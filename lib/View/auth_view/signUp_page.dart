@@ -4,29 +4,89 @@ import 'package:beauty_queen/View/auth_view/otp_page_view.dart';
 import 'package:beauty_queen/View/welcome_screen.dart';
 import 'package:beauty_queen/controller/auth_controller/signUpcontroller.dart';
 import 'package:beauty_queen/widgets/custom_button_2.dart';
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../const/strings.dart';
-import '../../const/colors.dart';
+import '../../const/app_colors.dart';
 import '../../const/styles.dart';
+import '../../const/validator.dart';
+import '../../controller/auth_controller/login_controler.dart';
 import '../../widgets/CustomTextField.dart';
+import '../../widgets/auth_widgets/text_field_auth_widget.dart';
+import '../../widgets/error_pop_up.dart';
+import '../../widgets/loading.dart';
 import '../../widgets/loginVia.dart';
-import 'LogIn_page.dart';
+import '../bottom_nav_screen.dart';
+import 'login_page.dart';
 
-class SignUpPage extends StatelessWidget {
-  final CombinedController combinedController = CombinedController();
-  final ScrollController scrollController = ScrollController();
+class SignUpPage extends StatefulWidget {
   SignUpPage({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _SignUpPage();
+  }
+}
+class _SignUpPage extends State<SignUpPage>{
+  final LogInController _controller = LogInController();
+
+  final ScrollController scrollController = ScrollController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController rePasswordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  _submit() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    _formKey.currentState!.save();
+    try {
+      LoadingScreen.show(context);
+
+      await _controller.login(phoneController.text, passwordController.text);
+      if (!context.mounted) return;
+
+      Navigator.of(context).pop();
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MainView(),
+          ),
+              (route) => false);
+    } on DioError catch (e, s) {
+      if (!context.mounted) return;
+
+      Navigator.of(context).pop();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => ErrorPopUp(
+          message: (e.response?.data as Map).values.first,
+        ),
+      );
+    } catch (e, s) {
+      if (!context.mounted) return;
+
+      Navigator.of(context).pop();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const ErrorPopUp(
+          message: ('something_wrong'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: kWhiteColor,
-        surfaceTintColor: kWhiteColor,
+        backgroundColor: AppColors.kWhiteColor,
+        surfaceTintColor: AppColors.kWhiteColor,
         elevation: 0,
         toolbarHeight: 40.h,
         actions: [
@@ -36,7 +96,7 @@ class SignUpPage extends StatelessWidget {
               },
               icon: Icon(
                 Icons.arrow_forward_ios,
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
                 size: 25.r,
               )),
         ],
@@ -45,7 +105,10 @@ class SignUpPage extends StatelessWidget {
         padding: EdgeInsets.all(16.r),
         child: SingleChildScrollView(
           controller: scrollController,
-          child: Column(
+          child:Form(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -56,54 +119,97 @@ class SignUpPage extends StatelessWidget {
                     height: 15.h,
                   ),
                   Text(
-                    kWelcome,
+                    tr('kWelcome'),
                     style: TextStyle(
                       fontSize: 29.02.sp,
                       fontFamily: kTheArabicSansLight,
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: 10.h),
-                  Text(
-                    kRegisterNow,
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        color: kTextGrayColor,
-                        fontFamily: kTheArabicSansLight,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 18.sp),
-                  ),
-                  SizedBox(height: 22.h),
-                  CustomTextField(
-                    hintText: kFirstNameHint,
-                    obscureTextObservable: combinedController.nameObscureText,
-                    controller: combinedController,
-                  ),
-                  SizedBox(height: 15.h),
-                  CustomTextField(
-                    hintText: kPhoneNumberHint,
+
+
+                  TextFieldAuthWidget(
+                    hindText: tr('kFirstNameHint'),
+                    controler: nameController,
+                    hintStyle: TextStyle(
+                      color: const Color(0xFF2C3E50),
+                      fontSize: 17.69.sp,
+                      fontFamily: kTheArabicSansLight,
+                      fontWeight: FontWeight.w600,
+                    ),
                     keyboardType: TextInputType.phone,
-                    obscureTextObservable: combinedController.phoneObscureText,
-                    controller: combinedController,
+                    validatorTextField: (val) {
+                      return Validator().validatorName(val);
+                    },
                   ),
                   SizedBox(height: 15.h),
-                  CustomTextField(
-                    hintText: kPasswordHint,
-                    initialObscureText: true,
-                    suffixIcon: Icons.visibility,
-                    obscureTextObservable:
-                        combinedController.passwordObscureText,
-                    controller: combinedController,
+                  TextFieldAuthWidget(
+                    hindText: tr('kPhoneNumberHint'),
+                    controler: phoneController,
+                    hintStyle: TextStyle(
+                      color: const Color(0xFF2C3E50),
+                      fontSize: 17.69.sp,
+                      fontFamily: kTheArabicSansLight,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    keyboardType: TextInputType.phone,
+                    validatorTextField: (val) {
+                      return Validator().validatorPhoneNumber(val);
+                    },
                   ),
                   SizedBox(height: 15.h),
-                  CustomTextField(
-                    hintText: kConfirmPasswordHint,
-                    initialObscureText: true,
-                    suffixIcon: Icons.visibility,
-                    obscureTextObservable:
-                        combinedController.confirmPasswordObscureText,
-                    controller: combinedController,
+                  Obx(() => TextFieldAuthWidget(
+                    hindText: tr('kPasswordHint'),
+                    controler: passwordController,
+                    hintStyle: TextStyle(
+                      color: const Color(0xFF2C3E50),
+                      fontSize: 17.69.sp,
+                      fontFamily: kTheArabicSansLight,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    obscureText: _controller.passwordObscureText.value,
+
+                    keyboardType: TextInputType.phone,
+                    validatorTextField: (val) {
+                      return Validator().validatorPassword(val);
+                    },
+                    suffixWidget: IconButton(
+                      icon: Icon(
+                        _controller.passwordObscureText.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: AppColors.kTextGrayColor,
+                      ),
+                      onPressed: _controller.toggleSignUpPasswordVisibility,
+                    ),
+                  )),
+                  SizedBox(height: 15.h),
+                  TextFieldAuthWidget(
+                    hindText: tr('kConfirmPasswordHint'),
+                    controler: rePasswordController,
+                    obscureText: _controller.confirmPasswordObscureText.value,
+
+                    hintStyle: TextStyle(
+                      color: const Color(0xFF2C3E50),
+                      fontSize: 17.69.sp,
+                      fontFamily: kTheArabicSansLight,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    suffixWidget: IconButton(
+                      icon: Icon(
+                        _controller.confirmPasswordObscureText.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: AppColors.kTextGrayColor,
+                      ),
+                      onPressed: _controller.toggleSignUpConfirmPasswordVisibility,
+                    ),
+                    keyboardType: TextInputType.phone,
+                    validatorTextField: (val) {
+                      return Validator().validatorRePassword(val, passwordController.text);
+                    },
                   ),
                   SizedBox(height: 25.h),
                   const LoginVia(),
@@ -116,15 +222,13 @@ class SignUpPage extends StatelessWidget {
                   width: 398.27.w,
                   height: 64.26.h,
                   borderRadius: 8.84.r,
-                  backgroundColor: kPrimaryColor,
+                  backgroundColor: AppColors.kPrimaryColor,
                   text: 'التسجيل',
-                  onPressed: () {
-                    Get.to(const OtpPage());
-                  },
+                  onPressed: _submit,
                   textStyle: TextStyle(
                       fontSize: 20.85.sp,
                       fontWeight: FontWeight.w700,
-                      color: kWhiteColor,
+                      color: AppColors.kWhiteColor,
                       fontFamily: kTheArabicSansLight)),
               SizedBox(
                 height: 27.h,
@@ -135,19 +239,19 @@ class SignUpPage extends StatelessWidget {
                 },
                 child: Center(
                   child: Text(
-                    kAlreadyHaveAccount,
+                    tr('kAlreadyHaveAccount'),
                     style: TextStyle(
                         decoration: TextDecoration.underline,
-                        decorationColor: kPrimaryColor,
+                        decorationColor: AppColors.kPrimaryColor,
                         fontFamily: kTheArabicSansLight,
                         fontSize: 21.21.sp,
                         fontWeight: FontWeight.bold,
-                        color: kPrimaryColor),
+                        color: AppColors.kPrimaryColor),
                   ),
                 ),
               ),
             ],
-          ),
+          ),)
         ),
       ),
     );

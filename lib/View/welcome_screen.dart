@@ -9,7 +9,7 @@ import '../const/colors.dart';
 import '../const/images.dart';
 import '../const/styles.dart';
 import '../controller/welcomescreencontroller.dart';
-import 'auth_view/LogIn_page.dart';
+import 'auth_view/login_page.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

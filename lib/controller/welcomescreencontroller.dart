@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:beauty_queen/View/auth_view/LogIn_page.dart';
+import 'package:beauty_queen/View/auth_view/login_page.dart';
 import 'package:get/get.dart';
 
 class WelcomeController extends GetxController {

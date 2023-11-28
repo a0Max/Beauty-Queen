@@ -9,9 +9,15 @@ import 'package:get/get.dart';
 import '../../const/colors.dart';
 import '../../widgets/custom_button_2.dart';
 
-class OtpPage extends StatelessWidget {
+class OtpPage extends StatefulWidget {
   const OtpPage({super.key});
 
+  @override
+  State<StatefulWidget> createState() {
+    return _OtpPage();
+  }
+}
+class _OtpPage extends State<OtpPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
