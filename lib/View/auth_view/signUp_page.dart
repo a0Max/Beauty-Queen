@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
-import '../../controller/auth_controller/login_controler.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../widgets/CustomTextField.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
@@ -30,7 +30,7 @@ class SignUpPage extends StatefulWidget {
   }
 }
 class _SignUpPage extends State<SignUpPage>{
-  final LogInController _controller = LogInController();
+  final AuthController _controller = AuthController();
 
   final ScrollController scrollController = ScrollController();
   TextEditingController phoneController = TextEditingController();
@@ -61,22 +61,15 @@ class _SignUpPage extends State<SignUpPage>{
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => ErrorPopUp(
-          message: (e.response?.data as Map).values.first,
-        ),
-      );
+
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+
     } catch (e, s) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => const ErrorPopUp(
-          message: ('something_wrong'),
-        ),
-      );
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+
     }
   }
 
@@ -125,6 +118,18 @@ class _SignUpPage extends State<SignUpPage>{
                       fontFamily: kTheArabicSansLight,
                       color: AppColors.kBlackColor,
                       fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Text(
+                    tr('detailsOfSignUp'),
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: AppColors.kCDGColor2,
+                      fontSize: 17.21.sp,
+                      fontFamily: kTheArabicSansLight,
+                      fontWeight: FontWeight.w300,
+                      // Adjusted the height to 1.0 instead of 0 to prevent potential issues
                     ),
                   ),
                   SizedBox(height: 10.h),
@@ -219,8 +224,8 @@ class _SignUpPage extends State<SignUpPage>{
                 ],
               ),
               CustomButtonTwo(
-                  width: 398.27.w,
-                  height: 64.26.h,
+                  width: MediaQuery.of(context).size.width,
+                  height: 50.26.h,
                   borderRadius: 8.84.r,
                   backgroundColor: AppColors.kPrimaryColor,
                   text: 'التسجيل',

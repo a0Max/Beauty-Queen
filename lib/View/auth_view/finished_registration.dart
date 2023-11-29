@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../const/strings.dart';
-import '../../const/colors.dart';
+import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../bottom_nav_screen.dart';
 
@@ -13,15 +15,13 @@ class CongratulationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              SizedBox(
-                height: 72.h,
-              ),
-              Image.asset(
-                'assets/images/congrads.png',
-                width: 424.17.w,
+              SvgPicture.asset(
+                AppImages.imageCongratulations,
+                // width: 424.17.w,
                 height: 315.27.h,
               ),
               SizedBox(
@@ -32,12 +32,12 @@ class CongratulationsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    kCongratulationsMessage,
+                    tr('congratulations'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30.85.sp,
                       fontFamily: kTheArabicSansBold,
-                      color: kPrimaryColor,
+                      color: AppColors.kPrimaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -45,12 +45,12 @@ class CongratulationsPage extends StatelessWidget {
                     height: 5.h,
                   ),
                   Text(
-                    kAccountActivationSuccessMessage,
+                    tr('account_activated'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30.85.sp,
                       fontFamily: kTheArabicSansBold,
-                      color: kPrimaryColor,
+                      color: AppColors.kPrimaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -58,45 +58,42 @@ class CongratulationsPage extends StatelessWidget {
               ),
               SizedBox(height: 42.h),
               Text(
-                kShoppingPromptMessage,
+                tr('account_activated_and_continuous'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontFamily: kTheArabicSansLight,
-                  color: kTextDGColor,
+                  color: AppColors.kTextDGColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(
                 height: 90.h,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Container(
-                  height: 64.26.h,
-                  width: 398.w,
-                  decoration: BoxDecoration(
-                    color: kPinkColor,
-                    borderRadius: BorderRadius.circular(9.r),
+              Container(
+                height: 64.26.h,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: AppColors.kPinkColor,
+                  borderRadius: BorderRadius.circular(9.r),
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColors.kWhiteColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(9.r),
+                    ),
                   ),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: kWhiteColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(9.r),
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.to(const MainView());
-                    },
-                    child: Text(
-                      kStartShopping,
-                      style: TextStyle(
-                          color: kWhiteColor,
-                          fontSize: 20.85.sp,
-                          fontFamily: kTheArabicSansLight,
-                          fontWeight: FontWeight.w700),
-                    ),
+                  onPressed: () {
+                    Get.to(const MainView());
+                  },
+                  child: Text(
+                    tr('start_shopping'),
+                    style: TextStyle(
+                        color: AppColors.kWhiteColor,
+                        fontSize: 20.85.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               ),

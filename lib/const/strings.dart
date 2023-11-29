@@ -1,33 +1,33 @@
-const String kWelcomeBack = 'مرحبًا بعودتك!';
-const String kEnterYourPhoneNumber = 'أدخل رقم هاتفك';
-const String kPassword = 'كلمة المرور';
-const String kEnterYourPassword = 'أدخل كلمة المرور هنا';
-const String kForgotPassword = 'هل نسيت كلمة السر؟';
+// const String kWelcomeBack = 'مرحبًا بعودتك!';
+// const String kEnterYourPhoneNumber = 'أدخل رقم هاتفك';
+// const String kPassword = 'كلمة المرور';
+// const String kEnterYourPassword = 'أدخل كلمة المرور هنا';
+// const String kForgotPassword = 'هل نسيت كلمة السر؟';
 const String kLogin = 'تسجيل دخول';
 const String kLoginVia = 'تسجيل الدخول عن طريق';
-const String kDoNotHaveAnAccount = 'ليس لديك حساب؟';
+// const String kDoNotHaveAnAccount = 'ليس لديك حساب؟';
 const String kCreateAccount = 'إنشاء حساب جديد';
-const String kWelcome = 'مـــرحباً ❤️';
-const String kRegisterNow =
-    'للشراء من الموقع وتصفـح كل العروض سجلي الآن مجاناً';
-const String kAlreadyHaveAccount = 'لديك حساب بالفعل؟';
-const String kFirstNameHint = 'الاسم الأول';
-const String kConfirmPasswordHint = 'تكرار كلمة المرور';
-const String kCongratulationsMessage = 'مبـــروك';
-const String kAccountActivationSuccessMessage = 'تم تفعيل حسابك بنجاح';
-const String kShoppingPromptMessage =
-    'تم تفعيل حسابك بنجاح\nإضغط علي إبدا التسوق للإستمرار';
-const String kStartShopping = 'ابدأ التسوق';
-const String kAllGlobalBrands = 'كل الماركات العالمية بين يديك';
-const String kAllInOnePlace = 'كل ما تحتاجينه في مكان واحد';
-const String kNoAccount = 'ليس لديك حســاب؟';
-const String kRegistrationVia = 'التسجيل عن طريق';
-const String kEnterVerificationCode =
-    'الرجاء إدخال الرمز المكون من 6 أرقام المرسل إلى 21 54 558 092';
-const String kInvalidNumber = 'رقم غير صحيح؟';
-const String kEdit = 'تعديل';
-const String kResendCode = 'سيتم إعادة إرسال الرمز في 00:59';
-const String kCheck = 'تحقق';
+// const String kWelcome = 'مـــرحباً ❤️';
+// const String kRegisterNow =
+//     'للشراء من الموقع وتصفـح كل العروض سجلي الآن مجاناً';
+// const String kAlreadyHaveAccount = 'لديك حساب بالفعل؟';
+// const String kFirstNameHint = 'الاسم الأول';
+// const String kConfirmPasswordHint = 'تكرار كلمة المرور';
+// const String kCongratulationsMessage = 'مبـــروك';
+// const String kAccountActivationSuccessMessage = 'تم تفعيل حسابك بنجاح';
+// const String kShoppingPromptMessage =
+//     'تم تفعيل حسابك بنجاح\nإضغط علي إبدا التسوق للإستمرار';
+// const String kStartShopping = 'ابدأ التسوق';
+// const String kAllGlobalBrands = 'كل الماركات العالمية بين يديك';
+// const String kAllInOnePlace = 'كل ما تحتاجينه في مكان واحد';
+// const String kNoAccount = 'ليس لديك حســاب؟';
+// const String kRegistrationVia = 'التسجيل عن طريق';
+// const String kEnterVerificationCode =
+//     'الرجاء إدخال الرمز المكون من 6 أرقام المرسل إلى 21 54 558 092';
+// const String kInvalidNumber = 'رقم غير صحيح؟';
+// const String kEdit = 'تعديل';
+// const String kResendCode = 'سيتم إعادة إرسال الرمز في 00:59';
+// const String kCheck = 'تحقق';
 const String kUpgradeAccount =
     'خصومات و شحن مجاني بترقية حسابك الى كوينا سجلي الان';
 const String kSearchForProductOrBrand = 'إبحث عن منتج أو ماركة';

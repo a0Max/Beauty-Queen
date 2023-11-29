@@ -21,5 +21,20 @@
   "kRegisterNow": "للشراء من الموقع وتصفـح كل العروض سجلي الآن مجاناً",
   "kWelcome": "مـــرحباً ❤\uFE0F",
   "kDoNotHaveAnAccount": "ليس لديك حساب؟",
-  "not_same": "كلمه السر ليست متطابقه"
+  "not_same": "كلمه السر ليست متطابقه",
+  "detailsOfSignUp": "للشراء من الموقع وتصفـح كل العروض سجلي الآن مجاناً",
+  "Resend": "إعادة الإرسال",
+  "please_enter_the4_digit_of_otp": "الرجاء إدخال الرمز المكون من 4 أرقام المرسل إلى",
+  "phone_not_correct": "رقم غير صحيح؟",
+  "edit": "تعديل",
+  "will_send_the_otp_again": "سيتم إعادة إرسال الرمز في ",
+  "make_sure": "تحقق",
+  "activate_code": "رمز التفعيـــل",
+  "Error": "خطا",
+  "something_wrong": "نعتذر حدث خطأ ما. برجاء التواصل مع فريق الدعم لدينا",
+  "check_phone_number": "برجاء تاكد من رقم الهاتف",
+  "congratulations": "مبـــروك",
+  "account_activated": "تم تفعيل حسابك بنجاح",
+  "account_activated_and_continuous": "تم تفعيل حسابك بنجاح\nإضغط علي إبدا التسوق للإستمرار",
+  "start_shopping": "ابدأ التسوق"
 }

@@ -1,5 +1,5 @@
-const kGoogleLogoPath = "assets/images/google.png";
-const kFacebookLogoPath = "assets/images/facebook.png";
+// const kGoogleLogoPath = "assets/images/google.png";
+// const kFacebookLogoPath = "assets/images/facebook.png";
 const kBeautyQueenLogoPath = "assets/images/beauty_queen_logo.png";
 const kCongratulationsImage = "assets/images/congrads.png";
 const kMagzineImage = 'assets/images/Magazine.png';

@@ -15,7 +15,7 @@ abstract class ApiProvider {
   ApiProvider() {
     // Attach Interceptors.
     dio.interceptors.add(_performanceInterceptor);
-    // if (kDebugMode) dio.interceptors.add(_logger);
+    if (kDebugMode) dio.interceptors.add(_logger);
   }
 
   // static final ApiProvider instance = ApiProvider._();
@@ -41,6 +41,9 @@ abstract class ApiProvider {
 
   ////////////////////////////// END POINTS ///////////////////////////////////
   static const String loginEndPoint = "login";
+  static const String registerEndPoint = "register";
+  static const String sendVerificationCodeEndPoint = "sendVerificationCode";
+  static const String checkCodeEndPoint = "checkCode";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -70,5 +73,7 @@ abstract class ApiProvider {
       return prefs.getString('locale')!.split('_')[0];
     }
   }
+
+
 }
 

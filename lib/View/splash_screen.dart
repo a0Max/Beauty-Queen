@@ -1,7 +1,10 @@
 import 'package:beauty_queen/controller/SplashScreenController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../const/app_images.dart';
 import '../const/colors.dart';
 import '../const/images.dart';
 
@@ -17,10 +20,8 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              kBeautyQueenLogoPath,
-              height: 150,
-              width: 150,
+            SvgPicture.asset(
+              AppImages.imageLogoLogin,
             ),
             const SizedBox(height: 20),
             Obx(() {

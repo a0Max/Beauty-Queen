@@ -1,43 +1,54 @@
+import 'dart:async';
+
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
+
+import '../../const/api_connrction/user_data_apis.dart';
+import '../../widgets/error_pop_up.dart';
 
 class OTPController extends GetxController {
-  final focusNode1 = FocusNode();
-  final focusNode2 = FocusNode();
-  final focusNode3 = FocusNode();
-  final focusNode4 = FocusNode();
-  var isFocused1 = false.obs;
-  var isFocused2 = false.obs;
-  var isFocused3 = false.obs;
-  var isFocused4 = false.obs;
+  Timer? _countdownTimer;
+  RxInt initialCountdownSeconds = 0.obs; // 1 minute and 30 seconds
+  final _api = UserDataApis();
 
-  @override
-  void onInit() {
-    super.onInit();
+  void startTimer() {
+    if (_countdownTimer != null) {
+      _countdownTimer!.cancel();
+    }
+    initialCountdownSeconds.value = 60;
+    startCountdown();
+  }
 
-    focusNode1.addListener(() {
-      isFocused1.value = focusNode1.hasFocus;
-    });
-
-    focusNode2.addListener(() {
-      isFocused2.value = focusNode2.hasFocus;
-    });
-
-    focusNode3.addListener(() {
-      isFocused3.value = focusNode3.hasFocus;
-    });
-
-    focusNode4.addListener(() {
-      isFocused4.value = focusNode4.hasFocus;
+  void startCountdown() {
+    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (initialCountdownSeconds.value > 0) {
+        initialCountdownSeconds.value--;
+      } else {
+        _countdownTimer!.cancel();
+      }
     });
   }
 
-  @override
-  void onClose() {
-    focusNode1.dispose();
-    focusNode2.dispose();
-    focusNode3.dispose();
-    focusNode4.dispose();
-    super.onClose();
+
+  sendOtp({required String phone}) async {
+    startTimer();
+    try {
+      await _api.sendVerificationCodeRequest(phone: phone);
+    } on DioException catch (e, s) {
+      ErrorPopUp(message: e.toString(), title: tr('Error'));
+    } catch (e) {
+      ErrorPopUp(message: e.toString(), title: tr('Error'));
+    }
+  }
+
+  String? phone;
+  updatePhone({required String phone}) {
+    this.phone = phone;
+    sendOtp(phone: phone);
+  }
+
+  checkTheOtp({required String sms}) async {
+    await _api.checkCodeRequest(phone: phone ?? '', sms: sms);
   }
 }

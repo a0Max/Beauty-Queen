@@ -15,10 +15,9 @@ import '../../const/api_connrction/user_data_apis.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
 
-class LogInController extends GetxController {
+class AuthController extends GetxController {
   var obscureText = true.obs;
   var userData = UserModel().obs;
-  var token = ''.obs;
   final _api = UserDataApis();
 
   void togglePasswordVisibility() {

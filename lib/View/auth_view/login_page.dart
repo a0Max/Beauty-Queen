@@ -1,17 +1,16 @@
 import 'package:beauty_queen/View/auth_view/signUp_page.dart';
 import 'package:beauty_queen/View/bottom_nav_screen.dart';
 import 'package:beauty_queen/View/welcome_screen.dart';
-import 'package:beauty_queen/controller/auth_controller/login_controler.dart';
+import 'package:beauty_queen/controller/auth_controller/auth_controler.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
-// import '../../const/strings.dart';
-import '../../const/colors.dart';
-import '../../const/images.dart';
+import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
@@ -29,7 +28,7 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPage extends State<LogInPage> {
-  final LogInController _controller = Get.put(LogInController());
+  final AuthController _controller = Get.put(AuthController());
   TextEditingController phoneController = TextEditingController(text: kDebugMode?"0927386249":"");
   TextEditingController passwordController = TextEditingController(text: kDebugMode?"01289555089":"");
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -53,26 +52,18 @@ class _LogInPage extends State<LogInPage> {
             builder: (context) => const MainView(),
           ),
           (route) => false);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => ErrorPopUp(
-          message: (e.response?.data as Map).values.first,
-        ),
-      );
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+
     } catch (e, s) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => const ErrorPopUp(
-          message: ('something_wrong'),
-        ),
-      );
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+
     }
   }
 
@@ -100,8 +91,8 @@ class _LogInPage extends State<LogInPage> {
                     size: 25.r,
                   )),
             ],
-            title: Image.asset(
-              kBeautyQueenLogoPath,
+            title: SvgPicture.asset(
+              AppImages.imageLogoLogin,
               height: 55.93.h,
               width: 166.08.w,
             )),
@@ -175,7 +166,6 @@ class _LogInPage extends State<LogInPage> {
                         _submit();
                       },
                       child: Container(
-                        width: 395.79.w,
                         height: 59.70.h,
                         decoration: ShapeDecoration(
                           color: AppColors.kPrimaryColor,
