@@ -1,12 +1,14 @@
 // ignore_for_file: file_names
 
 import 'package:beauty_queen/View/favourtie_screen.dart';
+import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../View/normalprofile.dart';
@@ -78,7 +80,7 @@ class CustomAppBar extends StatelessWidget {
                 fontSize: 12.5.sp,
                 fontFamily: kTheArabicSansLight,
                 fontWeight: FontWeight.w600,
-                height: 0,
+                // height: 0,
               ),
             ),
             TextSpan(
@@ -90,7 +92,6 @@ class CustomAppBar extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 decoration: TextDecoration.underline,
                 decorationColor: kWhiteColor,
-                height: 0,
               ),
             ),
           ],
@@ -113,20 +114,20 @@ class CustomAppBar extends StatelessWidget {
                     ),
                   GestureDetector(
                     onTap: onPressed,
-                    child: Image.asset(
-                      kmenuIconImage,
-                      height: 26.h,
-                      width: 30.w,
+                    child: SvgPicture.asset(
+                      AppImages.imageMenu,
+                      height: 20.h,
+                      width: 20.w,
                     ),
                   ),
                   SizedBox(
                     width: 16.w,
                   ),
                   if (isScrolled != true && showBagIcon2)
-                    Image.asset(
-                      kbagIconImage,
-                      height: 36.69.h,
-                      width: 34.17.w,
+                    SvgPicture.asset(
+                      AppImages.imageShop,
+                      height: 20.h,
+                      width: 20.w,
                     ),
                   const Spacer(),
                   if (isScrolled != true && showFavIcon)
@@ -134,10 +135,10 @@ class CustomAppBar extends StatelessWidget {
                       onTap: () {
                         Get.to(const FavScreen());
                       },
-                      child: Image.asset(
-                        kfavIconImage,
-                        height: 36.69.h,
-                        width: 34.17.w,
+                      child: SvgPicture.asset(
+                        AppImages.imageLoveSvg,
+                        height: 30.h,
+                        width: 30.w,
                       ),
                     ),
                   SizedBox(
@@ -148,10 +149,10 @@ class CustomAppBar extends StatelessWidget {
                       onTap: () {
                         Get.to(const NormalProfileScreen());
                       },
-                      child: Image.asset(
-                        kpersonIconImage,
-                        height: 36.69.h,
-                        width: 34.17.w,
+                      child: SvgPicture.asset(
+                        AppImages.imagePerson,
+                        height: 30.h,
+                        width: 30.w,
                       ),
                     ),
                   SizedBox(
@@ -162,10 +163,10 @@ class CustomAppBar extends StatelessWidget {
                       onTap: () {
                         Get.to(const CartScreen());
                       },
-                      child: Image.asset(
-                        kbagIconImage,
-                        height: 36.69.h,
-                        width: 34.17.w,
+                      child: SvgPicture.asset(
+                        AppImages.imageShop,
+                        height: 30.h,
+                        width: 30.w,
                       ),
                     ),
                   SizedBox(
@@ -204,7 +205,7 @@ class CustomAppBar extends StatelessWidget {
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       onPressed: onPressed,
-                      icon: Image.asset(ksearchiconImage),
+                      icon: SvgPicture.asset(AppImages.imageSearch),
                     ),
                     prefix: SizedBox(width: 20.w),
                     hintText: 'إبحث عن منتج أو ماركة',

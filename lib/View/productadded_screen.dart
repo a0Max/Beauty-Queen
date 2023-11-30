@@ -1,4 +1,4 @@
-import 'package:beauty_queen/View/bottom_nav_screen.dart';
+import 'package:beauty_queen/View/home/bottom_nav_screen.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:flutter/material.dart';

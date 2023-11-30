@@ -5,7 +5,31 @@ abstract class Connection {
   static const baseURL = 'https://$base/';
   static const apiURL = '${baseURL}api/v1/';
   static const storageURL = '${baseURL}storage/';
+  static const storageURLOfBrand = 'https://beautyqueen.twic.pics/brands';
   static const logoURL = '${baseURL}logo.png';
+  static String urlOfSlider({required String image}) {
+   return "$storageURL/slides/$image";
+  }
+  static String urlOfCategories({required String image}) {
+    return "${storageURL}categories/$image";
+  }
+  static String urlOfProducts({required String image}) {
+    return "${storageURL}products/$image";
+  }
+
+  static String urlOfSpecial({required String image}) {
+    return "${storageURL}special/$image";
+  }
+  static String urlOfBanner({required String image}) {
+    return "${storageURL}banner/$image";
+  }
+  static String urlOfDiscover({required String image}) {
+    return "${storageURL}discover/$image";
+  }
+  static String urlOfBrands({required String image}) {
+    return "$storageURLOfBrand/$image";
+  }
+
 
   static const String bundleId = '';
   static const String appstoreId = '';

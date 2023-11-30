@@ -14,5 +14,10 @@ class AppImages{
   static const String imageLockOfOtp = "${mainPathToSvg}lock.svg";
   static const String imageLogoLogin = "${mainPathToSvg}logo_login.svg";
   static const String imageCongratulations = "${mainPathToSvg}congratulations.svg";
+  static const String imageLoveSvg = "${mainPathToSvg}love.svg";
+  static const String imageMenu = "${mainPathToSvg}menu.svg";
+  static const String imagePerson = "${mainPathToSvg}person.svg";
+  static const String imageSearch = "${mainPathToSvg}search.svg";
+  static const String imageShop = "${mainPathToSvg}shop.svg";
 
 }

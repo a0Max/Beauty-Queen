@@ -18,7 +18,7 @@ import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
 import '../../widgets/loginVia.dart';
-import '../bottom_nav_screen.dart';
+import '../home/bottom_nav_screen.dart';
 import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _SignUpPage extends State<SignUpPage>{
     try {
       LoadingScreen.show(context);
 
-      await _controller.login(phoneController.text, passwordController.text);
+      await _controller.signUp(phone:phoneController.text,password: passwordController.text, name:nameController.text, rePassword: rePasswordController.text );
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
@@ -54,7 +54,7 @@ class _SignUpPage extends State<SignUpPage>{
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const MainView(),
+            builder: (context) => OtpPage(phone: phoneController.text,),
           ),
               (route) => false);
     } on DioError catch (e, s) {
@@ -133,8 +133,6 @@ class _SignUpPage extends State<SignUpPage>{
                     ),
                   ),
                   SizedBox(height: 10.h),
-
-
                   TextFieldAuthWidget(
                     hindText: tr('kFirstNameHint'),
                     controler: nameController,

@@ -1,11 +1,14 @@
 // ignore_for_file: file_names
 
+import 'package:beauty_queen/models/brand_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../const/images.dart';
+import '../const/vars.dart';
 
 class ScrollableContainerList extends StatelessWidget {
-  const ScrollableContainerList({super.key});
+  List<BrandModel> listOfBrands;
+  ScrollableContainerList( {super.key, required this.listOfBrands});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +16,14 @@ class ScrollableContainerList extends StatelessWidget {
       height: 265.11.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: listOfBrands.length,
         itemBuilder: (context, index) {
           return Container(
             width: 265.11.w,
             height: 265.11.h,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(kNasictaImage),
+                image: NetworkImage(Connection.urlOfBrands(image: listOfBrands[index].homepageBrandImage?.file??'')),
                 fit: BoxFit.cover,
               ),
             ),

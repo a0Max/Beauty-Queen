@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import '../../const/styles.dart';
-import '../bottom_nav_screen.dart';
+import '../home/bottom_nav_screen.dart';
 
 class CongratulationsPage extends StatelessWidget {
   const CongratulationsPage({super.key});

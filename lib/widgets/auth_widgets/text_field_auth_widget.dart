@@ -49,7 +49,7 @@ class TextFieldAuthWidget extends StatelessWidget{
               height: 0.08.h,
             ),
             contentPadding: EdgeInsets.symmetric(
-                vertical: 20.h, horizontal: 15.w),
+                vertical: 15.h, horizontal: 15.w),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.06.r),
               borderSide: BorderSide(

@@ -1,5 +1,5 @@
 import 'package:beauty_queen/View/auth_view/signUp_page.dart';
-import 'package:beauty_queen/View/bottom_nav_screen.dart';
+import 'package:beauty_queen/View/home/bottom_nav_screen.dart';
 import 'package:beauty_queen/View/welcome_screen.dart';
 import 'package:beauty_queen/controller/auth_controller/auth_controler.dart';
 import 'package:dio/dio.dart';

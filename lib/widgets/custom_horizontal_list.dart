@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../const/styles.dart';
+import '../const/vars.dart';
+import '../models/categories_model.dart';
 
 class CustomImageList extends StatelessWidget {
-  final List<String> imagePaths;
-  final List<String> texts;
+  final List<CategoryModel> dataOfItem;
+  // final List<String> texts;
 
   const CustomImageList(
-      {super.key, required this.imagePaths, required this.texts});
+      {super.key, required this.dataOfItem, });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: imagePaths.length,
+      itemCount: dataOfItem.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.all(10.r),
@@ -26,7 +28,7 @@ class CustomImageList extends StatelessWidget {
                 height: 92.03.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(imagePaths[index]),
+                    image: NetworkImage(Connection.urlOfCategories(image:dataOfItem[index].image??'')),
                     fit: BoxFit.fill,
                   ),
                   shape: BoxShape
@@ -34,7 +36,7 @@ class CustomImageList extends StatelessWidget {
                 ),
               ),
               Text(
-                texts[index],
+                dataOfItem[index].title??'',
                 style: TextStyle(
                     fontFamily: kTheArabicSansLight,
                     fontSize: 15.sp,

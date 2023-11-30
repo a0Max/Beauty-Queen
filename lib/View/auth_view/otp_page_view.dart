@@ -50,9 +50,15 @@ class _OtpPage extends State<OtpPage> {
 
       otpController.checkTheOtp(sms: _otp ?? '');
       Get.to(const CongratulationsPage());
-      if (!context.mounted) return;
+      // if (!context.mounted) return;
 
       Navigator.of(context).pop();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CongratulationsPage(),
+          ),
+              (route) => false);
     } on DioException catch (e, s) {
       if (!context.mounted) return;
 

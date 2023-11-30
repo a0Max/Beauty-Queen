@@ -32,12 +32,14 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-  Future<UserModel> signUpRequest({String? phone, String? password}) async {
+  Future<UserModel> signUpRequest({String? name, String? phone, String? password}) async {
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.registerEndPoint}',
       queryParameters: {
         "phone": phone,
+        "name": name,
         "password": password,
+        "password_confirmation":password
       },
       options: Options(
         headers: {

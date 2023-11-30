@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,7 +36,7 @@ class CustomProductCard extends StatelessWidget {
               height: 183.26.h,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(imageUrl),
+                  image: CachedNetworkImageProvider(imageUrl),
                   fit: BoxFit.fill,
                 ),
               ),
