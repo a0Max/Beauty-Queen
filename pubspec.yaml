@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+101
 
 environment:
   sdk: '>=3.1.1 <4.0.0'
@@ -33,11 +33,16 @@ dependencies:
   easy_localization: ^3.0.3
   fl_country_code_picker: ^0.1.7+1
   pin_code_text_field: ^1.8.0
+  json_annotation: ^4.8.1
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6 # flutter pub run build_runner build --delete-conflicting-outputs
+
 
 flutter:
   uses-material-design: true
