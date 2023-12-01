@@ -2,11 +2,12 @@
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
-import '../../const/colors.dart';
+// import '../../const/colors.dart';
 import '../../const/images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
@@ -255,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'وصل حديثا',
+                    tr('new_arrived'),
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color:  AppColors.kPrimaryColor,
@@ -266,14 +267,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Text(
-                    'عرض الكل',
+                    tr('see_all'),
                     style: TextStyle(
                       color: AppColors.kPrimaryColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w400,
                       decoration: TextDecoration.underline,
-                      decorationColor: kPrimaryColor,
+                      decorationColor: AppColors.kPrimaryColor,
                       height: 0,
                     ),
                   ),
@@ -321,7 +322,14 @@ class _HomePageState extends State<HomePage> {
                                 '',
                             note:
                                 _controller.homeData.value.newArrivals?[index].note ?? '',
-                            containertxt: 'تحديد الخيارات');
+                              productOptions: _controller
+                                  .homeData
+                                  .value
+                                  .newArrivals?[index].productOptions,
+                              inStock: "${_controller
+                                  .homeData
+                                  .value
+                                  .newArrivals?[index].stock}",);
                       },
                     ),
                   )
@@ -341,7 +349,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'العروض والهاديا',
+                    tr('offers_with_gift'),
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: AppColors.kPrimaryColor,
@@ -352,14 +360,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Text(
-                    'عرض الكل',
+                    tr('see_all'),
                     style: TextStyle(
                       color: AppColors.kPrimaryColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w400,
                       decoration: TextDecoration.underline,
-                      decorationColor: kPrimaryColor,
+                      decorationColor: AppColors.kPrimaryColor,
                       height: 0,
                     ),
                   ),
@@ -470,7 +478,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          'تسوقي الأن',
+                                          tr('shop_now'),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: Colors.white,
@@ -552,7 +560,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'التخفيضات',
+                          tr('offers_sale_down'),
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             color: AppColors.kPrimaryColor,
@@ -563,13 +571,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Text(
-                          'كل التخفيضات',
+                          tr('all_offers_sale_down'),
                           style: TextStyle(
                             color: AppColors.kPrimaryColor,
                             fontSize: 18.sp,
                             fontFamily: kTheArabicSansLight,
                             fontWeight: FontWeight.w400,
-                            decorationColor: kPrimaryColor,
+                            decorationColor: AppColors.kPrimaryColor,
                             decoration: TextDecoration.underline,
                             height: 0,
                           ),
@@ -577,7 +585,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+    Obx(() => SizedBox(
                       // height: 340.h,
                       child: CarouselSlider(
                           options: CarouselOptions(
@@ -632,7 +640,16 @@ class _HomePageState extends State<HomePage> {
                                                   .salesProducts?[value]
                                                   .price ??
                                               '',
-                                          containertxt: 'تحديد الخيارات'),
+                                          productOptions: _controller
+                                              .homeData
+                                              .value
+                                              .salesProducts?[value].productOptions,
+                                        inStock: "${_controller
+                                            .homeData
+                                            .value
+                                            .salesProducts?[value].stock}",
+
+                                      ),
                                       if ((_controller.homeData.value
                                                   .salesProducts?.length ??
                                               0) >
@@ -668,10 +685,18 @@ class _HomePageState extends State<HomePage> {
                                             disprice:
                                                 _controller.homeData.value.salesProducts?[value + 1].price ??
                                                     '',
-                                            containertxt: 'تحديد الخيارات'),
-                                      }
+                                          productOptions: _controller
+                                              .homeData
+                                              .value
+                                              .salesProducts?[value+1].productOptions,
+                                          inStock: "${_controller
+                                              .homeData
+                                              .value
+                                              .salesProducts?[value+1].stock}",
+                                        )}
+
                                     ],
-                                  );}))),
+                                  );})))),
                   Obx(() => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
@@ -713,7 +738,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'الماركات المميزة',
+                    tr('speacail_brands'),
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: AppColors.kPrimaryColor,
@@ -724,13 +749,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Text(
-                    'جميع الماركات',
+                    tr('all_brands'),
                     style: TextStyle(
                       color: AppColors.kPrimaryColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w400,
-                      decorationColor: kPrimaryColor,
+                      decorationColor: AppColors.kPrimaryColor,
                       decoration: TextDecoration.underline,
                       height: 0,
                     ),
@@ -746,7 +771,7 @@ class _HomePageState extends State<HomePage> {
               height: 51.h,
             ),
             SizedBox(
-              height: 670.h,
+              height: 600.h,
               child: Stack(
                 children: [
                   Container(
@@ -768,6 +793,7 @@ class _HomePageState extends State<HomePage> {
                       // left: 15.w,
                       child: Container(
                         height: 342,
+                        width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: _controller
@@ -792,6 +818,10 @@ class _HomePageState extends State<HomePage> {
                                 disprice: _controller.homeData.value.discover
                                         ?.products?[index].offerPrice ??
                                     '',
+                                productOptions: _controller.homeData.value.discover
+                                    ?.products?[index].productOptions,
+                                inStock: "${_controller.homeData.value.discover
+                                    ?.products?[index].stock}",
                                 containertxt: 'تحديد الخيارات');
                           },
                         ),
@@ -799,7 +829,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
             ///organicItems
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -891,7 +920,7 @@ class _HomePageState extends State<HomePage> {
                                       Padding(
                                         padding: EdgeInsets.only(left: 20.w),
                                         child: Text(
-                                          'تسوقي الأن',
+                                          tr('shop_now'),
                                           textAlign: TextAlign.right,
                                           style: TextStyle(
                                             color: Colors.white,
@@ -926,7 +955,7 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: EdgeInsets.only(right: 16.w),
                 child: Text(
-                  'إكتشفي أيضاً',
+                  tr('get_now_now'),
                   style: TextStyle(
                     color: AppColors.kPrimaryColor,
                     fontSize: 21.sp,
@@ -965,7 +994,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: 318.64.h,
               width: 484.14.w,
-              color: kPinkColor,
+              color: AppColors.kPinkColor,
               child: Stack(
                 children: [
                   Image(
@@ -1019,10 +1048,10 @@ class _HomePageState extends State<HomePage> {
                         width: 85.59.w,
                         decoration: BoxDecoration(
                             border:
-                                Border.all(width: 1.5.w, color: kWhiteColor),
+                                Border.all(width: 1.5.w, color: AppColors.kWhiteColor),
                             borderRadius: BorderRadius.circular(8.r)),
                         child: Center(
-                          child: Text('إطــلعي الأن',
+                          child: Text(tr('let_me_know_now'),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.03.sp,

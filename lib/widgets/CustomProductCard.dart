@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../const/app_colors.dart';
 import '../const/styles.dart';
 
 class CustomProductCard extends StatelessWidget {
@@ -49,7 +50,7 @@ class CustomProductCard extends StatelessWidget {
               width: 182.74.w,
               height: 128.53.h,
               decoration: const BoxDecoration(
-                color: Color(0xFFF4C6DD),
+                color: AppColors.klPinkColor,
               ),
             ),
           ),
@@ -78,7 +79,7 @@ class CustomProductCard extends StatelessWidget {
               buttonText,
               textAlign: TextAlign.right,
               style: TextStyle(
-                color: const Color(0xFF201C1C),
+                color: AppColors.kBlackRedColor,
                 fontSize: 13.sp,
                 fontFamily: kTheArabicSansLight,
                 fontWeight: FontWeight.w600,

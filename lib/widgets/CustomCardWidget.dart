@@ -3,20 +3,25 @@
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/widgets/CustomAlertBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../View/products_screen.dart';
+import '../const/app_colors.dart';
+import '../models/product_options_model.dart';
 
 class CustomCardWidget extends StatefulWidget {
   final String imageUrl;
   final String imgtxt;
   final String? price;
   final String des;
+  final String? inStock;
   final String? disprice;
+  final List<ProductOptionsModel>? productOptions;
   final String? note;
-  final String containertxt;
+  final String? containertxt;
 
   const CustomCardWidget(
       {super.key,
@@ -25,8 +30,9 @@ class CustomCardWidget extends StatefulWidget {
       this.price,
       required this.des,
       this.disprice,
-      required this.containertxt,
-      this.note});
+        this.containertxt,
+      this.note, this.inStock,
+        this.productOptions});
 
   @override
   State<CustomCardWidget> createState() => _CustomCardWidgetState();
@@ -76,24 +82,24 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     // size: 30,
                   ),
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return CustomAlertDialog(
-                          height: 124.95.h,
-                          width: 367.06.w,
-                          buttonOneText: 'متابعــــــة التســــوق',
-                          buttonTwoText: 'الذهاب الي المفضلة',
-                          dilougText:
-                              "لقد قمت بإضافة هذا المنتج بنجاح للمفضلة!",
-                          onButtonOnePressed: () {
-                            setState(() {
-                              isFavorite = true;
-                            });
-                          },
-                        );
-                      },
-                    );
+                    // showDialog(
+                    //   context: context,
+                    //   builder: (BuildContext context) {
+                    //     return CustomAlertDialog(
+                    //       height: 124.95.h,
+                    //       width: 367.06.w,
+                    //       buttonOneText: 'متابعــــــة التســــوق',
+                    //       buttonTwoText: 'الذهاب الي المفضلة',
+                    //       dilougText:
+                    //           "لقد قمت بإضافة هذا المنتج بنجاح للمفضلة!",
+                    //       onButtonOnePressed: () {
+                    //         setState(() {
+                    //           isFavorite = true;
+                    //         });
+                    //       },
+                    //     );
+                    //   },
+                    // );
                   },
                 ),
               ),
@@ -201,13 +207,50 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 ],
               ),
             ),
+            if(widget.inStock==null||widget.inStock=="0")...{
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(color: AppColors.kCDGColor),
+                child: Text(
+                  tr('not_availble_now'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14.11.sp,
+                    fontFamily: kTheArabicSansLight,
+                    fontWeight: FontWeight.w700,
+                    // height: 0.09,
+                  ),
+                ),
+              ),
+            }else if((widget.inStock!=null&&widget.inStock!="0") &&(widget.productOptions!=null&& widget.productOptions?.isNotEmpty==true) )...{
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(color: AppColors.kPrimaryColor),
+                child: Text(
+                  tr('choose_the_category'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14.11.sp,
+                    fontFamily: kTheArabicSansLight,
+                    fontWeight: FontWeight.w700,
+                    // height: 0.09,
+                  ),
+                ),
+              ),
+            } else...{
             Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(vertical: 10),
               alignment: Alignment.center,
-              decoration: const BoxDecoration(color: Color(0xFFDE0F7E)),
+              decoration: const BoxDecoration(color: AppColors.kPrimaryColor),
               child: Text(
-                widget.containertxt,
+                tr('add_to_bags'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -218,6 +261,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 ),
               ),
             ),
+            }
           ],
         ),
       ),

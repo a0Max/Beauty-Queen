@@ -117,6 +117,7 @@ class SalesProductsModel{
         this.labels});
 
   factory SalesProductsModel.fromJson(Map<String, dynamic> json) {
+    print(json['stock']);
     return _$SalesProductsModelFromJson(json);
   }
 
