@@ -9,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'View/home/bottom_nav_screen.dart';
-import 'main2.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +42,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             // home: SplashScreen(),
-            home: MyHomePage(),
+            home: MainView(),
 
             debugShowCheckedModeBanner: false,
             builder: (context, widget) {

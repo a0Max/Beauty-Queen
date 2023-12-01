@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(160.h),
+        preferredSize: Size.fromHeight(_isScrolled?100.h:160.h),
         child: CustomAppBar(
           showBagIcon: true,
           showFavIcon: true,
@@ -98,7 +98,6 @@ class _HomePageState extends State<HomePage> {
           children: [
             ///Slider
             Obx(() => Stack(
-                  // clipBehavior: Clip.none,
                   alignment: Alignment.center,
                   children: [
                     SizedBox(
@@ -218,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 77.h,
                                 alignment: Alignment.center,
                                 decoration: const BoxDecoration(
-                                    color: Color(0xFFDE0F7E)),
+                                    color: AppColors.kPrimaryColor),
                                 child: Padding(
                                   padding: EdgeInsets.all(9.r),
                                   child: Text(
@@ -259,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                     'وصل حديثا',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: const Color(0xFFDE0F7E),
+                      color:  AppColors.kPrimaryColor,
                       fontSize: 21.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w700,
@@ -269,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'عرض الكل',
                     style: TextStyle(
-                      color: const Color(0xFFDE0F7E),
+                      color: AppColors.kPrimaryColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w400,
@@ -290,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.only(top: 30.h),
                     child: Container(
-                      color: const Color(0xFFEAEAEA),
+                      color: AppColors.kBorderColor,
                       width: kScreenWidth,
                       height: 300.38.h,
                     ),
@@ -345,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                     'العروض والهاديا',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: const Color(0xFFDE0F7E),
+                      color: AppColors.kPrimaryColor,
                       fontSize: 21.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w700,
@@ -355,7 +354,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'عرض الكل',
                     style: TextStyle(
-                      color: const Color(0xFFDE0F7E),
+                      color: AppColors.kPrimaryColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w400,
@@ -437,7 +436,7 @@ class _HomePageState extends State<HomePage> {
                                               .title ??
                                           '',
                                       style: TextStyle(
-                                        color: const Color(0xFFDE0F7E),
+                                        color: AppColors.kPrimaryColor,
                                         fontSize: 18.sp,
                                         fontFamily: kTheArabicSansLight,
                                         fontWeight: FontWeight.w700,
@@ -449,7 +448,7 @@ class _HomePageState extends State<HomePage> {
                                           '',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        color: const Color(0xFF393336),
+                                        color: AppColors.kBlackPinkColor,
                                         height: 2,
                                         fontSize: 14.sp,
                                         fontFamily: kTheArabicSansLight,
@@ -463,7 +462,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 109.71.w,
                                       height: 37.93.h,
                                       decoration: ShapeDecoration(
-                                        color: const Color(0xFFDE0F7E),
+                                        color: AppColors.kPrimaryColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.69.r),
@@ -542,7 +541,7 @@ class _HomePageState extends State<HomePage> {
             /// salesProducts
             Container(
               width: 430.24.w,
-              decoration: const BoxDecoration(color: Color(0xFFF4C6DD)),
+              decoration: const BoxDecoration(color: AppColors.klPinkColor,),
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 children: [
@@ -556,7 +555,7 @@ class _HomePageState extends State<HomePage> {
                           'التخفيضات',
                           textAlign: TextAlign.right,
                           style: TextStyle(
-                            color: const Color(0xFFDE0F7E),
+                            color: AppColors.kPrimaryColor,
                             fontSize: 21.sp,
                             fontFamily: kTheArabicSansLight,
                             fontWeight: FontWeight.w700,
@@ -566,7 +565,7 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           'كل التخفيضات',
                           style: TextStyle(
-                            color: const Color(0xFFDE0F7E),
+                            color: AppColors.kPrimaryColor,
                             fontSize: 18.sp,
                             fontFamily: kTheArabicSansLight,
                             fontWeight: FontWeight.w400,
@@ -717,7 +716,7 @@ class _HomePageState extends State<HomePage> {
                     'الماركات المميزة',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: const Color(0xFFDE0F7E),
+                      color: AppColors.kPrimaryColor,
                       fontSize: 21.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w700,
@@ -727,7 +726,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'جميع الماركات',
                     style: TextStyle(
-                      color: const Color(0xFFDE0F7E),
+                      color: AppColors.kPrimaryColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w400,
@@ -839,7 +838,7 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 width: 257.0.w,
                                 height: 189.38.h,
-                                color: const Color(0xFFDE0F7E),
+                                color: AppColors.kPrimaryColor,
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 18.0),
                                   child: Column(
@@ -929,7 +928,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'إكتشفي أيضاً',
                   style: TextStyle(
-                    color: const Color(0xFFDE0F7E),
+                    color: AppColors.kPrimaryColor,
                     fontSize: 21.sp,
                     fontFamily: kTheArabicSansLight,
                     fontWeight: FontWeight.w700,
@@ -1001,8 +1000,8 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 13.18.sp,
                               fontFamily: kTheArabicSansLight,
                               fontWeight: FontWeight.w400,
-                              height: 1.5,
-                              letterSpacing: 0.13,
+                              // height: 1.5,
+                              // letterSpacing: 0.13,
                             ),
                           ),
                         ],

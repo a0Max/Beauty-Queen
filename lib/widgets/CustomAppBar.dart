@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 
 import '../View/normalprofile.dart';
 import '../View/cart_screen.dart';
+import '../const/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
   final bool? isScrolled;
@@ -68,7 +69,7 @@ class CustomAppBar extends StatelessWidget {
               )),
       ],
       automaticallyImplyLeading: false,
-      backgroundColor: const Color(0xffE01E89),
+      backgroundColor: AppColors.kPrimaryColor,
       centerTitle: true,
       title: Text.rich(
         TextSpan(
@@ -141,6 +142,49 @@ class CustomAppBar extends StatelessWidget {
                         width: 30.w,
                       ),
                     ),
+
+                  if(isScrolled == true)...{
+                    Container(
+                        height: 44.h,
+
+                        width: MediaQuery.of(context).size.width-(30.w+10.w+20.w+16.w+20.w+30.w+9.w),
+
+                        child:TextField(
+                          style: const TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                          ),
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: onPressed,
+                              icon: SvgPicture.asset(AppImages.imageSearch),
+                            ),
+                            prefix: SizedBox(width: 20.w),
+                            hintText: 'إبحث عن منتج أو ماركة',
+                            hintStyle: TextStyle(
+                              color: AppColors.kGrayColor,
+                              fontSize: 16.59.sp,
+                              fontFamily: kTheArabicSansLight,
+                              fontWeight: FontWeight.w300,
+                            ),
+                            contentPadding: EdgeInsets.symmetric(vertical: 7.h),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(39.r),
+                              borderSide: const BorderSide(
+                                color: AppColors.kWhiteBlueColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(39.r),
+                              borderSide: const BorderSide(
+                                color: AppColors.kWhiteBlueColor,
+                              ),
+                            ),
+                            fillColor: AppColors.kWhiteBlueColor,
+                            filled: true,
+                          ),
+                          maxLines: 1,
+                        )),
+                  },
                   SizedBox(
                     width: 9.w,
                   ),
@@ -181,10 +225,12 @@ class CustomAppBar extends StatelessWidget {
                           Icons.arrow_forward_ios,
                           color: kBlackColor,
                           size: 30,
-                        ))
+                        )),
+
                 ],
               ),
-              AnimatedContainer(
+
+              isScrolled==false?AnimatedContainer(
                 height: 44.h,
                 padding: EdgeInsets.symmetric(
                   horizontal: 16.w,
@@ -210,7 +256,7 @@ class CustomAppBar extends StatelessWidget {
                     prefix: SizedBox(width: 20.w),
                     hintText: 'إبحث عن منتج أو ماركة',
                     hintStyle: TextStyle(
-                      color: const Color(0xFF868686),
+                      color: AppColors.kGrayColor,
                       fontSize: 16.59.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w300,
@@ -219,20 +265,22 @@ class CustomAppBar extends StatelessWidget {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(39.r),
                       borderSide: const BorderSide(
-                        color: Color(0xFFF5F5F6),
+                        color: AppColors.kWhiteBlueColor,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(39.r),
                       borderSide: const BorderSide(
-                        color: Color(0xFFF5F5F6),
+                        color: AppColors.kWhiteBlueColor,
                       ),
                     ),
-                    fillColor: const Color(0xFFF5F5F6),
+                    fillColor: AppColors.kWhiteBlueColor,
                     filled: true,
                   ),
                   maxLines: 1,
                 ),
+              ):SizedBox(
+                height: 10.h,
               ),
             ],
           ),
