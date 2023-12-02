@@ -21,13 +21,11 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
-    print(response.data);
     if (validResponse(response.statusCode!)) {
       return UserModel.fromMap(
         response.data,
       );
     } else {
-      print(response.data);
       throw response.data;
     }
   }
@@ -49,13 +47,11 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
-    print(response.data);
     if (validResponse(response.statusCode!)) {
       return UserModel.fromMap(
         response.data,
       );
     } else {
-      print(response.data);
       throw response.data;
     }
   }
@@ -75,19 +71,15 @@ class UserDataApis extends ApiProvider {
           },
         ),
       );
-      print(response.data);
       if (validResponse(response.statusCode!)) {
         return response.data.toString();
       }
       else {
-        print("--${response.data}");
         throw response.data;
       }
     } on DioException catch (e, s) {
-      print('DioError4:$e');
       throw tr('check_phone_number');
     } catch (e) {
-      print('catch4:$e');
       throw tr('check_phone_number');
     }
   }
@@ -108,11 +100,9 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
-    print(response.data);
     if (validResponse(response.statusCode!)) {
       return true;
     } else {
-      print(response.data);
       throw response.data;
     }
   }

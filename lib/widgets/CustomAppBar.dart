@@ -230,7 +230,7 @@ class CustomAppBar extends StatelessWidget {
                 ],
               ),
 
-              isScrolled==false?AnimatedContainer(
+              if(isScrolled==false)...{AnimatedContainer(
                 height: 44.h,
                 padding: EdgeInsets.symmetric(
                   horizontal: 16.w,
@@ -279,7 +279,9 @@ class CustomAppBar extends StatelessWidget {
                   ),
                   maxLines: 1,
                 ),
-              ):SizedBox(
+              )},
+
+              SizedBox(
                 height: 10.h,
               ),
             ],

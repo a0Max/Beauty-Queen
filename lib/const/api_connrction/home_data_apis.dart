@@ -16,13 +16,12 @@ class HomeDataApis extends ApiProvider {
         },
       ),
     );
-    print(response.data);
     if (validResponse(response.statusCode!)) {
       return HomeModel.fromJson(
+
         response.data,
       );
     } else {
-      print(response.data);
       throw response.data;
     }
   }
