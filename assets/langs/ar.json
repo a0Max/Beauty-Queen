@@ -17,6 +17,7 @@
   "kPassword": "كلمة المرور",
   "kForgotPassword": "هل نسيت كلمة السر؟",
   "kLogin": "تسجيل دخول",
+  "kCreateAccount": "إنشاء حساب جديد",
   "kFirstNameHint": "الاسم الأول",
   "kRegisterNow": "للشراء من الموقع وتصفـح كل العروض سجلي الآن مجاناً",
   "kWelcome": "مـــرحباً ❤\uFE0F",
@@ -51,6 +52,7 @@
   "my_account": "حسابي",
   "not_availble_now": "غير متوفر حالياً",
   "choose_the_category": "تحديد الخيارات",
-  "add_to_bags": "إضافة إلى السلة"
+  "add_to_bags": "إضافة إلى السلة",
+  "way_to_login": "تسجيل الدخول عن طريق"
 
 }

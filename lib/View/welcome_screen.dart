@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:beauty_queen/View/auth_view/signUp_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -336,7 +337,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           Get.off(LogInPage());
                         }
                       },
-                      child: Text(kLogin,
+                      child: Text(tr('kLogin'),
                           style: TextStyle(
                               fontSize: 20.sp,
                               fontFamily: kTheArabicSansLight,
@@ -372,7 +373,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         }
                       },
                       child: Text(
-                        kCreateAccount,
+                        tr('kCreateAccount'),
                         style: kPrimaryTextStyle.copyWith(
                             color: kWhiteColor,
                             fontSize: 19.sp,

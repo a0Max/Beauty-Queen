@@ -16,7 +16,7 @@ class HomeController extends GetxController {
 
   Future<void> getHomeDataController() async {
     try {
-      homeData.value = await _api.HomeDataRequest();
+      homeData.value = await _api.homeDataRequest();
       sliders.value =
       (homeData.value.slides?.where((element) => element.mobile != null)
           .toList() ?? []);

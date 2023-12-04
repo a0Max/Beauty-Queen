@@ -24,6 +24,7 @@ class AuthController extends GetxController {
 
   login(String phone, String password) async {
     userData.value = await _api.loginRequest(phone:phone, password:password);
+    getUserData();
   }
 
   var passwordObscureText = true.obs;
@@ -40,6 +41,10 @@ class AuthController extends GetxController {
 
   Future<void> signUp({required String phone, required String password, required String name, required String rePassword}) async {
     userData.value = await _api.signUpRequest(phone:phone, password:password, name:name);
+    getUserData();
+  }
 
+  getUserData() async {
+    userData.value = await _api.userDataRequest();
   }
 }

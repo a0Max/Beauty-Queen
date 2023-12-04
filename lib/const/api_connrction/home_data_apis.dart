@@ -5,7 +5,8 @@ import '../vars.dart';
 import 'base_api_connection.dart';
 
 class HomeDataApis extends ApiProvider {
-  Future<HomeModel> HomeDataRequest() async {
+  Future<HomeModel> homeDataRequest() async {
+    final token = await getUserToken();
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.homepageEndPoint}',
       options: Options(
@@ -13,6 +14,8 @@ class HomeDataApis extends ApiProvider {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
           // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+
         },
       ),
     );

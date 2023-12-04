@@ -106,4 +106,29 @@ class UserDataApis extends ApiProvider {
       throw response.data;
     }
   }
+
+
+  Future<UserModel> userDataRequest() async {
+    final token = await getUserToken();
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.userEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return UserModel.fromMap(
+        response.data,
+      );
+    } else {
+      throw response.data;
+    }
+  }
+
 }

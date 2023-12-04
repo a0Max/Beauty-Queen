@@ -30,7 +30,7 @@ class LogInPage extends StatefulWidget {
 class _LogInPage extends State<LogInPage> {
   final AuthController _controller = Get.put(AuthController());
   TextEditingController phoneController = TextEditingController(text: kDebugMode?"0927386249":"");
-  TextEditingController passwordController = TextEditingController(text: kDebugMode?"01289555089":"");
+  TextEditingController passwordController = TextEditingController(text: kDebugMode?"012895550899":"");
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _submit() async {
@@ -162,7 +162,6 @@ class _LogInPage extends State<LogInPage> {
                     SizedBox(height: 38.h),
                     GestureDetector(
                       onTap: () {
-                        // Get.off(const MainView());
                         _submit();
                       },
                       child: Container(

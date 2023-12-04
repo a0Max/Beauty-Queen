@@ -3,10 +3,10 @@
 // const String kPassword = 'كلمة المرور';
 // const String kEnterYourPassword = 'أدخل كلمة المرور هنا';
 // const String kForgotPassword = 'هل نسيت كلمة السر؟';
-const String kLogin = 'تسجيل دخول';
-const String kLoginVia = 'تسجيل الدخول عن طريق';
+// const String kLogin = 'تسجيل دخول';
+// const String kLoginVia = 'تسجيل الدخول عن طريق';
 // const String kDoNotHaveAnAccount = 'ليس لديك حساب؟';
-const String kCreateAccount = 'إنشاء حساب جديد';
+// const String kCreateAccount = 'إنشاء حساب جديد';
 // const String kWelcome = 'مـــرحباً ❤️';
 // const String kRegisterNow =
 //     'للشراء من الموقع وتصفـح كل العروض سجلي الآن مجاناً';
