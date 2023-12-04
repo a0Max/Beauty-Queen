@@ -17,6 +17,7 @@ import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
 import '../../widgets/loginVia.dart';
+import 'enter_phone_screen.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -149,13 +150,16 @@ class _LogInPage extends State<LogInPage> {
                     SizedBox(height: 17.h),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        tr('kForgotPassword'),
-                        style: TextStyle(
-                          color: AppColors.kSecondaryColor,
-                          fontSize: 17.69.sp,
-                          fontFamily: kTheArabicSansLight,
-                          fontWeight: FontWeight.w400,
+                      child:GestureDetector(
+                        onTap: ()=>Get.to(EnterPhoneScreen()),
+                        child: Text(
+                          tr('kForgotPassword'),
+                          style: TextStyle(
+                            color: AppColors.kSecondaryColor,
+                            fontSize: 17.69.sp,
+                            fontFamily: kTheArabicSansLight,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),

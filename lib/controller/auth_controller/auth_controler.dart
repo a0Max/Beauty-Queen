@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:beauty_queen/models/user_model.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,6 +43,19 @@ class AuthController extends GetxController {
   Future<void> signUp({required String phone, required String password, required String name, required String rePassword}) async {
     userData.value = await _api.signUpRequest(phone:phone, password:password, name:name);
     getUserData();
+  }
+
+  Future<void> updatePassword({required String phone, required String password, required String rePassword}) async {
+    try{
+    await _api.forgetPasswordRequest(phone:phone, password:password, rePassword:rePassword);
+    } on DioError catch (e, s) {
+
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+
+    } catch (e, s) {
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+
+    }
   }
 
   getUserData() async {

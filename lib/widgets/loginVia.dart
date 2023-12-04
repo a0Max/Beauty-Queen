@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'package:beauty_queen/const/styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,7 +28,7 @@ class LoginVia extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
-                kLoginVia,
+                tr('way_to_login'),
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontFamily: kTheArabicSansLight,

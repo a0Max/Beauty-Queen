@@ -15,10 +15,12 @@ import '../../const/app_images.dart';
 import '../../widgets/custom_button_2.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
+import 'enter_new_password.dart';
 
 class OtpPage extends StatefulWidget {
   final String phone;
-  const OtpPage({super.key, required this.phone});
+  final bool? isForget;
+  const OtpPage({super.key, required this.phone, this.isForget});
 
   @override
   State<StatefulWidget> createState() {
@@ -49,16 +51,27 @@ class _OtpPage extends State<OtpPage> {
       LoadingScreen.show(context);
 
       otpController.checkTheOtp(sms: _otp ?? '');
-      Get.to(const CongratulationsPage());
-      // if (!context.mounted) return;
+      if (widget.isForget ==true){
 
-      Navigator.of(context).pop();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const CongratulationsPage(),
-          ),
-              (route) => false);
+        Navigator.of(context).pop();
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EnterNewPassword(phone: widget.phone,),
+            ),
+                (route) => false);
+      }else {
+        //   Get.to(const CongratulationsPage());
+        //   // if (!context.mounted) return;
+        // }
+        Navigator.of(context).pop();
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CongratulationsPage(),
+            ),
+                (route) => false);
+      }
     } on DioException catch (e, s) {
       if (!context.mounted) return;
 

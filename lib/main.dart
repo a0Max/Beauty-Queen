@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: kWhiteColor,
               useMaterial3: true,
             ),
-            // home: SplashScreen(),
-            home: MainView(),
+            home: SplashScreen(),
+            // home: MainView(),
 
             debugShowCheckedModeBanner: false,
             builder: (context, widget) {

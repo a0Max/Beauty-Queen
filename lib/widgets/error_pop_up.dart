@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ErrorPopUp{
-  ErrorPopUp({String? title, String? message}){
+  ErrorPopUp({String? title, String? message, bool? isError}){
     Get.snackbar(
       title??tr('Error'),
       message??tr('something_wrong'),
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 7),
-      backgroundColor: Colors.red,
+      backgroundColor:isError==false?Colors.green: Colors.red,
       colorText: Colors.white,
     );
   }

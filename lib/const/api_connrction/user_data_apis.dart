@@ -107,6 +107,29 @@ class UserDataApis extends ApiProvider {
     }
   }
 
+  Future<bool> forgetPasswordRequest(
+      {required String phone, required String password, required String rePassword}) async {
+    final token = await getUserToken();
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
+      queryParameters: {"phone": phone, "password": password, 'password_confirmation':rePassword},
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          "Authorization": 'Bearer $token',
+          // 'Country-Id': await _getCountryCode(),
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return true;
+    } else {
+      throw response.data;
+    }
+  }
+
 
   Future<UserModel> userDataRequest() async {
     final token = await getUserToken();

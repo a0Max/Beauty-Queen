@@ -1,0 +1,140 @@
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
+import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
+import '../../const/styles.dart';
+import '../../const/validator.dart';
+import '../../controller/auth_controller/otp_controller.dart';
+import '../../widgets/auth_widgets/text_field_auth_widget.dart';
+import '../../widgets/error_pop_up.dart';
+import '../../widgets/loading.dart';
+import '../welcome_screen.dart';
+import 'otp_page_view.dart';
+
+class EnterPhoneScreen extends StatefulWidget {
+  const EnterPhoneScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _EnterPhoneScreen();
+  }
+}
+class _EnterPhoneScreen extends State<EnterPhoneScreen>{
+  TextEditingController phoneController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final OTPController _controller = Get.put(OTPController());
+
+  _submit() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    _formKey.currentState!.save();
+    try {
+      LoadingScreen.show(context);
+
+      await _controller.updatePhone(phone:phoneController.text);
+      if (!context.mounted) return;
+
+      Navigator.of(context).pop();
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpPage(phone: phoneController.text,isForget:true),
+          ),
+              (route) => false);
+    } on DioException catch (e, s) {
+      if (!context.mounted) return;
+
+      Navigator.of(context).pop();
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+
+    } catch (e, s) {
+      if (!context.mounted) return;
+
+      Navigator.of(context).pop();
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+          surfaceTintColor: AppColors.kWhiteColor,
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Get.off(const WelcomeScreen());
+                },
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                  color: AppColors.kBlackColor,
+                  size: 25.r,
+                )),
+          ],
+          title: SvgPicture.asset(
+            AppImages.imageLogoLogin,
+            height: 55.93.h,
+            width: 166.08.w,
+          )),
+      body: Padding(
+        padding: EdgeInsets.all(16.r),
+    child: SingleChildScrollView(
+    child: Form(
+    key: _formKey,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SizedBox(height: 38.h),
+      TextFieldAuthWidget(
+        hindText: tr('kEnterYourPhoneNumber'),
+        titleText: tr('kPhoneNumber'),
+        controler: phoneController,
+        keyboardType: TextInputType.phone,
+        validatorTextField: (val) {
+          return Validator().validatorPhoneNumber(val);
+        },
+      ),
+      SizedBox(height: 17.h),
+      GestureDetector(
+        onTap: () {
+          _submit();
+        },
+        child: Container(
+          height: 59.70.h,
+          decoration: ShapeDecoration(
+            color: AppColors.kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.84),
+            ),
+          ),
+          child: Center(
+            child: Text(tr('send'),
+                style: TextStyle(
+                    fontSize: 22.11.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.kWhiteColor,
+                    fontFamily: kTheArabicSansLight)),
+          ),
+        ),
+      ),
+
+    ])))),
+
+    );
+  }
+
+
+}
