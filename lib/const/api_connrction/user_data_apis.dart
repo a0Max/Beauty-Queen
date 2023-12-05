@@ -146,12 +146,32 @@ class UserDataApis extends ApiProvider {
       ),
     );
     if (validResponse(response.statusCode!)) {
-      return UserModel.fromMap(
-        response.data,
-      );
+      final List<UserModel> l = [];
+      response.data.forEach((e) => l.add(UserModel.fromMap(e)));
+      return l.first;
+      // return UserModel.fromMap(
+      //   response.data,
+      // );
     } else {
       throw response.data;
     }
+  }
+
+
+  Future<void> logoutUserRequest() async {
+    final token = await getUserToken();
+    await dio.post(
+      '${Connection.apiURL}${ApiProvider.logoutEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+
+        },
+      ),
+    );
   }
 
 }

@@ -50,27 +50,27 @@ class UserModel {
   });
 
   UserModel.fromMap(Map<String, dynamic> json) {
-    id = json["user"]["id"];
-    name = json["user"]["name"];
-    lastName = json["user"]['last_name'];
-    birthDate = json["user"]['birth_date'];
-    email = json["user"]['email'];
-    phone = json["user"]['phone'];
-    address = json["user"]['address'];
-    cityId = json["user"]['city_id'];
-    areaId = json["user"]['area_id'];
-    emailVerifiedAt = json["user"]['email_verified_at'];
-    createdAt = json["user"]['created_at'];
-    updatedAt = json["user"]['updated_at'];
-    balance = json["user"]['balance'];
-    accountType = json["user"]['account_type'];
-    queenaBalance = json["user"]['queena_balance'];
-    upgradedToQueenaAt = json["user"]['upgraded_to_queena_at'];
-    brand1 = json["user"]['brand1'];
-    brand2 = json["user"]['brand2'];
-    brand3 = json["user"]['brand3'];
-    phone2 = json["user"]['phone2'];
-    whatsappPhone = json["user"]['whatsapp_phone'];
+    id = json["id"];
+    name = json["name"];
+    lastName = json['last_name'];
+    birthDate = json['birth_date'];
+    email = json['email'];
+    phone = json['phone'];
+    address = json['address'];
+    cityId = json['city_id'];
+    areaId = json['area_id'];
+    emailVerifiedAt = json['email_verified_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    balance = json['balance'];
+    accountType = json['account_type'];
+    queenaBalance = json['queena_balance'];
+    upgradedToQueenaAt = json['upgraded_to_queena_at'];
+    brand1 = json['brand1'];
+    brand2 = json['brand2'];
+    brand3 = json['brand3'];
+    phone2 = json['phone2'];
+    whatsappPhone = json['whatsapp_phone'];
     if (isNotBlank(json["token"])) saveToken(json["token"]);
   }
 

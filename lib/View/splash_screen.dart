@@ -1,4 +1,3 @@
-import 'package:beauty_queen/controller/SplashScreenController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,11 +6,22 @@ import 'package:get/get.dart';
 import '../const/app_images.dart';
 import '../const/colors.dart';
 import '../const/images.dart';
+import '../controller/auth_controller/auth_controler.dart';
 
-class SplashScreen extends StatelessWidget {
-  final SplashScreenController controller = Get.put(SplashScreenController());
+class SplashScreen extends StatefulWidget {
 
-  SplashScreen({super.key});
+  @override
+  State<StatefulWidget> createState() {
+    return _SplashScreen();
+  }
+}
+class _SplashScreen extends State<SplashScreen>{
+  final AuthController controller = Get.put(AuthController());
+@override
+  void initState() {
+    super.initState();
+    controller.startProgress();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -29,4 +29,5 @@ class AppColors {
   static const Color kCDGColor2 = Color(0xFFB8B8B8);
   static const Color kDividerrColor = Color(0xFFF4F4F4);
   static const Color kWhiteBlueColor = Color(0xffF5F5F6);
+  static const Color kGreyBlueColor = Color(0xff6c757d);
 }

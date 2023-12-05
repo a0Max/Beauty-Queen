@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../const/colors.dart';
 import '../const/images.dart';
+import '../models/sales_products_model.dart';
 import '../widgets/CustomCardWidget.dart';
 import 'filterby_screen.dart';
 
@@ -246,7 +247,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
             SizedBox(
               height: 22.h,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomCardWidget(
@@ -255,17 +256,17 @@ class _DiscountScreenState extends State<DiscountScreen> {
                     price: '150.00',
                     des: 'كريم اساس الترا اتش دي السائل من ميكب',
                     disprice: '190.00',
-                    containertxt: 'تحديد الخيارات'),
+                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
                 CustomCardWidget(
                     imageUrl: kLispticImage,
                     imgtxt: 'Rare Beauty',
                     price: '94.00',
                     des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
                     disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة'),
+                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
               ],
             ),
-            const Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomCardWidget(
@@ -274,17 +275,17 @@ class _DiscountScreenState extends State<DiscountScreen> {
                     price: '150.00',
                     des: 'كريم اساس الترا اتش دي السائل من ميكب',
                     disprice: '190.00',
-                    containertxt: 'تحديد الخيارات'),
+                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
                 CustomCardWidget(
                     imageUrl: kLispticImage,
                     imgtxt: 'Rare Beauty',
                     price: '94.00',
                     des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
                     disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة'),
+                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
               ],
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomCardWidget(
@@ -293,17 +294,17 @@ class _DiscountScreenState extends State<DiscountScreen> {
                     price: '150.00',
                     des: 'كريم اساس الترا اتش دي السائل من ميكب',
                     disprice: '190.00',
-                    containertxt: 'تحديد الخيارات'),
+                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
                 CustomCardWidget(
                     imageUrl: kLispticImage,
                     imgtxt: 'Rare Beauty',
                     price: '94.00',
                     des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
                     disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة'),
+                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
               ],
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomCardWidget(
@@ -312,14 +313,14 @@ class _DiscountScreenState extends State<DiscountScreen> {
                     price: '150.00',
                     des: 'كريم اساس الترا اتش دي السائل من ميكب',
                     disprice: '190.00',
-                    containertxt: 'تحديد الخيارات'),
+                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
                 CustomCardWidget(
                     imageUrl: kLispticImage,
                     imgtxt: 'Rare Beauty',
                     price: '94.00',
                     des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
                     disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة'),
+                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
               ],
             ),
           ],

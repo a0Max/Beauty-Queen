@@ -5,6 +5,7 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../models/sales_products_model.dart';
 import '../widgets/CustomAppBar.dart';
 import '../widgets/CustomCardWidget.dart';
 import '../widgets/CustomEndDrawer.dart';
@@ -226,7 +227,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
             SizedBox(
               height: 19.h,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomCardWidget(
@@ -235,14 +236,14 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                     price: '150.00',
                     des: 'كريم اساس الترا اتش دي السائل من ميكب',
                     disprice: '190.00',
-                    containertxt: 'تحديد الخيارات'),
+                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
                 CustomCardWidget(
                     imageUrl: kLispticImage,
                     imgtxt: 'Rare Beauty',
                     price: '94.00',
                     des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
                     disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة'),
+                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
               ],
             ),
             SizedBox(

@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../controller/auth_controller/auth_controler.dart';
 import 'about_app.dart';
+import 'auth_view/login_page.dart';
 import 'mysticker_screen.dart';
 import 'orders_screen.dart';
 import 'profile_screen.dart';
@@ -435,7 +437,16 @@ class NormalProfileScreen extends StatelessWidget {
                 height: 60.h,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  final AuthController controller = Get.put(AuthController());
+                  controller.logoutUserData();
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LogInPage(),
+                      ),
+                          (route) => false);
+                },
                 child: Container(
                   height: 60.h,
                   width: 398.w,
