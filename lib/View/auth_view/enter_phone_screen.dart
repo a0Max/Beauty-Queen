@@ -24,8 +24,10 @@ class EnterPhoneScreen extends StatefulWidget {
     return _EnterPhoneScreen();
   }
 }
-class _EnterPhoneScreen extends State<EnterPhoneScreen>{
-  TextEditingController phoneController = TextEditingController();
+
+class _EnterPhoneScreen extends State<EnterPhoneScreen> {
+  TextEditingController phoneController =
+      TextEditingController(text: kDebugMode ? '0927386249' : '');
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final OTPController _controller = Get.put(OTPController());
 
@@ -82,59 +84,65 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen>{
                   color: AppColors.kBlackColor,
                   size: 25.r,
                 )),
-          ],
-          title: SvgPicture.asset(
-            AppImages.imageLogoLogin,
-            height: 55.93.h,
-            width: 166.08.w,
-          )),
+          ],),
       body: Padding(
-        padding: EdgeInsets.all(16.r),
-    child: SingleChildScrollView(
-    child: Form(
-    key: _formKey,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SizedBox(height: 38.h),
-      TextFieldAuthWidget(
-        hindText: tr('kEnterYourPhoneNumber'),
-        titleText: tr('kPhoneNumber'),
-        controler: phoneController,
-        keyboardType: TextInputType.phone,
-        validatorTextField: (val) {
-          return Validator().validatorPhoneNumber(val);
-        },
-      ),
-      SizedBox(height: 17.h),
-      GestureDetector(
-        onTap: () {
-          _submit();
-        },
-        child: Container(
-          height: 59.70.h,
-          decoration: ShapeDecoration(
-            color: AppColors.kPrimaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.84),
-            ),
-          ),
-          child: Center(
-            child: Text(tr('send'),
-                style: TextStyle(
-                    fontSize: 22.11.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.kWhiteColor,
-                    fontFamily: kTheArabicSansLight)),
-          ),
-        ),
-      ),
-
-    ])))),
-
+          padding: EdgeInsets.all(16.r),
+          child: SingleChildScrollView(
+              child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          tr('backPassword'),
+                          style: TextStyle(
+                            color: AppColors.kBlackColor,
+                            fontSize: 29.78.sp,
+                            fontFamily: 'TheSans',
+                            fontWeight: FontWeight.w400,
+                          ),),
+                          Text(tr('backYourAccount'),
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              fontSize: 19.59.sp,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.kTextGrayColor)
+                        ),
+                        SizedBox(height: 38.h),
+                        TextFieldAuthWidget(
+                          hindText: tr('kEnterYourPhoneNumber'),
+                          titleText: tr('kPhoneNumber'),
+                          controler: phoneController,
+                          keyboardType: TextInputType.phone,
+                          validatorTextField: (val) {
+                            return Validator().validatorPhoneNumber(val);
+                          },
+                        ),
+                        SizedBox(height: 17.h),
+                        GestureDetector(
+                          onTap: () {
+                            _submit();
+                          },
+                          child: Container(
+                            height: 59.70.h,
+                            decoration: ShapeDecoration(
+                              color: AppColors.kPrimaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.84),
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(tr('continuation'),
+                                  style: TextStyle(
+                                      fontSize: 22.11.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.kWhiteColor,
+                                      fontFamily: kTheArabicSansLight)),
+                            ),
+                          ),
+                        ),
+                      ])))),
     );
   }
-
-
 }

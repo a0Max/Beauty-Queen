@@ -46,11 +46,11 @@ class _OtpPage extends State<OtpPage> {
   final TextEditingController _controller = TextEditingController();
   String? _otp;
 
-  checkOTP() {
+  checkOTP() async {
     try {
       LoadingScreen.show(context);
 
-      otpController.checkTheOtp(sms: _otp ?? '');
+      await otpController.checkTheOtp(sms: _otp ?? '');
       if (widget.isForget ==true){
 
         Navigator.of(context).pop();
@@ -96,7 +96,8 @@ class _OtpPage extends State<OtpPage> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.back();
+                // Get.back();
+                Navigator.pop(context);
               },
               icon: Icon(
                 Icons.arrow_forward_ios,

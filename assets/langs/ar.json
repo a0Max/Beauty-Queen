@@ -58,6 +58,11 @@
   "choose_the_category": "تحديد الخيارات",
   "add_to_bags": "إضافة إلى السلة",
   "way_to_login": "تسجيل الدخول عن طريق",
-  "codeOfSelected": "كود الخيار - "
+  "codeOfSelected": "كود الخيار - ",
+  "backPassword": "استرجاع كلمة المرور",
+  "backYourAccount": "أدخل رقم الهاتف لإسترجاع حسابك",
+  "enterPasswordForYourAccount":"أدخل كلمة المرور الجديدة لحسابك",
+  "makeSure": "تأكيد",
+  "continuation": "إستمرار"
 
 }

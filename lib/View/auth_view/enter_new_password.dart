@@ -1,11 +1,13 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart' hide Response;
+// import 'package:get/get_core/src/get_main.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
@@ -86,12 +88,7 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                     color: AppColors.kBlackColor,
                     size: 25.r,
                   )),
-            ],
-            title: SvgPicture.asset(
-              AppImages.imageLogoLogin,
-              height: 55.93.h,
-              width: 166.08.w,
-            )),
+            ],),
         body: Padding(
             padding: EdgeInsets.all(16.r),
             child: SingleChildScrollView(
@@ -101,9 +98,26 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            tr('backPassword'),
+                            style: TextStyle(
+                              color: AppColors.kBlackColor,
+                              fontSize: 29.78.sp,
+                              fontFamily: 'TheSans',
+                              fontWeight: FontWeight.w400,
+                            ),),
+                          Text(tr('enterPasswordForYourAccount'),
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansLight,
+                                  fontSize: 19.59.sp,
+                                  fontWeight: FontWeight.w300,
+                                  color: AppColors.kTextGrayColor)
+                          ),
+
                           SizedBox(height: 38.h),
                           Obx(() => TextFieldAuthWidget(
-                                hindText: tr('kPasswordHint'),
+                            titleText: tr('kPasswordHint'),
+                                hindText: '',
                                 controler: passwordController,
                                 hintStyle: TextStyle(
                                   color: const Color(0xFF2C3E50),
@@ -130,7 +144,8 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                               )),
                           SizedBox(height: 15.h),
                           TextFieldAuthWidget(
-                            hindText: tr('kConfirmPasswordHint'),
+                            titleText: tr('kConfirmPasswordHint'),
+                            hindText:'',
                             controler: rePasswordController,
                             obscureText:
                                 _controller.confirmPasswordObscureText.value,
@@ -164,8 +179,8 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                               height: 50.26.h,
                               borderRadius: 8.84.r,
                               backgroundColor: AppColors.kPrimaryColor,
-                              text: tr('save'),
-                              onPressed: _submit,
+                              text: tr('makeSure'),
+                              onPressed:(){ _submit();},
                               textStyle: TextStyle(
                                   fontSize: 20.85.sp,
                                   fontWeight: FontWeight.w700,

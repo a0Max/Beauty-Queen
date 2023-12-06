@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:beauty_queen/const/vars.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import '../../models/user_model.dart';
 import 'base_api_connection.dart';
 
@@ -30,14 +31,15 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-  Future<UserModel> signUpRequest({String? name, String? phone, String? password}) async {
+  Future<UserModel> signUpRequest(
+      {String? name, String? phone, String? password}) async {
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.registerEndPoint}',
       queryParameters: {
         "phone": phone,
         "name": name,
         "password": password,
-        "password_confirmation":password
+        "password_confirmation": password
       },
       options: Options(
         headers: {
@@ -66,15 +68,13 @@ class UserDataApis extends ApiProvider {
           headers: {
             ...apiHeaders,
             'Accept-Language': await ApiProvider.getAppLanguage(),
-            "Authorization": 'Bearer $token',
             // 'Country-Id': await _getCountryCode(),
           },
         ),
       );
       if (validResponse(response.statusCode!)) {
         return response.data.toString();
-      }
-      else {
+      } else {
         throw response.data;
       }
     } on DioException catch (e, s) {
@@ -95,7 +95,6 @@ class UserDataApis extends ApiProvider {
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          "Authorization": 'Bearer $token',
           // 'Country-Id': await _getCountryCode(),
         },
       ),
@@ -107,29 +106,29 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-  Future<bool> forgetPasswordRequest(
+  Future<void> forgetPasswordRequest(
       {required String phone, required String password, required String rePassword}) async {
-    final token = await getUserToken();
-
-    final response = await dio.post(
-      '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
-      queryParameters: {"phone": phone, "password": password, 'password_confirmation':rePassword},
-      options: Options(
-        headers: {
-          ...apiHeaders,
-          'Accept-Language': await ApiProvider.getAppLanguage(),
-          "Authorization": 'Bearer $token',
-          // 'Country-Id': await _getCountryCode(),
+      final response = await dio.post(
+        '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
+        queryParameters: {
+          "phone": phone,
+          "password": password,
+          'password_confirmation': rePassword
         },
-      ),
-    );
-    if (validResponse(response.statusCode!)) {
-      return true;
-    } else {
-      throw response.data;
-    }
+        options: Options(
+          headers: {
+            ...apiHeaders,
+            'Accept-Language': await ApiProvider.getAppLanguage(),
+            // "Authorization": 'Bearer $token',
+            'Content-Type': "text/html; charset=UTF-8"
+          },
+        ),
+      );
+      if (validResponse(response.statusCode!)) {
+      } else {
+        throw response.data;
+      }
   }
-
 
   Future<UserModel> userDataRequest() async {
     final token = await getUserToken();
@@ -141,7 +140,6 @@ class UserDataApis extends ApiProvider {
           'Accept-Language': await ApiProvider.getAppLanguage(),
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
-
         },
       ),
     );
@@ -157,7 +155,6 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-
   Future<void> logoutUserRequest() async {
     final token = await getUserToken();
     await dio.post(
@@ -168,10 +165,8 @@ class UserDataApis extends ApiProvider {
           'Accept-Language': await ApiProvider.getAppLanguage(),
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
-
         },
       ),
     );
   }
-
 }

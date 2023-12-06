@@ -1,14 +1,12 @@
 import 'package:beauty_queen/View/splash_screen.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
-import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'View/home/bottom_nav_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +41,7 @@ class MyApp extends StatelessWidget {
             ),
             home: SplashScreen(),
             // home: MainView(),
+            // home: EnterNewPassword(phone: '5345',),
 
             debugShowCheckedModeBanner: false,
             builder: (context, widget) {

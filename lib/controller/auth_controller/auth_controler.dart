@@ -50,6 +50,8 @@ class AuthController extends GetxController {
   Future<void> updatePassword({required String phone, required String password, required String rePassword}) async {
     try{
     await _api.forgetPasswordRequest(phone:phone, password:password, rePassword:rePassword);
+    ErrorPopUp(
+        message: tr('update_success'), title: tr('message'), isError: false);
     } on DioError catch (e, s) {
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
