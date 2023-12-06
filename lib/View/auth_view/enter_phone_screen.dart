@@ -44,12 +44,8 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen> {
 
       Navigator.of(context).pop();
 
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OtpPage(phone: phoneController.text,isForget:true),
-          ),
-              (route) => false);
+      Get.off(OtpPage(phone: phoneController.text, isForget: true),);
+
     } on DioException catch (e, s) {
       if (!context.mounted) return;
 
