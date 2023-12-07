@@ -189,7 +189,7 @@ class _SignUpPage extends State<SignUpPage>{
                     ),
                   )),
                   SizedBox(height: 15.h),
-                  TextFieldAuthWidget(
+                  Obx(() => TextFieldAuthWidget(
                     hindText: tr('kConfirmPasswordHint'),
                     controler: rePasswordController,
                     obscureText: _controller.confirmPasswordObscureText.value,
@@ -213,7 +213,7 @@ class _SignUpPage extends State<SignUpPage>{
                     validatorTextField: (val) {
                       return Validator().validatorRePassword(val, passwordController.text);
                     },
-                  ),
+                  )),
                   SizedBox(height: 25.h),
                   const LoginVia(),
                   SizedBox(

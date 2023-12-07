@@ -4,7 +4,6 @@ import 'package:beauty_queen/controller/auth_controller/otp_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -52,36 +51,22 @@ class _OtpPage extends State<OtpPage> {
 
       await otpController.checkTheOtp(sms: _otp ?? '');
       if (widget.isForget ==true){
-
-        Navigator.of(context).pop();
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EnterNewPassword(phone: widget.phone,),
-            ),
-                (route) => false);
+        Get.back();
+        Get.to(()=>EnterNewPassword(phone: widget.phone,),);
       }else {
-        //   Get.to(const CongratulationsPage());
-        //   // if (!context.mounted) return;
-        // }
-        Navigator.of(context).pop();
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CongratulationsPage(),
-            ),
-                (route) => false);
+        Get.back();
+        Get.off(const CongratulationsPage(),);
       }
     } on DioException catch (e, s) {
       if (!context.mounted) return;
 
-      Navigator.of(context).pop();
+      Get.back();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
     } catch (e, s) {
       if (!context.mounted) return;
 
-      Navigator.of(context).pop();
+      Get.back();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
 
     }

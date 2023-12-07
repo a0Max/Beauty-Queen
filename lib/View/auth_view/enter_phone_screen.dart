@@ -38,12 +38,12 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen> {
     }
     _formKey.currentState!.save();
     try {
-      LoadingScreen.show(context);
+      // LoadingScreen.show(context);
 
-      await _controller.updatePhone(phone:phoneController.text);
-      if (!context.mounted) return;
+      // await _controller.updatePhone(phone:phoneController.text);
+      // if (!context.mounted) return;
 
-      Navigator.of(context).pop();
+      // Navigator.of(context).pop();
 
       Get.off(OtpPage(phone: phoneController.text, isForget: true),);
 

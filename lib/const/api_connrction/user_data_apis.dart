@@ -61,6 +61,7 @@ class UserDataApis extends ApiProvider {
   Future<String> sendVerificationCodeRequest({required String phone}) async {
     final token = await getUserToken();
     try {
+      //sendVerificationCode
       final response = await dio.post(
         '${Connection.apiURL}${ApiProvider.sendVerificationCodeEndPoint}',
         queryParameters: {"phone": phone},
@@ -86,8 +87,8 @@ class UserDataApis extends ApiProvider {
 
   Future<bool> checkCodeRequest(
       {required String phone, required String sms}) async {
-    final token = await getUserToken();
-
+    // final token = await getUserToken();
+    //checkCode
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.checkCodeEndPoint}',
       queryParameters: {"phone": phone, "code": sms},
@@ -100,14 +101,16 @@ class UserDataApis extends ApiProvider {
       ),
     );
     if (validResponse(response.statusCode!)) {
+      // forgetPasswordRequest(phone: phone, password: '01289555089', rePassword: '01289555089');
       return true;
     } else {
       throw response.data;
     }
   }
 
-  Future<void> forgetPasswordRequest(
+  Future<bool> forgetPasswordRequest(
       {required String phone, required String password, required String rePassword}) async {
+    //updatePassword
       final response = await dio.post(
         '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
         queryParameters: {
@@ -120,11 +123,12 @@ class UserDataApis extends ApiProvider {
             ...apiHeaders,
             'Accept-Language': await ApiProvider.getAppLanguage(),
             // "Authorization": 'Bearer $token',
-            'Content-Type': "text/html; charset=UTF-8"
+            // 'Content-Type': "text/html; charset=UTF-8"
           },
         ),
       );
       if (validResponse(response.statusCode!)) {
+        return true;
       } else {
         throw response.data;
       }

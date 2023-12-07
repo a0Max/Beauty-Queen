@@ -35,6 +35,8 @@ class EnterNewPassword extends StatefulWidget {
 class _EnterNewPassword extends State<EnterNewPassword> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthController _controller = Get.put(AuthController());
+  final OTPController otpController = Get.put(OTPController());
+
   TextEditingController passwordController = TextEditingController();
   TextEditingController rePasswordController = TextEditingController();
   _submit() async {
@@ -45,27 +47,18 @@ class _EnterNewPassword extends State<EnterNewPassword> {
     try {
       LoadingScreen.show(context);
 
-      await _controller.updatePassword(
+      await otpController.updatePassword(
           phone: widget.phone,
           password: passwordController.text,
           rePassword: rePasswordController.text);
-      if (!context.mounted) return;
+      // if (!context.mounted) return;
 
-      Navigator.of(context).pop();
-      ErrorPopUp(
-          message: tr('update_success'), title: tr('message'), isError: false);
+      Get.back();
       Get.off(const LogInPage());
-    } on DioError catch (e, s) {
-      if (!context.mounted) return;
-
-      Navigator.of(context).pop();
-
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } on DioException catch (e, s) {
+      Get.back();
     } catch (e, s) {
-      if (!context.mounted) return;
-
-      Navigator.of(context).pop();
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      Get.back();
     }
   }
 
@@ -143,7 +136,7 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                                 ),
                               )),
                           SizedBox(height: 15.h),
-                          TextFieldAuthWidget(
+                          Obx(() => TextFieldAuthWidget(
                             titleText: tr('kConfirmPasswordHint'),
                             hindText:'',
                             controler: rePasswordController,
@@ -170,7 +163,7 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                               return Validator().validatorRePassword(
                                   val, passwordController.text);
                             },
-                          ),
+                          )),
                           const SizedBox(
                             height: 20,
                           ),

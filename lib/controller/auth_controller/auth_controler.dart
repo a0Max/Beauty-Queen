@@ -47,20 +47,6 @@ class AuthController extends GetxController {
     getUserData();
   }
 
-  Future<void> updatePassword({required String phone, required String password, required String rePassword}) async {
-    try{
-    await _api.forgetPasswordRequest(phone:phone, password:password, rePassword:rePassword);
-    ErrorPopUp(
-        message: tr('update_success'), title: tr('message'), isError: false);
-    } on DioError catch (e, s) {
-
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-
-    } catch (e, s) {
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
-
-    }
-  }
 
   var progressValue = 0.0.obs;
   var showProgress = true.obs;
