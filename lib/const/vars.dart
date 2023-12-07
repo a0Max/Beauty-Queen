@@ -30,6 +30,9 @@ abstract class Connection {
   static String urlOfBrands({required String image}) {
     return "$storageURLOfBrand/$image";
   }
+  static String urlOfBrands2({required String image}) {
+    return "${storageURLOfBrand}brands/$image";
+  }
 
 
   static const String bundleId = '';

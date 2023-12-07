@@ -1,58 +1,61 @@
 // ignore_for_file: file_names
 
+import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../View/filter_screen.dart';
-import '../const/strings.dart';
-import '../const/styles.dart';
-import '../controller/FilterController.dart';
+import '../../View/filter_screen.dart';
+import '../../const/strings.dart';
+import '../../const/styles.dart';
+import '../../const/vars.dart';
+import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/FilterController.dart';
 
 class CustomGridView extends StatelessWidget {
   final ScrollController? controller;
-  // Define a list of data for the grid items
   final List<GridItemData> gridData = [
     GridItemData(
-      imageAsset: khandgranateImage, // Replace with your image
+      imageAsset: AppImages.khandgranateImage, // Replace with your image
       label: kPerfumes,
     ),
     GridItemData(
-      imageAsset: kpaintImage, // Replace with your image
+      imageAsset: AppImages.kpaintImage, // Replace with your image
       label: kMakeup,
     ),
     // Add more data for additional grid items
     GridItemData(
-      imageAsset: kshampooImage, // Replace with your image
+      imageAsset: AppImages.kshampooImage, // Replace with your image
       label: kHaircare,
     ),
     GridItemData(
-      imageAsset: khandwashImage, // Replace with your image
+      imageAsset: AppImages.khandwashImage, // Replace with your image
       label: kSkincare,
     ),
     GridItemData(
-      imageAsset: khandpumpImage, // Replace with your image
+      imageAsset: AppImages.khandpumpImage, // Replace with your image
       label: kBodyCareAndRelaxation,
     ),
     GridItemData(
-      imageAsset: kacessorImage, // Replace with your image
+      imageAsset: AppImages.kacessorImage, // Replace with your image
       label: kPersonalCare,
     ),
     GridItemData(
-      imageAsset: knailImage, // Replace with your image
+      imageAsset: AppImages.knailImage, // Replace with your image
       label: kNails,
     ),
     GridItemData(
-      imageAsset: keyeImage, // Replace with your image
+      imageAsset: AppImages.keyeImage, // Replace with your image
       label: kLashes,
     ),
     GridItemData(
-      imageAsset: kBladeImage, // Replace with your image
+      imageAsset: AppImages.kBladeImage, // Replace with your image
       label: kElectricalAppliances,
     ),
     GridItemData(
-      imageAsset: kfirstaidImage, // Replace with your image
+      imageAsset: AppImages.kfirstaidImage, // Replace with your image
       label: kPharmacyOfBeauty,
     ),
 
@@ -64,6 +67,7 @@ class CustomGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FilterController filterController = Get.put(FilterController());
+    final AlkasamController _controller = Get.put(AlkasamController());
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 13.w),
       child: GridView.builder(
@@ -139,7 +143,7 @@ class CustomGridItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
+          SvgPicture.asset(
             imageAsset,
             height: 44.49.h,
             width: 36.98.w,

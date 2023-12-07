@@ -1,11 +1,14 @@
 // ignore_for_file: file_names, unrelated_type_equality_checks
 
-import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../const/app_images.dart';
 import '../const/colors.dart';
 import '../controller/NavBarController.dart';
 
@@ -17,29 +20,29 @@ class ReusableBottomNavigationBar extends StatelessWidget {
     final NavController controller = Get.put(NavController());
     final List<NavigationItem> navigationItems = [
       NavigationItem(
-          title: 'الرئيسية',
-          unselectedImagePath: khomeIconImage,
-          selectedImagePath: kHomeiconSlected),
+          title: tr('home'),
+          unselectedImagePath: AppImages.imageHomeUnSelected,
+          selectedImagePath: AppImages.imageHomeSelected),
       NavigationItem(
-          title: 'الأقسام',
-          unselectedImagePath: kappIconImage,
-          selectedImagePath: kCategoriesSelected),
+          title: tr('categories'),
+          unselectedImagePath: AppImages.imageCategoriesUnSelected,
+          selectedImagePath: AppImages.imageCategoriesSelected),
       NavigationItem(
-          title: 'التخفيض',
-          unselectedImagePath: ksettingIconImage,
-          selectedImagePath: kDiscountSelected),
+          title: tr('discounts'),
+          unselectedImagePath: AppImages.imageDiscountsUnSelected,
+          selectedImagePath: AppImages.imageDiscountsSelected),
       NavigationItem(
-          title: 'الماركات',
-          unselectedImagePath: ktagIconImage,
-          selectedImagePath: kdisIconSelected),
+          title: tr('Dis'),
+          unselectedImagePath: AppImages.imageDisUnSelected,
+          selectedImagePath: AppImages.imageDisSelected),
       NavigationItem(
-          title: 'الهدايا',
-          unselectedImagePath: kGiftIconImage,
-          selectedImagePath: kGiftsiconSelected),
+          title: tr('Gifts'),
+          unselectedImagePath: AppImages.imageGiftsUnSelected,
+          selectedImagePath: AppImages.imageGiftsSelected),
     ];
     return Obx(
       () => SizedBox(
-        height: 103.29.h,
+        // height: 103.29.h,
         child: BottomNavigationBar(
           backgroundColor: kWhiteColor,
           selectedIconTheme: const IconThemeData(
@@ -67,7 +70,7 @@ class ReusableBottomNavigationBar extends StatelessWidget {
           },
           items: navigationItems.map((item) {
             return BottomNavigationBarItem(
-              icon: Image.asset(
+              icon: SvgPicture.asset(
                 controller.currentIndex == navigationItems.indexOf(item)
                     ? item.selectedImagePath // Use selected image
                     : item.unselectedImagePath, // Use unselected image

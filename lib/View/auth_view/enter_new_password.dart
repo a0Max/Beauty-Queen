@@ -45,7 +45,7 @@ class _EnterNewPassword extends State<EnterNewPassword> {
     }
     _formKey.currentState!.save();
     try {
-      LoadingScreen.show(context);
+      // LoadingScreen.show(context);
 
       await otpController.updatePassword(
           phone: widget.phone,
@@ -53,12 +53,12 @@ class _EnterNewPassword extends State<EnterNewPassword> {
           rePassword: rePasswordController.text);
       // if (!context.mounted) return;
 
-      Get.back();
-      Get.off(const LogInPage());
+      // Get.back();
+      // Get.off(const LogInPage());
     } on DioException catch (e, s) {
-      Get.back();
+      // Get.back();
     } catch (e, s) {
-      Get.back();
+      // Get.back();
     }
   }
 
@@ -120,7 +120,7 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                                 ),
                                 obscureText:
                                     _controller.passwordObscureText.value,
-                                keyboardType: TextInputType.phone,
+                                // keyboardType: TextInputType.phone,
                                 validatorTextField: (val) {
                                   return Validator().validatorPassword(val);
                                 },
@@ -158,7 +158,7 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                               onPressed: _controller
                                   .toggleSignUpConfirmPasswordVisibility,
                             ),
-                            keyboardType: TextInputType.phone,
+                            // keyboardType: TextInputType.phone,
                             validatorTextField: (val) {
                               return Validator().validatorRePassword(
                                   val, passwordController.text);

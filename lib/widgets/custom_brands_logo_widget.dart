@@ -1,5 +1,6 @@
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -25,10 +26,10 @@ class CustomProductWidget extends StatelessWidget {
           Get.to(const BrandDetailScreen());
         },
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Image.asset(
-            imagePath,
-            height: 97.h,
-            width: 97.w,
+          CachedNetworkImage(
+            imageUrl:imagePath,
+            height: 85.h,
+            width: 85.w,
           ),
           Text(
             productName,

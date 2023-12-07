@@ -4,8 +4,8 @@ import 'package:beauty_queen/controller/NavBarController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/CustomNavBar.dart';
-import '../alkasam_screen.dart';
-import '../brands_screen.dart';
+import '../categories/alkasam_screen.dart';
+import '../brands/brands_screen.dart';
 import '../discounts_screen.dart';
 
 class MainView extends StatelessWidget {

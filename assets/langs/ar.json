@@ -63,6 +63,11 @@
   "backYourAccount": "أدخل رقم الهاتف لإسترجاع حسابك",
   "enterPasswordForYourAccount":"أدخل كلمة المرور الجديدة لحسابك",
   "makeSure": "تأكيد",
-  "continuation": "إستمرار"
+  "continuation": "إستمرار",
+  "home": "الرئيسية",
+  "categories": "الأقسام",
+  "discounts": "التخفيض",
+  "Dis": "الماركات",
+  "Gifts": "الهدايا"
 
 }

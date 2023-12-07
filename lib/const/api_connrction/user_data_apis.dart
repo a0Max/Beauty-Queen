@@ -108,7 +108,7 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-  Future<bool> forgetPasswordRequest(
+  Future<void> forgetPasswordRequest(
       {required String phone, required String password, required String rePassword}) async {
     //updatePassword
       final response = await dio.post(
@@ -128,7 +128,6 @@ class UserDataApis extends ApiProvider {
         ),
       );
       if (validResponse(response.statusCode!)) {
-        return true;
       } else {
         throw response.data;
       }

@@ -19,6 +19,32 @@ class HomeDataApis extends ApiProvider {
         },
       ),
     );
+
+    // final response2 = await dio.post(
+    //   'https://beautyqueen.ly/api/v1/addToCart?productID=3372&productOptionID&optionID&quantity=1',
+    //   options: Options(
+    //     headers: {
+    //       ...apiHeaders,
+    //       'Accept-Language': await ApiProvider.getAppLanguage(),
+    //       // 'Country-Id': await _getCountryCode(),
+    //       if (token != null) "Authorization": 'Bearer $token',
+    //
+    //     },
+    //   ),
+    // );
+    // final response3 = await dio.get(
+    //   'https://beautyqueen.ly/api/v1/get/cart',
+    //   options: Options(
+    //     headers: {
+    //       ...apiHeaders,
+    //       'Accept-Language': await ApiProvider.getAppLanguage(),
+    //       // 'Country-Id': await _getCountryCode(),
+    //       if (token != null) "Authorization": 'Bearer $token',
+    //
+    //     },
+    //   ),
+    // );
+
     if (validResponse(response.statusCode!)) {
       return HomeModel.fromJson(
 

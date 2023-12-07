@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
+import '../../View/auth_view/login_page.dart';
 import '../../const/api_connrction/user_data_apis.dart';
 import '../../widgets/error_pop_up.dart';
 
@@ -55,9 +56,10 @@ class OTPController extends GetxController {
   Future<void> updatePassword({required String phone, required String password, required String rePassword}) async {
     try{
       await _api.forgetPasswordRequest(phone:phone, password:password, rePassword:rePassword);
+
       ErrorPopUp(
           message: tr('update_success'), title: tr('message'), isError: false);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 

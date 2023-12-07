@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../const/colors.dart';
-import '../const/styles.dart';
-import '../widgets/CustomAppBar.dart';
-import '../widgets/CustomEndDrawer.dart';
-import '../widgets/CustomGirdview.dart';
+import 'package:get/get.dart';
+import '../../const/colors.dart';
+import '../../const/styles.dart';
+import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../widgets/CustomAppBar.dart';
+import '../../widgets/CustomEndDrawer.dart';
+import '../../widgets/categories/CustomGirdview.dart';
 
 class AlKasamScreen extends StatefulWidget {
   const AlKasamScreen({super.key});
@@ -15,6 +17,7 @@ class AlKasamScreen extends StatefulWidget {
 
 class _AlKasamScreenState extends State<AlKasamScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final AlkasamController _controller = Get.put(AlkasamController());
 
   final ScrollController _scrollController = ScrollController();
   bool _isScrolled = false;
@@ -27,6 +30,8 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+    _controller.getAlkasamDataController();
+
   }
 
   void _scrollListener() {
@@ -61,7 +66,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(160.h),
+          preferredSize: Size.fromHeight(_isScrolled ? 100.h :160.h),
           child: CustomAppBar(
             showarrowIcon: true,
             // showarrowIcon2: true,
