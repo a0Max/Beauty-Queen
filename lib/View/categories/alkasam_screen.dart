@@ -91,7 +91,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 30.h,
+                height: 0.h,
               ),
               Align(
                 alignment: Alignment.topRight,
@@ -119,7 +119,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
                 ),
               ),
               SizedBox(
-                height: 27.h,
+                height: 15.h,
               ),
               Directionality(
                   textDirection: TextDirection.ltr, child: CustomGridView()),

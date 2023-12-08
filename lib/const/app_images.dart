@@ -33,11 +33,15 @@ class AppImages{
   static const String kpaintImage = "${mainPathToSvg}paintbrush.svg";
   static const String kshampooImage = "${mainPathToSvg}shampoo.svg";
   static const String khandwashImage = "${mainPathToSvg}handwash.svg";
+  static const String kSkincare = "${mainPathToSvg}kSkincare.svg";
   static const String khandpumpImage = "${mainPathToSvg}kacessorImage.svg";
-  static const String kacessorImage = "${mainPathToSvg}handwash.svg";
+  static const String kPersonalCare = "${mainPathToSvg}kPersonalCare.svg";
   static const String knailImage = "${mainPathToSvg}nail.svg";
-  static const String keyeImage = "${mainPathToSvg}handwash.svg";
+  static const String keyeImage = "${mainPathToSvg}eye.svg";
   static const String kBladeImage = "${mainPathToSvg}blade.svg";
-  static const String kfirstaidImage = "${mainPathToSvg}handwash.svg";
+  static const String kfirstaidImage = "${mainPathToSvg}firstaid.svg";
+  static const String contactLenses = "${mainPathToSvg}contactLenses.svg";
+  static const String shavingAndHairRemoval = "${mainPathToSvg}Shaving_and_hair_removal.svg";
+  static const String eyelashes = "${mainPathToSvg}Eyelashes.svg";
 
 }

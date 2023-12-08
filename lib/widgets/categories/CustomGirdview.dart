@@ -3,6 +3,7 @@
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,44 +20,54 @@ class CustomGridView extends StatelessWidget {
   final List<GridItemData> gridData = [
     GridItemData(
       imageAsset: AppImages.khandgranateImage, // Replace with your image
-      label: kPerfumes,
+      label: tr("kPerfumes"),
     ),
     GridItemData(
       imageAsset: AppImages.kpaintImage, // Replace with your image
-      label: kMakeup,
+      label: tr('kMakeup'),
     ),
     // Add more data for additional grid items
     GridItemData(
       imageAsset: AppImages.kshampooImage, // Replace with your image
-      label: kHaircare,
+      label: tr('kHaircare'),
     ),
     GridItemData(
-      imageAsset: AppImages.khandwashImage, // Replace with your image
-      label: kSkincare,
+      imageAsset: AppImages.kSkincare, // Replace with your image
+      label: tr('kSkincare'),
     ),
     GridItemData(
       imageAsset: AppImages.khandpumpImage, // Replace with your image
-      label: kBodyCareAndRelaxation,
+      label: tr('kBodyCareAndRelaxation'),
     ),
     GridItemData(
-      imageAsset: AppImages.kacessorImage, // Replace with your image
-      label: kPersonalCare,
+      imageAsset: AppImages.kPersonalCare, // Replace with your image
+      label: tr('kPersonalCare'),
     ),
+
+    GridItemData(
+      imageAsset: AppImages.contactLenses, // Replace with your image
+      label: tr('contactـlenses'),
+    ),
+    GridItemData(
+      imageAsset: AppImages.shavingAndHairRemoval, // Replace with your image
+      label: tr('Shaving_and_hair_removal'),
+    ),
+
     GridItemData(
       imageAsset: AppImages.knailImage, // Replace with your image
-      label: kNails,
+      label: tr('kNails'),
     ),
     GridItemData(
-      imageAsset: AppImages.keyeImage, // Replace with your image
-      label: kLashes,
+      imageAsset: AppImages.eyelashes, // Replace with your image
+      label: tr('kLashes'),
     ),
     GridItemData(
       imageAsset: AppImages.kBladeImage, // Replace with your image
-      label: kElectricalAppliances,
+      label: tr('kElectricalAppliances'),
     ),
     GridItemData(
       imageAsset: AppImages.kfirstaidImage, // Replace with your image
-      label: kPharmacyOfBeauty,
+      label: tr('kPharmacyOfBeauty'),
     ),
 
     // ...
@@ -152,6 +163,7 @@ class CustomGridItem extends StatelessWidget {
             height: 23.h,
           ),
           Text(label,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15.sp,
                 fontFamily: kTheArabicSansLight,

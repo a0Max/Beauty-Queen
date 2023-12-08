@@ -31,8 +31,8 @@
 const String kUpgradeAccount =
     'خصومات و شحن مجاني بترقية حسابك الى كوينا سجلي الان';
 const String kSearchForProductOrBrand = 'إبحث عن منتج أو ماركة';
-const String kNails = 'الأظافر';
-const String kLashes = 'الرموش';
+// const String kNails = 'الأظافر';
+// const String kLashes = 'الرموش';
 const String kConcealerDescription =
     'اخفاء كلي للعيوب، تحديد، نحت وتوحيد لون بتغطية كاملة يحققها كونسيلر سوبر فكس من ريفلوشن.';
 const String kPrice = 'د.ل';
@@ -56,16 +56,16 @@ const String kExhibition = 'المعرض';
 const String kContactUs = 'تواصل معنا';
 const String kAboutOurStore = 'حول متجرنا';
 const String kHomePage = 'الرئيسية / الأقسام';
-const String kMakeup = 'المكياج';
-const String kPerfumes = 'العطور';
-const String kSkincare = 'العناية بالبشرة';
-const String kHaircare = 'العناية بالشعر';
-const String kPersonalCare = '  العناية\nالشخصية';
-const String kBodyCareAndRelaxation = 'العناية بالجسم\n    والإسترخاء';
+// const String kMakeup = 'المكياج';
+// const String kPerfumes = 'العطور';
+// const String kSkincare = 'العناية بالبشرة';
+// const String kHaircare = 'العناية بالشعر';
+// const String kPersonalCare = '  العناية\nالشخصية';
+// const String kBodyCareAndRelaxation = 'العناية بالجسم\n    والإسترخاء';
 const String kShavingAndHairRemoval = 'الحلاقة وإزالة الشعر';
 const String kContactLenses = 'العدسات اللاصقة';
-const String kPharmacyOfBeauty = 'صيدلية الجمال';
-const String kElectricalAppliances = 'الأجهزة الكهربائية';
+// const String kPharmacyOfBeauty = 'صيدلية الجمال';
+// const String kElectricalAppliances = 'الأجهزة الكهربائية';
 const String kFace = 'الوجه';
 const String kEyebrows = 'الحواجب';
 const String kEyes = 'العيون';
