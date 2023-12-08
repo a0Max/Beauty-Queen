@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/widgets/CustomAppBar.dart';
@@ -10,6 +8,7 @@ import 'package:get/get.dart';
 import '../../const/colors.dart';
 import '../../const/vars.dart';
 import '../../controller/brands_controller/brands_controller.dart';
+import '../../models/brand_model.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/custom_brands_logo_widget.dart';
 import '../branddetail_screen.dart';
@@ -35,7 +34,7 @@ class _BrandScreenState extends State<BrandScreen> {
   double searchBarTranslationY = 0.0;
 
   final ScrollController _scrollController = ScrollController();
-
+  // final GlobalKey<_ListItemState> _targetKey = GlobalKey<_ListItemState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -70,6 +69,24 @@ class _BrandScreenState extends State<BrandScreen> {
     super.dispose();
   }
 
+  void _scrollToColumn(String columnKey) {
+    final index = columnKey.codeUnitAt(0) - 'A'.codeUnitAt(0);
+    if (index >= 0 && index < _columnKeys.length) {
+      final RenderBox renderBox = _columnKeys[index].currentContext?.findRenderObject() as RenderBox;
+      final position = renderBox.localToGlobal(Offset.zero);
+
+      _scrollController.animateTo(
+        position.dy,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  final List<GlobalKey> _columnKeys = List.generate(
+    0,
+        (index) => GlobalKey(),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +118,6 @@ class _BrandScreenState extends State<BrandScreen> {
             SizedBox(
               height: 30.h,
             ),
-            // Alphabets, six per line
             for (int i = 0; i < characters.length; i += 6)
               Directionality(
                 textDirection: TextDirection.ltr,
@@ -111,9 +127,7 @@ class _BrandScreenState extends State<BrandScreen> {
                     for (int j = i; j < i + 6 && j < characters.length; j++)
                       GestureDetector(
                         onTap: () {
-                          setState(() {
-                            selectedAlphabet = characters[j];
-                          });
+                          _scrollToColumn(characters[j]);
                         },
                         child: Container(
                           padding: EdgeInsets.all(8.r),
@@ -137,197 +151,80 @@ class _BrandScreenState extends State<BrandScreen> {
                 ),
               ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Divider(
-                    endIndent: 15.w,
-                    indent: 15.w,
-                    // Adjust the height of the horizontal line
-                    color: kPrimaryColor, // Change the color of the line
-                    thickness: 2.w, // Adjust the width of the line
-                  ),
-                ),
-                Text(
-                  selectedAlphabet != null ? ' $selectedAlphabet ' : 'Filter',
-                  style: TextStyle(
-                      fontFamily: kTheArabicSansLight,
-                      fontSize: 23.82.sp,
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w700),
-                ),
-                Expanded(
-                  child: Divider(
-                    endIndent: 15.w,
-                    indent: 15.w,
-                    // Adjust the height of the horizontal line
-                    color: kPrimaryColor, // Change the color of the line
-                    thickness: 2.w, // Adjust the width of the line
-                  ),
-                ),
-              ],
-            ),
-            isBlank(selectedAlphabet) == true
-                ? Obx(() => Column(
-                      children: List.generate(
-                          _controller.brandsData.length,
-                          (index) => Column(
-                                children: [
-                                  Text(selectedAlphabet.toString()),
-                                  SizedBox(
-                                    height: 30,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          child: Divider(
-                                            endIndent: 15.w,
-                                            indent: 15.w,
-                                            // Adjust the height of the horizontal line
-                                            color:
-                                                kPrimaryColor, // Change the color of the line
-                                            thickness: 2
-                                                .w, // Adjust the width of the line
-                                          ),
-                                        ),
-                                        Text(
-                                          _controller.brandsData.keys
-                                              .toList()[index],
-                                          style: TextStyle(
-                                              fontSize: 23.82.sp,
-                                              fontFamily: kTheArabicSansLight,
-                                              color: kPrimaryColor,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                        Expanded(
-                                          child: Divider(
-                                            endIndent: 15.w,
-                                            indent: 15.w,
-                                            // Adjust the height of the horizontal line
-                                            color:
-                                                kPrimaryColor, // Change the color of the line
-                                            thickness: 2
-                                                .w, // Adjust the width of the line
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  // Text(_controller.brandsData[_controller.brandsData.keys.toList()[index]].length.toString())
-                                  Wrap(
-                                    spacing: 5,
-                                    runSpacing: 10,
-                                    children: List.generate(
-                                      _controller
+            Obx(() => ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    _columnKeys.add(GlobalKey());
+                    return Column(
+                      key: _columnKeys[index],
+                      children: [
+                        SizedBox(
+                          height: 30,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Divider(
+                                  endIndent: 15.w,
+                                  indent: 15.w,
+                                  // Adjust the height of the horizontal line
+                                  color:
+                                      kPrimaryColor, // Change the color of the line
+                                  thickness:
+                                      2.w, // Adjust the width of the line
+                                ),
+                              ),
+                              Text(
+                                _controller.brandsData.keys.toList()[index],
+                                style: TextStyle(
+                                    fontSize: 23.82.sp,
+                                    fontFamily: kTheArabicSansLight,
+                                    color: kPrimaryColor,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  endIndent: 15.w,
+                                  indent: 15.w,
+                                  // Adjust the height of the horizontal line
+                                  color:
+                                      kPrimaryColor, // Change the color of the line
+                                  thickness:
+                                      2.w, // Adjust the width of the line
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Wrap(
+                          spacing: 5,
+                          runSpacing: 10,
+                          children: List.generate(
+                            _controller
+                                .brandsData[
+                                    _controller.brandsData.keys.toList()[index]]
+                                .length,
+                            (index2) => CustomProductWidget(
+                              imagePath: Connection.urlOfBrands(
+                                  image: _controller
                                           .brandsData[_controller
                                               .brandsData.keys
-                                              .toList()[index]]
-                                          .length,
-                                      (index2) => CustomProductWidget(
-                                        imagePath: Connection.urlOfBrands(
-                                            image: _controller
-                                                    .brandsData[_controller
-                                                            .brandsData.keys
-                                                            .toList()[index]]
-                                                        [index2]
-                                                    .logo ??
-                                                ''),
-                                        productName: _controller
-                                                .brandsData[_controller
-                                                    .brandsData.keys
-                                                    .toList()[index]][index2]
-                                                .titleAr ??
-                                            '',
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )),
-                    ))
-                : SizedBox(),
-
-            Obx(() => Column(
-                  children: List.generate(
-                      _controller.brandsData.length,
-                      (index) => Column(
-                            children: [
-                              if (selectedAlphabet ==
-                                  _controller.brandsData.keys
-                                      .toList()[index]) ...{
-                                SizedBox(
-                                  height: 30,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Divider(
-                                          endIndent: 15.w,
-                                          indent: 15.w,
-                                          // Adjust the height of the horizontal line
-                                          color:
-                                              kPrimaryColor, // Change the color of the line
-                                          thickness: 2
-                                              .w, // Adjust the width of the line
-                                        ),
-                                      ),
-                                      Text(
-                                        selectedAlphabet.toString(),
-                                        style: TextStyle(
-                                            fontSize: 23.82.sp,
-                                            fontFamily: kTheArabicSansLight,
-                                            color: kPrimaryColor,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      Expanded(
-                                        child: Divider(
-                                          endIndent: 15.w,
-                                          indent: 15.w,
-                                          // Adjust the height of the horizontal line
-                                          color:
-                                              kPrimaryColor, // Change the color of the line
-                                          thickness: 2
-                                              .w, // Adjust the width of the line
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                // Text(_controller.brandsData[_controller.brandsData.keys.toList()[index]].length.toString())
-                                Wrap(
-                                  spacing: 5,
-                                  runSpacing: 10,
-                                  children: List.generate(
-                                    _controller
-                                        .brandsData[_controller.brandsData.keys
-                                            .toList()[index]]
-                                        .length,
-                                    (index2) {
-                                      return CustomProductWidget(
-                                        imagePath: Connection.urlOfBrands(
-                                            image: _controller
-                                                    .brandsData[_controller
-                                                            .brandsData.keys
-                                                            .toList()[index]]
-                                                        [index2]
-                                                    .logo ??
-                                                ''),
-                                        productName: _controller
-                                                .brandsData[_controller
-                                                    .brandsData.keys
-                                                    .toList()[index]][index2]
-                                                .titleAr ??
-                                            '',
-                                      );
-                                    },
-                                  ),
-                                )
-                              } else ...{
-                                SizedBox()
-                              }
-                            ],
-                          )),
+                                              .toList()[index]][index2]
+                                          .logo ??
+                                      ''),
+                              productName: _controller
+                                      .brandsData[_controller.brandsData.keys
+                                          .toList()[index]][index2]
+                                      .titleAr ??
+                                  '',
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                  itemCount: _controller.brandsData.length,
                 ))
           ],
         ),

@@ -33,14 +33,14 @@ class BrandsController extends GetxController {
      tempBrandsData.sort((a, b) => a.titleAr?.compareTo(b.titleAr ?? '') ?? 0);
      Map<String?, List<BrandModel>> groupedMap = groupObjectsByFirstChar(tempBrandsData);
 
-     groupedMap.forEach((key, value) {
-       print('$key:');
-
-       for(BrandModel x in value){
-         print('${x.titleAr}');
-
-       }
-     });
+     // groupedMap.forEach((key, value) {
+     //   print('$key:');
+     //
+     //   for(BrandModel x in value){
+     //     print('${x.titleAr}');
+     //
+     //   }
+     // });
      List<MapEntry<String?, List<BrandModel>>> sortedEntries = groupedMap.entries.toList()
        ..sort((a, b) => a.key?.compareTo(b.key??'')??0);
 
