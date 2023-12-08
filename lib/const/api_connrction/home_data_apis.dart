@@ -7,6 +7,7 @@ import 'base_api_connection.dart';
 class HomeDataApis extends ApiProvider {
   Future<HomeModel> homeDataRequest() async {
     final token = await getUserToken();
+    final cookies = await getCookies();
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.homepageEndPoint}',
       options: Options(
@@ -15,10 +16,12 @@ class HomeDataApis extends ApiProvider {
           'Accept-Language': await ApiProvider.getAppLanguage(),
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
 
         },
       ),
     );
+    await setTheHeader(response.headers);
 
     // final response2 = await dio.post(
     //   'https://beautyqueen.ly/api/v1/addToCart?productID=3372&productOptionID&optionID&quantity=1',

@@ -59,7 +59,15 @@ abstract class ApiProvider {
   // Getting User Token.
   Future<String?> getUserToken() async => await UserModel.getToken;
 
+  setTheHeader(Headers headers) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('set-cookie', headers['set-cookie']?.first??'');
+  }
 
+  getCookies() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+   return prefs.getString('set-cookie');
+  }
 ////////////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////// UTILS /////////////////////////////////////

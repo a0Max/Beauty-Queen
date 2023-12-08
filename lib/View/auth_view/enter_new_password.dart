@@ -45,7 +45,7 @@ class _EnterNewPassword extends State<EnterNewPassword> {
     }
     _formKey.currentState!.save();
     try {
-      // LoadingScreen.show(context);
+      LoadingScreen.show(context);
 
       await otpController.updatePassword(
           phone: widget.phone,
@@ -54,11 +54,12 @@ class _EnterNewPassword extends State<EnterNewPassword> {
       // if (!context.mounted) return;
 
       // Get.back();
-      // Get.off(const LogInPage());
+      Get.off(const LogInPage());
     } on DioException catch (e, s) {
-      // Get.back();
+      Get.back();
+      Navigator.of(context).pop();
     } catch (e, s) {
-      // Get.back();
+      Navigator.of(context).pop();
     }
   }
 

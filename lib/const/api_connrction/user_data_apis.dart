@@ -22,6 +22,7 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
+    await setTheHeader(response.headers);
     if (validResponse(response.statusCode!)) {
       return UserModel.fromMap(
         response.data,
@@ -49,6 +50,8 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
+    await setTheHeader(response.headers);
+
     if (validResponse(response.statusCode!)) {
       return UserModel.fromMap(
         response.data,
@@ -73,6 +76,8 @@ class UserDataApis extends ApiProvider {
           },
         ),
       );
+      await setTheHeader(response.headers);
+
       if (validResponse(response.statusCode!)) {
         return response.data.toString();
       } else {
@@ -87,7 +92,7 @@ class UserDataApis extends ApiProvider {
 
   Future<bool> checkCodeRequest(
       {required String phone, required String sms}) async {
-    // final token = await getUserToken();
+    final cookies = await getCookies();
     //checkCode
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.checkCodeEndPoint}',
@@ -96,7 +101,7 @@ class UserDataApis extends ApiProvider {
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          // 'Country-Id': await _getCountryCode(),
+          if (cookies != null) "Cookie": '$cookies',
         },
       ),
     );
@@ -111,7 +116,8 @@ class UserDataApis extends ApiProvider {
   Future<void> forgetPasswordRequest(
       {required String phone, required String password, required String rePassword}) async {
     //updatePassword
-      final response = await dio.post(
+    final cookies = await getCookies();
+    final response = await dio.post(
         '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
         queryParameters: {
           "phone": phone,
@@ -122,7 +128,7 @@ class UserDataApis extends ApiProvider {
           headers: {
             ...apiHeaders,
             'Accept-Language': await ApiProvider.getAppLanguage(),
-            // "Authorization": 'Bearer $token',
+            if (cookies != null) "Cookie": '$cookies',
             // 'Content-Type': "text/html; charset=UTF-8"
           },
         ),
@@ -146,6 +152,8 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
+    await setTheHeader(response.headers);
+
     if (validResponse(response.statusCode!)) {
       final List<UserModel> l = [];
       response.data.forEach((e) => l.add(UserModel.fromMap(e)));
