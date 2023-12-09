@@ -21,6 +21,9 @@ abstract class Connection {
   static String urlOfSpecial({required String image}) {
     return "${storageURL}special/$image";
   }
+  static String urlOfOptions({required String image}) {
+    return "${storageURL}options/$image";
+  }
   static String urlOfBanner({required String image}) {
     return "${storageURL}banner/$image";
   }
@@ -33,9 +36,17 @@ abstract class Connection {
   static String urlOfBrands2({required String image}) {
     return "${storageURLOfBrand}brands/$image";
   }
-
+  static String urlOfStorage({required String image}) {
+    return "${storageURL}/$image";
+  }
 
   static const String bundleId = '';
   static const String appstoreId = '';
   static const String mapKey = 'AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE';
+}
+
+abstract class TypeOfOptions{
+  static const size = 'الحجم';
+  static const color = 'اللون';
+
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'offer_image_model.dart';
 import 'options_model.dart';
 
 part 'options_model.g.dart';
@@ -29,6 +30,8 @@ class OptionsModel {
   String? flashDiscountPrice;
   String? createdAt;
   String? updatedAt;
+  OfferImageModel? mainImage;
+  List<OfferImageModel>? images;
 
   OptionsModel({this.id,
     this.title,
@@ -49,7 +52,9 @@ class OptionsModel {
     this.isFlashDiscount,
     this.flashDiscountPrice,
     this.createdAt,
-    this.updatedAt});
+    this.updatedAt,
+    this.images,
+    this.mainImage});
 
 
   factory OptionsModel.fromJson(Map<String, dynamic> json) {

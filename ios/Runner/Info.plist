@@ -49,5 +49,29 @@
 	<array>
 		<string>ar</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>comgooglemaps</string>
+        <string>baidumap</string>
+        <string>iosamap</string>
+        <string>waze</string>
+        <string>yandexmaps</string>
+        <string>yandexnavi</string>
+        <string>citymapper</string>
+        <string>mapswithme</string>
+        <string>osmandmaps</string>
+        <string>dgis</string>
+        <string>qqmap</string>
+        <string>here-location</string>
+        <string>tomtomgo</string>
+        <string>copilot</string>
+        <string>com.sygic.aura</string>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>sms</string>
+        <string>tel</string>
+        <string>mailto</string>
+        <string>https</string>
+    </array>
 </dict>
 </plist>

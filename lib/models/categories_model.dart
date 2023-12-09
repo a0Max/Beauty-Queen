@@ -10,7 +10,7 @@ class CategoryModel {
   int? id;
   String? title;
   String? description;
-  String? parentId;
+  num? parentId;
   String? sEOTitle;
   String? sEODescription;
   String? keywords;

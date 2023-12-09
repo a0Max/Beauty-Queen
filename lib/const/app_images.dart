@@ -43,5 +43,12 @@ class AppImages{
   static const String contactLenses = "${mainPathToSvg}contactLenses.svg";
   static const String shavingAndHairRemoval = "${mainPathToSvg}Shaving_and_hair_removal.svg";
   static const String eyelashes = "${mainPathToSvg}Eyelashes.svg";
-
+  static const String imageNewItem = "${mainPathToSvg}new_item.svg";
+  static const String imageOriginalItem = "${mainPathToSvg}original_item.svg";
+  static const String imageArtboard = "${mainPathToSvg}Artboard2.svg";
+  static const String imageDelivery = "${mainPathToSvg}delivery.svg";
+  static const String imageFreeDelivery = "${mainPathToSvg}free_delivery.svg";
+  static const String imageGift = "${mainPathToSvg}gift.svg";
+  static const String imageRate = "${mainPathToSvg}rate.svg";
+  static const String imageDetails = "${mainPathToSvg}details.svg";
 }

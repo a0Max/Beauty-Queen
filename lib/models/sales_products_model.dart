@@ -1,10 +1,12 @@
 
+import 'package:beauty_queen/const/vars.dart';
 import 'package:beauty_queen/models/brand_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'categories_model.dart';
 import 'label_model.dart';
 import 'offer_image_model.dart';
 import 'product_options_model.dart';
@@ -63,6 +65,8 @@ class SalesProductsModel{
   LabelModel? label;
   List<LabelModel>? labels;
   OfferImageModel? offerImage;
+  List<CategoryModel>? category;
+  List<OfferImageModel>? images;
 
   SalesProductsModel(
       {this.id,
@@ -114,11 +118,30 @@ class SalesProductsModel{
         this.productOptions,
         this.wishlist,
         this.label,
-        this.labels});
+        this.labels,
+        this.category,
+        this.images});
 
   factory SalesProductsModel.fromJson(Map<String, dynamic> json) {
+
     return _$SalesProductsModelFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$SalesProductsModelToJson(this);
+
+  List<String> getCurrentImages(){
+    List<String> finalImages = [];
+    if (mainImage !=null){
+      finalImages.add(Connection.urlOfProducts(image: mainImage??''));
+    }
+    if (images != null) {
+      for (OfferImageModel oneImage in images!) {
+        finalImages.add(Connection.urlOfProducts(image: oneImage.file??''));
+
+      }
+    }
+    return finalImages;
+  }
+
+
 }

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../View/products_screen.dart';
+import '../View/product_profile/products_screen.dart';
 import '../const/app_colors.dart';
 import '../models/options_model.dart';
 import '../models/product_options_model.dart';
@@ -22,6 +22,7 @@ class CustomCardWidget extends StatefulWidget {
   final String? price;
   final String? des;
   final String? inStock;
+  final double? width;
   final String? disprice;
   final List<ProductOptionsModel>? productOptions;
   final String? note;
@@ -34,6 +35,7 @@ class CustomCardWidget extends StatefulWidget {
       this.imgtxt,
       this.price,
       this.des,
+        this.width,
       this.disprice,
       this.containertxt,
       this.note,
@@ -63,11 +65,11 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
         ],
         color: Colors.white,
       ),
-      width: (MediaQuery.of(context).size.width / 2) - 20,
+      width: widget.width??(MediaQuery.of(context).size.width / 2) - 20,
       // height: 152.27.h,
       child: InkWell(
         onTap: () {
-          Get.to(const CarouselSliderPage());
+          Get.to(ItemProfilePage(itemId:widget.newArrival.id??0));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -332,7 +334,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   )
                 ],
               )
-            } else ...{
+            }
+            else ...{
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 200.h,
