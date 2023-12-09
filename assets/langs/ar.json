@@ -96,7 +96,14 @@
   "details_product": "تفاصيل المنتج",
   "rate": "التقييمـــــــات",
   "same_brand": "منتجات من نفس الماركة ...",
-  "related_product": "منتجات ذات صلة ..."
+  "related_product": "منتجات ذات صلة ...",
+  "chooseOptionFirst": "الرجاء إختيار خيار اولاً",
+  "okay": " حسناً ",
+  "youArrivedToMax": "لقد وصلت الحد الأقصى للطلب",
+  "youArrivedToMin": "لقد وصلت الحد الاقل للطلب",
+  "addedSuccessfully": "لقد قمت بإضافة هذا المنتج إلى سلة الشراء بنجاح!",
+  "continuesShopping": "متابعــــــة التســــوق",
+  "continuesOrder": "إستكمال الطلب الان"
 
 
 }

@@ -76,6 +76,11 @@ class ProductModel {
 
   List<String> getMinMax() {
     List<String> finalPrices = ['', ''];
+    if (productOptions?.isEmpty??true){
+      finalPrices[1] = (product?.price ?? '');
+
+      return finalPrices;
+    }
     String? min = productOptions?.first.options?.map((obj) => obj.price).reduce(
         (min, price) =>
             double.parse(price ?? '') < double.parse(min ?? '') ? price : min);

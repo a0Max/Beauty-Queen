@@ -10,9 +10,8 @@ class ProductDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final response = await dio.get(
-      ///todo back it
-      // '${Connection.apiURL}${ApiProvider.productEndPoint}/$productId',
-      '${Connection.apiURL}${ApiProvider.productEndPoint}/3367',
+      '${Connection.apiURL}${ApiProvider.productEndPoint}/$productId',
+      // '${Connection.apiURL}${ApiProvider.productEndPoint}/3367',
       // '${Connection.apiURL}${ApiProvider.productEndPoint}/3029',
 
       options: Options(
@@ -37,5 +36,35 @@ class ProductDataApis extends ApiProvider {
       throw response.data;
     }
   }
+
+  Future<bool> addProductToCart({required int quantity, required int productID, int? productOptionID, int? optionID}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.addToCartProductEndPoint}',
+      queryParameters: {
+        'productID': productID,
+        'quantity': quantity,
+        if (productOptionID!=null) 'productOptionID':productOptionID,
+        if (optionID!=null) 'optionID':optionID
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+
+        },
+      ),
+    );
+
+    if (validResponse(response.statusCode!)) {
+      return true;
+    } else {
+      throw response.data;
+    }
+}
 
 }

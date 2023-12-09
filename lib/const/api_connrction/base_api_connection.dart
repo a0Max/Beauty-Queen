@@ -51,6 +51,7 @@ abstract class ApiProvider {
   static const String logoutEndPoint = "logout";
   static const String updatePasswordEndPoint = "updatePassword";
   static const String productEndPoint = "product";
+  static const String addToCartProductEndPoint = "addToCart";
 
 ////////////////////////////////////////////////////////////////////////////
 

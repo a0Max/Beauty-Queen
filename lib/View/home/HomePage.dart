@@ -20,6 +20,7 @@ import '../../widgets/CustomProductCard.dart';
 import '../../widgets/ScrollableContainerList.dart';
 import '../../widgets/custom_horizontal_list.dart';
 import '../../widgets/loading/home_loading.dart';
+import '../product_profile/products_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -486,29 +487,41 @@ class _HomePageState extends State<HomePage> {
                                               SizedBox(
                                                 height: 18.h,
                                               ),
-                                              Container(
-                                                width: 109.71.w,
-                                                height: 37.93.h,
-                                                decoration: ShapeDecoration(
-                                                  color:
-                                                      AppColors.kPrimaryColor,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.69.r),
+                                              InkWell(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    10.69.r),
+                                                onTap: (){
+                                                  Get.to(ItemProfilePage(itemId: _controller
+                                                      .homeData
+                                                      .value
+                                                      .offers?[index].id??0));
+
+                                                },
+                                                child: Container(
+                                                  width: 109.71.w,
+                                                  height: 37.93.h,
+                                                  decoration: ShapeDecoration(
+                                                    color:
+                                                        AppColors.kPrimaryColor,
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.69.r),
+                                                    ),
                                                   ),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    tr('shop_now'),
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12.83.sp,
-                                                      fontFamily:
-                                                          kTheArabicSansLight,
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                  child: Center(
+                                                    child: Text(
+                                                      tr('shop_now'),
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.83.sp,
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -833,116 +846,125 @@ class _HomePageState extends State<HomePage> {
                                     height: 448.0.h,
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Container(
-                                          width: 257.0.w,
-                                          height: 258.56.h,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: CachedNetworkImageProvider(
-                                                Connection.urlOfSpecial(
-                                                    image: _controller
-                                                            .homeData
-                                                            .value
-                                                            .organicItems?[
-                                                                index]
-                                                            .image ??
-                                                        ''),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Get.to(ItemProfilePage(itemId: int.parse(_controller
+                                            .homeData
+                                            .value
+                                            .organicItems?[
+                                        index].linkId??'0')));
+                                      },
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Container(
+                                            width: 257.0.w,
+                                            height: 258.56.h,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: CachedNetworkImageProvider(
+                                                  Connection.urlOfSpecial(
+                                                      image: _controller
+                                                              .homeData
+                                                              .value
+                                                              .organicItems?[
+                                                                  index]
+                                                              .image ??
+                                                          ''),
+                                                ),
+                                                fit: BoxFit.fill,
                                               ),
-                                              fit: BoxFit.fill,
                                             ),
                                           ),
-                                        ),
-                                        // Pink Container
-                                        Container(
-                                          width: 257.0.w,
-                                          height: 189.38.h,
-                                          color: AppColors.kPrimaryColor,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 18.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  height: 30.h,
-                                                ),
-                                                Text(
-                                                  _controller
-                                                          .homeData
-                                                          .value
-                                                          .organicItems?[index]
-                                                          .title ??
-                                                      '',
-                                                  textAlign: TextAlign.right,
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 19.18.sp,
-                                                    fontFamily:
-                                                        kTheArabicSansLight,
-                                                    fontWeight: FontWeight.w700,
-                                                    height: 0.05,
-                                                    letterSpacing: -0.19,
+                                          // Pink Container
+                                          Container(
+                                            width: 257.0.w,
+                                            height: 179.38.h,
+                                            color: AppColors.kPrimaryColor,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 18.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 15.h,
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: 29.h,
-                                                ),
-                                                SizedBox(
-                                                  width: 226.11.w,
-                                                  child: Text(
+                                                  Text(
                                                     _controller
                                                             .homeData
                                                             .value
-                                                            .organicItems?[
-                                                                index]
-                                                            .description ??
+                                                            .organicItems?[index]
+                                                            .title ??
                                                         '',
                                                     textAlign: TextAlign.right,
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 13.18.sp,
+                                                      fontSize: 19.18.sp,
                                                       fontFamily:
                                                           kTheArabicSansLight,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      height: 1.5,
-                                                      letterSpacing: 0.13,
+                                                      fontWeight: FontWeight.w700,
+                                                      // height: 0.05,
+                                                    ),
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15.h,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 226.11.w,
+                                                    child: Text(
+                                                      _controller
+                                                              .homeData
+                                                              .value
+                                                              .organicItems?[
+                                                                  index]
+                                                              .description ??
+                                                          '',
+                                                      textAlign: TextAlign.right,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13.18.sp,
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        height: 1.5,
+                                                        letterSpacing: 0.13,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: 30.h,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 20.w),
-                                                  child: Text(
-                                                    tr('shop_now'),
-                                                    textAlign: TextAlign.right,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14.63.sp,
-                                                      fontFamily:
-                                                          kTheArabicSansLight,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                      height: 0.08,
-                                                      letterSpacing: -0.15,
-                                                    ),
+                                                  SizedBox(
+                                                    height: 30.h,
                                                   ),
-                                                )
-                                              ],
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 20.w),
+                                                    child: Text(
+                                                      tr('shop_now'),
+                                                      textAlign: TextAlign.right,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14.63.sp,
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        decoration: TextDecoration
+                                                            .underline,
+                                                        height: 0.08,
+                                                        letterSpacing: -0.15,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
@@ -977,20 +999,23 @@ class _HomePageState extends State<HomePage> {
                         spacing: 10,
                         children: List.generate(
                             _controller.homeData.value.specials?.length ?? 0,
-                            (index) => CustomProductCard(
-                                  imageUrl: Connection.urlOfSpecial(
-                                      image: _controller.homeData.value
-                                              .specials?[index].image ??
-                                          ''),
-                                  description: _controller.homeData.value
-                                          .specials?[index].description ??
-                                      '',
-                                  // 'تخلصي من جفاف وخشونة الوجه والجسم بخلاصة عسل المانوكا الغني الفيتامينات والمرطبات الطبيعية الدسمة',
-                                  buttonText: 'تسوقي الأن',
-                                  onPressed: () {
-                                    // Add your button click logic here
-                                  },
-                                )),
+                            (index) => GestureDetector(
+                              onTap: (){
+                                Get.to(ItemProfilePage(itemId: int.parse(_controller.homeData.value
+                                    .specials?[index].linkId??'0')));
+                              },
+                              child: CustomProductCard(
+                                    imageUrl: Connection.urlOfSpecial(
+                                        image: _controller.homeData.value
+                                                .specials?[index].image ??
+                                            ''),
+                                    description: _controller.homeData.value
+                                            .specials?[index].description ??
+                                        '',
+                                    buttonText: 'تسوقي الأن',
+
+                                  ),
+                            )),
                       ),
                       SizedBox(
                         height: 30.h,

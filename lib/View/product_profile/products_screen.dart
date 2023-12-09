@@ -3,10 +3,9 @@ import 'dart:developer';
 import 'package:beauty_queen/View/product_profile/tab_screen_one.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
-import 'package:beauty_queen/const/images.dart';
+import 'package:quiver/strings.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/widgets/CustomAlertBox.dart';
-import 'package:beauty_queen/widgets/custom_container.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -78,14 +77,15 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               Container(
                                   width: MediaQuery.of(context).size.width,
                                   alignment: Alignment.topRight,
-                                  child: Row(children: [
+                                  child: Wrap(children: [
                                     Text('${tr('sections')} / ',
                                         style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           color: kGrayColor,
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w400,
-                                        )),
+
+                                        ),maxLines: 2,overflow: TextOverflow.visible,),
                                     ...List.generate(
                                       controller.productData.value.product?.category
                                               ?.length ??
@@ -191,23 +191,46 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                         fontWeight: FontWeight.w700,
                                         color: kPrimaryColor),
                                   ),
-                                  Text(
-                                    "${controller.productData.value.getMinMax().first} دل ",
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        decoration: TextDecoration.lineThrough,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: kBlackColor),
-                                  ),
-                                  Text(
-                                    "${controller.productData.value.getMinMax().last} دل ",
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: kPrimaryColor),
-                                  ),
+                                  if ((controller.selectedOptions.value.isNotEmpty)&& controller.selectedOptions.value.first!=null)...{
+                                    Text(
+                                      "${controller.selectedOptions.value.first.price} دل ",
+                                      style: TextStyle(
+                                          fontFamily: kTheArabicSansLight,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: kPrimaryColor),
+                                    ),
+                                  }else ...{
+
+                                    if (isBlank(controller.productData.value
+                                        .getMinMax()
+                                        .first) && controller.productData.value
+                                        .getMinMax()
+                                        .first != '')...{
+                                      Text(
+                                        "${controller.productData.value
+                                            .getMinMax()
+                                            .first} دل ",
+                                        style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            decoration: TextDecoration
+                                                .lineThrough,
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: kBlackColor),
+                                      ),
+                                    },
+                                    Text(
+                                      "${controller.productData.value
+                                          .getMinMax()
+                                          .last} دل ",
+                                      style: TextStyle(
+                                          fontFamily: kTheArabicSansLight,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: kPrimaryColor),
+                                    ),
+                                  }
                                 ],
                               ),
                               Align(
@@ -735,14 +758,9 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                     ),
                   ),
                 ),
-                // Positioned(
-                //   bottom: 0,
-                //   left: 0,
-                //   right: 0,
-                //   child:
                       Container(
                         height: 100.h,
-                        // padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
                           BoxShadow(
@@ -756,75 +774,96 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(width: 45.w),
+                           Row(
+                             children: [
+                               GestureDetector(
+                                 onTap: () {
+                                   for(dynamic selected in controller.selectedOptions){
+                                     if (selected==null) {
+                                       showDialog(
+                                           context: context,
+                                           builder: (BuildContext context) {
+                                             return CustomAlertDialog(
+                                               buttonTwo:false,
+                                               dilougText:tr('chooseOptionFirst'),
+                                               buttonOneText: tr('okay'),
+                                             );
+                                           });
+                                       return;
+                                     }
+                                   }
+                                   controller.decrement();
+                                 },
+                                 child: Container(
+                                     height: 47.61.h,
+                                     width: 49.08.w,
+                                     color: kPrimaryColor,
+                                     child: Center(
+                                       child: Text(
+                                         '-',
+                                         style: TextStyle(
+                                             color: kWhiteColor,
+                                             fontSize: 30.sp,
+                                             fontWeight: FontWeight.w500),
+                                       ),
+                                     )),
+                               ),
+
+                               Container(
+                                   height: 47.61.h,
+                                   width: 49.08.w,
+                                   color: kWhiteColor,
+                                   child: Center(
+                                     child:  Text(
+                                       '${controller.count}',
+                                       style: TextStyle(
+                                         color: kBlackColor,
+                                         fontSize: 19.sp,
+                                         fontWeight: FontWeight.w500,
+                                       ),
+                                     ),
+                                   )),
+                               GestureDetector(
+                                 onTap: () {
+                                   for(dynamic selected in controller.selectedOptions){
+                                     if (selected==null) {
+                                       showDialog(
+                                           context: context,
+                                           builder: (BuildContext context) {
+                                             return CustomAlertDialog(
+                                               buttonTwo:false,
+                                               dilougText:tr('chooseOptionFirst'),
+                                               buttonOneText: tr('okay'),
+                                             );
+                                           });
+                                       return;
+                                     }
+                                   }
+                                   controller.increment();
+                                 },
+                                 child: Container(
+                                     height: 47.61.h,
+                                     width: 49.08.w,
+                                     color: kPrimaryColor,
+                                     child: Center(
+                                       child: Icon(
+                                         Icons.add,
+                                         color: kWhiteColor,
+                                         size: 30.r,
+                                       ),
+                                     )),
+                               ),
+                               // SizedBox(width: 17.w),
+
+                             ],
+                           ),
                             GestureDetector(
                               onTap: () {
-                                controller.decrement();
+                                controller.addToCart();
                               },
                               child: Container(
                                   height: 47.61.h,
-                                  width: 49.08.w,
-                                  color: kPrimaryColor,
-                                  child: Center(
-                                    child: Text(
-                                      '-',
-                                      style: TextStyle(
-                                          color: kWhiteColor,
-                                          fontSize: 30.sp,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  )),
-                            ),
-                            Container(
-                                height: 47.61.h,
-                                width: 49.08.w,
-                                color: kWhiteColor,
-                                child: Center(
-                                  child:  Text(
-                                        '${controller.count}',
-                                        style: TextStyle(
-                                          color: kBlackColor,
-                                          fontSize: 19.sp,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                )),
-                            GestureDetector(
-                              onTap: () {
-                                controller.increment();
-                              },
-                              child: Container(
-                                  height: 47.61.h,
-                                  width: 49.08.w,
-                                  color: kPrimaryColor,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.add,
-                                      color: kWhiteColor,
-                                      size: 30.r,
-                                    ),
-                                  )),
-                            ),
-                            SizedBox(width: 17.w),
-                            GestureDetector(
-                              onTap: () {
-                                log("print dailoug");
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return CustomAlertDialog(
-                                        height: 180.64.h,
-                                        width: 371.85.w,
-                                        dilougText:
-                                            'لقد قمت بإضافة هذا المنتج\n   إلى سلة الشراء بنجاح!',
-                                        buttonOneText: 'متابعــــــة\nالتســــوق',
-                                        buttonTwoText: 'إستكمال\nالطلب الان',
-                                      );
-                                    });
-                              },
-                              child: Container(
-                                  height: 47.61.h,
-                                  width: 200.65.w,
+                                  width: MediaQuery.of(context).size.width/2,
                                   color: kPrimaryColor,
                                   child: Center(
                                     child: Text(
@@ -840,8 +879,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                           ],
                         ),
                       ),
-                //
-                //   ),
               ],
             )),
       ),
