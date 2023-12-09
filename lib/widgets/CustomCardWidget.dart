@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../View/product_profile/products_screen.dart';
 import '../const/app_colors.dart';
+import '../controller/home_controller/home_controller.dart';
 import '../models/options_model.dart';
 import '../models/product_options_model.dart';
 import '../models/sales_products_model.dart';
@@ -50,6 +51,9 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
   bool isFavorite = false;
   bool showProductOptions = false;
   OptionsModel? selectedOption;
+  ProductOptionsModel? selectedParentOption;
+  final HomeController _controller = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -132,6 +136,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
 
                                                 setState(() {
                                                   selectedOption = value;
+                                                  selectedParentOption = widget.newArrival.productOptions?[index]??ProductOptionsModel();
                                                 });
 
                                               },
@@ -308,24 +313,45 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                         ),
 
                       }else...{
-                        Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          alignment: Alignment.center,
-                          decoration:
-                          const BoxDecoration(color: AppColors.kPrimaryColor),
-                          child: Text(
-                            tr('add_to_bags'),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.11.sp,
-                              fontFamily: kTheArabicSansLight,
-                              fontWeight: FontWeight.w700,
-                              // height: 0.09,
+                        InkWell(
+                          onTap: () async {
+                            if (selectedParentOption==null &&selectedOption ==null){
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CustomAlertDialog(
+                                      buttonTwo: false,
+                                      dilougText: tr('chooseOptionFirst'),
+                                      buttonOneText: tr('okay'),
+                                    );
+                                  });
+                            }else {
+                              await _controller.addToCart(
+                                  productId: widget.newArrival.id ?? 0,
+                                  productOptionId: selectedParentOption?.id ??
+                                      0,
+                                  productParentId: selectedOption?.id ?? 0);
+                            }
+                          },
+                          child: Container(
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            alignment: Alignment.center,
+                            decoration:
+                            const BoxDecoration(color: AppColors.kPrimaryColor),
+                            child: Text(
+                              tr('add_to_bags'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.11.sp,
+                                fontFamily: kTheArabicSansLight,
+                                fontWeight: FontWeight.w700,
+                                // height: 0.09,
+                              ),
                             ),
                           ),
                         )
@@ -531,21 +557,26 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   ),
                 ),
               } else ...{
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  alignment: Alignment.center,
-                  decoration:
-                      const BoxDecoration(color: AppColors.kPrimaryColor),
-                  child: Text(
-                    tr('add_to_bags'),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.11.sp,
-                      fontFamily: kTheArabicSansLight,
-                      fontWeight: FontWeight.w700,
-                      // height: 0.09,
+                InkWell(
+                  onTap: () async {
+                   await _controller.addToCart(productId: widget.newArrival.id??0);
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    alignment: Alignment.center,
+                    decoration:
+                    const BoxDecoration(color: AppColors.kPrimaryColor),
+                    child: Text(
+                      tr('add_to_bags'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.11.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w700,
+                        // height: 0.09,
+                      ),
                     ),
                   ),
                 ),

@@ -20,6 +20,7 @@ class CustomAppBar extends StatelessWidget {
   final double? searchBarWidth;
   final double? searchBarHeight;
   final double? containerHeight;
+  final int? countCart;
   final double? searchBarTranslationY;
   final double? searchBarTranslationX;
 
@@ -37,6 +38,7 @@ class CustomAppBar extends StatelessWidget {
       {super.key,
       this.searchBarHeight = 0.0,
       this.isScrolled = false,
+        this.countCart = 0,
       this.containerHeight = 0.0,
       this.searchBarWidth = 0.0,
       this.searchBarTranslationY = 0.0,
@@ -207,10 +209,14 @@ class CustomAppBar extends StatelessWidget {
                       onTap: () {
                         Get.to(const CartScreen());
                       },
-                      child: SvgPicture.asset(
-                        AppImages.imageShop,
-                        height: 30.h,
-                        width: 30.w,
+                      child: Badge(
+                        label: Text(countCart.toString()),
+    isLabelVisible:(countCart!=null)&&(countCart!=0),
+                        child: SvgPicture.asset(
+                          AppImages.imageShop,
+                          height: 30.h,
+                          width: 30.w,
+                        ),
                       ),
                     ),
                   SizedBox(

@@ -30,8 +30,8 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPage extends State<LogInPage> {
   final AuthController _controller = Get.put(AuthController());
-  TextEditingController phoneController = TextEditingController(text: kDebugMode?"0927386249":"");
-  TextEditingController passwordController = TextEditingController(text: kDebugMode?"01289555089":"");
+  TextEditingController phoneController = TextEditingController(text: kDebugMode?"0915307814":"");
+  TextEditingController passwordController = TextEditingController(text: kDebugMode?"012895550899":"");
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _submit() async {

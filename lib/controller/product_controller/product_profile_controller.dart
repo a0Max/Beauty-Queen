@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-import '../../const/api_connrction/product_data_apis.dart';
+import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/options_model.dart';
 import '../../models/product_model.dart';
 import '../../widgets/CustomAlertBox.dart';
@@ -19,7 +19,7 @@ class ProductProfileController extends GetxController with GetSingleTickerProvid
   TabController? tabsController;
   var index = 0.obs;
   var productData = ProductModel().obs;
-  final _api = ProductDataApis();
+  final _api = HomeDataApis();
 
   @override
   void onInit() {
@@ -39,8 +39,8 @@ class ProductProfileController extends GetxController with GetSingleTickerProvid
   getCurrentProduct({required int productId}) async {
     productData.value = await _api.getProductDataRequest(productId: productId);
     selectedOptions.value = List.generate(productData.value.productOptions?.length??0, (index) => null);
-    print(selectedOptions.value.isNotEmpty);
-    print(selectedOptions.value.first);
+    // print(selectedOptions.value.isNotEmpty);
+    // print(selectedOptions.value.first);
     // print(selectedOptions.value.first);
   }
 
@@ -138,7 +138,7 @@ class ProductProfileController extends GetxController with GetSingleTickerProvid
   }
 
   addToCart() async {
-    // try {
+    try {
       if (productData.value.productOptions?.isNotEmpty ?? false) {
         for (dynamic selected in selectedOptions) {
           if (selected == null) {
@@ -167,14 +167,14 @@ class ProductProfileController extends GetxController with GetSingleTickerProvid
               buttonTwoText: tr('continuesOrder'),
             );
           });
-    // }on DioException catch (e, s) {
-    //
-    //   ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    //
-    // } catch (e, s) {
-    //   log('error:$e');
-    //   ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
-    //
-    // }
+    }on DioException catch (e, s) {
+
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+
+    } catch (e, s) {
+      log('error:$e');
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+
+    }
   }
 }

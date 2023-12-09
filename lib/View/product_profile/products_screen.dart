@@ -778,20 +778,20 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                              children: [
                                GestureDetector(
                                  onTap: () {
-                                   for(dynamic selected in controller.selectedOptions){
-                                     if (selected==null) {
-                                       showDialog(
-                                           context: context,
-                                           builder: (BuildContext context) {
-                                             return CustomAlertDialog(
-                                               buttonTwo:false,
-                                               dilougText:tr('chooseOptionFirst'),
-                                               buttonOneText: tr('okay'),
-                                             );
-                                           });
-                                       return;
-                                     }
-                                   }
+                                   // for(dynamic selected in controller.selectedOptions){
+                                   //   if (selected==null) {
+                                   //     showDialog(
+                                   //         context: context,
+                                   //         builder: (BuildContext context) {
+                                   //           return CustomAlertDialog(
+                                   //             buttonTwo:false,
+                                   //             dilougText:tr('chooseOptionFirst'),
+                                   //             buttonOneText: tr('okay'),
+                                   //           );
+                                   //         });
+                                   //     return;
+                                   //   }
+                                   // }
                                    controller.decrement();
                                  },
                                  child: Container(
@@ -825,20 +825,20 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                    )),
                                GestureDetector(
                                  onTap: () {
-                                   for(dynamic selected in controller.selectedOptions){
-                                     if (selected==null) {
-                                       showDialog(
-                                           context: context,
-                                           builder: (BuildContext context) {
-                                             return CustomAlertDialog(
-                                               buttonTwo:false,
-                                               dilougText:tr('chooseOptionFirst'),
-                                               buttonOneText: tr('okay'),
-                                             );
-                                           });
-                                       return;
-                                     }
-                                   }
+                                   // for(dynamic selected in controller.selectedOptions){
+                                   //   if (selected==null) {
+                                   //     showDialog(
+                                   //         context: context,
+                                   //         builder: (BuildContext context) {
+                                   //           return CustomAlertDialog(
+                                   //             buttonTwo:false,
+                                   //             dilougText:tr('chooseOptionFirst'),
+                                   //             buttonOneText: tr('okay'),
+                                   //           );
+                                   //         });
+                                   //     return;
+                                   //   }
+                                   // }
                                    controller.increment();
                                  },
                                  child: Container(

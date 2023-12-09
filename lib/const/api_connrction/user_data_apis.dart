@@ -152,7 +152,7 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
-    await setTheHeader(response.headers);
+    // await setTheHeader(response.headers);
 
     if (validResponse(response.statusCode!)) {
       final List<UserModel> l = [];

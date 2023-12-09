@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
       key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
-        child: CustomAppBar(
+        child: Obx(()=>CustomAppBar(
           showBagIcon: true,
           showFavIcon: true,
           showPersonIcon: true,
@@ -88,11 +88,12 @@ class _HomePageState extends State<HomePage> {
             _scaffoldKey.currentState?.openEndDrawer();
           },
           isScrolled: _isScrolled,
+          countCart:_controller.countCart.value,
           searchBarWidth: searchBarWidth, // Replace with your desired width
           searchBarTranslationY: searchBarTranslationY,
           searchBarTranslationX: searchBarTranslationX,
           // Replace with your desired translation value
-        ),
+        )),
       ),
       endDrawer: const MyEndDrawer(),
       body: SingleChildScrollView(
