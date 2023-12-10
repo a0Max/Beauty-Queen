@@ -37,7 +37,7 @@ class CartDataApis extends ApiProvider {
   }
 
 
-  Future changeQuantityDataRequest({required int productId, required int productQuantity}) async {
+  Future changeQuantityDataRequest({required String productId, required int productQuantity}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
 

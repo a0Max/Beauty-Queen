@@ -94,7 +94,7 @@ class _BrandScreenState extends State<BrandScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(160.h),
+        preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
         child: CustomAppBar(
           showarrowIcon: false,
           showBagIcon: true,

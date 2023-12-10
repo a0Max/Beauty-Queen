@@ -55,7 +55,7 @@ class ProductController extends GetxController {
     ProductsModel? product = cartData.value.products?[index];
     if (int.parse("${product?.stock??1}")>int.parse("${product?.qty??1}")){
       product?.qty = int.parse("${product.qty??1}") + 1;
-      await _api.changeQuantityDataRequest(productId: product?.id??0, productQuantity: product?.qty);
+      await _api.changeQuantityDataRequest(productId: product?.rowId??'', productQuantity: product?.qty);
       cartData.update((val) {
         val?.products?[index].qty = product?.qty;
       });
@@ -69,7 +69,7 @@ class ProductController extends GetxController {
     ProductsModel? product = cartData.value.products?[index];
     if (int.parse("${product?.qty??1}")>1){
       product?.qty = int.parse("${product.qty??1}") - 1;
-      await _api.changeQuantityDataRequest(productId: product?.id??0, productQuantity: product?.qty);
+      await _api.changeQuantityDataRequest(productId: product?.rowId??'', productQuantity: product?.qty);
       cartData.update((val) {
         val?.products?[index].qty = product?.qty;
       });
@@ -83,9 +83,5 @@ class ProductController extends GetxController {
       totalCount.value = totalCount.value + int.parse("${element.qty??1}");
       totalPrice.value = totalPrice.value + (double.parse("${element.qty??1}")*double.parse("${element.price??1}"));
     });
-    // for(ProductsModel cart in cartData.value.products){
-    //
-    // }
-
   }
 }

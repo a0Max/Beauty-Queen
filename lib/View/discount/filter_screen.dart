@@ -5,13 +5,13 @@ import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../const/images.dart';
-import '../const/styles.dart';
-import '../controller/FilterController.dart';
-import '../models/sales_products_model.dart';
-import '../widgets/CustomAppBar.dart';
-import '../widgets/CustomCardWidget.dart';
-import '../widgets/custom_fliter_ container.dart';
+import '../../const/images.dart';
+import '../../const/styles.dart';
+import '../../controller/FilterController.dart';
+import '../../models/sales_products_model.dart';
+import '../../widgets/CustomAppBar.dart';
+import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/custom_fliter_ container.dart';
 
 class FliterScreen extends StatefulWidget {
   const FliterScreen({super.key});

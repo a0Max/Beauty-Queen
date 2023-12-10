@@ -105,7 +105,16 @@
   "continuesShopping": "متابعــــــة التســــوق",
   "continuesOrder": "إستكمال الطلب الان",
   "cart": "سلّتي",
-  "minItemsPerOrder": "الحد الأدنى للطلب هو 10 د.ل"
+  "minItemsPerOrder": "الحد الأدنى للطلب هو 10 د.ل",
+  "latest": "المضاف حديثا",
+  "selling": "الأكثر مبيعاً",
+  "priceAsc": "السعر من الأقل الى الأعلى",
+  "priceDesc": "السعر من الأعلى الى الأقل",
+  "classificationBy": "التصنيف حسب",
+  "price": "السعر",
+  "brands": "الماركة",
+  "project": "منتج",
+  "showMore": "عرض المزيد"
 
 
 }

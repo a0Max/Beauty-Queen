@@ -38,6 +38,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   collection: ^1.18.0
   flutter_widget_from_html: ^0.14.9
+  geekyants_flutter_gauges: ^1.0.3
 
 dev_dependencies:
   flutter_test:

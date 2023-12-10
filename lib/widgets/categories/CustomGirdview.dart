@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../View/filter_screen.dart';
+import '../../View/discount/filter_screen.dart';
 import '../../const/strings.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
@@ -91,8 +91,6 @@ class CustomGridView extends StatelessWidget {
           mainAxisSpacing: 40,
           crossAxisCount: 2, // 2 containers horizontally
           childAspectRatio: 1.3,
-
-          // Aspect ratio of each container
         ),
         itemCount: gridData.length, // Number of items in the grid
         itemBuilder: (context, index) {

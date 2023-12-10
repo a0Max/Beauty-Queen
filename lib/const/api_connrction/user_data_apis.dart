@@ -152,6 +152,13 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
+    response.headers.forEach((name, values) {
+      print('name:($name)');
+      values.forEach((element) {
+        print('         element:($element)');
+
+      });
+    });
     // await setTheHeader(response.headers);
 
     if (validResponse(response.statusCode!)) {

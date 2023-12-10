@@ -11,7 +11,7 @@ import '../View/GuidanceScreen.dart';
 import '../View/Quinaprogram_screen.dart';
 import '../View/beautypharmacyscreen.dart';
 import '../View/beautyscreen.dart';
-import '../View/discounts_screen.dart';
+import '../View/discount/discounts_screen.dart';
 import '../View/filterby_screen.dart';
 import '../View/normalprofile.dart';
 import '../View/orders_screen.dart';

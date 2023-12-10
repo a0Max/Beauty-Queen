@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 abstract class Connection {
   Connection._();
 
@@ -49,4 +51,17 @@ abstract class TypeOfOptions{
   static const size = 'الحجم';
   static const color = 'اللون';
 
+}
+
+abstract class SortTypes{
+  static const latest = 'latest';
+  static const selling = 'selling';
+  static const priceAsc = 'priceAsc';
+  static const priceDesc = 'priceDesc';
+  static Map listOfTTypesOfSort = {
+    latest: tr(latest),
+    selling: tr(selling),
+    priceAsc: tr(priceAsc),
+    priceDesc: tr(priceDesc)
+  };
 }

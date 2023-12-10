@@ -11,6 +11,8 @@ part 'product_banner_model.g.dart';
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class ProductBanner {
   String? file;
+  String? description;
+  String? banner;
   String? bannerIsLink;
   String? bannerLinkType;
   String? bannerLinkId;
@@ -21,6 +23,8 @@ class ProductBanner {
         this.bannerIsLink,
         this.bannerLinkType,
         this.bannerLinkId,
+        this.banner,
+        this.description,
         this.bannerUrlLink});
 
 

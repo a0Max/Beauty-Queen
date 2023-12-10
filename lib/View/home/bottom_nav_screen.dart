@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../widgets/CustomNavBar.dart';
 import '../categories/alkasam_screen.dart';
 import '../brands/brands_screen.dart';
-import '../discounts_screen.dart';
+import '../discount/discounts_screen.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});

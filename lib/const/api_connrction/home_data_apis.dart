@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 
+import '../../models/general_search_model.dart';
 import '../../models/home_model.dart';
 import '../../models/product_model.dart';
 import '../vars.dart';
 import 'base_api_connection.dart';
+import 'package:quiver/strings.dart';
 
 class HomeDataApis extends ApiProvider {
   Future<HomeModel> homeDataRequest() async {
@@ -17,14 +19,12 @@ class HomeDataApis extends ApiProvider {
           'Accept-Language': await ApiProvider.getAppLanguage(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
 
     if (validResponse(response.statusCode!)) {
       return HomeModel.fromJson(
-
         response.data,
       );
     } else {
@@ -47,7 +47,6 @@ class HomeDataApis extends ApiProvider {
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
@@ -55,7 +54,6 @@ class HomeDataApis extends ApiProvider {
 
     if (validResponse(response.statusCode!)) {
       return ProductModel.fromJson(
-
         response.data,
       );
     } else {
@@ -63,7 +61,11 @@ class HomeDataApis extends ApiProvider {
     }
   }
 
-  Future<bool> addProductToCart({required int quantity, required int productID, int? productOptionID, int? optionID}) async {
+  Future<bool> addProductToCart(
+      {required int quantity,
+      required int productID,
+      int? productOptionID,
+      int? optionID}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final response = await dio.post(
@@ -71,8 +73,8 @@ class HomeDataApis extends ApiProvider {
       queryParameters: {
         'productID': productID,
         'quantity': quantity,
-        if (productOptionID!=null) 'productOptionID':productOptionID,
-        if (optionID!=null) 'optionID':optionID
+        if (productOptionID != null) 'productOptionID': productOptionID,
+        if (optionID != null) 'optionID': optionID
       },
       options: Options(
         headers: {
@@ -81,7 +83,6 @@ class HomeDataApis extends ApiProvider {
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
@@ -110,7 +111,6 @@ class HomeDataApis extends ApiProvider {
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
@@ -120,6 +120,42 @@ class HomeDataApis extends ApiProvider {
       return count;
     } else {
       throw 0;
+    }
+  }
+
+  Future<GeneralSearchModel> getSalesDataRequest(
+      {String? keySort,
+      List? selectedLabels,
+        required int page,
+      List? selectedPrices,
+      List? selectedBrands}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getSalesEndPoint}',
+      queryParameters: {
+        if (isBlank(keySort)==false) 'sort': keySort,
+        if (selectedLabels?.isNotEmpty ?? false) 'label[]': selectedLabels,
+        if (selectedPrices?.isNotEmpty ?? false) 'price[]': selectedPrices,
+        if (selectedBrands?.isNotEmpty ?? false) 'brands[]': selectedBrands,
+        'page': page
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+        },
+      ),
+    );
+
+    if (validResponse(response.statusCode!)) {
+      return GeneralSearchModel.fromJson(
+        response.data,
+      );
+    } else {
+      throw response.data;
     }
   }
 }
