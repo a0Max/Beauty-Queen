@@ -11,6 +11,7 @@ import '../../const/app_colors.dart';
 import '../../const/images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
+import '../../controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomAppBar.dart';
@@ -32,6 +33,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final HomeController _controller = Get.put(HomeController());
+  final NavController _controllerNav = Get.put(NavController());
 
   final ScrollController _scrollController = ScrollController();
   bool _isScrolled = false;
@@ -88,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             _scaffoldKey.currentState?.openEndDrawer();
           },
           isScrolled: _isScrolled,
-          countCart:_controller.countCart.value,
+          countCart:_controllerNav.countCart.value,
           searchBarWidth: searchBarWidth, // Replace with your desired width
           searchBarTranslationY: searchBarTranslationY,
           searchBarTranslationX: searchBarTranslationX,

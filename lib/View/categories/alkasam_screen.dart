@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../const/colors.dart';
 import '../../const/styles.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/NavBarController.dart';
 import '../../widgets/CustomAppBar.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/categories/CustomGirdview.dart';
@@ -25,6 +26,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
   double searchBarHeight = 1.0;
   double searchBarTranslationX = 0.0;
   double searchBarTranslationY = 0.0;
+  final NavController _controllerNav = Get.put(NavController());
 
   @override
   void initState() {
@@ -68,8 +70,11 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(_isScrolled ? 100.h :160.h),
           child: CustomAppBar(
-            showarrowIcon: true,
-            // showarrowIcon2: true,
+            showarrowIcon: false,
+            showBagIcon: true,
+            showFavIcon: true,
+            showPersonIcon: true,
+            countCart:_controllerNav.countCart.value,
             // showBagIcon: true,
             // showFavIcon: true,
             // showPersonIcon: true,

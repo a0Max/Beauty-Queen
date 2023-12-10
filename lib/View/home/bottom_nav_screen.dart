@@ -14,6 +14,8 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final NavController controller = Get.put(NavController());
+    final NavController _controllerNav = Get.put(NavController());
+
     final List<Widget> screens = [
       const HomePage(),
       const AlKasamScreen(),
@@ -21,7 +23,7 @@ class MainView extends StatelessWidget {
       const BrandScreen(),
       const GuidanceScreen()
     ];
-
+    _controllerNav.getCountOfCart();
     return Scaffold(
       body: Obx(() => screens[controller.currentIndex.value]),
       bottomNavigationBar: const ReusableBottomNavigationBar(),

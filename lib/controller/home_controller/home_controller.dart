@@ -7,9 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/home_data_apis.dart';
-import '../../models/categories_model.dart';
 import '../../models/home_model.dart';
-import '../../models/slides_model.dart';
 import '../../widgets/CustomAlertBox.dart';
 import '../../widgets/error_pop_up.dart';
 
@@ -19,7 +17,6 @@ class HomeController extends GetxController {
   final _api = HomeDataApis();
   RxList sliders = [].obs;
 
-  RxInt countCart = 0.obs;
   Future<void> getHomeDataController() async {
     try {
       homeData.value = await _api.homeDataRequest();
@@ -34,7 +31,6 @@ class HomeController extends GetxController {
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
     isLoading.value = false;
-    getCountOfCart();
   }
 
   RxInt currentSlider = 0.obs;
@@ -75,7 +71,6 @@ class HomeController extends GetxController {
               buttonTwoText: tr('continuesOrder'),
             );
           });
-        getCountOfCart();
     }on DioException catch (e, s) {
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
@@ -87,10 +82,7 @@ class HomeController extends GetxController {
     }
   }
 
-  getCountOfCart() async {
-    countCart.value = await _api.getCartRequest();
-    print(countCart.value);
-  }
+
 
 
 }

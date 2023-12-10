@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../const/colors.dart';
 import '../../const/vars.dart';
+import '../../controller/NavBarController.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/brand_model.dart';
 import '../../widgets/CustomEndDrawer.dart';
@@ -36,6 +37,7 @@ class _BrandScreenState extends State<BrandScreen> {
   final ScrollController _scrollController = ScrollController();
   // final GlobalKey<_ListItemState> _targetKey = GlobalKey<_ListItemState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final NavController _controllerNav = Get.put(NavController());
 
   @override
   void initState() {
@@ -94,8 +96,11 @@ class _BrandScreenState extends State<BrandScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(160.h),
         child: CustomAppBar(
-          showBagIcon2: true,
-          showarrowIcon: true,
+          showarrowIcon: false,
+          showBagIcon: true,
+          showFavIcon: true,
+          showPersonIcon: true,
+          countCart:_controllerNav.countCart.value,
           onPressed: () {
             // Handle the button click here, e.g., open the end drawer.
             _scaffoldKey.currentState?.openEndDrawer();
