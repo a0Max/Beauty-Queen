@@ -51,4 +51,9 @@ class AppImages{
   static const String imageGift = "${mainPathToSvg}gift.svg";
   static const String imageRate = "${mainPathToSvg}rate.svg";
   static const String imageDetails = "${mainPathToSvg}details.svg";
+  static const String imageCarts = "${mainPathToSvg}cart.svg";
+  static const String imageDelete = "${mainPathToSvg}delete.svg";
+  static const String imageDiscount = "${mainPathToSvg}Discount.svg";
+  static const String kqueencrownImage = "${mainPathToSvg}queencrown.svg";
+
 }

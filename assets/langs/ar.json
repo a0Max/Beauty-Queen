@@ -103,7 +103,9 @@
   "youArrivedToMin": "لقد وصلت الحد الاقل للطلب",
   "addedSuccessfully": "لقد قمت بإضافة هذا المنتج إلى سلة الشراء بنجاح!",
   "continuesShopping": "متابعــــــة التســــوق",
-  "continuesOrder": "إستكمال الطلب الان"
+  "continuesOrder": "إستكمال الطلب الان",
+  "cart": "سلّتي",
+  "minItemsPerOrder": "الحد الأدنى للطلب هو 10 د.ل"
 
 
 }

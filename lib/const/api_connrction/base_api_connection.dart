@@ -47,12 +47,14 @@ abstract class ApiProvider {
   static const String homepageEndPoint = "homepage";
   static const String parentCategoriesPageEndPoint = "get/parentCategories";
   static const String getBrandsPageEndPoint = "get/brands";
+  static const String getCartsPageEndPoint = "get/cart";
   static const String userEndPoint = "user";
   static const String logoutEndPoint = "logout";
   static const String updatePasswordEndPoint = "updatePassword";
   static const String productEndPoint = "product";
   static const String addToCartProductEndPoint = "addToCart";
   static const String cartCounterProductEndPoint = "cartCounter";
+  static const String changeQuantityProductEndPoint = "changeQuantity";
 
 ////////////////////////////////////////////////////////////////////////////
 

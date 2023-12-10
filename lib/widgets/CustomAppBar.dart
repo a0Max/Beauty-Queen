@@ -12,7 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../View/normalprofile.dart';
-import '../View/cart_screen.dart';
+import '../View/cart/cart_screen.dart';
 import '../const/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
