@@ -17,8 +17,12 @@ class ProductController extends GetxController {
   final _api = CartDataApis();
   Rx<CartModel> cartData = CartModel().obs ;
 
+  RxDouble totalPrice = 0.0.obs;
+  RxInt totalCount = 0.obs;
+
   getCartData() async {
-    cartData.value =await  _api.cartDataRequest();
+    cartData.value = await _api.cartDataRequest();
+    updatePricesAndCount();
   }
 
   arrivedToMax(){
@@ -48,7 +52,6 @@ class ProductController extends GetxController {
   }
 
   Future<void> increment({required int index}) async {
-    print('old:${cartData.value.products?[index].qty}');
     ProductsModel? product = cartData.value.products?[index];
     if (int.parse("${product?.stock??1}")>int.parse("${product?.qty??1}")){
       product?.qty = int.parse("${product.qty??1}") + 1;
@@ -56,8 +59,6 @@ class ProductController extends GetxController {
       cartData.update((val) {
         val?.products?[index].qty = product?.qty;
       });
-      // cartData.value.products?[index].qty = product?.qty;
-      print('new:${cartData.value.products?[index].qty}');
       update();
     }else{
       arrivedToMax();
@@ -75,5 +76,16 @@ class ProductController extends GetxController {
     }else{
       cartData.value.products?.removeAt(index);
     }
+  }
+
+  updatePricesAndCount(){
+    cartData.value.products?.forEach((element) {
+      totalCount.value = totalCount.value + int.parse("${element.qty??1}");
+      totalPrice.value = totalPrice.value + (double.parse("${element.qty??1}")*double.parse("${element.price??1}"));
+    });
+    // for(ProductsModel cart in cartData.value.products){
+    //
+    // }
+
   }
 }

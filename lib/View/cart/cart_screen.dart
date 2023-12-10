@@ -233,7 +233,7 @@ class _CartScreen extends State<CartScreen>{
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'عدد العناصر(1) ',
+                              'عدد العناصر(${productController.totalCount.value}) ',
                               style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 21.sp,
@@ -241,7 +241,7 @@ class _CartScreen extends State<CartScreen>{
                                   color: kPrimaryColor),
                             ),
                             Text(
-                              'الإجمالي: 40.00 دل ',
+                              'الإجمالي: ${productController.totalPrice.value} دل ',
                               style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 21.sp,
@@ -319,7 +319,7 @@ class _CartScreen extends State<CartScreen>{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(width: 30.w),
+                // SizedBox(width: 30.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -332,7 +332,7 @@ class _CartScreen extends State<CartScreen>{
                           color: klPinkColor),
                     ),
                     Text(
-                       '40.00دل',
+                       '${productController.totalPrice.value}دل',
                       style: TextStyle(
                           fontFamily: kTheArabicSansLight,
                           fontSize: 24.sp,
