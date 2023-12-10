@@ -11,7 +11,7 @@ import '../../const/app_colors.dart';
 import '../../const/images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
-import '../../controller/NavBarController.dart';
+import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomAppBar.dart';

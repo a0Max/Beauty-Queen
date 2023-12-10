@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../const/colors.dart';
 import '../../const/styles.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
-import '../../controller/NavBarController.dart';
+import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../widgets/CustomAppBar.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/categories/CustomGirdview.dart';

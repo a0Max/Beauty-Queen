@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 import '../const/app_images.dart';
 import '../const/colors.dart';
-import '../controller/NavBarController.dart';
+import '../controller/nav_bar_controller/NavBarController.dart';
 
 class ReusableBottomNavigationBar extends StatelessWidget {
   const ReusableBottomNavigationBar({Key? key}) : super(key: key);

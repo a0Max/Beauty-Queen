@@ -6,11 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../const/vars.dart';
-import '../models/brand_model.dart';
-import '../models/cart_model.dart';
-import '../models/products_model.dart';
-import '../widgets/CustomAlertBox.dart';
+import '../../const/vars.dart';
+import '../../models/brand_model.dart';
+import '../../models/cart_model.dart';
+import '../../models/products_model.dart';
+import '../../widgets/CustomAlertBox.dart';
 
 class ProductController extends GetxController {
   var count = 1.obs;

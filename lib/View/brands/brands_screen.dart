@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import '../../const/colors.dart';
 import '../../const/vars.dart';
-import '../../controller/NavBarController.dart';
+import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/brand_model.dart';
 import '../../widgets/CustomEndDrawer.dart';

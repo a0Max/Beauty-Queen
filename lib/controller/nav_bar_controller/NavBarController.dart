@@ -2,7 +2,7 @@
 
 import 'package:get/get.dart';
 
-import '../const/api_connrction/home_data_apis.dart';
+import '../../const/api_connrction/home_data_apis.dart';
 
 class NavController extends GetxController {
   //////////////// Bottom Navigation Bar /////////////

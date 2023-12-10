@@ -1,7 +1,7 @@
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
-import 'package:beauty_queen/controller/productController.dart';
+import 'package:beauty_queen/controller/cart_controller/productController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

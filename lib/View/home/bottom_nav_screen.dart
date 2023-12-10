@@ -1,6 +1,6 @@
 import 'package:beauty_queen/View/GuidanceScreen.dart';
 import 'package:beauty_queen/View/home/HomePage.dart';
-import 'package:beauty_queen/controller/NavBarController.dart';
+import 'package:beauty_queen/controller/nav_bar_controller/NavBarController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/CustomNavBar.dart';

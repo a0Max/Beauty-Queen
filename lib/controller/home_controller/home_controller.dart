@@ -10,7 +10,7 @@ import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/home_model.dart';
 import '../../widgets/CustomAlertBox.dart';
 import '../../widgets/error_pop_up.dart';
-import '../NavBarController.dart';
+import '../nav_bar_controller/NavBarController.dart';
 
 class HomeController extends GetxController {
   RxBool isLoading = true.obs;
