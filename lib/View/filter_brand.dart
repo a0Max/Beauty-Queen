@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../const/colors.dart';
 import '../const/styles.dart';
-import 'filterby_screen.dart';
+import 'discount/filterby_screen.dart';
 
 class FilterbyBrand extends StatelessWidget {
   const FilterbyBrand({super.key});

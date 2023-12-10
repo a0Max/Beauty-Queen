@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 import '../../models/general_search_model.dart';
@@ -156,6 +158,50 @@ class HomeDataApis extends ApiProvider {
       );
     } else {
       throw response.data;
+    }
+  }
+
+  addReview({
+    required String comment,
+    int? rating,
+    String? image,
+    required String productId
+    }) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    File file = File(image.toString());
+    String fileName = file.path.split('/').last;
+
+    FormData formData = FormData.fromMap({
+      if(isBlank(rating.toString())==false)'rating': rating,
+      'product_id': productId,
+      'comment': comment,
+      if (image != null)
+        "images": await MultipartFile.fromFile(file.path, filename: fileName),
+    });
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.submitReviewProductEndPoint}',
+      queryParameters: {
+
+      },
+
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      int count = response.data['counter'];
+      print('count:$count');
+      return count;
+    } else {
+      throw 0;
     }
   }
 }

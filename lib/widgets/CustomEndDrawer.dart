@@ -12,7 +12,7 @@ import '../View/Quinaprogram_screen.dart';
 import '../View/beautypharmacyscreen.dart';
 import '../View/beautyscreen.dart';
 import '../View/discount/discounts_screen.dart';
-import '../View/filterby_screen.dart';
+import '../View/discount/filterby_screen.dart';
 import '../View/normalprofile.dart';
 import '../View/orders_screen.dart';
 import '../const/colors.dart';

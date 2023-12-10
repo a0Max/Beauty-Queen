@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:beauty_queen/View/filterby_screen.dart';
+import 'package:beauty_queen/View/discount/filterby_screen.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
 import 'package:flutter/material.dart';

@@ -9,7 +9,7 @@ import '../const/styles.dart';
 import '../models/sales_products_model.dart';
 import '../widgets/CustomCardWidget.dart';
 import '../widgets/CustomEndDrawer.dart';
-import 'filterby_screen.dart';
+import 'discount/filterby_screen.dart';
 
 class BeautyPharmaScreen extends StatefulWidget {
   const BeautyPharmaScreen({super.key});

@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:beauty_queen/View/product_profile/tab_screen_one.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:quiver/strings.dart';
 import 'package:beauty_queen/const/styles.dart';
-import 'package:beauty_queen/widgets/CustomAlertBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -541,7 +538,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               ),
                              controller.index.value == 0
                                   ? TabScreenOne()
-                                  : const TabScreenTwo(),
+                                  : TabScreenTwo(),
                               //////////////////////////////////
                               SizedBox(
                                 height: 10.h,

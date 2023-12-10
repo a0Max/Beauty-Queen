@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
+import '../../controller/product_controller/product_profile_controller.dart';
 
 class RatingWidget extends StatelessWidget {
   final int maxRating;
-  final RxInt currentRating;
+  // int currentRating;
 
-  const RatingWidget(
-      {super.key, required this.maxRating, required this.currentRating});
+  RatingWidget(
+      {super.key, required this.maxRating,});
 
   @override
   Widget build(BuildContext context) {
+    final ProductProfileController controller =
+    Get.put(ProductProfileController());
+
     return Obx(
           () => Row(
         children: List.generate(
@@ -20,10 +24,14 @@ class RatingWidget extends StatelessWidget {
 
             child: Icon(
               // size: 30,
-              index < currentRating.value ? Icons.star : Icons.star_border,
-              color: index < currentRating.value ? AppColors.kPrimaryColor : AppColors.kPinkColor,
+              index < controller.rate.value ? Icons.star : Icons.star_border,
+              color: index < controller.rate.value ? AppColors.kPrimaryColor : AppColors.kPinkColor,
             ),
-            onTap: () => currentRating.value = index + 1,
+            onTap: () {
+
+              // currentRating = index + 1;
+              controller.currentRate(newRate:index + 1);
+            }
           ),
         ),
       ),

@@ -13,7 +13,7 @@ import '../const/styles.dart';
 
 import '../models/sales_products_model.dart';
 import '../widgets/CustomCardWidget.dart';
-import 'filterby_screen.dart';
+import 'discount/filterby_screen.dart';
 
 class GuidanceScreen extends StatefulWidget {
   const GuidanceScreen({super.key});

@@ -82,6 +82,8 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.12.0)"
   - GoogleUtilities/UserDefaults (7.12.0):
     - GoogleUtilities/Logger
+  - image_picker_ios (0.0.1):
+    - Flutter
   - just_audio (0.0.1):
     - Flutter
   - map_launcher (0.0.1):
@@ -122,6 +124,7 @@ DEPENDENCIES:
   - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
   - Flutter (from `Flutter`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - map_launcher (from `.symlinks/plugins/map_launcher/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -166,6 +169,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   google_maps_flutter_ios:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   just_audio:
     :path: ".symlinks/plugins/just_audio/ios"
   map_launcher:
@@ -208,6 +213,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
   GoogleMaps: 025272d5876d3b32604e5c080dc25eaf68764693
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   map_launcher: e325db1261d029ff33e08e03baccffe09593ffea
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5

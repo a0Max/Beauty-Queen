@@ -18,7 +18,7 @@ import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomCardWidget.dart';
-import '../filterby_screen.dart';
+import 'filterby_screen.dart';
 
 class DiscountScreen extends StatefulWidget {
   const DiscountScreen({super.key});
