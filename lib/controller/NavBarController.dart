@@ -9,7 +9,7 @@ class NavController extends GetxController {
   final RxInt _currentIndex = 0.obs;
   RxInt countCart = 0.obs;
   final _api = HomeDataApis();
-
+  static NavController get to => Get.find(); // Get reference to ControllerB
   RxInt get currentIndex => _currentIndex;
 
   void updateIndex(int newIndex) {

@@ -10,6 +10,7 @@ import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/home_model.dart';
 import '../../widgets/CustomAlertBox.dart';
 import '../../widgets/error_pop_up.dart';
+import '../NavBarController.dart';
 
 class HomeController extends GetxController {
   RxBool isLoading = true.obs;
@@ -71,6 +72,7 @@ class HomeController extends GetxController {
               buttonTwoText: tr('continuesOrder'),
             );
           });
+        NavController.to.getCountOfCart();
     }on DioException catch (e, s) {
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
