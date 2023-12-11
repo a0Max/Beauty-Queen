@@ -14,7 +14,9 @@ import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/custom_brands_logo_widget.dart';
 
 class BrandScreen extends StatefulWidget {
-  const BrandScreen({super.key});
+  final bool? showBack;
+
+  const BrandScreen({super.key, this.showBack});
 
   @override
   State<BrandScreen> createState() => _BrandScreenState();
@@ -94,10 +96,11 @@ class _BrandScreenState extends State<BrandScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
         child: CustomAppBar(
-          showarrowIcon: false,
-          showBagIcon: true,
-          showFavIcon: true,
-          showPersonIcon: true,
+          showarrowIcon: widget.showBack==true?true:false,
+          showBagIcon: widget.showBack==true?false:true,
+          showFavIcon:  widget.showBack==true?false:true,
+          showPersonIcon:  widget.showBack==true?false:true,
+
           countCart:_controllerNav.countCart.value,
           onPressed: () {
             // Handle the button click here, e.g., open the end drawer.

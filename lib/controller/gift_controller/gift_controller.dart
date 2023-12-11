@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
+import '../../const/api_connrction/brands_data_api.dart';
 import '../../const/api_connrction/gifts_data_apis.dart';
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/general_search_model.dart';
@@ -82,4 +83,22 @@ class GiftController extends GetxController {
   }
 
 
+  var generalSearchData2 = GeneralSearchModel().obs;
+  RxList dataProducts2 = [].obs;
+  final _api2 = BrandsDataApis();
+
+
+  Future<void> getOffersDataController() async {
+    try{
+      generalSearchData2.value = await _api2.getOffersDataRequest();
+        dataProducts2.addAll(generalSearchData2.value.gifts?.data??[]);
+
+    } on DioException catch (e) {
+      generalSearchData.value = GeneralSearchModel();
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } catch (e) {
+      generalSearchData.value = GeneralSearchModel();
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+    }
+  }
 }

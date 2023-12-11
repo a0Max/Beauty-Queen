@@ -20,7 +20,9 @@ import '../../widgets/CustomCardWidget.dart';
 import 'filterby_screen.dart';
 
 class DiscountScreen extends StatefulWidget {
-  const DiscountScreen({super.key});
+  final bool? showBack;
+
+  const DiscountScreen({super.key, this.showBack});
 
   @override
   State<DiscountScreen> createState() => _DiscountScreenState();
@@ -80,9 +82,14 @@ class _DiscountScreenState extends State<DiscountScreen> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
-            showBagIcon: true,
-            showFavIcon: true,
-            showPersonIcon: true,
+            // showBagIcon: true,
+            // showFavIcon: true,
+            // showPersonIcon: true,
+            showarrowIcon: widget.showBack==true?true:false,
+            showBagIcon: widget.showBack==true?false:true,
+            showFavIcon:  widget.showBack==true?false:true,
+            showPersonIcon:  widget.showBack==true?false:true,
+
             countCart: _controllerNav.countCart.value,
             onPressed: () {
               _scaffoldKey.currentState?.openEndDrawer();

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../../models/brand_model.dart';
 import 'package:quiver/strings.dart';
 import '../../models/general_search_model.dart';
+import '../../models/sales_products_model.dart';
 import '../vars.dart';
 import 'base_api_connection.dart';
 
@@ -52,6 +53,29 @@ class BrandsDataApis extends ApiProvider {
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
 
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return GeneralSearchModel.fromJson(
+        response.data,
+      );
+    } else {
+      throw response.data;
+    }
+  }
+
+
+  Future<GeneralSearchModel> getOffersDataRequest() async {
+    final token = await getUserToken();
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getBrandsPageEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
         },
       ),
     );

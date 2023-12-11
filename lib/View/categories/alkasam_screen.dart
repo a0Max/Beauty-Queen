@@ -11,7 +11,8 @@ import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/categories/CustomGirdview.dart';
 
 class AlKasamScreen extends StatefulWidget {
-  const AlKasamScreen({super.key});
+  final bool? showBack;
+  const AlKasamScreen({super.key, this.showBack});
 
   @override
   State<AlKasamScreen> createState() => _AlKasamScreenState();
@@ -71,10 +72,11 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(_isScrolled ? 100.h :160.h),
           child: CustomAppBar(
-            showarrowIcon: false,
-            showBagIcon: true,
-            showFavIcon: true,
-            showPersonIcon: true,
+            showarrowIcon: widget.showBack==true?true:false,
+            showBagIcon: widget.showBack==true?false:true,
+            showFavIcon:  widget.showBack==true?false:true,
+            showPersonIcon:  widget.showBack==true?false:true,
+
             countCart:_controllerNav.countCart.value,
             // showBagIcon: true,
             // showFavIcon: true,

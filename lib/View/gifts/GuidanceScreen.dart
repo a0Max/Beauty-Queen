@@ -25,7 +25,9 @@ import '../discount/filterby_screen.dart';
 import 'filterby_gifts_screen.dart';
 
 class GuidanceScreen extends StatefulWidget {
-  const GuidanceScreen({super.key});
+  final bool? showBack;
+
+  const GuidanceScreen({super.key, this.showBack});
 
   @override
   State<GuidanceScreen> createState() => _GuidanceScreenState();
@@ -85,9 +87,14 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_isScrolled?100.h:160.h),
         child: CustomAppBar(
-          showBagIcon: true,
-          showFavIcon: true,
-          showPersonIcon: true,
+          // showBagIcon: true,
+          // showFavIcon: true,
+          // showPersonIcon: true,
+          showarrowIcon: widget.showBack==true?true:false,
+          showBagIcon: widget.showBack==true?false:true,
+          showFavIcon:  widget.showBack==true?false:true,
+          showPersonIcon:  widget.showBack==true?false:true,
+
           onPressed: () {
             // Handle the button click here, e.g., open the end drawer.
             _scaffoldKey.currentState?.openEndDrawer();

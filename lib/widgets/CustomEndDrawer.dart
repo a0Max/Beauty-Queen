@@ -9,12 +9,13 @@ import 'package:get/get.dart';
 
 import '../View/gifts/GuidanceScreen.dart';
 import '../View/Quinaprogram_screen.dart';
-import '../View/beautypharmacyscreen.dart';
+import '../View/offers/beautypharmacyscreen.dart';
 import '../View/beautyscreen.dart';
 import '../View/discount/discounts_screen.dart';
 import '../View/discount/filterby_screen.dart';
 import '../View/normalprofile.dart';
 import '../View/orders_screen.dart';
+import '../const/app_colors.dart';
 import '../const/colors.dart';
 
 class MyEndDrawer extends StatelessWidget {
@@ -27,7 +28,7 @@ class MyEndDrawer extends StatelessWidget {
       child: Align(
         alignment: Alignment.topRight,
         child: Container(
-          color: kWhiteColor,
+          color: AppColors.kWhiteColor,
           height: Get.height,
           width: 261.57.w,
           child: ListView(
@@ -43,13 +44,13 @@ class MyEndDrawer extends StatelessWidget {
                       child: Container(
                         height: 35.94.h,
                         width: 101.63.w,
-                        color: kPinkColor,
+                        color: AppColors.kPinkColor,
                         child: Center(
                           child: Text(
                             ' طلباتي',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: kWhiteColor,
+                              color: AppColors.kWhiteColor,
                               fontSize: 16.sp,
                               fontFamily: kTheArabicSansLight,
                               fontWeight: FontWeight.w600,
@@ -66,13 +67,13 @@ class MyEndDrawer extends StatelessWidget {
                       child: Container(
                         height: 35.94.h,
                         width: 101.63.w,
-                        color: kPinkColor,
+                        color: AppColors.kPinkColor,
                         child: Center(
                           child: Text(
                             ' حسابي',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: kWhiteColor,
+                              color: AppColors.kWhiteColor,
                               fontSize: 16.sp,
                               fontFamily: kTheArabicSansLight,
                               fontWeight: FontWeight.w600,
@@ -91,14 +92,14 @@ class MyEndDrawer extends StatelessWidget {
               Container(
                 height: 37.13.h,
                 width: 261.57.w,
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w, top: 5.h),
                   child: Text(
                     ' :تسوقي حسب',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -111,7 +112,7 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const AlKasamScreen());
+                  Get.to(const AlKasamScreen(showBack: true,));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -119,7 +120,7 @@ class MyEndDrawer extends StatelessWidget {
                     'الأقسام',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -128,7 +129,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               /////////second container//////////
               SizedBox(
@@ -136,7 +137,7 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const BrandScreen());
+                  Get.to(const BrandScreen(showBack: true,));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -144,7 +145,7 @@ class MyEndDrawer extends StatelessWidget {
                     'الماركات',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 18.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -153,7 +154,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               ///////////////third//////////////////
               SizedBox(
@@ -161,7 +162,7 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const DiscountScreen());
+                  Get.to(const DiscountScreen(showBack: true,));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -169,7 +170,7 @@ class MyEndDrawer extends StatelessWidget {
                     'التخفيضات',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -178,7 +179,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               ////////fourth//////////////
               SizedBox(
@@ -186,7 +187,7 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const GuidanceScreen());
+                  Get.to(const GuidanceScreen(showBack: true,));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -194,7 +195,7 @@ class MyEndDrawer extends StatelessWidget {
                     'الهدايا',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -203,7 +204,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               /////////////////fifth////////////
               SizedBox(
@@ -219,7 +220,7 @@ class MyEndDrawer extends StatelessWidget {
                     'عروض بيوتي كوين',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -228,7 +229,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               //////////////sixth/////////////////////
               SizedBox(
@@ -244,7 +245,7 @@ class MyEndDrawer extends StatelessWidget {
                     'صيدلية الجمال',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -253,7 +254,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
 //////////////seventh/////////////////////
               SizedBox(
@@ -269,7 +270,7 @@ class MyEndDrawer extends StatelessWidget {
                     'الأجهزة الكهربائية',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -278,7 +279,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               SizedBox(
                 height: 25.h,
@@ -287,14 +288,14 @@ class MyEndDrawer extends StatelessWidget {
               Container(
                 height: 37.13.h,
                 width: 261.57.w,
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w, top: 5.h),
                   child: Text(
                     'إكتشفي أيضاً',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -316,7 +317,7 @@ class MyEndDrawer extends StatelessWidget {
                     'مجلة بيوتي كوين',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -325,7 +326,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
 
               /////////////second text//////////////////
@@ -342,7 +343,7 @@ class MyEndDrawer extends StatelessWidget {
                     'برنامج كوينا',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -351,7 +352,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               /////////////third//////////
               SizedBox(
@@ -367,7 +368,7 @@ class MyEndDrawer extends StatelessWidget {
                     'المعرض',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
@@ -376,7 +377,7 @@ class MyEndDrawer extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
               ),
               SizedBox(
                 height: 25.h,
@@ -384,7 +385,7 @@ class MyEndDrawer extends StatelessWidget {
               Container(
                 height: 37.13.h,
                 width: 261.57.w,
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
                 child: GestureDetector(
                   onTap: () {
                     Get.back();
@@ -395,7 +396,7 @@ class MyEndDrawer extends StatelessWidget {
                       'تواصل معنا',
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        color: kBlackColor,
+                        color: AppColors.kBlackColor,
                         fontSize: 17.sp,
                         fontFamily: kTheArabicSansLight,
                         fontWeight: FontWeight.w600,
@@ -411,7 +412,7 @@ class MyEndDrawer extends StatelessWidget {
               Container(
                 height: 37.13.h,
                 width: 261.57.w,
-                color: klPinkColor,
+                color: AppColors.klPinkColor,
                 child: GestureDetector(
                   onTap: () {
                     Get.to(const FilterByContainer());
@@ -422,7 +423,7 @@ class MyEndDrawer extends StatelessWidget {
                       'حول متجرنا',
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        color: kBlackColor,
+                        color: AppColors.kBlackColor,
                         fontSize: 17.sp,
                         fontFamily: kTheArabicSansLight,
                         fontWeight: FontWeight.w600,
