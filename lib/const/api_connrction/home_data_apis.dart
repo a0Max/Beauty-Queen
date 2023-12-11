@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import '../../models/general_search_model.dart';
 import '../../models/home_model.dart';
 import '../../models/product_model.dart';
+import '../../models/product_options_model.dart';
 import '../vars.dart';
 import 'base_api_connection.dart';
 import 'package:quiver/strings.dart';
@@ -172,19 +173,23 @@ class HomeDataApis extends ApiProvider {
     File file = File(image.toString());
     String fileName = file.path.split('/').last;
 
-    FormData formData = FormData.fromMap({
-      if(isBlank(rating.toString())==false)'rating': rating,
-      'product_id': productId,
-      'comment': comment,
-      if (image != null)
-        "images": await MultipartFile.fromFile(file.path, filename: fileName),
-    });
+    // FormData formData = FormData.fromMap({
+    //   if(isBlank(rating.toString())==false)'rating': rating,
+    //   'product_id': productId,
+    //   'comment': comment,
+    //   if (image != null)
+    //     "images": await MultipartFile.fromFile(file.path, filename: fileName),
+    // });
 
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.submitReviewProductEndPoint}',
       queryParameters: {
-
-      },
+        if(isBlank(rating.toString())==false)'rating': rating,
+        'product_id': productId,
+        'comment': comment,
+        if (image != null)
+        "images": await MultipartFile.fromFile(file.path, filename: fileName),
+        },
 
       options: Options(
         headers: {
@@ -204,4 +209,57 @@ class HomeDataApis extends ApiProvider {
       throw 0;
     }
   }
+
+  addWishlistRequest({
+    required int productId
+  }) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.addWishlistProductEndPoint}',
+      queryParameters: {
+        'id': productId,
+        },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+    } else {
+      throw 0;
+    }
+  }
+
+  Future<List<ProductOptionsModel>> getTheWishlist() async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getWishlistProductEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+        },
+      ),
+    );
+
+    if (validResponse(response.statusCode!)) {
+      final List<ProductOptionsModel> l = [];
+      response.data['items'].forEach((e) => l.add(ProductOptionsModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+
+  }
+
+
 }

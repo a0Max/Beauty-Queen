@@ -36,12 +36,13 @@ class CustomAlertDialog extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
+        padding: EdgeInsets.symmetric(horizontal: 10.w,vertical:20.h),
         decoration: const BoxDecoration(
           color: kPrimaryColor,
         ),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 23.h),
+            // SizedBox(height: 23.h),
             Text(
               dilougText.toString(),
               style: TextStyle(
@@ -51,7 +52,7 @@ class CustomAlertDialog extends StatelessWidget {
                 fontSize: 16.39.sp,
               ),
             ),
-            SizedBox(height: 13.h),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -61,7 +62,9 @@ class CustomAlertDialog extends StatelessWidget {
                   },
                   child: Container(
                     height: 42.65.h,
-                    width: 145.91.w,
+                    // width: 145.91.w,
+
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
                     color: kBlackColor,
                     child: Center(
                       child: Text(
@@ -83,7 +86,8 @@ class CustomAlertDialog extends StatelessWidget {
                     },
                     child: Container(
                       height: 42.65.h,
-                      width: 145.91.w,
+                      padding: EdgeInsets.symmetric(horizontal: 7.w),
+                      // width: 145.91.w,
                       color: kBlackColor,
                       child: Center(
                         child: Text(
@@ -99,6 +103,7 @@ class CustomAlertDialog extends StatelessWidget {
                   ),
               ],
             ),
+            // SizedBox(height: 13.h),
           ],
         ),
       ),

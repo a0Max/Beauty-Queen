@@ -57,6 +57,8 @@ abstract class ApiProvider {
   static const String cartCounterProductEndPoint = "cartCounter";
   static const String changeQuantityProductEndPoint = "changeQuantity";
   static const String submitReviewProductEndPoint = "submitReview";
+  static const String addWishlistProductEndPoint = "add/wishlist";
+  static const String getWishlistProductEndPoint = "get/wishlist";
 
 ////////////////////////////////////////////////////////////////////////////
 

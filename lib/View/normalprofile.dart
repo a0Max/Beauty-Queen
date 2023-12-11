@@ -247,7 +247,7 @@ class NormalProfileScreen extends StatelessWidget {
                   ////////////second container//////////////
                   GestureDetector(
                     onTap: () {
-                      Get.to(const FavScreen());
+                      Get.to( FavScreen());
                     },
                     child: Container(
                       height: 115.h,

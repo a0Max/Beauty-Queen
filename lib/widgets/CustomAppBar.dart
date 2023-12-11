@@ -136,7 +136,7 @@ class CustomAppBar extends StatelessWidget {
                   if (isScrolled != true && showFavIcon)
                     GestureDetector(
                       onTap: () {
-                        Get.to(const FavScreen());
+                        Get.to( FavScreen());
                       },
                       child: SvgPicture.asset(
                         AppImages.imageLoveSvg,

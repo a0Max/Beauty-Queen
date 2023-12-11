@@ -380,6 +380,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       // size: 30,
                     ),
                     onPressed: () {
+                      _controller.addWishlist(postId: widget.newArrival.id??0);
                       // showDialog(
                       //   context: context,
                       //   builder: (BuildContext context) {

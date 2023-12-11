@@ -85,6 +85,13 @@ class HomeController extends GetxController {
   }
 
 
+  addWishlist({required int postId}) async {
+    await _api.addWishlistRequest(productId: postId);
+  }
 
+  RxList wishlistList = [].obs;
+  getWishlist() async {
+    wishlistList.value = await _api.getTheWishlist();
+  }
 
 }

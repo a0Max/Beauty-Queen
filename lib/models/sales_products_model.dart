@@ -61,7 +61,7 @@ class SalesProductsModel{
   String? updatedAt;
   BrandModel? brand;
   List<ProductOptionsModel>? productOptions;
-  List<String>? wishlist;
+  List<ProductOptionsModel>? wishlist;
   LabelModel? label;
   List<LabelModel>? labels;
   OfferImageModel? offerImage;

@@ -64,7 +64,7 @@ SalesProductsModel _$SalesProductsModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) => ProductOptionsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       wishlist: (json['wishlist'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => ProductOptionsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       label: json['label'] == null
           ? null
@@ -130,7 +130,7 @@ Map<String, dynamic> _$SalesProductsModelToJson(SalesProductsModel instance) =>
       'brand': instance.brand?.toJson(),
       'product_options':
           instance.productOptions?.map((e) => e.toJson()).toList(),
-      'wishlist': instance.wishlist,
+      'wishlist': instance.wishlist?.map((e) => e.toJson()).toList(),
       'label': instance.label?.toJson(),
       'labels': instance.labels?.map((e) => e.toJson()).toList(),
       'offer_image': instance.offerImage?.toJson(),

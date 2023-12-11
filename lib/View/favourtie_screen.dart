@@ -4,12 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../const/images.dart';
+import '../const/vars.dart';
+import '../controller/home_controller/home_controller.dart';
 import '../models/sales_products_model.dart';
 import '../widgets/CustomCardWidget.dart';
 
-class FavScreen extends StatelessWidget {
-  const FavScreen({super.key});
+class FavScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _FavScreen();
+  }
+}
+class _FavScreen extends State<FavScreen>{
+  final HomeController _controller = Get.put(HomeController());
 
+  @override
+  void initState() {
+    super.initState();
+    _controller.getWishlist();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +51,7 @@ class FavScreen extends StatelessWidget {
                 )),
           ]),
       body: SingleChildScrollView(
-        child: Column(
+        child: Obx(()=>Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
@@ -75,46 +89,23 @@ class FavScreen extends StatelessWidget {
             SizedBox(
               height: 34.75.h,
             ),
-             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomCardWidget(
-                    imageUrl: kBaseImage,
-                    imgtxt: 'Makeup Forever',
-                    price: '150.00',
-                    des: 'كريم اساس الترا اتش دي السائل من ميكب',
-                    disprice: '190.00',
-                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
-                CustomCardWidget(
-                    imageUrl: kLispticImage,
-                    imgtxt: 'Rare Beauty',
-                    price: '94.00',
-                    des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
-                    disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
-              ],
-            ),
-             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomCardWidget(
-                    imageUrl: kBaseImage,
-                    imgtxt: 'Makeup Forever',
-                    price: '150.00',
-                    des: 'كريم اساس الترا اتش دي السائل من ميكب',
-                    disprice: '190.00',
-                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
-                CustomCardWidget(
-                    imageUrl: kLispticImage,
-                    imgtxt: 'Rare Beauty',
-                    price: '94.00',
-                    des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
-                    disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
-              ],
-            ),
+            Wrap(
+              runSpacing: 7,
+              children: List.generate(
+                  _controller.wishlistList.value.length,
+                      (index) =>
+                          CustomCardWidget(
+                    imageUrl: Connection.urlOfProducts(
+                        image: _controller
+                            .wishlistList.value[index].product.mainImage ??
+                            ''),
+                    newArrival: _controller.wishlistList.value[index].product ??
+                        SalesProductsModel(),
+                  // )
+              ),
+            ),)
           ],
-        ),
+        )),
       ),
       // bottomNavigationBar: ReusableBottomNavigationBar(),
     );
