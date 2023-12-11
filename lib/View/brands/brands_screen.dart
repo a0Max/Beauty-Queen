@@ -13,7 +13,7 @@ import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/brand_model.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/custom_brands_logo_widget.dart';
-import '../branddetail_screen.dart';
+import 'branddetail_screen.dart';
 import 'package:quiver/strings.dart';
 
 class BrandScreen extends StatefulWidget {
@@ -219,11 +219,15 @@ class _BrandScreenState extends State<BrandScreen> {
                                               .toList()[index]][index2]
                                           .logo ??
                                       ''),
+
                               productName: _controller
                                       .brandsData[_controller.brandsData.keys
                                           .toList()[index]][index2]
                                       .titleAr ??
                                   '',
+                              brandId: _controller
+                                .brandsData[_controller.brandsData.keys
+                                .toList()[index]][index2].id.toString(),
                             ),
                           ),
                         )

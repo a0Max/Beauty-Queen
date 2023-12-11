@@ -16,6 +16,7 @@ class GeneralSearchModel {
   PaginationModel? products;
   int? salesCount;
   List<BrandModel>? brands;
+  BrandModel? brand;
   List<String>? prices;
   List<LabelModel>? labels;
   ProductBanner? info;
@@ -25,6 +26,7 @@ class GeneralSearchModel {
         this.salesCount,
         this.brands,
         this.prices,
+        this.brand,
         this.products,
         this.labels,
         this.info});

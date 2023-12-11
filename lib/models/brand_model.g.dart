@@ -21,6 +21,9 @@ BrandModel _$BrandModelFromJson(Map<String, dynamic> json) => BrandModel(
       sEODescription: json['s_e_o_description'] as String?,
       keywords: json['keywords'] as String?,
       createdAt: json['created_at'] as String?,
+      mobileSlides: (json['mobile_slides'] as List<dynamic>?)
+          ?.map((e) => OfferImageModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       homepageBrandImage: json['homepage_brand_image'] == null
           ? null
           : OfferImageModel.fromJson(
@@ -46,4 +49,5 @@ Map<String, dynamic> _$BrandModelToJson(BrandModel instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'homepage_brand_image': instance.homepageBrandImage?.toJson(),
+      'mobile_slides': instance.mobileSlides?.map((e) => e.toJson()).toList(),
     };

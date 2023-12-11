@@ -15,7 +15,7 @@ abstract class ApiProvider {
   ApiProvider() {
     // Attach Interceptors.
     dio.interceptors.add(_performanceInterceptor);
-    if (kDebugMode) dio.interceptors.add(_logger);
+    // if (kDebugMode) dio.interceptors.add(_logger);
   }
 
   // static final ApiProvider instance = ApiProvider._();

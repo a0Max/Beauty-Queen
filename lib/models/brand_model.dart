@@ -25,6 +25,7 @@ class BrandModel{
   String? createdAt;
   String? updatedAt;
   OfferImageModel? homepageBrandImage;
+  List<OfferImageModel>? mobileSlides;
 
   BrandModel(
       {this.id,
@@ -41,6 +42,7 @@ class BrandModel{
         this.sEODescription,
         this.keywords,
         this.createdAt,
+        this.mobileSlides,
         this.homepageBrandImage,
         this.updatedAt});
 

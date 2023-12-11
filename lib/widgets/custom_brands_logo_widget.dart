@@ -5,25 +5,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../View/branddetail_screen.dart';
+import '../View/brands/branddetail_screen.dart';
 
 class CustomProductWidget extends StatelessWidget {
   final String imagePath;
   final String productName;
+  final String brandId;
   final VoidCallback? onTap;
 
   const CustomProductWidget({
     super.key,
     required this.imagePath,
     required this.productName,
-    this.onTap,
+    this.onTap, required this.brandId,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.to(const BrandDetailScreen());
+          Get.to(BrandDetailScreen(brandId: int.parse(brandId),));
         },
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           CachedNetworkImage(

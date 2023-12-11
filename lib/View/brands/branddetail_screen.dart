@@ -2,16 +2,24 @@ import 'package:beauty_queen/View/discount/filterby_screen.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
-import '../models/sales_products_model.dart';
-import '../widgets/CustomAppBar.dart';
-import '../widgets/CustomCardWidget.dart';
-import '../widgets/CustomEndDrawer.dart';
+import '../../const/app_colors.dart';
+import '../../const/vars.dart';
+import '../../controller/brands_controller/brands_controller.dart';
+import '../../models/sales_products_model.dart';
+import '../../widgets/CustomAppBar.dart';
+import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/CustomEndDrawer.dart';
+import 'filterby_category_screen.dart';
 
 class BrandDetailScreen extends StatefulWidget {
-  const BrandDetailScreen({super.key});
+  final int brandId;
+  const BrandDetailScreen({super.key, required this.brandId});
 
   @override
   State<BrandDetailScreen> createState() => _BrandDetailScreenState();
@@ -24,11 +32,13 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
   double searchBarTranslationX = 0.0;
   double searchBarTranslationY = 0.0;
   final ScrollController _scrollController = ScrollController();
+  BrandsController controller = Get.put(BrandsController());
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+    controller.getDetailsOfBrand(idOfBrand: widget.brandId, currentPage:1);
   }
 
   void _scrollListener() {
@@ -61,9 +71,9 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(160.h),
+        preferredSize: Size.fromHeight(_isScrolled?100.h:160.h),
         child: CustomAppBar(
-          showBagIcon2: true,
+          showBagIcon2: false,
           showarrowIcon: true,
           onPressed: () {
             // Handle the button click here, e.g., open the end drawer.
@@ -78,30 +88,31 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
         ),
       ),
       endDrawer: const MyEndDrawer(),
-      body: SingleChildScrollView(
+      body: Obx(()=>SingleChildScrollView(
         controller: _scrollController,
         child: Column(
           children: [
             SizedBox(
               height: 16.h,
             ),
-            Image.asset(kalbaaImage),
-            Image.asset(kfruitImage),
+
+            Container(
+              height: 70.h,
+              width: MediaQuery.of(context).size.width,
+              color: Color(int.parse(
+                  "ff${controller.generalSearchData.value.brand?.logoBackground?.toUpperCase().replaceAll('#', '') ?? ''}",
+                  radix: 16)),
+              child: CachedNetworkImage(imageUrl: Connection.urlOfBrands3(image:controller.generalSearchData.value.brand?.logo??'')),
+            ),
+            CachedNetworkImage(imageUrl: Connection.urlOfBrands3(image:controller.generalSearchData.value.brand?.mobileSlides?.first.file??'')),
             SizedBox(
               height: 16.h,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Text(
-                textAlign: TextAlign.center,
-                "تتوافق المنتجات النباتية مع حبنا للعالم الطبيعي، ولهذا السبب فإن منتجاتنا طبيعية ونباتية 100%. ونراعي في صناعتنا تقليل بصمتنا البيئية كلما استطعنا ذلك، ولهذا السبب نستخدم مواد التعبئة والتغليف المعاد تدويرها لنحمي الارض والبيئة من التلف. شعارنا يجب أن تكون منتجاتنا جميلة لك وللعالم الذي نعيش فيه .. ونحن نعتقد أن المستقبل جميل",
-                style: TextStyle(
-                    fontFamily: kTheArabicSansLight,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w700,
-                    color: kTextGrayColor),
-              ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 15.w),
+              child:             HtmlWidget(controller.generalSearchData.value.brand?.shortDescription??''),
             ),
+
             SizedBox(
               height: 61.h,
             ),
@@ -113,7 +124,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                     height: 39.76.h,
                     width: 180.w,
                     decoration: BoxDecoration(
-                      border: Border.all(color: kPrimaryColor, width: 1.5.w),
+                      border: Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
                     ),
                     child: Row(
                       children: [
@@ -122,61 +133,36 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                             iconEnabledColor: Colors.transparent,
                             isDense: true,
                             isExpanded: true,
-
                             alignment: Alignment.center,
-                            value: null, // Set the initial value to null
-                            items: [
-                              DropdownMenuItem<String>(
-                                value: 'المضاف حديثاً',
-                                child: Text('المضاف حديثاً',
+                            value: controller.valueSort.value == ''
+                                ? null
+                                : controller.valueSort.value,
+                            items: SortTypes.listOfTTypesOfSort.values
+                                .map((value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value,
                                     style: TextStyle(
-                                      color: kBlackColor,
+                                      color: AppColors.kBlackColor,
                                       fontSize: 14.sp,
                                       fontFamily: kTheArabicSansLight,
                                       fontWeight: FontWeight.w400,
                                       height: 0,
                                     )),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: 'الأكثر مبيعاً',
-                                child: Text('الأكثر مبيعاً',
-                                    style: TextStyle(
-                                      color: kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: 'السعر من أقل الي الأعلي',
-                                child: Text('السعر من أقل الي الأعلي',
-                                    style: TextStyle(
-                                      color: kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: 'السعر من الأعلي أقل الي',
-                                child: Text('السعر من الأعلي أقل الي',
-                                    style: TextStyle(
-                                      color: kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              ),
-                            ],
+                              );
+                            }).toList(),
                             onChanged: (String? newValue) {
-                              // Handle the selected option if needed
+                              SortTypes.listOfTTypesOfSort
+                                  .forEach((key, value) {
+                                if (value == newValue) {
+                                  controller.updateSortType(
+                                      newKeySort: key, newValueSort: value, idOfBrand: widget.brandId);
+                                }
+                              });
                             },
-                            hint: Text('التصنيف حسب',
+                            hint: Text(tr('classificationBy'),
                                 style: TextStyle(
-                                  color: kBlackColor,
+                                  color: AppColors.kBlackColor,
                                   fontSize: 18.sp,
                                   fontFamily: kTheArabicSansLight,
                                   fontWeight: FontWeight.w400,
@@ -203,7 +189,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Get.to(const FilterByContainer());
+                            Get.to( FilterByBrandsContainer(brandId: widget.brandId,));
                           },
                           child: Text('فلترة النتائج',
                               style: TextStyle(
@@ -227,31 +213,40 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
             SizedBox(
               height: 19.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomCardWidget(
-                    imageUrl: kBaseImage,
-                    imgtxt: 'Makeup Forever',
-                    price: '150.00',
-                    des: 'كريم اساس الترا اتش دي السائل من ميكب',
-                    disprice: '190.00',
-                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
-                CustomCardWidget(
-                    imageUrl: kLispticImage,
-                    imgtxt: 'Rare Beauty',
-                    price: '94.00',
-                    des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
-                    disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
-              ],
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.only(right: 17.h),
+                child: Text(
+                    'عدد المنتجات: ${controller.generalSearchData.value.products?.total ?? ''}',
+                    style: const TextStyle(
+                      fontFamily: kTheArabicSansLight,
+                      color: AppColors.kGrayColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    )),
+              ),
+            ),
+
+            Wrap(
+              runSpacing: 7,
+              children: List.generate(
+                  controller.dataProducts.value.length,
+                      (index) => CustomCardWidget(
+                    imageUrl: Connection.urlOfProducts(
+                        image: controller
+                            .dataProducts.value[index].mainImage ??
+                            ''),
+                    newArrival: controller.dataProducts.value[index] ??
+                        SalesProductsModel(),
+                  )),
             ),
             SizedBox(
               height: 50.h,
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

@@ -36,7 +36,6 @@ class AlkasamController extends GetxController {
   updateCurrentCategoryId({required int newId, required bool getChild}) async {
     currentCategoryId.value = newId;
     getCategoriesDataController(currentPage: 1, getByParent: true);
-    print('getChild:$getChild');
     if (getChild == true){
       childCategoryData.value = await _api.getChildDataRequest(parentId:currentCategoryId.value);
     }
@@ -67,7 +66,6 @@ class AlkasamController extends GetxController {
         generalSearchData.value = await _api.getCategoryDataRequest(page: 1,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value,categoryId: currentParent);
         dataProducts.value = generalSearchData.value.products?.data??[];
       }
-      print('data:${generalSearchData.value.products?.total}');
     } on DioException catch (e, s) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');

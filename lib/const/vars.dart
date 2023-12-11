@@ -38,6 +38,9 @@ abstract class Connection {
   static String urlOfBrands2({required String image}) {
     return "${storageURLOfBrand}brands/$image";
   }
+  static String urlOfBrands3({required String image}) {
+    return "${storageURL}Brands/$image";
+  }
   static String urlOfStorage({required String image}) {
     return "${storageURL}/$image";
   }
