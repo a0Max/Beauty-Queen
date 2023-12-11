@@ -17,6 +17,9 @@ GeneralSearchModel _$GeneralSearchModelFromJson(Map<String, dynamic> json) =>
           .toList(),
       prices:
           (json['prices'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      products: json['products'] == null
+          ? null
+          : PaginationModel.fromJson(json['products'] as Map<String, dynamic>),
       labels: (json['labels'] as List<dynamic>?)
           ?.map((e) => LabelModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -28,6 +31,7 @@ GeneralSearchModel _$GeneralSearchModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GeneralSearchModelToJson(GeneralSearchModel instance) =>
     <String, dynamic>{
       'sales': instance.sales?.toJson(),
+      'products': instance.products?.toJson(),
       'salesCount': instance.salesCount,
       'brands': instance.brands?.map((e) => e.toJson()).toList(),
       'prices': instance.prices,

@@ -100,14 +100,16 @@ class _DiscountScreenState extends State<DiscountScreen> {
             controller: _scrollController,
             child: Column(
               children: [
-                SizedBox(
-                    height: 139.17.h,
-                    width: MediaQuery.of(context).size.width,
-                    child: CachedNetworkImage(
-                        imageUrl: Connection.urlOfStorage(
-                            image: _controller
-                                    .generalSearchData.value.info?.banner ??
-                                ''))),
+                if ( _controller
+                    .generalSearchData.value.info?.banner != null)
+                  SizedBox(
+                      height: 139.17.h,
+                      width: MediaQuery.of(context).size.width,
+                      child: CachedNetworkImage(
+                          imageUrl: Connection.urlOfStorage(
+                              image: _controller
+                                      .generalSearchData.value.info?.banner ??
+                                  ''))),
                 SizedBox(
                   height: 14.h,
                 ),
@@ -258,62 +260,73 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 ),
                 SizedBox(height: 40,),
 
-                 Text('النتائج: ${_controller.dataProducts.value.length} من ${_controller.generalSearchData.value.salesCount}'),
-                 SizedBox(height: 10,),
-                 SizedBox(
-                   width: MediaQuery.of(context).size.width/2,
-                    height: 30,
-                    child: LinearGauge(
-                      gaugeOrientation: GaugeOrientation.horizontal,
-                      start: 0,
-                      end: double.parse("${_controller.generalSearchData.value.salesCount??1}"),
-                      valueBar: [
-                        ValueBar(
-                            value: double.parse("${_controller.dataProducts.value.length}"),
-                            color: AppColors.mainColor,
-                            borderRadius: 15,
-                            valueBarThickness: 10)
-                      ],
-                      linearGaugeBoxDecoration:
+                 if (_controller.dataProducts.value.isNotEmpty)...{
+                   Text('النتائج: ${_controller.dataProducts.value
+                       .length} من ${_controller.generalSearchData.value
+                       .salesCount}'),
+                   SizedBox(height: 10,),
+                   SizedBox(
+                     width: MediaQuery
+                         .of(context)
+                         .size
+                         .width / 2,
+                     height: 30,
+                     child: LinearGauge(
+                       gaugeOrientation: GaugeOrientation.horizontal,
+                       start: 0,
+                       end: double.parse(
+                           "${_controller.generalSearchData.value.salesCount ??
+                               1}"),
+                       valueBar: [
+                         ValueBar(
+                             value: double.parse("${_controller.dataProducts
+                                 .value.length}"),
+                             color: AppColors.mainColor,
+                             borderRadius: 15,
+                             valueBarThickness: 10)
+                       ],
+                       linearGaugeBoxDecoration:
                        const LinearGaugeBoxDecoration(
-                          backgroundColor: AppColors.kShadowColor,
-                          thickness: 10,
-                          borderRadius: 15),
-                      rulers: RulerStyle(
-                        rulerPosition: RulerPosition.center,
-                        showLabel: false,
-                        showSecondaryRulers: false,
-                        showPrimaryRulers: false,
-                        secondaryRulersHeight: 0,
-                      ),
-                    ),
-                  ),
-                GestureDetector(
-                  onTap: () {
-                    _controller.getSalesDataController();
-
-                  },
-                  child: Container(
-                    // height: 59.70.h,
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
-                    width: MediaQuery.of(context).size.width/2,
-                    decoration: ShapeDecoration(
-                      color: AppColors.kPrimaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.84),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(tr('showMore'),
-                          style: TextStyle(
-                              fontSize: 22.11.sp,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.kWhiteColor,
-                              fontFamily: kTheArabicSansLight)),
-                    ),
-                  ),
-                )
-
+                           backgroundColor: AppColors.kShadowColor,
+                           thickness: 10,
+                           borderRadius: 15),
+                       rulers: RulerStyle(
+                         rulerPosition: RulerPosition.center,
+                         showLabel: false,
+                         showSecondaryRulers: false,
+                         showPrimaryRulers: false,
+                         secondaryRulersHeight: 0,
+                       ),
+                     ),
+                   ),
+                   GestureDetector(
+                     onTap: () {
+                       _controller.getSalesDataController();
+                     },
+                     child: Container(
+                       // height: 59.70.h,
+                       padding: EdgeInsets.symmetric(vertical: 10.h),
+                       width: MediaQuery
+                           .of(context)
+                           .size
+                           .width / 2,
+                       decoration: ShapeDecoration(
+                         color: AppColors.kPrimaryColor,
+                         shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(8.84),
+                         ),
+                       ),
+                       child: Center(
+                         child: Text(tr('showMore'),
+                             style: TextStyle(
+                                 fontSize: 22.11.sp,
+                                 fontWeight: FontWeight.w400,
+                                 color: AppColors.kWhiteColor,
+                                 fontFamily: kTheArabicSansLight)),
+                       ),
+                     ),
+                   )
+                 }
               ],
             ),
           )),

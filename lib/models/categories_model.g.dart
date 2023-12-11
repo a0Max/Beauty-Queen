@@ -23,6 +23,9 @@ CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) =>
       bannerLinkId: json['banner_link_id'] as String?,
       bannerUrlLink: json['banner_url_link'] as String?,
       createdAt: json['created_at'] as String?,
+      children: (json['children'] as List<dynamic>?)
+          ?.map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       updatedAt: json['updated_at'] as String?,
     );
 
@@ -44,4 +47,5 @@ Map<String, dynamic> _$CategoryModelToJson(CategoryModel instance) =>
       'banner_url_link': instance.bannerUrlLink,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
+      'children': instance.children?.map((e) => e.toJson()).toList(),
     };

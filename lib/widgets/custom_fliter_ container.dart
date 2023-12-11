@@ -22,8 +22,9 @@ class MyCustomContainer extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
           height: 34.95.h,
-          width: 92.12.w,
+          // width: 92.12.w,
           decoration: BoxDecoration(
             border: Border.all(color: kTextGrayColor, width: 1.w),
             borderRadius: BorderRadius.circular(

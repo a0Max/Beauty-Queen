@@ -23,7 +23,7 @@ class CategoryModel {
   String? bannerUrlLink;
   String? createdAt;
   String? updatedAt;
-
+  List<CategoryModel>? children;
   CategoryModel(
       {this.id,
       this.title,
@@ -40,6 +40,7 @@ class CategoryModel {
       this.bannerLinkId,
       this.bannerUrlLink,
       this.createdAt,
+        this.children,
       this.updatedAt});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {

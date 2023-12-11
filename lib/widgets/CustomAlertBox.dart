@@ -52,7 +52,7 @@ class CustomAlertDialog extends StatelessWidget {
                 fontSize: 16.39.sp,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[

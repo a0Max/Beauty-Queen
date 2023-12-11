@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../View/discount/filter_screen.dart';
+import '../../View/categories/filter_screen.dart';
 import '../../const/strings.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
@@ -21,70 +21,79 @@ class CustomGridView extends StatelessWidget {
     GridItemData(
       imageAsset: AppImages.khandgranateImage, // Replace with your image
       label: tr("kPerfumes"),
+      id:44,
     ),
     GridItemData(
       imageAsset: AppImages.kpaintImage, // Replace with your image
       label: tr('kMakeup'),
+      id:43,
     ),
     // Add more data for additional grid items
     GridItemData(
       imageAsset: AppImages.kshampooImage, // Replace with your image
       label: tr('kHaircare'),
+      id:46,
     ),
     GridItemData(
       imageAsset: AppImages.kSkincare, // Replace with your image
       label: tr('kSkincare'),
+      id:45,
     ),
     GridItemData(
       imageAsset: AppImages.khandpumpImage, // Replace with your image
       label: tr('kBodyCareAndRelaxation'),
+      id:48,
     ),
     GridItemData(
       imageAsset: AppImages.kPersonalCare, // Replace with your image
       label: tr('kPersonalCare'),
+      id:47,
     ),
 
     GridItemData(
       imageAsset: AppImages.contactLenses, // Replace with your image
       label: tr('contactـlenses'),
+      id:50,
     ),
     GridItemData(
       imageAsset: AppImages.shavingAndHairRemoval, // Replace with your image
       label: tr('Shaving_and_hair_removal'),
+      id:49,
     ),
 
     GridItemData(
       imageAsset: AppImages.knailImage, // Replace with your image
       label: tr('kNails'),
+      id:52,
     ),
     GridItemData(
       imageAsset: AppImages.eyelashes, // Replace with your image
       label: tr('kLashes'),
+      id:51,
     ),
     GridItemData(
       imageAsset: AppImages.kBladeImage, // Replace with your image
       label: tr('kElectricalAppliances'),
+      id:53,
     ),
     GridItemData(
       imageAsset: AppImages.kfirstaidImage, // Replace with your image
       label: tr('kPharmacyOfBeauty'),
+      id:183,
     ),
-
-    // ...
   ];
 
   CustomGridView({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
-    final FilterController filterController = Get.put(FilterController());
+    // final FilterController filterController = Get.put(FilterController());
     final AlkasamController _controller = Get.put(AlkasamController());
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 13.w),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         controller: controller,
-
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisSpacing: 18,
@@ -96,8 +105,8 @@ class CustomGridView extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              filterController.updateSelectedLabel(gridData[index].label);
-              Get.to(const FliterScreen());
+              _controller.updateCurrentCategoryId(newId:gridData[index].id, getChild: false);
+              Get.to(FliterScreen(categoryId: gridData[index].id,));
             },
             child: CustomGridItem(
               imageAsset: gridData[index].imageAsset,
@@ -113,10 +122,12 @@ class CustomGridView extends StatelessWidget {
 class GridItemData {
   final String imageAsset;
   final String label;
+  final int id;
 
   GridItemData({
     required this.imageAsset,
     required this.label,
+    required this.id,
   });
 }
 

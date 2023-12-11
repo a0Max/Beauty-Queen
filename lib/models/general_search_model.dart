@@ -13,6 +13,7 @@ part 'general_search_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class GeneralSearchModel {
   PaginationModel? sales;
+  PaginationModel? products;
   int? salesCount;
   List<BrandModel>? brands;
   List<String>? prices;
@@ -24,6 +25,7 @@ class GeneralSearchModel {
         this.salesCount,
         this.brands,
         this.prices,
+        this.products,
         this.labels,
         this.info});
 
