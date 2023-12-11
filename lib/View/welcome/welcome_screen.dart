@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
-import '../../const/strings.dart';
 // import '../../const/colors.dart';
 import '../../const/images.dart';
 import '../../const/styles.dart';
@@ -331,11 +330,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         // Check if the timer has been canceled
                         if (controller.cancelTimerFlag.value) {
                           // Timer canceled, navigate to the login screen
-                          Get.off(LogInPage());
+                          Get.off(const LogInPage());
                         } else {
                           // Timer not canceled, cancel the timer and navigate
                           controller.cancelTimer();
-                          Get.off(LogInPage());
+                          Get.off(const LogInPage());
                         }
                       },
                       child: Text(tr('kLogin'),
@@ -366,11 +365,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         // Check if the timer has been canceled
                         if (controller.cancelTimerFlag.value) {
                           // Timer canceled, navigate to the sign-up screen
-                          Get.off(SignUpPage());
+                          Get.off(const SignUpPage());
                         } else {
                           // Timer not canceled, cancel the timer and navigate
                           controller.cancelTimer();
-                          Get.off(SignUpPage());
+                          Get.off(const SignUpPage());
                         }
                       },
                       child: Text(

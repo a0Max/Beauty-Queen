@@ -1,10 +1,7 @@
 import 'offer_image_model.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'options_model.dart';
 
 part 'discover_brand.g.dart';
 

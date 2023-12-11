@@ -85,7 +85,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 children: [
                   Positioned(
                       child: IconButton(
-                    icon: Icon(Icons.close),
+                    icon: const Icon(Icons.close),
                     onPressed: () {
                       setState(() {
                         showProductOptions = false;
@@ -105,7 +105,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                       children: [
                                         Text(widget.newArrival
                                                 .productOptions?[index].title ??
-                                            '', style:TextStyle(
+                                            '', style:const TextStyle(
                                           color: AppColors.kGreyBlueColor,
                                           fontSize: 18
                                         ) ,),
@@ -140,7 +140,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                                 });
 
                                               },
-                                              buttonStyleData: ButtonStyleData(
+                                              buttonStyleData: const ButtonStyleData(
                                                 decoration: BoxDecoration(
                                                   color: AppColors.kPrimaryColor,
                                                   ),
@@ -176,7 +176,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                           Container(
                                           margin: EdgeInsets.symmetric(horizontal: 15.w),
 
-                                          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                           color: AppColors.klPinkColor,
                                           width: MediaQuery.of(context).size.width,
                                           // alignment: Alignment.center,

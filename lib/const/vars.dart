@@ -42,7 +42,7 @@ abstract class Connection {
     return "${storageURL}Brands/$image";
   }
   static String urlOfStorage({required String image}) {
-    return "${storageURL}/$image";
+    return "$storageURL/$image";
   }
 
   static const String bundleId = '';

@@ -53,7 +53,7 @@ class WelcomeController extends GetxController {
 
   void _navigateToLoginScreen() {
     // Implement the navigation logic here, e.g., using Get.to() if using GetX for navigation
-    Get.off(LogInPage());
+    Get.off(const LogInPage());
   }
 
   void cancelTimer() {

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:map_launcher/map_launcher.dart' as mapLauncher;
 import 'package:beauty_queen/const/extensions.dart';
 import '../const/app_images.dart';
 
@@ -12,7 +11,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
 
 class LocationMap extends StatefulWidget {
-  LocationMap({super.key});
+  const LocationMap({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -45,7 +44,7 @@ class _LocationMap extends State<LocationMap> {
   final Set<Marker> _markers = <Marker>{};
   addMarker() async {
     final Uint8List? markerIcon = await getBytesFromAsset();
-    print('markerIcon:${markerIcon}');
+    print('markerIcon:$markerIcon');
     print('_markers:${_markers.length}');
     _markers.add(
       Marker(

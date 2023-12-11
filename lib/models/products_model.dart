@@ -1,6 +1,4 @@
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'products_model.g.dart';

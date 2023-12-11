@@ -1,6 +1,5 @@
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../widgets/item_of_app.dart';
 
@@ -13,7 +12,7 @@ class AboutAppScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
 
-        leading: SizedBox(),
+        leading: const SizedBox(),
         centerTitle: true,
         actions: [
           IconButton(onPressed: () {

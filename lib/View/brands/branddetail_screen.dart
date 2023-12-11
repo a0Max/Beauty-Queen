@@ -1,4 +1,3 @@
-import 'package:beauty_queen/View/discount/filterby_screen.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';

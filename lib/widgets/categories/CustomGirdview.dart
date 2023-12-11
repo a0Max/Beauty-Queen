@@ -12,7 +12,7 @@ import '../../const/styles.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 
 class CustomGridView extends StatelessWidget {
-  final ScrollController? controller;
+  final ScrollController? scrollController;
   final List<GridItemData> gridData = [
     GridItemData(
       imageAsset: AppImages.khandgranateImage, // Replace with your image
@@ -79,17 +79,17 @@ class CustomGridView extends StatelessWidget {
     ),
   ];
 
-  CustomGridView({super.key, this.controller});
+  CustomGridView({super.key, this.scrollController});
 
   @override
   Widget build(BuildContext context) {
     // final FilterController filterController = Get.put(FilterController());
-    final AlkasamController _controller = Get.put(AlkasamController());
+    final AlkasamController controller = Get.put(AlkasamController());
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 13.w),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
-        controller: controller,
+        controller: scrollController,
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisSpacing: 18,
@@ -101,7 +101,7 @@ class CustomGridView extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              _controller.updateCurrentCategoryId(newId:gridData[index].id, getChild: false);
+              controller.updateCurrentCategoryId(newId:gridData[index].id, getChild: false);
               Get.to(FliterScreen(categoryId: gridData[index].id,));
             },
             child: CustomGridItem(

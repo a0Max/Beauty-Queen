@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../widgets/contact_us_screen.dart';
 import '../widgets/location_map.dart';
-import 'about_app.dart';
 import '../widgets/comment_widget.dart';
 import '../widgets/email_widget.dart';
 import '../widgets/social_login.dart';
-import '../widgets/text_field_widget.dart';
 import '../widgets/work_hours.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -20,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        leading: SizedBox(),
+        leading: const SizedBox(),
         actions: [
           IconButton(onPressed: () {
             Navigator.pop(context);
@@ -53,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
               25.ph,
               const WorkHours(),
               25.ph,
-              LocationMap()
+              const LocationMap()
 
             ],
           ),

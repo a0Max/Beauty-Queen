@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'package:beauty_queen/View/discount/filterby_screen.dart';
 // import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,7 +10,6 @@ import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
-import '../../controller/FilterController.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomAppBar.dart';
 import '../../widgets/CustomCardWidget.dart';

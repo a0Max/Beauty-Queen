@@ -2,7 +2,6 @@
 
 import 'package:beauty_queen/View/auth_view/otp_page_view.dart';
 import 'package:beauty_queen/View/welcome/welcome_screen.dart';
-import 'package:beauty_queen/controller/auth_controller/signUpcontroller.dart';
 import 'package:beauty_queen/widgets/custom_button_2.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,16 +12,14 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../controller/auth_controller/auth_controler.dart';
-import '../../widgets/CustomTextField.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
 import '../../widgets/loginVia.dart';
-import '../home/bottom_nav_screen.dart';
 import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({super.key});
+  const SignUpPage({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -57,14 +54,14 @@ class _SignUpPage extends State<SignUpPage>{
             builder: (context) => OtpPage(phone: phoneController.text,),
           ),
               (route) => false);
-    } on DioError catch (e, s) {
+    } on DioError catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
-    } catch (e, s) {
+    } catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
@@ -238,7 +235,7 @@ class _SignUpPage extends State<SignUpPage>{
               ),
               InkWell(
                 onTap: () {
-                  Get.to(LogInPage());
+                  Get.to(const LogInPage());
                 },
                 child: Center(
                   child: Text(

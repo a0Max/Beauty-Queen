@@ -3,7 +3,6 @@
 import 'package:beauty_queen/View/favourtie_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
-import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 
 import 'package:flutter/material.dart';
@@ -136,7 +135,7 @@ class CustomAppBar extends StatelessWidget {
                   if (isScrolled != true && showFavIcon)
                     GestureDetector(
                       onTap: () {
-                        Get.to( FavScreen());
+                        Get.to( const FavScreen());
                       },
                       child: SvgPicture.asset(
                         AppImages.imageLoveSvg,
@@ -146,7 +145,7 @@ class CustomAppBar extends StatelessWidget {
                     ),
 
                   if(isScrolled == true)...{
-                    Container(
+                    SizedBox(
                         height: 44.h,
 
                         width: MediaQuery.of(context).size.width-(30.w+10.w+20.w+16.w+20.w+30.w+9.w),

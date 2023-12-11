@@ -1,23 +1,18 @@
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart' hide Response;
 // import 'package:get/get_core/src/get_main.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/auth_controller/otp_controller.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/custom_button_2.dart';
-import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
 import '../welcome/welcome_screen.dart';
 import 'login_page.dart';
@@ -55,10 +50,10 @@ class _EnterNewPassword extends State<EnterNewPassword> {
 
       // Get.back();
       Get.off(const LogInPage());
-    } on DioException catch (e, s) {
+    } on DioException {
       Get.back();
       Navigator.of(context).pop();
-    } catch (e, s) {
+    } catch (e) {
       Navigator.of(context).pop();
     }
   }

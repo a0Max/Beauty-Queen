@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: kWhiteColor,
               useMaterial3: true,
             ),
-            home: SplashScreen(),
+            home: const SplashScreen(),
             // home: MainView(),
             // home: EnterNewPassword(phone: '5345',),
 

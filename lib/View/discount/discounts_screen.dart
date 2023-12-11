@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 // import '../../const/colors.dart';
-import '../../const/images.dart';
 import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';

@@ -3,11 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/alkasam_data_api.dart';
-import '../../const/api_connrction/home_data_apis.dart';
-import '../../models/categories_model.dart';
 import '../../models/general_search_model.dart';
-import '../../models/home_model.dart';
-import '../../models/slides_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class AlkasamController extends GetxController {
@@ -22,10 +18,10 @@ class AlkasamController extends GetxController {
     try {
       categoryData.value = await _api.categoryDataRequest();
 
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       categoryData.value=[];
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e, s) {
+    } catch (e) {
       categoryData.value=[];
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
@@ -66,10 +62,10 @@ class AlkasamController extends GetxController {
         generalSearchData.value = await _api.getCategoryDataRequest(page: 1,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value,categoryId: currentParent);
         dataProducts.value = generalSearchData.value.products?.data??[];
       }
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e, s) {
+    } catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }

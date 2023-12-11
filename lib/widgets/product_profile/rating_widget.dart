@@ -8,7 +8,7 @@ class RatingWidget extends StatelessWidget {
   final int maxRating;
   // int currentRating;
 
-  RatingWidget(
+  const RatingWidget(
       {super.key, required this.maxRating,});
 
   @override

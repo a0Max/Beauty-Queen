@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:beauty_queen/const/app_colors.dart';
-import 'package:beauty_queen/const/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';

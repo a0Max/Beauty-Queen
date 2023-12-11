@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/general_search_model.dart';
-import '../../models/sales_products_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class SalesController extends GetxController {
@@ -32,10 +31,10 @@ class SalesController extends GetxController {
         print("dataProducts.value:${dataProducts.value.length}");
       }
 
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e, s) {
+    } catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }

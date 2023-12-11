@@ -3,7 +3,6 @@
 import 'package:beauty_queen/models/brand_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../const/images.dart';
 import '../const/vars.dart';
 
 class ScrollableContainerList extends StatelessWidget {

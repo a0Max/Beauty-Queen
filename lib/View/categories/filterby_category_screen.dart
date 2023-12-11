@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
-import '../../controller/discounts_controller/sales_controller.dart';
 
 class FilterByCategoryContainer extends StatefulWidget {
   const FilterByCategoryContainer({super.key});

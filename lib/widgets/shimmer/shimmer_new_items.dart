@@ -29,7 +29,7 @@ class ShimmerNewItems extends StatelessWidget {
                       Container(
                         width: 262.45.w,
                         height: 262.45.h,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white
                         ),
                       ),

@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
-import '../../View/auth_view/login_page.dart';
 import '../../const/api_connrction/user_data_apis.dart';
 import '../../widgets/error_pop_up.dart';
 
@@ -36,7 +35,7 @@ class OTPController extends GetxController {
     startTimer();
     try {
       await _api.sendVerificationCodeRequest(phone: phone);
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       ErrorPopUp(message: e.toString(), title: tr('Error'));
     } catch (e) {
       ErrorPopUp(message: e.toString(), title: tr('Error'));
@@ -59,11 +58,11 @@ class OTPController extends GetxController {
 
       ErrorPopUp(
           message: tr('update_success'), title: tr('message'), isError: false);
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
-    } catch (e, s) {
+    } catch (e) {
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
 
     }

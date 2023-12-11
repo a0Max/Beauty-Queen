@@ -26,13 +26,13 @@ class ShimmerCategories extends StatelessWidget {
                     Container(
                       width: 92.03.w,
                       height: 92.03.h,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape
                             .circle, // Use BoxShape.circle to make it circular
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,

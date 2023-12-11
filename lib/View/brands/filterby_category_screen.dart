@@ -6,9 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/brands_controller/brands_controller.dart';
-import '../../controller/discounts_controller/sales_controller.dart';
 
 class FilterByBrandsContainer extends StatefulWidget {
   final int brandId;

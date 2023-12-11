@@ -308,7 +308,7 @@ class _CartScreen extends State<CartScreen>{
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
               BoxShadow(
@@ -347,7 +347,7 @@ class _CartScreen extends State<CartScreen>{
                     Get.to(() => const TabView());
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     width: MediaQuery.of(context).size.width/2,
                     decoration: BoxDecoration(
                       color: AppColors.kPrimaryColor,

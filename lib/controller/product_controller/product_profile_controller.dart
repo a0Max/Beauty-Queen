@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 import 'dart:developer';
 
-import 'package:beauty_queen/const/images.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -162,9 +161,9 @@ class ProductProfileController extends GetxController
               buttonTwoText: tr('continuesOrder'),
             );
           });
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e, s) {
+    } catch (e) {
       log('error:$e');
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
@@ -176,9 +175,10 @@ class ProductProfileController extends GetxController
     final XFile? response = await picker.pickImage(source: ImageSource.gallery);
     if (response == null) {
       return;
-    } else if (response != null) {
+    } else {
       imagePath.value = response.path;
-    } else {}
+    }
+  
   }
   RxInt rate = 0.obs;
   currentRate({required int newRate}){

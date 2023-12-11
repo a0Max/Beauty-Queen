@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:beauty_queen/const/vars.dart';
 import 'package:dio/dio.dart';
@@ -83,7 +82,7 @@ class UserDataApis extends ApiProvider {
       } else {
         throw response.data;
       }
-    } on DioException catch (e, s) {
+    } on DioException {
       throw tr('check_phone_number');
     } catch (e) {
       throw tr('check_phone_number');
@@ -154,10 +153,10 @@ class UserDataApis extends ApiProvider {
     );
     response.headers.forEach((name, values) {
       print('name:($name)');
-      values.forEach((element) {
+      for (var element in values) {
         print('         element:($element)');
 
-      });
+      }
     });
     // await setTheHeader(response.headers);
 

@@ -3,13 +3,14 @@ import 'package:beauty_queen/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../const/images.dart';
 import '../const/vars.dart';
 import '../controller/home_controller/home_controller.dart';
 import '../models/sales_products_model.dart';
 import '../widgets/CustomCardWidget.dart';
 
 class FavScreen extends StatefulWidget {
+  const FavScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState

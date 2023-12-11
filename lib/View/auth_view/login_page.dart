@@ -53,13 +53,13 @@ class _LogInPage extends State<LogInPage> {
             builder: (context) => const MainView(),
           ),
           (route) => false);
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
-    } catch (e, s) {
+    } catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
@@ -151,7 +151,7 @@ class _LogInPage extends State<LogInPage> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child:GestureDetector(
-                        onTap: ()=>Get.to(EnterPhoneScreen()),
+                        onTap: ()=>Get.to(const EnterPhoneScreen()),
                         child: Text(
                           tr('kForgotPassword'),
                           style: TextStyle(
@@ -194,7 +194,7 @@ class _LogInPage extends State<LogInPage> {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          Get.off(SignUpPage());
+                          Get.off(const SignUpPage());
                         },
                         child: SizedBox(
                           height: 30.h,

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 // import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/widgets/loading.dart';
@@ -10,9 +9,7 @@ import '../../const/app_colors.dart';
 // import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
-import '../../models/sales_products_model.dart';
 import '../../widgets/CustomAlertBox.dart';
-import '../../widgets/CustomCardWidget.dart';
 import '../../widgets/product_profile/rating_widget.dart';
 
 class TabScreenTwo extends StatelessWidget {
@@ -47,7 +44,7 @@ class TabScreenTwo extends StatelessWidget {
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w))),
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         Row(
           children: [
             GestureDetector(
@@ -68,7 +65,7 @@ class TabScreenTwo extends StatelessWidget {
             SizedBox(
               width: 16.w,
             ),
-            RatingWidget(maxRating: 5),
+            const RatingWidget(maxRating: 5),
           ],
         ),
         SizedBox(

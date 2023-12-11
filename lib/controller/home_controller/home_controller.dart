@@ -24,10 +24,10 @@ class HomeController extends GetxController {
       sliders.value =
       (homeData.value.slides?.where((element) => element.mobile != null)
           .toList() ?? []);
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       homeData.value=HomeModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e, s) {
+    } catch (e) {
       homeData.value=HomeModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
@@ -73,11 +73,11 @@ class HomeController extends GetxController {
             );
           });
         NavController.to.getCountOfCart();
-    }on DioException catch (e, s) {
+    }on DioException catch (e) {
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
-    } catch (e, s) {
+    } catch (e) {
       log('error:$e');
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
 

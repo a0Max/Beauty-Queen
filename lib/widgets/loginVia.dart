@@ -6,8 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../const/app_images.dart';
-import '../const/strings.dart';
-import '../const/images.dart';
 
 class LoginVia extends StatelessWidget {
   const LoginVia({super.key});
@@ -62,7 +60,7 @@ class LoginVia extends StatelessWidget {
                 },
                 child: Container(
                   width: (MediaQuery.of(context).size.width-100)/2,
-                  padding: EdgeInsets.symmetric(vertical: 17),
+                  padding: const EdgeInsets.symmetric(vertical: 17),
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -84,7 +82,7 @@ class LoginVia extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(width: 20,),
+              const SizedBox(width: 20,),
               InkWell(
                 highlightColor:Colors.transparent,
                 splashColor: Colors.transparent,
@@ -93,7 +91,7 @@ class LoginVia extends StatelessWidget {
                 },
                 child: Container(
                   width: (MediaQuery.of(context).size.width-100)/2,
-                  padding: EdgeInsets.symmetric(vertical: 17),
+                  padding: const EdgeInsets.symmetric(vertical: 17),
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(

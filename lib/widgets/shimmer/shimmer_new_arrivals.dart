@@ -42,7 +42,7 @@ class ShimmerNewArrivals extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Container(
+            SizedBox(
               height: 340.h,
               child: ListView.builder(
                 shrinkWrap: true,
@@ -50,7 +50,7 @@ class ShimmerNewArrivals extends StatelessWidget {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
                     width: (MediaQuery.of(context).size.width / 2) - 20,
                     decoration: BoxDecoration(
                       color: Colors.white,

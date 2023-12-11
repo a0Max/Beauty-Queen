@@ -16,7 +16,7 @@ class CongratulationsPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16),
+          margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
               SvgPicture.asset(

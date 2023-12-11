@@ -247,7 +247,7 @@ class NormalProfileScreen extends StatelessWidget {
                   ////////////second container//////////////
                   GestureDetector(
                     onTap: () {
-                      Get.to( FavScreen());
+                      Get.to( const FavScreen());
                     },
                     child: Container(
                       height: 115.h,
@@ -428,7 +428,7 @@ class NormalProfileScreen extends StatelessWidget {
                   const Spacer(),
                   IconButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutAppScreen() ));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const AboutAppScreen() ));
                       },
                       icon: const Icon(Icons.arrow_forward_ios))
                 ],

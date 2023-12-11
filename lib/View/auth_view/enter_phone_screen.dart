@@ -3,17 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../controller/auth_controller/otp_controller.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
-import '../../widgets/loading.dart';
 import '../welcome/welcome_screen.dart';
 import 'otp_page_view.dart';
 
@@ -47,13 +44,13 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen> {
 
       Get.off(OtpPage(phone: phoneController.text, isForget: true),);
 
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
-    } catch (e, s) {
+    } catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();

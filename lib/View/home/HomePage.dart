@@ -804,7 +804,7 @@ class _HomePageState extends State<HomePage> {
                             Positioned(
                                 top: 230.h,
                                 // left: 15.w,
-                                child: Container(
+                                child: SizedBox(
                                   height: 342,
                                   width: MediaQuery.of(context).size.width,
                                   child: ListView.builder(

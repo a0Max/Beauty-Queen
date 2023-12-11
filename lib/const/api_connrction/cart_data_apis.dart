@@ -1,9 +1,7 @@
 
 import 'package:dio/dio.dart';
 
-import '../../models/brand_model.dart';
 import '../../models/cart_model.dart';
-import '../../models/categories_model.dart';
 import '../vars.dart';
 import 'base_api_connection.dart';
 

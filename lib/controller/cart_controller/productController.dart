@@ -2,12 +2,9 @@
 
 import 'package:beauty_queen/const/api_connrction/cart_data_apis.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../const/vars.dart';
-import '../../models/brand_model.dart';
 import '../../models/cart_model.dart';
 import '../../models/products_model.dart';
 import '../../widgets/CustomAlertBox.dart';

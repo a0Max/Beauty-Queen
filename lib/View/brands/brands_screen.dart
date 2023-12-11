@@ -10,11 +10,8 @@ import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/brands_controller/brands_controller.dart';
-import '../../models/brand_model.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/custom_brands_logo_widget.dart';
-import 'branddetail_screen.dart';
-import 'package:quiver/strings.dart';
 
 class BrandScreen extends StatefulWidget {
   const BrandScreen({super.key});
@@ -80,7 +77,7 @@ class _BrandScreenState extends State<BrandScreen> {
 
       _scrollController.animateTo(
         position.dy,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     }

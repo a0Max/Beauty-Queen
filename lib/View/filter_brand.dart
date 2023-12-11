@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../const/colors.dart';
 import '../const/styles.dart';
-import 'discount/filterby_screen.dart';
 
 class FilterbyBrand extends StatelessWidget {
   const FilterbyBrand({super.key});
@@ -55,7 +54,7 @@ class FilterbyBrand extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
+              children: const [
                 // ExpansionTile(
                 //   title: Text('الماركة',
                 //       style: TextStyle(

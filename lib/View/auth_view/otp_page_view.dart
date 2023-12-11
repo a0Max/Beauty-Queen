@@ -57,13 +57,13 @@ class _OtpPage extends State<OtpPage> {
         Get.back();
         Get.off(const CongratulationsPage(),);
       }
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       if (!context.mounted) return;
 
       Get.back();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
-    } catch (e, s) {
+    } catch (e) {
       if (!context.mounted) return;
 
       Get.back();
@@ -190,7 +190,7 @@ class _OtpPage extends State<OtpPage> {
                     defaultBorderColor: AppColors.kCDGColor,
                     hasTextBorderColor: AppColors.kCDGColor,
                     maxLength: 4,
-                    pinBoxOuterPadding: EdgeInsets.symmetric(horizontal: 15),
+                    pinBoxOuterPadding: const EdgeInsets.symmetric(horizontal: 15),
                     hasError: false,
                     pinBoxColor: Theme.of(context).scaffoldBackgroundColor,
                     pinBoxRadius: 13,

@@ -724,7 +724,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                 ),
                       Container(
                         height: 100.h,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
                           BoxShadow(

@@ -1,10 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'offer_image_model.dart';
-import 'options_model.dart';
 
 part 'product_banner_model.g.dart';
 
