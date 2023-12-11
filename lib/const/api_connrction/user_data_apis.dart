@@ -151,22 +151,10 @@ class UserDataApis extends ApiProvider {
         },
       ),
     );
-    response.headers.forEach((name, values) {
-      print('name:($name)');
-      for (var element in values) {
-        print('         element:($element)');
-
-      }
-    });
-    // await setTheHeader(response.headers);
-
     if (validResponse(response.statusCode!)) {
       final List<UserModel> l = [];
       response.data.forEach((e) => l.add(UserModel.fromMap(e)));
       return l.first;
-      // return UserModel.fromMap(
-      //   response.data,
-      // );
     } else {
       throw response.data;
     }

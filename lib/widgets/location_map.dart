@@ -44,8 +44,6 @@ class _LocationMap extends State<LocationMap> {
   final Set<Marker> _markers = <Marker>{};
   addMarker() async {
     final Uint8List? markerIcon = await getBytesFromAsset();
-    print('markerIcon:$markerIcon');
-    print('_markers:${_markers.length}');
     _markers.add(
       Marker(
         icon: markerIcon!=null
@@ -57,7 +55,6 @@ class _LocationMap extends State<LocationMap> {
     );
     setState(() {
     });
-    print('_markers:${_markers.length}');
   }
 
   @override

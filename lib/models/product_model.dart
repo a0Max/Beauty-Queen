@@ -86,7 +86,6 @@ class ProductModel {
             double.parse(price ?? '') > double.parse(min ?? '') ? price : max);
     finalPrices[0] = (min ?? '');
     finalPrices[1] = (max ?? '');
-    print(finalPrices);
     return finalPrices;
   }
 }

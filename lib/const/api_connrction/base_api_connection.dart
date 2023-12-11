@@ -56,6 +56,7 @@ abstract class ApiProvider {
   static const String submitReviewProductEndPoint = "submitReview";
   static const String addWishlistProductEndPoint = "add/wishlist";
   static const String getWishlistProductEndPoint = "get/wishlist";
+  static const String getGiftsProductEndPoint = "get/gifts";
   static const String getCategoryDataEndPoint = "category";
   static const String getCurrentCategoryChildrenDataEndPoint = "getCurrentCategoryChildren";
 
@@ -69,7 +70,6 @@ abstract class ApiProvider {
 
   setTheHeader(Headers headers) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print((headers['set-cookie']?.first??'').runtimeType);
     String cookies =(headers['set-cookie']?.first??'').split(";").first;
 
     prefs.setString('set-cookie', cookies);

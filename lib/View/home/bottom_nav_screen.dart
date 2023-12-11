@@ -1,4 +1,4 @@
-import 'package:beauty_queen/View/GuidanceScreen.dart';
+import 'package:beauty_queen/View/gifts/GuidanceScreen.dart';
 import 'package:beauty_queen/View/home/HomePage.dart';
 import 'package:beauty_queen/controller/nav_bar_controller/NavBarController.dart';
 import 'package:flutter/material.dart';

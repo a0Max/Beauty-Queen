@@ -3,17 +3,25 @@
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/widgets/CustomAppBar.dart';
 import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 
-import '../const/colors.dart';
-import '../const/styles.dart';
+import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
+import '../../const/colors.dart';
+import '../../const/styles.dart';
 
-import '../models/sales_products_model.dart';
-import '../widgets/CustomCardWidget.dart';
-import 'discount/filterby_screen.dart';
+import '../../const/vars.dart';
+import '../../controller/gift_controller/gift_controller.dart';
+import '../../models/sales_products_model.dart';
+import '../../widgets/CustomCardWidget.dart';
+import '../discount/filterby_screen.dart';
+import 'filterby_gifts_screen.dart';
 
 class GuidanceScreen extends StatefulWidget {
   const GuidanceScreen({super.key});
@@ -31,11 +39,13 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
   double searchBarTranslationX = 0.0;
   double searchBarTranslationY = 0.0;
   double containerheight = 1.0;
+  final GiftController controller = Get.put(GiftController());
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+    controller.getGiftsDataController(currentPage: 1);
   }
 
   void _scrollListener() {
@@ -69,14 +79,14 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final FilterController filterController = Get.put(FilterController());
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(160.h),
+        preferredSize: Size.fromHeight(_isScrolled?100.h:160.h),
         child: CustomAppBar(
-          showBagIcon2: true,
-          showarrowIcon: true,
+          showBagIcon: true,
+          showFavIcon: true,
+          showPersonIcon: true,
           onPressed: () {
             // Handle the button click here, e.g., open the end drawer.
             _scaffoldKey.currentState?.openEndDrawer();
@@ -92,7 +102,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
         ),
       ),
       endDrawer: const MyEndDrawer(),
-      body: SingleChildScrollView(
+      body: Obx(()=>SingleChildScrollView(
         controller: _scrollController,
         child: Column(
           children: [
@@ -247,7 +257,8 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                     height: 39.76.h,
                     width: 180.w,
                     decoration: BoxDecoration(
-                      border: Border.all(color: kPrimaryColor, width: 1.5.w),
+                      border:
+                      Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
                     ),
                     child: Row(
                       children: [
@@ -256,61 +267,36 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                             iconEnabledColor: Colors.transparent,
                             isDense: true,
                             isExpanded: true,
-
                             alignment: Alignment.center,
-                            value: null, // Set the initial value to null
-                            items: [
-                              DropdownMenuItem<String>(
-                                value: 'المضاف حديثاً',
-                                child: Text('المضاف حديثاً',
+                            value: controller.valueSort.value == ''
+                                ? null
+                                : controller.valueSort.value,
+                            items: SortTypes.listOfTTypesOfSort.values
+                                .map((value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value,
                                     style: TextStyle(
-                                      color: kBlackColor,
+                                      color: AppColors.kBlackColor,
                                       fontSize: 14.sp,
                                       fontFamily: kTheArabicSansLight,
                                       fontWeight: FontWeight.w400,
                                       height: 0,
                                     )),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: 'الأكثر مبيعاً',
-                                child: Text('الأكثر مبيعاً',
-                                    style: TextStyle(
-                                      color: kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: 'السعر من أقل الي الأعلي',
-                                child: Text('السعر من أقل الي الأعلي',
-                                    style: TextStyle(
-                                      color: kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: 'السعر من الأعلي أقل الي',
-                                child: Text('السعر من الأعلي أقل الي',
-                                    style: TextStyle(
-                                      color: kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              ),
-                            ],
+                              );
+                            }).toList(),
                             onChanged: (String? newValue) {
-                              // Handle the selected option if needed
+                              SortTypes.listOfTTypesOfSort
+                                  .forEach((key, value) {
+                                if (value == newValue) {
+                                  controller.updateSortType(
+                                      newKeySort: key, newValueSort: value);
+                                }
+                              });
                             },
-                            hint: Text('التصنيف حسب',
+                            hint: Text(tr('classificationBy'),
                                 style: TextStyle(
-                                  color: kBlackColor,
+                                  color: AppColors.kBlackColor,
                                   fontSize: 18.sp,
                                   fontFamily: kTheArabicSansLight,
                                   fontWeight: FontWeight.w400,
@@ -320,7 +306,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 3.w),
-                          child: Image.asset(ksortIconImage),
+                          child: SvgPicture.asset(AppImages.sortTypeImage),
                         ),
                       ],
                     ),
@@ -337,7 +323,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Get.to(const FilterByContainer());
+                            Get.to(const FilterByGiftsContainer());
                           },
                           child: Text('فلترة النتائج',
                               style: TextStyle(
@@ -365,7 +351,8 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: EdgeInsets.only(right: 16.w),
-                child: Text('عدد المنتجات: 124',
+                child: Text(
+                    '${tr('project')}: ${controller.generalSearchData.value.gifts?.total ?? ''}',
                     style: TextStyle(
                       fontFamily: kTheArabicSansLight,
                       color: kGrayColor,
@@ -377,47 +364,92 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
             SizedBox(
               height: 22.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomCardWidget(
-                    imageUrl: kBaseImage,
-                    imgtxt: 'Makeup Forever',
-                    price: '150.00',
-                    des: 'كريم اساس الترا اتش دي السائل من ميكب',
-                    disprice: '190.00',
-                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
-                CustomCardWidget(
-                    imageUrl: kLispticImage,
-                    imgtxt: 'Rare Beauty',
-                    price: '94.00',
-                    des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
-                    disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
-              ],
+            Wrap(
+              runSpacing: 7,
+              children: List.generate(
+                  controller.dataProducts.value.length,
+                      (index) => CustomCardWidget(
+                    imageUrl: Connection.urlOfProducts(
+                        image: controller
+                            .dataProducts.value[index].mainImage ??
+                            ''),
+                    newArrival: controller.dataProducts.value[index] ??
+                        SalesProductsModel(),
+                  )),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomCardWidget(
-                    imageUrl: kBaseImage,
-                    imgtxt: 'Makeup Forever',
-                    price: '150.00',
-                    des: 'كريم اساس الترا اتش دي السائل من ميكب',
-                    disprice: '190.00',
-                    containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
-                CustomCardWidget(
-                    imageUrl: kLispticImage,
-                    imgtxt: 'Rare Beauty',
-                    price: '94.00',
-                    des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
-                    disprice: '94.00',
-                    containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ),
-              ],
-            ),
+
+            if (controller.dataProducts.value.isNotEmpty)...{
+
+              const SizedBox(height: 40,),
+              Text('النتائج: ${controller.dataProducts.value
+                  .length} من ${controller.generalSearchData.value
+                  .gifts?.total??0}'),
+              const SizedBox(height: 10,),
+              SizedBox(
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width / 2,
+                height: 30,
+                child: LinearGauge(
+                  gaugeOrientation: GaugeOrientation.horizontal,
+                  start: 0,
+                  end: double.parse(
+                      "${controller.generalSearchData.value.gifts?.total ??
+                          1}"),
+                  valueBar: [
+                    ValueBar(
+                        value: double.parse("${controller.dataProducts
+                            .value.length}"),
+                        color: AppColors.mainColor,
+                        borderRadius: 15,
+                        valueBarThickness: 10)
+                  ],
+                  linearGaugeBoxDecoration:
+                  const LinearGaugeBoxDecoration(
+                      backgroundColor: AppColors.kShadowColor,
+                      thickness: 10,
+                      borderRadius: 15),
+                  rulers: RulerStyle(
+                    rulerPosition: RulerPosition.center,
+                    showLabel: false,
+                    showSecondaryRulers: false,
+                    showPrimaryRulers: false,
+                    secondaryRulersHeight: 0,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  controller.getGiftsDataController();
+                },
+                child: Container(
+                  // height: 59.70.h,
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width / 2,
+                  decoration: ShapeDecoration(
+                    color: AppColors.kPrimaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.84),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(tr('showMore'),
+                        style: TextStyle(
+                            fontSize: 22.11.sp,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.kWhiteColor,
+                            fontFamily: kTheArabicSansLight)),
+                  ),
+                ),
+              )
+            }
           ],
         ),
-      ),
+      )),
     );
   }
 }

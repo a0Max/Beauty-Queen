@@ -58,24 +58,15 @@ class BrandsController extends GetxController {
         page = page +1;
         generalSearchData.value = await _api.getDetailOfBrandsDataRequest(page: page,id:idOfBrand,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
         dataProducts.addAll(generalSearchData.value.products?.data??[]);
-        print('page:$page');
-        print("dataProducts.value:${dataProducts.value.length}");
       }else{
         page = 1;
         generalSearchData.value = await _api.getDetailOfBrandsDataRequest(page: 1,id:idOfBrand,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
         dataProducts.value = generalSearchData.value.products?.data??[];
-        print('page:$page');
-        print("dataProducts.value:${dataProducts.value.length}");
       }
-      print("dataProducts.value:${generalSearchData.value.brand?.logoBackground?.replaceAll('#', '')}");
-      print("dataProducts.value:${int.parse(generalSearchData.value.brand?.logoBackground?.replaceAll('#', '')??'', radix: 16)}");
-
     } on DioException catch (e) {
-      print('error:$e');
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
-      print('error:$e');
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }

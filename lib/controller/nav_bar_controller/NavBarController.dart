@@ -18,6 +18,5 @@ class NavController extends GetxController {
 
   getCountOfCart() async {
     countCart.value = await _api.getCartRequest();
-    print(countCart.value);
   }
 }

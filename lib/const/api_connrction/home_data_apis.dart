@@ -119,7 +119,6 @@ class HomeDataApis extends ApiProvider {
     );
     if (validResponse(response.statusCode!)) {
       int count = response.data['counter'];
-      print('count:$count');
       return count;
     } else {
       throw 0;
@@ -203,7 +202,6 @@ class HomeDataApis extends ApiProvider {
     );
     if (validResponse(response.statusCode!)) {
       int count = response.data['counter'];
-      print('count:$count');
       return count;
     } else {
       throw 0;

@@ -2,29 +2,29 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
+import '../../const/api_connrction/gifts_data_apis.dart';
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 
-class SalesController extends GetxController {
+class GiftController extends GetxController {
   var generalSearchData = GeneralSearchModel().obs;
   RxList dataProducts = [].obs;
-  final _api = HomeDataApis();
+  final _api = GiftsDataApis();
   int page = 1;
 
-  Future<void> getSalesDataController({int? currentPage}) async {
+  Future<void> getGiftsDataController({int? currentPage}) async {
     try {
       if(currentPage==null){
         page = page +1;
 
-        generalSearchData.value = await _api.getSalesDataRequest(page: page,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
-        dataProducts.addAll(generalSearchData.value.sales?.data??[]);
+        generalSearchData.value = await _api.getGiftsDataRequest(page: page,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
+        dataProducts.addAll(generalSearchData.value.gifts?.data??[]);
       }else{
         page = 1;
-        generalSearchData.value = await _api.getSalesDataRequest(page: 1,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
-        dataProducts.value = generalSearchData.value.sales?.data??[];
+        generalSearchData.value = await _api.getGiftsDataRequest(page: 1,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
+        dataProducts.value = generalSearchData.value.gifts?.data??[];
       }
-
     } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
@@ -39,7 +39,7 @@ class SalesController extends GetxController {
   updateSortType({required String newKeySort, required String newValueSort}){
     keySort.value = newKeySort;
     valueSort.value = newValueSort;
-    getSalesDataController(currentPage: 1);
+    getGiftsDataController(currentPage: 1);
   }
 
   RxList selectedLabels = [].obs;
@@ -78,7 +78,7 @@ class SalesController extends GetxController {
   }
 
   applySelected(){
-    getSalesDataController(currentPage: 1);
+    getGiftsDataController(currentPage: 1);
   }
 
 

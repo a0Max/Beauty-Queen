@@ -24,9 +24,6 @@ class CartDataApis extends ApiProvider {
       ),
     );
     if (validResponse(response.statusCode!)) {
-      // final List<CartModel> l = [];
-      // ['brands'].forEach((e) => l.add());
-      // print('l:${l.length}');
       return CartModel.fromJson(response.data);
 
     } else {

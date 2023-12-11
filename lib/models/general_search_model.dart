@@ -11,6 +11,7 @@ part 'general_search_model.g.dart';
 class GeneralSearchModel {
   PaginationModel? sales;
   PaginationModel? products;
+  PaginationModel? gifts;
   int? salesCount;
   List<BrandModel>? brands;
   BrandModel? brand;
@@ -22,6 +23,7 @@ class GeneralSearchModel {
       {this.sales,
         this.salesCount,
         this.brands,
+        this.gifts,
         this.prices,
         this.brand,
         this.products,

@@ -26,7 +26,6 @@ class AlkasamDataApis extends ApiProvider {
     if (validResponse(response.statusCode!)) {
       final List<CategoryModel> l = [];
       response.data['categories'].forEach((e) => l.add(CategoryModel.fromJson(e)));
-      print('l:${l.length}');
       return l;
 
     } else {
@@ -51,7 +50,6 @@ class AlkasamDataApis extends ApiProvider {
     if (validResponse(response.statusCode!)) {
       final List<CategoryModel> l = [];
       response.data['categories'].forEach((e) => l.add(CategoryModel.fromJson(e)));
-      print('l:${l.length}');
       return l;
 
     } else {
@@ -77,7 +75,6 @@ class AlkasamDataApis extends ApiProvider {
     if (validResponse(response.statusCode!)) {
       final List<CategoryModel> l = [];
       response.data['children'].forEach((e) => l.add(CategoryModel.fromJson(e)));
-      print('l:${l.length}');
       return l;
 
     } else {

@@ -23,7 +23,6 @@ class BrandsDataApis extends ApiProvider {
     if (validResponse(response.statusCode!)) {
       final List<BrandModel> l = [];
       response.data['brands'].forEach((e) => l.add(BrandModel.fromJson(e)));
-      print('l:${l.length}');
       return l;
     } else {
       throw response.data;

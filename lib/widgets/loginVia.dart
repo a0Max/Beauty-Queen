@@ -56,7 +56,6 @@ class LoginVia extends StatelessWidget {
                 highlightColor:Colors.transparent,
                 splashColor: Colors.transparent,
                 onTap: () {
-                  print('facebooklogin');
                 },
                 child: Container(
                   width: (MediaQuery.of(context).size.width-100)/2,
