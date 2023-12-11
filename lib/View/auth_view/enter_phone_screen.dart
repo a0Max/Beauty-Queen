@@ -14,7 +14,7 @@ import '../../controller/auth_controller/otp_controller.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
-import '../welcome_screen.dart';
+import '../welcome/welcome_screen.dart';
 import 'otp_page_view.dart';
 
 class EnterPhoneScreen extends StatefulWidget {

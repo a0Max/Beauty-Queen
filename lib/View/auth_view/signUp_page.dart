@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:beauty_queen/View/auth_view/otp_page_view.dart';
-import 'package:beauty_queen/View/welcome_screen.dart';
+import 'package:beauty_queen/View/welcome/welcome_screen.dart';
 import 'package:beauty_queen/controller/auth_controller/signUpcontroller.dart';
 import 'package:beauty_queen/widgets/custom_button_2.dart';
 import 'package:dio/dio.dart';

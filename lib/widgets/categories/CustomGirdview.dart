@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:beauty_queen/const/app_images.dart';
-import 'package:beauty_queen/const/colors.dart';
+// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../View/categories/filter_screen.dart';
+import '../../const/app_colors.dart';
 import '../../const/strings.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
@@ -145,7 +146,7 @@ class CustomGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: kWhiteColor,
+        color: AppColors.kWhiteColor,
         borderRadius: BorderRadius.circular(18.r),
         // boxShadow: [BoxShadow(blurRadius: 0.0.r)]
 

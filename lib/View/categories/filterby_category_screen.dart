@@ -1,10 +1,11 @@
-import 'package:beauty_queen/const/colors.dart';
+// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../const/app_colors.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/discounts_controller/sales_controller.dart';
 
@@ -22,7 +23,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: AppColors.kPrimaryColor,
         elevation: 0,
         automaticallyImplyLeading: false,
       ),
@@ -31,7 +32,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
           Container(
             height: 64.h,
             width: MediaQuery.of(context).size.width,
-            color: kBlackColor,
+            color: AppColors.kBlackColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -45,7 +46,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 21.sp,
                         fontWeight: FontWeight.w500,
-                        color: kWhiteColor),
+                        color: AppColors.kWhiteColor),
                   ),
                 ),
                 SizedBox(
@@ -57,7 +58,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                     },
                     icon: Icon(
                       Icons.close,
-                      color: kWhiteColor,
+                      color: AppColors.kWhiteColor,
                       size: 30.r,
                     )),
               ],
@@ -74,7 +75,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                           title: Text(tr('brands'),
                               style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
-                                  color: kBlackColor,
+                                  color: AppColors.kBlackColor,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 17.sp)),
                           shape: const RoundedRectangleBorder(
@@ -108,7 +109,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                                                     0);
                                           }),
                                       Divider(
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                         thickness: 1.w,
                                       ),
                                     ],
@@ -145,7 +146,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                                                   "0"));
                                         }),
                                     Divider(
-                                      color: kPrimaryColor,
+                                      color: AppColors.kPrimaryColor,
                                       thickness: 1.w,
                                     ),
                                   ],
@@ -158,7 +159,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                           title: Text(tr('price'),
                               style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
-                                  color: kBlackColor,
+                                  color: AppColors.kBlackColor,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 17.sp)),
                           shape: const RoundedRectangleBorder(
@@ -183,7 +184,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                                                 newSelected: index);
                                           }),
                                       Divider(
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                         thickness: 1.w,
                                       ),
                                     ],
@@ -197,7 +198,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
           Container(
             padding: EdgeInsets.only(bottom: 40.h, top: 20.h),
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+            decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
               BoxShadow(
                 color: const Color.fromARGB(32, 0, 0, 0),
                 blurRadius: 28.r,
@@ -211,7 +212,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                     '${tr('project')}: ${controller.generalSearchData.value.salesCount ?? ''}',
                     style: TextStyle(
                       fontFamily: kTheArabicSansLight,
-                      color: kGrayColor,
+                      color: AppColors.kGrayColor,
                       fontSize: 17.sp,
                       fontWeight: FontWeight.w400,
                     )),
@@ -230,7 +231,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                         height: 39.55.h,
                         width: 95.w,
                         decoration: BoxDecoration(
-                            border: Border.all(color: kPrimaryColor, width: 1.w),
+                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(
@@ -239,7 +240,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 17.sp,
                                 fontWeight: FontWeight.w700,
-                                color: kPrimaryColor),
+                                color: AppColors.kPrimaryColor),
                           ),
                         ),
                       ),
@@ -256,8 +257,8 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                         height: 39.55.h,
                         width: 95.w,
                         decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            border: Border.all(color: kPrimaryColor, width: 1.w),
+                            color: AppColors.kPrimaryColor,
+                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(
@@ -266,7 +267,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w700,
-                                color: kWhiteColor),
+                                color: AppColors.kWhiteColor),
                           ),
                         ),
                       ),
@@ -295,8 +296,8 @@ class FilterOption extends StatelessWidget {
     return Row(
       children: [
         Checkbox(
-          checkColor: kWhiteColor,
-          activeColor: kPrimaryColor,
+          checkColor: AppColors.kWhiteColor,
+          activeColor: AppColors.kPrimaryColor,
           value: isChecked,
           onChanged: onChanged,
         ),
@@ -307,7 +308,7 @@ class FilterOption extends StatelessWidget {
           text,
           style: TextStyle(
               fontFamily: kTheArabicSansLight,
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontWeight: FontWeight.w700,
               fontSize: 17.sp),
         ),

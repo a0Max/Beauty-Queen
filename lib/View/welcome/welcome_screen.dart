@@ -5,12 +5,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../const/strings.dart';
-import '../const/colors.dart';
-import '../const/images.dart';
-import '../const/styles.dart';
-import '../controller/welcomescreencontroller.dart';
-import 'auth_view/login_page.dart';
+import '../../const/app_colors.dart';
+import '../../const/strings.dart';
+// import '../../const/colors.dart';
+import '../../const/images.dart';
+import '../../const/styles.dart';
+import '../../controller/welcome/welcomescreencontroller.dart';
+import '../auth_view/login_page.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -58,7 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final WelcomeController controller = Get.put(WelcomeController());
     return Scaffold(
-      backgroundColor: kBlackColor,
+      backgroundColor: AppColors.kBlackColor,
       body: Stack(
         children: [
           PageView(
@@ -124,13 +125,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             fontSize: 31.73.sp,
-                            color: kWhiteColor,
+                            color: AppColors.kWhiteColor,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         Text('بين يديك\n',
                             style: TextStyle(
-                                color: kPrimaryColor,
+                                color: AppColors.kPrimaryColor,
                                 fontFamily: kTheArabicSansBold,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 40.73.sp)),
@@ -190,13 +191,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             fontSize: 33.73.sp,
-                            color: kWhiteColor,
+                            color: AppColors.kWhiteColor,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         Text('في مكان واحد\n',
                             style: TextStyle(
-                                color: kPrimaryColor,
+                                color: AppColors.kPrimaryColor,
                                 fontFamily: kTheArabicSansLight,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 36.73.sp)),
@@ -318,7 +319,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(kPrimaryColor),
+                            MaterialStateProperty.all<Color>(AppColors.kPrimaryColor),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -341,7 +342,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           style: TextStyle(
                               fontSize: 20.sp,
                               fontFamily: kTheArabicSansLight,
-                              color: kWhiteColor,
+                              color: AppColors.kWhiteColor,
                               fontWeight: FontWeight.w700)),
                     ),
                   ),
@@ -356,7 +357,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            side: BorderSide(width: 1.w, color: kWhiteColor),
+                            side: BorderSide(width: 1.w, color: AppColors.kWhiteColor),
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                         ),
@@ -375,7 +376,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Text(
                         tr('kCreateAccount'),
                         style: kPrimaryTextStyle.copyWith(
-                            color: kWhiteColor,
+                            color: AppColors.kWhiteColor,
                             fontSize: 19.sp,
                             fontWeight: FontWeight.w600,
                             fontFamily: kTheArabicSansLight),

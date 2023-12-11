@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../const/colors.dart';
+// import '../../const/colors.dart';
+import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
@@ -106,7 +107,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
                       text: " الرئيسية/ ",
                       style: TextStyle(
                         fontFamily: kTheArabicSansLight,
-                        color: kGrayColor,
+                        color: AppColors.kGrayColor,
                         fontSize: 17.sp,
                         fontWeight: FontWeight.w400,
                       ),
@@ -115,7 +116,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
                           text: "الأقسام",
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
-                            color: kBlackColor,
+                            color: AppColors.kBlackColor,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w600,
                           ),

@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../View/home/bottom_nav_screen.dart';
-import '../../View/welcome_screen.dart';
+import '../../View/welcome/welcome_screen.dart';
 import '../../const/api_connrction/user_data_apis.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';

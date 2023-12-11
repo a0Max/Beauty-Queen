@@ -1,6 +1,6 @@
 import 'package:beauty_queen/View/product_profile/tab_screen_one.dart';
 import 'package:beauty_queen/const/app_images.dart';
-import 'package:beauty_queen/const/colors.dart';
+// import 'package:beauty_queen/const/colors.dart';
 import 'package:quiver/strings.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -78,7 +78,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     Text('${tr('sections')} / ',
                                         style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
-                                          color: kGrayColor,
+                                          color: AppColors.kGrayColor,
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w400,
 
@@ -100,7 +100,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               '${controller.productData.value.product?.category?[index].title ?? ''} / ',
                                               style: TextStyle(
                                                 fontFamily: kTheArabicSansLight,
-                                                color: kGrayColor,
+                                                color: AppColors.kGrayColor,
                                                 fontSize: 16.sp,
                                                 fontWeight: FontWeight.w400,
                                               ))
@@ -108,7 +108,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               '${controller.productData.value.product?.category?[index].title ?? ''} ',
                                               style: TextStyle(
                                                 fontFamily: kTheArabicSansLight,
-                                                color: kBlackColor,
+                                                color: AppColors.kBlackColor,
                                                 fontSize: 16.sp,
                                                 fontWeight: FontWeight.w700,
                                               ),
@@ -186,7 +186,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 17.sp,
                                         fontWeight: FontWeight.w700,
-                                        color: kPrimaryColor),
+                                        color: AppColors.kPrimaryColor),
                                   ),
                                   if ((controller.selectedOptions.value.isNotEmpty)&& controller.selectedOptions.value.first!=null)...{
                                     Text(
@@ -195,7 +195,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           fontFamily: kTheArabicSansLight,
                                           fontSize: 15.sp,
                                           fontWeight: FontWeight.w400,
-                                          color: kPrimaryColor),
+                                          color: AppColors.kPrimaryColor),
                                     ),
                                   }else ...{
 
@@ -214,7 +214,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                 .lineThrough,
                                             fontSize: 15.sp,
                                             fontWeight: FontWeight.w400,
-                                            color: kBlackColor),
+                                            color: AppColors.kBlackColor),
                                       ),
                                     },
                                     Text(
@@ -225,7 +225,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           fontFamily: kTheArabicSansLight,
                                           fontSize: 15.sp,
                                           fontWeight: FontWeight.w400,
-                                          color: kPrimaryColor),
+                                          color: AppColors.kPrimaryColor),
                                     ),
                                   }
                                 ],
@@ -238,7 +238,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                       fontFamily: kTheArabicSansLight,
                                       fontSize: 17.sp,
                                       fontWeight: FontWeight.w700,
-                                      color: kBlackColor),
+                                      color: AppColors.kBlackColor),
                                 ),
                               ),
                               SizedBox(
@@ -508,7 +508,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               fontFamily: kTheArabicSansLight,
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.w400,
-                                              color: kBlackColor),
+                                              color: AppColors.kBlackColor),
                                         ),
                                       ],
                                     ),
@@ -527,14 +527,14 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               fontFamily: kTheArabicSansLight,
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.w400,
-                                              color: kBlackColor),
+                                              color: AppColors.kBlackColor),
                                         ),
                                       ],
                                     ),
                                   )
                                 ],
                                 controller: controller.tabsController,
-                                indicatorColor: kPrimaryColor,
+                                indicatorColor: AppColors.kPrimaryColor,
                               ),
                              controller.index.value == 0
                                   ? TabScreenOne()
@@ -545,7 +545,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               ),
                               Divider(
                                 thickness: 1.w,
-                                color: kTextGrayColor,
+                                color: AppColors.kTextGrayColor,
                               ),
                               SizedBox(
                                 height: 27.h,
@@ -554,39 +554,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               SizedBox(
                                 height: 32.h,
                               ),
-                              // Text(
-                              //   "منتجات ذات صلة ...",
-                              //   style: TextStyle(
-                              //       fontFamily: kTheArabicSansLight,
-                              //       fontSize: 17.sp,
-                              //       fontWeight: FontWeight.w700,
-                              //       color: kPrimaryColor),
-                              // ),
-                              // SizedBox(
-                              //   height: 21.h,
-                              // ),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     CustomCardWidget(
-                              //         imageUrl: kBaseImage,
-                              //         imgtxt: 'Makeup Forever',
-                              //         price: '150.00',
-                              //         des: 'كريم اساس الترا اتش دي السائل من ميكب',
-                              //         disprice: '190.00',
-                              //         containertxt: 'تحديد الخيارات', newArrival:SalesProductsModel() ),
-                              //     CustomCardWidget(
-                              //       imageUrl: kLispticImage,
-                              //       imgtxt: 'Rare Beauty',
-                              //       price: '94.00',
-                              //       des: 'طقم فريش اند ديوي للشفاه والخدود من رير بيوتي',
-                              //       disprice: '94.00',
-                              //       containertxt: 'إضافة إلي السلة', newArrival:SalesProductsModel() ,),
-                              //   ],
-                              // ),
-                              // SizedBox(
-                              //   height: 21.h,
-                              // ),
 
                               ])),
                         Column(
@@ -600,7 +567,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 17.sp,
                                     fontWeight: FontWeight.w700,
-                                    color: kPrimaryColor),
+                                    color: AppColors.kPrimaryColor),
                               ),
                             ),
                             CarouselSlider(
@@ -681,7 +648,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 17.sp,
                                     fontWeight: FontWeight.w700,
-                                    color: kPrimaryColor),
+                                    color: AppColors.kPrimaryColor),
                               ),
                             ),
                             CarouselSlider(
@@ -759,7 +726,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                         height: 100.h,
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+                        decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
                           BoxShadow(
                             color: const Color.fromARGB(32, 0, 0, 0),
                             blurRadius: 28.r,
@@ -794,12 +761,12 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                  child: Container(
                                      height: 47.61.h,
                                      width: 49.08.w,
-                                     color: kPrimaryColor,
+                                     color: AppColors.kPrimaryColor,
                                      child: Center(
                                        child: Text(
                                          '-',
                                          style: TextStyle(
-                                             color: kWhiteColor,
+                                             color: AppColors.kWhiteColor,
                                              fontSize: 30.sp,
                                              fontWeight: FontWeight.w500),
                                        ),
@@ -809,12 +776,12 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                Container(
                                    height: 47.61.h,
                                    width: 49.08.w,
-                                   color: kWhiteColor,
+                                   color: AppColors.kWhiteColor,
                                    child: Center(
                                      child:  Text(
                                        '${controller.count}',
                                        style: TextStyle(
-                                         color: kBlackColor,
+                                         color: AppColors.kBlackColor,
                                          fontSize: 19.sp,
                                          fontWeight: FontWeight.w500,
                                        ),
@@ -841,11 +808,11 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                  child: Container(
                                      height: 47.61.h,
                                      width: 49.08.w,
-                                     color: kPrimaryColor,
+                                     color: AppColors.kPrimaryColor,
                                      child: Center(
                                        child: Icon(
                                          Icons.add,
-                                         color: kWhiteColor,
+                                         color: AppColors.kWhiteColor,
                                          size: 30.r,
                                        ),
                                      )),
@@ -861,13 +828,13 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               child: Container(
                                   height: 47.61.h,
                                   width: MediaQuery.of(context).size.width/2,
-                                  color: kPrimaryColor,
+                                  color: AppColors.kPrimaryColor,
                                   child: Center(
                                     child: Text(
                                       'إضافة الي السلة',
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
-                                          color: kWhiteColor,
+                                          color: AppColors.kWhiteColor,
                                           fontSize: 15.89.sp,
                                           fontWeight: FontWeight.w500),
                                     ),

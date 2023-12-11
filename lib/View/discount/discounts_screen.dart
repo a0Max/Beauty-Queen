@@ -12,7 +12,7 @@ import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/colors.dart';
+// import '../../const/colors.dart';
 import '../../const/images.dart';
 import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
@@ -117,7 +117,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                   child: Text('التخفيضات',
                       style: TextStyle(
                         fontFamily: kTheArabicSansLight,
-                        color: kBlackColor,
+                        color: AppColors.kBlackColor,
                         fontSize: 25.sp,
                         fontWeight: FontWeight.w400,
                       )),
@@ -135,7 +135,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                         width: 180.w,
                         decoration: BoxDecoration(
                           border:
-                              Border.all(color: kPrimaryColor, width: 1.5.w),
+                              Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
                         ),
                         child: Row(
                           children: [
@@ -154,7 +154,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                                     value: value,
                                     child: Text(value,
                                         style: TextStyle(
-                                          color: kBlackColor,
+                                          color: AppColors.kBlackColor,
                                           fontSize: 14.sp,
                                           fontFamily: kTheArabicSansLight,
                                           fontWeight: FontWeight.w400,
@@ -173,7 +173,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                                 },
                                 hint: Text(tr('classificationBy'),
                                     style: TextStyle(
-                                      color: kBlackColor,
+                                      color: AppColors.kBlackColor,
                                       fontSize: 18.sp,
                                       fontFamily: kTheArabicSansLight,
                                       fontWeight: FontWeight.w400,
@@ -194,7 +194,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                         width: 180.w,
                         decoration: BoxDecoration(
                           border:
-                              Border.all(color: kPrimaryColor, width: 1.5.w),
+                              Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -205,7 +205,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                               },
                               child: Text('فلترة النتائج',
                                   style: TextStyle(
-                                    color: kBlackColor,
+                                    color: AppColors.kBlackColor,
                                     fontSize: 18.sp,
                                     fontFamily: kTheArabicSansLight,
                                     fontWeight: FontWeight.w400,
@@ -236,7 +236,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                         'عدد المنتجات: ${_controller.generalSearchData.value.salesCount ?? ''}',
                         style: TextStyle(
                           fontFamily: kTheArabicSansLight,
-                          color: kGrayColor,
+                          color: AppColors.kGrayColor,
                           fontSize: 17.sp,
                           fontWeight: FontWeight.w400,
                         )),
@@ -258,13 +258,13 @@ class _DiscountScreenState extends State<DiscountScreen> {
                                 SalesProductsModel(),
                           )),
                 ),
-                SizedBox(height: 40,),
+                const SizedBox(height: 40,),
 
                  if (_controller.dataProducts.value.isNotEmpty)...{
                    Text('النتائج: ${_controller.dataProducts.value
                        .length} من ${_controller.generalSearchData.value
                        .salesCount}'),
-                   SizedBox(height: 10,),
+                   const SizedBox(height: 10,),
                    SizedBox(
                      width: MediaQuery
                          .of(context)

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../const/colors.dart';
+// import '../../const/colors.dart';
+import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/brands_controller/brands_controller.dart';
@@ -138,7 +139,7 @@ class _BrandScreenState extends State<BrandScreen> {
                           padding: EdgeInsets.all(8.r),
                           color: selectedAlphabet == characters[j] &&
                                   !showAllBrands
-                              ? kPrimaryColor
+                              ? AppColors.kPrimaryColor
                               : Colors.transparent,
                           child: Text(
                             characters[j],
@@ -146,7 +147,7 @@ class _BrandScreenState extends State<BrandScreen> {
                                 color: selectedAlphabet == characters[j] &&
                                         !showAllBrands
                                     ? Colors.white
-                                    : kPrimaryColor,
+                                    : AppColors.kPrimaryColor,
                                 fontSize: 26.sp,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -175,7 +176,7 @@ class _BrandScreenState extends State<BrandScreen> {
                                   indent: 15.w,
                                   // Adjust the height of the horizontal line
                                   color:
-                                      kPrimaryColor, // Change the color of the line
+                                  AppColors.kPrimaryColor, // Change the color of the line
                                   thickness:
                                       2.w, // Adjust the width of the line
                                 ),
@@ -185,7 +186,7 @@ class _BrandScreenState extends State<BrandScreen> {
                                 style: TextStyle(
                                     fontSize: 23.82.sp,
                                     fontFamily: kTheArabicSansLight,
-                                    color: kPrimaryColor,
+                                    color: AppColors.kPrimaryColor,
                                     fontWeight: FontWeight.w700),
                               ),
                               Expanded(
@@ -194,7 +195,7 @@ class _BrandScreenState extends State<BrandScreen> {
                                   indent: 15.w,
                                   // Adjust the height of the horizontal line
                                   color:
-                                      kPrimaryColor, // Change the color of the line
+                                  AppColors.kPrimaryColor, // Change the color of the line
                                   thickness:
                                       2.w, // Adjust the width of the line
                                 ),

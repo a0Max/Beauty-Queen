@@ -1,5 +1,5 @@
 import 'package:beauty_queen/const/app_images.dart';
-import 'package:beauty_queen/const/colors.dart';
+// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/controller/cart_controller/productController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../const/app_colors.dart';
 import '../../const/images.dart';
 import '../../const/vars.dart';
 import '../cart_tab_screen.dart';
@@ -58,7 +59,7 @@ class _CartScreen extends State<CartScreen>{
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 23.sp,
                                 fontWeight: FontWeight.w700,
-                                color: kPrimaryColor),
+                                color: AppColors.kPrimaryColor),
                           ),
                         ],
                       ),
@@ -69,13 +70,13 @@ class _CartScreen extends State<CartScreen>{
                           },
                           icon: const Icon(
                             Icons.arrow_forward_ios,
-                            color: kBlackColor,
+                            color: AppColors.kBlackColor,
                             size: 25,
                           )),
                     ],
                   ),
                   Container(
-                    color: kPrimaryColor,
+                    color: AppColors.kPrimaryColor,
                     height: 50.83.h,
                     // width: 438.44.w,
                     width: MediaQuery.of(context).size.width,
@@ -90,7 +91,7 @@ class _CartScreen extends State<CartScreen>{
                               fontFamily: kTheArabicSansLight,
                               fontSize: 19.sp,
                               fontWeight: FontWeight.w600,
-                              color: kWhiteColor),
+                              color: AppColors.kWhiteColor),
                         ),
                         const Spacer(),
                         SvgPicture.asset(AppImages.kqueencrownImage),
@@ -130,7 +131,7 @@ class _CartScreen extends State<CartScreen>{
                                                   fontFamily: kTheArabicSansLight,
                                                   fontSize: 18.39.sp,
                                                   fontWeight: FontWeight.w600,
-                                                  color: kBlackColor),
+                                                  color: AppColors.kBlackColor),
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                             ),
@@ -141,7 +142,7 @@ class _CartScreen extends State<CartScreen>{
                                                   fontFamily: kTheArabicSansLight,
                                                   fontSize: 17.47.sp,
                                                   fontWeight: FontWeight.w400,
-                                                  color: kBlackColor),
+                                                  color: AppColors.kBlackColor),
                                             ),
                                           ],
                                         ),
@@ -151,7 +152,7 @@ class _CartScreen extends State<CartScreen>{
                                               fontFamily: kTheArabicSansLight,
                                               fontSize: 16.55.sp,
                                               fontWeight: FontWeight.w400,
-                                              color: kGrayColor),
+                                              color: AppColors.kGrayColor),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -163,7 +164,7 @@ class _CartScreen extends State<CartScreen>{
                                                 fontFamily: kTheArabicSansLight,
                                                 fontSize: 16.55.sp,
                                                 fontWeight: FontWeight.w500,
-                                                color: kGrayColor),
+                                                color: AppColors.kGrayColor),
                                           ),
                                         }
                                       ],
@@ -182,7 +183,7 @@ class _CartScreen extends State<CartScreen>{
                                 width: 123.53.w,
                                 decoration: BoxDecoration(
                                   border:
-                                  Border.all(width: 1.w, color: kTextGrayColor),
+                                  Border.all(width: 1.w, color: AppColors.kTextGrayColor),
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -193,13 +194,13 @@ class _CartScreen extends State<CartScreen>{
                                         },
                                         icon: const Icon(
                                           Icons.add,
-                                          color: kBlackColor,
+                                          color: AppColors.kBlackColor,
                                           size: 30,
                                         )),
                               Obx(()=>Text(
                                       '${productController.cartData.value.products?[index].qty}',
                                       style: TextStyle(
-                                          color: kBlackColor,
+                                          color: AppColors.kBlackColor,
                                           fontSize: 21.92.sp,
                                           fontWeight: FontWeight.w600),
                                     )),
@@ -219,7 +220,7 @@ class _CartScreen extends State<CartScreen>{
 
                             const Divider(
                               thickness: 1,
-                              color: kTextGrayColor,
+                              color: AppColors.kTextGrayColor,
                             ),
                           ],
                         )),
@@ -238,7 +239,7 @@ class _CartScreen extends State<CartScreen>{
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 21.sp,
                                   fontWeight: FontWeight.w400,
-                                  color: kPrimaryColor),
+                                  color: AppColors.kPrimaryColor),
                             ),
                             Text(
                               'الإجمالي: ${productController.totalPrice.value} دل ',
@@ -246,7 +247,7 @@ class _CartScreen extends State<CartScreen>{
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 21.sp,
                                   fontWeight: FontWeight.w700,
-                                  color: kPrimaryColor),
+                                  color: AppColors.kPrimaryColor),
                             ),
                           ],
                         ),
@@ -258,8 +259,8 @@ class _CartScreen extends State<CartScreen>{
                           width: 398.w,
                           decoration: BoxDecoration(
                               border:
-                                  Border.all(width: 1.w, color: kPrimaryColor),
-                              color: klPinkColor,
+                                  Border.all(width: 1.w, color: AppColors.kPrimaryColor),
+                              color: AppColors.klPinkColor,
                               borderRadius: BorderRadius.circular(13.r)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -274,13 +275,13 @@ class _CartScreen extends State<CartScreen>{
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: kWhiteColor),
+                                    color: AppColors.kWhiteColor),
                               ),
                               Container(
                                 height: 52.7.h,
                                 width: 124.28.w,
                                 decoration: BoxDecoration(
-                                  color: kPrimaryColor,
+                                  color: AppColors.kPrimaryColor,
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(13.r),
                                       bottomLeft: Radius.circular(13.r)),
@@ -292,7 +293,7 @@ class _CartScreen extends State<CartScreen>{
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 18.sp,
                                         fontWeight: FontWeight.w600,
-                                        color: kWhiteColor),
+                                        color: AppColors.kWhiteColor),
                                   ),
                                 ),
                               )
@@ -309,7 +310,7 @@ class _CartScreen extends State<CartScreen>{
           Container(
             padding: EdgeInsets.symmetric(vertical: 20),
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+            decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
               BoxShadow(
                 blurRadius: 10.r,
                 offset: const Offset(0, 4),
@@ -329,7 +330,7 @@ class _CartScreen extends State<CartScreen>{
                           fontFamily: kTheArabicSansLight,
                           fontSize: 15.83.sp,
                           fontWeight: FontWeight.w500,
-                          color: klPinkColor),
+                          color: AppColors.klPinkColor),
                     ),
                     Text(
                        '${productController.totalPrice.value}دل',
@@ -337,7 +338,7 @@ class _CartScreen extends State<CartScreen>{
                           fontFamily: kTheArabicSansLight,
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w400,
-                          color: kPrimaryColor),
+                          color: AppColors.kPrimaryColor),
                     )
                   ],
                 ),
@@ -349,7 +350,7 @@ class _CartScreen extends State<CartScreen>{
                     padding: EdgeInsets.symmetric(vertical: 10),
                     width: MediaQuery.of(context).size.width/2,
                     decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      color: AppColors.kPrimaryColor,
                       borderRadius: BorderRadius.circular(46.r),
                     ),
                     child: Center(
@@ -359,7 +360,7 @@ class _CartScreen extends State<CartScreen>{
                             fontFamily: kTheArabicSansLight,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w500,
-                            color: kWhiteColor),
+                            color: AppColors.kWhiteColor),
                       ),
                     ),
                   ),

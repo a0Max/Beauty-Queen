@@ -1,4 +1,4 @@
-import 'package:beauty_queen/View/splash_screen.dart';
+import 'package:beauty_queen/View/welcome/splash_screen.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 

@@ -1,12 +1,13 @@
 import 'dart:developer';
 import 'package:beauty_queen/View/discount/filterby_screen.dart';
-import 'package:beauty_queen/const/colors.dart';
+// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../const/app_colors.dart';
 import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
@@ -107,7 +108,7 @@ class _FliterScreenState extends State<FliterScreen> {
                       text: "الأقسام / ",
                       style: TextStyle(
                         fontFamily: kTheArabicSansLight,
-                        color: kGrayColor,
+                        color: AppColors.kGrayColor,
                         fontSize: 17.sp,
                         fontWeight: FontWeight.w400,
                       ),
@@ -116,7 +117,7 @@ class _FliterScreenState extends State<FliterScreen> {
                           text: _controller.categoryData.value.where((element) => element.id == widget.categoryId).toList().first.title,
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
-                            color: kBlackColor,
+                            color: AppColors.kBlackColor,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w600,
                           ),
@@ -201,7 +202,7 @@ class _FliterScreenState extends State<FliterScreen> {
                     height: 39.76.h,
                     width: 180.w,
                     decoration: BoxDecoration(
-                      border: Border.all(color: kPrimaryColor, width: 1.5.w),
+                      border: Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
                     ),
                     child: Row(
                       children: [
@@ -220,7 +221,7 @@ class _FliterScreenState extends State<FliterScreen> {
                                 value: value,
                                 child: Text(value,
                                     style: TextStyle(
-                                      color: kBlackColor,
+                                      color: AppColors.kBlackColor,
                                       fontSize: 14.sp,
                                       fontFamily: kTheArabicSansLight,
                                       fontWeight: FontWeight.w400,
@@ -239,7 +240,7 @@ class _FliterScreenState extends State<FliterScreen> {
                             },
                             hint: Text(tr('classificationBy'),
                                 style: TextStyle(
-                                  color: kBlackColor,
+                                  color: AppColors.kBlackColor,
                                   fontSize: 18.sp,
                                   fontFamily: kTheArabicSansLight,
                                   fontWeight: FontWeight.w400,
@@ -259,7 +260,7 @@ class _FliterScreenState extends State<FliterScreen> {
                     height: 39.76.h,
                     width: 180.w,
                     decoration: BoxDecoration(
-                      border: Border.all(color: kPrimaryColor, width: 1.5.w),
+                      border: Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -270,7 +271,7 @@ class _FliterScreenState extends State<FliterScreen> {
                           },
                           child: Text('فلترة النتائج',
                               style: TextStyle(
-                                color: kBlackColor,
+                                color: AppColors.kBlackColor,
                                 fontSize: 18.sp,
                                 fontFamily: kTheArabicSansLight,
                                 fontWeight: FontWeight.w400,
@@ -300,7 +301,7 @@ class _FliterScreenState extends State<FliterScreen> {
                     'عدد المنتجات: ${_controller.generalSearchData.value.products?.total ?? ''}',
                     style: const TextStyle(
                       fontFamily: kTheArabicSansLight,
-                      color: kGrayColor,
+                      color: AppColors.kGrayColor,
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                     )),
