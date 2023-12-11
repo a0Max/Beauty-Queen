@@ -3,6 +3,7 @@
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/widgets/CustomAppBar.dart';
 import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
@@ -106,7 +107,16 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
         controller: _scrollController,
         child: Column(
           children: [
-            Image.asset(krectanglegifImage),
+            if ( controller
+                .generalSearchData.value.info?.banner != null)
+              SizedBox(
+                  height: 139.17.h,
+                  width: MediaQuery.of(context).size.width,
+                  child: CachedNetworkImage(
+                      imageUrl: Connection.urlOfStorage(
+                          image: controller
+                              .generalSearchData.value.info?.banner ??
+                              ''))),
             SizedBox(
               height: 20.h,
             ),
