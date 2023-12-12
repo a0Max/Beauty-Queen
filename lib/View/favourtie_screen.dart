@@ -1,7 +1,10 @@
+import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
+import 'package:beauty_queen/const/extensions.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../const/vars.dart';
 import '../controller/home_controller/home_controller.dart';
@@ -58,52 +61,48 @@ class _FavScreen extends State<FavScreen>{
             SizedBox(
               height: 28.85.h,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Container(
-                height: 52.81.h,
-                width: 133.36.w,
-                decoration: BoxDecoration(
-                    color: klPinkColor,
-                    borderRadius: BorderRadius.circular(41.r)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.delete,
-                          color: kPrimaryColor,
-                          size: 30.r,
-                        )),
-                    Text(
-                      "إزالــة",
-                      style: TextStyle(
-                          color: kPrimaryColor,
-                          fontSize: 18.74.sp,
-                          fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 34.75.h,
-            ),
             Wrap(
               runSpacing: 7,
               children: List.generate(
                   _controller.wishlistList.value.length,
                       (index) =>
-                          CustomCardWidget(
-                    imageUrl: Connection.urlOfProducts(
-                        image: _controller
-                            .wishlistList.value[index].product.mainImage ??
-                            ''),
-                    newArrival: _controller.wishlistList.value[index].product ??
-                        SalesProductsModel(),
-                  // )
-              ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                onTap: (){
+                                  print('${_controller.wishlistList.value[index].id??0}');
+                                  _controller.removeWishlist(postId: _controller.wishlistList.value[index].id??0);
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    10.pw,
+                                    SvgPicture.asset(AppImages.imageDelete2),
+                                    5.pw,
+                                    Text(
+                                      "إزالــة",
+                                      style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontSize: 18.74.sp,
+                                          fontWeight: FontWeight.w400),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              10.ph,
+                              CustomCardWidget(
+                                                  imageUrl: Connection.urlOfProducts(
+                                                      image: _controller
+                                .wishlistList.value[index].product.mainImage ??
+                                ''),
+                                                  newArrival: _controller.wishlistList.value[index].product ??
+                                                      SalesProductsModel(),
+                                                // )
+                                            ),
+                            ],
+                          ),
             ),)
           ],
         )),

@@ -234,6 +234,33 @@ class HomeDataApis extends ApiProvider {
     }
   }
 
+
+  removeWishlistRequest({
+    required int productId
+  }) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.removeWishlistProductEndPoint}',
+      queryParameters: {
+        'id': productId,
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+    } else {
+      throw 0;
+    }
+  }
+
   Future<List<ProductOptionsModel>> getTheWishlist() async {
     final token = await getUserToken();
     final cookies = await getCookies();
