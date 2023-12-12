@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:beauty_queen/View/fav/favourtie_screen.dart';
+import 'package:beauty_queen/View/search/search_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
@@ -13,6 +14,7 @@ import 'package:get/get.dart';
 import '../View/user_profile/normalprofile.dart';
 import '../View/cart/cart_screen.dart';
 import '../const/app_colors.dart';
+import '../controller/search/search_controller.dart';
 
 class CustomAppBar extends StatelessWidget {
   final bool? isScrolled;
@@ -33,7 +35,7 @@ class CustomAppBar extends StatelessWidget {
   final bool showarrowIcon2;
   final bool showimageIcon;
 
-  const CustomAppBar(
+  CustomAppBar(
       {super.key,
       this.searchBarHeight = 0.0,
       this.isScrolled = false,
@@ -51,6 +53,7 @@ class CustomAppBar extends StatelessWidget {
       this.showarrowIcon = false,
       this.showimageIcon = false,
       this.showBagIcon2 = false});
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -151,14 +154,20 @@ class CustomAppBar extends StatelessWidget {
                         width: MediaQuery.of(context).size.width-(30.w+10.w+20.w+16.w+20.w+30.w+9.w),
 
                         child:TextField(
+                          controller: searchController,
                           style: const TextStyle(
                             fontFamily: kTheArabicSansLight,
                           ),
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
-                              onPressed: onPressed,
+                              onPressed: (){
+                                print('onPressed');
+                                Get.to(()=>SearchScreen(subKeyWord: searchController.text));
+
+                              },
                               icon: SvgPicture.asset(AppImages.imageSearch),
                             ),
+
                             prefix: SizedBox(width: 20.w),
                             hintText: 'إبحث عن منتج أو ماركة',
                             hintStyle: TextStyle(
@@ -183,6 +192,17 @@ class CustomAppBar extends StatelessWidget {
                             fillColor: AppColors.kWhiteBlueColor,
                             filled: true,
                           ),
+                          onSubmitted: (val){
+                            print('onSubmitted');
+
+                            Get.to(()=>SearchScreen(subKeyWord: val));
+                          },
+                          onEditingComplete: (){
+                            print('onEditingComplete');
+
+                            Get.to(()=>SearchScreen(subKeyWord: searchController.text));
+                          },
+
                           maxLines: 1,
                         )),
                   },
@@ -250,12 +270,17 @@ class CustomAppBar extends StatelessWidget {
                   isScrolled! ? -20.0 : 0,
                 ),
                 child: TextField(
+                  controller: searchController,
                   style: const TextStyle(
                     fontFamily: kTheArabicSansLight,
                   ),
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
-                      onPressed: onPressed,
+                      onPressed: (){
+                        print('onPressed');
+                        Get.to(()=>SearchScreen(subKeyWord: searchController.text));
+
+                      },
                       icon: SvgPicture.asset(AppImages.imageSearch),
                     ),
                     prefix: SizedBox(width: 20.w),
@@ -282,6 +307,17 @@ class CustomAppBar extends StatelessWidget {
                     fillColor: AppColors.kWhiteBlueColor,
                     filled: true,
                   ),
+                  onSubmitted: (val){
+                    print('onSubmitted');
+
+                    Get.to(()=>SearchScreen(subKeyWord: val));
+                  },
+                  onEditingComplete: (){
+                    print('onEditingComplete');
+
+                    Get.to(()=>SearchScreen(subKeyWord: searchController.text));
+                  },
+
                   maxLines: 1,
                 ),
               )},

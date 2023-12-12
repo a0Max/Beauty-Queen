@@ -86,9 +86,9 @@ class _HomePageState extends State<HomePage> {
           showBagIcon: true,
           showFavIcon: true,
           showPersonIcon: true,
-          onPressed: () {
-            _scaffoldKey.currentState?.openEndDrawer();
-          },
+          // onPressed: () {
+          //   _scaffoldKey.currentState?.openEndDrawer();
+          // },
           isScrolled: _isScrolled,
           countCart:_controllerNav.countCart.value,
           searchBarWidth: searchBarWidth, // Replace with your desired width

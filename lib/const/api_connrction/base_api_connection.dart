@@ -59,6 +59,7 @@ abstract class ApiProvider {
   static const String getWishlistProductEndPoint = "get/wishlist";
   static const String removeWishlistProductEndPoint = "remove/wishlist";
   static const String getGiftsProductEndPoint = "get/gifts";
+  static const String getSearchProductEndPoint = "search";
   static const String getOffersProductEndPoint = "get/offers";
   static const String getCategoryDataEndPoint = "category";
   static const String getCitiesDataEndPoint = "get/cities";
