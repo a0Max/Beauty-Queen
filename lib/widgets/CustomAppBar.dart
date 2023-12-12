@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:beauty_queen/View/favourtie_screen.dart';
+import 'package:beauty_queen/View/fav/favourtie_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';

@@ -371,6 +371,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     fit: BoxFit.fill,
                   ),
                 ),
+                ///Todo: miss after add change and if i liked
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(
@@ -381,24 +382,6 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     ),
                     onPressed: () {
                       _controller.addWishlist(postId: widget.newArrival.id??0);
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (BuildContext context) {
-                      //     return CustomAlertDialog(
-                      //       height: 124.95.h,
-                      //       width: 367.06.w,
-                      //       buttonOneText: 'متابعــــــة التســــوق',
-                      //       buttonTwoText: 'الذهاب الي المفضلة',
-                      //       dilougText:
-                      //           "لقد قمت بإضافة هذا المنتج بنجاح للمفضلة!",
-                      //       onButtonOnePressed: () {
-                      //         setState(() {
-                      //           isFavorite = true;
-                      //         });
-                      //       },
-                      //     );
-                      //   },
-                      // );
                     },
                   ),
                 ),

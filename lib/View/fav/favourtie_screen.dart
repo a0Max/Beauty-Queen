@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../const/vars.dart';
-import '../controller/home_controller/home_controller.dart';
-import '../models/sales_products_model.dart';
-import '../widgets/CustomCardWidget.dart';
+import '../../const/vars.dart';
+import '../../controller/home_controller/home_controller.dart';
+import '../../models/sales_products_model.dart';
+import '../../widgets/CustomCardWidget.dart';
 
 class FavScreen extends StatefulWidget {
   const FavScreen({super.key});

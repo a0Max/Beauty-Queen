@@ -1,4 +1,4 @@
-import 'package:beauty_queen/View/favourtie_screen.dart';
+import 'package:beauty_queen/View/fav/favourtie_screen.dart';
 import 'package:beauty_queen/View/user_profile/mydata_screen.dart';
 import 'package:beauty_queen/View/user_profile/password_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
@@ -245,10 +245,10 @@ class NormalProfileScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                kgiftImage,
-                                height: 66.11.h,
-                                width: 54.w,
+                              SvgPicture.asset(
+                                AppImages.myOrdersImage,
+                                // height: 66.11.h,
+                                // width: 54.w,
                               ),
                               SizedBox(
                                 height: 10.h,
@@ -287,10 +287,10 @@ class NormalProfileScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                kfavImage,
-                                height: 66.11.h,
-                                width: 54.w,
+                              SvgPicture.asset(
+                                AppImages.subFavImage,
+                                // height: 66.11.h,
+                                // width: 54.w,
                               ),
                               SizedBox(
                                 height: 10.h,
@@ -329,10 +329,10 @@ class NormalProfileScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                kqueenImage,
-                                height: 66.11.h,
-                                width: 54.w,
+                              SvgPicture.asset(
+                                AppImages.myStickerImage,
+                                // height: 66.11.h,
+                                // width: 54.w,
                               ),
                               SizedBox(
                                 height: 10.h,
@@ -421,7 +421,7 @@ class NormalProfileScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Image.asset(kchatIconImage),
+                      SvgPicture.asset(AppImages.chatImage),
                       SizedBox(
                         width: 25.w,
                       ),
@@ -451,7 +451,7 @@ class NormalProfileScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Image.asset(kiconCircleImage),
+                      SvgPicture.asset(AppImages.infoCircleImage),
                       SizedBox(
                         width: 25.w,
                       ),

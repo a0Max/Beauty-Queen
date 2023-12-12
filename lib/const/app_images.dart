@@ -63,5 +63,8 @@ class AppImages{
   static const String infoCircleImage = "${mainPathToSvg}Info-Circle.svg";
   static const String passwordImage = "${mainPathToSvg}password.svg";
   static const String profileImage = "${mainPathToSvg}Profile.svg";
+  static const String subFavImage = "${mainPathToSvg}sub_fav.svg";
+  static const String myStickerImage = "${mainPathToSvg}my_sticker.svg";
+  static const String myOrdersImage = "${mainPathToSvg}my_orders.svg";
 
 }
