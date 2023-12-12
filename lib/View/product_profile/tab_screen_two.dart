@@ -9,7 +9,6 @@ import '../../const/app_colors.dart';
 // import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
-import '../../widgets/CustomAlertBox.dart';
 import '../../widgets/product_profile/rating_widget.dart';
 
 class TabScreenTwo extends StatelessWidget {

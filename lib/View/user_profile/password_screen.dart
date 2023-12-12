@@ -10,14 +10,13 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../controller/auth_controller/auth_controler.dart';
-import '../../widgets/CustomFormField.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
 import '../../widgets/loading.dart';
 import '../auth_view/login_page.dart';
 
 class PasswordScreen extends StatefulWidget {
-  PasswordScreen({super.key});
+  const PasswordScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {

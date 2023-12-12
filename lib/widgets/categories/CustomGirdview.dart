@@ -1,7 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:beauty_queen/const/app_images.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,7 +13,7 @@ import '../../controller/AlKasam_controller/alkasam_controller.dart';
 class CustomGridView extends StatelessWidget {
   final ScrollController? scrollController;
 
-  CustomGridView({super.key, this.scrollController});
+  const CustomGridView({super.key, this.scrollController});
 
   @override
   Widget build(BuildContext context) {

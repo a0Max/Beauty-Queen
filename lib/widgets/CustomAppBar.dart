@@ -55,6 +55,19 @@ class CustomAppBar extends StatelessWidget {
       this.showBagIcon2 = false});
   TextEditingController searchController = TextEditingController();
 
+  goToSearchScreen({required BuildContext context}){
+    // var context = Get.context;
+    final currentRoute = ModalRoute.of(context);
+    final currentScreenName = currentRoute?.settings.name;
+    print('currentScreenName:$currentScreenName');
+    if (currentScreenName== "/SearchScreen"){
+      final SearchController0 controller = Get.put(SearchController0());
+      controller.getSearchDetails(currentPage: 1, subKeyWord: searchController.text);
+
+    }else {
+      Get.to(() => SearchScreen(subKeyWord: searchController.text));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -161,9 +174,7 @@ class CustomAppBar extends StatelessWidget {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                               onPressed: (){
-                                print('onPressed');
-                                Get.to(()=>SearchScreen(subKeyWord: searchController.text));
-
+                                goToSearchScreen(context:context);
                               },
                               icon: SvgPicture.asset(AppImages.imageSearch),
                             ),
@@ -193,14 +204,12 @@ class CustomAppBar extends StatelessWidget {
                             filled: true,
                           ),
                           onSubmitted: (val){
-                            print('onSubmitted');
+                            goToSearchScreen(context:context);
 
-                            Get.to(()=>SearchScreen(subKeyWord: val));
                           },
                           onEditingComplete: (){
-                            print('onEditingComplete');
+                            goToSearchScreen(context:context);
 
-                            Get.to(()=>SearchScreen(subKeyWord: searchController.text));
                           },
 
                           maxLines: 1,
@@ -277,9 +286,7 @@ class CustomAppBar extends StatelessWidget {
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       onPressed: (){
-                        print('onPressed');
-                        Get.to(()=>SearchScreen(subKeyWord: searchController.text));
-
+                        goToSearchScreen(context:context);
                       },
                       icon: SvgPicture.asset(AppImages.imageSearch),
                     ),
@@ -308,14 +315,11 @@ class CustomAppBar extends StatelessWidget {
                     filled: true,
                   ),
                   onSubmitted: (val){
-                    print('onSubmitted');
-
-                    Get.to(()=>SearchScreen(subKeyWord: val));
+                    goToSearchScreen(context:context);
                   },
                   onEditingComplete: (){
-                    print('onEditingComplete');
+                    goToSearchScreen(context:context);
 
-                    Get.to(()=>SearchScreen(subKeyWord: searchController.text));
                   },
 
                   maxLines: 1,
@@ -330,5 +334,6 @@ class CustomAppBar extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

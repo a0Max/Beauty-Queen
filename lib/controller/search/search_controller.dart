@@ -1,13 +1,9 @@
-import 'dart:developer';
 
-import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
-import '../../const/api_connrction/brands_data_api.dart';
 import '../../const/api_connrction/search_data_apis.dart';
-import '../../models/brand_model.dart';
 import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 

@@ -129,7 +129,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
               SizedBox(
                 height: 15.h,
               ),
-              Directionality(
+              const Directionality(
                   textDirection: TextDirection.ltr, child: CustomGridView()),
             ],
           ),

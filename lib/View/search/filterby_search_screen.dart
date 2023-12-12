@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/search/search_controller.dart';
 
 class FilterBySearchContainer extends StatefulWidget {

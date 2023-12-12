@@ -13,13 +13,10 @@ import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-// import '../../const/colors.dart';
-import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/search/search_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomCardWidget.dart';
-import '../../widgets/custom_brands_logo_widget.dart';
 import '../brands/branddetail_screen.dart';
 import 'filterby_search_screen.dart';
 
@@ -106,71 +103,83 @@ class _SearchScreen extends State<SearchScreen> {
             child: Column(
               children: [
                 Container(
+                  alignment: Alignment.centerRight,
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: Text('نتائج البحث على: ${widget.subKeyWord}')),
+                    child: Text('نتائج البحث على: ${_controller.keyWord.value}', style: TextStyle(
+                      fontFamily: kTheArabicSansLight,
+                      color: AppColors.kGrayColor,
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w400,
+                    ),)),
 
                 SizedBox(
                   height: 14.h,
                 ),
-                Container(
-                  height: 140.h,
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount:_controller.generalSearchData.value.brands?.length ?? 0 ,
-
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                          onTap: () {
-                            Get.to(BrandDetailScreen(brandId: int.parse(_controller
-                                .generalSearchData.value.brands?[index].id
-                                .toString() ??
-                                '0'),));
-                          },
-                          child: Column(mainAxisSize: MainAxisSize.min, children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 10.h),
-
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 8,
-                                    offset: Offset(0, 1),
+                if (_controller.generalSearchData.value.brands?.isNotEmpty ??
+                    false) ...{
+                  Container(
+                    height: 140.h,
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          _controller.generalSearchData.value.brands?.length ??
+                              0,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                            onTap: () {
+                              Get.to(BrandDetailScreen(
+                                brandId: int.parse(_controller.generalSearchData
+                                        .value.brands?[index].id
+                                        .toString() ??
+                                    '0'),
+                              ));
+                            },
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 10.h),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 1),
+                                        ),
+                                      ],
+                                    ),
+                                    child: CachedNetworkImage(
+                                      imageUrl: Connection.urlOfBrands(
+                                          image: _controller.generalSearchData
+                                                  .value.brands?[index].logo ??
+                                              ''),
+                                      height: 105.h,
+                                      width: 105.w,
+                                    ),
                                   ),
-                                ],
-                              ),
-                              child: CachedNetworkImage(
-                                imageUrl:Connection.urlOfBrands(
-                                    image: _controller.generalSearchData.value
-                                        .brands?[index].logo ??
-                                        ''),
-                                height: 105.h,
-                                width: 105.w,
-
-                              ),
-                            ),
-                            Text(
-                              _controller.generalSearchData.value
-                                  .brands?[index].titleAr ??
-                                  '',
-                              style: TextStyle(
-                                fontFamily: kTheArabicSansLight,
-                                color: AppColors.kBlackColor,
-                                fontSize: 12.64.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ]));
-
-                    }, separatorBuilder: (BuildContext context, int index) => 25.pw,
-
+                                  Text(
+                                    _controller.generalSearchData.value
+                                            .brands?[index].titleAr ??
+                                        '',
+                                    style: TextStyle(
+                                      fontFamily: kTheArabicSansLight,
+                                      color: AppColors.kBlackColor,
+                                      fontSize: 12.64.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  )
+                                ]));
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          25.pw,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 14.h,
-                ),
+                  SizedBox(
+                    height: 14.h,
+                  ),
+                },
                 ///////////////filter////////////
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -346,7 +355,7 @@ class _SearchScreen extends State<SearchScreen> {
                   GestureDetector(
                     onTap: () {
                       _controller.getSearchDetails(
-                          subKeyWord: widget.subKeyWord);
+                          subKeyWord: _controller.keyWord.value);
                     },
                     child: Container(
                       // height: 59.70.h,

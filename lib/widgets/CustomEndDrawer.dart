@@ -11,13 +11,11 @@ import '../View/categories/filter_screen.dart';
 import '../View/gifts/GuidanceScreen.dart';
 import '../View/Quinaprogram_screen.dart';
 import '../View/offers/beautypharmacyscreen.dart';
-import '../View/beautyscreen.dart';
 import '../View/discount/discounts_screen.dart';
 import '../View/discount/filterby_screen.dart';
 import '../View/user_profile/normalprofile.dart';
 import '../View/orders_screen.dart';
 import '../const/app_colors.dart';
-import '../const/colors.dart';
 import '../controller/AlKasam_controller/alkasam_controller.dart';
 
 class MyEndDrawer extends StatelessWidget {
@@ -242,7 +240,7 @@ class MyEndDrawer extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   controller.updateCurrentCategoryId(newId:183, getChild: false);
-                  Get.to(FliterScreen(categoryId: 183,));
+                  Get.to(const FliterScreen(categoryId: 183,));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -268,7 +266,7 @@ class MyEndDrawer extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   controller.updateCurrentCategoryId(newId:53, getChild: false);
-                  Get.to(FliterScreen(categoryId: 53,));
+                  Get.to(const FliterScreen(categoryId: 53,));
                   },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),

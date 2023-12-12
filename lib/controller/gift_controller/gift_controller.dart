@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../const/api_connrction/brands_data_api.dart';
 import '../../const/api_connrction/gifts_data_apis.dart';
-import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 

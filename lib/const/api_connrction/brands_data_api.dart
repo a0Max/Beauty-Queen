@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import '../../models/brand_model.dart';
 import 'package:quiver/strings.dart';
 import '../../models/general_search_model.dart';
-import '../../models/sales_products_model.dart';
 import '../vars.dart';
 import 'base_api_connection.dart';
 

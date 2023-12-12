@@ -4,22 +4,18 @@ import 'package:beauty_queen/widgets/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../models/city_area_model.dart';
-import '../../widgets/CustomDropDownTextFIled.dart';
-import '../../widgets/CustomFormField.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 
 class MyDataScreen extends StatefulWidget {
-  MyDataScreen({super.key});
+  const MyDataScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {

@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
-import '../../const/images.dart';
+// import '../../const/images.dart';
 import '../../const/vars.dart';
 import '../cart_tab_screen.dart';
 
@@ -208,8 +208,8 @@ class _CartScreen extends State<CartScreen>{
                                         onPressed: () {
                                           productController.decrement(index: index);
                                         },
-                                        icon: Image.asset(
-                                          kdeleteiconImage,
+                                        icon: SvgPicture.asset(
+                                          AppImages.imageDelete,
                                           height: 22.01.h,
                                           width: 19.26.w,
                                         ))
@@ -268,7 +268,7 @@ class _CartScreen extends State<CartScreen>{
                               SizedBox(
                                 width: 13.3.w,
                               ),
-                              Image.asset(kdiscountImage),
+                              SvgPicture.asset(AppImages.imageDiscount),
                               Text(
                                 'أدخــل رمز التخفيض',
                                 style: TextStyle(

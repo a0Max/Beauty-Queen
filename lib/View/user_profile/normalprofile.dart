@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
+import '../../widgets/bottom_sheet_of_add_money.dart';
 import '../about_app.dart';
 import '../auth_view/login_page.dart';
 import '../mysticker_screen.dart';
@@ -171,7 +172,7 @@ class NormalProfileScreen extends StatelessWidget {
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              _showModalSheet(context);
+                              showModalSheet(context);
                             },
                             child: Container(
                               height: 41.56.h,
@@ -358,7 +359,7 @@ class NormalProfileScreen extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     onTap: () {
-                      Get.to(MyDataScreen());
+                      Get.to(const MyDataScreen());
                     },
                     child: Row(
                       children: [
@@ -377,7 +378,7 @@ class NormalProfileScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                             onPressed: () {
-                              Get.to(MyDataScreen());
+                              Get.to(const MyDataScreen());
                             },
                             icon: const Icon(Icons.arrow_forward_ios))
                       ],
@@ -391,7 +392,7 @@ class NormalProfileScreen extends StatelessWidget {
                       highlightColor: Colors.transparent,
                       splashColor: Colors.transparent,
                       onTap: () {
-                        Get.to( PasswordScreen());
+                        Get.to( const PasswordScreen());
                       },
                       child: Row(
                         children: [
@@ -410,7 +411,7 @@ class NormalProfileScreen extends StatelessWidget {
                           const Spacer(),
                           IconButton(
                               onPressed: () {
-                                Get.to( PasswordScreen());
+                                Get.to( const PasswordScreen());
                               },
                               icon: const Icon(Icons.arrow_forward_ios))
                         ],
@@ -528,103 +529,3 @@ class NormalProfileScreen extends StatelessWidget {
   }
 }
 
-void _showModalSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          backgroundColor: kWhiteColor,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.close,
-                  size: 30.r,
-                  color: kPrimaryColor,
-                )),
-          ],
-          title: Text(
-            "المحفظة",
-            style: TextStyle(
-                fontFamily: kTheArabicSansLight,
-                color: kBlackColor,
-                fontSize: 23.74.sp,
-                fontWeight: FontWeight.w600),
-          ),
-          centerTitle: true,
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 50.h,
-                ),
-                Text(
-                  "تعبئة رصيد المحفظة ",
-                  style: TextStyle(
-                      fontFamily: kTheArabicSansLight,
-                      color: kPrimaryColor,
-                      fontSize: 23.74.sp,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Container(
-                  height: 68.29.h,
-                  width: 398.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.r),
-                      border: Border.all(width: 1, color: kPrimaryColor)),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        disabledBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        fillColor: klPinkColor,
-                        prefixIcon: Image.asset(ksubtractImage),
-                        hintText: 'أدخل رقم البطاقة',
-                        hintStyle: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: kPrimaryColor,
-                            fontSize: 21.1.sp,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                ),
-                SizedBox(
-                  height: 100.h,
-                ),
-                Container(
-                  height: 68.h,
-                  width: 398.w,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(47.r)),
-                  child: Center(
-                    child: Text(
-                      "تعبئة الرصيد ",
-                      style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          color: kWhiteColor,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    },
-  );
-}
