@@ -59,4 +59,32 @@ class CartDataApis extends ApiProvider {
       throw response.data;
     }
   }
+
+  Future removeItemDataRequest({required String productId}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.removeFromCartProductEndPoint}',
+      queryParameters: {
+        'id':productId
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+
+    } else {
+      throw response.data;
+    }
+  }
+
 }

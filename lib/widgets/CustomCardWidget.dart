@@ -418,44 +418,83 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // if (widget.newArrival.offerPrice == null ||
+                        //     widget.newArrival.offerPrice == '' ||
+                        //     widget.newArrival.offerPrice == '' ||
+                        //     widget.newArrival.offerPrice?.split('').first ==
+                        //         '0') ...{
+                        //
+                        //
+                        // },
                         if (widget.newArrival.offerPrice != null &&
                             widget.newArrival.offerPrice != '' &&
                             widget.newArrival.offerPrice != '' &&
                             widget.newArrival.offerPrice?.split('').first !=
                                 '0') ...{
-                          Row(
+                          Container(
+                              width: widget.width??(MediaQuery.of(context).size.width / 2) - 40,
+                              child:Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                widget.newArrival.offerPrice ?? '',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15.16.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
-                                  decoration: TextDecoration.lineThrough,
-                                  height: 0.08,
-                                ),
+                              Row(
+                                children: [
+
+                                  Text(
+                                    widget.newArrival.price ?? '',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15.16.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.lineThrough,
+                                      height: 0.08,
+                                    ),
+                                  ),
+                                  Text(
+                                    tr('Del'),
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10.99.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                tr('Del'),
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 10.99.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
-                                  decoration: TextDecoration.lineThrough,
-                                ),
-                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    widget.newArrival.offerPrice ?? '',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: const Color(0xFFDE0F7E),
+                                      fontSize: 15.16.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0.08,
+                                    ),
+                                  ),
+                                  Text(
+                                    'د.ل',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: const Color(0xFFDE0F7E),
+                                      fontSize: 10.99.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0.15,
+                                    ),
+                                  ),
+                                ],
+                              )
+
                             ],
-                          ),
-                        },
-                        if (widget.newArrival.price != null &&
-                            widget.newArrival.price != '' &&
-                            widget.newArrival.price != '' &&
-                            widget.newArrival.price?.split('').first !=
-                                '0') ...{
+                          ))
+
+                        }else...{
                           Row(
                             children: [
                               Text(
@@ -510,7 +549,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     ),
                   ),
                 ),
-              } else if ((widget.newArrival.stock != null &&
+              }
+              else if ((widget.newArrival.stock != null &&
                       widget.newArrival.stock != "0") &&
                   (widget.newArrival.productOptions != null &&
                       widget.newArrival.productOptions?.isNotEmpty ==
@@ -540,7 +580,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     ),
                   ),
                 ),
-              } else ...{
+              }
+              else ...{
                 InkWell(
                   onTap: () async {
                    await _controller.addToCart(productId: widget.newArrival.id??0);

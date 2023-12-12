@@ -4,6 +4,7 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/controller/cart_controller/productController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,7 +35,7 @@ class _CartScreen extends State<CartScreen>{
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Column(
+          body: Obx(()=>Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
@@ -99,7 +100,7 @@ class _CartScreen extends State<CartScreen>{
                     ),
                   ),
 
-                  Obx(()=>Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Column(
                       children: [
@@ -197,21 +198,25 @@ class _CartScreen extends State<CartScreen>{
                                           color: AppColors.kBlackColor,
                                           size: 30,
                                         )),
-                              Obx(()=>Text(
+                              Text(
                                       '${productController.cartData.value.products?[index].qty}',
                                       style: TextStyle(
                                           color: AppColors.kBlackColor,
                                           fontSize: 21.92.sp,
                                           fontWeight: FontWeight.w600),
-                                    )),
+                                    ),
                                     IconButton(
                                         onPressed: () {
                                           productController.decrement(index: index);
                                         },
-                                        icon: SvgPicture.asset(
+                                        icon:productController.cartData.value.products?[index].qty==1? SvgPicture.asset(
                                           AppImages.imageDelete,
                                           height: 22.01.h,
                                           width: 19.26.w,
+                                        ):const Icon(
+                                          CupertinoIcons.minus,
+                                          color: AppColors.kBlackColor,
+                                          size: 30,
                                         ))
                                   ],
                                 ),
@@ -302,7 +307,7 @@ class _CartScreen extends State<CartScreen>{
                         ),
                       ],
                     ),
-                  )),
+                  ),
                 ],
               ),
             ),
@@ -369,7 +374,7 @@ class _CartScreen extends State<CartScreen>{
             ),
           ),
         ],
-      )),
+      ))),
     );
   }
 }

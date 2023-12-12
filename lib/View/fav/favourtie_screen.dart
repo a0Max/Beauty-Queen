@@ -21,7 +21,8 @@ class FavScreen extends StatefulWidget {
     return _FavScreen();
   }
 }
-class _FavScreen extends State<FavScreen>{
+
+class _FavScreen extends State<FavScreen> {
   final HomeController _controller = Get.put(HomeController());
 
   @override
@@ -29,6 +30,7 @@ class _FavScreen extends State<FavScreen>{
     super.initState();
     _controller.getWishlist();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,57 +58,62 @@ class _FavScreen extends State<FavScreen>{
                 )),
           ]),
       body: SingleChildScrollView(
-        child: Obx(()=>Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 28.85.h,
-            ),
-            Wrap(
-              runSpacing: 7,
-              children: List.generate(
-                  _controller.wishlistList.value.length,
-                      (index) =>
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+        child: Obx(() => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 28.85.h,
+                ),
+                Wrap(
+                  runSpacing: 7,
+                  children: List.generate(
+                    _controller.wishlistList.value.length,
+                    (index) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            print(
+                                '${_controller.wishlistList.value[index].id ?? 0}');
+                            _controller.removeWishlist(
+                                postId:
+                                    _controller.wishlistList.value[index].id ??
+                                        0);
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              GestureDetector(
-                                onTap: (){
-                                  print('${_controller.wishlistList.value[index].id??0}');
-                                  _controller.removeWishlist(postId: _controller.wishlistList.value[index].id??0);
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    10.pw,
-                                    SvgPicture.asset(AppImages.imageDelete2),
-                                    5.pw,
-                                    Text(
-                                      tr('del_item'),
-                                      style: TextStyle(
-                                          color: kPrimaryColor,
-                                          fontSize: 18.74.sp,
-                                          fontWeight: FontWeight.w400),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              10.ph,
-                              CustomCardWidget(
-                                                  imageUrl: Connection.urlOfProducts(
-                                                      image: _controller
-                                .wishlistList.value[index].product.mainImage ??
-                                ''),
-                                                  newArrival: _controller.wishlistList.value[index].product ??
-                                                      SalesProductsModel(),
-                                                // )
-                                            ),
+                              10.pw,
+                              SvgPicture.asset(AppImages.imageDelete2),
+                              5.pw,
+                              Text(
+                                tr('del_item'),
+                                style: TextStyle(
+                                    color: kPrimaryColor,
+                                    fontSize: 18.74.sp,
+                                    fontWeight: FontWeight.w400),
+                              )
                             ],
                           ),
-            ),)
-          ],
-        )),
+                        ),
+                        10.ph,
+                        CustomCardWidget(
+                          imageUrl: Connection.urlOfProducts(
+                              image: _controller.wishlistList.value[index]
+                                      .product.mainImage ??
+                                  ''),
+                          newArrival:
+                              _controller.wishlistList.value[index].product ??
+                                  SalesProductsModel(),
+                          // )
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )),
       ),
       // bottomNavigationBar: ReusableBottomNavigationBar(),
     );
