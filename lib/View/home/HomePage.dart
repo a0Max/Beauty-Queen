@@ -14,7 +14,7 @@ import '../../const/vars.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/CustomAppBar.dart';
+import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/CustomCardWidget.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/CustomProductCard.dart';

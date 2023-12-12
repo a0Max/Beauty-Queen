@@ -19,7 +19,7 @@ import '../about_app.dart';
 import '../auth_view/login_page.dart';
 import '../mysticker_screen.dart';
 import '../orders_screen.dart';
-import '../profile_screen.dart';
+import 'profile_screen.dart';
 
 class NormalProfileScreen extends StatelessWidget {
   const NormalProfileScreen({Key? key}) : super(key: key);

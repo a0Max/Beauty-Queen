@@ -2,7 +2,7 @@ import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/const/vars.dart';
-import 'package:beauty_queen/widgets/CustomAppBar.dart';
+import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
 import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';

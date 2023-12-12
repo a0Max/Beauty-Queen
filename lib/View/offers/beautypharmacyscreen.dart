@@ -1,6 +1,6 @@
 import 'package:beauty_queen/const/app_colors.dart';
 import 'package:beauty_queen/const/styles.dart';
-import 'package:beauty_queen/widgets/CustomAppBar.dart';
+import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

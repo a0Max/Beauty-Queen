@@ -11,10 +11,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../View/user_profile/normalprofile.dart';
-import '../View/cart/cart_screen.dart';
-import '../const/app_colors.dart';
-import '../controller/search/search_controller.dart';
+import '../../View/user_profile/normalprofile.dart';
+import '../../View/cart/cart_screen.dart';
+import '../../const/app_colors.dart';
+import '../../controller/search/search_controller.dart';
 
 class CustomAppBar extends StatelessWidget {
   final bool? isScrolled;

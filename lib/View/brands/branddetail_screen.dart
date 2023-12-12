@@ -11,7 +11,7 @@ import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/CustomAppBar.dart';
+import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/CustomCardWidget.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import 'filterby_category_screen.dart';

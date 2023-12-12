@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:beauty_queen/const/images.dart';
-import 'package:beauty_queen/widgets/CustomAppBar.dart';
+import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
 import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';

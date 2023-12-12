@@ -1,9 +1,9 @@
 import 'package:beauty_queen/const/extensions.dart';
-import '../const/app_images.dart';
+import '../../const/app_images.dart';
 import 'package:flutter/material.dart';
 
-import 'button_widget.dart';
-import 'text_field_widget.dart';
+import '../based/button_widget.dart';
+import '../text_field_widget.dart';
 
 class CommentWidget extends StatelessWidget{
   const CommentWidget({super.key});

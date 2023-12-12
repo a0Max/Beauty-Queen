@@ -2,12 +2,12 @@
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/contact_us_screen.dart';
-import '../widgets/location_map.dart';
-import '../widgets/comment_widget.dart';
-import '../widgets/email_widget.dart';
-import '../widgets/social_login.dart';
-import '../widgets/work_hours.dart';
+import '../../widgets/contact_us_screen.dart';
+import '../../widgets/location_map.dart';
+import '../../widgets/product_profile/comment_widget.dart';
+import '../../widgets/email_widget.dart';
+import '../../widgets/social_login.dart';
+import '../../widgets/work_hours.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

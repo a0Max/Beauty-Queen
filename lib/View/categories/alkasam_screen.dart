@@ -7,7 +7,7 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
-import '../../widgets/CustomAppBar.dart';
+import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/CustomEndDrawer.dart';
 import '../../widgets/categories/CustomGirdview.dart';
 
