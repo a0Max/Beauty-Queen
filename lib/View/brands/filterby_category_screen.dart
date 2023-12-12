@@ -41,7 +41,7 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                 ),
                 Center(
                   child: Text(
-                    "فلترة النتائج",
+                    tr('filter_result'),
                     style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         fontSize: 21.sp,
@@ -235,7 +235,7 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(
-                            "مسح الكل",
+                            tr('delete_all'),
                             style: TextStyle(
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 17.sp,
@@ -262,7 +262,7 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(
-                            'حفظ الخيارات',
+                            tr('save_chooses'),
                             style: TextStyle(
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 14.sp,

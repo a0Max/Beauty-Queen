@@ -238,7 +238,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                         ),
                                       ),
                                       Text(
-                                        'د.ل',
+                                        tr('Del'),
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: Colors.black,
@@ -438,7 +438,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                 ),
                               ),
                               Text(
-                                'د.ل',
+                                tr('Del'),
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                   color: Colors.black,

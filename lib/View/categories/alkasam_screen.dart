@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -106,7 +107,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
                 child: Padding(
                   padding: EdgeInsets.only(right: 17.w),
                   child: Text.rich(TextSpan(
-                      text: " الرئيسية/ ",
+                      text: " ${tr('home')}/ ",
                       style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         color: AppColors.kGrayColor,
@@ -115,7 +116,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
                       ),
                       children: [
                         TextSpan(
-                          text: "الأقسام",
+                          text: tr('categories'),
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             color: AppColors.kBlackColor,

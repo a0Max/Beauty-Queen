@@ -137,7 +137,7 @@ class _CartScreen extends State<CartScreen>{
                                             ),
                                             const Spacer(),
                                             Text(
-                                              'د.ل${productController.cartData.value.products?[index].price}',
+                                              '${tr('Del')}${productController.cartData.value.products?[index].price}',
                                               style: TextStyle(
                                                   fontFamily: kTheArabicSansLight,
                                                   fontSize: 17.47.sp,
@@ -234,7 +234,7 @@ class _CartScreen extends State<CartScreen>{
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'عدد العناصر(${productController.totalCount.value}) ',
+                              '${tr('countItem')}(${productController.totalCount.value}) ',
                               style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 21.sp,
@@ -242,7 +242,7 @@ class _CartScreen extends State<CartScreen>{
                                   color: AppColors.kPrimaryColor),
                             ),
                             Text(
-                              'الإجمالي: ${productController.totalPrice.value} دل ',
+                              '${tr('all')}: ${productController.totalPrice.value} ${tr('Del')} ',
                               style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 21.sp,
@@ -270,7 +270,7 @@ class _CartScreen extends State<CartScreen>{
                               ),
                               SvgPicture.asset(AppImages.imageDiscount),
                               Text(
-                                'أدخــل رمز التخفيض',
+                                tr('addCoupon'),
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 18.sp,
@@ -288,7 +288,7 @@ class _CartScreen extends State<CartScreen>{
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'إستخدام',
+                                    tr('continus2'),
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 18.sp,
@@ -325,7 +325,7 @@ class _CartScreen extends State<CartScreen>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                       'المجموع',
+                       tr('total'),
                       style: TextStyle(
                           fontFamily: kTheArabicSansLight,
                           fontSize: 15.83.sp,
@@ -333,7 +333,7 @@ class _CartScreen extends State<CartScreen>{
                           color: AppColors.klPinkColor),
                     ),
                     Text(
-                       '${productController.totalPrice.value}دل',
+                       '${productController.totalPrice.value}${tr('Del')}',
                       style: TextStyle(
                           fontFamily: kTheArabicSansLight,
                           fontSize: 24.sp,
@@ -355,7 +355,7 @@ class _CartScreen extends State<CartScreen>{
                     ),
                     child: Center(
                       child: Text(
-                        'الإستمرار',
+                        tr('continus'),
                         style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             fontSize: 24.sp,

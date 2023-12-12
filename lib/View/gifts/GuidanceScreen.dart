@@ -127,7 +127,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
               height: 20.h,
             ),
             Center(
-              child: Text('بطاقات الهدايا',
+              child: Text(tr('giftCard'),
                   style: TextStyle(
                     fontFamily: kTheArabicSansLight,
                     color: kBlackColor,
@@ -182,7 +182,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                                           BorderRadius.circular(15.r)),
                                   child: Center(
                                     child: Text(
-                                      'إضافة إلي السلة',
+                                      tr('add_to_bags'),
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           fontWeight: FontWeight.w400,
@@ -241,7 +241,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                                           BorderRadius.circular(15.r)),
                                   child: Center(
                                     child: Text(
-                                      'إضافة إلي السلة',
+                                      tr('add_to_bags'),
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           fontWeight: FontWeight.w400,
@@ -341,7 +341,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                           onTap: () {
                             Get.to(const FilterByGiftsContainer());
                           },
-                          child: Text('فلترة النتائج',
+                          child: Text(tr('filter_result'),
                               style: TextStyle(
                                 color: kBlackColor,
                                 fontSize: 18.sp,
@@ -397,8 +397,8 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
             if (controller.dataProducts.value.isNotEmpty)...{
 
               const SizedBox(height: 40,),
-              Text('النتائج: ${controller.dataProducts.value
-                  .length} من ${controller.generalSearchData.value
+              Text('${tr('result')}: ${controller.dataProducts.value
+                  .length} ${tr('to')} ${controller.generalSearchData.value
                   .gifts?.total??0}'),
               const SizedBox(height: 10,),
               SizedBox(

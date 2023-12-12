@@ -190,7 +190,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                   ),
                                   if ((controller.selectedOptions.value.isNotEmpty)&& controller.selectedOptions.value.first!=null)...{
                                     Text(
-                                      "${controller.selectedOptions.value.first.price} دل ",
+                                      "${controller.selectedOptions.value.first.price} ${tr('Del')} ",
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           fontSize: 15.sp,
@@ -207,7 +207,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                       Text(
                                         "${controller.productData.value
                                             .getMinMax()
-                                            .first} دل ",
+                                            .first} ${tr('Del')} ",
                                         style: TextStyle(
                                             fontFamily: kTheArabicSansLight,
                                             decoration: TextDecoration
@@ -220,7 +220,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     Text(
                                       "${controller.productData.value
                                           .getMinMax()
-                                          .last} دل ",
+                                          .last} ${tr('Del')} ",
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           fontSize: 15.sp,
@@ -831,7 +831,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                   color: AppColors.kPrimaryColor,
                                   child: Center(
                                     child: Text(
-                                      'إضافة الي السلة',
+                                      tr('addToCart'),
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           color: AppColors.kWhiteColor,

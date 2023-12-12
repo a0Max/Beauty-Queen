@@ -1,6 +1,7 @@
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +37,7 @@ class _FavScreen extends State<FavScreen>{
           automaticallyImplyLeading: false,
           backgroundColor: kWhiteColor,
           title: Text(
-            "المفضلة",
+            tr('fav'),
             style: TextStyle(
                 color: kBlackColor,
                 fontSize: 27.74.sp,
@@ -82,7 +83,7 @@ class _FavScreen extends State<FavScreen>{
                                     SvgPicture.asset(AppImages.imageDelete2),
                                     5.pw,
                                     Text(
-                                      "إزالــة",
+                                      tr('del_item'),
                                       style: TextStyle(
                                           color: kPrimaryColor,
                                           fontSize: 18.74.sp,

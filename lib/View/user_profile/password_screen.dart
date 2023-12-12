@@ -56,13 +56,13 @@ class _PasswordScreen extends State<PasswordScreen>{
 
     Navigator.of(context).pop();
 
-    ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
 
   } catch (e) {
     if (!context.mounted) return;
 
     Navigator.of(context).pop();
-    ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+    ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
 
   }
 }
@@ -87,7 +87,7 @@ class _PasswordScreen extends State<PasswordScreen>{
               )),
         ],
         title: Text(
-          "كلمة المرور",
+          tr('kPasswordHint'),
           style: TextStyle(
               fontFamily: kTheArabicSansLight,
               color: kBlackColor,
@@ -191,7 +191,7 @@ class _PasswordScreen extends State<PasswordScreen>{
                           (route) => false);
                 },
                 child: Text(
-                  'نسيت كلمة المرور؟',
+                  tr('forget_password'),
                   style: TextStyle(
                       fontFamily: kTheArabicSansLight,
                       color: kPrimaryColor,
@@ -207,7 +207,7 @@ class _PasswordScreen extends State<PasswordScreen>{
                   height: 50.h,
                   borderRadius: 47.r,
                   backgroundColor: kPrimaryColor,
-                  text: "حفظ",
+                  text: tr('save'),
                   onPressed: _submit,
                   textStyle: TextStyle(
                     fontFamily: kTheArabicSansLight,

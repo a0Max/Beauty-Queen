@@ -5,6 +5,7 @@ import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,7 +43,7 @@ class NormalProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('مرحبا ${controller.userData.value.name}❤️',
+                        Text('${tr('hello')} ${controller.userData.value.name}❤️',
                             style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               color: kPrimaryColor,
@@ -66,7 +67,7 @@ class NormalProfileScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text('نوع الحساب',
+                      Text(tr('accountType'),
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             color: kTextGrayColor,
@@ -88,7 +89,7 @@ class NormalProfileScreen extends StatelessWidget {
                           child: Stack(
                             children: [
                               Center(
-                                child: Text('كوينا',
+                                child: Text(tr('quna'),
                                     style: TextStyle(
                                       fontFamily: kTheArabicSansLight,
                                       color: kWhiteColor,
@@ -104,7 +105,7 @@ class NormalProfileScreen extends StatelessWidget {
                           ),
                         ),
                       } else ...{
-                        Text('عادي',
+                        Text(tr('normal'),
                             style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               color: AppColors.mainColor,
@@ -142,7 +143,7 @@ class NormalProfileScreen extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: 'محفظتي\n',
+                                      text: tr('wallet'),
                                       style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
                                         color: kTextGrayColor,
@@ -158,7 +159,7 @@ class NormalProfileScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w700,
                                       )),
                                   TextSpan(
-                                      text: 'دل',
+                                      text:tr('Del'),
                                       style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
                                         color: kPrimaryColor,
@@ -200,7 +201,7 @@ class NormalProfileScreen extends StatelessWidget {
                                       width: 10.w,
                                     ),
                                     Text(
-                                      'تعبئة',
+                                      tr('fill'),
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           color: kWhiteColor,
@@ -255,7 +256,7 @@ class NormalProfileScreen extends StatelessWidget {
                                 height: 10.h,
                               ),
                               Text(
-                                'طلباتي',
+                                tr('my_orders'),
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
                                     color: kPrimaryColor,
@@ -297,7 +298,7 @@ class NormalProfileScreen extends StatelessWidget {
                                 height: 10.h,
                               ),
                               Text(
-                                'المفضلة',
+                                tr('fav'),
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
                                     color: kPrimaryColor,
@@ -339,7 +340,7 @@ class NormalProfileScreen extends StatelessWidget {
                                 height: 10.h,
                               ),
                               Text(
-                                'ملصقاتي',
+                                tr('mines'),
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
                                     color: kPrimaryColor,
@@ -368,7 +369,7 @@ class NormalProfileScreen extends StatelessWidget {
                           width: 25.w,
                         ),
                         Text(
-                          'بياناتي',
+                          tr('ourData'),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               color: kBlackColor,
@@ -401,7 +402,7 @@ class NormalProfileScreen extends StatelessWidget {
                             width: 25.w,
                           ),
                           Text(
-                            'كلمة المرور',
+                            tr('kPasswordHint'),
                             style: TextStyle(
                                 fontFamily: kTheArabicSansLight,
                                 color: kBlackColor,
@@ -427,7 +428,7 @@ class NormalProfileScreen extends StatelessWidget {
                         width: 25.w,
                       ),
                       Text(
-                        'تواصل معنا',
+                        tr('contact_us'),
                         style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             color: kBlackColor,
@@ -457,7 +458,7 @@ class NormalProfileScreen extends StatelessWidget {
                         width: 25.w,
                       ),
                       Text(
-                        'حـول المتجر',
+                        tr('about_shop'),
                         style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             color: kBlackColor,
@@ -507,7 +508,7 @@ class NormalProfileScreen extends StatelessWidget {
                             width: 10.w,
                           ),
                           Text(
-                            'تسجيل الخروج',
+                            tr('logout'),
                             style: TextStyle(
                                 fontFamily: kTheArabicSansLight,
                                 color: kWhiteColor,

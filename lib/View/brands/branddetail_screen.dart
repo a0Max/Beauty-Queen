@@ -190,7 +190,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                           onTap: () {
                             Get.to( FilterByBrandsContainer(brandId: widget.brandId,));
                           },
-                          child: Text('فلترة النتائج',
+                          child: Text(tr('filter_result'),
                               style: TextStyle(
                                 color: kBlackColor,
                                 fontSize: 18.sp,
@@ -217,7 +217,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
               child: Padding(
                 padding: EdgeInsets.only(right: 17.h),
                 child: Text(
-                    'عدد المنتجات: ${controller.generalSearchData.value.products?.total ?? ''}',
+                    '${tr('count_items')}: ${controller.generalSearchData.value.products?.total ?? ''}',
                     style: const TextStyle(
                       fontFamily: kTheArabicSansLight,
                       color: AppColors.kGrayColor,

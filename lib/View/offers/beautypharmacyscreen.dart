@@ -106,7 +106,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
                   child: Text(
-                      'عروض مميزة و حصرية لدينا و متاحة فقط للطلب اونلاين عبر الموقع',
+                      tr('offerDes'),
                       style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         color: AppColors.mainColor,

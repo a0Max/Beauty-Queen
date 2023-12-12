@@ -120,7 +120,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                   height: 14.h,
                 ),
                 Center(
-                  child: Text('التخفيضات',
+                  child: Text(tr('offers_sale_down'),
                       style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         color: AppColors.kBlackColor,
@@ -209,7 +209,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                               onTap: () {
                                 Get.to(const FilterByContainer());
                               },
-                              child: Text('فلترة النتائج',
+                              child: Text(tr('filter_result'),
                                   style: TextStyle(
                                     color: AppColors.kBlackColor,
                                     fontSize: 18.sp,
@@ -239,7 +239,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                   child: Padding(
                     padding: EdgeInsets.only(right: 16.w),
                     child: Text(
-                        'عدد المنتجات: ${_controller.generalSearchData.value.salesCount ?? ''}',
+                        '${tr('count_items')}: ${_controller.generalSearchData.value.salesCount ?? ''}',
                         style: TextStyle(
                           fontFamily: kTheArabicSansLight,
                           color: AppColors.kGrayColor,
@@ -267,8 +267,8 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 const SizedBox(height: 40,),
 
                  if (_controller.dataProducts.value.isNotEmpty)...{
-                   Text('النتائج: ${_controller.dataProducts.value
-                       .length} من ${_controller.generalSearchData.value
+                   Text('${tr('result')}: ${_controller.dataProducts.value
+                       .length} ${tr('to')} ${_controller.generalSearchData.value
                        .salesCount}'),
                    const SizedBox(height: 10,),
                    SizedBox(

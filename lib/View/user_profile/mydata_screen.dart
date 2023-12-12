@@ -74,7 +74,7 @@ class _MyDataScreen extends State<MyDataScreen> {
               )),
         ],
         title: Text(
-          "بياناتي",
+          tr('ourData'),
           style: TextStyle(
               fontFamily: kTheArabicSansLight,
               color: kBlackColor,
@@ -324,7 +324,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomButton(
-                          text: "حفظ",
+                          text: tr('save'),
                           backgroundColor: kPrimaryColor,
                           width: 160.w,
                           height: 40.26.h,
@@ -338,7 +338,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                       CustomButton(
                           border:
                               Border.all(color: kPrimaryColor, width: 1.56.w),
-                          text: "تعديــل",
+                          text: tr('edit2'),
                           backgroundColor: kWhiteColor,
                           width: 160.w,
                           height: 40.26.h,

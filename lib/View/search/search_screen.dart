@@ -105,7 +105,7 @@ class _SearchScreen extends State<SearchScreen> {
                 Container(
                   alignment: Alignment.centerRight,
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: Text('نتائج البحث على: ${_controller.keyWord.value}', style: TextStyle(
+                    child: Text('${tr('result_of_search')}: ${_controller.keyWord.value}', style: TextStyle(
                       fontFamily: kTheArabicSansLight,
                       color: AppColors.kGrayColor,
                       fontSize: 17.sp,
@@ -258,7 +258,7 @@ class _SearchScreen extends State<SearchScreen> {
                               onTap: () {
                                 Get.to(const FilterBySearchContainer());
                               },
-                              child: Text('فلترة النتائج',
+                              child: Text(tr('filter_result'),
                                   style: TextStyle(
                                     color: AppColors.kBlackColor,
                                     fontSize: 18.sp,
@@ -288,7 +288,7 @@ class _SearchScreen extends State<SearchScreen> {
                   child: Padding(
                     padding: EdgeInsets.only(right: 16.w),
                     child: Text(
-                        'عدد المنتجات: ${_controller.generalSearchData.value.products?.total ?? ''}',
+                        '${tr('count_items')}: ${_controller.generalSearchData.value.products?.total ?? ''}',
                         style: TextStyle(
                           fontFamily: kTheArabicSansLight,
                           color: AppColors.kGrayColor,
@@ -319,7 +319,7 @@ class _SearchScreen extends State<SearchScreen> {
 
                 if (_controller.dataProducts.value.isNotEmpty) ...{
                   Text(
-                      'النتائج: ${_controller.dataProducts.value.length} من ${_controller.generalSearchData.value.products?.total}'),
+                      '${tr('result')}: ${_controller.dataProducts.value.length} ${tr('to')} ${_controller.generalSearchData.value.products?.total}'),
                   const SizedBox(
                     height: 10,
                   ),

@@ -59,13 +59,13 @@ class _SignUpPage extends State<SignUpPage>{
 
       Navigator.of(context).pop();
 
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
 
     } catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
 
     }
   }
@@ -223,7 +223,7 @@ class _SignUpPage extends State<SignUpPage>{
                   height: 50.26.h,
                   borderRadius: 8.84.r,
                   backgroundColor: AppColors.kPrimaryColor,
-                  text: 'التسجيل',
+                  text: tr('signUp'),
                   onPressed: _submit,
                   textStyle: TextStyle(
                       fontSize: 20.85.sp,

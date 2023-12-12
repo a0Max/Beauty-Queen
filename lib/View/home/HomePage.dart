@@ -1015,7 +1015,7 @@ class _HomePageState extends State<HomePage> {
                                     description: _controller.homeData.value
                                             .specials?[index].description ??
                                         '',
-                                    buttonText: 'تسوقي الأن',
+                                    buttonText: tr('shopNow'),
 
                                   ),
                             )),

@@ -3,6 +3,7 @@
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/widgets/CustomFormField.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -445,21 +446,21 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'المجموع:',
+                    '${tr('total')}:',
                     style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         fontSize: 24.sp,
                         fontWeight: FontWeight.w600,
                         color: kBlackColor),
                   ),
-                  Text(
-                    '345 دل',
-                    style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryColor),
-                  ),
+                  // Text(
+                  //   '345 دل',
+                  //   style: TextStyle(
+                  //       fontFamily: kTheArabicSansLight,
+                  //       fontSize: 24.sp,
+                  //       fontWeight: FontWeight.w600,
+                  //       color: kPrimaryColor),
+                  // ),
                 ],
               ),
             ),
@@ -592,7 +593,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 ),
                 Text.rich(TextSpan(children: [
                   TextSpan(
-                    text: 'المجموع\n',
+                    text: tr('total'),
                     style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         fontSize: 18.83.sp,
@@ -1386,7 +1387,7 @@ class SummaryScreen extends StatelessWidget {
                 ),
                 Text.rich(TextSpan(children: [
                   TextSpan(
-                    text: 'المجموع\n',
+                    text: tr('total'),
                     style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         fontSize: 18.83.sp,

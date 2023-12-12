@@ -120,7 +120,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'كل الماركات العاليمة',
+                          tr('all_brands_in_world'),
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             fontSize: 31.73.sp,
@@ -128,7 +128,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        Text('بين يديك\n',
+                        Text(tr('on_hand'),
                             style: TextStyle(
                                 color: AppColors.kPrimaryColor,
                                 fontFamily: kTheArabicSansBold,
@@ -186,7 +186,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'كل ماتحتاجينه',
+                          tr('all_needed'),
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             fontSize: 33.73.sp,
@@ -194,7 +194,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        Text('في مكان واحد\n',
+                        Text(tr('in_one_place'),
                             style: TextStyle(
                                 color: AppColors.kPrimaryColor,
                                 fontFamily: kTheArabicSansLight,

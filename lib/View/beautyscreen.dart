@@ -1,4 +1,5 @@
 import 'package:beauty_queen/widgets/CustomAppBar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -220,7 +221,7 @@ class _BeautyPharmaScreenState extends State<BeautyPharmaScreen> {
                           onTap: () {
                             Get.to(const FilterByContainer());
                           },
-                          child: Text('فلترة النتائج',
+                          child: Text(tr('filter_result'),
                               style: TextStyle(
                                 color: kBlackColor,
                                 fontSize: 18.sp,

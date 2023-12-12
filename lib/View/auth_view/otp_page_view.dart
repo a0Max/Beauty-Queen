@@ -61,13 +61,13 @@ class _OtpPage extends State<OtpPage> {
       if (!context.mounted) return;
 
       Get.back();
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
 
     } catch (e) {
       if (!context.mounted) return;
 
       Get.back();
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
 
     }
   }

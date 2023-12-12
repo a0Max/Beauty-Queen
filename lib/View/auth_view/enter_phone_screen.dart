@@ -48,13 +48,13 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen> {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
 
     } catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
 
     }
   }

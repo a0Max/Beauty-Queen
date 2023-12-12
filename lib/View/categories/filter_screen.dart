@@ -102,7 +102,7 @@ class _FliterScreenState extends State<FliterScreen> {
                 padding: EdgeInsets.only(right: 17.h),
                 child: Obx(
                   () => Text.rich(TextSpan(
-                      text: "الأقسام / ",
+                      text: "${tr('categories')} / ",
                       style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         color: AppColors.kGrayColor,
@@ -266,7 +266,7 @@ class _FliterScreenState extends State<FliterScreen> {
                           onTap: () {
                             Get.to(const FilterByCategoryContainer());
                           },
-                          child: Text('فلترة النتائج',
+                          child: Text(tr('filter_result'),
                               style: TextStyle(
                                 color: AppColors.kBlackColor,
                                 fontSize: 18.sp,
@@ -295,7 +295,7 @@ class _FliterScreenState extends State<FliterScreen> {
               child: Padding(
                 padding: EdgeInsets.only(right: 17.h),
                 child: Text(
-                    'عدد المنتجات: ${_controller.generalSearchData.value.products?.total ?? ''}',
+                    '${tr('count_items')}: ${_controller.generalSearchData.value.products?.total ?? ''}',
                     style: const TextStyle(
                       fontFamily: kTheArabicSansLight,
                       color: AppColors.kGrayColor,

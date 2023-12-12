@@ -1,6 +1,7 @@
 
 // import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/widgets/loading.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -39,7 +40,7 @@ class TabScreenTwo extends StatelessWidget {
                   borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
-              hintText: 'أكتب تقييماً...',
+              hintText: tr('writeReview'),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w))),
         ),
@@ -51,7 +52,7 @@ class TabScreenTwo extends StatelessWidget {
                 controller.getImage();
               },
               child: Text(
-                'إضافة صورة',
+                tr('addPic'),
                 style: TextStyle(
                     fontFamily: kTheArabicSansLight,
                     decorationColor: AppColors.kPrimaryColor,
@@ -86,7 +87,7 @@ class TabScreenTwo extends StatelessWidget {
             color: AppColors.kPrimaryColor,
             child: Center(
               child: Text(
-                'إرسال',
+                tr('send2'),
                 style: TextStyle(
                     fontFamily: kTheArabicSansLight,
                     fontSize: 15.sp,
