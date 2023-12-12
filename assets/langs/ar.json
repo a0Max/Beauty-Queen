@@ -118,7 +118,9 @@
   "nackName": "اللقب",
   "birthDay": "تاريخ الميلاد",
   "city": "المدينة",
-  "area": "المنطقة"
-
+  "area": "المنطقة",
+"enterNewPassword": "كلمة المرور الجديدة",
+"enterNewPassword2": "تأكيد كلمة المرور",
+  "currentPassword": "كلمة المرور الحالية"
 
 }

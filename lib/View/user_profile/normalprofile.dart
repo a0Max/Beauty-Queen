@@ -1,6 +1,6 @@
 import 'package:beauty_queen/View/favourtie_screen.dart';
 import 'package:beauty_queen/View/user_profile/mydata_screen.dart';
-import 'package:beauty_queen/View/password_screen.dart';
+import 'package:beauty_queen/View/user_profile/password_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/images.dart';
@@ -358,7 +358,7 @@ class NormalProfileScreen extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     onTap: () {
-                      Get.to( MyDataScreen());
+                      Get.to(MyDataScreen());
                     },
                     child: Row(
                       children: [
@@ -377,7 +377,7 @@ class NormalProfileScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                             onPressed: () {
-                              Get.to( MyDataScreen());
+                              Get.to(MyDataScreen());
                             },
                             icon: const Icon(Icons.arrow_forward_ios))
                       ],
@@ -387,28 +387,34 @@ class NormalProfileScreen extends StatelessWidget {
                     color: kDividerrColor,
                     thickness: 2,
                   ),
-                  Row(
-                    children: [
-                      Image.asset(klockIconImage),
-                      SizedBox(
-                        width: 25.w,
-                      ),
-                      Text(
-                        'كلمة المرور',
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: kBlackColor,
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const Spacer(),
-                      IconButton(
-                          onPressed: () {
-                            Get.to(const PasswordScreen());
-                          },
-                          icon: const Icon(Icons.arrow_forward_ios))
-                    ],
-                  ),
+                  InkWell(
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      onTap: () {
+                        Get.to( PasswordScreen());
+                      },
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(AppImages.passwordImage),
+                          SizedBox(
+                            width: 25.w,
+                          ),
+                          Text(
+                            'كلمة المرور',
+                            style: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                color: kBlackColor,
+                                fontSize: 19.sp,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          const Spacer(),
+                          IconButton(
+                              onPressed: () {
+                                Get.to( PasswordScreen());
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios))
+                        ],
+                      )),
                   const Divider(
                     color: kDividerrColor,
                     thickness: 2,
@@ -474,8 +480,7 @@ class NormalProfileScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      final AuthController controller =
-                          Get.put(AuthController());
+                      //
                       controller.logoutUserData();
                       Navigator.pushAndRemoveUntil(
                           context,

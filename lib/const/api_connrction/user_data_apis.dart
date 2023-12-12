@@ -221,4 +221,35 @@ class UserDataApis extends ApiProvider {
   }
 
 
+  Future<void> updatePasswordRequest(
+      {required String currentPassword, required String newPassword, required String reNewPassword}) async {
+    final cookies = await getCookies();
+    final token = await getUserToken();
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
+      queryParameters: {
+        "password": currentPassword,
+        "new_password": newPassword,
+        "new_password_confirmations": reNewPassword
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+
+          // 'Country-Id': await _getCountryCode(),
+        },
+      ),
+    );
+    await setTheHeader(response.headers);
+
+    if (validResponse(response.statusCode!)) {
+
+    } else {
+      throw response.data;
+    }
+  }
 }
