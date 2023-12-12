@@ -68,7 +68,7 @@ class BrandsDataApis extends ApiProvider {
   Future<GeneralSearchModel> getOffersDataRequest() async {
     final token = await getUserToken();
     final response = await dio.get(
-      '${Connection.apiURL}${ApiProvider.getBrandsPageEndPoint}',
+      '${Connection.apiURL}${ApiProvider.getOffersProductEndPoint}',
       options: Options(
         headers: {
           ...apiHeaders,
