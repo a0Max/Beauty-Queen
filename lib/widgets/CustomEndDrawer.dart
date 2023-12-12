@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../View/categories/filter_screen.dart';
 import '../View/gifts/GuidanceScreen.dart';
 import '../View/Quinaprogram_screen.dart';
 import '../View/offers/beautypharmacyscreen.dart';
@@ -17,12 +18,15 @@ import '../View/normalprofile.dart';
 import '../View/orders_screen.dart';
 import '../const/app_colors.dart';
 import '../const/colors.dart';
+import '../controller/AlKasam_controller/alkasam_controller.dart';
 
 class MyEndDrawer extends StatelessWidget {
   const MyEndDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AlkasamController controller = Get.put(AlkasamController());
+
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Align(
@@ -237,7 +241,8 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const BeautyPharmaScreen());
+                  controller.updateCurrentCategoryId(newId:183, getChild: false);
+                  Get.to(FliterScreen(categoryId: 183,));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -262,8 +267,9 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const HairDryerScreen());
-                },
+                  controller.updateCurrentCategoryId(newId:53, getChild: false);
+                  Get.to(FliterScreen(categoryId: 53,));
+                  },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
                   child: Text(

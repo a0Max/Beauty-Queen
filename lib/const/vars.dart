@@ -1,5 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 
+import '../models/grid_item_data.dart';
+import 'app_images.dart';
+
 abstract class Connection {
   Connection._();
 
@@ -48,6 +51,73 @@ abstract class Connection {
   static const String bundleId = '';
   static const String appstoreId = '';
   static const String mapKey = 'AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE';
+
+  static List<GridItemData> gridData = [
+    GridItemData(
+      imageAsset: AppImages.khandgranateImage, // Replace with your image
+      label: tr("kPerfumes"),
+      id:44,
+    ),
+    GridItemData(
+      imageAsset: AppImages.kpaintImage, // Replace with your image
+      label: tr('kMakeup'),
+      id:43,
+    ),
+    // Add more data for additional grid items
+    GridItemData(
+      imageAsset: AppImages.kshampooImage, // Replace with your image
+      label: tr('kHaircare'),
+      id:46,
+    ),
+    GridItemData(
+      imageAsset: AppImages.kSkincare, // Replace with your image
+      label: tr('kSkincare'),
+      id:45,
+    ),
+    GridItemData(
+      imageAsset: AppImages.khandpumpImage, // Replace with your image
+      label: tr('kBodyCareAndRelaxation'),
+      id:48,
+    ),
+    GridItemData(
+      imageAsset: AppImages.kPersonalCare, // Replace with your image
+      label: tr('kPersonalCare'),
+      id:47,
+    ),
+
+    GridItemData(
+      imageAsset: AppImages.contactLenses, // Replace with your image
+      label: tr('contactـlenses'),
+      id:50,
+    ),
+    GridItemData(
+      imageAsset: AppImages.shavingAndHairRemoval, // Replace with your image
+      label: tr('Shaving_and_hair_removal'),
+      id:49,
+    ),
+
+    GridItemData(
+      imageAsset: AppImages.knailImage, // Replace with your image
+      label: tr('kNails'),
+      id:52,
+    ),
+    GridItemData(
+      imageAsset: AppImages.eyelashes, // Replace with your image
+      label: tr('kLashes'),
+      id:51,
+    ),
+    GridItemData(
+      imageAsset: AppImages.kBladeImage, // Replace with your image
+      label: tr('kElectricalAppliances'),
+      id:53,
+    ),
+    GridItemData(
+      imageAsset: AppImages.kfirstaidImage, // Replace with your image
+      label: tr('kPharmacyOfBeauty'),
+      id:183,
+    ),
+  ];
+
 }
 
 abstract class TypeOfOptions{

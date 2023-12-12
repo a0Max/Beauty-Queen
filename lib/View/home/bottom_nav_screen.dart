@@ -3,18 +3,33 @@ import 'package:beauty_queen/View/home/HomePage.dart';
 import 'package:beauty_queen/controller/nav_bar_controller/NavBarController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../widgets/CustomNavBar.dart';
 import '../categories/alkasam_screen.dart';
 import '../brands/brands_screen.dart';
 import '../discount/discounts_screen.dart';
 
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   const MainView({super.key});
 
   @override
+  State<StatefulWidget> createState() {
+    return _MainView();
+  }
+}
+
+class _MainView extends State<MainView>{
+  final AlkasamController controller2 = Get.put(AlkasamController());
+  final NavController controller = Get.put(NavController());
+
+  @override
+  void initState() {
+    super.initState();
+    controller2.getAlkasamDataController();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final NavController controller = Get.put(NavController());
-    final NavController controllerNav = Get.put(NavController());
 
     final List<Widget> screens = [
       const HomePage(),
@@ -23,7 +38,7 @@ class MainView extends StatelessWidget {
       const BrandScreen(),
       const GuidanceScreen()
     ];
-    controllerNav.getCountOfCart();
+    controller.getCountOfCart();
     return Scaffold(
       body: Obx(() => screens[controller.currentIndex.value]),
       bottomNavigationBar: const ReusableBottomNavigationBar(),
