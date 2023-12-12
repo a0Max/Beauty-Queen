@@ -183,7 +183,7 @@ class HomeDataApis extends ApiProvider {
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.submitReviewProductEndPoint}',
       queryParameters: {
-        if(isBlank(rating.toString())==false)'rating': rating,
+        'rating': rating??1,
         'product_id': productId,
         'comment': comment,
         if (image != null)
@@ -201,8 +201,8 @@ class HomeDataApis extends ApiProvider {
       ),
     );
     if (validResponse(response.statusCode!)) {
-      int count = response.data['counter'];
-      return count;
+      // int count = response.data['counter'];
+      // return count;
     } else {
       throw 0;
     }

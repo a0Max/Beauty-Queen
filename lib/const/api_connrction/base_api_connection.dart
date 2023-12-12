@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:firebase_performance_dio/firebase_performance_dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +13,7 @@ abstract class ApiProvider {
   ApiProvider() {
     // Attach Interceptors.
     dio.interceptors.add(_performanceInterceptor);
-    // if (kDebugMode) dio.interceptors.add(_logger);
+    if (kDebugMode) dio.interceptors.add(_logger);
   }
 
   // static final ApiProvider instance = ApiProvider._();

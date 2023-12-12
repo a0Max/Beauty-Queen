@@ -185,7 +185,39 @@ class ProductProfileController extends GetxController
     rate.value = newRate;
   }
 
+
+  showCompleteComment(){
+    var context = Get.context;
+
+    showDialog(
+        context: context!,
+        builder: (BuildContext context) {
+          return CustomAlertDialog(
+            buttonTwo: false,
+            height: 172.29.h,
+            width: 339.97.w,
+            dilougText:
+            'تم ارسال تقييمك بنجاح. سيتم نشره حال موافقة مسؤولين المتجر عليه',
+            buttonOneText: 'حسناً',
+          );
+        });
+  }
   verifyToAddReview({required String comment}) async {
-    await _api.addReview(comment: comment, productId: "${productData.value.product?.id??0}");
+    try {
+      await _api.addReview(comment: comment,
+          productId: "${productData.value.product?.id ?? 0}",
+          image: imagePath.value);
+      showCompleteComment();
+    } on DioException catch (e) {
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } catch (e) {
+      log('error:$e');
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+    }
+  }
+
+  clearData(){
+    rate.value = 0;
+    imagePath.value = '';
   }
 }

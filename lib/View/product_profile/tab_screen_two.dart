@@ -76,18 +76,10 @@ class TabScreenTwo extends StatelessWidget {
             LoadingScreen.show(context);
             await controller.verifyToAddReview(comment: commentController.text);
             Navigator.of(context).pop();
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return CustomAlertDialog(
-                    buttonTwo: false,
-                    height: 172.29.h,
-                    width: 339.97.w,
-                    dilougText:
-                        'تم ارسال تقييمك بنجاح. سيتم نشره حال موافقة مسؤولين المتجر عليه',
-                    buttonOneText: 'حسناً',
-                  );
-                });
+            controller.clearData();
+            commentController.clear();
+
+
           },
           child: Container(
             height: 37.83.h,
