@@ -231,7 +231,7 @@ class UserDataApis extends ApiProvider {
       queryParameters: {
         "password": currentPassword,
         "new_password": newPassword,
-        "new_password_confirmations": reNewPassword
+        "new_password_confirmation": reNewPassword
       },
       options: Options(
         headers: {

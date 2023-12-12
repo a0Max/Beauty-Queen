@@ -139,8 +139,11 @@ abstract class SortTypes{
   };
 }
 
-
 abstract class AccountTypes{
   static const queena = 'queena1';
 }
 
+abstract class LinkTypes{
+  static const brand = 'brand';
+  static const product = 'product';
+}

@@ -11,6 +11,7 @@ import '../../const/app_colors.dart';
 import '../../const/images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
+import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
@@ -21,6 +22,9 @@ import '../../widgets/CustomProductCard.dart';
 import '../../widgets/ScrollableContainerList.dart';
 import '../../widgets/custom_horizontal_list.dart';
 import '../../widgets/loading/home_loading.dart';
+import '../brands/branddetail_screen.dart';
+import '../categories/filter_screen.dart';
+import '../offers/beautypharmacyscreen.dart';
 import '../product_profile/products_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -86,9 +90,9 @@ class _HomePageState extends State<HomePage> {
           showBagIcon: true,
           showFavIcon: true,
           showPersonIcon: true,
-          // onPressed: () {
-          //   _scaffoldKey.currentState?.openEndDrawer();
-          // },
+          onPressed: () {
+            _scaffoldKey.currentState?.openEndDrawer();
+          },
           isScrolled: _isScrolled,
           countCart:_controllerNav.countCart.value,
           searchBarWidth: searchBarWidth, // Replace with your desired width
@@ -128,7 +132,17 @@ class _HomePageState extends State<HomePage> {
                               items: List.generate(
                                   _controller.sliders.length ?? 0,
                                   (index) => GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          if (_controller
+                                              .sliders[index].linkType == LinkTypes.brand){
+                                            Get.to(BrandDetailScreen(brandId: int.parse(_controller
+                                                .sliders[index].linkId),));
+                                          }else if (_controller.sliders[index].linkType == LinkTypes.product){
+                                            Get.to(ItemProfilePage(itemId:int.parse(_controller
+                                                .sliders[index].linkId)));
+
+                                          }
+                                        },
                                         child: CachedNetworkImage(
                                           imageUrl: Connection.urlOfSlider(
                                               image: _controller
@@ -208,61 +222,70 @@ class _HomePageState extends State<HomePage> {
                           itemCount:
                               _controller.homeData.value.newItems?.length ?? 0,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 9.w),
-                              child: SizedBox(
-                                width: 262.45.w,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Container(
-                                      width: 262.45.w,
-                                      height: 262.45.h,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: CachedNetworkImageProvider(
-                                              Connection.urlOfSpecial(
-                                                  image: _controller
-                                                          .homeData
-                                                          .value
-                                                          .newItems?[index]
-                                                          .image ??
-                                                      '')),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 262.45.w,
-                                      height: 77.h,
-                                      alignment: Alignment.center,
-                                      decoration: const BoxDecoration(
-                                          color: AppColors.kPrimaryColor),
-                                      child: Padding(
-                                        padding: EdgeInsets.all(9.r),
-                                        child: Text(
-                                          _controller
-                                                  .homeData
-                                                  .value
-                                                  .newItems?[index]
-                                                  .description ??
-                                              '',
-                                          textAlign: TextAlign.right,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 3,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13.1.sp,
-                                            fontFamily: kTheArabicSansLight,
-                                            fontWeight: FontWeight.w700,
-                                            // height: 1.5,
+                            return GestureDetector(
+                              onTap: (){
+                                if (_controller.homeData.value.newItems?[index].linkId!=null) {
+                                  Get.to(ItemProfilePage(itemId: int.parse(
+                                      _controller.homeData.value
+                                          .newItems?[index].linkId ?? '0')));
+                                }
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 9.w),
+                                child: SizedBox(
+                                  width: 262.45.w,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Container(
+                                        width: 262.45.w,
+                                        height: 262.45.h,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                                Connection.urlOfSpecial(
+                                                    image: _controller
+                                                            .homeData
+                                                            .value
+                                                            .newItems?[index]
+                                                            .image ??
+                                                        '')),
+                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Container(
+                                        width: 262.45.w,
+                                        height: 77.h,
+                                        alignment: Alignment.center,
+                                        decoration: const BoxDecoration(
+                                            color: AppColors.kPrimaryColor),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(9.r),
+                                          child: Text(
+                                            _controller
+                                                    .homeData
+                                                    .value
+                                                    .newItems?[index]
+                                                    .description ??
+                                                '',
+                                            textAlign: TextAlign.right,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13.1.sp,
+                                              fontFamily: kTheArabicSansLight,
+                                              fontWeight: FontWeight.w700,
+                                              // height: 1.5,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
@@ -368,16 +391,21 @@ class _HomePageState extends State<HomePage> {
                                 height: 0,
                               ),
                             ),
-                            Text(
-                              tr('see_all'),
-                              style: TextStyle(
-                                color: AppColors.kPrimaryColor,
-                                fontSize: 18.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w400,
-                                decoration: TextDecoration.underline,
-                                decorationColor: AppColors.kPrimaryColor,
-                                height: 0,
+                            GestureDetector(
+                              onTap: (){
+                                Get.to(const BeautyPharmacyScreen());
+                              },
+                              child: Text(
+                                tr('see_all'),
+                                style: TextStyle(
+                                  color: AppColors.kPrimaryColor,
+                                  fontSize: 18.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w400,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: AppColors.kPrimaryColor,
+                                  height: 0,
+                                ),
                               ),
                             ),
                           ],
@@ -572,18 +600,28 @@ class _HomePageState extends State<HomePage> {
                       ///banners
                       ...List.generate(
                         _controller.homeData.value.banners?.length ?? 0,
-                        (index) => Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 179.28.h,
-                          margin: const EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: CachedNetworkImageProvider(
-                                  Connection.urlOfBanner(
-                                      image: _controller.homeData.value
-                                              .banners?[index].banner ??
-                                          '')),
-                              fit: BoxFit.cover,
+                        (index) => GestureDetector(
+                          onTap: (){
+                            if (_controller.homeData.value.banners?[index].linkType == LinkTypes.brand){
+                              Get.to(BrandDetailScreen(brandId: int.parse(_controller.homeData.value.banners?[index].linkId??'0'),));
+                            }else if (_controller.homeData.value.banners?[index].linkType == LinkTypes.product){
+                              Get.to(ItemProfilePage(itemId:int.parse(_controller.homeData.value.banners?[index].linkId??'0')));
+
+                            }
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 179.28.h,
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: CachedNetworkImageProvider(
+                                    Connection.urlOfBanner(
+                                        image: _controller.homeData.value
+                                                .banners?[index].banner ??
+                                            '')),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -619,16 +657,22 @@ class _HomePageState extends State<HomePage> {
                                       height: 0,
                                     ),
                                   ),
-                                  Text(
-                                    tr('all_offers_sale_down'),
-                                    style: TextStyle(
-                                      color: AppColors.kPrimaryColor,
-                                      fontSize: 18.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      decorationColor: AppColors.kPrimaryColor,
-                                      decoration: TextDecoration.underline,
-                                      height: 0,
+                                  GestureDetector(
+                                    onTap: (){
+                                      final NavController controller = Get.put(NavController());
+                                      controller.updateIndex(2);
+                                    },
+                                    child: Text(
+                                      tr('all_offers_sale_down'),
+                                      style: TextStyle(
+                                        color: AppColors.kPrimaryColor,
+                                        fontSize: 18.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        decorationColor: AppColors.kPrimaryColor,
+                                        decoration: TextDecoration.underline,
+                                        height: 0,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -760,16 +804,22 @@ class _HomePageState extends State<HomePage> {
                                 height: 0,
                               ),
                             ),
-                            Text(
-                              tr('all_brands'),
-                              style: TextStyle(
-                                color: AppColors.kPrimaryColor,
-                                fontSize: 18.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w400,
-                                decorationColor: AppColors.kPrimaryColor,
-                                decoration: TextDecoration.underline,
-                                height: 0,
+                            GestureDetector(
+                              onTap: (){
+                                final NavController controller = Get.put(NavController());
+                                controller.updateIndex(3);
+                              },
+                              child: Text(
+                                tr('all_brands'),
+                                style: TextStyle(
+                                  color: AppColors.kPrimaryColor,
+                                  fontSize: 18.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w400,
+                                  decorationColor: AppColors.kPrimaryColor,
+                                  decoration: TextDecoration.underline,
+                                  height: 0,
+                                ),
                               ),
                             )
                           ],
@@ -787,17 +837,24 @@ class _HomePageState extends State<HomePage> {
                         height: 600.h,
                         child: Stack(
                           children: [
-                            Container(
-                              // width: 705.83.w,
-                              height: 281.30.h,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                      Connection.urlOfDiscover(
-                                          image: _controller.homeData.value
-                                                  .discover?.info?.mobile ??
-                                              '')),
-                                  fit: BoxFit.cover,
+                            GestureDetector(
+                              onTap: (){
+                                final AlkasamController controller = Get.put(AlkasamController());
+                                controller.updateCurrentCategoryId(newId:187, getChild: false);
+                                Get.to(FliterScreen(categoryId: 187,));
+                              },
+                              child: Container(
+                                // width: 705.83.w,
+                                height: 281.30.h,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: CachedNetworkImageProvider(
+                                        Connection.urlOfDiscover(
+                                            image: _controller.homeData.value
+                                                    .discover?.info?.mobile ??
+                                                '')),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),

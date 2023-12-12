@@ -103,7 +103,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                   radix: 16)),
               child: CachedNetworkImage(imageUrl: Connection.urlOfBrands3(image:controller.generalSearchData.value.brand?.logo??'')),
             ),
-            CachedNetworkImage(imageUrl: Connection.urlOfBrands3(image:controller.generalSearchData.value.brand?.mobileSlides?.first.file??'')),
+            // CachedNetworkImage(imageUrl: Connection.urlOfBrands3(image:controller.generalSearchData.value.brand?.mobileSlides?.first.file??'')),
             SizedBox(
               height: 16.h,
             ),

@@ -85,7 +85,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
         endDrawer: const MyEndDrawer(),
         body: SingleChildScrollView(
           controller: _scrollController,
-          child: Padding(
+          child: Obx(()=>Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: Column(
               children: [
@@ -264,7 +264,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                     ))
               ],
             ),
-          ),
+          )),
         ));
   }
 }
