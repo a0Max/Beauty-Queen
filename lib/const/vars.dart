@@ -138,3 +138,9 @@ abstract class SortTypes{
     priceDesc: tr(priceDesc)
   };
 }
+
+
+abstract class AccountTypes{
+  static const queena = 'queena1';
+}
+

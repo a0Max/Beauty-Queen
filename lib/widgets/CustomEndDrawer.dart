@@ -14,7 +14,7 @@ import '../View/offers/beautypharmacyscreen.dart';
 import '../View/beautyscreen.dart';
 import '../View/discount/discounts_screen.dart';
 import '../View/discount/filterby_screen.dart';
-import '../View/normalprofile.dart';
+import '../View/user_profile/normalprofile.dart';
 import '../View/orders_screen.dart';
 import '../const/app_colors.dart';
 import '../const/colors.dart';

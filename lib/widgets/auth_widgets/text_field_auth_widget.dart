@@ -10,12 +10,14 @@ class TextFieldAuthWidget extends StatelessWidget{
   final FormFieldValidator? validatorTextField;
   final TextEditingController? controler;
   final bool? obscureText;
+  final Function()? onTap;
+  final bool? readOnly;
   final Widget? suffixWidget;
   final TextStyle? hintStyle;
 
   final TextInputType? keyboardType;
 
-  const TextFieldAuthWidget({super.key, this.titleText, required this.hindText, this.controler, this.obscureText, this.suffixWidget, this.keyboardType, this.validatorTextField, this.hintStyle});
+  const TextFieldAuthWidget({super.key,this.onTap,this.readOnly, this.titleText, required this.hindText, this.controler, this.obscureText, this.suffixWidget, this.keyboardType, this.validatorTextField, this.hintStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,8 @@ class TextFieldAuthWidget extends StatelessWidget{
         TextFormField(
           obscureText: obscureText ?? false,
           controller: controler,
-
+          readOnly: readOnly??false,
+          onTap: onTap,
           keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hindText,

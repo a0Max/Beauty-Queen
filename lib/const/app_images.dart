@@ -57,5 +57,10 @@ class AppImages{
   static const String kqueencrownImage = "${mainPathToSvg}queencrown.svg";
   static const String filterTypeImage = "${mainPathToSvg}filter_type.svg";
   static const String sortTypeImage = "${mainPathToSvg}sort_type.svg";
+  static const String accountStarsImage = "${mainPathToSvg}account_stars.svg";
+  static const String chatImage = "${mainPathToSvg}Chat.svg";
+  static const String infoCircleImage = "${mainPathToSvg}Info-Circle.svg";
+  static const String passwordImage = "${mainPathToSvg}password.svg";
+  static const String profileImage = "${mainPathToSvg}Profile.svg";
 
 }

@@ -2,6 +2,7 @@
 import 'package:beauty_queen/const/vars.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../../models/city_area_model.dart';
 import '../../models/user_model.dart';
 import 'base_api_connection.dart';
 
@@ -174,4 +175,50 @@ class UserDataApis extends ApiProvider {
       ),
     );
   }
+
+  Future<List<CityAreaModel>> getCityDataRequest() async {
+    final token = await getUserToken();
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getCitiesDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      final List<CityAreaModel> l = [];
+      response.data['cities'].forEach((e) => l.add(CityAreaModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+  Future<List<CityAreaModel>> getAreaDataRequest({required int cityId}) async {
+    final token = await getUserToken();
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getAreasDataEndPoint}/$cityId',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      final List<CityAreaModel> l = [];
+      response.data['areas'].forEach((e) => l.add(CityAreaModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+
 }

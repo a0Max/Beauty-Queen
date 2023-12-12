@@ -18,10 +18,11 @@ class SplashScreen extends StatefulWidget {
 }
 class _SplashScreen extends State<SplashScreen>{
   final AuthController controller = Get.put(AuthController());
-@override
+  @override
   void initState() {
     super.initState();
     controller.startProgress();
+    controller.getCities();
   }
 
   @override
