@@ -9,21 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../View/product_profile/products_screen.dart';
-import '../const/app_colors.dart';
-import '../controller/home_controller/home_controller.dart';
-import '../models/options_model.dart';
-import '../models/product_options_model.dart';
-import '../models/sales_products_model.dart';
+import '../../View/product_profile/products_screen.dart';
+import '../../const/app_colors.dart';
+import '../../controller/home_controller/home_controller.dart';
+import '../../models/options_model.dart';
+import '../../models/product_options_model.dart';
+import '../../models/sales_products_model.dart';
 
 class CustomCardWidget extends StatefulWidget {
   final String imageUrl;
   final SalesProductsModel newArrival;
+  final double? width;
   final String? imgtxt;
   final String? price;
   final String? des;
   final String? inStock;
-  final double? width;
   final String? disprice;
   final List<ProductOptionsModel>? productOptions;
   final String? note;
@@ -33,10 +33,10 @@ class CustomCardWidget extends StatefulWidget {
       {super.key,
       required this.imageUrl,
       required this.newArrival,
+      this.width,
       this.imgtxt,
       this.price,
       this.des,
-        this.width,
       this.disprice,
       this.containertxt,
       this.note,
@@ -73,7 +73,11 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
       // height: 152.27.h,
       child: InkWell(
         onTap: () {
-          Get.to(ItemProfilePage(itemId:widget.newArrival.id??0));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                   ItemProfilePage(itemId:widget.newArrival.id??0)));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,

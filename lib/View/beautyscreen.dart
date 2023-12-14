@@ -8,7 +8,7 @@ import '../const/colors.dart';
 import '../const/images.dart';
 import '../const/styles.dart';
 import '../models/sales_products_model.dart';
-import '../widgets/CustomCardWidget.dart';
+import '../widgets/product_profile/CustomCardWidget.dart';
 import '../widgets/drawer/CustomEndDrawer.dart';
 import 'discount/filterby_screen.dart';
 

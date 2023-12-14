@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 // import '../../const/images.dart';
 import '../../const/vars.dart';
+import '../../widgets/shimmer/shimmer_cart_item.dart';
 import '../cart_tab_screen.dart';
 
 class CartScreen extends StatefulWidget {
@@ -99,7 +100,10 @@ class _CartScreen extends State<CartScreen>{
                       ],
                     ),
                   ),
+                  productController.isLoading.value==true?
 
+                  ShimmerCartItem()
+                      :
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Column(

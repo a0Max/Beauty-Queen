@@ -16,7 +16,7 @@ import '../../const/app_colors.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/search/search_controller.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_categories.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../brands/branddetail_screen.dart';

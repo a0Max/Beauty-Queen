@@ -93,10 +93,15 @@ class HomeController extends GetxController {
     await _api.removeWishlistRequest(productId: postId);
     getWishlist();
   }
+  RxBool isLoadingWishlist = false.obs;
 
   RxList wishlistList = [].obs;
   getWishlist() async {
+    isLoadingWishlist.value = true;
+
     wishlistList.value = await _api.getTheWishlist();
+    isLoadingWishlist.value = false;
+
   }
 
 }

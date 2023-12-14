@@ -20,7 +20,7 @@ import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/gift_controller/gift_controller.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
 import 'filterby_gifts_screen.dart';

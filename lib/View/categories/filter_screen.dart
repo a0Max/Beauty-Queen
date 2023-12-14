@@ -13,7 +13,7 @@ import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
-import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/custom_fliter_ container.dart';
 import '../../widgets/shimmer/shimmer_categories.dart';
 import '../../widgets/shimmer/shimmer_item.dart';

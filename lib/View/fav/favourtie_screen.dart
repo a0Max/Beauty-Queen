@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 import '../../const/vars.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/product_profile/CustomCardWidget.dart';
+import '../../widgets/shimmer/shimmer_item.dart';
 
 class FavScreen extends StatefulWidget {
   const FavScreen({super.key});
@@ -64,7 +65,14 @@ class _FavScreen extends State<FavScreen> {
                 SizedBox(
                   height: 28.85.h,
                 ),
+                _controller.isLoadingWishlist.value == true
+                    ?
                 Wrap(
+                  runSpacing: 7,
+                  children:
+                  List.generate(2, (index) => const ShimmerItem(isDelete:true)),
+                )
+                    :Wrap(
                   runSpacing: 7,
                   children: List.generate(
                     _controller.wishlistList.value.length,
@@ -73,8 +81,6 @@ class _FavScreen extends State<FavScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            print(
-                                '${_controller.wishlistList.value[index].id ?? 0}');
                             _controller.removeWishlist(
                                 postId:
                                     _controller.wishlistList.value[index].id ??

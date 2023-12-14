@@ -16,7 +16,7 @@ import '../../const/app_colors.dart';
 import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
 import 'filterby_screen.dart';
@@ -84,21 +84,15 @@ class _DiscountScreenState extends State<DiscountScreen> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
-            // showBagIcon: true,
-            // showFavIcon: true,
-            // showPersonIcon: true,
             showarrowIcon: widget.showBack==true?true:false,
             showBagIcon: widget.showBack==true?false:true,
             showFavIcon:  widget.showBack==true?false:true,
             showPersonIcon:  widget.showBack==true?false:true,
-
             countCart: _controllerNav.countCart.value,
             onPressed: () {
               _scaffoldKey.currentState?.openEndDrawer();
             },
             isScrolled: _isScrolled,
-
-            // Replace with your variable for scroll state
             searchBarWidth: searchBarWidth, // Replace with your desired width
             searchBarTranslationY: searchBarTranslationY,
             searchBarTranslationX: searchBarTranslationX,

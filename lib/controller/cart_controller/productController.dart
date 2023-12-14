@@ -13,13 +13,16 @@ class ProductController extends GetxController {
   var count = 1.obs;
   final _api = CartDataApis();
   Rx<CartModel> cartData = CartModel().obs ;
+  RxBool isLoading = false.obs;
 
   RxDouble totalPrice = 0.0.obs;
   RxInt totalCount = 0.obs;
 
   getCartData() async {
+    isLoading.value = true;
     cartData.value = await _api.cartDataRequest();
     updatePricesAndCount();
+    isLoading.value = false;
   }
 
   arrivedToMax(){

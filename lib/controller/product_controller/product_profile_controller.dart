@@ -21,6 +21,7 @@ class ProductProfileController extends GetxController
   var index = 0.obs;
   var productData = ProductModel().obs;
   final _api = HomeDataApis();
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -38,9 +39,12 @@ class ProductProfileController extends GetxController
   }
 
   getCurrentProduct({required int productId}) async {
+    isLoading.value = true;
+    productData.value = ProductModel();
     productData.value = await _api.getProductDataRequest(productId: productId);
     selectedOptions.value = List.generate(
         productData.value.productOptions?.length ?? 0, (index) => null);
+    isLoading.value = false;
   }
 
   RxList selectedOptions = [].obs;

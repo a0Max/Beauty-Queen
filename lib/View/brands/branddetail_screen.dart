@@ -12,7 +12,7 @@ import '../../const/vars.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
-import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';

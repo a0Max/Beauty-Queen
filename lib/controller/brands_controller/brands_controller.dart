@@ -11,7 +11,7 @@ import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class BrandsController extends GetxController {
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   final _api = BrandsDataApis();
   RxMap brandsData = {}.obs;
   var generalSearchData = GeneralSearchModel().obs;
