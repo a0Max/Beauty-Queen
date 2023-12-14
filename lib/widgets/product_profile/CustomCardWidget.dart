@@ -425,20 +425,12 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // if (widget.newArrival.offerPrice == null ||
-                        //     widget.newArrival.offerPrice == '' ||
-                        //     widget.newArrival.offerPrice == '' ||
-                        //     widget.newArrival.offerPrice?.split('').first ==
-                        //         '0') ...{
-                        //
-                        //
-                        // },
                         if (widget.newArrival.offerPrice != null &&
                             widget.newArrival.offerPrice != '' &&
                             widget.newArrival.offerPrice != '' &&
                             widget.newArrival.offerPrice?.split('').first !=
                                 '0') ...{
-                          Container(
+                          SizedBox(
                               width: widget.width??(MediaQuery.of(context).size.width / 2) - 40,
                               child:Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -501,7 +493,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                             ],
                           ))
 
-                        }else...{
+                        }
+                        else...{
                           Row(
                             children: [
                               Text(

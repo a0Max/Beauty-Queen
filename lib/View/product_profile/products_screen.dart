@@ -192,6 +192,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                   SizedBox(
                                     height: 10.h,
                                   ),
+                                  (controller.productData?.value?.last?.product?.offerPrice!=null ??false)?
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -215,38 +216,97 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               color: AppColors.kPrimaryColor),
                                         ),
                                       }else ...{
+                                        if (controller.productData.value.last.product.offerPrice != null &&
+                                            controller.productData.value.last.product.offerPrice  != '' &&
+                                            controller.productData.value.last.product.offerPrice  != '' &&
+                                            controller.productData.value.last.product.offerPrice?.split('').first !=
+                                                '0') ...{
+                                          SizedBox(
+                                              width: (MediaQuery.of(context).size.width / 2) - 40,
+                                              child:Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
 
-                                        if (isBlank(controller.productData.value.last
-                                            .getMinMax()
-                                            .first) && controller.productData.value.last
-                                            .getMinMax()
-                                            .first != '')...{
-                                          Text(
-                                            "${controller.productData.value.last
-                                                .getMinMax()
-                                                .first} ${tr('Del')} ",
-                                            style: TextStyle(
-                                                fontFamily: kTheArabicSansLight,
-                                                decoration: TextDecoration
-                                                    .lineThrough,
-                                                fontSize: 15.sp,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppColors.kBlackColor),
-                                          ),
-                                        },
-                                        Text(
-                                          "${controller.productData.value.last
-                                              .getMinMax()
-                                              .last} ${tr('Del')} ",
-                                          style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppColors.kPrimaryColor),
-                                        ),
+
+                                                      Text(
+                                                        "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                        textAlign: TextAlign.right,
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 15.16.sp,
+                                                          fontFamily: kTheArabicSansLight,
+                                                          fontWeight: FontWeight.w400,
+                                                          decoration: TextDecoration.lineThrough,
+                                                          height: 0.08,
+                                                        ),
+                                                      ),
+
+
+
+                                                      Text(
+                                                        "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
+                                                        textAlign: TextAlign.right,
+                                                        style: TextStyle(
+                                                          color: const Color(0xFFDE0F7E),
+                                                          fontSize: 15.16.sp,
+                                                          fontFamily: kTheArabicSansLight,
+                                                          fontWeight: FontWeight.w400,
+                                                          height: 0.08,
+                                                        ),
+                                                      ),
+
+
+                                                ],
+                                              ))
+
+                                        }
+                                        else...{
+
+                                              Text(
+                                                "${controller.productData.value.last.product.price ?? ''}${tr('Del')}",
+                                                textAlign: TextAlign.right,
+                                                style: TextStyle(
+                                                  color: const Color(0xFFDE0F7E),
+                                                  fontSize: 15.16.sp,
+                                                  fontFamily: kTheArabicSansLight,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 0.08,
+                                                ),
+                                              ),
+
+
+                                        }
+                                        // if (isBlank(controller.productData.value.last
+                                        //     .getMinMax()
+                                        //     .first) && controller.productData.value.last
+                                        //     .getMinMax()
+                                        //     .first != '')...{
+                                        //   Text(
+                                        //     "${controller.productData.value.last
+                                        //         .getMinMax()
+                                        //         .first} ${tr('Del')} ",
+                                        //     style: TextStyle(
+                                        //         fontFamily: kTheArabicSansLight,
+                                        //         decoration: TextDecoration
+                                        //             .lineThrough,
+                                        //         fontSize: 15.sp,
+                                        //         fontWeight: FontWeight.w400,
+                                        //         color: AppColors.kBlackColor),
+                                        //   ),
+                                        // },
+                                        // Text(
+                                        //   "${controller.productData.value.last
+                                        //       .getMinMax()
+                                        //       .last} ${tr('Del')} ",
+                                        //   style: TextStyle(
+                                        //       fontFamily: kTheArabicSansLight,
+                                        //       fontSize: 15.sp,
+                                        //       fontWeight: FontWeight.w400,
+                                        //       color: AppColors.kPrimaryColor),
+                                        // ),
                                       }
                                     ],
-                                  ),
+                                  ):SizedBox(),
                                   Align(
                                     alignment: Alignment.topRight,
                                     child: Text(
