@@ -19,10 +19,9 @@ class ProductProfileController extends GetxController
     with GetSingleTickerProviderStateMixin {
   TabController? tabsController;
   var index = 0.obs;
-  var productData = ProductModel().obs;
   final _api = HomeDataApis();
   RxBool isLoading = false.obs;
-
+  RxList productData = [].obs;
   @override
   void onInit() {
     tabsController = TabController(length: 2, vsync: this);
@@ -41,11 +40,11 @@ class ProductProfileController extends GetxController
   getCurrentProduct({required int productId}) async {
     try {
       isLoading.value = true;
-      productData.value = ProductModel();
-      productData.value =
+      ProductModel newData =
       await _api.getProductDataRequest(productId: productId);
       selectedOptions.value = List.generate(
-          productData.value.productOptions?.length ?? 0, (index) => null);
+          newData.productOptions?.length ?? 0, (index) => null);
+      productData.add(newData);
     }on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
@@ -56,6 +55,12 @@ class ProductProfileController extends GetxController
       }
     }
     isLoading.value = false;
+  }
+
+  removeLast(){
+    if (  productData.isNotEmpty) {
+      productData.removeLast();
+    }
   }
 
   RxList selectedOptions = [].obs;
@@ -110,7 +115,7 @@ class ProductProfileController extends GetxController
   }
 
   void increment() {
-    if (productData.value.productOptions?.isNotEmpty ?? false) {
+    if (productData.value.last.productOptions?.isNotEmpty ?? false) {
       if (selectedOptions.value.first == null) {
         chooseFirst();
       } else if (int.parse(selectedOptions.first.stock) > count.value) {
@@ -119,7 +124,7 @@ class ProductProfileController extends GetxController
         arrivedToMax();
       }
     } else {
-      if (int.parse(productData.value.product?.stock ?? '1') > count.value) {
+      if (int.parse(productData.value.last.product?.stock ?? '1') > count.value) {
         count.value++;
       } else {
         arrivedToMax();
@@ -128,7 +133,7 @@ class ProductProfileController extends GetxController
   }
 
   void decrement() {
-    if (productData.value.productOptions?.isNotEmpty ?? false) {
+    if (productData.value.last.productOptions?.isNotEmpty ?? false) {
       if (selectedOptions.value.first == null) {
         chooseFirst();
       } else if (count.value > 1) {
@@ -147,7 +152,7 @@ class ProductProfileController extends GetxController
 
   addToCart() async {
     try {
-      if (productData.value.productOptions?.isNotEmpty ?? false) {
+      if (productData.value.last.productOptions?.isNotEmpty ?? false) {
         for (dynamic selected in selectedOptions) {
           if (selected == null) {
             chooseFirst();
@@ -156,13 +161,13 @@ class ProductProfileController extends GetxController
         }
         await _api.addProductToCart(
             quantity: count.value,
-            productID: productData.value.product?.id ?? 0,
-            productOptionID: productData.value.productOptions?.first.id,
+            productID: productData.value.last.product?.id ?? 0,
+            productOptionID: productData.value.last.productOptions?.first.id,
             optionID: selectedOptions.value.first.id);
       } else if (selectedOptions.value.isEmpty) {
         await _api.addProductToCart(
             quantity: count.value,
-            productID: productData.value.product?.id ?? 0);
+            productID: productData.value.last.product?.id ?? 0);
       }
       var context = Get.context;
 
@@ -220,7 +225,7 @@ class ProductProfileController extends GetxController
   verifyToAddReview({required String comment}) async {
     try {
       await _api.addReview(comment: comment,
-          productId: "${productData.value.product?.id ?? 0}",
+          productId: "${productData.value.last.product?.id ?? 0}",
           image: imagePath.value);
       showCompleteComment();
     } on DioException catch (e) {

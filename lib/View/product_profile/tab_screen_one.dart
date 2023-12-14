@@ -20,7 +20,7 @@ class TabScreenOne extends StatelessWidget {
         SizedBox(
           height: 30.h,
         ),
-        HtmlWidget(controller.productData.value.product?.description??''),
+        HtmlWidget(controller.productData.value.last.product?.description??''),
         SizedBox(
           height: 17.h,
         ),

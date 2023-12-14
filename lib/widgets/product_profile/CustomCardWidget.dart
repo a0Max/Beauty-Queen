@@ -74,12 +74,13 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
       // height: 152.27.h,
       child: InkWell(
         onTap: () {
-          Get.to(ItemProfilePage(itemId:widget.newArrival.id??0))?.then((value) => Get.delete<ProductProfileController>());
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) =>
-          //          ItemProfilePage(itemId:widget.newArrival.id??0)));
+          // Get.lazyPut(()=>ProductProfileController());
+          // Get.to(ItemProfilePage(itemId:widget.newArrival.id??0));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                   ItemProfilePage(itemId:widget.newArrival.id??0)));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
