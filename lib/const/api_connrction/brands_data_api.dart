@@ -9,6 +9,10 @@ import 'base_api_connection.dart';
 class BrandsDataApis extends ApiProvider {
   Future<List<BrandModel>> breandsDataRequest() async {
     final token = await getUserToken();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getBrandsPageEndPoint}',
       options: Options(
@@ -35,6 +39,10 @@ class BrandsDataApis extends ApiProvider {
     List? selectedBrands}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getBrandsPageEndPoint}/$id',
       queryParameters: {
@@ -67,6 +75,10 @@ class BrandsDataApis extends ApiProvider {
 
   Future<GeneralSearchModel> getOffersDataRequest() async {
     final token = await getUserToken();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getOffersProductEndPoint}',
       options: Options(

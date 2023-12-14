@@ -14,6 +14,10 @@ class HomeDataApis extends ApiProvider {
   Future<HomeModel> homeDataRequest() async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.homepageEndPoint}',
       options: Options(
@@ -38,6 +42,10 @@ class HomeDataApis extends ApiProvider {
   Future<ProductModel> getProductDataRequest({required int productId}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.productEndPoint}/$productId',
       // '${Connection.apiURL}${ApiProvider.productEndPoint}/3367',
@@ -71,6 +79,10 @@ class HomeDataApis extends ApiProvider {
       int? optionID}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.addToCartProductEndPoint}',
       queryParameters: {
@@ -102,6 +114,10 @@ class HomeDataApis extends ApiProvider {
   Future<int> getCartRequest() async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.cartCounterProductEndPoint}',
       // '${Connection.apiURL}${ApiProvider.productEndPoint}/3367',
@@ -133,6 +149,10 @@ class HomeDataApis extends ApiProvider {
       List? selectedBrands}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getSalesEndPoint}',
       queryParameters: {
@@ -169,6 +189,10 @@ class HomeDataApis extends ApiProvider {
     }) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     File file = File(image.toString());
     String fileName = file.path.split('/').last;
 
@@ -213,6 +237,10 @@ class HomeDataApis extends ApiProvider {
   }) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.addWishlistProductEndPoint}',
       queryParameters: {
@@ -240,6 +268,10 @@ class HomeDataApis extends ApiProvider {
   }) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.removeWishlistProductEndPoint}',
       queryParameters: {
@@ -264,6 +296,10 @@ class HomeDataApis extends ApiProvider {
   Future<List<ProductOptionsModel>> getTheWishlist() async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getWishlistProductEndPoint}',
       options: Options(
@@ -285,6 +321,4 @@ class HomeDataApis extends ApiProvider {
     }
 
   }
-
-
 }

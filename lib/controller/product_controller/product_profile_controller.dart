@@ -39,11 +39,22 @@ class ProductProfileController extends GetxController
   }
 
   getCurrentProduct({required int productId}) async {
-    isLoading.value = true;
-    productData.value = ProductModel();
-    productData.value = await _api.getProductDataRequest(productId: productId);
-    selectedOptions.value = List.generate(
-        productData.value.productOptions?.length ?? 0, (index) => null);
+    try {
+      isLoading.value = true;
+      productData.value = ProductModel();
+      productData.value =
+      await _api.getProductDataRequest(productId: productId);
+      selectedOptions.value = List.generate(
+          productData.value.productOptions?.length ?? 0, (index) => null);
+    }on DioException catch (e) {
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } catch (e) {
+      if (e == 'Check Network connection'){
+        ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+      }else {
+        ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      }
+    }
     isLoading.value = false;
   }
 

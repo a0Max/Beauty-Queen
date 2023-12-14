@@ -9,7 +9,10 @@ class CartDataApis extends ApiProvider {
   Future<CartModel> cartDataRequest() async {
     final token = await getUserToken();
     final cookies = await getCookies();
-
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getCartsPageEndPoint}',
       options: Options(
@@ -31,11 +34,13 @@ class CartDataApis extends ApiProvider {
     }
   }
 
-
   Future changeQuantityDataRequest({required String productId, required int productQuantity}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
-
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.changeQuantityProductEndPoint}',
       queryParameters: {
@@ -63,7 +68,10 @@ class CartDataApis extends ApiProvider {
   Future removeItemDataRequest({required String productId}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
-
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.removeFromCartProductEndPoint}',
       queryParameters: {

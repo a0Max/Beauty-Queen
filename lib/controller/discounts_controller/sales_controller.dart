@@ -32,7 +32,11 @@ class SalesController extends GetxController {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
       generalSearchData.value = GeneralSearchModel();
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      if (e == 'Check Network connection'){
+        ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+      }else {
+        ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      }
     }
     isLoading.value = false;
   }

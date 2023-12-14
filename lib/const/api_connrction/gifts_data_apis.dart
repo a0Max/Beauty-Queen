@@ -16,6 +16,10 @@ class GiftsDataApis extends ApiProvider {
         List? selectedBrands}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getGiftsProductEndPoint}',
       queryParameters: {

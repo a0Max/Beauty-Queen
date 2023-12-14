@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/home_controller/home_controller.dart';
+import '../../controller/product_controller/product_profile_controller.dart';
 import '../../models/options_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
@@ -73,11 +74,12 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
       // height: 152.27.h,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                   ItemProfilePage(itemId:widget.newArrival.id??0)));
+          Get.to(ItemProfilePage(itemId:widget.newArrival.id??0))?.then((value) => Get.delete<ProductProfileController>());
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) =>
+          //          ItemProfilePage(itemId:widget.newArrival.id??0)));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,

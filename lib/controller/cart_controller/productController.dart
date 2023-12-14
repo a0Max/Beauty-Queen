@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:beauty_queen/const/api_connrction/cart_data_apis.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import '../../models/cart_model.dart';
 import '../../models/products_model.dart';
 import '../../widgets/CustomAlertBox.dart';
+import '../../widgets/error_pop_up.dart';
 
 class ProductController extends GetxController {
   var count = 1.obs;
@@ -19,10 +21,24 @@ class ProductController extends GetxController {
   RxInt totalCount = 0.obs;
 
   getCartData() async {
-    isLoading.value = true;
-    cartData.value = await _api.cartDataRequest();
-    updatePricesAndCount();
-    isLoading.value = false;
+    try {
+      isLoading.value = true;
+      cartData.value = await _api.cartDataRequest();
+      updatePricesAndCount();
+      isLoading.value = false;
+    }on DioException catch (e, s) {
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } catch(e){
+      if (e == 'Check Network connection'){
+        ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+      }else {
+        if (e == 'Check Network connection'){
+          ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+        }else {
+          ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+        }
+      }
+    }
   }
 
   arrivedToMax(){

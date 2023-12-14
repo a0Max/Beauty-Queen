@@ -29,7 +29,12 @@ class HomeController extends GetxController {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
       homeData.value=HomeModel();
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      print('error:${e}');
+      if (e == 'Check Network connection'){
+        ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+      }else {
+        ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      }
     }
     isLoading.value = false;
   }
@@ -98,10 +103,18 @@ class HomeController extends GetxController {
   RxList wishlistList = [].obs;
   getWishlist() async {
     isLoadingWishlist.value = true;
-
+    try {
     wishlistList.value = await _api.getTheWishlist();
+    }on DioException catch (e) {
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } catch (e) {
+      if (e == 'Check Network connection'){
+        ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+      }else {
+        ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      }
+    }
     isLoadingWishlist.value = false;
-
   }
 
 }
