@@ -10,7 +10,7 @@ import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/brands_controller/brands_controller.dart';
-import '../../widgets/CustomEndDrawer.dart';
+import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/custom_brands_logo_widget.dart';
 
 class BrandScreen extends StatefulWidget {

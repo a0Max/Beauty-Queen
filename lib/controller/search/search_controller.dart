@@ -8,7 +8,7 @@ import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class SearchController0 extends GetxController {
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   final _api = SearchDataApis();
   var generalSearchData = GeneralSearchModel().obs;
   int page = 1;
@@ -16,6 +16,9 @@ class SearchController0 extends GetxController {
   RxString keyWord = ''.obs;
 
   getSearchDetails({required String subKeyWord, int? currentPage}) async {
+    isLoading.value = true;
+    generalSearchData.value = GeneralSearchModel();
+    dataProducts.value = [];
     try {
       keyWord.value = subKeyWord;
       if(currentPage==null){
@@ -34,6 +37,7 @@ class SearchController0 extends GetxController {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
+    isLoading.value = false;
   }
 
   var keySort = RxString('');

@@ -7,16 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../View/categories/filter_screen.dart';
-import '../View/gifts/GuidanceScreen.dart';
-import '../View/Quinaprogram_screen.dart';
-import '../View/offers/beautypharmacyscreen.dart';
-import '../View/discount/discounts_screen.dart';
-import '../View/discount/filterby_screen.dart';
-import '../View/user_profile/normalprofile.dart';
-import '../View/orders_screen.dart';
-import '../const/app_colors.dart';
-import '../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../View/categories/filter_screen.dart';
+import '../../View/gifts/GuidanceScreen.dart';
+import '../../View/Quinaprogram_screen.dart';
+import '../../View/offers/beautypharmacyscreen.dart';
+import '../../View/discount/discounts_screen.dart';
+import '../../View/discount/filterby_screen.dart';
+import '../../View/user_profile/normalprofile.dart';
+import '../../View/orders_screen.dart';
+import '../../const/app_colors.dart';
+import '../../controller/AlKasam_controller/alkasam_controller.dart';
 
 class MyEndDrawer extends StatelessWidget {
   const MyEndDrawer({super.key});

@@ -3,7 +3,7 @@ import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/const/vars.dart';
 import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
-import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
+import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,8 @@ import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/search/search_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/shimmer/shimmer_categories.dart';
+import '../../widgets/shimmer/shimmer_item.dart';
 import '../brands/branddetail_screen.dart';
 import 'filterby_search_screen.dart';
 
@@ -115,8 +117,10 @@ class _SearchScreen extends State<SearchScreen> {
                 SizedBox(
                   height: 14.h,
                 ),
-                if (_controller.generalSearchData.value.brands?.isNotEmpty ??
-                    false) ...{
+                (_controller.isLoading.value == true)?
+                const ShimmerCategories()
+                    :(_controller.generalSearchData.value.brands?.isNotEmpty ??
+                    false) ?
                   Container(
                     height: 140.h,
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -175,11 +179,9 @@ class _SearchScreen extends State<SearchScreen> {
                       separatorBuilder: (BuildContext context, int index) =>
                           25.pw,
                     ),
-                  ),
-                  SizedBox(
-                    height: 14.h,
-                  ),
-                },
+                  ):SizedBox(),
+
+
                 ///////////////filter////////////
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -300,7 +302,13 @@ class _SearchScreen extends State<SearchScreen> {
                 SizedBox(
                   height: 22.h,
                 ),
-                Wrap(
+                _controller.isLoading.value == true
+                    ? Wrap(
+                  runSpacing: 7,
+                  children:
+                  List.generate(2, (index) => const ShimmerItem()),
+                )
+                    :Wrap(
                   runSpacing: 7,
                   children: List.generate(
                       _controller.dataProducts.value.length,

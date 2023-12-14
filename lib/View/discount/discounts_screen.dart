@@ -2,7 +2,7 @@ import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/const/vars.dart';
 import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
-import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
+import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,8 @@ import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/shimmer/shimmer_item.dart';
+import '../../widgets/shimmer/shimmer_slider.dart';
 import 'filterby_screen.dart';
 
 class DiscountScreen extends StatefulWidget {
@@ -106,8 +108,12 @@ class _DiscountScreenState extends State<DiscountScreen> {
             controller: _scrollController,
             child: Column(
               children: [
-                if ( _controller
-                    .generalSearchData.value.info?.banner != null)
+                _controller.isLoading.value == true?
+
+                ShimmerSlider(height:139.17.h,
+                ):
+                 ( _controller
+                    .generalSearchData.value.info?.banner != null)?
                   SizedBox(
                       height: 139.17.h,
                       width: MediaQuery.of(context).size.width,
@@ -115,7 +121,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                           imageUrl: Connection.urlOfStorage(
                               image: _controller
                                       .generalSearchData.value.info?.banner ??
-                                  ''))),
+                                  ''))):const SizedBox(),
                 SizedBox(
                   height: 14.h,
                 ),
@@ -251,6 +257,14 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 SizedBox(
                   height: 22.h,
                 ),
+                _controller.isLoading.value == true?
+                Wrap(
+                  runSpacing: 7,
+                  children: List.generate(
+                      2,
+                          (index) => const ShimmerItem()),
+                )
+                    :
                 Wrap(
                   runSpacing: 7,
                   children: List.generate(

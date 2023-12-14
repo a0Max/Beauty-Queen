@@ -8,12 +8,14 @@ import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class GiftController extends GetxController {
+  RxBool isLoading = false.obs;
   var generalSearchData = GeneralSearchModel().obs;
   RxList dataProducts = [].obs;
   final _api = GiftsDataApis();
   int page = 1;
 
   Future<void> getGiftsDataController({int? currentPage}) async {
+    isLoading.value = true;
     try {
       if(currentPage==null){
         page = page +1;
@@ -32,6 +34,7 @@ class GiftController extends GetxController {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
+    isLoading.value = false;
   }
 
   var keySort = RxString('');
@@ -85,9 +88,10 @@ class GiftController extends GetxController {
   var generalSearchData2 = GeneralSearchModel().obs;
   RxList dataProducts2 = [].obs;
   final _api2 = BrandsDataApis();
-
+  RxBool isLoading2 = false.obs;
 
   Future<void> getOffersDataController() async {
+    isLoading2.value = true;
     try{
       generalSearchData2.value = await _api2.getOffersDataRequest();
         dataProducts2.addAll(generalSearchData2.value.gifts?.data??[]);
@@ -99,5 +103,6 @@ class GiftController extends GetxController {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
+    isLoading2.value = false;
   }
 }

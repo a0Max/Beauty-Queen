@@ -2,7 +2,7 @@
 
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
-import 'package:beauty_queen/widgets/CustomEndDrawer.dart';
+import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -21,6 +21,8 @@ import '../../const/vars.dart';
 import '../../controller/gift_controller/gift_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomCardWidget.dart';
+import '../../widgets/shimmer/shimmer_item.dart';
+import '../../widgets/shimmer/shimmer_slider.dart';
 import 'filterby_gifts_screen.dart';
 
 class GuidanceScreen extends StatefulWidget {
@@ -113,8 +115,12 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
         controller: _scrollController,
         child: Column(
           children: [
-            if ( controller
-                .generalSearchData.value.info?.banner != null)
+            controller.isLoading.value == true
+                ? ShimmerSlider(
+              height: 139.17.h,
+            )
+                :  ( controller
+                .generalSearchData.value.info?.banner != null)?
               SizedBox(
                   height: 139.17.h,
                   width: MediaQuery.of(context).size.width,
@@ -122,7 +128,8 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                       imageUrl: Connection.urlOfStorage(
                           image: controller
                               .generalSearchData.value.info?.banner ??
-                              ''))),
+                              '')))
+                  : const SizedBox(),
             SizedBox(
               height: 20.h,
             ),
@@ -368,7 +375,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
               child: Padding(
                 padding: EdgeInsets.only(right: 16.w),
                 child: Text(
-                    '${tr('project')}: ${controller.generalSearchData.value.gifts?.total ?? ''}',
+                    '${tr('count_items')}: ${controller.generalSearchData.value.gifts?.total ?? ''}',
                     style: TextStyle(
                       fontFamily: kTheArabicSansLight,
                       color: kGrayColor,
@@ -380,7 +387,13 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
             SizedBox(
               height: 22.h,
             ),
-            Wrap(
+            controller.isLoading.value == true
+                ? Wrap(
+              runSpacing: 7,
+              children:
+              List.generate(2, (index) => const ShimmerItem()),
+            )
+                :Wrap(
               runSpacing: 7,
               children: List.generate(
                   controller.dataProducts.value.length,

@@ -8,7 +8,7 @@ import '../../const/styles.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../widgets/based/CustomAppBar.dart';
-import '../../widgets/CustomEndDrawer.dart';
+import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/categories/CustomGirdview.dart';
 
 class AlKasamScreen extends StatefulWidget {

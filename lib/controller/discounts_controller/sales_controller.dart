@@ -7,12 +7,14 @@ import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class SalesController extends GetxController {
+  RxBool isLoading = false.obs;
   var generalSearchData = GeneralSearchModel().obs;
   RxList dataProducts = [].obs;
   final _api = HomeDataApis();
   int page = 1;
 
   Future<void> getSalesDataController({int? currentPage}) async {
+    isLoading.value = true;
     try {
       if(currentPage==null){
         page = page +1;
@@ -32,6 +34,7 @@ class SalesController extends GetxController {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
+    isLoading.value = false;
   }
 
   var keySort = RxString('');

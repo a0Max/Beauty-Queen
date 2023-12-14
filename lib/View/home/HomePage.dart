@@ -17,7 +17,7 @@ import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/CustomCardWidget.dart';
-import '../../widgets/CustomEndDrawer.dart';
+import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/CustomProductCard.dart';
 import '../../widgets/ScrollableContainerList.dart';
 import '../../widgets/custom_horizontal_list.dart';

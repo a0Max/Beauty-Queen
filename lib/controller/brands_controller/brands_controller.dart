@@ -53,6 +53,7 @@ class BrandsController extends GetxController {
   }
 
   getDetailsOfBrand({required int idOfBrand, int? currentPage}) async {
+    isLoading.value = true;
     try {
       if(currentPage==null){
         page = page +1;
@@ -70,6 +71,7 @@ class BrandsController extends GetxController {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
+    isLoading.value = false;
   }
 
   var keySort = RxString('');

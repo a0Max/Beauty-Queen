@@ -13,7 +13,9 @@ import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/CustomCardWidget.dart';
-import '../../widgets/CustomEndDrawer.dart';
+import '../../widgets/drawer/CustomEndDrawer.dart';
+import '../../widgets/shimmer/shimmer_item.dart';
+import '../../widgets/shimmer/shimmer_slider.dart';
 import 'filterby_category_screen.dart';
 
 class BrandDetailScreen extends StatefulWidget {
@@ -94,7 +96,11 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
             SizedBox(
               height: 16.h,
             ),
-
+            controller.isLoading.value == true
+                ? ShimmerSlider(
+              height: 70.h,
+            )
+                :(controller.generalSearchData.value.brand?.logo!=null)?
             Container(
               height: 70.h,
               width: MediaQuery.of(context).size.width,
@@ -102,8 +108,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                   "ff${controller.generalSearchData.value.brand?.logoBackground?.toUpperCase().replaceAll('#', '') ?? ''}",
                   radix: 16)),
               child: CachedNetworkImage(imageUrl: Connection.urlOfBrands3(image:controller.generalSearchData.value.brand?.logo??'')),
-            ),
-            // CachedNetworkImage(imageUrl: Connection.urlOfBrands3(image:controller.generalSearchData.value.brand?.mobileSlides?.first.file??'')),
+            ):const SizedBox(),
             SizedBox(
               height: 16.h,
             ),
@@ -226,7 +231,13 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                     )),
               ),
             ),
-
+            controller.isLoading.value == true
+                ? Wrap(
+              runSpacing: 7,
+              children:
+              List.generate(2, (index) => const ShimmerItem()),
+            )
+                :
             Wrap(
               runSpacing: 7,
               children: List.generate(

@@ -7,7 +7,7 @@ import '../../models/general_search_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class AlkasamController extends GetxController {
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   final _api = AlkasamDataApis();
   RxList categoryData = [].obs;
   RxList childCategoryData = [].obs;
@@ -25,7 +25,6 @@ class AlkasamController extends GetxController {
       categoryData.value=[];
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
-    isLoading.value = false;
   }
 
   RxInt currentCategoryId = 0.obs;
@@ -45,6 +44,8 @@ class AlkasamController extends GetxController {
 
   int pageCategory = 1;
   Future<void> getCategoriesDataController({int? currentPage, bool? getByParent}) async {
+    isLoading.value = true;
+    generalSearchData.value = GeneralSearchModel();
     try {
       int currentParent = 0;
       if(getByParent == true){
@@ -69,6 +70,7 @@ class AlkasamController extends GetxController {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
+    isLoading.value = false;
   }
 
   var keySort = RxString('');
