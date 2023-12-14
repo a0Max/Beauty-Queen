@@ -31,6 +31,8 @@ class AlkasamController extends GetxController {
   updateCurrentCategoryId({required int newId, required bool getChild}) async {
     currentCategoryId.value = newId;
     getCategoriesDataController(currentPage: 1, getByParent: true);
+    childCurrentCategoryId.value =0;
+    childCategoryData.value = [];
     if (getChild == true){
       childCategoryData.value = await _api.getChildDataRequest(parentId:currentCategoryId.value);
     }
@@ -48,7 +50,7 @@ class AlkasamController extends GetxController {
     generalSearchData.value = GeneralSearchModel();
     try {
       int currentParent = 0;
-      if(getByParent == true){
+      if(getByParent == true || childCurrentCategoryId.value == 0){
         currentParent = currentCategoryId.value;
       }else{
         currentParent = childCurrentCategoryId.value;

@@ -44,6 +44,7 @@ class ProductProfileController extends GetxController
       await _api.getProductDataRequest(productId: productId);
       selectedOptions.value = List.generate(
           newData.productOptions?.length ?? 0, (index) => null);
+      await Future.delayed(Duration(milliseconds: 500));
       productData.add(newData);
     }on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');

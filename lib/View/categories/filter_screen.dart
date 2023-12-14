@@ -85,6 +85,7 @@ class _FliterScreenState extends State<FliterScreen> {
             onPressed: () {
               _scaffoldKey.currentState?.openEndDrawer();
             },
+
             isScrolled: _isScrolled,
             searchBarWidth: searchBarWidth, // Replace with your desired width
             searchBarTranslationY: searchBarTranslationY,

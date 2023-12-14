@@ -395,7 +395,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
 
                                                   },
                                                   value: controller.selectedOptions[index],
-                                                  items: controller.productData.value.last.productOptions?[index].options?.map((value) {
+                                                  items: controller.productData.value.last.productOptions?[index].options?.map<DropdownMenuItem<OptionsModel>>((value) {
                                                     return DropdownMenuItem<OptionsModel>(
                                                       value: value,
                                                       child: Row(
@@ -474,7 +474,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
 
                                                   },
                                                   value: controller.selectedOptions[index],
-                                                  items: controller.productData.value.last.productOptions?[index].options?.map((value) {
+                                                  items: controller.productData.last?.productOptions?[index]?.options?.map<DropdownMenuItem<OptionsModel>>((OptionsModel value) {
                                                     return DropdownMenuItem<OptionsModel>(
                                                       value: value,
                                                       child: Row(
@@ -486,10 +486,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                 shape: BoxShape.circle,
                                                                 image: DecorationImage(image: CachedNetworkImageProvider(Connection.urlOfOptions(image: value.mainImage?.file??''))
                                                                 ),
-                                                                // Connection.urlOfOptions(image: '')/
-                                                                // color:  Color(int.parse(
-                                                                //     "ff${value.color?.toUpperCase().replaceAll('#', '') ?? ''}",
-                                                                //     radix: 16)
                                                               )
                                                           ),
                                                           Padding(
@@ -500,8 +496,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       ),
                                                     );
                                                   }).toList(),
-                                                ),
-                                              }
+                                                ),}
                                             ],
                                           )),
                                 ),
