@@ -15,12 +15,11 @@ class DetailsStatic extends StatelessWidget{
   Future<void> _makePhoneCall(String url) async {
 
     try {
-      log('clicked');
       await launchUrl(Uri.parse("tel:$url"),
           mode: LaunchMode.externalApplication);
     } catch (e) {
 
-      log('error:$e');
+      log('_makePhoneCall: error:$e');
     }
   }
   const DetailsStatic({super.key, required this.title, required this.body, required this.icon, this.isPhone});

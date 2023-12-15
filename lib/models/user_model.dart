@@ -9,6 +9,7 @@ class UserModel {
   String? email;
   String? phone;
   String? address;
+  String? isPhoneVerified;
   String? cityId;
   String? areaId;
   String? emailVerifiedAt;
@@ -46,7 +47,8 @@ class UserModel {
     this.queenaBalance,
     this.updatedAt,
     this.upgradedToQueenaAt,
-    this.whatsappPhone
+    this.whatsappPhone,
+    this.isPhoneVerified
   });
 
   UserModel.fromMap(Map<String, dynamic> json) {
@@ -57,8 +59,9 @@ class UserModel {
     email = json['email'];
     phone = json['phone'];
     address = json['address'];
-    cityId = json['city_id'];
-    areaId = json['area_id'];
+    isPhoneVerified = json['is_phone_verified'];
+    cityId = "${json['city_id']}";
+    areaId = "${json['area_id']}";
     emailVerifiedAt = json['email_verified_at'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -66,9 +69,9 @@ class UserModel {
     accountType = json['account_type'];
     queenaBalance = json['queena_balance'];
     upgradedToQueenaAt = json['upgraded_to_queena_at'];
-    brand1 = json['brand1'];
-    brand2 = json['brand2'];
-    brand3 = json['brand3'];
+    brand1 = "${json['brand1']}";
+    brand2 = "${json['brand2']}";
+    brand3 = "${json['brand3']}";
     phone2 = json['phone2'];
     whatsappPhone = json['whatsapp_phone'];
     if (isNotBlank(json["token"])) saveToken(json["token"]);

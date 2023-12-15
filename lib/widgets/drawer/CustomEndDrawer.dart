@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 import '../../View/categories/filter_screen.dart';
 import '../../View/gifts/GuidanceScreen.dart';
-import '../../View/Quinaprogram_screen.dart';
+import '../../View/whats_queena/Quinaprogram_screen.dart';
 import '../../View/offers/beautypharmacyscreen.dart';
 import '../../View/discount/discounts_screen.dart';
 import '../../View/discount/filterby_screen.dart';

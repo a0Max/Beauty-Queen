@@ -55,7 +55,7 @@ class AuthController extends GetxController {
         try {
           await getUserData();
         } catch (e) {
-          log('Error:$e');
+          log('startProgress:Error:$e');
         }
       }
     }

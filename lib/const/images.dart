@@ -26,7 +26,6 @@ const kdotImage = 'assets/images/dotrectangle.png';
 const kImageone = 'assets/images/imageone.png';
 const kImagetwo = 'assets/images/imagetwo.png';
 const kImagethree = 'assets/images/imagethree.png';
-const kbagImage = 'assets/images/bag.png';
 const khairdyerImage = 'assets/images/hairdryer.png';
 const kgiftImagetwo = 'assets/images/GiftCard.png';
 const kfilterIconImage = 'assets/icons/filterIcon.png';

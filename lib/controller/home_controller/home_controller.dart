@@ -83,7 +83,7 @@ class HomeController extends GetxController {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
     } catch (e) {
-      log('error:$e');
+      log('addToCart:error:$e');
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
 
     }

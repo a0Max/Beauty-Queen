@@ -49,7 +49,7 @@ class CustomCardWidget extends StatefulWidget {
 }
 
 class _CustomCardWidgetState extends State<CustomCardWidget> {
-  bool isFavorite = false;
+  // bool isFavorite = false;
   bool showProductOptions = false;
   OptionsModel? selectedOption;
   ProductOptionsModel? selectedParentOption;
@@ -383,8 +383,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   alignment: Alignment.topLeft,
                   child: IconButton(
                     icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: isFavorite ? Colors.red : const Color(0xff13110C),
+                      (widget.newArrival.wishlist?.isNotEmpty??false) ? Icons.favorite : Icons.favorite_border,
+                      color: (widget.newArrival.wishlist?.isNotEmpty??false) ? Colors.red : const Color(0xff13110C),
                       // size: 30,
                     ),
                     onPressed: () {

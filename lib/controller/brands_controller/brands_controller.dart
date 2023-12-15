@@ -38,14 +38,14 @@ class BrandsController extends GetxController {
 
      brandsData.value = sortedMap;
     } on DioException catch (e, s) {
-      log('error:$e');
-      log('error:$s');
+      log('getBrandsDataController:error:$e');
+      log('getBrandsDataController:error:$s');
 
       brandsData.value={};
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e, s) {
-      log('error:$e');
-      log('error:$s');
+      log('getBrandsDataController:error:$e');
+      log('getBrandsDataController:error:$s');
       brandsData.value={};
       if (e == 'Check Network connection'){
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');

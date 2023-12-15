@@ -3,6 +3,7 @@ import 'package:beauty_queen/View/user_profile/mydata_screen.dart';
 import 'package:beauty_queen/View/user_profile/password_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -223,135 +224,146 @@ class NormalProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: 13.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(const OrdersScreen());
-                        },
-                        child: Container(
-                          height: 115.h,
-                          width: 115.w,
-                          decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              borderRadius: BorderRadius.circular(15.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromARGB(32, 0, 0, 0),
-                                  blurRadius: 28.r,
-                                  offset: const Offset(0, 4),
-                                  spreadRadius: 0,
-                                ),
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                AppImages.myOrdersImage,
-                                // height: 66.11.h,
-                                // width: 54.w,
+                  SizedBox(
+                    height: 115.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(const OrdersScreen());
+                            },
+                            child: Container(
+                              height: 115.h,
+                              width: 115.w,
+                              decoration: BoxDecoration(
+                                  color: kWhiteColor,
+                                  borderRadius: BorderRadius.circular(15.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color.fromARGB(32, 0, 0, 0),
+                                      blurRadius: 28.r,
+                                      offset: const Offset(0, 4),
+                                      spreadRadius: 0,
+                                    ),
+                                  ]),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    AppImages.myOrdersImage,
+                                    // height: 66.11.h,
+                                    // width: 54.w,
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                    tr('my_orders'),
+                                    style: TextStyle(
+                                        fontFamily: kTheArabicSansLight,
+                                        color: kPrimaryColor,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w700),
+                                  )
+                                ],
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                tr('my_orders'),
-                                style: TextStyle(
-                                    fontFamily: kTheArabicSansLight,
-                                    color: kPrimaryColor,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w700),
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                      ////////////second container//////////////
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(const FavScreen());
-                        },
-                        child: Container(
-                          height: 115.h,
-                          width: 115.w,
-                          decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              borderRadius: BorderRadius.circular(15.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromARGB(32, 0, 0, 0),
-                                  blurRadius: 28.r,
-                                  offset: const Offset(0, 4),
-                                  spreadRadius: 0,
-                                ),
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                AppImages.subFavImage,
-                                // height: 66.11.h,
-                                // width: 54.w,
+                        15.pw,
+                        ////////////second container//////////////
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(const FavScreen());
+                            },
+                            child: Container(
+                              height: 115.h,
+                              width: 115.w,
+                              decoration: BoxDecoration(
+                                  color: kWhiteColor,
+                                  borderRadius: BorderRadius.circular(15.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color.fromARGB(32, 0, 0, 0),
+                                      blurRadius: 28.r,
+                                      offset: const Offset(0, 4),
+                                      spreadRadius: 0,
+                                    ),
+                                  ]),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    AppImages.subFavImage,
+                                    // height: 66.11.h,
+                                    // width: 54.w,
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                    tr('fav'),
+                                    style: TextStyle(
+                                        fontFamily: kTheArabicSansLight,
+                                        color: kPrimaryColor,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w700),
+                                  )
+                                ],
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                tr('fav'),
-                                style: TextStyle(
-                                    fontFamily: kTheArabicSansLight,
-                                    color: kPrimaryColor,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w700),
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                      ////////////third container////////////////
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(const MyStickerScreen());
-                        },
-                        child: Container(
-                          height: 115.h,
-                          width: 115.w,
-                          decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              borderRadius: BorderRadius.circular(15.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromARGB(32, 0, 0, 0),
-                                  blurRadius: 28.r,
-                                  offset: const Offset(0, 4),
-                                  spreadRadius: 0,
-                                ),
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                AppImages.myStickerImage,
-                                // height: 66.11.h,
-                                // width: 54.w,
+                        if (controller.userData.value.accountType ==
+                            AccountTypes.queena) ...{
+                          ////////////third container////////////////
+                          Expanded(child:GestureDetector(
+                            onTap: () {
+                              Get.to(const MyStickerScreen());
+                            },
+                            child: Container(
+                              height: 115.h,
+                              width: 115.w,
+                              decoration: BoxDecoration(
+                                  color: kWhiteColor,
+                                  borderRadius: BorderRadius.circular(15.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color.fromARGB(32, 0, 0, 0),
+                                      blurRadius: 28.r,
+                                      offset: const Offset(0, 4),
+                                      spreadRadius: 0,
+                                    ),
+                                  ]),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    AppImages.myStickerImage,
+                                    // height: 66.11.h,
+                                    // width: 54.w,
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                    tr('mines'),
+                                    style: TextStyle(
+                                        fontFamily: kTheArabicSansLight,
+                                        color: kPrimaryColor,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w700),
+                                  )
+                                ],
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                tr('mines'),
-                                style: TextStyle(
-                                    fontFamily: kTheArabicSansLight,
-                                    color: kPrimaryColor,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                            ),
+                          )),
+                        }
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 46.h,

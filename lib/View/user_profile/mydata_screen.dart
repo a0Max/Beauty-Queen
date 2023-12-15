@@ -136,6 +136,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                   SizedBox(
                     height: 20.h,
                   ),
+                  Text("${controller.userData.value.accountType}"),
                   if (controller.userData.value.accountType ==
                       AccountTypes.queena) ...{
                     TextFieldAuthWidget(

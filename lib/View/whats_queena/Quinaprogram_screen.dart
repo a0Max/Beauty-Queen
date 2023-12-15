@@ -1,12 +1,12 @@
 // ignore_for_file: unrelated_type_equality_checks, file_names
 
+import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/colors.dart';
-import 'package:beauty_queen/const/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../const/styles.dart';
-import '../controller/secondtabcontroller.dart';
+import '../../const/styles.dart';
+import '../../controller/queen_controller/queen_controller.dart';
 import 'QuinaOffers_screen.dart';
 import 'Quinaproducts_screen.dart';
 import 'WhatisQuina_screen.dart';
@@ -16,13 +16,13 @@ class QuinaprogramScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MyTabsTwo tabcontroller = Get.put(MyTabsTwo());
+    final QueenController tabcontroller = Get.put(QueenController());
 
     return Scaffold(
       body: Column(
         children: [
           SizedBox(
-            height: 20.h,
+            height: 50.h,
           ),
           Align(
             alignment: Alignment.topLeft,
@@ -36,7 +36,7 @@ class QuinaprogramScreen extends StatelessWidget {
                   color: kBlackColor,
                 )),
           ),
-          Image.asset(kqueenaImage),
+          Image.asset(AppImages.queenaImage),
           SizedBox(
             height: 20.h,
           ),
@@ -49,7 +49,7 @@ class QuinaprogramScreen extends StatelessWidget {
                 () => Tab(
                   icon: Container(
                     height: 64.h,
-                    width: 115.w,
+                    // width: 115.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: kPrimaryColor, width: 1.w),
                       borderRadius: BorderRadius.circular(13.r),
@@ -59,7 +59,7 @@ class QuinaprogramScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        "ما هو برنامج\n    كوينا؟",
+                        "ما هو برنامج كوينا؟",
                         style: TextStyle(
                           fontFamily: kTheArabicSansLight,
                           fontSize: 13.83.sp,
@@ -68,6 +68,8 @@ class QuinaprogramScreen extends StatelessWidget {
                               ? kWhiteColor
                               : kPrimaryColor,
                         ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible,
                       ),
                     ),
                   ),
@@ -77,7 +79,7 @@ class QuinaprogramScreen extends StatelessWidget {
                 () => Tab(
                   icon: Container(
                     height: 41.h,
-                    width: 115.w,
+                    // width: 115.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: kPrimaryColor, width: 1.w),
                       borderRadius: BorderRadius.circular(13.r),
@@ -105,7 +107,7 @@ class QuinaprogramScreen extends StatelessWidget {
                 () => Tab(
                   icon: Container(
                     height: 41.h,
-                    width: 115.w,
+                    // width: 115.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: kPrimaryColor, width: 1.w),
                       borderRadius: BorderRadius.circular(13.r),
@@ -132,6 +134,7 @@ class QuinaprogramScreen extends StatelessWidget {
             ],
             controller: tabcontroller.tabsController,
             indicatorColor: Colors.transparent,
+              dividerColor:Colors.transparent
           ),
           Expanded(
             child: TabBarView(

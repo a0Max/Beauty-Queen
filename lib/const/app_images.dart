@@ -66,5 +66,25 @@ class AppImages{
   static const String subFavImage = "${mainPathToSvg}sub_fav.svg";
   static const String myStickerImage = "${mainPathToSvg}my_sticker.svg";
   static const String myOrdersImage = "${mainPathToSvg}my_orders.svg";
+  static const String whatsQueena1Image = "${mainPathToSvg}whatsQueena1.svg";
+  static const String whatsQueena2Image = "${mainPathToSvg}whatsQueena2.svg";
+  static const String whatsQueena3Image = "${mainPathToSvg}whatsQueena3.svg";
+  static const String arrowImage = "${mainPathToSvg}arrow.svg";
+  static const String badge3Image = "${mainPathToSvg}badge3.svg";
+  static const String badge2Image = "${mainPathToSvg}badge2.svg";
+  static const String badge1Image = "${mainPathToSvg}badge1.svg";
+  static const String markerImage = "${mainPathToSvg}marker.svg";
+  static const String badge1ImagePng = "${mainPathToImages}badge1.png";
+  static const String badge2ImagePng = "${mainPathToImages}badge1.png";
+  static const String badge3ImagePng = "${mainPathToImages}badge1.png";
+  static const String queenaImage = "${mainPathToImages}queena.png";
+  static const String lineOfBadgeImage = "${mainPathToImages}line_of_badge.png";
+  static const String queenaSilverImage = "${mainPathToImages}queenaSilver.png";
+  static const String queenaPinkImage = "${mainPathToImages}queenaPink.png";
+  static const String queenaGoldImage = "${mainPathToImages}queenaGold.png";
+  static const String queena2Image = "${mainPathToImages}queena2.png";
+  static const String queenaPageImage = "${mainPathToImages}queenaPage.jpg";
+  static const String queenaCryingImage = "${mainPathToImages}queenaCrying.png";
+  static const String bagImage = "${mainPathToImages}bag.png";
 
 }

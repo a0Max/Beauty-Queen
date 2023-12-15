@@ -359,7 +359,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 3.w),
-                          child: Image.asset(kfilterIconImage),
+                          child:SvgPicture.asset(AppImages.filterTypeImage),
                         ),
                       ],
                     ),

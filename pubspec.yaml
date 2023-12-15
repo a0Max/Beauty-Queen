@@ -41,6 +41,7 @@ dependencies:
   geekyants_flutter_gauges: ^1.0.3
   image_picker: ^1.0.4
   internet_connection_checker: ^1.0.0+1
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:

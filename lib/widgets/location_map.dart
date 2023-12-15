@@ -115,7 +115,7 @@ class _LocationMap extends State<LocationMap> {
                 await launchUrl(Uri.parse(url),
                     mode: LaunchMode.externalApplication);
               } catch (e) {
-                log('error:$e');
+                log('location-map:error:$e');
               }
             },
           ),
