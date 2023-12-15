@@ -16,7 +16,7 @@ import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../widgets/bottom_sheet_of_add_money.dart';
-import '../about_app.dart';
+import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
 import '../mysticker_screen.dart';
 import '../orders_screen.dart';
@@ -320,6 +320,7 @@ class NormalProfileScreen extends StatelessWidget {
                         if (controller.userData.value.accountType ==
                             AccountTypes.queena) ...{
                           ////////////third container////////////////
+                          15.pw,
                           Expanded(child:GestureDetector(
                             onTap: () {
                               Get.to(const MyStickerScreen());
@@ -463,31 +464,38 @@ class NormalProfileScreen extends StatelessWidget {
                     color: kDividerrColor,
                     thickness: 2,
                   ),
-                  Row(
-                    children: [
-                      SvgPicture.asset(AppImages.infoCircleImage),
-                      SizedBox(
-                        width: 25.w,
-                      ),
-                      Text(
-                        tr('about_shop'),
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: kBlackColor,
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const Spacer(),
-                      IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AboutAppScreen()));
-                          },
-                          icon: const Icon(Icons.arrow_forward_ios))
-                    ],
+                  InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const AboutAppScreen()));
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(AppImages.infoCircleImage),
+                        SizedBox(
+                          width: 25.w,
+                        ),
+                        Text(
+                          tr('about_shop'),
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: kBlackColor,
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () {
+                              Get.to(const AboutAppScreen());
+                            },
+                            icon: const Icon(Icons.arrow_forward_ios))
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 60.h,

@@ -118,7 +118,6 @@ class AuthController extends GetxController {
 
   }
 
-
   applyToChangePassword({required String currentPassword, required String newPassword, required String reNewPassword}) async {
     await _api.updatePasswordRequest(currentPassword: currentPassword, newPassword: newPassword, reNewPassword: reNewPassword);
   }

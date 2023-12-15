@@ -3,6 +3,7 @@ import 'package:beauty_queen/const/vars.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../models/city_area_model.dart';
+import '../../models/departments_model.dart';
 import '../../models/user_model.dart';
 import 'base_api_connection.dart';
 
@@ -248,6 +249,29 @@ class UserDataApis extends ApiProvider {
 
     if (validResponse(response.statusCode!)) {
 
+    } else {
+      throw response.data;
+    }
+  }
+
+
+  Future<List<DepartmentsModel>> getAboutMEDataRequest() async {
+    final token = await getUserToken();
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getAboutTheStoreDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      final List<DepartmentsModel> l = [];
+      response.data['departments'].forEach((e) => l.add(DepartmentsModel.fromJson(e)));
+      return l;
     } else {
       throw response.data;
     }

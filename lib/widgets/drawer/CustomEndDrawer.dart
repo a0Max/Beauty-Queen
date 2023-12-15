@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../View/about_me/about_app.dart';
 import '../../View/categories/filter_screen.dart';
 import '../../View/gifts/GuidanceScreen.dart';
 import '../../View/whats_queena/Quinaprogram_screen.dart';
@@ -392,7 +393,11 @@ class MyEndDrawer extends StatelessWidget {
                 color: AppColors.klPinkColor,
                 child: GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const AboutAppScreen()));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 20.w, top: 5.h),
