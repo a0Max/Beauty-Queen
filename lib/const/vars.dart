@@ -13,6 +13,7 @@ abstract class Connection {
   static const storageURLOfBrand = 'https://beautyqueen.twic.pics/brands';
   static const logoURL = '${baseURL}logo.png';
   static const googleLogin = '${baseURL}auth/google/redirect';
+  static const magazineUrl = 'https://magazine.beautyqueen.ly/';
   static String urlOfSlider({required String image}) {
    return "$storageURL/slides/$image";
   }

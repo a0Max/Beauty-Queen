@@ -11,6 +11,7 @@ import '../../View/about_me/about_app.dart';
 import '../../View/categories/filter_screen.dart';
 import '../../View/events/events_screen.dart';
 import '../../View/gifts/GuidanceScreen.dart';
+import '../../View/magazine/magazine_screen.dart';
 import '../../View/user_profile/profile_screen.dart';
 import '../../View/whats_queena/Quinaprogram_screen.dart';
 import '../../View/offers/beautypharmacyscreen.dart';
@@ -316,7 +317,7 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  // Get.to(const HairDryerScreen());
+                  Get.to(const MagazineScreen());
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),

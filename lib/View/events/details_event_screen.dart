@@ -30,6 +30,9 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
     controller.currentGetEvents(id: widget.eventId);
   }
 
+  final PageController _pageController = PageController();
+  final PageController controllerPage = PageController();
+  final List<String> items = List.generate(10, (index) => 'Item ${index + 1}');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,24 +53,160 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
               )),
         ),
 
-        Obx(()=>Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-              children: [
-                15.ph,
-                Text(controller.event.value.title??'',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.visible,style: TextStyle(
-                    fontSize: 16.11.sp,
-                    fontWeight: FontWeight.w400,
-                    // color: Colors.white,
-                    fontFamily: kTheArabicSansLight)),
-                15.ph,
-                HtmlWidget(controller.event.value.description??''),
+        Obx(() => controller.isLoading2.value == true
+            ? const Center(
+                child: CupertinoActivityIndicator(),
+              )
+            : Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 410.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: CachedNetworkImageProvider(
+                                controller.currentImage.value),
+                            fit: BoxFit.fill)),
+                  ),
+                  15.ph,
+                  Container(
+                      height: 120.h,
+                      width: MediaQuery.of(context).size.width,
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        // fit : StackFit.expand,
+                        clipBehavior: Clip.hardEdge,
+                        children: [
+                          PageView.builder(
+                              controller: _pageController,
+                              itemCount: controller.listOfImage.length,
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    if (index > 0) ...{
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        height: 120.h,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            image: DecorationImage(
+                                                image:
+                                                    CachedNetworkImageProvider(
+                                                        controller.listOfImage
+                                                            .value[index - 1]),
+                                                fit: BoxFit.fill)),
+                                      ),
+                                    } else ...{
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        height: 120.h,
+                                      )
+                                    },
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      height: 120.h,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          image: DecorationImage(
+                                              image: CachedNetworkImageProvider(
+                                                  controller.listOfImage
+                                                      .value[index]),
+                                              fit: BoxFit.fill)),
+                                    ),
+                                    if ((index + 1) <
+                                            controller
+                                                .listOfImage.value.length &&
+                                        controller
+                                                .listOfImage.value[index + 1] !=
+                                            null) ...{
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        height: 120.h,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            image: DecorationImage(
+                                                image:
+                                                    CachedNetworkImageProvider(
+                                                        controller.listOfImage
+                                                            .value[index + 1]),
+                                                fit: BoxFit.fill)),
+                                      ),
+                                    } else ...{
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        height: 120.h,
+                                      )
+                                    },
+                                  ],
+                                );
+                              }),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  _pageController.previousPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
 
-
-              ]),
-        ))
+                                },
+                                child: Container(
+                                    padding: const EdgeInsets.all(7),
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white60),
+                                    child: const Icon(
+                                        Icons.arrow_back_ios_new_outlined)),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+                                },
+                                child: Container(
+                                    padding: const EdgeInsets.all(7),
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white60),
+                                    child:
+                                        const Icon(Icons.arrow_forward_ios_rounded)),
+                              ),
+                            ],
+                          )
+                        ],
+                      )),
+                  15.ph,
+                  Text(controller.event.value.title ?? '',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(
+                          fontSize: 16.11.sp,
+                          fontWeight: FontWeight.w400,
+                          // color: Colors.white,
+                          fontFamily: kTheArabicSansLight)),
+                  15.ph,
+                  HtmlWidget(controller.event.value.description ?? ''),
+                ]),
+              ))
       ]),
     );
   }

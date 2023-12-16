@@ -76,6 +76,7 @@ class _EventsScreen extends State<EventsScreen> {
                     },
                         child: Container(
                           // height: 100,
+                          width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.only(bottom: 20),
                           child: Column(
                             children: [
@@ -83,20 +84,21 @@ class _EventsScreen extends State<EventsScreen> {
                                 imageUrl: Connection.urlOfEvent(
                                     image: controller
                                         .eventsList[index].coverImage.file),
-                                width: MediaQuery.of(context).size.width-100,
-                                height: 350.h,
+                                width: MediaQuery.of(context).size.width,
+                                height: 450.h,
                                 fit: BoxFit.fill,
                               ),
                               Container(
                                 height: 100.h,
-                                width: MediaQuery.of(context).size.width-100,
-                                padding: EdgeInsets.symmetric(horizontal: 5.w,vertical: 10.h),
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 10.h),
                                 decoration:
                                     const BoxDecoration(color: AppColors.mainColor),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width/2,
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width/1.7,
                                       child: Text(controller
                                           .eventsList[index].title??'', overflow: TextOverflow.visible,style: TextStyle(
                                           fontSize: 12.11.sp,
