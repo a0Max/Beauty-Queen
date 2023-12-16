@@ -11,6 +11,7 @@ import '../../models/home_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/CustomAlertBox.dart';
+import '../../widgets/based/loading.dart';
 import '../../widgets/error_pop_up.dart';
 import '../nav_bar_controller/NavBarController.dart';
 
@@ -58,14 +59,15 @@ class HomeController extends GetxController {
 
   addToCart({required int productId, int? productOptionId, int? productParentId}) async {
     try {
+      var context = Get.context;
+
+      LoadingScreen.show(context!);
 
         await _api.addProductToCart(quantity: 1,
             productID: productId,
             productOptionID: productOptionId,
             optionID: productParentId);
-
-      var context = Get.context;
-
+        Get.back();
       showDialog(
           context: context!,
           builder: (BuildContext context) {
@@ -79,11 +81,12 @@ class HomeController extends GetxController {
           });
         NavController.to.getCountOfCart();
     }on DioException catch (e) {
+      Get.back();
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
 
     } catch (e) {
-      log('addToCart:error:$e');
+      Get.back();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
 
     }
