@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/options_model.dart';
 import '../../models/product_model.dart';
+import '../../models/product_options_model.dart';
 import '../../widgets/CustomAlertBox.dart';
 import '../../widgets/error_pop_up.dart';
 
@@ -241,4 +242,14 @@ class ProductProfileController extends GetxController
     rate.value = 0;
     imagePath.value = '';
   }
+
+  updateToLike({ required int index}){
+    // productData
+    //     .value.
+    productData.last.update((val) {
+      val?.p?[index].wishlist?.add(ProductOptionsModel());
+    });
+
+  }
+
 }

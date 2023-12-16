@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../const/api_connrction/queen_data_apis.dart';
 import '../../models/general_search_model.dart';
+import '../../models/product_options_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class QueenOfferController extends GetxController with GetSingleTickerProviderStateMixin {
@@ -97,5 +98,9 @@ class QueenOfferController extends GetxController with GetSingleTickerProviderSt
   applySelected(){
     getQueenOfferDataController(currentPage: 1);
   }
-
+  updateToLike({ required int index}){
+    dataProducts[index].update((val) {
+      val?.wishlist?.add(ProductOptionsModel());
+    });
+  }
 }

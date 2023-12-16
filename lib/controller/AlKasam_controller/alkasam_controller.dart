@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../const/api_connrction/alkasam_data_api.dart';
 import '../../models/general_search_model.dart';
+import '../../models/product_options_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class AlkasamController extends GetxController {
@@ -122,6 +123,9 @@ class AlkasamController extends GetxController {
     getCategoriesDataController(currentPage: 1);
   }
 
-
-
+  updateToLike({ required int index}){
+    generalSearchData.update((val) {
+      val?.products?.data?[index].wishlist?.add(ProductOptionsModel());
+    });
+  }
 }

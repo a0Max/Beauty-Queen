@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/general_search_model.dart';
+import '../../models/product_options_model.dart';
+import '../../models/sales_products_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class SalesController extends GetxController {
   RxBool isLoading = false.obs;
   var generalSearchData = GeneralSearchModel().obs;
-  RxList dataProducts = [].obs;
+  RxList dataProducts = <SalesProductsModel>[].obs;
   final _api = HomeDataApis();
   int page = 1;
 
@@ -88,5 +90,10 @@ class SalesController extends GetxController {
     getSalesDataController(currentPage: 1);
   }
 
+  updateToLike({ required int index}) {
+    generalSearchData.update((val) {
+      val?.sales?.data?[index].wishlist?.add(ProductOptionsModel());
+    });
+  }
 
 }

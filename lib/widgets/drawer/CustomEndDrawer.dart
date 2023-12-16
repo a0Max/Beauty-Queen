@@ -314,7 +314,7 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const HairDryerScreen());
+                  // Get.to(const HairDryerScreen());
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),

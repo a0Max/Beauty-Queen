@@ -21,28 +21,12 @@ class CustomCardWidget extends StatefulWidget {
   final String imageUrl;
   final SalesProductsModel newArrival;
   final double? width;
-  final String? imgtxt;
-  final String? price;
-  final String? des;
-  final String? inStock;
-  final String? disprice;
-  final List<ProductOptionsModel>? productOptions;
-  final String? note;
-  final String? containertxt;
+  final Function() onLikeTap;
 
   const CustomCardWidget(
       {super.key,
       required this.imageUrl,
-      required this.newArrival,
-      this.width,
-      this.imgtxt,
-      this.price,
-      this.des,
-      this.disprice,
-      this.containertxt,
-      this.note,
-      this.inStock,
-      this.productOptions});
+      required this.newArrival, this.width,  required this.onLikeTap,});
 
   @override
   State<CustomCardWidget> createState() => _CustomCardWidgetState();
@@ -388,13 +372,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       // size: 30,
                     ),
                     onPressed: () {
+                      widget.onLikeTap();
                       _controller.addWishlist(postId: widget.newArrival.id??0);
                     },
                   ),
                 ),
               ),
               Container(
-                height: 100,
+                // height: 100,
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 9),
                 child: Column(

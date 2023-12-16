@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../const/api_connrction/search_data_apis.dart';
 import '../../models/general_search_model.dart';
+import '../../models/product_options_model.dart';
 import '../../widgets/error_pop_up.dart';
 
 class SearchController0 extends GetxController {
@@ -90,6 +91,13 @@ class SearchController0 extends GetxController {
   applySelected(){
     getSearchDetails(currentPage: 1, subKeyWord:keyWord.value);
   }
-
+  updateToLike({ required int index}){
+    // dataProducts[index].update((val) {
+    //   val?.wishlist?.add(ProductOptionsModel());
+    // });
+    generalSearchData.update((val) {
+      val?.products?.data?[index].wishlist?.add(ProductOptionsModel());
+    });
+  }
 
 }

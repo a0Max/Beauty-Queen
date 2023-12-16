@@ -262,14 +262,18 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 Wrap(
                   runSpacing: 7,
                   children: List.generate(
-                      _controller.dataProducts.value.length,
+                      _controller.generalSearchData.value.sales?.data?.length??0,
                       (index) => CustomCardWidget(
                             imageUrl: Connection.urlOfProducts(
                                 image: _controller
-                                        .dataProducts.value[index].mainImage ??
+                                        .generalSearchData.value.sales?.data?[index].mainImage ??
                                     ''),
-                            newArrival: _controller.dataProducts.value[index] ??
+                            newArrival: _controller.generalSearchData.value.sales?.data?[index] ??
                                 SalesProductsModel(),
+                        onLikeTap: (){
+                          _controller.updateToLike(index:index);
+
+                        },
                           )),
                 ),
                 const SizedBox(height: 40,),

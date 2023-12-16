@@ -311,14 +311,17 @@ class _SearchScreen extends State<SearchScreen> {
                     :Wrap(
                   runSpacing: 7,
                   children: List.generate(
-                      _controller.dataProducts.value.length,
+                      _controller.generalSearchData.value.products?.data?.length??0,
                       (index) => CustomCardWidget(
                             imageUrl: Connection.urlOfProducts(
                                 image: _controller
-                                        .dataProducts.value[index].mainImage ??
+                                        .generalSearchData.value.products?.data?[index].mainImage ??
                                     ''),
-                            newArrival: _controller.dataProducts.value[index] ??
+                            newArrival: _controller.generalSearchData.value.products?.data?[index] ??
                                 SalesProductsModel(),
+                        onLikeTap: (){
+                          _controller.updateToLike(index:index);
+                        },
                           )),
                 ),
                 const SizedBox(

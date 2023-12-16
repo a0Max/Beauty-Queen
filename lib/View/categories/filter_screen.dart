@@ -372,15 +372,19 @@ class _FliterScreenState extends State<FliterScreen> {
                     : Wrap(
                         runSpacing: 7,
                         children: List.generate(
-                            _controller.dataProducts.value.length,
+                            _controller.generalSearchData.value.products?.data?.length??0,
                             (index) => CustomCardWidget(
                                   imageUrl: Connection.urlOfProducts(
-                                      image: _controller.dataProducts
-                                              .value[index].mainImage ??
+                                      image: _controller.generalSearchData.value.products?.data?[index].mainImage ??
                                           ''),
                                   newArrival:
-                                      _controller.dataProducts.value[index] ??
+                                      _controller.generalSearchData.value.products?.data?[index] ??
                                           SalesProductsModel(),
+                              onLikeTap: (){
+                                _controller.updateToLike(index:index);
+
+
+                              },
                                 )),
                       ),
               ]),

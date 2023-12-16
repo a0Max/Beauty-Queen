@@ -361,6 +361,11 @@ class _HomePageState extends State<HomePage> {
                                             ''),
                                     newArrival: _controller.homeData.value
                                         .newArrivals?[index]??SalesProductsModel(),
+                                    onLikeTap: (){
+                                      _controller.updateToLike(newArrivals:true, index:index);
+                                      print('newArrivals:${_controller.homeData.value.newArrivals?[index].wishlist
+                                          ?.length}');
+                                    },
                                   );
                                 },
                               ),
@@ -720,6 +725,11 @@ class _HomePageState extends State<HomePage> {
                                               .homeData
                                               .value
                                               .salesProducts?[value]??SalesProductsModel(),
+                                            onLikeTap: (){
+                                              _controller.updateToLike(salesProducts:true, index:value);
+                                              print('salesProducts:${_controller.homeData.value.salesProducts?[value].wishlist
+                                                  ?.length}');
+                                            },
                                           ),
                                           if ((_controller.homeData.value
                                                       .salesProducts?.length ??
@@ -740,6 +750,11 @@ class _HomePageState extends State<HomePage> {
                                                   .homeData
                                                   .value
                                                   .salesProducts?[value+1]??SalesProductsModel(),
+                                              onLikeTap: (){
+                                                _controller.updateToLike(salesProducts:true, index:value+1);
+                                                print('salesProducts:${_controller.homeData.value.salesProducts?[value+1].wishlist
+                                                    ?.length}');
+                                              },
                                             )
                                           }
                                         ],
@@ -872,6 +887,14 @@ class _HomePageState extends State<HomePage> {
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
                                       return CustomCardWidget(
+                                        onLikeTap: (){
+                                          _controller.updateToLike(discover:true, index:index);
+                                          print('products:${_controller.homeData
+                                              .value
+                                              .discover
+                                              ?.products?[index].wishlist
+                                              ?.length}');
+                                        },
                                           imageUrl: Connection.urlOfProducts(
                                               image: _controller
                                                       .homeData

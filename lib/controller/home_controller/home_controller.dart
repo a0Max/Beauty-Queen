@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/home_model.dart';
+import '../../models/product_options_model.dart';
+import '../../models/sales_products_model.dart';
 import '../../widgets/CustomAlertBox.dart';
 import '../../widgets/error_pop_up.dart';
 import '../nav_bar_controller/NavBarController.dart';
@@ -44,12 +46,10 @@ class HomeController extends GetxController {
     currentSlider.value = newSlider;
   }
 
-
   RxInt currentOffer = 0.obs;
   updateCurrentOffer({required int newSlider}){
     currentOffer.value = newSlider;
   }
-
 
   RxInt currentSalesProducts = 0.obs;
   updateSalesProducts({required int newSlider}){
@@ -89,7 +89,6 @@ class HomeController extends GetxController {
     }
   }
 
-
   addWishlist({required int postId}) async {
     await _api.addWishlistRequest(productId: postId);
   }
@@ -117,4 +116,35 @@ class HomeController extends GetxController {
     isLoadingWishlist.value = false;
   }
 
+  updateToLike({bool? newArrivals, bool? salesProducts, bool? discover, required int index}){
+    if (newArrivals==true){
+      homeData.update((val) {
+        val?.newArrivals?[index].wishlist?.add(ProductOptionsModel());
+      });
+      print('newArrivals:${homeData.value.newArrivals?[index].wishlist
+          ?.length}');
+    }
+    if (salesProducts==true){
+      homeData.update((val) {
+        val?.salesProducts?[index].wishlist?.add(ProductOptionsModel());
+      });
+      Future.delayed(const Duration(milliseconds: 500));
+      print('salesProducts:${homeData.value.salesProducts?[index].wishlist
+          ?.length}');
+    }
+    if (discover==true){
+      // homeData
+      //     .value
+      //     .discover
+      //     ?.products?[index].wishlist?.add(ProductOptionsModel());
+      homeData.update((val) {
+        val?.discover?.products?[index].wishlist?.add(ProductOptionsModel());
+      });
+      print('products:${homeData
+          .value
+          .discover
+          ?.products?[index].wishlist
+          ?.length}');
+    }
+  }
 }

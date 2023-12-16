@@ -396,14 +396,17 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                 :Wrap(
               runSpacing: 7,
               children: List.generate(
-                  controller.dataProducts.value.length,
+                  controller.generalSearchData.value.gifts?.data?.length??0,
                       (index) => CustomCardWidget(
                     imageUrl: Connection.urlOfProducts(
                         image: controller
-                            .dataProducts.value[index].mainImage ??
+                            .generalSearchData.value.gifts?.data?[index].mainImage ??
                             ''),
-                    newArrival: controller.dataProducts.value[index] ??
+                    newArrival: controller.generalSearchData.value.gifts?.data?[index] ??
                         SalesProductsModel(),
+                        onLikeTap: (){
+                          controller.updateToLike(index:index);
+                        },
                   )),
             ),
 
