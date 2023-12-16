@@ -13,7 +13,7 @@ import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/auth_controller/otp_controller.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/custom_button_2.dart';
-import '../../widgets/loading.dart';
+import '../../widgets/based/loading.dart';
 import '../welcome/welcome_screen.dart';
 import 'login_page.dart';
 

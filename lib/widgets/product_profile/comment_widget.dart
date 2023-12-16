@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../../controller/auth_controller/auth_controler.dart';
 import '../based/button_widget.dart';
+import '../based/loading.dart';
 import '../error_pop_up.dart';
 import '../text_field_widget.dart';
 
@@ -78,11 +79,38 @@ class CommentWidget extends StatelessWidget {
           children: [
             Expanded(
                 flex: 2,
-                child: TextFieldWidget(
-                  borderRadius: 2,
-                  height: 40,
-                  controler: phoneController,
-                )),
+                child:Container(
+                  height: 50,
+                  child: TextField(
+                      controller: phoneController,
+                      keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(2.0),
+                          borderSide: BorderSide(
+                              color: AppColors.mainColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(2.0),
+                          borderSide: BorderSide(
+                              color: AppColors.greyColor),
+                        ),
+                        focusedErrorBorder:OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(2.0),
+                          borderSide: const BorderSide(
+                              color: AppColors.redColor),
+                        ),
+                        filled: true,
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(2.0),
+                          borderSide: const BorderSide(
+                              color: AppColors.redColor),
+                        ),
+                        fillColor: Colors.white,
+                        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14)),
+                  ),
+                )
+                ),
             const Expanded(flex: 1, child: SizedBox()),
           ],
         ),
@@ -105,21 +133,25 @@ class CommentWidget extends StatelessWidget {
             marginWidth: 0,
             action: () async {
               try {
+                LoadingScreen.show(context);
+
                 await _controller.sendMessageToManagies(
                     phone: phoneController.text,
                     message: messageController.text);
+                Navigator.of(context).pop();
+
                 ErrorPopUp(
                     message: tr('updated2'),
                     title: tr('message'),
                     isError: false);
                 Navigator.of(context).pop();
               } on DioException catch (e, s) {
-                print('error:$e');
+                Navigator.of(context).pop();
                 ErrorPopUp(
                     message: (e.response?.data as Map).values.first,
                     title: 'خطا');
               } catch (e) {
-                print('error:$e');
+                Navigator.of(context).pop();
                 if (e == 'Check Network connection') {
                   ErrorPopUp(
                       message: tr('network_connection'), title: tr('Error'));

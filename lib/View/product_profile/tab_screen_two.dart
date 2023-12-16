@@ -1,6 +1,6 @@
 
 // import 'package:beauty_queen/const/colors.dart';
-import 'package:beauty_queen/widgets/loading.dart';
+import 'package:beauty_queen/widgets/based/loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

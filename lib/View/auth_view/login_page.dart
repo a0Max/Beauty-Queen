@@ -15,7 +15,7 @@ import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/error_pop_up.dart';
-import '../../widgets/loading.dart';
+import '../../widgets/based/loading.dart';
 import '../../widgets/loginVia.dart';
 import 'enter_phone_screen.dart';
 

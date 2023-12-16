@@ -1,3 +1,4 @@
+import 'package:beauty_queen/const/app_colors.dart';
 import 'package:flutter/material.dart' hide FontWeight;
 import 'package:loading_indicator/loading_indicator.dart';
 
@@ -19,7 +20,7 @@ class LoadingWidget extends StatelessWidget {
         height: size,
         child: LoadingIndicator(
           indicatorType: indicator,
-          colors: [Theme.of(context).primaryColor],
+          colors: const [AppColors.mainColor],
         ),
       ),
     );

@@ -13,7 +13,7 @@ import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import '../../widgets/custom_button_2.dart';
 import '../../widgets/error_pop_up.dart';
-import '../../widgets/loading.dart';
+import '../../widgets/based/loading.dart';
 import 'enter_new_password.dart';
 
 class OtpPage extends StatefulWidget {
