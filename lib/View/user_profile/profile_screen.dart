@@ -1,13 +1,18 @@
 
 import 'package:beauty_queen/const/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../widgets/contact_us_screen.dart';
-import '../../widgets/location_map.dart';
+import '../../const/colors.dart';
+import '../../const/styles.dart';
+import '../../widgets/contact_us/contact_us_screen.dart';
+import '../../widgets/contact_us/location_map.dart';
 import '../../widgets/product_profile/comment_widget.dart';
-import '../../widgets/email_widget.dart';
-import '../../widgets/social_login.dart';
-import '../../widgets/work_hours.dart';
+import '../../widgets/contact_us/email_widget.dart';
+import '../../widgets/contact_us/social_login.dart';
+import '../../widgets/contact_us/work_hours.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -16,47 +21,53 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        surfaceTintColor: kWhiteColor,
+        automaticallyImplyLeading: false,
         elevation: 0,
-        leading: const SizedBox(),
+        backgroundColor: kWhiteColor,
         actions: [
-          IconButton(onPressed: () {
-            Navigator.pop(context);
-          }, icon: const Icon(                Icons.arrow_forward_ios,
-          ))
+          IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                size: 30.r,
+                color: kBlackColor,
+              )),
         ],
-
         title: Text(
-          'تواصل معنا',
-          style:
-              Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 20),
+          tr('contact_us'),
+          style: TextStyle(
+              fontFamily: kTheArabicSansLight,
+              color: kBlackColor,
+              fontSize: 27.sp,
+              fontWeight: FontWeight.w600),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
-          child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              20.ph,
-              const ContactUsScreen(),
-              25.ph,
-              const SocialLogin(),
-              25.ph,
-              const EmailWidget(),
-              25.ph,
-              const CommentWidget(),
-              25.ph,
-              const WorkHours(),
-              25.ph,
-              const LocationMap()
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                20.ph,
+                const ContactUsScreen(),
+                25.ph,
+                SocialLogin(),
+                25.ph,
+                const EmailWidget(),
+                25.ph,
+                CommentWidget(),
+                25.ph,
+                const WorkHours(),
+                25.ph,
+                const LocationMap()
 
-            ],
-          ),
-        ),
-      )),
+              ],
+            ),
+          )),
     );
   }
 }

@@ -303,9 +303,9 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-
   Future<List<DepartmentsModel>> getAboutMEDataRequest() async {
     final token = await getUserToken();
+
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getAboutTheStoreDataEndPoint}',
       options: Options(
@@ -321,6 +321,33 @@ class UserDataApis extends ApiProvider {
       final List<DepartmentsModel> l = [];
       response.data['departments'].forEach((e) => l.add(DepartmentsModel.fromJson(e)));
       return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+
+  Future<bool> sendMessageRequest({required String phone, required String message}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.sendMessageDataEndPoint}',
+      queryParameters: {
+        'phone': phone,
+        'message': message
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return true;
     } else {
       throw response.data;
     }

@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:beauty_queen/const/extensions.dart';
-import '../const/app_images.dart';
+import 'package:flutter_svg/svg.dart';
+import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -66,18 +68,20 @@ class _LocationMap extends State<LocationMap> {
           children: [
             Transform.flip(
                 flipX: true,
-                child: Image.asset(
+                child: SvgPicture.asset(
                   AppImages.imagePin,
-                  height: 30,
-                  width: 30,
+                  // height: 30,
+                  // width: 30,
                 )),
             10.pw,
             Text(
               'موقعنا على خرائط قوقل',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontFamily: 'TheSans',
+                fontSize: 18.74,
+                color: AppColors.mainColor,
+                fontWeight: FontWeight.w700,
+              ),
             )
           ],
         ),

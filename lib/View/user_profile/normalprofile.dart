@@ -434,31 +434,43 @@ class NormalProfileScreen extends StatelessWidget {
                     color: kDividerrColor,
                     thickness: 2,
                   ),
-                  Row(
-                    children: [
-                      SvgPicture.asset(AppImages.chatImage),
-                      SizedBox(
-                        width: 25.w,
-                      ),
-                      Text(
-                        tr('contact_us'),
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: kBlackColor,
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const Spacer(),
-                      IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ProfileScreen()));
-                          },
-                          icon: const Icon(Icons.arrow_forward_ios))
-                    ],
+                  InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const ProfileScreen()));
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(AppImages.chatImage),
+                        SizedBox(
+                          width: 25.w,
+                        ),
+                        Text(
+                          tr('contact_us'),
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: kBlackColor,
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () {
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const ProfileScreen()));                            },
+                            icon: const Icon(Icons.arrow_forward_ios))
+                      ],
+                    ),
                   ),
                   const Divider(
                     color: kDividerrColor,

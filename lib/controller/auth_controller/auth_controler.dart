@@ -141,6 +141,7 @@ class AuthController extends GetxController {
         brand1: "${selectedBrandData1.value.id}",
         brand2: "${selectedBrandData2.value.id}",
         brand3: "${selectedBrandData3.value.id}",);
+    getUserData();
 
   }
 
@@ -190,6 +191,22 @@ class AuthController extends GetxController {
     selectedBrandData2.value = BrandModel();
     selectedBrandData1.value = BrandModel();
     allowToEdit.value = false;
+  }
+
+  googleLogin() async {
+    // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // // final GoogleSignInAuthentication? googleAuth =
+    // //     await googleUser?.authentication;
+    // print('googleAuth?.accessToken:${googleUser?.email}');
+    // print('googleAuth?.accessToken:${googleUser?.id}');
+    // print('googleAuth?.accessToken:${googleUser?.displayName}');
+    // print('googleAuth?.accessToken:${googleUser?.photoUrl}');
+    // print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
+    // print('googleAuth?.accessToken:${googleAuth?.accessToken}');
+  }
+
+  sendMessageToManagies({required String phone, required String message}) async {
+    await _api.sendMessageRequest(phone: phone, message: message);
   }
 
 }

@@ -147,3 +147,9 @@ abstract class LinkTypes{
   static const brand = 'brand';
   static const product = 'product';
 }
+
+abstract class SocialMedia{
+  static const email = 'magazine@beautyqueen.ly';
+  static const phone = '0919900224';
+}
+

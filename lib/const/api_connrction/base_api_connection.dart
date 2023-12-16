@@ -72,6 +72,7 @@ abstract class ApiProvider {
   static const String getQueenaProductsDataEndPoint = "get/queenaProducts";
   static const String getQueenaOffersDataEndPoint = "get/queenaOffers";
   static const String getAboutTheStoreDataEndPoint = "getAboutTheStore";
+  static const String sendMessageDataEndPoint = "sendMessage";
 
 ////////////////////////////////////////////////////////////////////////////
 

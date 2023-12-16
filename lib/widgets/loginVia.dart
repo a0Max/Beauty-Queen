@@ -4,14 +4,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../const/app_images.dart';
+import '../controller/auth_controller/auth_controler.dart';
 
 class LoginVia extends StatelessWidget {
   const LoginVia({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthController controller = Get.put(AuthController());
+
     return Column(
       children: [
         Row(
@@ -86,7 +90,7 @@ class LoginVia extends StatelessWidget {
                 highlightColor:Colors.transparent,
                 splashColor: Colors.transparent,
                 onTap: () {
-                  print('googlelogin');
+                  controller.googleLogin();
                 },
                 child: Container(
                   width: (MediaQuery.of(context).size.width-100)/2,
