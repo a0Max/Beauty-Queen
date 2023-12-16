@@ -100,11 +100,14 @@ class _EventsScreen extends State<EventsScreen> {
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width/1.7,
                                       child: Text(controller
-                                          .eventsList[index].title??'', overflow: TextOverflow.visible,style: TextStyle(
-                                          fontSize: 12.11.sp,
-                                          fontWeight: FontWeight.w400,
+                                          .eventsList[index].title??'', overflow: TextOverflow.ellipsis,style: TextStyle(
+                                          fontSize: 18.11.sp,
+                                          fontWeight: FontWeight.w700,
                                           color: Colors.white,
-                                          fontFamily: kTheArabicSansLight)),
+                                          fontFamily: kTheArabicSansLight),
+                                      maxLines: 3,
+
+                                      ),
                                     ),
 
                                     Container(
@@ -115,7 +118,7 @@ class _EventsScreen extends State<EventsScreen> {
                                         child: Container(
                                           // height: 49.70.h,
                                           decoration: ShapeDecoration(
-                                            color: Colors.white70,
+                                            color: AppColors.klPinkColor,
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(8.84),
                                             ),
@@ -124,7 +127,7 @@ class _EventsScreen extends State<EventsScreen> {
                                             margin: const EdgeInsets.all(10),
                                             child: Text('اطلعي الآن',
                                                 style: TextStyle(
-                                                    fontSize: 12.11.sp,
+                                                    fontSize: 15.11.sp,
                                                     fontWeight: FontWeight.w400,
                                                     color: AppColors.mainColor,
                                                     fontFamily: kTheArabicSansLight)),

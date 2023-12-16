@@ -30,9 +30,9 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
     controller.currentGetEvents(id: widget.eventId);
   }
 
-  final PageController _pageController = PageController();
-  final PageController controllerPage = PageController();
-  final List<String> items = List.generate(10, (index) => 'Item ${index + 1}');
+  final PageController _pageController1 = PageController();
+  final PageController _pageController2 = PageController();
+  final PageController _pageController3 = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,101 +71,133 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                             fit: BoxFit.fill)),
                   ),
                   15.ph,
-                  Container(
+                  SizedBox(
                       height: 120.h,
                       width: MediaQuery.of(context).size.width,
                       child: Stack(
                         alignment: AlignmentDirectional.center,
-                        // fit : StackFit.expand,
-                        clipBehavior: Clip.hardEdge,
+
                         children: [
-                          PageView.builder(
-                              controller: _pageController,
-                              itemCount: controller.listOfImage.length,
-                              itemBuilder: (context, index) {
-                                return Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    if (index > 0) ...{
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                4,
-                                        height: 120.h,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              SizedBox(
+                                height: 120.h,
+                                width:
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width / 4,
+                                child: PageView.builder(
+                                    controller: _pageController3,
+                                    itemCount: controller.listOfImage.length,
+                                    itemBuilder: (context, index) {
+                                      if(index > 0) {
+                                        return
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
                                                 BorderRadius.circular(20),
-                                            image: DecorationImage(
-                                                image:
-                                                    CachedNetworkImageProvider(
+                                                image: DecorationImage(
+                                                    image: CachedNetworkImageProvider(
                                                         controller.listOfImage
                                                             .value[index - 1]),
-                                                fit: BoxFit.fill)),
-                                      ),
-                                    } else ...{
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                4,
-                                        height: 120.h,
-                                      )
-                                    },
-                                    Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      height: 120.h,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
+                                                    fit: BoxFit.fill)),
+                                          );
+                                      }else{
+                                        return SizedBox(
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              4,
+                                          height: 120.h,
+                                        );
+                                      }
+                                    }),
+                              ),
+
+                              SizedBox(
+                                height: 120.h,
+                                width:
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width / 4,
+                                child: PageView.builder(
+                                    controller: _pageController2,
+                                    itemCount: controller.listOfImage.length,
+                                    itemBuilder: (context, index) {
+                                      return
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
                                               BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              image: CachedNetworkImageProvider(
-                                                  controller.listOfImage
-                                                      .value[index]),
-                                              fit: BoxFit.fill)),
-                                    ),
-                                    if ((index + 1) <
-                                            controller
-                                                .listOfImage.value.length &&
-                                        controller
-                                                .listOfImage.value[index + 1] !=
-                                            null) ...{
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                4,
-                                        height: 120.h,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
+                                              image: DecorationImage(
+                                                  image: CachedNetworkImageProvider(
+                                                      controller.listOfImage
+                                                          .value[index]),
+                                                  fit: BoxFit.fill)),
+                                        );
+                                    }),
+                              ),
+                              SizedBox(
+                                height: 120.h,
+                                width:
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width / 4,
+                                child: PageView.builder(
+                                    controller: _pageController1,
+                                    itemCount: controller.listOfImage.length,
+                                    itemBuilder: (context, index) {
+                                      if ((index + 1) <
+                                          controller
+                                              .listOfImage.value.length &&
+                                          controller
+                                              .listOfImage.value[index + 1] !=
+                                              null) {
+                                        return
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
                                                 BorderRadius.circular(20),
-                                            image: DecorationImage(
-                                                image:
-                                                    CachedNetworkImageProvider(
+                                                image: DecorationImage(
+                                                    image: CachedNetworkImageProvider(
                                                         controller.listOfImage
-                                                            .value[index + 1]),
-                                                fit: BoxFit.fill)),
-                                      ),
-                                    } else ...{
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                4,
-                                        height: 120.h,
-                                      )
-                                    },
-                                  ],
-                                );
-                              }),
+                                                            .value[index+1]),
+                                                    fit: BoxFit.fill)),
+                                          );
+                                      }else{
+                                        SizedBox(
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              4,
+                                          height: 120.h,
+                                        );
+                                      }
+                                    }),
+                              ),
+
+                            ],
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
                                 onTap: () {
-                                  _pageController.previousPage(
+                                  _pageController1.previousPage(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.ease,
                                   );
-
+                                  _pageController2.previousPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+                                  _pageController3.previousPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
                                 },
                                 child: Container(
                                     padding: const EdgeInsets.all(7),
@@ -177,7 +209,17 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  _pageController.nextPage(
+                                  _pageController1.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+
+                                  _pageController2.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+
+                                  _pageController3.nextPage(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.ease,
                                   );
@@ -188,12 +230,14 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                         shape: BoxShape.circle,
                                         color: Colors.white60),
                                     child:
-                                        const Icon(Icons.arrow_forward_ios_rounded)),
+                                    const Icon(Icons.arrow_forward_ios_rounded)),
                               ),
                             ],
-                          )
+                          ),
+
                         ],
                       )),
+
                   15.ph,
                   Text(controller.event.value.title ?? '',
                       textAlign: TextAlign.center,
