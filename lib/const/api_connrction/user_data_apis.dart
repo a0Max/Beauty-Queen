@@ -177,6 +177,55 @@ class UserDataApis extends ApiProvider {
     );
   }
 
+  Future<bool> updateUserRequest({
+    required String name,
+    required String lastName,
+    required String? birthDate,
+    required String phone,
+    required String? cityId,
+    required String? areaId,
+    required String? phone2,
+    required String? email,
+    required String? whatsappPhone,
+    required String? brand1,
+    required String? brand2,
+    required String? brand3,
+}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.updateUserDataDataEndPoint}',
+      queryParameters: {
+        'name':name,
+        'last_name':lastName,
+        'birth_date':birthDate,
+        'phone':phone,
+        'city_id':cityId,
+        'area_id':areaId,
+        'phone2':phone2,
+        'email':email,
+        'whatsapp_phone':whatsappPhone,
+        'brand1':brand1,
+        'brand2':brand2,
+        'brand3':brand3,
+
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return true;
+    } else {
+      throw response.data;
+    }
+  }
+
   Future<List<CityAreaModel>> getCityDataRequest() async {
     final token = await getUserToken();
     final response = await dio.get(

@@ -1,18 +1,24 @@
 import 'dart:developer';
 
 import 'package:beauty_queen/models/user_model.dart';
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../View/home/bottom_nav_screen.dart';
 import '../../View/welcome/welcome_screen.dart';
+import '../../const/api_connrction/brands_data_api.dart';
 import '../../const/api_connrction/user_data_apis.dart';
+import '../../models/brand_model.dart';
 import '../../models/city_area_model.dart';
+import '../../widgets/error_pop_up.dart';
 
 class AuthController extends GetxController {
   var obscureText = true.obs;
   var userData = UserModel().obs;
   final _api = UserDataApis();
+  final _api2 = BrandsDataApis();
 
   void togglePasswordVisibility() {
     obscureText.value = !obscureText.value;
@@ -94,11 +100,14 @@ class AuthController extends GetxController {
     citiesData.value = await _api.getCityDataRequest();
   }
 
-  updateSelectedCity({required CityAreaModel newCity}) {
+  RxBool loadingArea = false.obs;
+  updateSelectedCity({required CityAreaModel newCity}) async {
     selectedCityData.value = newCity;
     selectedAreaData.value = CityAreaModel();
     if (newCity.hasArea == '1') {
-      getArea(cityId: newCity.id ?? 0);
+      loadingArea.value = true;
+      await getArea(cityId: newCity.id ?? 0);
+      loadingArea.value = false;
     }
   }
   updateSelectedArea({required CityAreaModel newArea}) {
@@ -114,11 +123,73 @@ class AuthController extends GetxController {
     allowToEdit.value = !(allowToEdit.value);
   }
 
-  applyToSaveEdit(){
+  applyToSaveEdit({required String nameController,
+    required String nickNameController,
+    required String phoneController,
+    required String whatsAppController,
+  required String phoneController2,
+  required String emailController}) async {
+    await _api.updateUserRequest(name: nameController,
+        lastName: nickNameController,
+        birthDate: dateTime.value,
+        phone: phoneController,
+        cityId: "${selectedCityData.value.id}",
+        areaId: "${selectedAreaData.value.id}",
+        phone2: phoneController2,
+        email: emailController,
+        whatsappPhone: whatsAppController,
+        brand1: "${selectedBrandData1.value.id}",
+        brand2: "${selectedBrandData2.value.id}",
+        brand3: "${selectedBrandData3.value.id}",);
 
   }
 
   applyToChangePassword({required String currentPassword, required String newPassword, required String reNewPassword}) async {
     await _api.updatePasswordRequest(currentPassword: currentPassword, newPassword: newPassword, reNewPassword: reNewPassword);
   }
+  RxList brandsData =[].obs;
+  RxBool loadingBrands = false.obs;
+
+  Future<void> getBrandsDataController() async {
+    try {
+      loadingBrands.value = true;
+      brandsData.value = await _api2.breandsDataRequest();
+    } on DioException catch (e, s) {
+      brandsData.value=[];
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } catch (e, s) {
+      brandsData.value=[];
+      if (e == 'Check Network connection'){
+        ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+      }else {
+        ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+      }
+    }
+    loadingBrands.value = false;
+  }
+
+  var selectedBrandData1 = BrandModel().obs;
+  updateSelectedBrand1({required BrandModel newBrand}) async {
+    selectedBrandData1.value = newBrand;
+  }
+
+
+  var selectedBrandData2 = BrandModel().obs;
+  updateSelectedBrand2({required BrandModel newBrand}) async {
+    selectedBrandData2.value = newBrand;
+  }
+
+
+  var selectedBrandData3 = BrandModel().obs;
+  updateSelectedBrand3({required BrandModel newBrand}) async {
+    selectedBrandData3.value = newBrand;
+  }
+  clearBrand(){
+    brandsData.value = [];
+    selectedBrandData3.value = BrandModel();
+    selectedBrandData2.value = BrandModel();
+    selectedBrandData1.value = BrandModel();
+    allowToEdit.value = false;
+  }
+
 }

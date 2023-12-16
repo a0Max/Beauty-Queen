@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/extensions.dart';
+import 'package:beauty_queen/models/brand_model.dart';
 import 'package:beauty_queen/widgets/custom_button.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,6 +18,7 @@ import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../models/city_area_model.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
+import '../../widgets/error_pop_up.dart';
 
 class MyDataScreen extends StatefulWidget {
   const MyDataScreen({super.key});
@@ -27,6 +33,9 @@ class _MyDataScreen extends State<MyDataScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController nickNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController whatsAppController = TextEditingController();
+  TextEditingController phoneController2 = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   // TextEditingController birthDayController = TextEditingController();
   AuthController controller = Get.put(AuthController());
 
@@ -46,12 +55,72 @@ class _MyDataScreen extends State<MyDataScreen> {
   @override
   void initState() {
     super.initState();
+    controller.clearBrand();
+
     nameController =
         TextEditingController(text: controller.userData.value.name);
     phoneController =
         TextEditingController(text: controller.userData.value.phone);
     nickNameController =
         TextEditingController(text: controller.userData.value.lastName);
+    if (controller.userData.value.accountType == AccountTypes.queena) {
+      compliteDataOfQueenaAccount();
+    }
+  }
+
+  compliteDataOfQueenaAccount() async {
+    await controller.getBrandsDataController();
+    if (controller.userData.value.cityId != null) {
+      final cityList = controller.citiesData.value.where(
+          (element) => "${element.id}" == controller.userData.value.cityId);
+
+      if (cityList.isNotEmpty) {
+        CityAreaModel tempCity = cityList.first;
+        await controller.updateSelectedCity(newCity: tempCity);
+      }
+      if (controller.userData.value.areaId != null) {
+        final areaList = controller.areaData.value.where(
+            (element) => "${element.id}" == controller.userData.value.areaId);
+
+        if (areaList.isNotEmpty) {
+          CityAreaModel tempArea = areaList.first;
+          controller.updateSelectedArea(newArea: tempArea);
+        }
+      }
+    }
+    if (controller.userData.value.birthDate != null) {
+      DateTime dateTime =
+          DateTime.parse(controller.userData.value.birthDate ?? '');
+      String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
+      controller.updateDateTime(newDateTime: formattedDate);
+    }
+
+    if (controller.userData.value.brand1 != null) {
+      final brandList = controller.brandsData.value.where(
+          (element) => "${element.id}" == controller.userData.value.brand1);
+      if (brandList.isNotEmpty) {
+        BrandModel tempBrand = brandList.first;
+        controller.updateSelectedBrand1(newBrand: tempBrand);
+      }
+    }
+
+    if (controller.userData.value.brand2 != null) {
+      final brandList = controller.brandsData.value.where(
+          (element) => "${element.id}" == controller.userData.value.brand2);
+      if (brandList.isNotEmpty) {
+        BrandModel tempBrand = brandList.first;
+        controller.updateSelectedBrand2(newBrand: tempBrand);
+      }
+    }
+
+    if (controller.userData.value.brand3 != null) {
+      final brandList = controller.brandsData.value.where(
+          (element) => "${element.id}" == controller.userData.value.brand3);
+      if (brandList.isNotEmpty) {
+        BrandModel tempBrand = brandList.first;
+        controller.updateSelectedBrand3(newBrand: tempBrand);
+      }
+    }
   }
 
   @override
@@ -99,7 +168,9 @@ class _MyDataScreen extends State<MyDataScreen> {
                           hindText: tr('kFirstNameHint'),
                           titleText: tr('kFirstNameHint'),
                           controler: nameController,
-                          readOnly: controller.allowToEdit.value==false?true:null,
+                          readOnly: controller.allowToEdit.value == false
+                              ? true
+                              : null,
                           hintStyle: TextStyle(
                             color: const Color(0xFF2C3E50),
                             fontSize: 17.69.sp,
@@ -117,7 +188,9 @@ class _MyDataScreen extends State<MyDataScreen> {
                         child: TextFieldAuthWidget(
                           hindText: tr('nackName'),
                           titleText: tr('nackName'),
-                          readOnly: controller.allowToEdit.value==false?true:null,
+                          readOnly: controller.allowToEdit.value == false
+                              ? true
+                              : null,
                           controler: nickNameController,
                           hintStyle: TextStyle(
                             color: const Color(0xFF2C3E50),
@@ -136,15 +209,67 @@ class _MyDataScreen extends State<MyDataScreen> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  Text("${controller.userData.value.accountType}"),
                   if (controller.userData.value.accountType ==
                       AccountTypes.queena) ...{
+                    TextFieldAuthWidget(
+                      hindText: tr('whatsApp'),
+                      titleText: tr('whatsApp'),
+                      readOnly:
+                          controller.allowToEdit.value == false ? true : null,
+                      controler: whatsAppController,
+                      hintStyle: TextStyle(
+                        color: const Color(0xFF2C3E50),
+                        fontSize: 17.69.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      keyboardType: TextInputType.name,
+                      validatorTextField: (val) {
+                        return Validator().validatorName(val);
+                      },
+                    ),
+                    TextFieldAuthWidget(
+                      hindText: tr('subPhone'),
+                      titleText: tr('subPhone'),
+                      readOnly:
+                          controller.allowToEdit.value == false ? true : null,
+                      controler: phoneController2,
+                      hintStyle: TextStyle(
+                        color: const Color(0xFF2C3E50),
+                        fontSize: 17.69.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      keyboardType: TextInputType.name,
+                      validatorTextField: (val) {
+                        return Validator().validatorName(val);
+                      },
+                    ),
+                    TextFieldAuthWidget(
+                      hindText: tr('email'),
+                      titleText: tr('email'),
+                      readOnly:
+                          controller.allowToEdit.value == false ? true : null,
+                      controler: emailController,
+                      hintStyle: TextStyle(
+                        color: const Color(0xFF2C3E50),
+                        fontSize: 17.69.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      keyboardType: TextInputType.name,
+                      validatorTextField: (val) {
+                        return Validator().validatorName(val);
+                      },
+                    ),
                     TextFieldAuthWidget(
                       hindText: tr('birthDay'),
                       titleText: tr('birthDay'),
                       readOnly: true,
                       onTap: () {
-                        showDatePickerDialog();
+                        if (controller.allowToEdit.value == true) {
+                          showDatePickerDialog();
+                        }
                       },
                       controler: TextEditingController(
                           text: controller.dateTime.value),
@@ -211,6 +336,8 @@ class _MyDataScreen extends State<MyDataScreen> {
                         underline: const SizedBox(),
                         iconEnabledColor: Colors.transparent,
                         isDense: true,
+                        // onTap:  controller.allowToEdit.value==true?null:log('open')
+                        // ,
                         isExpanded: true,
                         value: controller.selectedCityData.value.id == null
                             ? null
@@ -228,10 +355,12 @@ class _MyDataScreen extends State<MyDataScreen> {
                                 )),
                           );
                         }).toList(),
-                        onChanged: (CityAreaModel? newValue) {
-                          controller.updateSelectedCity(
-                              newCity: newValue ?? CityAreaModel());
-                        },
+                        onChanged: controller.allowToEdit.value != true
+                            ? null
+                            : (CityAreaModel? newValue) {
+                                controller.updateSelectedCity(
+                                    newCity: newValue ?? CityAreaModel());
+                              },
                         hint: Text(
                           tr('city'),
                           style: TextStyle(
@@ -252,7 +381,12 @@ class _MyDataScreen extends State<MyDataScreen> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    if (controller.areaData.value.isNotEmpty &&
+                    if (controller.loadingArea.value == true) ...{
+                      const Center(
+                        child: CupertinoActivityIndicator(),
+                      )
+                    } else if (controller.loadingArea.value != true &&
+                        controller.areaData.value.isNotEmpty &&
                         controller.selectedCityData.value.hasArea != "0") ...{
                       Text(
                         tr('area'),
@@ -295,10 +429,12 @@ class _MyDataScreen extends State<MyDataScreen> {
                                   )),
                             );
                           }).toList(),
-                          onChanged: (CityAreaModel? newValue) {
-                            controller.updateSelectedArea(
-                                newArea: newValue ?? CityAreaModel());
-                          },
+                          onChanged: controller.allowToEdit.value != true
+                              ? null
+                              : (CityAreaModel? newValue) {
+                                  controller.updateSelectedArea(
+                                      newArea: newValue ?? CityAreaModel());
+                                },
                           hint: Text(
                             tr('area'),
                             style: TextStyle(
@@ -317,6 +453,248 @@ class _MyDataScreen extends State<MyDataScreen> {
                         ),
                       ),
                     },
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    if (controller.loadingBrands.value == true &&
+                        controller.brandsData.value.isEmpty) ...{
+                      const Center(
+                        child: CupertinoActivityIndicator(),
+                      )
+                    } else if (controller.loadingBrands.value != true &&
+                        controller.brandsData.value.isNotEmpty) ...{
+                      Text(
+                        tr('yourBest3'),
+                        style: TextStyle(
+                          color: AppColors.mainColor,
+                          fontSize: 18.79.sp,
+                          fontFamily: kTheArabicSansLight,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tr('brand1'),
+                            style: TextStyle(
+                              color: AppColors.kSecondaryColor,
+                              fontSize: 18.79.sp,
+                              fontFamily: kTheArabicSansLight,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(height: 10.h),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            height: 49.76.h,
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(11.06.r),
+                              border: Border.all(
+                                  width: 1.11.w,
+                                  color: const Color(0xFFD9DEE2)),
+                            ),
+                            child: DropdownButton<BrandModel>(
+                              underline: const SizedBox(),
+                              iconEnabledColor: Colors.transparent,
+                              isDense: true,
+                              isExpanded: true,
+                              value:
+                                  controller.selectedBrandData1.value.id == null
+                                      ? null
+                                      : controller.selectedBrandData1.value,
+                              items: controller.brandsData.value.map((value) {
+                                return DropdownMenuItem<BrandModel>(
+                                  value: value,
+                                  child: Text(value.titleAr ?? '',
+                                      style: TextStyle(
+                                        color: AppColors.kBlackColor,
+                                        fontSize: 14.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                      )),
+                                );
+                              }).toList(),
+                              onChanged: controller.allowToEdit.value != true
+                                  ? null
+                                  : (BrandModel? newValue) {
+                                      controller.updateSelectedBrand1(
+                                          newBrand: newValue ?? BrandModel());
+                                    },
+                              hint: Text(
+                                tr('brand1'),
+                                style: TextStyle(
+                                  color: AppColors.kBlackColor,
+                                  fontSize: 18.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 20.h,
+                          // ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tr('brand2'),
+                            style: TextStyle(
+                              color: AppColors.kSecondaryColor,
+                              fontSize: 18.79.sp,
+                              fontFamily: kTheArabicSansLight,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(height: 10.h),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            height: 49.76.h,
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(11.06.r),
+                              border: Border.all(
+                                  width: 1.11.w,
+                                  color: const Color(0xFFD9DEE2)),
+                            ),
+                            child: DropdownButton<BrandModel>(
+                              underline: const SizedBox(),
+                              iconEnabledColor: Colors.transparent,
+                              isDense: true,
+                              isExpanded: true,
+                              value:
+                                  controller.selectedBrandData2.value.id == null
+                                      ? null
+                                      : controller.selectedBrandData2.value,
+                              items: controller.brandsData.value.map((value) {
+                                return DropdownMenuItem<BrandModel>(
+                                  value: value,
+                                  child: Text(value.titleAr ?? '',
+                                      style: TextStyle(
+                                        color: AppColors.kBlackColor,
+                                        fontSize: 14.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                      )),
+                                );
+                              }).toList(),
+                              onChanged: controller.allowToEdit.value != true
+                                  ? null
+                                  : (BrandModel? newValue) {
+                                      controller.updateSelectedBrand2(
+                                          newBrand: newValue ?? BrandModel());
+                                    },
+                              hint: Text(
+                                tr('brand2'),
+                                style: TextStyle(
+                                  color: AppColors.kBlackColor,
+                                  fontSize: 18.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 20.h,
+                          // ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tr('brand3'),
+                            style: TextStyle(
+                              color: AppColors.kSecondaryColor,
+                              fontSize: 18.79.sp,
+                              fontFamily: kTheArabicSansLight,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(height: 10.h),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            height: 49.76.h,
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(11.06.r),
+                              border: Border.all(
+                                  width: 1.11.w,
+                                  color: const Color(0xFFD9DEE2)),
+                            ),
+                            child: DropdownButton<BrandModel>(
+                              underline: const SizedBox(),
+                              iconEnabledColor: Colors.transparent,
+                              isDense: true,
+                              isExpanded: true,
+                              value:
+                                  controller.selectedBrandData3.value.id == null
+                                      ? null
+                                      : controller.selectedBrandData3.value,
+                              items: controller.brandsData.value.map((value) {
+                                return DropdownMenuItem<BrandModel>(
+                                  value: value,
+                                  child: Text(value.titleAr ?? '',
+                                      style: TextStyle(
+                                        color: AppColors.kBlackColor,
+                                        fontSize: 14.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                      )),
+                                );
+                              }).toList(),
+                              onChanged: controller.allowToEdit.value != true
+                                  ? null
+                                  : (BrandModel? newValue) {
+                                      controller.updateSelectedBrand3(
+                                          newBrand: newValue ?? BrandModel());
+                                    },
+                              hint: Text(
+                                tr('brand3'),
+                                style: TextStyle(
+                                  color: AppColors.kBlackColor,
+                                  fontSize: 18.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 20.h,
+                          // ),
+                        ],
+                      )
+                    }
                   },
                   SizedBox(
                     height: 50.h,
@@ -324,34 +702,74 @@ class _MyDataScreen extends State<MyDataScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomButton(
-                          text: tr('save'),
-                          backgroundColor: kPrimaryColor,
-                          width: 160.w,
-                          height: 40.26.h,
-                          borderRadius: 47.34.r,
-                          onPressed: () {},
-                          textStyle: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 20.85.sp,
-                              color: kWhiteColor,
-                              fontWeight: FontWeight.w700)),
-                      CustomButton(
-                          border:
-                              Border.all(color: kPrimaryColor, width: 1.56.w),
-                          text: tr('edit2'),
-                          backgroundColor: kWhiteColor,
-                          width: 160.w,
-                          height: 40.26.h,
-                          borderRadius: 47.34.r,
-                          onPressed: () {
-                            controller.applyToEdit();
-                          },
-                          textStyle: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 20.85.sp,
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.w700))
+                      if (controller.allowToEdit.value == true) ...{
+                        Expanded(
+                            child: CustomButton(
+                                text: tr('save'),
+                                backgroundColor: kPrimaryColor,
+                                // width: 160.w,
+                                height: 40.26.h,
+                                borderRadius: 47.34.r,
+                                onPressed: () async {
+                                  try {
+                                    await controller.applyToSaveEdit(
+                                        nameController: nameController.text,
+                                        nickNameController:
+                                            nickNameController.text,
+                                        phoneController: phoneController.text,
+                                        whatsAppController:
+                                            whatsAppController.text,
+                                        phoneController2: phoneController2.text,
+                                        emailController: emailController.text);
+                                    ErrorPopUp(
+                                        message: tr('updated'), title: tr('message'), isError: false);
+                                    Navigator.of(context).pop();
+                                  } on DioException catch (e, s) {
+                                    print('error:$e');
+                                    ErrorPopUp(
+                                        message: (e.response?.data as Map)
+                                            .values
+                                            .first,
+                                        title: 'خطا');
+                                  } catch (e) {
+                                    print('error:$e');
+                                    if (e == 'Check Network connection') {
+                                      ErrorPopUp(
+                                          message: tr('network_connection'),
+                                          title: tr('Error'));
+                                    } else {
+                                      ErrorPopUp(
+                                          message: tr('something_wrong'),
+                                          title: tr('Error'));
+                                    }
+                                  }
+                                  print('Done');
+                                },
+                                textStyle: TextStyle(
+                                    fontFamily: kTheArabicSansLight,
+                                    fontSize: 20.85.sp,
+                                    color: kWhiteColor,
+                                    fontWeight: FontWeight.w700))),
+                        15.pw,
+                      },
+                      Expanded(
+                        child: CustomButton(
+                            border:
+                                Border.all(color: kPrimaryColor, width: 1.56.w),
+                            text: tr('edit2'),
+                            backgroundColor: kWhiteColor,
+                            // width: 160.w,
+                            height: 40.26.h,
+                            borderRadius: 47.34.r,
+                            onPressed: () {
+                              controller.applyToEdit();
+                            },
+                            textStyle: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                fontSize: 20.85.sp,
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w700)),
+                      )
                     ],
                   ),
 
