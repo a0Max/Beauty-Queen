@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../View/about_me/about_app.dart';
 import '../../View/categories/filter_screen.dart';
+import '../../View/events/events_screen.dart';
 import '../../View/gifts/GuidanceScreen.dart';
 import '../../View/user_profile/profile_screen.dart';
 import '../../View/whats_queena/Quinaprogram_screen.dart';
@@ -366,7 +367,7 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.back();
+                  Get.to(const EventsScreen());
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),

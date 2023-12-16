@@ -32,6 +32,9 @@ abstract class Connection {
   static String urlOfBanner({required String image}) {
     return "${storageURL}banner/$image";
   }
+  static String urlOfEvent({required String image}) {
+    return "${storageURL}events/$image";
+  }
   static String urlOfDiscover({required String image}) {
     return "${storageURL}discover/$image";
   }

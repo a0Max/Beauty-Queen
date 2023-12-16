@@ -69,7 +69,7 @@ class HomeController extends GetxController {
             optionID: productParentId);
         Get.back();
       showDialog(
-          context: context!,
+          context: context,
           builder: (BuildContext context) {
             return CustomAlertDialog(
               height: 180.64.h,
