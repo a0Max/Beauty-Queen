@@ -21,24 +21,28 @@ class CustomCardWidget extends StatefulWidget {
   final String imageUrl;
   final SalesProductsModel newArrival;
   final double? width;
-  final Function() onLikeTap;
+  final bool favorite;
 
   const CustomCardWidget(
       {super.key,
       required this.imageUrl,
-      required this.newArrival, this.width,  required this.onLikeTap,});
+      required this.newArrival, this.width,  required this.favorite,});
 
   @override
   State<CustomCardWidget> createState() => _CustomCardWidgetState();
 }
 
 class _CustomCardWidgetState extends State<CustomCardWidget> {
-  // bool isFavorite = false;
+  bool isFavorite = false;
   bool showProductOptions = false;
   OptionsModel? selectedOption;
   ProductOptionsModel? selectedParentOption;
   final HomeController _controller = Get.put(HomeController());
-
+@override
+  void initState() {
+    super.initState();
+    isFavorite = widget.favorite??false;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -367,12 +371,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   alignment: Alignment.topLeft,
                   child: IconButton(
                     icon: Icon(
-                      (widget.newArrival.wishlist?.isNotEmpty??false) ? Icons.favorite : Icons.favorite_border,
-                      color: (widget.newArrival.wishlist?.isNotEmpty??false) ? Colors.red : const Color(0xff13110C),
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.red : const Color(0xff13110C),
                       // size: 30,
                     ),
                     onPressed: () {
-                      widget.onLikeTap();
+                      setState(() {
+                        isFavorite = true;
+                      });
                       _controller.addWishlist(postId: widget.newArrival.id??0);
                     },
                   ),

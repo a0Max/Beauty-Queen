@@ -404,9 +404,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                             ''),
                     newArrival: controller.generalSearchData.value.gifts?.data?[index] ??
                         SalesProductsModel(),
-                        onLikeTap: (){
-                          controller.updateToLike(index:index);
-                        },
+                        favorite: controller.generalSearchData.value.gifts?.data?[index].wishlist?.isNotEmpty??false,
                   )),
             ),
 

@@ -380,11 +380,7 @@ class _FliterScreenState extends State<FliterScreen> {
                                   newArrival:
                                       _controller.generalSearchData.value.products?.data?[index] ??
                                           SalesProductsModel(),
-                              onLikeTap: (){
-                                _controller.updateToLike(index:index);
-
-
-                              },
+                              favorite: _controller.generalSearchData.value.products?.data?[index].wishlist?.isNotEmpty??false,
                                 )),
                       ),
               ]),

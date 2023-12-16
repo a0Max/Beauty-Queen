@@ -319,9 +319,7 @@ class _SearchScreen extends State<SearchScreen> {
                                     ''),
                             newArrival: _controller.generalSearchData.value.products?.data?[index] ??
                                 SalesProductsModel(),
-                        onLikeTap: (){
-                          _controller.updateToLike(index:index);
-                        },
+                        favorite: _controller.generalSearchData.value.products?.data?[index].wishlist?.isNotEmpty??false,
                           )),
                 ),
                 const SizedBox(

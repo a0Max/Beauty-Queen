@@ -270,10 +270,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                                     ''),
                             newArrival: _controller.generalSearchData.value.sales?.data?[index] ??
                                 SalesProductsModel(),
-                        onLikeTap: (){
-                          _controller.updateToLike(index:index);
-
-                        },
+                        favorite: _controller.generalSearchData.value.sales?.data?[index].wishlist?.isNotEmpty??false,
                           )),
                 ),
                 const SizedBox(height: 40,),

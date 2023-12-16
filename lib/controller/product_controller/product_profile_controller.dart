@@ -48,8 +48,10 @@ class ProductProfileController extends GetxController
       await Future.delayed(Duration(milliseconds: 500));
       productData.add(newData);
     }on DioException catch (e) {
+      print('error:$e');
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
+      print('error:$e');
       if (e == 'Check Network connection'){
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
       }else {
@@ -246,6 +248,8 @@ class ProductProfileController extends GetxController
   updateToLike({ required int index}){
     // productData
     //     .value.
+    // productData.last.p[index].wishlist?.add(ProductOptionsModel());
+    // update();
     productData.last.update((val) {
       val?.p?[index].wishlist?.add(ProductOptionsModel());
     });

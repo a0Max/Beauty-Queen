@@ -112,9 +112,8 @@ class _FavScreen extends State<FavScreen> {
                           newArrival:
                               _controller.wishlistList.value[index].product ??
                                   SalesProductsModel(),
-                          // )
-                          onLikeTap: (){
-                          },
+                          favorite: _controller.wishlistList.value[index].product.wishlist?.isNotEmpty??false,
+
                         ),
                       ],
                     ),

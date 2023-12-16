@@ -250,11 +250,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                             ''),
                     newArrival: controller.generalSearchData.value.products?.data?[index] ??
                         SalesProductsModel(),
-                        onLikeTap: (){
-                          controller.updateToLike(index:index);
-
-
-                      },
+                        favorite: controller.generalSearchData.value.products?.data?[index].wishlist?.isNotEmpty??false,
                   )),
             ),
 

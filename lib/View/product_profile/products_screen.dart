@@ -681,9 +681,10 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                             .productData
                                             .value.last
                                             .p?[value]??SalesProductsModel(),
-                                        onLikeTap: (){
-                                          controller.updateToLike(index:value);
-                                        },
+                                        favorite: controller
+                                            .productData
+                                            .value.last
+                                            .p?[value].wishlist?.isNotEmpty??false,
                                       ),
                                       if ((controller
                                           .productData.value.last
@@ -706,9 +707,10 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               .productData
                                               .value.last
                                               .p?[value+1]??SalesProductsModel(),
-                                          onLikeTap: (){
-                                            controller.updateToLike(index:value+1);
-                                          },
+                                          favorite: controller
+                                              .productData
+                                              .value.last
+                                              .p?[value+1].wishlist?.isNotEmpty??false,
                                         )
                                       }
                                     ],
@@ -768,9 +770,10 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                             .productData
                                             .value.last
                                             .sameBrandProducts?[value]??SalesProductsModel(),
-                                        onLikeTap: (){
-                                          controller.updateToLike(index:value);
-                                        },
+                                        favorite: controller
+                                            .productData
+                                            .value.last
+                                            .sameBrandProducts?[value].wishlist?.isNotEmpty??false,
                                       ),
                                       if ((controller
                                           .productData.value.last
@@ -788,13 +791,14 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               value + 1]
                                                   .mainImage ??
                                                   ''),
-                                          onLikeTap: (){
-                                            controller.updateToLike(index:value+1);
-                                          },
                                           newArrival: controller
                                               .productData
                                               .value.last
                                               .sameBrandProducts?[value+1]??SalesProductsModel(),
+                                          favorite: controller
+                                              .productData
+                                              .value.last
+                                              .sameBrandProducts?[value+1].wishlist?.isNotEmpty??false,
                                         )
                                       }
                                     ],

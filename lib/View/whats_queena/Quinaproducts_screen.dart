@@ -215,10 +215,10 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                       newArrival: controller
                                               .dataProducts.value[index] ??
                                           SalesProductsModel(),
-                                  onLikeTap: (){
-                                    controller.updateToLike(index:index);
-                                  },
-                                    )),
+                                  favorite:  controller
+                                      .dataProducts.value[index].wishlist?.isNotEmpty??false,
+
+                                )),
                           ),
                           if (controller.dataProducts.value.isNotEmpty) ...{
                             const SizedBox(

@@ -223,9 +223,8 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                                   newArrival: controller
                                       .dataProducts.value[index] ??
                                       SalesProductsModel(),
-                                      onLikeTap: (){
-                                        controller.updateToLike(index:index);
-                                      },
+                                      favorite:  controller
+                                          .dataProducts.value[index].wishlist?.isNotEmpty??false,
                                 )),
                           ),
                           if (controller.dataProducts.value.isNotEmpty) ...{
