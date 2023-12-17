@@ -139,7 +139,7 @@ class _SignUpPage extends State<SignUpPage>{
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,
                     ),
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.name,
                     validatorTextField: (val) {
                       return Validator().validatorName(val);
                     },
@@ -171,7 +171,7 @@ class _SignUpPage extends State<SignUpPage>{
                     ),
                     obscureText: _controller.passwordObscureText.value,
 
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.name,
                     validatorTextField: (val) {
                       return Validator().validatorPassword(val);
                     },
@@ -206,7 +206,7 @@ class _SignUpPage extends State<SignUpPage>{
                       ),
                       onPressed: _controller.toggleSignUpConfirmPasswordVisibility,
                     ),
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.name,
                     validatorTextField: (val) {
                       return Validator().validatorRePassword(val, passwordController.text);
                     },

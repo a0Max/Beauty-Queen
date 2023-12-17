@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 import 'package:beauty_queen/View/categories/alkasam_screen.dart';
 import 'package:beauty_queen/View/brands/brands_screen.dart';
-import 'package:beauty_queen/View/hairdryerscreen.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

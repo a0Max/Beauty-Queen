@@ -15,10 +15,13 @@ class AboutAppController extends GetxController{
     aboutData.value = await _api.getAboutMEDataRequest();
   }
 
+  RxBool loadingOfMySticker = false.obs;
 
   RxList myStickerData = [].obs;
   getMySticker() async {
+    loadingOfMySticker.value = true;
     myStickerData.value = await _api.getTransactionsataRequest();
+    loadingOfMySticker.value = false;
   }
 
 }

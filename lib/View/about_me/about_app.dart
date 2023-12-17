@@ -1,5 +1,6 @@
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -56,18 +57,17 @@ class _AboutAppScreen extends State<AboutAppScreen>{
         ),
         centerTitle: true,
       ),
-      body: Obx(()=>ListView(
+      body: Obx(()=>
+      (_controller.loadingOfMySticker.value && _controller.aboutData.isEmpty) == true
+          ? const Center(
+        child: CupertinoActivityIndicator(),
+      )
+          :
+
+      ListView(
         children: [
           20.ph,
           ...List.generate(_controller.aboutData.value.length??0, (index) => ItemOfApp(title: _controller.aboutData.value[index].title, description: _controller.aboutData.value[index].description,))
-          // ItemOfApp(title: 'نبذه حول المتجر ',),
-          // ItemOfApp(title: 'تاريخ المتجر',),
-          // ItemOfApp(title: 'ادارة المتجر وفريق العمل',),
-          // ItemOfApp(title: 'التجريب والعينات المجانية',),
-          // ItemOfApp(title: 'خدمة التوصيل',),
-          // ItemOfApp(title: 'الاستلام من المتجر',),
-          // ItemOfApp(title: 'ترجيع منتج بعد الاستلام',),
-          // ItemOfApp(title: 'سياسة الاستبدال',),
         ],
       )),
     );
