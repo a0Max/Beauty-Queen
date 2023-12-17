@@ -63,6 +63,9 @@ class _MyDataScreen extends State<MyDataScreen> {
         TextEditingController(text: controller.userData.value.phone);
     nickNameController =
         TextEditingController(text: controller.userData.value.lastName);
+
+    whatsAppController =
+        TextEditingController(text: controller.userData.value.whatsappPhone);
     if (controller.userData.value.accountType == AccountTypes.queena) {
       compliteDataOfQueenaAccount();
     }

@@ -157,3 +157,8 @@ abstract class SocialMedia{
   static const phone = '0919900224';
 }
 
+abstract class LocationMapLatLng{
+  static const lat = 32.85027077679638;
+  static const lng = 13.203011592591462;
+}
+

@@ -11,7 +11,7 @@ import '../../View/categories/filter_screen.dart';
 import '../../View/events/events_screen.dart';
 import '../../View/gifts/GuidanceScreen.dart';
 import '../../View/magazine/magazine_screen.dart';
-import '../../View/user_profile/profile_screen.dart';
+import '../../View/user_profile/contact_us_screen.dart';
 import '../../View/whats_queena/Quinaprogram_screen.dart';
 import '../../View/offers/beautypharmacyscreen.dart';
 import '../../View/discount/discounts_screen.dart';
@@ -399,7 +399,7 @@ class MyEndDrawer extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                            const ProfileScreen()));
+                            const ContactUsScreen()));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 20.w, top: 5.h),

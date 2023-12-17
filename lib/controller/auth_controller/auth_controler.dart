@@ -4,6 +4,7 @@ import 'package:beauty_queen/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../View/home/bottom_nav_screen.dart';
@@ -194,15 +195,15 @@ class AuthController extends GetxController {
   }
 
   googleLogin() async {
-    // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    // // final GoogleSignInAuthentication? googleAuth =
-    // //     await googleUser?.authentication;
-    // print('googleAuth?.accessToken:${googleUser?.email}');
-    // print('googleAuth?.accessToken:${googleUser?.id}');
-    // print('googleAuth?.accessToken:${googleUser?.displayName}');
-    // print('googleAuth?.accessToken:${googleUser?.photoUrl}');
-    // print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
-    // print('googleAuth?.accessToken:${googleAuth?.accessToken}');
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    print('googleAuth?.accessToken:${googleUser?.email}');
+    print('googleAuth?.accessToken:${googleUser?.id}');
+    print('googleAuth?.accessToken:${googleUser?.displayName}');
+    print('googleAuth?.accessToken:${googleUser?.photoUrl}');
+    print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
+    print('googleAuth?.accessToken:${googleAuth?.accessToken}');
   }
 
   sendMessageToManagies({required String phone, required String message}) async {

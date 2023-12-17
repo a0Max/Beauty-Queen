@@ -18,9 +18,10 @@ import '../../controller/auth_controller/auth_controler.dart';
 import '../../widgets/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
+import '../notification/notification_screen.dart';
 import 'mysticker_screen.dart';
 import '../orders_screen.dart';
-import 'profile_screen.dart';
+import 'contact_us_screen.dart';
 
 class NormalProfileScreen extends StatelessWidget {
   const NormalProfileScreen({Key? key}) : super(key: key);
@@ -373,6 +374,38 @@ class NormalProfileScreen extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     onTap: () {
+                      Get.to(const NotificationScreen());
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(AppImages.notificationImage),
+                        SizedBox(
+                          width: 25.w,
+                        ),
+                        Text(
+                          tr('notification'),
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: kBlackColor,
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () {
+                              Get.to(const NotificationScreen());
+                            },
+                            icon: const Icon(Icons.arrow_forward_ios))
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: kDividerrColor,
+                    thickness: 2,
+                  ),InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
                       Get.to(const MyDataScreen());
                     },
                     child: Row(
@@ -443,7 +476,7 @@ class NormalProfileScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                              const ProfileScreen()));
+                              const ContactUsScreen()));
                     },
                     child: Row(
                       children: [
@@ -467,7 +500,8 @@ class NormalProfileScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                      const ProfileScreen()));                            },
+                                      const ContactUsScreen()));
+                              },
                             icon: const Icon(Icons.arrow_forward_ios))
                       ],
                     ),

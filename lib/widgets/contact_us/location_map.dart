@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:beauty_queen/const/extensions.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
@@ -12,6 +14,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
 
+import '../../const/vars.dart';
+
 class LocationMap extends StatefulWidget {
   const LocationMap({super.key});
 
@@ -22,8 +26,7 @@ class LocationMap extends StatefulWidget {
 }
 
 class _LocationMap extends State<LocationMap> {
-  double defaultLng = 30.05736217878459;
-  double defaultLat = 31.243119488562105;
+
   final Completer<GoogleMapController> _controller = Completer();
   GoogleMapController? _gMapController;
 
@@ -51,8 +54,8 @@ class _LocationMap extends State<LocationMap> {
         icon: markerIcon!=null
             ? BitmapDescriptor.fromBytes(markerIcon) :
         BitmapDescriptor.defaultMarker,
-        markerId: MarkerId(LatLng(defaultLat, defaultLng).toString()),
-        position: LatLng(defaultLat, defaultLng),
+        markerId: MarkerId(const LatLng(LocationMapLatLng.lat, LocationMapLatLng.lng).toString()),
+        position: const LatLng(LocationMapLatLng.lat, LocationMapLatLng.lng),
       ),
     );
     setState(() {
@@ -74,7 +77,7 @@ class _LocationMap extends State<LocationMap> {
                   // width: 30,
                 )),
             10.pw,
-            Text(
+            const Text(
               'موقعنا على خرائط قوقل',
               style: TextStyle(
                 fontFamily: 'TheSans',
@@ -95,10 +98,9 @@ class _LocationMap extends State<LocationMap> {
             myLocationButtonEnabled: false,
             zoomControlsEnabled: true,
             // zoomGesturesEnabled: true,
-            initialCameraPosition: CameraPosition(
+            initialCameraPosition: const CameraPosition(
               target: LatLng(
-                defaultLat,
-                defaultLng,
+                  LocationMapLatLng.lat, LocationMapLatLng.lng
               ),
               zoom: 14.0,
             ),
@@ -113,8 +115,8 @@ class _LocationMap extends State<LocationMap> {
               // 31.241809512813163; // Replace with the desired latitude
               // const longitude = 29.95926284901688;
 
-              final url =
-                  'https://www.google.com/maps/search/?api=1&query=$defaultLat,$defaultLng';
+              const url =
+                  'https://www.google.com/maps/search/?api=1&query=${LocationMapLatLng.lat},${LocationMapLatLng.lng}';
               try {
                 await launchUrl(Uri.parse(url),
                     mode: LaunchMode.externalApplication);

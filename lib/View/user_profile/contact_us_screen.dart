@@ -14,8 +14,8 @@ import '../../widgets/contact_us/email_widget.dart';
 import '../../widgets/contact_us/social_login.dart';
 import '../../widgets/contact_us/work_hours.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ContactUsScreen extends StatelessWidget {
+  const ContactUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 20.ph,
-                const ContactUsScreen(),
+                const ContactUsScreen0(),
                 25.ph,
                 SocialLogin(),
                 25.ph,

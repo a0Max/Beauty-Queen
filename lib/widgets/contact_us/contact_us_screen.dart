@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 
 import '../../const/vars.dart';
 
-class ContactUsScreen extends StatelessWidget {
-  const ContactUsScreen({super.key});
+class ContactUsScreen0 extends StatelessWidget {
+  const ContactUsScreen0({super.key});
   Future<void> _makePhoneCall(String url) async {
     try {
       await launchUrl(Uri.parse("tel:$url"),

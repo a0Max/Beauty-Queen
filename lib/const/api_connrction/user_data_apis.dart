@@ -1,5 +1,6 @@
 
 import 'package:beauty_queen/const/vars.dart';
+import 'package:beauty_queen/models/notification_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../models/city_area_model.dart';
@@ -243,6 +244,31 @@ class UserDataApis extends ApiProvider {
     if (validResponse(response.statusCode!)) {
       final List<CityAreaModel> l = [];
       response.data['cities'].forEach((e) => l.add(CityAreaModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+
+  Future<List<NotificationModel>> getNotificationsDataRequest() async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getNotificationsDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      final List<NotificationModel> l = [];
+      response.data['notifications'].forEach((e) => l.add(NotificationModel.fromJson(e)));
       return l;
     } else {
       throw response.data;
