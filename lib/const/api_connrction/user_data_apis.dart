@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../models/city_area_model.dart';
 import '../../models/departments_model.dart';
+import '../../models/transactions_model.dart';
 import '../../models/user_model.dart';
 import 'base_api_connection.dart';
 
@@ -352,4 +353,28 @@ class UserDataApis extends ApiProvider {
       throw response.data;
     }
   }
+
+  Future<List<TransactionsModel>> getTransactionsataRequest() async {
+    final token = await getUserToken();
+
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getQueenaTransactionsDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      final List<TransactionsModel> l = [];
+      response.data['transactions'].forEach((e) => l.add(TransactionsModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+  }
+
 }

@@ -18,7 +18,7 @@ import '../../controller/auth_controller/auth_controler.dart';
 import '../../widgets/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
-import '../mysticker_screen.dart';
+import 'mysticker_screen.dart';
 import '../orders_screen.dart';
 import 'profile_screen.dart';
 

@@ -75,6 +75,7 @@ abstract class ApiProvider {
   static const String sendMessageDataEndPoint = "sendMessage";
   static const String getEventsDataEndPoint = "get/events";
   static const String getEventDataEndPoint = "get/event";
+  static const String getQueenaTransactionsDataEndPoint = "get/queenaTransactions";
 
 ////////////////////////////////////////////////////////////////////////////
 
