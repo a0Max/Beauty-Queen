@@ -14,18 +14,18 @@ class SocialLogin extends StatelessWidget {
   List<SocialMediaModel> listOfSocialMedia = [
     SocialMediaModel(
         url: 'https://www.tiktok.com/@beautyqueen.ly0?_t=8Y6WKdWaGJi&_r=1',
-        image: ''),
+        image: AppImages.tiktokImage),
     SocialMediaModel(
         url: 'https://www.snapchat.com/add/beautyqueenyl?share_id=ODFGMDlBQzUtMjJFQS00NjBCLTgxRUEtMTIzMTQ1RjQxRDAz&locale=en_LY',
-        image: ''),
+        image: AppImages.snapChatImage),
 
     SocialMediaModel(
         url: 'https://instagram.com/beautyqueen.ly?igshid=YmMyMTA2M2Y=',
-        image: ''),
+        image: AppImages.instegramImage),
 
     SocialMediaModel(
         url: 'https://www.facebook.com/beautyqueenmakeup.ly/',
-        image: ''),
+        image: AppImages.facebook1Image),
   ];
   @override
   Widget build(BuildContext context) {
@@ -66,6 +66,9 @@ class SocialLogin extends StatelessWidget {
                     height: 40,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5),
+                      child: Container(
+                          padding: EdgeInsets.all(7),
+                          child: SvgPicture.asset(listOfSocialMedia[index].image)),
                       onTap: () async {
                         try {
                           await launchUrl(Uri.parse(listOfSocialMedia[index].url),
