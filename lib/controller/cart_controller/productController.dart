@@ -105,4 +105,8 @@ class ProductController extends GetxController {
       totalPrice.value = totalPrice.value + (double.parse("${element.qty??1}")*double.parse("${element.price??1}"));
     });
   }
+
+  checkCode({required String code}) async {
+    await _api.checkPromoCode(code: code);
+  }
 }

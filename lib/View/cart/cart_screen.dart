@@ -3,6 +3,7 @@ import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/controller/cart_controller/productController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 // import '../../const/images.dart';
 import '../../const/vars.dart';
+import '../../widgets/based/loading.dart';
+import '../../widgets/error_pop_up.dart';
 import '../../widgets/shimmer/shimmer_cart_item.dart';
 import '../cart_tab_screen.dart';
 
@@ -26,6 +29,7 @@ class CartScreen extends StatefulWidget {
 }
 class _CartScreen extends State<CartScreen>{
   ProductController productController = Get.put(ProductController());
+  TextEditingController promoCodeController = TextEditingController();
 
   @override
   void initState() {
@@ -102,7 +106,7 @@ class _CartScreen extends State<CartScreen>{
                   ),
                   productController.isLoading.value==true?
 
-                  ShimmerCartItem()
+                  const ShimmerCartItem()
                       :
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -278,31 +282,90 @@ class _CartScreen extends State<CartScreen>{
                                 width: 13.3.w,
                               ),
                               SvgPicture.asset(AppImages.imageDiscount),
-                              Text(
-                                tr('addCoupon'),
-                                style: TextStyle(
-                                    fontFamily: kTheArabicSansLight,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.kWhiteColor),
+                              Expanded(
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      errorBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.zero,
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
+                                      ),
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.zero,
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
+                                      ),
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.zero,
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
+                                      ),
+                                      focusedErrorBorder:const OutlineInputBorder(
+                                        borderRadius: BorderRadius.zero,
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
+                                      ),
+
+                                      hintText: tr('addCoupon'),
+                                    hintStyle: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.kWhiteColor)
+                                  ),
+                                  controller: promoCodeController,
+                                  ),
                               ),
-                              Container(
-                                height: 52.7.h,
-                                width: 124.28.w,
-                                decoration: BoxDecoration(
-                                  color: AppColors.kPrimaryColor,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(13.r),
-                                      bottomLeft: Radius.circular(13.r)),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    tr('continus2'),
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.kWhiteColor),
+                              InkWell(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(13.r),
+                                    bottomLeft: Radius.circular(13.r)),
+                                onTap: () async {
+                                  LoadingScreen.show(context);
+                                  try{
+                                    await productController.checkCode(code: promoCodeController.text);
+                                    if (!context.mounted) return;
+
+                                    Navigator.of(context).pop();
+
+                                    ErrorPopUp(
+                                        message: tr('promoCodeAccepted2'),
+                                        title: tr('promoCodeAccepted'),
+                                        isError: false);
+                                  }on DioException catch (e) {
+                                    if (!context.mounted) return;
+
+                                    Navigator.of(context).pop();
+                                    ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
+
+                                  } catch (e) {
+                                    if (!context.mounted) return;
+
+                                    Navigator.of(context).pop();
+                                    ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
+
+                                  }
+
+                                },
+                                child: Container(
+                                  height: 52.7.h,
+                                  // width: 124.28.w,
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.kPrimaryColor,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(13.r),
+                                        bottomLeft: Radius.circular(13.r)),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      tr('continus2'),
+                                      style: TextStyle(
+                                          fontFamily: kTheArabicSansLight,
+                                          fontSize: 18.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.kWhiteColor),
+                                    ),
                                   ),
                                 ),
                               )

@@ -95,4 +95,33 @@ class CartDataApis extends ApiProvider {
     }
   }
 
+  Future<bool> checkPromoCode({required String code}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false){
+      throw 'Check Network connection';
+    }
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.checkPromoCodeDataEndPoint}',
+      queryParameters: {
+        'code':code
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return true;
+    } else {
+      throw response.data;
+    }
+  }
+
 }
