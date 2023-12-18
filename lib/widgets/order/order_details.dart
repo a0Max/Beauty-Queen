@@ -23,6 +23,8 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
     OrdersController controller = Get.put(OrdersController());
 
     return Scaffold(
+      // backgroundColor: Colors.transparent,
+      //   ,
         appBar: AppBar(
           surfaceTintColor: kWhiteColor,
           automaticallyImplyLeading: false,
@@ -52,9 +54,9 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
         body: SingleChildScrollView(
           child: Obx(() =>controller.loadingDetailsOrders.value == true?ShimmerTicket(): Column(
                 children: [
-                  SizedBox(
-                    height: 33.h,
-                  ),
+                  // SizedBox(
+                  //   height: 33.h,
+                  // ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     child: CustomPaint(
@@ -62,7 +64,7 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                           MediaQuery.of(context).size.width,
                           (MediaQuery.of(context).size.width *
                                   1.3283208020050126)
-                              .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                              .toDouble()),
                       painter: RPSCustomPainter(),
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 20.w),

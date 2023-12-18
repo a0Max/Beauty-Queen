@@ -283,16 +283,46 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                   showModalBottomSheet(
                                                       context: context,
                                                       isScrollControlled: true,
+                                                      backgroundColor: Colors.white,
+                                                      elevation: 0,
+                                                      shape:
+                                                          const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  16.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  16.0),
+                                                        ),
+                                                      ),
                                                       builder: (BuildContext
                                                           context) {
-                                                        return SizedBox(
+                                                        return Container(
                                                             height: MediaQuery.of(
                                                                         context)
                                                                     .size
                                                                     .height -
                                                                 200,
+                                                            decoration:
+                                                                const BoxDecoration(
+                                                                  // color: Colors.white,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        16.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        16.0),
+                                                              ),
+                                                            ),
+                                                            padding: EdgeInsets.only(top:15),
                                                             child:
-                                                                const ShowModalSheetDetailOrder());
+                                                                const ShowModalSheetDetailOrder()
+                                                        );
                                                       });
                                                 },
                                                 child: Container(
