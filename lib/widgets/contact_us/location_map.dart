@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:beauty_queen/const/extensions.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
