@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'offer_image_model.dart';
+import 'options_model.dart';
+import 'sales_products_model.dart';
 
 part 'transactions_model.g.dart';
 
@@ -15,7 +17,14 @@ class TransactionsModel{
   String? updatedAt;
   String? isQueena;
   int? queenaAmount;
-
+  int? productId;
+  int? poID;
+  int? option;
+  String? price;
+  String? quantity;
+  String? status;
+  List<SalesProductsModel>? products;
+  List<OptionsModel>? options;
   TransactionsModel(
       {this.id,
         this.userId,

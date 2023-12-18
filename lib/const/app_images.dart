@@ -91,5 +91,6 @@ class AppImages{
   static const String instegramImage = "${mainPathToSvg}instegram.svg";
   static const String facebook1Image = "${mainPathToSvg}facebook1.svg";
   static const String notificationImage = "${mainPathToSvg}notification.svg";
+  static const String homeIconImage = "${mainPathToSvg}home_icon.svg";
 
 }

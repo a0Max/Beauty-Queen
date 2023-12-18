@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../const/images.dart';
-import 'orders_screen.dart';
+import 'orders/orders_screen.dart';
 
 class ProductAddedScreen extends StatelessWidget {
   const ProductAddedScreen({super.key});

@@ -20,7 +20,7 @@ import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
 import '../notification/notification_screen.dart';
 import 'mysticker_screen.dart';
-import '../orders_screen.dart';
+import '../orders/orders_screen.dart';
 import 'contact_us_screen.dart';
 
 class NormalProfileScreen extends StatelessWidget {

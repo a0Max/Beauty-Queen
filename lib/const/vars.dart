@@ -162,3 +162,9 @@ abstract class LocationMapLatLng{
   static const lng = 13.203011592591462;
 }
 
+
+abstract class OrderState{
+  static const shipped = 'shipped';
+  static const cancelled = 'cancelled';
+}
+
