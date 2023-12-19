@@ -5,10 +5,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
 import '../../const/vars.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/sales_products_model.dart';
@@ -177,7 +179,8 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 3.w),
-                          child: Image.asset(ksortIconImage),
+                          child: SvgPicture.asset(
+                              AppImages.sortTypeImage),
                         ),
                       ],
                     ),
@@ -207,8 +210,8 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 3.w),
-                          child: Image.asset(kfilterIconImage),
-                        ),
+                          child: SvgPicture.asset(
+                              AppImages.filterTypeImage),                        ),
                       ],
                     ),
                   ),

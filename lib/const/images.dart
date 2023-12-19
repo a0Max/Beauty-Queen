@@ -1,7 +1,4 @@
 const kMagzineImage = 'assets/images/Magazine.png';
-const kLispticImage = 'assets/images/Lisptic.png';
-const kBaseImage = 'assets/images/Base.png';
-const kbeautyPhramaImage = 'assets/images/beautyphramaBanner.png';
 const kqueencrownImage = 'assets/images/queencrown.png';
 const krevitImage = 'assets/images/revit.png';
 const kcarImage = 'assets/images/car.png';
@@ -14,22 +11,8 @@ const ksmallcardImage = 'assets/images/smallcard.png';
 const kpaperImage = 'assets/images/paper.png';
 const facepowderImage = 'assets/images/facepowder.png';
 const makeupboxImage = 'assets/images/box.png';
-const kaddressImage = 'assets/images/address.png';
 const ksubtractImage = 'assets/images/Subtract.png';
-const kbatchImage = 'assets/images/batch.png';
-const kqueenaImage = 'assets/images/queena.png';
-const kgifImage = 'assets/images/Gif.png';
-const kflowerImage = 'assets/images/flower.png';
-const kbatchesImage = 'assets/images/batches.png';
-const karrowrightImage = 'assets/images/arrowright.png';
-const kdotImage = 'assets/images/dotrectangle.png';
-const kImageone = 'assets/images/imageone.png';
-const kImagetwo = 'assets/images/imagetwo.png';
-const kImagethree = 'assets/images/imagethree.png';
-const khairdyerImage = 'assets/images/hairdryer.png';
 const kgiftImagetwo = 'assets/images/GiftCard.png';
-const kfilterIconImage = 'assets/icons/filterIcon.png';
-const ksortIconImage = 'assets/icons/sortarrow.png';
 
 
 ///needed

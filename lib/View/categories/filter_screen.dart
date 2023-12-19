@@ -5,8 +5,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
 import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
@@ -302,7 +304,9 @@ class _FliterScreenState extends State<FliterScreen> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 3.w),
-                              child: Image.asset(ksortIconImage),
+                              child: SvgPicture.asset(
+                                  AppImages.sortTypeImage),
+
                             ),
                           ],
                         ),
@@ -333,7 +337,8 @@ class _FliterScreenState extends State<FliterScreen> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 3.w),
-                              child: Image.asset(kfilterIconImage),
+                              child: SvgPicture.asset(
+                                  AppImages.filterTypeImage),
                             ),
                           ],
                         ),
