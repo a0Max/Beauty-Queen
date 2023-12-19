@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import '../const/app_colors.dart';
-import '../const/colors.dart';
 import '../controller/basketController.dart';
 import 'productadded_screen.dart';
 

@@ -1,4 +1,3 @@
-import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/widgets/based/custom_button_2.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';

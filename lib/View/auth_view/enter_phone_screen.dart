@@ -27,7 +27,6 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen> {
   TextEditingController phoneController =
       TextEditingController(text: kDebugMode ? '0927386249' : '');
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final OTPController _controller = Get.put(OTPController());
 
   _submit() async {
     if (!_formKey.currentState!.validate()) {

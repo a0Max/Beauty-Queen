@@ -1,5 +1,3 @@
-import 'package:beauty_queen/const/colors.dart';
-import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 
 import 'package:flutter/material.dart';

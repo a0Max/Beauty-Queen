@@ -1,4 +1,3 @@
-// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,8 @@ class FilterByCategoryContainer extends StatefulWidget {
   const FilterByCategoryContainer({super.key});
 
   @override
-  State<FilterByCategoryContainer> createState() => _FilterByCategoryContainer();
+  State<FilterByCategoryContainer> createState() =>
+      _FilterByCategoryContainer();
 }
 
 class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
@@ -97,7 +97,8 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                                                   .generalSearchData
                                                   .value
                                                   .brands?[index]
-                                                  .id.toString()),
+                                                  .id
+                                                  .toString()),
                                           onChanged: (val) {
                                             controller.updateSelectedBrands(
                                                 newSelected: controller
@@ -133,7 +134,8 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                                                 .generalSearchData
                                                 .value
                                                 .labels?[index]
-                                                .id.toString()),
+                                                .id
+                                                .toString()),
                                         onChanged: (val) {
                                           controller.updateSelectedLabel(
                                               newSelected: int.parse(controller
@@ -222,7 +224,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.clearSelected();
                         Navigator.of(context).pop();
                       },
@@ -230,7 +232,8 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                         height: 39.55.h,
                         width: 95.w,
                         decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
+                            border: Border.all(
+                                color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(
@@ -248,7 +251,7 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                       width: 20.w,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.applySelected();
                         Navigator.of(context).pop();
                       },
@@ -257,7 +260,8 @@ class _FilterByCategoryContainer extends State<FilterByCategoryContainer> {
                         width: 95.w,
                         decoration: BoxDecoration(
                             color: AppColors.kPrimaryColor,
-                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
+                            border: Border.all(
+                                color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(

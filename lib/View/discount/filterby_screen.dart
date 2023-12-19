@@ -1,4 +1,3 @@
-// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,7 @@ class _FilterByContainerState extends State<FilterByContainer> {
                 ),
                 Center(
                   child: Text(
-                   tr('filter_result'),
+                    tr('filter_result'),
                     style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         fontSize: 21.sp,
@@ -97,7 +96,8 @@ class _FilterByContainerState extends State<FilterByContainer> {
                                                   .generalSearchData
                                                   .value
                                                   .brands?[index]
-                                                  .id.toString()),
+                                                  .id
+                                                  .toString()),
                                           onChanged: (val) {
                                             controller.updateSelectedBrands(
                                                 newSelected: controller
@@ -133,7 +133,8 @@ class _FilterByContainerState extends State<FilterByContainer> {
                                                 .generalSearchData
                                                 .value
                                                 .labels?[index]
-                                                .id.toString()),
+                                                .id
+                                                .toString()),
                                         onChanged: (val) {
                                           controller.updateSelectedLabel(
                                               newSelected: int.parse(controller
@@ -222,7 +223,7 @@ class _FilterByContainerState extends State<FilterByContainer> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.clearSelected();
                         Navigator.of(context).pop();
                       },
@@ -230,7 +231,8 @@ class _FilterByContainerState extends State<FilterByContainer> {
                         height: 39.55.h,
                         width: 95.w,
                         decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
+                            border: Border.all(
+                                color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(
@@ -248,7 +250,7 @@ class _FilterByContainerState extends State<FilterByContainer> {
                       width: 20.w,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.applySelected();
                         Navigator.of(context).pop();
                       },
@@ -257,7 +259,8 @@ class _FilterByContainerState extends State<FilterByContainer> {
                         width: 95.w,
                         decoration: BoxDecoration(
                             color: AppColors.kPrimaryColor,
-                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
+                            border: Border.all(
+                                color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(

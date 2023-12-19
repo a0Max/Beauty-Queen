@@ -3,7 +3,6 @@
 import 'package:beauty_queen/View/fav/favourtie_screen.dart';
 import 'package:beauty_queen/View/search/search_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
-import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
 
 import 'package:flutter/material.dart';

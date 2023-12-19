@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/colors.dart';
 
 class MagazineScreen extends StatefulWidget {
   const MagazineScreen({super.key});

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
-// import '../../const/colors.dart';
 import '../../const/images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';

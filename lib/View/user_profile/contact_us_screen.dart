@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/colors.dart';
 import '../../const/styles.dart';
 import '../../widgets/contact_us/contact_us_screen.dart';
 import '../../widgets/contact_us/location_map.dart';

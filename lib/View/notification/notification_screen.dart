@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../const/colors.dart';
 import '../../const/styles.dart';
 import '../../controller/notification_controller/notification_controller.dart';
 import '../../widgets/shimmer/shimmer_notification.dart';

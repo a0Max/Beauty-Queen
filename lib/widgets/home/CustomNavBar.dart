@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
-import '../../const/colors.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 
 class ReusableBottomNavigationBar extends StatelessWidget {

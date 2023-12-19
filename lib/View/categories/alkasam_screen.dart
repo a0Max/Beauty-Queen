@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-// import '../../const/colors.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
@@ -36,7 +35,6 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
     super.initState();
     _scrollController.addListener(_scrollListener);
     _controller.getAlkasamDataController();
-
   }
 
   void _scrollListener() {
@@ -71,14 +69,14 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(_isScrolled ? 100.h :160.h),
+          preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
-            showarrowIcon: widget.showBack==true?true:false,
-            showBagIcon: widget.showBack==true?false:true,
-            showFavIcon:  widget.showBack==true?false:true,
-            showPersonIcon:  widget.showBack==true?false:true,
+            showarrowIcon: widget.showBack == true ? true : false,
+            showBagIcon: widget.showBack == true ? false : true,
+            showFavIcon: widget.showBack == true ? false : true,
+            showPersonIcon: widget.showBack == true ? false : true,
 
-            countCart:_controllerNav.countCart.value,
+            countCart: _controllerNav.countCart.value,
             // showBagIcon: true,
             // showFavIcon: true,
             // showPersonIcon: true,

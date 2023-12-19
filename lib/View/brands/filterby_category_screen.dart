@@ -1,4 +1,3 @@
-// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +97,8 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                                                   .generalSearchData
                                                   .value
                                                   .brands?[index]
-                                                  .id.toString()),
+                                                  .id
+                                                  .toString()),
                                           onChanged: (val) {
                                             controller.updateSelectedBrands(
                                                 newSelected: controller
@@ -134,7 +134,8 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                                                 .generalSearchData
                                                 .value
                                                 .labels?[index]
-                                                .id.toString()),
+                                                .id
+                                                .toString()),
                                         onChanged: (val) {
                                           controller.updateSelectedLabel(
                                               newSelected: int.parse(controller
@@ -223,7 +224,7 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.clearSelected();
                         Navigator.of(context).pop();
                       },
@@ -231,7 +232,8 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                         height: 39.55.h,
                         width: 95.w,
                         decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
+                            border: Border.all(
+                                color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(
@@ -249,7 +251,7 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                       width: 20.w,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.applySelected(idOfBrand: widget.brandId);
                         Navigator.of(context).pop();
                       },
@@ -258,7 +260,8 @@ class _FilterByBrandsContainer extends State<FilterByBrandsContainer> {
                         width: 95.w,
                         decoration: BoxDecoration(
                             color: AppColors.kPrimaryColor,
-                            border: Border.all(color: AppColors.kPrimaryColor, width: 1.w),
+                            border: Border.all(
+                                color: AppColors.kPrimaryColor, width: 1.w),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Center(
                           child: Text(

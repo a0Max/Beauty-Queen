@@ -12,7 +12,6 @@ import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-// import '../../const/colors.dart';
 import '../../controller/discounts_controller/sales_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
@@ -84,10 +83,10 @@ class _DiscountScreenState extends State<DiscountScreen> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
-            showarrowIcon: widget.showBack==true?true:false,
-            showBagIcon: widget.showBack==true?false:true,
-            showFavIcon:  widget.showBack==true?false:true,
-            showPersonIcon:  widget.showBack==true?false:true,
+            showarrowIcon: widget.showBack == true ? true : false,
+            showBagIcon: widget.showBack == true ? false : true,
+            showFavIcon: widget.showBack == true ? false : true,
+            showPersonIcon: widget.showBack == true ? false : true,
             countCart: _controllerNav.countCart.value,
             onPressed: () {
               _scaffoldKey.currentState?.openEndDrawer();
@@ -102,20 +101,20 @@ class _DiscountScreenState extends State<DiscountScreen> {
             controller: _scrollController,
             child: Column(
               children: [
-                _controller.isLoading.value == true?
-
-                ShimmerSlider(height:139.17.h,
-                ):
-                 ( _controller
-                    .generalSearchData.value.info?.banner != null)?
-                  SizedBox(
-                      height: 139.17.h,
-                      width: MediaQuery.of(context).size.width,
-                      child: CachedNetworkImage(
-                          imageUrl: Connection.urlOfStorage(
-                              image: _controller
-                                      .generalSearchData.value.info?.banner ??
-                                  ''))):const SizedBox(),
+                _controller.isLoading.value == true
+                    ? ShimmerSlider(
+                        height: 139.17.h,
+                      )
+                    : (_controller.generalSearchData.value.info?.banner != null)
+                        ? SizedBox(
+                            height: 139.17.h,
+                            width: MediaQuery.of(context).size.width,
+                            child: CachedNetworkImage(
+                                imageUrl: Connection.urlOfStorage(
+                                    image: _controller.generalSearchData.value
+                                            .info?.banner ??
+                                        '')))
+                        : const SizedBox(),
                 SizedBox(
                   height: 14.h,
                 ),
@@ -140,8 +139,8 @@ class _DiscountScreenState extends State<DiscountScreen> {
                         height: 39.76.h,
                         width: 180.w,
                         decoration: BoxDecoration(
-                          border:
-                              Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
+                          border: Border.all(
+                              color: AppColors.kPrimaryColor, width: 1.5.w),
                         ),
                         child: Row(
                           children: [
@@ -199,8 +198,8 @@ class _DiscountScreenState extends State<DiscountScreen> {
                         height: 39.76.h,
                         width: 180.w,
                         decoration: BoxDecoration(
-                          border:
-                              Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
+                          border: Border.all(
+                              color: AppColors.kPrimaryColor, width: 1.5.w),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -251,97 +250,100 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 SizedBox(
                   height: 22.h,
                 ),
-                _controller.isLoading.value == true?
-                Wrap(
-                  runSpacing: 7,
-                  children: List.generate(
-                      2,
-                          (index) => const ShimmerItem()),
-                )
-                    :
-                Wrap(
-                  runSpacing: 7,
-                  children: List.generate(
-                      _controller.generalSearchData.value.sales?.data?.length??0,
-                      (index) => CustomCardWidget(
-                            imageUrl: Connection.urlOfProducts(
-                                image: _controller
-                                        .generalSearchData.value.sales?.data?[index].mainImage ??
-                                    ''),
-                            newArrival: _controller.generalSearchData.value.sales?.data?[index] ??
-                                SalesProductsModel(),
-                        favorite: _controller.generalSearchData.value.sales?.data?[index].wishlist?.isNotEmpty??false,
-                          )),
+                _controller.isLoading.value == true
+                    ? Wrap(
+                        runSpacing: 7,
+                        children:
+                            List.generate(2, (index) => const ShimmerItem()),
+                      )
+                    : Wrap(
+                        runSpacing: 7,
+                        children: List.generate(
+                            _controller.generalSearchData.value.sales?.data
+                                    ?.length ??
+                                0,
+                            (index) => CustomCardWidget(
+                                  imageUrl: Connection.urlOfProducts(
+                                      image: _controller.generalSearchData.value
+                                              .sales?.data?[index].mainImage ??
+                                          ''),
+                                  newArrival: _controller.generalSearchData
+                                          .value.sales?.data?[index] ??
+                                      SalesProductsModel(),
+                                  favorite: _controller
+                                          .generalSearchData
+                                          .value
+                                          .sales
+                                          ?.data?[index]
+                                          .wishlist
+                                          ?.isNotEmpty ??
+                                      false,
+                                )),
+                      ),
+                const SizedBox(
+                  height: 40,
                 ),
-                const SizedBox(height: 40,),
 
-                 if (_controller.dataProducts.value.isNotEmpty)...{
-                   Text('${tr('result')}: ${_controller.dataProducts.value
-                       .length} ${tr('to')} ${_controller.generalSearchData.value
-                       .salesCount}'),
-                   const SizedBox(height: 10,),
-                   SizedBox(
-                     width: MediaQuery
-                         .of(context)
-                         .size
-                         .width / 2,
-                     height: 30,
-                     child: LinearGauge(
-                       gaugeOrientation: GaugeOrientation.horizontal,
-                       start: 0,
-                       end: double.parse(
-                           "${_controller.generalSearchData.value.salesCount ??
-                               1}"),
-                       valueBar: [
-                         ValueBar(
-                             value: double.parse("${_controller.dataProducts
-                                 .value.length}"),
-                             color: AppColors.mainColor,
-                             borderRadius: 15,
-                             valueBarThickness: 10)
-                       ],
-                       linearGaugeBoxDecoration:
-                       const LinearGaugeBoxDecoration(
-                           backgroundColor: AppColors.kShadowColor,
-                           thickness: 10,
-                           borderRadius: 15),
-                       rulers: RulerStyle(
-                         rulerPosition: RulerPosition.center,
-                         showLabel: false,
-                         showSecondaryRulers: false,
-                         showPrimaryRulers: false,
-                         secondaryRulersHeight: 0,
-                       ),
-                     ),
-                   ),
-                   GestureDetector(
-                     onTap: () {
-                       _controller.getSalesDataController();
-                     },
-                     child: Container(
-                       // height: 59.70.h,
-                       padding: EdgeInsets.symmetric(vertical: 10.h),
-                       width: MediaQuery
-                           .of(context)
-                           .size
-                           .width / 2,
-                       decoration: ShapeDecoration(
-                         color: AppColors.kPrimaryColor,
-                         shape: RoundedRectangleBorder(
-                           borderRadius: BorderRadius.circular(8.84),
-                         ),
-                       ),
-                       child: Center(
-                         child: Text(tr('showMore'),
-                             style: TextStyle(
-                                 fontSize: 22.11.sp,
-                                 fontWeight: FontWeight.w400,
-                                 color: AppColors.kWhiteColor,
-                                 fontFamily: kTheArabicSansLight)),
-                       ),
-                     ),
-                   )
-                 }
+                if (_controller.dataProducts.value.isNotEmpty) ...{
+                  Text(
+                      '${tr('result')}: ${_controller.dataProducts.value.length} ${tr('to')} ${_controller.generalSearchData.value.salesCount}'),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 30,
+                    child: LinearGauge(
+                      gaugeOrientation: GaugeOrientation.horizontal,
+                      start: 0,
+                      end: double.parse(
+                          "${_controller.generalSearchData.value.salesCount ?? 1}"),
+                      valueBar: [
+                        ValueBar(
+                            value: double.parse(
+                                "${_controller.dataProducts.value.length}"),
+                            color: AppColors.mainColor,
+                            borderRadius: 15,
+                            valueBarThickness: 10)
+                      ],
+                      linearGaugeBoxDecoration: const LinearGaugeBoxDecoration(
+                          backgroundColor: AppColors.kShadowColor,
+                          thickness: 10,
+                          borderRadius: 15),
+                      rulers: RulerStyle(
+                        rulerPosition: RulerPosition.center,
+                        showLabel: false,
+                        showSecondaryRulers: false,
+                        showPrimaryRulers: false,
+                        secondaryRulersHeight: 0,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _controller.getSalesDataController();
+                    },
+                    child: Container(
+                      // height: 59.70.h,
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      width: MediaQuery.of(context).size.width / 2,
+                      decoration: ShapeDecoration(
+                        color: AppColors.kPrimaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.84),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(tr('showMore'),
+                            style: TextStyle(
+                                fontSize: 22.11.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.kWhiteColor,
+                                fontFamily: kTheArabicSansLight)),
+                      ),
+                    ),
+                  )
+                }
               ],
             ),
           )),

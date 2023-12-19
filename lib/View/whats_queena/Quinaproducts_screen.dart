@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
-import '../../const/colors.dart';
 // import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';

@@ -7,9 +7,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/colors.dart';
 import '../../const/styles.dart';
-import '../../const/vars.dart';
 import '../../controller/events_controller/events_controller.dart';
 
 class DetailsEventsScreen extends StatefulWidget {

@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../../const/colors.dart';
-import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/orders_controller/orders_controller.dart';

@@ -1,5 +1,3 @@
-
-// import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/widgets/based/loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,7 @@ class TabScreenTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProductProfileController controller =
-    Get.put(ProductProfileController());
+        Get.put(ProductProfileController());
 
     // final RxInt currentRating = 0.obs;
     return Column(
@@ -33,22 +31,29 @@ class TabScreenTwo extends StatelessWidget {
           controller: commentController,
           decoration: InputDecoration(
               errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
+                  borderSide:
+                      BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
               disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
+                  borderSide:
+                      BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
               focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
+                  borderSide:
+                      BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
               enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
+                  borderSide:
+                      BorderSide(color: AppColors.kPrimaryColor, width: 2.w)),
               hintText: tr('writeReview'),
               border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 2.w))),
+                  borderSide:
+                      BorderSide(color: AppColors.kPrimaryColor, width: 2.w))),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         Row(
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 controller.getImage();
               },
               child: Text(
@@ -78,8 +83,6 @@ class TabScreenTwo extends StatelessWidget {
             Navigator.of(context).pop();
             controller.clearData();
             commentController.clear();
-
-
           },
           child: Container(
             height: 37.83.h,
@@ -101,4 +104,3 @@ class TabScreenTwo extends StatelessWidget {
     );
   }
 }
-

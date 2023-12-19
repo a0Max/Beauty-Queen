@@ -1,7 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks, file_names
 
 import 'package:beauty_queen/const/app_images.dart';
-import 'package:beauty_queen/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

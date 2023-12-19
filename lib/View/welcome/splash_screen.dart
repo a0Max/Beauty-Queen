@@ -4,19 +4,18 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
-// import '../../const/colors.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
 
   @override
   State<StatefulWidget> createState() {
     return _SplashScreen();
   }
 }
-class _SplashScreen extends State<SplashScreen>{
+
+class _SplashScreen extends State<SplashScreen> {
   final AuthController controller = Get.put(AuthController());
   @override
   void initState() {
@@ -45,8 +44,8 @@ class _SplashScreen extends State<SplashScreen>{
                       width: 238,
                       height: 6,
                       decoration: ShapeDecoration(
-                        color:
-                        AppColors.klPinkColor, // I assumed a light pink background. Adjust as needed.
+                        color: AppColors
+                            .klPinkColor, // I assumed a light pink background. Adjust as needed.
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(17),
                         ),

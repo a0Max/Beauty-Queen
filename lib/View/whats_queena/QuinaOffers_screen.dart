@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
-import '../../const/colors.dart';
 import '../../const/vars.dart';
 import '../../controller/queen_controller/queen_offer_controller.dart';
 import '../../models/sales_products_model.dart';

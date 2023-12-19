@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/models/brand_model.dart';
 import 'package:beauty_queen/widgets/based/custom_button.dart';

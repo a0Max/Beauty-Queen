@@ -1,5 +1,4 @@
 import 'package:beauty_queen/const/app_images.dart';
-import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 
