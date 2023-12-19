@@ -6,7 +6,7 @@ import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/general_search_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 
 class SalesController extends GetxController {
   RxBool isLoading = false.obs;
@@ -18,25 +18,34 @@ class SalesController extends GetxController {
   Future<void> getSalesDataController({int? currentPage}) async {
     isLoading.value = true;
     try {
-      if(currentPage==null){
-        page = page +1;
+      if (currentPage == null) {
+        page = page + 1;
 
-        generalSearchData.value = await _api.getSalesDataRequest(page: page,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
-        dataProducts.addAll(generalSearchData.value.sales?.data??[]);
-      }else{
+        generalSearchData.value = await _api.getSalesDataRequest(
+            page: page,
+            keySort: keySort.value,
+            selectedLabels: selectedLabels.value,
+            selectedPrices: selectedPrices.value,
+            selectedBrands: selectedBrands.value);
+        dataProducts.addAll(generalSearchData.value.sales?.data ?? []);
+      } else {
         page = 1;
-        generalSearchData.value = await _api.getSalesDataRequest(page: 1,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value);
-        dataProducts.value = generalSearchData.value.sales?.data??[];
+        generalSearchData.value = await _api.getSalesDataRequest(
+            page: 1,
+            keySort: keySort.value,
+            selectedLabels: selectedLabels.value,
+            selectedPrices: selectedPrices.value,
+            selectedBrands: selectedBrands.value);
+        dataProducts.value = generalSearchData.value.sales?.data ?? [];
       }
-
     } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
       generalSearchData.value = GeneralSearchModel();
-      if (e == 'Check Network connection'){
+      if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
-      }else {
+      } else {
         ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
       }
     }
@@ -45,55 +54,52 @@ class SalesController extends GetxController {
 
   var keySort = RxString('');
   var valueSort = RxString('');
-  updateSortType({required String newKeySort, required String newValueSort}){
+  updateSortType({required String newKeySort, required String newValueSort}) {
     keySort.value = newKeySort;
     valueSort.value = newValueSort;
     getSalesDataController(currentPage: 1);
   }
 
   RxList selectedLabels = [].obs;
-  updateSelectedLabel({required int newSelected}){
-    if (selectedLabels.value.contains("$newSelected")){
+  updateSelectedLabel({required int newSelected}) {
+    if (selectedLabels.value.contains("$newSelected")) {
       selectedLabels.remove("$newSelected");
-    }else {
+    } else {
       selectedLabels.add("$newSelected");
     }
-
   }
 
   RxList selectedPrices = [].obs;
-  updateSelectedPrices({required int newSelected}){
-    if (selectedPrices.value.contains("$newSelected")){
+  updateSelectedPrices({required int newSelected}) {
+    if (selectedPrices.value.contains("$newSelected")) {
       selectedPrices.remove("$newSelected");
-    }else {
+    } else {
       selectedPrices.add("$newSelected");
     }
   }
 
-
   RxList selectedBrands = [].obs;
-  updateSelectedBrands({required int newSelected}){
-    if (selectedBrands.value.contains("$newSelected")){
+  updateSelectedBrands({required int newSelected}) {
+    if (selectedBrands.value.contains("$newSelected")) {
       selectedBrands.remove("$newSelected");
-    }else {
+    } else {
       selectedBrands.add("$newSelected");
     }
   }
 
-  clearSelected(){
+  clearSelected() {
     selectedBrands.clear();
     selectedPrices.clear();
     selectedLabels.clear();
   }
 
-  applySelected(){
+  applySelected() {
     getSalesDataController(currentPage: 1);
   }
 
-  updateToLike({ required int index}) {
+  updateToLike({required int index}) {
     generalSearchData.update((val) {
       val?.sales?.data?[index].wishlist?.add(ProductOptionsModel());
     });
   }
-
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'const/app_colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ Future<void> main() async {
       useOnlyLangCode: true,
       path: 'assets/langs',
       fallbackLocale: const Locale('ar'),
-      child:const MyApp()));
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             theme: ThemeData(
-              scaffoldBackgroundColor: kWhiteColor,
+              scaffoldBackgroundColor: AppColors.kWhiteColor,
               useMaterial3: true,
             ),
             home: const SplashScreen(),

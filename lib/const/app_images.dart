@@ -1,7 +1,6 @@
-class AppImages{
+class AppImages {
   static const String mainPathToImages = 'assets/images/';
   static const String mainPathToSvg = 'assets/svg/';
-
   static const String imageClock = "${mainPathToSvg}clock.svg";
   static const String imagesInternet = "${mainPathToSvg}internet.svg";
   static const String imagePhoneCall = "${mainPathToSvg}phone-call.svg";
@@ -13,22 +12,29 @@ class AppImages{
   static const String imageFacebook = "${mainPathToSvg}facebook.svg";
   static const String imageLockOfOtp = "${mainPathToSvg}lock.svg";
   static const String imageLogoLogin = "${mainPathToSvg}logo_login.svg";
-  static const String imageCongratulations = "${mainPathToSvg}congratulations.svg";
+  static const String imageCongratulations =
+      "${mainPathToSvg}congratulations.svg";
   static const String imageLoveSvg = "${mainPathToSvg}love.svg";
   static const String imageMenu = "${mainPathToSvg}menu.svg";
   static const String imagePerson = "${mainPathToSvg}person.svg";
   static const String imageSearch = "${mainPathToSvg}search.svg";
   static const String imageShop = "${mainPathToSvg}shop.svg";
-  static const String imageCategoriesSelected = "${mainPathToSvg}Categories_selected.svg";
+  static const String imageCategoriesSelected =
+      "${mainPathToSvg}Categories_selected.svg";
   static const String imageDisSelected = "${mainPathToSvg}dis_selected.svg";
-  static const String imageDiscountsSelected = "${mainPathToSvg}Discounts_selected.svg";
+  static const String imageDiscountsSelected =
+      "${mainPathToSvg}Discounts_selected.svg";
   static const String imageGiftsSelected = "${mainPathToSvg}gifts_selected.svg";
   static const String imageHomeSelected = "${mainPathToSvg}Home_Selected.svg";
-  static const String imageCategoriesUnSelected = "${mainPathToSvg}Categories_unselected.svg";
+  static const String imageCategoriesUnSelected =
+      "${mainPathToSvg}Categories_unselected.svg";
   static const String imageDisUnSelected = "${mainPathToSvg}dis_unselected.svg";
-  static const String imageDiscountsUnSelected = "${mainPathToSvg}Discounts_unselected.svg";
-  static const String imageGiftsUnSelected = "${mainPathToSvg}gifts_unselected.svg";
-  static const String imageHomeUnSelected = "${mainPathToSvg}Home_unSelected.svg";
+  static const String imageDiscountsUnSelected =
+      "${mainPathToSvg}Discounts_unselected.svg";
+  static const String imageGiftsUnSelected =
+      "${mainPathToSvg}gifts_unselected.svg";
+  static const String imageHomeUnSelected =
+      "${mainPathToSvg}Home_unSelected.svg";
   static const String khandgranateImage = "${mainPathToSvg}handgrante.svg";
   static const String kpaintImage = "${mainPathToSvg}paintbrush.svg";
   static const String kshampooImage = "${mainPathToSvg}shampoo.svg";
@@ -41,7 +47,8 @@ class AppImages{
   static const String kBladeImage = "${mainPathToSvg}blade.svg";
   static const String kfirstaidImage = "${mainPathToSvg}firstaid.svg";
   static const String contactLenses = "${mainPathToSvg}contactLenses.svg";
-  static const String shavingAndHairRemoval = "${mainPathToSvg}Shaving_and_hair_removal.svg";
+  static const String shavingAndHairRemoval =
+      "${mainPathToSvg}Shaving_and_hair_removal.svg";
   static const String eyelashes = "${mainPathToSvg}Eyelashes.svg";
   static const String imageNewItem = "${mainPathToSvg}new_item.svg";
   static const String imageOriginalItem = "${mainPathToSvg}original_item.svg";
@@ -93,4 +100,15 @@ class AppImages{
   static const String notificationImage = "${mainPathToSvg}notification.svg";
   static const String homeIconImage = "${mainPathToSvg}home_icon.svg";
 
+  static const String kFaceImage = '${mainPathToImages}Face.png';
+  static const String kbannerImage = '${mainPathToImages}banner.png';
+  static const String kpageviewoneImage = '${mainPathToImages}pageviewOne.png';
+  static const String kpageviewTwoImage = '${mainPathToImages}pageviewTwo.png';
+  static const String kpageviewThreeImage =
+      '${mainPathToImages}pageviewThree.png';
+  static const String kpageviewlogoImage = '${mainPathToImages}logo.png';
+  static const String kpageblackoneImage = '${mainPathToImages}blackone.png';
+  static const String kpageblacktwoImage = '${mainPathToImages}blacktwo.png';
+  static const String kpageeyeoneImage = '${mainPathToImages}eyeone.png';
+  static const String kpageeyetwoImage = '${mainPathToImages}eyetwo.png';
 }

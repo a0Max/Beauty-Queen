@@ -13,8 +13,8 @@ import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/options_model.dart';
 import '../../models/product_model.dart';
 import '../../models/product_options_model.dart';
-import '../../widgets/CustomAlertBox.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/product_profile/CustomAlertBox.dart';
+import '../../widgets/based/error_pop_up.dart';
 
 class ProductProfileController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -42,27 +42,27 @@ class ProductProfileController extends GetxController
     try {
       isLoading.value = true;
       ProductModel newData =
-      await _api.getProductDataRequest(productId: productId);
-      selectedOptions.value = List.generate(
-          newData.productOptions?.length ?? 0, (index) => null);
+          await _api.getProductDataRequest(productId: productId);
+      selectedOptions.value =
+          List.generate(newData.productOptions?.length ?? 0, (index) => null);
       await Future.delayed(Duration(milliseconds: 500));
       productData.add(newData);
-    }on DioException catch (e) {
+    } on DioException catch (e) {
       print('error:$e');
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
       print('error:$e');
-      if (e == 'Check Network connection'){
+      if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
-      }else {
+      } else {
         ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
       }
     }
     isLoading.value = false;
   }
 
-  removeLast(){
-    if (  productData.isNotEmpty) {
+  removeLast() {
+    if (productData.isNotEmpty) {
       productData.removeLast();
     }
   }
@@ -128,7 +128,8 @@ class ProductProfileController extends GetxController
         arrivedToMax();
       }
     } else {
-      if (int.parse(productData.value.last.product?.stock ?? '1') > count.value) {
+      if (int.parse(productData.value.last.product?.stock ?? '1') >
+          count.value) {
         count.value++;
       } else {
         arrivedToMax();
@@ -202,15 +203,14 @@ class ProductProfileController extends GetxController
     } else {
       imagePath.value = response.path;
     }
-  
   }
+
   RxInt rate = 0.obs;
-  currentRate({required int newRate}){
+  currentRate({required int newRate}) {
     rate.value = newRate;
   }
 
-
-  showCompleteComment(){
+  showCompleteComment() {
     var context = Get.context;
 
     showDialog(
@@ -221,14 +221,16 @@ class ProductProfileController extends GetxController
             height: 172.29.h,
             width: 339.97.w,
             dilougText:
-            'تم ارسال تقييمك بنجاح. سيتم نشره حال موافقة مسؤولين المتجر عليه',
+                'تم ارسال تقييمك بنجاح. سيتم نشره حال موافقة مسؤولين المتجر عليه',
             buttonOneText: 'حسناً',
           );
         });
   }
+
   verifyToAddReview({required String comment}) async {
     try {
-      await _api.addReview(comment: comment,
+      await _api.addReview(
+          comment: comment,
           productId: "${productData.value.last.product?.id ?? 0}",
           image: imagePath.value);
       showCompleteComment();
@@ -240,12 +242,12 @@ class ProductProfileController extends GetxController
     }
   }
 
-  clearData(){
+  clearData() {
     rate.value = 0;
     imagePath.value = '';
   }
 
-  updateToLike({ required int index}){
+  updateToLike({required int index}) {
     // productData
     //     .value.
     // productData.last.p[index].wishlist?.add(ProductOptionsModel());
@@ -253,7 +255,5 @@ class ProductProfileController extends GetxController
     productData.last.update((val) {
       val?.p?[index].wishlist?.add(ProductOptionsModel());
     });
-
   }
-
 }

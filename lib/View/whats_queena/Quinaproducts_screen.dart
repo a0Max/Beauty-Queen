@@ -94,8 +94,9 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                   height: 39.76.h,
                                   width: 180.w,
                                   decoration: BoxDecoration(
-                                    border:
-                                    Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
+                                    border: Border.all(
+                                        color: AppColors.kPrimaryColor,
+                                        width: 1.5.w),
                                   ),
                                   child: Row(
                                     children: [
@@ -105,18 +106,22 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                           isDense: true,
                                           isExpanded: true,
                                           alignment: Alignment.center,
-                                          value: controller.valueSort.value == ''
-                                              ? null
-                                              : controller.valueSort.value,
-                                          items: SortTypes.listOfTTypesOfSort.values
+                                          value:
+                                              controller.valueSort.value == ''
+                                                  ? null
+                                                  : controller.valueSort.value,
+                                          items: SortTypes
+                                              .listOfTTypesOfSort.values
                                               .map((value) {
                                             return DropdownMenuItem<String>(
                                               value: value,
                                               child: Text(value,
                                                   style: TextStyle(
-                                                    color: AppColors.kBlackColor,
+                                                    color:
+                                                        AppColors.kBlackColor,
                                                     fontSize: 14.sp,
-                                                    fontFamily: kTheArabicSansLight,
+                                                    fontFamily:
+                                                        kTheArabicSansLight,
                                                     fontWeight: FontWeight.w400,
                                                     height: 0,
                                                   )),
@@ -127,7 +132,8 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                                 .forEach((key, value) {
                                               if (value == newValue) {
                                                 controller.updateSortType(
-                                                    newKeySort: key, newValueSort: value);
+                                                    newKeySort: key,
+                                                    newValueSort: value);
                                               }
                                             });
                                           },
@@ -143,43 +149,47 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(left: 3.w),
-                                        child: SvgPicture.asset(AppImages.sortTypeImage),
+                                        child: SvgPicture.asset(
+                                            AppImages.sortTypeImage),
                                       ),
                                     ],
                                   ),
                                 ),
                                 //////////////second///////////////
                                 Container(
-                                  height: 39.76.h,
-                                  width: 180.w,
-                                  decoration: BoxDecoration(
-                                    border:
-                                    Border.all(color: AppColors.kPrimaryColor, width: 1.5.w),
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Get.to(const FilterByQuinaItemsContainer());
-                                    },
-                                    child:Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                       Text(tr('filter_result'),
-                                            style: TextStyle(
-                                              color: AppColors.kBlackColor,
-                                              fontSize: 18.sp,
-                                              fontFamily: kTheArabicSansLight,
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                            )),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 3.w),
-                                        // child: Image.asset(kfilterIconImage),
-                                        child:
-                                        SvgPicture.asset(AppImages.filterTypeImage),
+                                    height: 39.76.h,
+                                    width: 180.w,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: AppColors.kPrimaryColor,
+                                          width: 1.5.w),
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Get.to(
+                                            const FilterByQuinaItemsContainer());
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(tr('filter_result'),
+                                              style: TextStyle(
+                                                color: AppColors.kBlackColor,
+                                                fontSize: 18.sp,
+                                                fontFamily: kTheArabicSansLight,
+                                                fontWeight: FontWeight.w400,
+                                                height: 0,
+                                              )),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 3.w),
+                                            // child: Image.asset(kfilterIconImage),
+                                            child: SvgPicture.asset(
+                                                AppImages.filterTypeImage),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),)
-                                ),
+                                    )),
                               ],
                             ),
                           ),
@@ -194,7 +204,7 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                   '${tr('count_items')}: ${controller.generalSearchData.value.products?.total ?? ''}',
                                   style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
-                                    color: kGrayColor,
+                                    color: AppColors.kGrayColor,
                                     fontSize: 17.sp,
                                     fontWeight: FontWeight.w400,
                                   )),
@@ -215,10 +225,13 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                       newArrival: controller
                                               .dataProducts.value[index] ??
                                           SalesProductsModel(),
-                                  favorite:  controller
-                                      .dataProducts.value[index].wishlist?.isNotEmpty??false,
-
-                                )),
+                                      favorite: controller
+                                              .dataProducts
+                                              .value[index]
+                                              .wishlist
+                                              ?.isNotEmpty ??
+                                          false,
+                                    )),
                           ),
                           if (controller.dataProducts.value.isNotEmpty) ...{
                             const SizedBox(

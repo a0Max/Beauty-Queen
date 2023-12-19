@@ -7,9 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../const/app_images.dart';
-import '../const/colors.dart';
-import '../controller/nav_bar_controller/NavBarController.dart';
+import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
+import '../../const/colors.dart';
+import '../../controller/nav_bar_controller/NavBarController.dart';
 
 class ReusableBottomNavigationBar extends StatelessWidget {
   const ReusableBottomNavigationBar({Key? key}) : super(key: key);
@@ -43,22 +44,23 @@ class ReusableBottomNavigationBar extends StatelessWidget {
       () => SizedBox(
         // height: 103.29.h,
         child: BottomNavigationBar(
-          backgroundColor: kWhiteColor,
+          backgroundColor: AppColors.kWhiteColor,
           selectedIconTheme: const IconThemeData(
-            color: kPrimaryColor,
+            color: AppColors.kPrimaryColor,
           ),
-          unselectedIconTheme: const IconThemeData(color: kBlackColor),
+          unselectedIconTheme:
+              const IconThemeData(color: AppColors.kBlackColor),
           elevation: 0,
-          selectedItemColor: kPrimaryColor,
-          unselectedItemColor: kTextGrayColor,
+          selectedItemColor: AppColors.kPrimaryColor,
+          unselectedItemColor: AppColors.kTextGrayColor,
           selectedLabelStyle: TextStyle(
               height: 2.h,
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontFamily: kTheArabicSansLight,
               fontSize: 12.sp,
               fontWeight: FontWeight.w700),
           unselectedLabelStyle: TextStyle(
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontFamily: kTheArabicSansLight,
               fontSize: 12.sp,
               fontWeight: FontWeight.w700),

@@ -7,11 +7,12 @@ import 'package:get/get.dart';
 
 // import '../../const/colors.dart';
 import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
 import '../../const/vars.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
-import '../../widgets/custom_brands_logo_widget.dart';
+import '../../widgets/brands/custom_brands_logo_widget.dart';
 
 class BrandScreen extends StatefulWidget {
   final bool? showBack;
@@ -74,7 +75,8 @@ class _BrandScreenState extends State<BrandScreen> {
   void _scrollToColumn(String columnKey) {
     final index = columnKey.codeUnitAt(0) - 'A'.codeUnitAt(0);
     if (index >= 0 && index < _columnKeys.length) {
-      final RenderBox renderBox = _columnKeys[index].currentContext?.findRenderObject() as RenderBox;
+      final RenderBox renderBox =
+          _columnKeys[index].currentContext?.findRenderObject() as RenderBox;
       final position = renderBox.localToGlobal(Offset.zero);
 
       _scrollController.animateTo(
@@ -87,7 +89,7 @@ class _BrandScreenState extends State<BrandScreen> {
 
   final List<GlobalKey> _columnKeys = List.generate(
     0,
-        (index) => GlobalKey(),
+    (index) => GlobalKey(),
   );
   @override
   Widget build(BuildContext context) {
@@ -96,12 +98,12 @@ class _BrandScreenState extends State<BrandScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
         child: CustomAppBar(
-          showarrowIcon: widget.showBack==true?true:false,
-          showBagIcon: widget.showBack==true?false:true,
-          showFavIcon:  widget.showBack==true?false:true,
-          showPersonIcon:  widget.showBack==true?false:true,
+          showarrowIcon: widget.showBack == true ? true : false,
+          showBagIcon: widget.showBack == true ? false : true,
+          showFavIcon: widget.showBack == true ? false : true,
+          showPersonIcon: widget.showBack == true ? false : true,
 
-          countCart:_controllerNav.countCart.value,
+          countCart: _controllerNav.countCart.value,
           onPressed: () {
             // Handle the button click here, e.g., open the end drawer.
             _scaffoldKey.currentState?.openEndDrawer();
@@ -119,8 +121,7 @@ class _BrandScreenState extends State<BrandScreen> {
         controller: _scrollController,
         child: Column(
           children: [
-            Image.asset(kbannerImage),
-
+            Image.asset(AppImages.kbannerImage),
             SizedBox(
               height: 30.h,
             ),
@@ -156,10 +157,9 @@ class _BrandScreenState extends State<BrandScreen> {
                   ],
                 ),
               ),
-
             Obx(() => ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     _columnKeys.add(GlobalKey());
                     return Column(
@@ -175,8 +175,8 @@ class _BrandScreenState extends State<BrandScreen> {
                                   endIndent: 15.w,
                                   indent: 15.w,
                                   // Adjust the height of the horizontal line
-                                  color:
-                                  AppColors.kPrimaryColor, // Change the color of the line
+                                  color: AppColors
+                                      .kPrimaryColor, // Change the color of the line
                                   thickness:
                                       2.w, // Adjust the width of the line
                                 ),
@@ -194,8 +194,8 @@ class _BrandScreenState extends State<BrandScreen> {
                                   endIndent: 15.w,
                                   indent: 15.w,
                                   // Adjust the height of the horizontal line
-                                  color:
-                                  AppColors.kPrimaryColor, // Change the color of the line
+                                  color: AppColors
+                                      .kPrimaryColor, // Change the color of the line
                                   thickness:
                                       2.w, // Adjust the width of the line
                                 ),
@@ -219,15 +219,16 @@ class _BrandScreenState extends State<BrandScreen> {
                                               .toList()[index]][index2]
                                           .logo ??
                                       ''),
-
                               productName: _controller
                                       .brandsData[_controller.brandsData.keys
                                           .toList()[index]][index2]
                                       .titleAr ??
                                   '',
                               brandId: _controller
-                                .brandsData[_controller.brandsData.keys
-                                .toList()[index]][index2].id.toString(),
+                                  .brandsData[_controller.brandsData.keys
+                                      .toList()[index]][index2]
+                                  .id
+                                  .toString(),
                             ),
                           ),
                         )

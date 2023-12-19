@@ -38,11 +38,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
       appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
-          backgroundColor: kWhiteColor,
+          backgroundColor: AppColors.kWhiteColor,
           title: Text(
             "طلباتي",
             style: TextStyle(
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
                 fontSize: 27.74.sp,
                 fontWeight: FontWeight.w400),
           ),
@@ -54,7 +54,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 },
                 icon: const Icon(
                   Icons.arrow_forward_ios,
-                  color: kBlackColor,
+                  color: AppColors.kBlackColor,
                   size: 30,
                 )),
           ]),
@@ -81,7 +81,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                               color: AppColors.kDividerColor),
                                           borderRadius:
                                               BorderRadius.circular(11.r),
-                                          color: kWhiteColor,
+                                          color: AppColors.kWhiteColor,
                                           boxShadow: [
                                             BoxShadow(
                                               color: const Color.fromARGB(
@@ -99,7 +99,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                               height: 47.h,
                                               width: 358.w,
                                               decoration: BoxDecoration(
-                                                  color: kCDGColor,
+                                                  color: AppColors.kCDGColor,
                                                   borderRadius:
                                                       BorderRadius.only(
                                                           topLeft:
@@ -118,7 +118,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                     style: TextStyle(
                                                         fontFamily:
                                                             kTheArabicSansLight,
-                                                        color: kBlackColor,
+                                                        color: AppColors
+                                                            .kBlackColor,
                                                         fontSize: 18.sp,
                                                         fontWeight:
                                                             FontWeight.w600),
@@ -193,7 +194,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                       fontSize: 14.sp,
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      color: kTextGrayColor),
+                                                      color: AppColors
+                                                          .kTextGrayColor),
                                                 ),
                                                 TextSpan(
                                                   text:
@@ -204,7 +206,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                       fontSize: 14.sp,
                                                       fontWeight:
                                                           FontWeight.w600,
-                                                      color: kPrimaryColor),
+                                                      color: AppColors
+                                                          .kPrimaryColor),
                                                 )
                                               ])),
                                               Text.rich(TextSpan(children: [
@@ -216,7 +219,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                       fontSize: 14.sp,
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      color: kTextGrayColor),
+                                                      color: AppColors
+                                                          .kTextGrayColor),
                                                 ),
                                                 TextSpan(
                                                   text:
@@ -227,7 +231,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                       fontSize: 14.sp,
                                                       fontWeight:
                                                           FontWeight.w600,
-                                                      color: kBlackColor),
+                                                      color: AppColors
+                                                          .kBlackColor),
                                                 )
                                               ])),
                                             ],
@@ -256,8 +261,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
-                                                              color:
-                                                                  kBlackColor),
+                                                              color: AppColors
+                                                                  .kBlackColor),
                                                         ),
                                                         Text(
                                                           '${controller.listOfOrders.value[index]?.price} د.ل ',
@@ -268,8 +273,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
-                                                              color:
-                                                                  kPrimaryColor),
+                                                              color: AppColors
+                                                                  .kPrimaryColor),
                                                         )
                                                       ],
                                                     ),
@@ -283,7 +288,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                   showModalBottomSheet(
                                                       context: context,
                                                       isScrollControlled: true,
-                                                      backgroundColor: Colors.white,
+                                                      backgroundColor:
+                                                          Colors.white,
                                                       elevation: 0,
                                                       shape:
                                                           const RoundedRectangleBorder(
@@ -307,7 +313,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                                 200,
                                                             decoration:
                                                                 const BoxDecoration(
-                                                                  // color: Colors.white,
+                                                              // color: Colors.white,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .only(
@@ -319,17 +325,19 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                                         16.0),
                                                               ),
                                                             ),
-                                                            padding: EdgeInsets.only(top:15),
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 15),
                                                             child:
-                                                                const ShowModalSheetDetailOrder()
-                                                        );
+                                                                const ShowModalSheetDetailOrder());
                                                       });
                                                 },
                                                 child: Container(
                                                     height: 41.22.h,
                                                     width: 142.38.w,
                                                     decoration: BoxDecoration(
-                                                        color: kPrimaryColor,
+                                                        color: AppColors
+                                                            .kPrimaryColor,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(
@@ -348,13 +356,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w700,
-                                                              color:
-                                                                  kWhiteColor),
+                                                              color: AppColors
+                                                                  .kWhiteColor),
                                                         ),
                                                         Icon(
                                                           Icons
                                                               .arrow_forward_ios,
-                                                          color: kWhiteColor,
+                                                          color: AppColors
+                                                              .kWhiteColor,
                                                           size: 15.r,
                                                         )
                                                       ],

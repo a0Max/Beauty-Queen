@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
-import '../../widgets/bottom_sheet_of_add_money.dart';
+import '../../widgets/user_profile/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
 import '../notification/notification_screen.dart';
@@ -45,10 +45,11 @@ class NormalProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('${tr('hello')} ${controller.userData.value.name}❤️',
+                        Text(
+                            '${tr('hello')} ${controller.userData.value.name}❤️',
                             style: TextStyle(
                               fontFamily: kTheArabicSansLight,
-                              color: kPrimaryColor,
+                              color: AppColors.kPrimaryColor,
                               fontSize: 29.19.sp,
                               fontWeight: FontWeight.w600,
                             )),
@@ -58,7 +59,7 @@ class NormalProfileScreen extends StatelessWidget {
                             },
                             icon: const Icon(
                               Icons.arrow_forward_ios,
-                              color: kBlackColor,
+                              color: AppColors.kBlackColor,
                               size: 25,
                             )),
                       ],
@@ -72,7 +73,7 @@ class NormalProfileScreen extends StatelessWidget {
                       Text(tr('accountType'),
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
-                            color: kTextGrayColor,
+                            color: AppColors.kTextGrayColor,
                             fontSize: 18.19.sp,
                             fontWeight: FontWeight.w500,
                           )),
@@ -85,7 +86,7 @@ class NormalProfileScreen extends StatelessWidget {
                           height: 30.57.h,
                           width: 81.19.w,
                           decoration: BoxDecoration(
-                            color: kPrimaryColor,
+                            color: AppColors.kPrimaryColor,
                             borderRadius: BorderRadius.circular(50.r),
                           ),
                           child: Stack(
@@ -94,7 +95,7 @@ class NormalProfileScreen extends StatelessWidget {
                                 child: Text(tr('quna'),
                                     style: TextStyle(
                                       fontFamily: kTheArabicSansLight,
-                                      color: kWhiteColor,
+                                      color: AppColors.kWhiteColor,
                                       fontSize: 18.19.sp,
                                       fontWeight: FontWeight.w500,
                                     )),
@@ -126,7 +127,8 @@ class NormalProfileScreen extends StatelessWidget {
                       height: 98.h,
                       width: 398.w,
                       decoration: BoxDecoration(
-                        color: kWhiteColor, // Set the fill color to white
+                        color: AppColors
+                            .kWhiteColor, // Set the fill color to white
                         borderRadius: BorderRadius.circular(16.r),
                         boxShadow: [
                           BoxShadow(
@@ -148,7 +150,7 @@ class NormalProfileScreen extends StatelessWidget {
                                       text: tr('wallet'),
                                       style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        color: kTextGrayColor,
+                                        color: AppColors.kTextGrayColor,
                                         fontSize: 16.58.sp,
                                         fontWeight: FontWeight.w500,
                                       )),
@@ -156,15 +158,15 @@ class NormalProfileScreen extends StatelessWidget {
                                       text: '100.00  ',
                                       style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                         fontSize: 28.45.sp,
                                         fontWeight: FontWeight.w700,
                                       )),
                                   TextSpan(
-                                      text:tr('Del'),
+                                      text: tr('Del'),
                                       style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                         fontSize: 24.45.sp,
                                         fontWeight: FontWeight.w600,
                                       )),
@@ -181,7 +183,7 @@ class NormalProfileScreen extends StatelessWidget {
                               height: 41.56.h,
                               width: 107.w,
                               decoration: BoxDecoration(
-                                  color: kPrimaryColor,
+                                  color: AppColors.kPrimaryColor,
                                   borderRadius: BorderRadius.circular(27.41.r)),
                               child: Padding(
                                 padding: EdgeInsets.only(right: 5.68.w),
@@ -192,11 +194,11 @@ class NormalProfileScreen extends StatelessWidget {
                                       width: 30.w,
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: kWhiteColor,
+                                        color: AppColors.kWhiteColor,
                                       ),
                                       child: const Icon(
                                         Icons.add,
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                       ),
                                     ),
                                     SizedBox(
@@ -206,7 +208,7 @@ class NormalProfileScreen extends StatelessWidget {
                                       tr('fill'),
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
-                                          color: kWhiteColor,
+                                          color: AppColors.kWhiteColor,
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w700),
                                     )
@@ -239,7 +241,7 @@ class NormalProfileScreen extends StatelessWidget {
                               height: 115.h,
                               width: 115.w,
                               decoration: BoxDecoration(
-                                  color: kWhiteColor,
+                                  color: AppColors.kWhiteColor,
                                   borderRadius: BorderRadius.circular(15.r),
                                   boxShadow: [
                                     BoxShadow(
@@ -264,7 +266,7 @@ class NormalProfileScreen extends StatelessWidget {
                                     tr('my_orders'),
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w700),
                                   )
@@ -284,7 +286,7 @@ class NormalProfileScreen extends StatelessWidget {
                               height: 115.h,
                               width: 115.w,
                               decoration: BoxDecoration(
-                                  color: kWhiteColor,
+                                  color: AppColors.kWhiteColor,
                                   borderRadius: BorderRadius.circular(15.r),
                                   boxShadow: [
                                     BoxShadow(
@@ -309,7 +311,7 @@ class NormalProfileScreen extends StatelessWidget {
                                     tr('fav'),
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w700),
                                   )
@@ -322,7 +324,8 @@ class NormalProfileScreen extends StatelessWidget {
                             AccountTypes.queena) ...{
                           ////////////third container////////////////
                           15.pw,
-                          Expanded(child:GestureDetector(
+                          Expanded(
+                              child: GestureDetector(
                             onTap: () {
                               Get.to(const MyStickerScreen());
                             },
@@ -330,7 +333,7 @@ class NormalProfileScreen extends StatelessWidget {
                               height: 115.h,
                               width: 115.w,
                               decoration: BoxDecoration(
-                                  color: kWhiteColor,
+                                  color: AppColors.kWhiteColor,
                                   borderRadius: BorderRadius.circular(15.r),
                                   boxShadow: [
                                     BoxShadow(
@@ -355,7 +358,7 @@ class NormalProfileScreen extends StatelessWidget {
                                     tr('mines'),
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        color: kPrimaryColor,
+                                        color: AppColors.kPrimaryColor,
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w700),
                                   )
@@ -386,7 +389,7 @@ class NormalProfileScreen extends StatelessWidget {
                           tr('notification'),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
-                              color: kBlackColor,
+                              color: AppColors.kBlackColor,
                               fontSize: 19.sp,
                               fontWeight: FontWeight.w700),
                         ),
@@ -400,9 +403,10 @@ class NormalProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const Divider(
-                    color: kDividerrColor,
+                    color: AppColors.kDividerrColor,
                     thickness: 2,
-                  ),InkWell(
+                  ),
+                  InkWell(
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     onTap: () {
@@ -418,7 +422,7 @@ class NormalProfileScreen extends StatelessWidget {
                           tr('ourData'),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
-                              color: kBlackColor,
+                              color: AppColors.kBlackColor,
                               fontSize: 19.sp,
                               fontWeight: FontWeight.w700),
                         ),
@@ -432,14 +436,14 @@ class NormalProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const Divider(
-                    color: kDividerrColor,
+                    color: AppColors.kDividerrColor,
                     thickness: 2,
                   ),
                   InkWell(
                       highlightColor: Colors.transparent,
                       splashColor: Colors.transparent,
                       onTap: () {
-                        Get.to( const PasswordScreen());
+                        Get.to(const PasswordScreen());
                       },
                       child: Row(
                         children: [
@@ -451,32 +455,30 @@ class NormalProfileScreen extends StatelessWidget {
                             tr('kPasswordHint'),
                             style: TextStyle(
                                 fontFamily: kTheArabicSansLight,
-                                color: kBlackColor,
+                                color: AppColors.kBlackColor,
                                 fontSize: 19.sp,
                                 fontWeight: FontWeight.w700),
                           ),
                           const Spacer(),
                           IconButton(
                               onPressed: () {
-                                Get.to( const PasswordScreen());
+                                Get.to(const PasswordScreen());
                               },
                               icon: const Icon(Icons.arrow_forward_ios))
                         ],
                       )),
                   const Divider(
-                    color: kDividerrColor,
+                    color: AppColors.kDividerrColor,
                     thickness: 2,
                   ),
                   InkWell(
                     highlightColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     onTap: () {
-
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                              const ContactUsScreen()));
+                              builder: (context) => const ContactUsScreen()));
                     },
                     child: Row(
                       children: [
@@ -488,26 +490,25 @@ class NormalProfileScreen extends StatelessWidget {
                           tr('contact_us'),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
-                              color: kBlackColor,
+                              color: AppColors.kBlackColor,
                               fontSize: 19.sp,
                               fontWeight: FontWeight.w700),
                         ),
                         const Spacer(),
                         IconButton(
                             onPressed: () {
-
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                      const ContactUsScreen()));
-                              },
+                                          const ContactUsScreen()));
+                            },
                             icon: const Icon(Icons.arrow_forward_ios))
                       ],
                     ),
                   ),
                   const Divider(
-                    color: kDividerrColor,
+                    color: AppColors.kDividerrColor,
                     thickness: 2,
                   ),
                   InkWell(
@@ -517,8 +518,7 @@ class NormalProfileScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                              const AboutAppScreen()));
+                              builder: (context) => const AboutAppScreen()));
                     },
                     child: Row(
                       children: [
@@ -530,7 +530,7 @@ class NormalProfileScreen extends StatelessWidget {
                           tr('about_shop'),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
-                              color: kBlackColor,
+                              color: AppColors.kBlackColor,
                               fontSize: 19.sp,
                               fontWeight: FontWeight.w700),
                         ),
@@ -561,14 +561,14 @@ class NormalProfileScreen extends StatelessWidget {
                       height: 60.h,
                       width: 398.w,
                       decoration: BoxDecoration(
-                          color: kPrimaryColor,
+                          color: AppColors.kPrimaryColor,
                           borderRadius: BorderRadius.circular(50.r)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(
                             Icons.logout,
-                            color: kWhiteColor,
+                            color: AppColors.kWhiteColor,
                           ),
                           SizedBox(
                             width: 10.w,
@@ -577,7 +577,7 @@ class NormalProfileScreen extends StatelessWidget {
                             tr('logout'),
                             style: TextStyle(
                                 fontFamily: kTheArabicSansLight,
-                                color: kWhiteColor,
+                                color: AppColors.kWhiteColor,
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -595,4 +595,3 @@ class NormalProfileScreen extends StatelessWidget {
     );
   }
 }
-

@@ -5,6 +5,7 @@ import 'package:beauty_queen/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/queen_controller/queen_controller.dart';
 import 'QuinaOffers_screen.dart';
@@ -33,7 +34,7 @@ class QuinaprogramScreen extends StatelessWidget {
                 icon: Icon(
                   Icons.arrow_forward_ios,
                   size: 30.r,
-                  color: kBlackColor,
+                  color: AppColors.kBlackColor,
                 )),
           ),
           Image.asset(AppImages.queenaImage),
@@ -41,101 +42,103 @@ class QuinaprogramScreen extends StatelessWidget {
             height: 20.h,
           ),
           TabBar(
-            onTap: (index) {
-              tabcontroller.changeTab(index);
-            },
-            tabs: [
-              Obx(
-                () => Tab(
-                  icon: Container(
-                    height: 64.h,
-                    // width: 115.w,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kPrimaryColor, width: 1.w),
-                      borderRadius: BorderRadius.circular(13.r),
-                      color: tabcontroller.currentTab == 0
-                          ? kPrimaryColor
-                          : Colors.white,
-                    ),
-                    child: Center(
-                      child: Text(
-                        "ما هو برنامج كوينا؟",
-                        style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          fontSize: 13.83.sp,
-                          fontWeight: FontWeight.w400,
-                          color: tabcontroller.currentTab == 0
-                              ? kWhiteColor
-                              : kPrimaryColor,
-                        ),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.visible,
+              onTap: (index) {
+                tabcontroller.changeTab(index);
+              },
+              tabs: [
+                Obx(
+                  () => Tab(
+                    icon: Container(
+                      height: 64.h,
+                      // width: 115.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: AppColors.kPrimaryColor, width: 1.w),
+                        borderRadius: BorderRadius.circular(13.r),
+                        color: tabcontroller.currentTab == 0
+                            ? AppColors.kPrimaryColor
+                            : Colors.white,
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Obx(
-                () => Tab(
-                  icon: Container(
-                    height: 41.h,
-                    // width: 115.w,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kPrimaryColor, width: 1.w),
-                      borderRadius: BorderRadius.circular(13.r),
-                      color: tabcontroller.currentTab == 1
-                          ? kPrimaryColor
-                          : Colors.white,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'منتجات كوينا',
-                        style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          fontSize: 13.83.sp,
-                          fontWeight: FontWeight.w400,
-                          color: tabcontroller.currentTab == 1
-                              ? kWhiteColor
-                              : kPrimaryColor,
+                      child: Center(
+                        child: Text(
+                          "ما هو برنامج كوينا؟",
+                          style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            fontSize: 13.83.sp,
+                            fontWeight: FontWeight.w400,
+                            color: tabcontroller.currentTab == 0
+                                ? AppColors.kWhiteColor
+                                : AppColors.kPrimaryColor,
+                          ),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.visible,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Obx(
-                () => Tab(
-                  icon: Container(
-                    height: 41.h,
-                    // width: 115.w,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kPrimaryColor, width: 1.w),
-                      borderRadius: BorderRadius.circular(13.r),
-                      color: tabcontroller.currentTab == 2
-                          ? kPrimaryColor
-                          : Colors.white,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'عروض كوينا',
-                        style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          fontSize: 13.83.sp,
-                          fontWeight: FontWeight.w400,
-                          color: tabcontroller.currentTab == 2
-                              ? kWhiteColor
-                              : kPrimaryColor,
+                Obx(
+                  () => Tab(
+                    icon: Container(
+                      height: 41.h,
+                      // width: 115.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: AppColors.kPrimaryColor, width: 1.w),
+                        borderRadius: BorderRadius.circular(13.r),
+                        color: tabcontroller.currentTab == 1
+                            ? AppColors.kPrimaryColor
+                            : Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'منتجات كوينا',
+                          style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            fontSize: 13.83.sp,
+                            fontWeight: FontWeight.w400,
+                            color: tabcontroller.currentTab == 1
+                                ? AppColors.kWhiteColor
+                                : AppColors.kPrimaryColor,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              )
-            ],
-            controller: tabcontroller.tabsController,
-            indicatorColor: Colors.transparent,
-              dividerColor:Colors.transparent
-          ),
+                Obx(
+                  () => Tab(
+                    icon: Container(
+                      height: 41.h,
+                      // width: 115.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: AppColors.kPrimaryColor, width: 1.w),
+                        borderRadius: BorderRadius.circular(13.r),
+                        color: tabcontroller.currentTab == 2
+                            ? AppColors.kPrimaryColor
+                            : Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'عروض كوينا',
+                          style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            fontSize: 13.83.sp,
+                            fontWeight: FontWeight.w400,
+                            color: tabcontroller.currentTab == 2
+                                ? AppColors.kWhiteColor
+                                : AppColors.kPrimaryColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+              controller: tabcontroller.tabsController,
+              indicatorColor: Colors.transparent,
+              dividerColor: Colors.transparent),
           Expanded(
             child: TabBarView(
               controller: tabcontroller.tabsController,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../const/app_colors.dart';
 import '../const/images.dart';
 import 'orders/orders_screen.dart';
 
@@ -31,7 +32,7 @@ class ProductAddedScreen extends StatelessWidget {
               style: TextStyle(
                   fontSize: 38.sp,
                   fontWeight: FontWeight.w600,
-                  color: kBlackColor),
+                  color: AppColors.kBlackColor),
             ),
             //////////
             Text.rich(TextSpan(children: [
@@ -41,7 +42,7 @@ class ProductAddedScreen extends StatelessWidget {
                     fontFamily: kTheArabicSansLight,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w500,
-                    color: kTextGrayColor),
+                    color: AppColors.kTextGrayColor),
               ),
               TextSpan(
                 text: '749#',
@@ -49,7 +50,7 @@ class ProductAddedScreen extends StatelessWidget {
                     fontFamily: kTheArabicSansLight,
                     fontSize: 22.1.sp,
                     fontWeight: FontWeight.w600,
-                    color: kPrimaryColor),
+                    color: AppColors.kPrimaryColor),
               )
             ])),
             Text(
@@ -58,7 +59,7 @@ class ProductAddedScreen extends StatelessWidget {
                   fontFamily: kTheArabicSansLight,
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w500,
-                  color: kBlackColor),
+                  color: AppColors.kBlackColor),
             ),
             Stack(children: [
               Image.asset(ksmallcardImage),
@@ -79,7 +80,7 @@ class ProductAddedScreen extends StatelessWidget {
                           fontFamily: kTheArabicSansLight,
                           fontSize: 19.sp,
                           fontWeight: FontWeight.w600,
-                          color: kPrimaryColor),
+                          color: AppColors.kPrimaryColor),
                     ),
                     SizedBox(
                       width: 10.w,
@@ -88,7 +89,7 @@ class ProductAddedScreen extends StatelessWidget {
                       child: Divider(
                         endIndent: 23,
                         thickness: 1,
-                        color: kPrimaryColor,
+                        color: AppColors.kPrimaryColor,
                       ),
                     )
                   ],
@@ -113,7 +114,7 @@ class ProductAddedScreen extends StatelessWidget {
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 21.44.sp,
                                 fontWeight: FontWeight.w600,
-                                color: kBlackColor),
+                                color: AppColors.kBlackColor),
                           ),
                           TextSpan(
                             text: 'التاريخ: 22/10/2022',
@@ -121,7 +122,7 @@ class ProductAddedScreen extends StatelessWidget {
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 16.44.sp,
                                 fontWeight: FontWeight.w400,
-                                color: kTextGrayColor),
+                                color: AppColors.kTextGrayColor),
                           ),
                         ],
                       ),
@@ -140,13 +141,13 @@ class ProductAddedScreen extends StatelessWidget {
                       width: 40.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9.87.r),
-                          color: kPrimaryColor),
+                          color: AppColors.kPrimaryColor),
                       child: Center(
                         child: Text(
                           "3+",
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
-                              color: kWhiteColor,
+                              color: AppColors.kWhiteColor,
                               fontSize: 17.54.sp,
                               fontWeight: FontWeight.w600),
                         ),
@@ -167,7 +168,7 @@ class ProductAddedScreen extends StatelessWidget {
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: kPrimaryColor),
+                                  color: AppColors.kPrimaryColor),
                             ),
                           ],
                         ),
@@ -185,7 +186,7 @@ class ProductAddedScreen extends StatelessWidget {
                 height: 64.26.h,
                 width: 398.27.w,
                 decoration: BoxDecoration(
-                    color: kPrimaryColor,
+                    color: AppColors.kPrimaryColor,
                     borderRadius: BorderRadius.circular(47.34.r)),
                 child: Center(
                   child: Text(
@@ -194,7 +195,7 @@ class ProductAddedScreen extends StatelessWidget {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 20.85.sp,
                         fontWeight: FontWeight.w700,
-                        color: kWhiteColor),
+                        color: AppColors.kWhiteColor),
                   ),
                 ),
               ),
@@ -209,7 +210,7 @@ class ProductAddedScreen extends StatelessWidget {
                     fontFamily: kTheArabicSansLight,
                     fontSize: 20.85.sp,
                     fontWeight: FontWeight.w600,
-                    color: kPrimaryColor),
+                    color: AppColors.kPrimaryColor),
               ),
             ),
           ],

@@ -10,7 +10,7 @@ import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../controller/auth_controller/otp_controller.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 import '../welcome/welcome_screen.dart';
 import 'otp_page_view.dart';
 
@@ -42,43 +42,44 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen> {
 
       // Navigator.of(context).pop();
 
-      Get.off(OtpPage(phone: phoneController.text, isForget: true),);
-
+      Get.off(
+        OtpPage(phone: phoneController.text, isForget: true),
+      );
     } on DioException catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
-
+      ErrorPopUp(
+          message: (e.response?.data as Map).values.first, title: tr('Error'));
     } catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
       ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
-
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-          surfaceTintColor: AppColors.kWhiteColor,
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Get.off(const WelcomeScreen());
-                },
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  color: AppColors.kBlackColor,
-                  size: 25.r,
-                )),
-          ],),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        surfaceTintColor: AppColors.kWhiteColor,
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.off(const WelcomeScreen());
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                color: AppColors.kBlackColor,
+                size: 25.r,
+              )),
+        ],
+      ),
       body: Padding(
           padding: EdgeInsets.all(16.r),
           child: SingleChildScrollView(
@@ -95,14 +96,14 @@ class _EnterPhoneScreen extends State<EnterPhoneScreen> {
                             fontSize: 29.78.sp,
                             fontFamily: 'TheSans',
                             fontWeight: FontWeight.w400,
-                          ),),
-                          Text(tr('backYourAccount'),
-                          style: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 19.59.sp,
-                              fontWeight: FontWeight.w300,
-                              color: AppColors.kTextGrayColor)
+                          ),
                         ),
+                        Text(tr('backYourAccount'),
+                            style: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                fontSize: 19.59.sp,
+                                fontWeight: FontWeight.w300,
+                                color: AppColors.kTextGrayColor)),
                         SizedBox(height: 38.h),
                         TextFieldAuthWidget(
                           hindText: tr('kEnterYourPhoneNumber'),

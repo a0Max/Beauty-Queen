@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../based/button_widget.dart';
 import '../based/loading.dart';
-import '../error_pop_up.dart';
-import '../text_field_widget.dart';
+import '../based/error_pop_up.dart';
+import 'text_field_widget.dart';
 
 class CommentWidget extends StatelessWidget {
   CommentWidget({super.key});
@@ -79,38 +79,36 @@ class CommentWidget extends StatelessWidget {
           children: [
             Expanded(
                 flex: 2,
-                child:Container(
+                child: Container(
                   height: 50,
                   child: TextField(
-                      controller: phoneController,
-                      keyboardType: TextInputType.phone,
+                    controller: phoneController,
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: BorderSide(
-                              color: AppColors.mainColor),
+                          borderSide: BorderSide(color: AppColors.mainColor),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: BorderSide(
-                              color: AppColors.greyColor),
+                          borderSide: BorderSide(color: AppColors.greyColor),
                         ),
-                        focusedErrorBorder:OutlineInputBorder(
+                        focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: const BorderSide(
-                              color: AppColors.redColor),
+                          borderSide:
+                              const BorderSide(color: AppColors.redColor),
                         ),
                         filled: true,
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: const BorderSide(
-                              color: AppColors.redColor),
+                          borderSide:
+                              const BorderSide(color: AppColors.redColor),
                         ),
                         fillColor: Colors.white,
-                        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14)),
+                        hintStyle:
+                            const TextStyle(color: Colors.grey, fontSize: 14)),
                   ),
-                )
-                ),
+                )),
             const Expanded(flex: 1, child: SizedBox()),
           ],
         ),

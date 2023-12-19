@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../const/styles.dart';
+import '../../const/app_colors.dart';
+import '../../const/styles.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String? dilougText;
@@ -36,9 +37,9 @@ class CustomAlertDialog extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
-        padding: EdgeInsets.symmetric(horizontal: 10.w,vertical:20.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
         decoration: const BoxDecoration(
-          color: kPrimaryColor,
+          color: AppColors.kPrimaryColor,
         ),
         child: Column(
           children: <Widget>[
@@ -48,7 +49,7 @@ class CustomAlertDialog extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontFamily: kTheArabicSansLight,
-                color: kWhiteColor,
+                color: AppColors.kWhiteColor,
                 fontSize: 16.39.sp,
               ),
             ),
@@ -65,13 +66,13 @@ class CustomAlertDialog extends StatelessWidget {
                     // width: 145.91.w,
 
                     padding: EdgeInsets.symmetric(horizontal: 7.w),
-                    color: kBlackColor,
+                    color: AppColors.kBlackColor,
                     child: Center(
                       child: Text(
                         buttonOneText.toString(),
                         style: TextStyle(
                             fontFamily: kTheArabicSansLight,
-                            color: kWhiteColor,
+                            color: AppColors.kWhiteColor,
                             fontSize: 14.2.sp,
                             fontWeight: FontWeight.w700),
                       ),
@@ -88,13 +89,13 @@ class CustomAlertDialog extends StatelessWidget {
                       height: 42.65.h,
                       padding: EdgeInsets.symmetric(horizontal: 7.w),
                       // width: 145.91.w,
-                      color: kBlackColor,
+                      color: AppColors.kBlackColor,
                       child: Center(
                         child: Text(
                           buttonTwoText.toString(),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
-                              color: kWhiteColor,
+                              color: AppColors.kWhiteColor,
                               fontSize: 14.2.sp,
                               fontWeight: FontWeight.w700),
                         ),

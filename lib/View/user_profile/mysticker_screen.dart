@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import '../../const/colors.dart';
 import '../../controller/about_controller/about_app_controller.dart';
@@ -50,20 +51,20 @@ class _MyStickerScreen extends State<MyStickerScreen> {
               : SingleChildScrollView(
                   child: Container(
                     decoration: const BoxDecoration(
-                      color: kWhiteColor,
+                      color: AppColors.kWhiteColor,
                     ),
                     child: Column(
                       children: [
                         Container(
                           height: 45.h,
                           width: MediaQuery.of(context).size.width,
-                          color: kPrimaryColor,
+                          color: AppColors.kPrimaryColor,
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: 20.w),
                           child: Text(
                             'رصيد الملصقات: ${_controller.myStickerData.value.fold<int>(0, (sum, obj) => int.parse("$sum") + int.parse("${obj.queenaAmount}"))}',
                             style: TextStyle(
-                                color: kWhiteColor,
+                                color: AppColors.kWhiteColor,
                                 fontSize: 17.sp,
                                 fontWeight: FontWeight.w700),
                           ),
@@ -91,7 +92,7 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                                         style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w400,
-                                            color: kBlackColor),
+                                            color: AppColors.kBlackColor),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -102,7 +103,7 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                                         style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w400,
-                                            color: kBlackColor),
+                                            color: AppColors.kBlackColor),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -114,7 +115,7 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                                         style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w400,
-                                            color: kBlackColor),
+                                            color: AppColors.kBlackColor),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),

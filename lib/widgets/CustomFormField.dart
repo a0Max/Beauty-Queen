@@ -4,6 +4,8 @@ import 'package:beauty_queen/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../const/app_colors.dart';
+
 class ReusableTextFormField extends StatelessWidget {
   final String? labelText;
   final TextEditingController? controller;
@@ -33,7 +35,7 @@ class ReusableTextFormField extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13.r),
-          border: Border.all(width: 1.w, color: kTextGrayColor)),
+          border: Border.all(width: 1.w, color: AppColors.kTextGrayColor)),
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,

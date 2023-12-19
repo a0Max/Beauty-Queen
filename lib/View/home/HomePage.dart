@@ -18,9 +18,9 @@ import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
-import '../../widgets/CustomProductCard.dart';
-import '../../widgets/ScrollableContainerList.dart';
-import '../../widgets/custom_horizontal_list.dart';
+import '../../widgets/home/CustomProductCard.dart';
+import '../../widgets/home/ScrollableContainerList.dart';
+import '../../widgets/home/custom_horizontal_list.dart';
 import '../../widgets/loading/home_loading.dart';
 import '../brands/branddetail_screen.dart';
 import '../categories/filter_screen.dart';
@@ -86,20 +86,20 @@ class _HomePageState extends State<HomePage> {
       key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
-        child: Obx(()=>CustomAppBar(
-          showBagIcon: true,
-          showFavIcon: true,
-          showPersonIcon: true,
-          onPressed: () {
-            _scaffoldKey.currentState?.openEndDrawer();
-          },
-          isScrolled: _isScrolled,
-          countCart:_controllerNav.countCart.value,
-          searchBarWidth: searchBarWidth, // Replace with your desired width
-          searchBarTranslationY: searchBarTranslationY,
-          searchBarTranslationX: searchBarTranslationX,
-          // Replace with your desired translation value
-        )),
+        child: Obx(() => CustomAppBar(
+              showBagIcon: true,
+              showFavIcon: true,
+              showPersonIcon: true,
+              onPressed: () {
+                _scaffoldKey.currentState?.openEndDrawer();
+              },
+              isScrolled: _isScrolled,
+              countCart: _controllerNav.countCart.value,
+              searchBarWidth: searchBarWidth, // Replace with your desired width
+              searchBarTranslationY: searchBarTranslationY,
+              searchBarTranslationX: searchBarTranslationX,
+              // Replace with your desired translation value
+            )),
       ),
       endDrawer: const MyEndDrawer(),
       body: SingleChildScrollView(
@@ -134,13 +134,18 @@ class _HomePageState extends State<HomePage> {
                                   (index) => GestureDetector(
                                         onTap: () {
                                           if (_controller
-                                              .sliders[index].linkType == LinkTypes.brand){
-                                            Get.to(BrandDetailScreen(brandId: int.parse(_controller
-                                                .sliders[index].linkId),));
-                                          }else if (_controller.sliders[index].linkType == LinkTypes.product){
-                                            Get.to(ItemProfilePage(itemId:int.parse(_controller
-                                                .sliders[index].linkId)));
-
+                                                  .sliders[index].linkType ==
+                                              LinkTypes.brand) {
+                                            Get.to(BrandDetailScreen(
+                                              brandId: int.parse(_controller
+                                                  .sliders[index].linkId),
+                                            ));
+                                          } else if (_controller
+                                                  .sliders[index].linkType ==
+                                              LinkTypes.product) {
+                                            Get.to(ItemProfilePage(
+                                                itemId: int.parse(_controller
+                                                    .sliders[index].linkId)));
                                           }
                                         },
                                         child: CachedNetworkImage(
@@ -223,11 +228,14 @@ class _HomePageState extends State<HomePage> {
                               _controller.homeData.value.newItems?.length ?? 0,
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                              onTap: (){
-                                if (_controller.homeData.value.newItems?[index].linkId!=null) {
-                                  Get.to(ItemProfilePage(itemId: int.parse(
-                                      _controller.homeData.value
-                                          .newItems?[index].linkId ?? '0')));
+                              onTap: () {
+                                if (_controller.homeData.value.newItems?[index]
+                                        .linkId !=
+                                    null) {
+                                  Get.to(ItemProfilePage(
+                                      itemId: int.parse(_controller.homeData
+                                              .value.newItems?[index].linkId ??
+                                          '0')));
                                 }
                               },
                               child: Padding(
@@ -360,9 +368,15 @@ class _HomePageState extends State<HomePage> {
                                                 .mainImage ??
                                             ''),
                                     newArrival: _controller.homeData.value
-                                        .newArrivals?[index]??SalesProductsModel(),
-                                    favorite: _controller.homeData.value
-                                        .newArrivals?[index].wishlist?.isNotEmpty??false,
+                                            .newArrivals?[index] ??
+                                        SalesProductsModel(),
+                                    favorite: _controller
+                                            .homeData
+                                            .value
+                                            .newArrivals?[index]
+                                            .wishlist
+                                            ?.isNotEmpty ??
+                                        false,
                                   );
                                 },
                               ),
@@ -394,7 +408,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Get.to(const BeautyPharmacyScreen());
                               },
                               child: Text(
@@ -522,14 +536,16 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               InkWell(
                                                 borderRadius:
-                                                BorderRadius.circular(
-                                                    10.69.r),
-                                                onTap: (){
-                                                  Get.to(ItemProfilePage(itemId: _controller
-                                                      .homeData
-                                                      .value
-                                                      .offers?[index].id??0));
-
+                                                    BorderRadius.circular(
+                                                        10.69.r),
+                                                onTap: () {
+                                                  Get.to(ItemProfilePage(
+                                                      itemId: _controller
+                                                              .homeData
+                                                              .value
+                                                              .offers?[index]
+                                                              .id ??
+                                                          0));
                                                 },
                                                 child: Container(
                                                   width: 109.71.w,
@@ -537,7 +553,8 @@ class _HomePageState extends State<HomePage> {
                                                   decoration: ShapeDecoration(
                                                     color:
                                                         AppColors.kPrimaryColor,
-                                                    shape: RoundedRectangleBorder(
+                                                    shape:
+                                                        RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.69.r),
@@ -546,7 +563,8 @@ class _HomePageState extends State<HomePage> {
                                                   child: Center(
                                                     child: Text(
                                                       tr('shop_now'),
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12.83.sp,
@@ -603,12 +621,22 @@ class _HomePageState extends State<HomePage> {
                       ...List.generate(
                         _controller.homeData.value.banners?.length ?? 0,
                         (index) => GestureDetector(
-                          onTap: (){
-                            if (_controller.homeData.value.banners?[index].linkType == LinkTypes.brand){
-                              Get.to(BrandDetailScreen(brandId: int.parse(_controller.homeData.value.banners?[index].linkId??'0'),));
-                            }else if (_controller.homeData.value.banners?[index].linkType == LinkTypes.product){
-                              Get.to(ItemProfilePage(itemId:int.parse(_controller.homeData.value.banners?[index].linkId??'0')));
-
+                          onTap: () {
+                            if (_controller
+                                    .homeData.value.banners?[index].linkType ==
+                                LinkTypes.brand) {
+                              Get.to(BrandDetailScreen(
+                                brandId: int.parse(_controller.homeData.value
+                                        .banners?[index].linkId ??
+                                    '0'),
+                              ));
+                            } else if (_controller
+                                    .homeData.value.banners?[index].linkType ==
+                                LinkTypes.product) {
+                              Get.to(ItemProfilePage(
+                                  itemId: int.parse(_controller.homeData.value
+                                          .banners?[index].linkId ??
+                                      '0')));
                             }
                           },
                           child: Container(
@@ -660,8 +688,9 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: (){
-                                      final NavController controller = Get.put(NavController());
+                                    onTap: () {
+                                      final NavController controller =
+                                          Get.put(NavController());
                                       controller.updateIndex(2);
                                     },
                                     child: Text(
@@ -671,7 +700,8 @@ class _HomePageState extends State<HomePage> {
                                         fontSize: 18.sp,
                                         fontFamily: kTheArabicSansLight,
                                         fontWeight: FontWeight.w400,
-                                        decorationColor: AppColors.kPrimaryColor,
+                                        decorationColor:
+                                            AppColors.kPrimaryColor,
                                         decoration: TextDecoration.underline,
                                         height: 0,
                                       ),
@@ -719,13 +749,17 @@ class _HomePageState extends State<HomePage> {
                                                         .mainImage ??
                                                     ''),
                                             newArrival: _controller
-                                              .homeData
-                                              .value
-                                              .salesProducts?[value]??SalesProductsModel(),
+                                                    .homeData
+                                                    .value
+                                                    .salesProducts?[value] ??
+                                                SalesProductsModel(),
                                             favorite: _controller
-                                                .homeData
-                                                .value
-                                                .salesProducts?[value].wishlist?.isNotEmpty??false,
+                                                    .homeData
+                                                    .value
+                                                    .salesProducts?[value]
+                                                    .wishlist
+                                                    ?.isNotEmpty ??
+                                                false,
                                           ),
                                           if ((_controller.homeData.value
                                                       .salesProducts?.length ??
@@ -741,16 +775,17 @@ class _HomePageState extends State<HomePage> {
                                                                   value + 1]
                                                               .mainImage ??
                                                           ''),
-
-                                              newArrival: _controller
-                                                  .homeData
-                                                  .value
-                                                  .salesProducts?[value+1]??SalesProductsModel(),
+                                              newArrival: _controller.homeData
+                                                          .value.salesProducts?[
+                                                      value + 1] ??
+                                                  SalesProductsModel(),
                                               favorite: _controller
-                                                  .homeData
-                                                  .value
-                                                  .salesProducts?[value+1].wishlist?.isNotEmpty??false,
-
+                                                      .homeData
+                                                      .value
+                                                      .salesProducts?[value + 1]
+                                                      .wishlist
+                                                      ?.isNotEmpty ??
+                                                  false,
                                             )
                                           }
                                         ],
@@ -816,8 +851,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: (){
-                                final NavController controller = Get.put(NavController());
+                              onTap: () {
+                                final NavController controller =
+                                    Get.put(NavController());
                                 controller.updateIndex(3);
                               },
                               child: Text(
@@ -849,10 +885,14 @@ class _HomePageState extends State<HomePage> {
                         child: Stack(
                           children: [
                             GestureDetector(
-                              onTap: (){
-                                final AlkasamController controller = Get.put(AlkasamController());
-                                controller.updateCurrentCategoryId(newId:187, getChild: false);
-                                Get.to(FliterScreen(categoryId: 187,));
+                              onTap: () {
+                                final AlkasamController controller =
+                                    Get.put(AlkasamController());
+                                controller.updateCurrentCategoryId(
+                                    newId: 187, getChild: false);
+                                Get.to(FliterScreen(
+                                  categoryId: 187,
+                                ));
                               },
                               child: Container(
                                 // width: 705.83.w,
@@ -883,17 +923,26 @@ class _HomePageState extends State<HomePage> {
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
                                       return CustomCardWidget(
-
-                                          imageUrl: Connection.urlOfProducts(
-                                              image: _controller
-                                                      .homeData
-                                                      .value
-                                                      .discover
-                                                      ?.products?[index]
-                                                      .mainImage ??
-                                                  ''),
-                                        newArrival: _controller.homeData.value.discover?.products?[index]??SalesProductsModel(),
-                                        favorite: _controller.homeData.value.discover?.products?[index].wishlist?.isNotEmpty??false,);
+                                        imageUrl: Connection.urlOfProducts(
+                                            image: _controller
+                                                    .homeData
+                                                    .value
+                                                    .discover
+                                                    ?.products?[index]
+                                                    .mainImage ??
+                                                ''),
+                                        newArrival: _controller.homeData.value
+                                                .discover?.products?[index] ??
+                                            SalesProductsModel(),
+                                        favorite: _controller
+                                                .homeData
+                                                .value
+                                                .discover
+                                                ?.products?[index]
+                                                .wishlist
+                                                ?.isNotEmpty ??
+                                            false,
+                                      );
                                     },
                                   ),
                                 )),
@@ -920,12 +969,14 @@ class _HomePageState extends State<HomePage> {
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 10.0),
                                     child: GestureDetector(
-                                      onTap: (){
-                                        Get.to(ItemProfilePage(itemId: int.parse(_controller
-                                            .homeData
-                                            .value
-                                            .organicItems?[
-                                        index].linkId??'0')));
+                                      onTap: () {
+                                        Get.to(ItemProfilePage(
+                                            itemId: int.parse(_controller
+                                                    .homeData
+                                                    .value
+                                                    .organicItems?[index]
+                                                    .linkId ??
+                                                '0')));
                                       },
                                       child: Column(
                                         crossAxisAlignment:
@@ -936,7 +987,8 @@ class _HomePageState extends State<HomePage> {
                                             height: 258.56.h,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
-                                                image: CachedNetworkImageProvider(
+                                                image:
+                                                    CachedNetworkImageProvider(
                                                   Connection.urlOfSpecial(
                                                       image: _controller
                                                               .homeData
@@ -969,7 +1021,8 @@ class _HomePageState extends State<HomePage> {
                                                     _controller
                                                             .homeData
                                                             .value
-                                                            .organicItems?[index]
+                                                            .organicItems?[
+                                                                index]
                                                             .title ??
                                                         '',
                                                     textAlign: TextAlign.right,
@@ -978,10 +1031,12 @@ class _HomePageState extends State<HomePage> {
                                                       fontSize: 19.18.sp,
                                                       fontFamily:
                                                           kTheArabicSansLight,
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                       // height: 0.05,
                                                     ),
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                   SizedBox(
                                                     height: 15.h,
@@ -996,7 +1051,8 @@ class _HomePageState extends State<HomePage> {
                                                                   index]
                                                               .description ??
                                                           '',
-                                                      textAlign: TextAlign.right,
+                                                      textAlign:
+                                                          TextAlign.right,
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 13.18.sp,
@@ -1017,7 +1073,8 @@ class _HomePageState extends State<HomePage> {
                                                         left: 20.w),
                                                     child: Text(
                                                       tr('shop_now'),
-                                                      textAlign: TextAlign.right,
+                                                      textAlign:
+                                                          TextAlign.right,
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 14.63.sp,
@@ -1025,8 +1082,9 @@ class _HomePageState extends State<HomePage> {
                                                             kTheArabicSansLight,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        decoration: TextDecoration
-                                                            .underline,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
                                                         height: 0.08,
                                                         letterSpacing: -0.15,
                                                       ),
@@ -1073,11 +1131,16 @@ class _HomePageState extends State<HomePage> {
                         children: List.generate(
                             _controller.homeData.value.specials?.length ?? 0,
                             (index) => GestureDetector(
-                              onTap: (){
-                                Get.to(ItemProfilePage(itemId: int.parse(_controller.homeData.value
-                                    .specials?[index].linkId??'0')));
-                              },
-                              child: CustomProductCard(
+                                  onTap: () {
+                                    Get.to(ItemProfilePage(
+                                        itemId: int.parse(_controller
+                                                .homeData
+                                                .value
+                                                .specials?[index]
+                                                .linkId ??
+                                            '0')));
+                                  },
+                                  child: CustomProductCard(
                                     imageUrl: Connection.urlOfSpecial(
                                         image: _controller.homeData.value
                                                 .specials?[index].image ??
@@ -1086,9 +1149,8 @@ class _HomePageState extends State<HomePage> {
                                             .specials?[index].description ??
                                         '',
                                     buttonText: tr('shopNow'),
-
                                   ),
-                            )),
+                                )),
                       ),
                       SizedBox(
                         height: 30.h,

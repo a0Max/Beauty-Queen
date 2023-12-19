@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../const/api_connrction/alkasam_data_api.dart';
 import '../../models/general_search_model.dart';
 import '../../models/product_options_model.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 
 class AlkasamController extends GetxController {
   RxBool isLoading = false.obs;
@@ -18,12 +18,11 @@ class AlkasamController extends GetxController {
   Future<void> getAlkasamDataController() async {
     try {
       categoryData.value = await _api.categoryDataRequest();
-
     } on DioException catch (e) {
-      categoryData.value=[];
+      categoryData.value = [];
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
-      categoryData.value=[];
+      categoryData.value = [];
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
   }
@@ -32,39 +31,54 @@ class AlkasamController extends GetxController {
   updateCurrentCategoryId({required int newId, required bool getChild}) async {
     currentCategoryId.value = newId;
     getCategoriesDataController(currentPage: 1, getByParent: true);
-    childCurrentCategoryId.value =0;
+    childCurrentCategoryId.value = 0;
     childCategoryData.value = [];
-    if (getChild == true){
-      childCategoryData.value = await _api.getChildDataRequest(parentId:currentCategoryId.value);
+    if (getChild == true) {
+      childCategoryData.value =
+          await _api.getChildDataRequest(parentId: currentCategoryId.value);
     }
   }
 
   RxInt childCurrentCategoryId = 0.obs;
-  updateChildCurrentCategoryId({required int newId}){
+  updateChildCurrentCategoryId({required int newId}) {
     childCurrentCategoryId.value = newId;
-    getCategoriesDataController(currentPage: 1, getByParent:false);
+    getCategoriesDataController(currentPage: 1, getByParent: false);
   }
 
   int pageCategory = 1;
-  Future<void> getCategoriesDataController({int? currentPage, bool? getByParent}) async {
+  Future<void> getCategoriesDataController(
+      {int? currentPage, bool? getByParent}) async {
     isLoading.value = true;
     generalSearchData.value = GeneralSearchModel();
     try {
       int currentParent = 0;
-      if(getByParent == true || childCurrentCategoryId.value == 0){
+      if (getByParent == true || childCurrentCategoryId.value == 0) {
         currentParent = currentCategoryId.value;
-      }else{
+      } else {
         currentParent = childCurrentCategoryId.value;
       }
-      if(currentPage==null){
-        pageCategory = pageCategory +1;
+      if (currentPage == null) {
+        pageCategory = pageCategory + 1;
 
-        generalSearchData.value = await _api.getCategoryDataRequest(page: pageCategory,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value, categoryId: currentParent, );
-        dataProducts.addAll(generalSearchData.value.products?.data??[]);
-      }else{
+        generalSearchData.value = await _api.getCategoryDataRequest(
+          page: pageCategory,
+          keySort: keySort.value,
+          selectedLabels: selectedLabels.value,
+          selectedPrices: selectedPrices.value,
+          selectedBrands: selectedBrands.value,
+          categoryId: currentParent,
+        );
+        dataProducts.addAll(generalSearchData.value.products?.data ?? []);
+      } else {
         pageCategory = 1;
-        generalSearchData.value = await _api.getCategoryDataRequest(page: 1,keySort:keySort.value, selectedLabels:selectedLabels.value, selectedPrices:selectedPrices.value, selectedBrands:selectedBrands.value,categoryId: currentParent);
-        dataProducts.value = generalSearchData.value.products?.data??[];
+        generalSearchData.value = await _api.getCategoryDataRequest(
+            page: 1,
+            keySort: keySort.value,
+            selectedLabels: selectedLabels.value,
+            selectedPrices: selectedPrices.value,
+            selectedBrands: selectedBrands.value,
+            categoryId: currentParent);
+        dataProducts.value = generalSearchData.value.products?.data ?? [];
       }
     } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
@@ -78,52 +92,50 @@ class AlkasamController extends GetxController {
 
   var keySort = RxString('');
   var valueSort = RxString('');
-  updateSortType({required String newKeySort, required String newValueSort}){
+  updateSortType({required String newKeySort, required String newValueSort}) {
     keySort.value = newKeySort;
     valueSort.value = newValueSort;
     getCategoriesDataController(currentPage: 1);
   }
 
   RxList selectedLabels = [].obs;
-  updateSelectedLabel({required int newSelected}){
-    if (selectedLabels.value.contains("$newSelected")){
+  updateSelectedLabel({required int newSelected}) {
+    if (selectedLabels.value.contains("$newSelected")) {
       selectedLabels.remove("$newSelected");
-    }else {
+    } else {
       selectedLabels.add("$newSelected");
     }
-
   }
 
   RxList selectedPrices = [].obs;
-  updateSelectedPrices({required int newSelected}){
-    if (selectedPrices.value.contains("$newSelected")){
+  updateSelectedPrices({required int newSelected}) {
+    if (selectedPrices.value.contains("$newSelected")) {
       selectedPrices.remove("$newSelected");
-    }else {
+    } else {
       selectedPrices.add("$newSelected");
     }
   }
 
-
   RxList selectedBrands = [].obs;
-  updateSelectedBrands({required int newSelected}){
-    if (selectedBrands.value.contains("$newSelected")){
+  updateSelectedBrands({required int newSelected}) {
+    if (selectedBrands.value.contains("$newSelected")) {
       selectedBrands.remove("$newSelected");
-    }else {
+    } else {
       selectedBrands.add("$newSelected");
     }
   }
 
-  clearSelected(){
+  clearSelected() {
     selectedBrands.clear();
     selectedPrices.clear();
     selectedLabels.clear();
   }
 
-  applySelected(){
+  applySelected() {
     getCategoriesDataController(currentPage: 1);
   }
 
-  updateToLike({ required int index}){
+  updateToLike({required int index}) {
     generalSearchData.update((val) {
       val?.products?.data?[index].wishlist?.add(ProductOptionsModel());
     });

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
@@ -37,11 +38,11 @@ class _FavScreen extends State<FavScreen> {
       appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
-          backgroundColor: kWhiteColor,
+          backgroundColor: AppColors.kWhiteColor,
           title: Text(
             tr('fav'),
             style: TextStyle(
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
                 fontSize: 27.74.sp,
                 fontWeight: FontWeight.w400),
           ),
@@ -53,7 +54,7 @@ class _FavScreen extends State<FavScreen> {
                 },
                 icon: const Icon(
                   Icons.arrow_forward_ios,
-                  color: kBlackColor,
+                  color: AppColors.kBlackColor,
                   size: 30,
                 )),
           ]),
@@ -65,59 +66,59 @@ class _FavScreen extends State<FavScreen> {
                   height: 28.85.h,
                 ),
                 _controller.isLoadingWishlist.value == true
-                    ?
-                Wrap(
-                  runSpacing: 7,
-                  children:
-                  List.generate(2, (index) => const ShimmerItem(isDelete:true)),
-                )
-                    :Wrap(
-                  runSpacing: 7,
-                  children: List.generate(
-                    _controller.wishlistList.value.length,
-                    (index) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _controller.removeWishlist(
-                                postId:
-                                    _controller.wishlistList.value[index].id ??
-                                        0);
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                    ? Wrap(
+                        runSpacing: 7,
+                        children: List.generate(
+                            2, (index) => const ShimmerItem(isDelete: true)),
+                      )
+                    : Wrap(
+                        runSpacing: 7,
+                        children: List.generate(
+                          _controller.wishlistList.value.length,
+                          (index) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              10.pw,
-                              SvgPicture.asset(AppImages.imageDelete2),
-                              5.pw,
-                              Text(
-                                tr('del_item'),
-                                style: TextStyle(
-                                    color: kPrimaryColor,
-                                    fontSize: 18.74.sp,
-                                    fontWeight: FontWeight.w400),
-                              )
+                              GestureDetector(
+                                onTap: () {
+                                  _controller.removeWishlist(
+                                      postId: _controller
+                                              .wishlistList.value[index].id ??
+                                          0);
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    10.pw,
+                                    SvgPicture.asset(AppImages.imageDelete2),
+                                    5.pw,
+                                    Text(
+                                      tr('del_item'),
+                                      style: TextStyle(
+                                          color: AppColors.kPrimaryColor,
+                                          fontSize: 18.74.sp,
+                                          fontWeight: FontWeight.w400),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              10.ph,
+                              CustomCardWidget(
+                                imageUrl: Connection.urlOfProducts(
+                                    image: _controller.wishlistList.value[index]
+                                            .product.mainImage ??
+                                        ''),
+                                newArrival: _controller
+                                        .wishlistList.value[index].product ??
+                                    SalesProductsModel(),
+                                favorite: _controller.wishlistList.value[index]
+                                        .product.wishlist?.isNotEmpty ??
+                                    false,
+                              ),
                             ],
                           ),
                         ),
-                        10.ph,
-                        CustomCardWidget(
-                          imageUrl: Connection.urlOfProducts(
-                              image: _controller.wishlistList.value[index]
-                                      .product.mainImage ??
-                                  ''),
-                          newArrival:
-                              _controller.wishlistList.value[index].product ??
-                                  SalesProductsModel(),
-                          favorite: _controller.wishlistList.value[index].product.wishlist?.isNotEmpty??false,
-
-                        ),
-                      ],
-                    ),
-                  ),
-                )
+                      )
               ],
             )),
       ),

@@ -49,7 +49,7 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
               icon: Icon(
                 Icons.arrow_forward_ios,
                 size: 30.r,
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
               )),
         ),
 
@@ -76,109 +76,97 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: Stack(
                         alignment: AlignmentDirectional.center,
-
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
                               SizedBox(
                                 height: 120.h,
-                                width:
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width / 4,
+                                width: MediaQuery.of(context).size.width / 4,
                                 child: PageView.builder(
                                     controller: _pageController3,
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {
-                                      if(index > 0) {
-                                        return
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.circular(20),
-                                                image: DecorationImage(
-                                                    image: CachedNetworkImageProvider(
-                                                        controller.listOfImage
-                                                            .value[index - 1]),
-                                                    fit: BoxFit.fill)),
-                                          );
-                                      }else{
+                                      if (index > 0) {
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              image: DecorationImage(
+                                                  image:
+                                                      CachedNetworkImageProvider(
+                                                          controller.listOfImage
+                                                                  .value[
+                                                              index - 1]),
+                                                  fit: BoxFit.fill)),
+                                        );
+                                      } else {
                                         return SizedBox(
-                                          width:
-                                          MediaQuery.of(context).size.width /
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
                                               4,
                                           height: 120.h,
                                         );
                                       }
                                     }),
                               ),
-
                               SizedBox(
                                 height: 120.h,
-                                width:
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width / 4,
+                                width: MediaQuery.of(context).size.width / 4,
                                 child: PageView.builder(
                                     controller: _pageController2,
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {
-                                      return
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(20),
-                                              image: DecorationImage(
-                                                  image: CachedNetworkImageProvider(
-                                                      controller.listOfImage
-                                                          .value[index]),
-                                                  fit: BoxFit.fill)),
-                                        );
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            image: DecorationImage(
+                                                image:
+                                                    CachedNetworkImageProvider(
+                                                        controller.listOfImage
+                                                            .value[index]),
+                                                fit: BoxFit.fill)),
+                                      );
                                     }),
                               ),
                               SizedBox(
                                 height: 120.h,
-                                width:
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width / 4,
+                                width: MediaQuery.of(context).size.width / 4,
                                 child: PageView.builder(
                                     controller: _pageController1,
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {
                                       if ((index + 1) <
-                                          controller
-                                              .listOfImage.value.length &&
-                                          controller
-                                              .listOfImage.value[index + 1] !=
+                                              controller
+                                                  .listOfImage.value.length &&
+                                          controller.listOfImage
+                                                  .value[index + 1] !=
                                               null) {
-                                        return
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.circular(20),
-                                                image: DecorationImage(
-                                                    image: CachedNetworkImageProvider(
-                                                        controller.listOfImage
-                                                            .value[index+1]),
-                                                    fit: BoxFit.fill)),
-                                          );
-                                      }else{
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              image: DecorationImage(
+                                                  image:
+                                                      CachedNetworkImageProvider(
+                                                          controller.listOfImage
+                                                                  .value[
+                                                              index + 1]),
+                                                  fit: BoxFit.fill)),
+                                        );
+                                      } else {
                                         SizedBox(
-                                          width:
-                                          MediaQuery.of(context).size.width /
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
                                               4,
                                           height: 120.h,
                                         );
                                       }
                                     }),
                               ),
-
                             ],
                           ),
                           Row(
@@ -229,15 +217,13 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                     decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.white60),
-                                    child:
-                                    const Icon(Icons.arrow_forward_ios_rounded)),
+                                    child: const Icon(
+                                        Icons.arrow_forward_ios_rounded)),
                               ),
                             ],
                           ),
-
                         ],
                       )),
-
                   15.ph,
                   Text(controller.event.value.title ?? '',
                       textAlign: TextAlign.center,

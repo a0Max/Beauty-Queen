@@ -5,6 +5,8 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../const/app_colors.dart';
+
 class MyCustomContainer extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
@@ -26,11 +28,11 @@ class MyCustomContainer extends StatelessWidget {
           height: 34.95.h,
           // width: 92.12.w,
           decoration: BoxDecoration(
-            border: Border.all(color: kTextGrayColor, width: 1.w),
+            border: Border.all(color: AppColors.kTextGrayColor, width: 1.w),
             borderRadius: BorderRadius.circular(
               9.43.r,
             ),
-            color: isSelected ? kTextGrayColor : Colors.transparent,
+            color: isSelected ? AppColors.kTextGrayColor : Colors.transparent,
           ),
           child: Center(
             child: Text(

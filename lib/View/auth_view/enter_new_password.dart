@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ import '../../const/validator.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/auth_controller/otp_controller.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
-import '../../widgets/custom_button_2.dart';
+import '../../widgets/based/custom_button_2.dart';
 import '../../widgets/based/loading.dart';
 import '../welcome/welcome_screen.dart';
 import 'login_page.dart';
@@ -62,22 +61,23 @@ class _EnterNewPassword extends State<EnterNewPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            centerTitle: true,
-            surfaceTintColor: AppColors.kWhiteColor,
-            automaticallyImplyLeading: false,
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Get.off(const WelcomeScreen());
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    color: AppColors.kBlackColor,
-                    size: 25.r,
-                  )),
-            ],),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+          surfaceTintColor: AppColors.kWhiteColor,
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Get.off(const WelcomeScreen());
+                },
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                  color: AppColors.kBlackColor,
+                  size: 25.r,
+                )),
+          ],
+        ),
         body: Padding(
             padding: EdgeInsets.all(16.r),
             child: SingleChildScrollView(
@@ -94,18 +94,17 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                               fontSize: 29.78.sp,
                               fontFamily: 'TheSans',
                               fontWeight: FontWeight.w400,
-                            ),),
+                            ),
+                          ),
                           Text(tr('enterPasswordForYourAccount'),
                               style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
                                   fontSize: 19.59.sp,
                                   fontWeight: FontWeight.w300,
-                                  color: AppColors.kTextGrayColor)
-                          ),
-
+                                  color: AppColors.kTextGrayColor)),
                           SizedBox(height: 38.h),
                           Obx(() => TextFieldAuthWidget(
-                            titleText: tr('kPasswordHint'),
+                                titleText: tr('kPasswordHint'),
                                 hindText: '',
                                 controler: passwordController,
                                 hintStyle: TextStyle(
@@ -133,33 +132,33 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                               )),
                           SizedBox(height: 15.h),
                           Obx(() => TextFieldAuthWidget(
-                            titleText: tr('kConfirmPasswordHint'),
-                            hindText:'',
-                            controler: rePasswordController,
-                            obscureText:
-                                _controller.confirmPasswordObscureText.value,
-                            hintStyle: TextStyle(
-                              color: const Color(0xFF2C3E50),
-                              fontSize: 17.69.sp,
-                              fontFamily: kTheArabicSansLight,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            suffixWidget: IconButton(
-                              icon: Icon(
-                                _controller.confirmPasswordObscureText.value
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: AppColors.kTextGrayColor,
-                              ),
-                              onPressed: _controller
-                                  .toggleSignUpConfirmPasswordVisibility,
-                            ),
-                            // keyboardType: TextInputType.phone,
-                            validatorTextField: (val) {
-                              return Validator().validatorRePassword(
-                                  val, passwordController.text);
-                            },
-                          )),
+                                titleText: tr('kConfirmPasswordHint'),
+                                hindText: '',
+                                controler: rePasswordController,
+                                obscureText: _controller
+                                    .confirmPasswordObscureText.value,
+                                hintStyle: TextStyle(
+                                  color: const Color(0xFF2C3E50),
+                                  fontSize: 17.69.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                suffixWidget: IconButton(
+                                  icon: Icon(
+                                    _controller.confirmPasswordObscureText.value
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: AppColors.kTextGrayColor,
+                                  ),
+                                  onPressed: _controller
+                                      .toggleSignUpConfirmPasswordVisibility,
+                                ),
+                                // keyboardType: TextInputType.phone,
+                                validatorTextField: (val) {
+                                  return Validator().validatorRePassword(
+                                      val, passwordController.text);
+                                },
+                              )),
                           const SizedBox(
                             height: 20,
                           ),
@@ -169,7 +168,9 @@ class _EnterNewPassword extends State<EnterNewPassword> {
                               borderRadius: 8.84.r,
                               backgroundColor: AppColors.kPrimaryColor,
                               text: tr('makeSure'),
-                              onPressed:(){ _submit();},
+                              onPressed: () {
+                                _submit();
+                              },
                               textStyle: TextStyle(
                                   fontSize: 20.85.sp,
                                   fontWeight: FontWeight.w700,

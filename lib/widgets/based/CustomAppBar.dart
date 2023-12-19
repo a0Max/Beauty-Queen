@@ -39,7 +39,7 @@ class CustomAppBar extends StatelessWidget {
       {super.key,
       this.searchBarHeight = 0.0,
       this.isScrolled = false,
-        this.countCart = 0,
+      this.countCart = 0,
       this.containerHeight = 0.0,
       this.searchBarWidth = 0.0,
       this.searchBarTranslationY = 0.0,
@@ -55,19 +55,20 @@ class CustomAppBar extends StatelessWidget {
       this.showBagIcon2 = false});
   TextEditingController searchController = TextEditingController();
 
-  goToSearchScreen({required BuildContext context}){
+  goToSearchScreen({required BuildContext context}) {
     // var context = Get.context;
     final currentRoute = ModalRoute.of(context);
     final currentScreenName = currentRoute?.settings.name;
     print('currentScreenName:$currentScreenName');
-    if (currentScreenName== "/SearchScreen"){
+    if (currentScreenName == "/SearchScreen") {
       final SearchController0 controller = Get.put(SearchController0());
-      controller.getSearchDetails(currentPage: 1, subKeyWord: searchController.text);
-
-    }else {
+      controller.getSearchDetails(
+          currentPage: 1, subKeyWord: searchController.text);
+    } else {
       Get.to(() => SearchScreen(subKeyWord: searchController.text));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -81,7 +82,7 @@ class CustomAppBar extends StatelessWidget {
               },
               icon: const Icon(
                 Icons.arrow_forward_ios,
-                color: kWhiteColor,
+                color: AppColors.kWhiteColor,
                 size: 25,
               )),
       ],
@@ -109,7 +110,7 @@ class CustomAppBar extends StatelessWidget {
                 fontFamily: kTheArabicSansLight,
                 fontWeight: FontWeight.w600,
                 decoration: TextDecoration.underline,
-                decorationColor: kWhiteColor,
+                decorationColor: AppColors.kWhiteColor,
               ),
             ),
           ],
@@ -151,7 +152,7 @@ class CustomAppBar extends StatelessWidget {
                   if (isScrolled != true && showFavIcon)
                     GestureDetector(
                       onTap: () {
-                        Get.to( const FavScreen());
+                        Get.to(const FavScreen());
                       },
                       child: SvgPicture.asset(
                         AppImages.imageLoveSvg,
@@ -159,26 +160,23 @@ class CustomAppBar extends StatelessWidget {
                         width: 30.w,
                       ),
                     ),
-
-                  if(isScrolled == true)...{
+                  if (isScrolled == true) ...{
                     SizedBox(
                         height: 44.h,
-
-                        width: MediaQuery.of(context).size.width-(30.w+10.w+20.w+16.w+20.w+30.w+9.w),
-
-                        child:TextField(
+                        width: MediaQuery.of(context).size.width -
+                            (30.w + 10.w + 20.w + 16.w + 20.w + 30.w + 9.w),
+                        child: TextField(
                           controller: searchController,
                           style: const TextStyle(
                             fontFamily: kTheArabicSansLight,
                           ),
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
-                              onPressed: (){
-                                goToSearchScreen(context:context);
+                              onPressed: () {
+                                goToSearchScreen(context: context);
                               },
                               icon: SvgPicture.asset(AppImages.imageSearch),
                             ),
-
                             prefix: SizedBox(width: 20.w),
                             hintText: 'إبحث عن منتج أو ماركة',
                             hintStyle: TextStyle(
@@ -203,15 +201,12 @@ class CustomAppBar extends StatelessWidget {
                             fillColor: AppColors.kWhiteBlueColor,
                             filled: true,
                           ),
-                          onSubmitted: (val){
-                            goToSearchScreen(context:context);
-
+                          onSubmitted: (val) {
+                            goToSearchScreen(context: context);
                           },
-                          onEditingComplete: (){
-                            goToSearchScreen(context:context);
-
+                          onEditingComplete: () {
+                            goToSearchScreen(context: context);
                           },
-
                           maxLines: 1,
                         )),
                   },
@@ -239,7 +234,7 @@ class CustomAppBar extends StatelessWidget {
                       },
                       child: Badge(
                         label: Text(countCart.toString()),
-    isLabelVisible:(countCart!=null)&&(countCart!=0),
+                        isLabelVisible: (countCart != null) && (countCart != 0),
                         child: SvgPicture.asset(
                           AppImages.imageShop,
                           height: 30.h,
@@ -257,75 +252,72 @@ class CustomAppBar extends StatelessWidget {
                         },
                         icon: const Icon(
                           Icons.arrow_forward_ios,
-                          color: kBlackColor,
+                          color: AppColors.kBlackColor,
                           size: 30,
                         )),
-
                 ],
               ),
-
-              if(isScrolled==false)...{AnimatedContainer(
-                height: 44.h,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                ),
-                margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
-                width: Get.width * searchBarWidth!,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                transform: Matrix4.translationValues(
-                  isScrolled! ? 20 : 10.0,
-                  searchBarTranslationY!,
-                  isScrolled! ? -20.0 : 0,
-                ),
-                child: TextField(
-                  controller: searchController,
-                  style: const TextStyle(
-                    fontFamily: kTheArabicSansLight,
+              if (isScrolled == false) ...{
+                AnimatedContainer(
+                  height: 44.h,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
                   ),
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: (){
-                        goToSearchScreen(context:context);
-                      },
-                      icon: SvgPicture.asset(AppImages.imageSearch),
-                    ),
-                    prefix: SizedBox(width: 20.w),
-                    hintText: 'إبحث عن منتج أو ماركة',
-                    hintStyle: TextStyle(
-                      color: AppColors.kGrayColor,
-                      fontSize: 16.59.sp,
+                  margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
+                  width: Get.width * searchBarWidth!,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  transform: Matrix4.translationValues(
+                    isScrolled! ? 20 : 10.0,
+                    searchBarTranslationY!,
+                    isScrolled! ? -20.0 : 0,
+                  ),
+                  child: TextField(
+                    controller: searchController,
+                    style: const TextStyle(
                       fontFamily: kTheArabicSansLight,
-                      fontWeight: FontWeight.w300,
                     ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 7.h),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(39.r),
-                      borderSide: const BorderSide(
-                        color: AppColors.kWhiteBlueColor,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          goToSearchScreen(context: context);
+                        },
+                        icon: SvgPicture.asset(AppImages.imageSearch),
                       ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(39.r),
-                      borderSide: const BorderSide(
-                        color: AppColors.kWhiteBlueColor,
+                      prefix: SizedBox(width: 20.w),
+                      hintText: 'إبحث عن منتج أو ماركة',
+                      hintStyle: TextStyle(
+                        color: AppColors.kGrayColor,
+                        fontSize: 16.59.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w300,
                       ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 7.h),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(39.r),
+                        borderSide: const BorderSide(
+                          color: AppColors.kWhiteBlueColor,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(39.r),
+                        borderSide: const BorderSide(
+                          color: AppColors.kWhiteBlueColor,
+                        ),
+                      ),
+                      fillColor: AppColors.kWhiteBlueColor,
+                      filled: true,
                     ),
-                    fillColor: AppColors.kWhiteBlueColor,
-                    filled: true,
+                    onSubmitted: (val) {
+                      goToSearchScreen(context: context);
+                    },
+                    onEditingComplete: () {
+                      goToSearchScreen(context: context);
+                    },
+                    maxLines: 1,
                   ),
-                  onSubmitted: (val){
-                    goToSearchScreen(context:context);
-                  },
-                  onEditingComplete: (){
-                    goToSearchScreen(context:context);
-
-                  },
-
-                  maxLines: 1,
-                ),
-              )},
-
+                )
+              },
               SizedBox(
                 height: 10.h,
               ),
@@ -334,6 +326,5 @@ class CustomAppBar extends StatelessWidget {
         ),
       ),
     );
-
   }
 }

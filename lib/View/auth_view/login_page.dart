@@ -14,9 +14,9 @@ import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
-import '../../widgets/loginVia.dart';
+import '../../widgets/auth_widgets/loginVia.dart';
 import 'enter_phone_screen.dart';
 
 class LogInPage extends StatefulWidget {
@@ -30,8 +30,10 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPage extends State<LogInPage> {
   final AuthController _controller = Get.put(AuthController());
-  TextEditingController phoneController = TextEditingController(text: kDebugMode?"0922255002":"");
-  TextEditingController passwordController = TextEditingController(text: kDebugMode?"moly123456":"");
+  TextEditingController phoneController =
+      TextEditingController(text: kDebugMode ? "0922255002" : "");
+  TextEditingController passwordController =
+      TextEditingController(text: kDebugMode ? "moly123456" : "");
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _submit() async {
@@ -57,14 +59,13 @@ class _LogInPage extends State<LogInPage> {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
-
+      ErrorPopUp(
+          message: (e.response?.data as Map).values.first, title: tr('Error'));
     } catch (e) {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
       ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
-
     }
   }
 
@@ -110,7 +111,7 @@ class _LogInPage extends State<LogInPage> {
                     Text(
                       tr('kWelcomeBack'),
                       style: TextStyle(
-                        color: AppColors.kTextBlackColor ,
+                        color: AppColors.kTextBlackColor,
                         fontSize: 28.74.sp,
                         fontFamily: kTheArabicSansLight,
                         fontWeight: FontWeight.bold,
@@ -145,13 +146,12 @@ class _LogInPage extends State<LogInPage> {
                           validatorTextField: (val) {
                             return Validator().validatorPassword(val);
                           },
-
-                    )),
+                        )),
                     SizedBox(height: 17.h),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child:GestureDetector(
-                        onTap: ()=>Get.to(const EnterPhoneScreen()),
+                      child: GestureDetector(
+                        onTap: () => Get.to(const EnterPhoneScreen()),
                         child: Text(
                           tr('kForgotPassword'),
                           style: TextStyle(

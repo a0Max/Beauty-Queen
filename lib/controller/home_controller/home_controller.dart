@@ -10,9 +10,9 @@ import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/home_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
-import '../../widgets/CustomAlertBox.dart';
+import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/based/loading.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 import '../nav_bar_controller/NavBarController.dart';
 
 class HomeController extends GetxController {
@@ -24,18 +24,19 @@ class HomeController extends GetxController {
   Future<void> getHomeDataController() async {
     try {
       homeData.value = await _api.homeDataRequest();
-      sliders.value =
-      (homeData.value.slides?.where((element) => element.mobile != null)
-          .toList() ?? []);
+      sliders.value = (homeData.value.slides
+              ?.where((element) => element.mobile != null)
+              .toList() ??
+          []);
     } on DioException catch (e) {
-      homeData.value=HomeModel();
+      homeData.value = HomeModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
-      homeData.value=HomeModel();
+      homeData.value = HomeModel();
       print('error:${e}');
-      if (e == 'Check Network connection'){
+      if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
-      }else {
+      } else {
         ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
       }
     }
@@ -43,52 +44,53 @@ class HomeController extends GetxController {
   }
 
   RxInt currentSlider = 0.obs;
-  updateCurrentSlider({required int newSlider}){
+  updateCurrentSlider({required int newSlider}) {
     currentSlider.value = newSlider;
   }
 
   RxInt currentOffer = 0.obs;
-  updateCurrentOffer({required int newSlider}){
+  updateCurrentOffer({required int newSlider}) {
     currentOffer.value = newSlider;
   }
 
   RxInt currentSalesProducts = 0.obs;
-  updateSalesProducts({required int newSlider}){
+  updateSalesProducts({required int newSlider}) {
     currentSalesProducts.value = newSlider;
   }
 
-  addToCart({required int productId, int? productOptionId, int? productParentId}) async {
+  addToCart(
+      {required int productId,
+      int? productOptionId,
+      int? productParentId}) async {
     try {
       var context = Get.context;
 
       LoadingScreen.show(context!);
 
-        await _api.addProductToCart(quantity: 1,
-            productID: productId,
-            productOptionID: productOptionId,
-            optionID: productParentId);
-        Get.back();
+      await _api.addProductToCart(
+          quantity: 1,
+          productID: productId,
+          productOptionID: productOptionId,
+          optionID: productParentId);
+      Get.back();
       showDialog(
           context: context,
           builder: (BuildContext context) {
             return CustomAlertDialog(
               height: 180.64.h,
-              dilougText:
-              tr('addedSuccessfully'),
+              dilougText: tr('addedSuccessfully'),
               buttonOneText: tr('continuesShopping'),
               buttonTwoText: tr('continuesOrder'),
             );
           });
-        NavController.to.getCountOfCart();
-    }on DioException catch (e) {
+      NavController.to.getCountOfCart();
+    } on DioException catch (e) {
       Get.back();
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-
     } catch (e) {
       Get.back();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
-
     }
   }
 
@@ -100,42 +102,47 @@ class HomeController extends GetxController {
     await _api.removeWishlistRequest(productId: postId);
     getWishlist();
   }
+
   RxBool isLoadingWishlist = false.obs;
 
   RxList wishlistList = [].obs;
   getWishlist() async {
     isLoadingWishlist.value = true;
     try {
-    wishlistList.value = await _api.getTheWishlist();
-    }on DioException catch (e) {
+      wishlistList.value = await _api.getTheWishlist();
+    } on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
-      if (e == 'Check Network connection'){
+      if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
-      }else {
+      } else {
         ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
       }
     }
     isLoadingWishlist.value = false;
   }
 
-  updateToLike({bool? newArrivals, bool? salesProducts, bool? discover, required int index}){
-    if (newArrivals==true){
+  updateToLike(
+      {bool? newArrivals,
+      bool? salesProducts,
+      bool? discover,
+      required int index}) {
+    if (newArrivals == true) {
       homeData.update((val) {
         val?.newArrivals?[index].wishlist?.add(ProductOptionsModel());
       });
-      print('newArrivals:${homeData.value.newArrivals?[index].wishlist
-          ?.length}');
+      print(
+          'newArrivals:${homeData.value.newArrivals?[index].wishlist?.length}');
     }
-    if (salesProducts==true){
+    if (salesProducts == true) {
       homeData.update((val) {
         val?.salesProducts?[index].wishlist?.add(ProductOptionsModel());
       });
       Future.delayed(const Duration(milliseconds: 500));
-      print('salesProducts:${homeData.value.salesProducts?[index].wishlist
-          ?.length}');
+      print(
+          'salesProducts:${homeData.value.salesProducts?[index].wishlist?.length}');
     }
-    if (discover==true){
+    if (discover == true) {
       // homeData
       //     .value
       //     .discover
@@ -143,11 +150,8 @@ class HomeController extends GetxController {
       homeData.update((val) {
         val?.discover?.products?[index].wishlist?.add(ProductOptionsModel());
       });
-      print('products:${homeData
-          .value
-          .discover
-          ?.products?[index].wishlist
-          ?.length}');
+      print(
+          'products:${homeData.value.discover?.products?[index].wishlist?.length}');
     }
   }
 }

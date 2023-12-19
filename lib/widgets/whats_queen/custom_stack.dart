@@ -21,28 +21,32 @@ class DottedBorderPainter extends CustomPainter {
     // Draw top border
     double startY = 0.0;
     while (startY < size.width) {
-      canvas.drawLine(Offset(startY, 0.0), Offset(startY + dashWidth, 0.0), paint);
+      canvas.drawLine(
+          Offset(startY, 0.0), Offset(startY + dashWidth, 0.0), paint);
       startY += dashWidth + dashSpace;
     }
 
     // Draw right border
     double startX = size.width - dashWidth;
     while (startX > 0.0) {
-      canvas.drawLine(Offset(size.width, startX), Offset(size.width, startX - dashWidth), paint);
+      canvas.drawLine(Offset(size.width, startX),
+          Offset(size.width, startX - dashWidth), paint);
       startX -= dashWidth + dashSpace;
     }
 
     // Draw bottom border
     startY = size.height - dashWidth;
     while (startY > 0.0) {
-      canvas.drawLine(Offset(startY, size.height), Offset(startY - dashWidth, size.height), paint);
+      canvas.drawLine(Offset(startY, size.height),
+          Offset(startY - dashWidth, size.height), paint);
       startY -= dashWidth + dashSpace;
     }
 
     // Draw left border
     startX = 0.0;
     while (startX < size.height) {
-      canvas.drawLine(Offset(0.0, startX), Offset(0.0, startX + dashWidth), paint);
+      canvas.drawLine(
+          Offset(0.0, startX), Offset(0.0, startX + dashWidth), paint);
       startX += dashWidth + dashSpace;
     }
   }
@@ -66,9 +70,9 @@ class ImageWithTextOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-      color:  AppColors.mainColor,
+      color: AppColors.mainColor,
       strokeWidth: 1,
-      dashPattern : const <double>[3, 5],
+      dashPattern: const <double>[3, 5],
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +81,7 @@ class ImageWithTextOverlay extends StatelessWidget {
             text1,
             style: TextStyle(
               fontFamily: kTheArabicSansLight,
-              color: kPrimaryColor,
+              color: AppColors.kPrimaryColor,
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -86,7 +90,7 @@ class ImageWithTextOverlay extends StatelessWidget {
             text2,
             style: TextStyle(
               fontFamily: kTheArabicSansLight,
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontWeight: FontWeight.w400,
               fontSize: 10.sp,
             ),

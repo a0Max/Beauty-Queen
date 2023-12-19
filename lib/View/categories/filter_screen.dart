@@ -16,7 +16,7 @@ import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
-import '../../widgets/custom_fliter_ container.dart';
+import '../../widgets/categories/custom_fliter_ container.dart';
 import '../../widgets/shimmer/shimmer_categories.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
@@ -304,9 +304,7 @@ class _FliterScreenState extends State<FliterScreen> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 3.w),
-                              child: SvgPicture.asset(
-                                  AppImages.sortTypeImage),
-
+                              child: SvgPicture.asset(AppImages.sortTypeImage),
                             ),
                           ],
                         ),
@@ -337,8 +335,8 @@ class _FliterScreenState extends State<FliterScreen> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 3.w),
-                              child: SvgPicture.asset(
-                                  AppImages.filterTypeImage),
+                              child:
+                                  SvgPicture.asset(AppImages.filterTypeImage),
                             ),
                           ],
                         ),
@@ -377,15 +375,29 @@ class _FliterScreenState extends State<FliterScreen> {
                     : Wrap(
                         runSpacing: 7,
                         children: List.generate(
-                            _controller.generalSearchData.value.products?.data?.length??0,
+                            _controller.generalSearchData.value.products?.data
+                                    ?.length ??
+                                0,
                             (index) => CustomCardWidget(
                                   imageUrl: Connection.urlOfProducts(
-                                      image: _controller.generalSearchData.value.products?.data?[index].mainImage ??
+                                      image: _controller
+                                              .generalSearchData
+                                              .value
+                                              .products
+                                              ?.data?[index]
+                                              .mainImage ??
                                           ''),
-                                  newArrival:
-                                      _controller.generalSearchData.value.products?.data?[index] ??
-                                          SalesProductsModel(),
-                              favorite: _controller.generalSearchData.value.products?.data?[index].wishlist?.isNotEmpty??false,
+                                  newArrival: _controller.generalSearchData
+                                          .value.products?.data?[index] ??
+                                      SalesProductsModel(),
+                                  favorite: _controller
+                                          .generalSearchData
+                                          .value
+                                          .products
+                                          ?.data?[index]
+                                          .wishlist
+                                          ?.isNotEmpty ??
+                                      false,
                                 )),
                       ),
               ]),

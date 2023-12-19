@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../const/app_colors.dart';
 import '../../const/colors.dart';
 import '../../const/styles.dart';
 import '../../controller/about_controller/about_app_controller.dart';
@@ -19,7 +20,8 @@ class AboutAppScreen extends StatefulWidget {
     return _AboutAppScreen();
   }
 }
-class _AboutAppScreen extends State<AboutAppScreen>{
+
+class _AboutAppScreen extends State<AboutAppScreen> {
   final AboutAppController _controller = Get.put(AboutAppController());
 
   @override
@@ -32,10 +34,10 @@ class _AboutAppScreen extends State<AboutAppScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: kWhiteColor,
+        surfaceTintColor: AppColors.kWhiteColor,
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: kWhiteColor,
+        backgroundColor: AppColors.kWhiteColor,
         actions: [
           IconButton(
               onPressed: () {
@@ -44,32 +46,37 @@ class _AboutAppScreen extends State<AboutAppScreen>{
               icon: Icon(
                 Icons.arrow_forward_ios,
                 size: 30.r,
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
               )),
         ],
         title: Text(
           tr('about_us'),
           style: TextStyle(
               fontFamily: kTheArabicSansLight,
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontSize: 27.sp,
               fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
-      body: Obx(()=>
-      (_controller.loadingOfMySticker.value && _controller.aboutData.isEmpty) == true
+      body: Obx(() => (_controller.loadingOfMySticker.value &&
+                  _controller.aboutData.isEmpty) ==
+              true
           ? const Center(
-        child: CupertinoActivityIndicator(),
-      )
-          :
-
-      ListView(
-        children: [
-          20.ph,
-          ...List.generate(_controller.aboutData.value.length??0, (index) => ItemOfApp(title: _controller.aboutData.value[index].title, description: _controller.aboutData.value[index].description,))
-        ],
-      )),
+              child: CupertinoActivityIndicator(),
+            )
+          : ListView(
+              children: [
+                20.ph,
+                ...List.generate(
+                    _controller.aboutData.value.length ?? 0,
+                    (index) => ItemOfApp(
+                          title: _controller.aboutData.value[index].title,
+                          description:
+                              _controller.aboutData.value[index].description,
+                        ))
+              ],
+            )),
     );
   }
 }

@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../const/app_images.dart';
-import '../controller/auth_controller/auth_controler.dart';
+import '../../const/app_images.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 
 class LoginVia extends StatelessWidget {
   const LoginVia({super.key});
@@ -57,19 +57,17 @@ class LoginVia extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                highlightColor:Colors.transparent,
+                highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
-                onTap: () {
-                },
+                onTap: () {},
                 child: Container(
-                  width: (MediaQuery.of(context).size.width-100)/2,
+                  width: (MediaQuery.of(context).size.width - 100) / 2,
                   padding: const EdgeInsets.symmetric(vertical: 17),
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
-                          width: 1.11.w,
-                          color: const Color(0xFFE4E4E4)),
+                          width: 1.11.w, color: const Color(0xFFE4E4E4)),
                       borderRadius: BorderRadius.circular(8.84.r),
                     ),
                     shadows: const [
@@ -81,26 +79,29 @@ class LoginVia extends StatelessWidget {
                       )
                     ],
                   ),
-                  child: SvgPicture.asset(AppImages.imageFacebook, height: 25,),
+                  child: SvgPicture.asset(
+                    AppImages.imageFacebook,
+                    height: 25,
+                  ),
                 ),
               ),
-
-              const SizedBox(width: 20,),
+              const SizedBox(
+                width: 20,
+              ),
               InkWell(
-                highlightColor:Colors.transparent,
+                highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 onTap: () {
                   controller.googleLogin();
                 },
                 child: Container(
-                  width: (MediaQuery.of(context).size.width-100)/2,
+                  width: (MediaQuery.of(context).size.width - 100) / 2,
                   padding: const EdgeInsets.symmetric(vertical: 17),
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
-                          width: 1.11.w,
-                          color: const Color(0xFFE4E4E4)),
+                          width: 1.11.w, color: const Color(0xFFE4E4E4)),
                       borderRadius: BorderRadius.circular(8.84.r),
                     ),
                     shadows: const [
@@ -112,10 +113,12 @@ class LoginVia extends StatelessWidget {
                       )
                     ],
                   ),
-                  child: SvgPicture.asset(AppImages.imageGoogle, height: 25,),
+                  child: SvgPicture.asset(
+                    AppImages.imageGoogle,
+                    height: 25,
+                  ),
                 ),
               ),
-
             ],
           ),
         ),

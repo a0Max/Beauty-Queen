@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../const/app_colors.dart';
 import '../../const/colors.dart';
 
 class MagazineScreen extends StatefulWidget {
@@ -29,15 +30,15 @@ class _MagazineScreen extends State<MagazineScreen> {
           },
           onPageStarted: (url) async {
             print('url:$url');
-            if (url.contains('magazine')==false) {
+            if (url.contains('magazine') == false) {
               Navigator.of(context).pop();
             }
           },
           onPageFinished: (url) async {
-            if (url.contains('magazine')==false) {
+            if (url.contains('magazine') == false) {
               Navigator.of(context).pop();
             }
-            },
+          },
         ),
       )
       ..loadRequest(Uri.parse(Connection.magazineUrl));
@@ -58,7 +59,7 @@ class _MagazineScreen extends State<MagazineScreen> {
                 icon: Icon(
                   Icons.arrow_forward_ios,
                   size: 30.r,
-                  color: kBlackColor,
+                  color: AppColors.kBlackColor,
                 )),
           ),
           Expanded(

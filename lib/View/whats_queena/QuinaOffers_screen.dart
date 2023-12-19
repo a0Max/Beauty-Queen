@@ -60,7 +60,7 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                             child: Text(tr('no_offer_items'),
                                 style: TextStyle(
                                   fontFamily: kTheArabicSansLight,
-                                  color: kBlackColor,
+                                  color: AppColors.kBlackColor,
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w400,
                                 )),
@@ -74,7 +74,7 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                               child: Text(tr('no_offer_items2'),
                                   style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
-                                    color: kTextGrayColor,
+                                    color: AppColors.kTextGrayColor,
                                     fontSize: 17.sp,
                                     fontWeight: FontWeight.w400,
                                   )),
@@ -162,7 +162,8 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                                   width: 180.w,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: kPrimaryColor, width: 1.5.w),
+                                        color: AppColors.kPrimaryColor,
+                                        width: 1.5.w),
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
@@ -174,7 +175,7 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                                         },
                                         child: Text(tr('filter_result'),
                                             style: TextStyle(
-                                              color: kBlackColor,
+                                              color: AppColors.kBlackColor,
                                               fontSize: 18.sp,
                                               fontFamily: kTheArabicSansLight,
                                               fontWeight: FontWeight.w400,
@@ -202,7 +203,7 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                               child: Text(
                                   '${tr('count_items')}: ${controller.generalSearchData.value.products?.total ?? ''}',
                                   style: TextStyle(
-                                    color: kGrayColor,
+                                    color: AppColors.kGrayColor,
                                     fontSize: 17.sp,
                                     fontWeight: FontWeight.w400,
                                   )),
@@ -215,17 +216,21 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                             runSpacing: 7,
                             children: List.generate(
                                 controller.dataProducts.value.length,
-                                    (index) => CustomCardWidget(
-                                  imageUrl: Connection.urlOfProducts(
-                                      image: controller.dataProducts
-                                          .value[index].mainImage ??
-                                          ''),
-                                  newArrival: controller
-                                      .dataProducts.value[index] ??
-                                      SalesProductsModel(),
-                                      favorite:  controller
-                                          .dataProducts.value[index].wishlist?.isNotEmpty??false,
-                                )),
+                                (index) => CustomCardWidget(
+                                      imageUrl: Connection.urlOfProducts(
+                                          image: controller.dataProducts
+                                                  .value[index].mainImage ??
+                                              ''),
+                                      newArrival: controller
+                                              .dataProducts.value[index] ??
+                                          SalesProductsModel(),
+                                      favorite: controller
+                                              .dataProducts
+                                              .value[index]
+                                              .wishlist
+                                              ?.isNotEmpty ??
+                                          false,
+                                    )),
                           ),
                           if (controller.dataProducts.value.isNotEmpty) ...{
                             const SizedBox(
@@ -253,10 +258,10 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                                       valueBarThickness: 10)
                                 ],
                                 linearGaugeBoxDecoration:
-                                const LinearGaugeBoxDecoration(
-                                    backgroundColor: AppColors.kShadowColor,
-                                    thickness: 10,
-                                    borderRadius: 15),
+                                    const LinearGaugeBoxDecoration(
+                                        backgroundColor: AppColors.kShadowColor,
+                                        thickness: 10,
+                                        borderRadius: 15),
                                 rulers: RulerStyle(
                                   rulerPosition: RulerPosition.center,
                                   showLabel: false,
@@ -291,7 +296,6 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                               ),
                             )
                           }
-
                         ],
                       ),
           )),

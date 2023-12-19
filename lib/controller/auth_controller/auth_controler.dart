@@ -13,7 +13,7 @@ import '../../const/api_connrction/brands_data_api.dart';
 import '../../const/api_connrction/user_data_apis.dart';
 import '../../models/brand_model.dart';
 import '../../models/city_area_model.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 
 class AuthController extends GetxController {
   var obscureText = true.obs;
@@ -111,6 +111,7 @@ class AuthController extends GetxController {
       loadingArea.value = false;
     }
   }
+
   updateSelectedArea({required CityAreaModel newArea}) {
     selectedAreaData.value = newArea;
   }
@@ -120,36 +121,45 @@ class AuthController extends GetxController {
   }
 
   RxBool allowToEdit = false.obs;
-  applyToEdit(){
+  applyToEdit() {
     allowToEdit.value = !(allowToEdit.value);
   }
 
-  applyToSaveEdit({required String nameController,
-    required String nickNameController,
-    required String phoneController,
-    required String whatsAppController,
-  required String phoneController2,
-  required String emailController}) async {
-    await _api.updateUserRequest(name: nameController,
-        lastName: nickNameController,
-        birthDate: dateTime.value,
-        phone: phoneController,
-        cityId: "${selectedCityData.value.id}",
-        areaId: "${selectedAreaData.value.id}",
-        phone2: phoneController2,
-        email: emailController,
-        whatsappPhone: whatsAppController,
-        brand1: "${selectedBrandData1.value.id}",
-        brand2: "${selectedBrandData2.value.id}",
-        brand3: "${selectedBrandData3.value.id}",);
+  applyToSaveEdit(
+      {required String nameController,
+      required String nickNameController,
+      required String phoneController,
+      required String whatsAppController,
+      required String phoneController2,
+      required String emailController}) async {
+    await _api.updateUserRequest(
+      name: nameController,
+      lastName: nickNameController,
+      birthDate: dateTime.value,
+      phone: phoneController,
+      cityId: "${selectedCityData.value.id}",
+      areaId: "${selectedAreaData.value.id}",
+      phone2: phoneController2,
+      email: emailController,
+      whatsappPhone: whatsAppController,
+      brand1: "${selectedBrandData1.value.id}",
+      brand2: "${selectedBrandData2.value.id}",
+      brand3: "${selectedBrandData3.value.id}",
+    );
     getUserData();
-
   }
 
-  applyToChangePassword({required String currentPassword, required String newPassword, required String reNewPassword}) async {
-    await _api.updatePasswordRequest(currentPassword: currentPassword, newPassword: newPassword, reNewPassword: reNewPassword);
+  applyToChangePassword(
+      {required String currentPassword,
+      required String newPassword,
+      required String reNewPassword}) async {
+    await _api.updatePasswordRequest(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        reNewPassword: reNewPassword);
   }
-  RxList brandsData =[].obs;
+
+  RxList brandsData = [].obs;
   RxBool loadingBrands = false.obs;
 
   Future<void> getBrandsDataController() async {
@@ -157,13 +167,13 @@ class AuthController extends GetxController {
       loadingBrands.value = true;
       brandsData.value = await _api2.breandsDataRequest();
     } on DioException catch (e, s) {
-      brandsData.value=[];
+      brandsData.value = [];
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e, s) {
-      brandsData.value=[];
-      if (e == 'Check Network connection'){
+      brandsData.value = [];
+      if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
-      }else {
+      } else {
         ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
       }
     }
@@ -175,18 +185,17 @@ class AuthController extends GetxController {
     selectedBrandData1.value = newBrand;
   }
 
-
   var selectedBrandData2 = BrandModel().obs;
   updateSelectedBrand2({required BrandModel newBrand}) async {
     selectedBrandData2.value = newBrand;
   }
 
-
   var selectedBrandData3 = BrandModel().obs;
   updateSelectedBrand3({required BrandModel newBrand}) async {
     selectedBrandData3.value = newBrand;
   }
-  clearBrand(){
+
+  clearBrand() {
     brandsData.value = [];
     selectedBrandData3.value = BrandModel();
     selectedBrandData2.value = BrandModel();
@@ -206,8 +215,8 @@ class AuthController extends GetxController {
     print('googleAuth?.accessToken:${googleAuth?.accessToken}');
   }
 
-  sendMessageToManagies({required String phone, required String message}) async {
+  sendMessageToManagies(
+      {required String phone, required String message}) async {
     await _api.sendMessageRequest(phone: phone, message: message);
   }
-
 }

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../View/brands/branddetail_screen.dart';
+import '../../View/brands/branddetail_screen.dart';
+import '../../const/app_colors.dart';
 
 class CustomProductWidget extends StatelessWidget {
   final String imagePath;
@@ -17,18 +18,21 @@ class CustomProductWidget extends StatelessWidget {
     super.key,
     required this.imagePath,
     required this.productName,
-    this.onTap, required this.brandId,
+    this.onTap,
+    required this.brandId,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Get.to(BrandDetailScreen(brandId: int.parse(brandId),));
+          Get.to(BrandDetailScreen(
+            brandId: int.parse(brandId),
+          ));
         },
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           CachedNetworkImage(
-            imageUrl:imagePath,
+            imageUrl: imagePath,
             height: 85.h,
             width: 85.w,
           ),
@@ -36,7 +40,7 @@ class CustomProductWidget extends StatelessWidget {
             productName,
             style: TextStyle(
               fontFamily: kTheArabicSansLight,
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontSize: 12.64.sp,
               fontWeight: FontWeight.w400,
             ),

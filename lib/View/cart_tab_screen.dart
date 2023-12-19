@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import '../const/app_colors.dart';
 import '../const/colors.dart';
 import '../controller/basketController.dart';
 import 'productadded_screen.dart';
@@ -48,7 +49,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kWhiteColor,
+        backgroundColor: AppColors.kWhiteColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         actions: [
@@ -62,7 +63,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
         title: Text(
           "سلّــتي",
           style: TextStyle(
-            color: kBlackColor,
+            color: AppColors.kBlackColor,
             fontSize: 28.sp, // Replace with 28.sp if you're using scaled fonts
             fontFamily: kTheArabicSansLight,
           ),
@@ -83,7 +84,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
             fontSize: 14.sp, // Replace with 14.sp if you're using scaled fonts
             fontWeight: FontWeight.w700,
           ),
-          labelColor: kBlackColor,
+          labelColor: AppColors.kBlackColor,
           indicatorColor: Colors.transparent,
           tabs: [
             Tab(
@@ -121,7 +122,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.w, // Replace with 1.w if you're using scaled sizes
-          color: isSelected ? kPrimaryColor : Colors.grey,
+          color: isSelected ? AppColors.kPrimaryColor : Colors.grey,
         ),
         shape: BoxShape.circle,
       ),
@@ -132,7 +133,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
           height: 28.59.h, // Replace with 28.59.h if you're using scaled sizes
           width: 28.59.w, // Replace with 28.59.w if you're using scaled sizes
           decoration: BoxDecoration(
-            color: isSelected ? kPrimaryColor : Colors.grey,
+            color: isSelected ? AppColors.kPrimaryColor : Colors.grey,
             shape: BoxShape.circle,
           ),
           child: Center(
@@ -142,7 +143,8 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
                 fontSize:
                     14.sp, // Replace with 14.sp if you're using scaled fonts
                 fontFamily: kTheArabicSansLight,
-                color: isSelected ? kWhiteColor : kBlackColor,
+                color:
+                    isSelected ? AppColors.kWhiteColor : AppColors.kBlackColor,
               ),
             ),
           ),
@@ -187,12 +189,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 22.sp,
                             fontWeight: FontWeight.w600,
-                            color: kBlackColor),
+                            color: AppColors.kBlackColor),
                       ),
                     ],
                   ),
                   Divider(
-                    color: kTextGrayColor,
+                    color: AppColors.kTextGrayColor,
                     thickness: 1.w,
                   ),
                   SizedBox(
@@ -205,9 +207,10 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         () => Radio(
                           fillColor: MaterialStateProperty.resolveWith<Color>(
                               (states) {
-                            return kPrimaryColor; // Unselected color for the radio button
+                            return AppColors
+                                .kPrimaryColor; // Unselected color for the radio button
                           }),
-                          activeColor: kWhiteColor,
+                          activeColor: AppColors.kWhiteColor,
                           value: 'الاستلام بخدمة التوصيل',
                           groupValue:
                               basketController.selectedPaymentMethod2.value,
@@ -222,12 +225,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           fontFamily: kTheArabicSansLight,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w600,
-                          color: kPrimaryColor),
+                          color: AppColors.kPrimaryColor),
                     ),
                   ),
 
                   Divider(
-                    color: kTextGrayColor,
+                    color: AppColors.kTextGrayColor,
                     thickness: 1.w,
                   ),
                   SizedBox(
@@ -241,7 +244,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13.r),
                       border: Border.all(
-                        color: kTextGrayColor,
+                        color: AppColors.kTextGrayColor,
                       ),
                     ),
                     child: Obx(
@@ -258,8 +261,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               fontWeight: FontWeight.w600,
                               color: basketController
                                       .selectedValue.value.isNotEmpty
-                                  ? kPrimaryColor
-                                  : kBlackColor,
+                                  ? AppColors.kPrimaryColor
+                                  : AppColors.kBlackColor,
                             ),
                           ),
                           DropdownButton<String>(
@@ -294,7 +297,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13.r),
                       border: Border.all(
-                        color: kTextGrayColor,
+                        color: AppColors.kTextGrayColor,
                       ),
                     ),
                     child: Obx(
@@ -311,8 +314,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               fontWeight: FontWeight.w600,
                               color: basketController
                                       .selectedValue2.value.isNotEmpty
-                                  ? kPrimaryColor
-                                  : kBlackColor,
+                                  ? AppColors.kPrimaryColor
+                                  : AppColors.kBlackColor,
                             ),
                           ),
                           DropdownButton<String>(
@@ -349,7 +352,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 21.sp,
                         fontWeight: FontWeight.w600,
-                        color: kBlackColor),
+                        color: AppColors.kBlackColor),
                   ),
                   SizedBox(
                     height: 16.h,
@@ -363,7 +366,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 21.sp,
                         fontWeight: FontWeight.w600,
-                        color: kBlackColor),
+                        color: AppColors.kBlackColor),
                   ),
                   SizedBox(
                     height: 34.h,
@@ -374,9 +377,10 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         height: 28.h,
                         width: 28.w,
                         child: Checkbox(
-                          side: BorderSide(color: kTextGrayColor, width: 1.5.w),
-                          checkColor: kWhiteColor,
-                          activeColor: kPrimaryColor,
+                          side: BorderSide(
+                              color: AppColors.kTextGrayColor, width: 1.5.w),
+                          checkColor: AppColors.kWhiteColor,
+                          activeColor: AppColors.kPrimaryColor,
                           value: isChecked,
                           onChanged: (bool? value) {
                             setState(() {
@@ -394,7 +398,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
-                            color: kBlackColor),
+                            color: AppColors.kBlackColor),
                       ),
                     ],
                   ),
@@ -424,7 +428,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
-                        color: kBlackColor),
+                        color: AppColors.kBlackColor),
                   ),
                   Text(
                     '24 ساعة',
@@ -432,7 +436,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 22.sp,
                         fontWeight: FontWeight.w600,
-                        color: kBlackColor),
+                        color: AppColors.kBlackColor),
                   ),
                 ],
               ),
@@ -451,7 +455,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 24.sp,
                         fontWeight: FontWeight.w600,
-                        color: kBlackColor),
+                        color: AppColors.kBlackColor),
                   ),
                   // Text(
                   //   '345 دل',
@@ -472,7 +476,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               Expanded(
                   child: Divider(
                 endIndent: 10.w,
-                color: kTextGrayColor,
+                color: AppColors.kTextGrayColor,
                 thickness: 1.w,
                 indent: 10.w,
               )),
@@ -482,12 +486,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     fontFamily: kTheArabicSansLight,
                     fontSize: 28.sp,
                     fontWeight: FontWeight.w600,
-                    color: kBlackColor),
+                    color: AppColors.kBlackColor),
               ),
               Expanded(
                   child: Divider(
                 endIndent: 10.w,
-                color: kTextGrayColor,
+                color: AppColors.kTextGrayColor,
                 thickness: 1.w,
                 indent: 10.w,
               )),
@@ -498,7 +502,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             Container(
               height: 75.2.h,
               width: 459.62.w,
-              decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+              decoration:
+                  BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
                 BoxShadow(
                   color: const Color.fromARGB(32, 0, 0, 0),
                   blurRadius: 28.r,
@@ -516,9 +521,10 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           () => Radio(
                             fillColor: MaterialStateProperty.resolveWith<Color>(
                                 (states) {
-                              return kPrimaryColor; // Unselected color for the radio button
+                              return AppColors
+                                  .kPrimaryColor; // Unselected color for the radio button
                             }),
-                            activeColor: kWhiteColor,
+                            activeColor: AppColors.kWhiteColor,
                             value: 'الحجز والإستلام من المتجر',
                             groupValue:
                                 basketController.selectedPaymentMethod2.value,
@@ -533,7 +539,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
-                            color: kTextGrayColor),
+                            color: AppColors.kTextGrayColor),
                       ),
                     ),
                   ),
@@ -546,7 +552,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         height: 45.52.h,
                         width: 98.19.w,
                         decoration: BoxDecoration(
-                            color: kPrimaryColor,
+                            color: AppColors.kPrimaryColor,
                             borderRadius: BorderRadius.circular(22.24.r)),
                         child: Center(
                           child: Text(
@@ -555,7 +561,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w600,
-                                color: kWhiteColor),
+                                color: AppColors.kWhiteColor),
                           ),
                         ),
                       ),
@@ -577,7 +583,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           label: Container(
             height: 157.07.h,
             width: 431.77.w,
-            decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+            decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
               BoxShadow(
                 color: const Color.fromARGB(32, 0, 0, 0),
                 blurRadius: 28.r,
@@ -598,7 +604,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 18.83.sp,
                         fontWeight: FontWeight.w500,
-                        color: klPinkColor),
+                        color: AppColors.klPinkColor),
                   ),
                   TextSpan(
                     text: '900 دل',
@@ -606,7 +612,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 34.01.sp,
                         fontWeight: FontWeight.w700,
-                        color: kBlackColor),
+                        color: AppColors.kBlackColor),
                   )
                 ])),
                 GestureDetector(
@@ -615,7 +621,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     height: 62.7.h,
                     width: 220.w,
                     decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      color: AppColors.kPrimaryColor,
                       borderRadius: BorderRadius.circular(46.r),
                     ),
                     child: Center(
@@ -625,7 +631,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 23.sp,
                             fontWeight: FontWeight.w500,
-                            color: kWhiteColor),
+                            color: AppColors.kWhiteColor),
                       ),
                     ),
                   ),
@@ -666,7 +672,7 @@ class PaymentScreen extends StatelessWidget {
                           fontFamily: kTheArabicSansLight,
                           fontSize: 22.sp,
                           fontWeight: FontWeight.w600,
-                          color: kBlackColor),
+                          color: AppColors.kBlackColor),
                     ),
                   ],
                 ),
@@ -684,7 +690,7 @@ class PaymentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color:
                                 basketController.selectedPaymentMethod == 'cash'
-                                    ? kPrimaryColor
+                                    ? AppColors.kPrimaryColor
                                     : Colors.white,
                             borderRadius: BorderRadius.circular(9.r)),
                         child: Stack(
@@ -696,14 +702,14 @@ class PaymentScreen extends StatelessWidget {
                                   height: 23.h,
                                   width: 41.w,
                                   decoration: BoxDecoration(
-                                      color: kWhiteColor,
+                                      color: AppColors.kWhiteColor,
                                       borderRadius: BorderRadius.circular(3.r)),
                                   child: Center(
                                     child: Text(
                                       "Cash",
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
-                                          color: kPrimaryColor,
+                                          color: AppColors.kPrimaryColor,
                                           fontSize: 11.sp,
                                           fontWeight: FontWeight.w700),
                                     ),
@@ -717,8 +723,8 @@ class PaymentScreen extends StatelessWidget {
                                     color: basketController
                                                 .selectedPaymentMethod ==
                                             'cash'
-                                        ? kWhiteColor
-                                        : kBlackColor,
+                                        ? AppColors.kWhiteColor
+                                        : AppColors.kBlackColor,
                                     fontSize: 21.sp,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -729,8 +735,8 @@ class PaymentScreen extends StatelessWidget {
                                     color: basketController
                                                 .selectedPaymentMethod ==
                                             'cash'
-                                        ? kWhiteColor
-                                        : kBlackColor,
+                                        ? AppColors.kWhiteColor
+                                        : AppColors.kBlackColor,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -745,15 +751,16 @@ class PaymentScreen extends StatelessWidget {
                                         if (states
                                             .contains(MaterialState.selected)) {
                                           basketController.containerColor =
-                                              kPrimaryColor;
+                                              AppColors.kPrimaryColor;
                                           return Colors
                                               .white; // Selected color for the radio button
                                         }
                                         basketController.containerColor =
                                             Colors.white;
-                                        return kPrimaryColor; // Unselected color for the radio button
+                                        return AppColors
+                                            .kPrimaryColor; // Unselected color for the radio button
                                       }),
-                                      activeColor: kWhiteColor,
+                                      activeColor: AppColors.kWhiteColor,
                                       value: 'cash',
                                       groupValue: basketController
                                           .selectedPaymentMethod.value,
@@ -793,7 +800,7 @@ class PaymentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: basketController.selectedPaymentMethod ==
                                     'محفظتي'
-                                ? kPrimaryColor
+                                ? AppColors.kPrimaryColor
                                 : Colors.white,
                             boxShadow: [BoxShadow(blurRadius: 0.5.r)],
                             borderRadius: BorderRadius.circular(9.r)),
@@ -808,8 +815,8 @@ class PaymentScreen extends StatelessWidget {
                                     color: basketController
                                                 .selectedPaymentMethod ==
                                             'محفظتي'
-                                        ? kWhiteColor
-                                        : kBlackColor,
+                                        ? AppColors.kWhiteColor
+                                        : AppColors.kBlackColor,
                                     fontSize: 21.sp,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -821,8 +828,8 @@ class PaymentScreen extends StatelessWidget {
                                       color: basketController
                                                   .selectedPaymentMethod ==
                                               'محفظتي'
-                                          ? kWhiteColor
-                                          : kPrimaryColor,
+                                          ? AppColors.kWhiteColor
+                                          : AppColors.kPrimaryColor,
                                       fontSize: 23.sp,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -833,8 +840,8 @@ class PaymentScreen extends StatelessWidget {
                                       color: basketController
                                                   .selectedPaymentMethod ==
                                               'محفظتي'
-                                          ? kWhiteColor
-                                          : kBlackColor,
+                                          ? AppColors.kWhiteColor
+                                          : AppColors.kBlackColor,
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w500),
                                 )
@@ -848,15 +855,15 @@ class PaymentScreen extends StatelessWidget {
                                       if (states
                                           .contains(MaterialState.selected)) {
                                         basketController.containerColor =
-                                            kPrimaryColor;
+                                            AppColors.kPrimaryColor;
                                         return Colors
                                             .white; // Selected color for the radio button
                                       }
                                       basketController.containerColor =
-                                          kWhiteColor;
-                                      return kPrimaryColor;
+                                          AppColors.kWhiteColor;
+                                      return AppColors.kPrimaryColor;
                                     }),
-                                    activeColor: kWhiteColor,
+                                    activeColor: AppColors.kWhiteColor,
                                     value: 'محفظتي',
                                     groupValue: basketController
                                         .selectedPaymentMethod.value,
@@ -887,7 +894,7 @@ class PaymentScreen extends StatelessWidget {
           Container(
             height: 157.07.h,
             width: 431.77.w,
-            decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+            decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
               BoxShadow(
                 color: const Color.fromARGB(32, 0, 0, 0),
                 blurRadius: 28.r,
@@ -906,7 +913,7 @@ class PaymentScreen extends StatelessWidget {
                           fontFamily: kTheArabicSansLight,
                           fontSize: 18.83.sp,
                           fontWeight: FontWeight.w500,
-                          color: klPinkColor),
+                          color: AppColors.klPinkColor),
                     ),
                     TextSpan(
                       text: '900 دل',
@@ -914,7 +921,7 @@ class PaymentScreen extends StatelessWidget {
                           fontFamily: kTheArabicSansLight,
                           fontSize: 34.01.sp,
                           fontWeight: FontWeight.w700,
-                          color: kBlackColor),
+                          color: AppColors.kBlackColor),
                     )
                   ])),
                   SizedBox(width: 35.w),
@@ -924,7 +931,7 @@ class PaymentScreen extends StatelessWidget {
                       height: 62.7.h,
                       width: 220.w,
                       decoration: BoxDecoration(
-                        color: kPrimaryColor,
+                        color: AppColors.kPrimaryColor,
                         borderRadius: BorderRadius.circular(46.r),
                       ),
                       child: Center(
@@ -934,7 +941,7 @@ class PaymentScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 23.sp,
                               fontWeight: FontWeight.w500,
-                              color: kWhiteColor),
+                              color: AppColors.kWhiteColor),
                         ),
                       ),
                     ),
@@ -978,7 +985,7 @@ class SummaryScreen extends StatelessWidget {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w600,
-                            color: kBlackColor),
+                            color: AppColors.kBlackColor),
                       ),
                       const Spacer(),
                       Text(
@@ -987,7 +994,7 @@ class SummaryScreen extends StatelessWidget {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w600,
-                            color: kBlackColor),
+                            color: AppColors.kBlackColor),
                       ),
                     ],
                   ),
@@ -1010,7 +1017,7 @@ class SummaryScreen extends StatelessWidget {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w500,
-                            color: kBlackColor,
+                            color: AppColors.kBlackColor,
                           ),
                         ),
                         TextSpan(
@@ -1019,7 +1026,7 @@ class SummaryScreen extends StatelessWidget {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w600,
-                            color: kPrimaryColor,
+                            color: AppColors.kPrimaryColor,
                           ),
                         )
                       ])),
@@ -1030,7 +1037,7 @@ class SummaryScreen extends StatelessWidget {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w500,
-                            color: kBlackColor,
+                            color: AppColors.kBlackColor,
                           ),
                         ),
                         TextSpan(
@@ -1039,7 +1046,7 @@ class SummaryScreen extends StatelessWidget {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 22.sp,
                             fontWeight: FontWeight.w600,
-                            color: kPrimaryColor,
+                            color: AppColors.kPrimaryColor,
                           ),
                         )
                       ])),
@@ -1057,7 +1064,7 @@ class SummaryScreen extends StatelessWidget {
                           fontFamily: kTheArabicSansLight,
                           fontSize: 22.53.sp,
                           fontWeight: FontWeight.w600,
-                          color: kBlackColor,
+                          color: AppColors.kBlackColor,
                         ),
                       ),
                     ],
@@ -1087,7 +1094,7 @@ class SummaryScreen extends StatelessWidget {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 17.44.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: kBlackColor),
+                                    color: AppColors.kBlackColor),
                               ),
                             ),
                             Positioned(
@@ -1098,7 +1105,7 @@ class SummaryScreen extends StatelessWidget {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 16.57.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: kPrimaryColor),
+                                    color: AppColors.kPrimaryColor),
                               ),
                             ),
                             Positioned(
@@ -1110,7 +1117,7 @@ class SummaryScreen extends StatelessWidget {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 15.7.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: kGrayColor),
+                                    color: AppColors.kGrayColor),
                               ),
                             ),
                             Positioned(
@@ -1125,7 +1132,7 @@ class SummaryScreen extends StatelessWidget {
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
-                                        color: kTextGrayColor),
+                                        color: AppColors.kTextGrayColor),
                                   ),
                                   Text(
                                     ' أزرق غامق',
@@ -1133,7 +1140,7 @@ class SummaryScreen extends StatelessWidget {
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 14.83.sp,
                                         fontWeight: FontWeight.w600,
-                                        color: kBlackColor),
+                                        color: AppColors.kBlackColor),
                                   ),
                                   SizedBox(
                                     width: 60.w,
@@ -1144,7 +1151,7 @@ class SummaryScreen extends StatelessWidget {
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 14.83.sp,
                                         fontWeight: FontWeight.w600,
-                                        color: kBlackColor),
+                                        color: AppColors.kBlackColor),
                                   ),
                                 ],
                               ),
@@ -1186,7 +1193,7 @@ class SummaryScreen extends StatelessWidget {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 17.44.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: kBlackColor),
+                                    color: AppColors.kBlackColor),
                               ),
                             ),
                             Positioned(
@@ -1197,7 +1204,7 @@ class SummaryScreen extends StatelessWidget {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 16.57.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: kPrimaryColor),
+                                    color: AppColors.kPrimaryColor),
                               ),
                             ),
                             Positioned(
@@ -1209,7 +1216,7 @@ class SummaryScreen extends StatelessWidget {
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 15.7.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: kGrayColor),
+                                    color: AppColors.kGrayColor),
                               ),
                             ),
                             Positioned(
@@ -1224,7 +1231,7 @@ class SummaryScreen extends StatelessWidget {
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
-                                        color: kTextGrayColor),
+                                        color: AppColors.kTextGrayColor),
                                   ),
                                   Text(
                                     ' أزرق غامق',
@@ -1232,7 +1239,7 @@ class SummaryScreen extends StatelessWidget {
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 14.83.sp,
                                         fontWeight: FontWeight.w600,
-                                        color: kBlackColor),
+                                        color: AppColors.kBlackColor),
                                   ),
                                   SizedBox(
                                     width: 60.w,
@@ -1243,7 +1250,7 @@ class SummaryScreen extends StatelessWidget {
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 14.83.sp,
                                         fontWeight: FontWeight.w600,
-                                        color: kBlackColor),
+                                        color: AppColors.kBlackColor),
                                   ),
                                 ],
                               ),
@@ -1275,7 +1282,7 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 18.1.sp,
                               fontWeight: FontWeight.w400,
-                              color: kTextGrayColor),
+                              color: AppColors.kTextGrayColor),
                         ),
                         Text(
                           '00.00',
@@ -1283,7 +1290,7 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 18.1.sp,
                               fontWeight: FontWeight.w500,
-                              color: kBlackColor),
+                              color: AppColors.kBlackColor),
                         ),
                       ]),
                   ///////////second row////////
@@ -1296,7 +1303,7 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 18.1.sp,
                               fontWeight: FontWeight.w400,
-                              color: kTextGrayColor),
+                              color: AppColors.kTextGrayColor),
                         ),
                         Text(
                           '00.00',
@@ -1304,7 +1311,7 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 18.1.sp,
                               fontWeight: FontWeight.w500,
-                              color: kBlackColor),
+                              color: AppColors.kBlackColor),
                         ),
                       ]),
                   /////////third row//////////////
@@ -1317,7 +1324,7 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 18.1.sp,
                               fontWeight: FontWeight.w400,
-                              color: kTextGrayColor),
+                              color: AppColors.kTextGrayColor),
                         ),
                         Text(
                           '00.00',
@@ -1325,11 +1332,11 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 18.1.sp,
                               fontWeight: FontWeight.w500,
-                              color: kBlackColor),
+                              color: AppColors.kBlackColor),
                         ),
                       ]),
                   Divider(
-                    color: kTextGrayColor,
+                    color: AppColors.kTextGrayColor,
                     thickness: 1.w,
                   ),
                   SizedBox(
@@ -1344,7 +1351,7 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 19.sp,
                               fontWeight: FontWeight.w600,
-                              color: kBlackColor),
+                              color: AppColors.kBlackColor),
                         ),
                         Text(
                           '900 LYD',
@@ -1352,7 +1359,7 @@ class SummaryScreen extends StatelessWidget {
                               fontFamily: kTheArabicSansLight,
                               fontSize: 22.44.sp,
                               fontWeight: FontWeight.w600,
-                              color: kPrimaryColor),
+                              color: AppColors.kPrimaryColor),
                         ),
                       ]),
                 ],
@@ -1371,7 +1378,7 @@ class SummaryScreen extends StatelessWidget {
           label: Container(
             height: 157.07.h,
             width: 431.77.w,
-            decoration: BoxDecoration(color: kWhiteColor, boxShadow: [
+            decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
               BoxShadow(
                 color: const Color.fromARGB(32, 0, 0, 0),
                 blurRadius: 28.r,
@@ -1392,7 +1399,7 @@ class SummaryScreen extends StatelessWidget {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 18.83.sp,
                         fontWeight: FontWeight.w500,
-                        color: klPinkColor),
+                        color: AppColors.klPinkColor),
                   ),
                   TextSpan(
                     text: '900 دل',
@@ -1400,7 +1407,7 @@ class SummaryScreen extends StatelessWidget {
                         fontFamily: kTheArabicSansLight,
                         fontSize: 34.01.sp,
                         fontWeight: FontWeight.w700,
-                        color: kBlackColor),
+                        color: AppColors.kBlackColor),
                   )
                 ])),
                 // SizedBox(width: 35.w),
@@ -1412,7 +1419,7 @@ class SummaryScreen extends StatelessWidget {
                     height: 62.7.h,
                     width: 220.w,
                     decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      color: AppColors.kPrimaryColor,
                       borderRadius: BorderRadius.circular(46.r),
                     ),
                     child: Center(
@@ -1422,7 +1429,7 @@ class SummaryScreen extends StatelessWidget {
                             fontFamily: kTheArabicSansLight,
                             fontSize: 23.sp,
                             fontWeight: FontWeight.w500,
-                            color: kWhiteColor),
+                            color: AppColors.kWhiteColor),
                       ),
                     ),
                   ),

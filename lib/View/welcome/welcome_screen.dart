@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 // import '../../const/colors.dart';
+import '../../const/app_images.dart';
 import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../controller/welcome/welcomescreencontroller.dart';
@@ -76,21 +77,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Image.asset(
-                      kpageviewThreeImage,
+                      AppImages.kpageviewThreeImage,
                     ),
                   ),
                   Align(
                       alignment: Alignment.topRight,
-                      child: Image.asset(kpageviewTwoImage)),
+                      child: Image.asset(AppImages.kpageviewTwoImage)),
                   Align(
                       alignment: Alignment.center,
-                      child: Image.asset(kpageviewoneImage)),
+                      child: Image.asset(AppImages.kpageviewoneImage)),
                   Container(
                     height: 351.h,
                     width: 390.w,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(kpageblacktwoImage),
+                        image: AssetImage(AppImages.kpageblacktwoImage),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -101,7 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       width: 390.w,
                       height: 351.h,
                       child: Image.asset(
-                        kpageblackoneImage,
+                        AppImages.kpageblackoneImage,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -110,7 +111,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       right: 176.w,
                       top: 50.h,
                       child: Image.asset(
-                        kpageviewlogoImage,
+                        AppImages.kpageviewlogoImage,
                         height: 53.61.h,
                         width: 55.w,
                       )),
@@ -146,7 +147,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Container(
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(kFaceImage),
+                        image: AssetImage(AppImages.kFaceImage),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -156,7 +157,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     width: 390.w,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(kpageblacktwoImage),
+                        image: AssetImage(AppImages.kpageblacktwoImage),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -167,7 +168,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       width: 390.w,
                       height: 351.h,
                       child: Image.asset(
-                        kpageblackoneImage,
+                        AppImages.kpageblackoneImage,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -176,7 +177,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       right: 176.w,
                       top: 50.h,
                       child: Image.asset(
-                        kpageviewlogoImage,
+                        AppImages.kpageviewlogoImage,
                         height: 53.61.h,
                         width: 55.w,
                       )),
@@ -207,7 +208,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       top: 453.h,
                       left: -26.w,
                       child: Image.asset(
-                        kpageeyeoneImage,
+                        AppImages.kpageeyeoneImage,
                         height: 181.h,
                         width: 186.w,
                       )),
@@ -215,7 +216,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       top: 249.35.h,
                       right: 25.w,
                       child: Image.asset(
-                        kpageeyetwoImage,
+                        AppImages.kpageeyetwoImage,
                         height: 231.65.h,
                         width: 303.94.w,
                       )),
@@ -317,8 +318,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     height: 54.h,
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(AppColors.kPrimaryColor),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            AppColors.kPrimaryColor),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -356,7 +357,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            side: BorderSide(width: 1.w, color: AppColors.kWhiteColor),
+                            side: BorderSide(
+                                width: 1.w, color: AppColors.kWhiteColor),
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                         ),

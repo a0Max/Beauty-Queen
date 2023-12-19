@@ -5,7 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/user_data_apis.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 
 class OTPController extends GetxController {
   Timer? _countdownTimer;
@@ -30,7 +30,6 @@ class OTPController extends GetxController {
     });
   }
 
-
   sendOtp({required String phone}) async {
     startTimer();
     try {
@@ -52,20 +51,20 @@ class OTPController extends GetxController {
     await _api.checkCodeRequest(phone: phone ?? '', sms: sms);
   }
 
-  Future<void> updatePassword({required String phone, required String password, required String rePassword}) async {
-    try{
-      await _api.forgetPasswordRequest(phone:phone, password:password, rePassword:rePassword);
+  Future<void> updatePassword(
+      {required String phone,
+      required String password,
+      required String rePassword}) async {
+    try {
+      await _api.forgetPasswordRequest(
+          phone: phone, password: password, rePassword: rePassword);
 
       ErrorPopUp(
           message: tr('update_success'), title: tr('message'), isError: false);
     } on DioException catch (e) {
-
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-
     } catch (e) {
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
-
     }
   }
-
 }

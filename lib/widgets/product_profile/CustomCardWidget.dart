@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:beauty_queen/const/styles.dart';
-import 'package:beauty_queen/widgets/CustomAlertBox.dart';
+import 'package:beauty_queen/widgets/product_profile/CustomAlertBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -24,10 +24,13 @@ class CustomCardWidget extends StatefulWidget {
   final double? width;
   final bool favorite;
 
-  const CustomCardWidget(
-      {super.key,
-      required this.imageUrl,
-      required this.newArrival, this.width,  required this.favorite,});
+  const CustomCardWidget({
+    super.key,
+    required this.imageUrl,
+    required this.newArrival,
+    this.width,
+    required this.favorite,
+  });
 
   @override
   State<CustomCardWidget> createState() => _CustomCardWidgetState();
@@ -39,11 +42,12 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
   OptionsModel? selectedOption;
   ProductOptionsModel? selectedParentOption;
   final HomeController _controller = Get.put(HomeController());
-@override
+  @override
   void initState() {
     super.initState();
-    isFavorite = widget.favorite??false;
+    isFavorite = widget.favorite ?? false;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +63,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
         ],
         color: Colors.white,
       ),
-      width: widget.width??(MediaQuery.of(context).size.width / 2) - 20,
+      width: widget.width ?? (MediaQuery.of(context).size.width / 2) - 20,
       // height: 152.27.h,
       child: InkWell(
         onTap: () {
@@ -69,7 +73,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                   ItemProfilePage(itemId:widget.newArrival.id??0)));
+                      ItemProfilePage(itemId: widget.newArrival.id ?? 0)));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -99,29 +103,36 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                 widget.newArrival.productOptions?.length ?? 0,
                                 (index) => Column(
                                       children: [
-                                        Text(widget.newArrival
-                                                .productOptions?[index].title ??
-                                            '', style:const TextStyle(
-                                          color: AppColors.kGreyBlueColor,
-                                          fontSize: 18
-                                        ) ,),
+                                        Text(
+                                          widget
+                                                  .newArrival
+                                                  .productOptions?[index]
+                                                  .title ??
+                                              '',
+                                          style: const TextStyle(
+                                              color: AppColors.kGreyBlueColor,
+                                              fontSize: 18),
+                                        ),
                                         Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 10.w),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 10.w),
                                           child: DropdownButtonHideUnderline(
-
                                             child: DropdownButton2(
                                               isExpanded: true,
-                                              items: widget.newArrival.productOptions?[index].options
+                                              items: widget
+                                                  .newArrival
+                                                  .productOptions?[index]
+                                                  .options
                                                   ?.toList()
                                                   .map((item) {
-                                                return DropdownMenuItem<OptionsModel>(
+                                                return DropdownMenuItem<
+                                                    OptionsModel>(
                                                   value: item,
                                                   child: Text(
-                                                    item.title?? '',
+                                                    item.title ?? '',
                                                     style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.white
-                                                    ),
+                                                        fontSize: 14,
+                                                        color: Colors.white),
                                                     // maxLines: 1,
                                                     // overflow: TextOverflow.ellipsis,
                                                   ),
@@ -129,38 +140,56 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                               }).toList(),
                                               value: selectedOption,
                                               onChanged: (value) {
-
                                                 setState(() {
                                                   selectedOption = value;
-                                                  selectedParentOption = widget.newArrival.productOptions?[index]??ProductOptionsModel();
+                                                  selectedParentOption = widget
+                                                              .newArrival
+                                                              .productOptions?[
+                                                          index] ??
+                                                      ProductOptionsModel();
                                                 });
-
                                               },
-                                              buttonStyleData: const ButtonStyleData(
+                                              buttonStyleData:
+                                                  const ButtonStyleData(
                                                 decoration: BoxDecoration(
-                                                  color: AppColors.kPrimaryColor,
-                                                  ),
+                                                  color:
+                                                      AppColors.kPrimaryColor,
+                                                ),
                                                 elevation: 0,
                                               ),
-                                              iconStyleData: const IconStyleData(
-                                                icon: Icon(Icons.keyboard_arrow_down_rounded,
-                                                    color: Colors.white, size: 30),
+                                              iconStyleData:
+                                                  const IconStyleData(
+                                                icon: Icon(
+                                                    Icons
+                                                        .keyboard_arrow_down_rounded,
+                                                    color: Colors.white,
+                                                    size: 30),
                                                 iconSize: 30,
                                               ),
-                                              dropdownStyleData: DropdownStyleData(
-                                                  maxHeight: 150,
-                                                  padding: null,
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.kTextBlackColor.withOpacity(.9),
-                                                    borderRadius: BorderRadius.circular(14),
-                                                  ),
-                                                  elevation: 0,
-                                                  scrollbarTheme: ScrollbarThemeData(
-                                                    radius: const Radius.circular(40),
-                                                    thickness: MaterialStateProperty.all(6),
-                                                    thumbVisibility:
-                                                    MaterialStateProperty.all(true),
-                                                  )),
+                                              dropdownStyleData:
+                                                  DropdownStyleData(
+                                                      maxHeight: 150,
+                                                      padding: null,
+                                                      decoration: BoxDecoration(
+                                                        color: AppColors
+                                                            .kTextBlackColor
+                                                            .withOpacity(.9),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(14),
+                                                      ),
+                                                      elevation: 0,
+                                                      scrollbarTheme:
+                                                          ScrollbarThemeData(
+                                                        radius: const Radius
+                                                            .circular(40),
+                                                        thickness:
+                                                            MaterialStateProperty
+                                                                .all(6),
+                                                        thumbVisibility:
+                                                            MaterialStateProperty
+                                                                .all(true),
+                                                      )),
                                               // menuItemStyleData: const MenuItemStyleData(
                                               //   height: 40,
                                               //   // padding: EdgeInsets.only(left: 14, right: 14),
@@ -168,17 +197,24 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                             ),
                                           ),
                                         ),
-                                        if(selectedOption != null && selectedOption?.code!=null)
+                                        if (selectedOption != null &&
+                                            selectedOption?.code != null)
                                           Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 15.w),
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 15.w),
 
-                                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                                          color: AppColors.klPinkColor,
-                                          width: MediaQuery.of(context).size.width,
-                                          // alignment: Alignment.center,
-                                          child: Text("${tr('codeOfSelected')} ${selectedOption?.code??''}", overflow: TextOverflow.ellipsis,),
-                                        )
-
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5, horizontal: 5),
+                                            color: AppColors.klPinkColor,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            // alignment: Alignment.center,
+                                            child: Text(
+                                              "${tr('codeOfSelected')} ${selectedOption?.code ?? ''}",
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          )
                                       ],
                                     )),
                           )),
@@ -217,7 +253,9 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                 if (widget.newArrival.offerPrice != null &&
                                     widget.newArrival.offerPrice != '' &&
                                     widget.newArrival.offerPrice != '' &&
-                                    widget.newArrival.offerPrice?.split('').first !=
+                                    widget.newArrival.offerPrice
+                                            ?.split('')
+                                            .first !=
                                         '0') ...{
                                   Row(
                                     children: [
@@ -229,7 +267,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                           fontSize: 15.16.sp,
                                           fontFamily: kTheArabicSansLight,
                                           fontWeight: FontWeight.w400,
-                                          decoration: TextDecoration.lineThrough,
+                                          decoration:
+                                              TextDecoration.lineThrough,
                                           height: 0.08,
                                         ),
                                       ),
@@ -241,7 +280,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                           fontSize: 10.99.sp,
                                           fontFamily: kTheArabicSansLight,
                                           fontWeight: FontWeight.w400,
-                                          decoration: TextDecoration.lineThrough,
+                                          decoration:
+                                              TextDecoration.lineThrough,
                                         ),
                                       ),
                                     ],
@@ -288,13 +328,15 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                         ),
                       ),
                       if ((selectedOption?.stock == null ||
-                          selectedOption?.stock == "0" ||
-                          num.parse(selectedOption?.stock??'0') < 0)&&selectedOption!=null) ...{
+                              selectedOption?.stock == "0" ||
+                              num.parse(selectedOption?.stock ?? '0') < 0) &&
+                          selectedOption != null) ...{
                         Container(
                           width: MediaQuery.of(context).size.width,
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           alignment: Alignment.center,
-                          decoration: const BoxDecoration(color: AppColors.kCDGColor),
+                          decoration:
+                              const BoxDecoration(color: AppColors.kCDGColor),
                           child: Text(
                             tr('not_availble_now'),
                             textAlign: TextAlign.center,
@@ -307,11 +349,11 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                             ),
                           ),
                         ),
-
-                      }else...{
+                      } else ...{
                         InkWell(
                           onTap: () async {
-                            if (selectedParentOption==null &&selectedOption ==null){
+                            if (selectedParentOption == null &&
+                                selectedOption == null) {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -321,23 +363,20 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                       buttonOneText: tr('okay'),
                                     );
                                   });
-                            }else {
+                            } else {
                               await _controller.addToCart(
                                   productId: widget.newArrival.id ?? 0,
-                                  productOptionId: selectedParentOption?.id ??
-                                      0,
+                                  productOptionId:
+                                      selectedParentOption?.id ?? 0,
                                   productParentId: selectedOption?.id ?? 0);
                             }
                           },
                           child: Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
+                            width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             alignment: Alignment.center,
-                            decoration:
-                            const BoxDecoration(color: AppColors.kPrimaryColor),
+                            decoration: const BoxDecoration(
+                                color: AppColors.kPrimaryColor),
                             child: Text(
                               tr('add_to_bags'),
                               textAlign: TextAlign.center,
@@ -356,8 +395,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   )
                 ],
               )
-            }
-            else ...{
+            } else ...{
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 200.h,
@@ -367,6 +405,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     fit: BoxFit.fill,
                   ),
                 ),
+
                 ///Todo: miss after add change and if i liked
                 child: Align(
                   alignment: Alignment.topLeft,
@@ -380,7 +419,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       setState(() {
                         isFavorite = true;
                       });
-                      _controller.addWishlist(postId: widget.newArrival.id??0);
+                      _controller.addWishlist(
+                          postId: widget.newArrival.id ?? 0);
                     },
                   ),
                 ),
@@ -423,70 +463,70 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                             widget.newArrival.offerPrice?.split('').first !=
                                 '0') ...{
                           SizedBox(
-                              width: widget.width??(MediaQuery.of(context).size.width / 2) - 40,
-                              child:Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+                              width: widget.width ??
+                                  (MediaQuery.of(context).size.width / 2) - 40,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-
-                                  Text(
-                                    widget.newArrival.price ?? '',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15.16.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.lineThrough,
-                                      height: 0.08,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        widget.newArrival.price ?? '',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15.16.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                          height: 0.08,
+                                        ),
+                                      ),
+                                      Text(
+                                        tr('Del'),
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 10.99.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    tr('Del'),
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10.99.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.lineThrough,
-                                    ),
-                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        widget.newArrival.offerPrice ?? '',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: const Color(0xFFDE0F7E),
+                                          fontSize: 15.16.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0.08,
+                                        ),
+                                      ),
+                                      Text(
+                                        'د.ل',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: const Color(0xFFDE0F7E),
+                                          fontSize: 10.99.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0.15,
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    widget.newArrival.offerPrice ?? '',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: const Color(0xFFDE0F7E),
-                                      fontSize: 15.16.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0.08,
-                                    ),
-                                  ),
-                                  Text(
-                                    'د.ل',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: const Color(0xFFDE0F7E),
-                                      fontSize: 10.99.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0.15,
-                                    ),
-                                  ),
-                                ],
-                              )
-
-                            ],
-                          ))
-
-                        }
-                        else...{
+                              ))
+                        } else ...{
                           Row(
                             children: [
                               Text(
@@ -541,8 +581,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     ),
                   ),
                 ),
-              }
-              else if ((widget.newArrival.stock != null &&
+              } else if ((widget.newArrival.stock != null &&
                       widget.newArrival.stock != "0") &&
                   (widget.newArrival.productOptions != null &&
                       widget.newArrival.productOptions?.isNotEmpty ==
@@ -572,18 +611,18 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     ),
                   ),
                 ),
-              }
-              else ...{
+              } else ...{
                 InkWell(
                   onTap: () async {
-                   await _controller.addToCart(productId: widget.newArrival.id??0);
+                    await _controller.addToCart(
+                        productId: widget.newArrival.id ?? 0);
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     alignment: Alignment.center,
                     decoration:
-                    const BoxDecoration(color: AppColors.kPrimaryColor),
+                        const BoxDecoration(color: AppColors.kPrimaryColor),
                     child: Text(
                       tr('add_to_bags'),
                       textAlign: TextAlign.center,

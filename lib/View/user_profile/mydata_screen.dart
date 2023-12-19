@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:beauty_queen/const/colors.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/models/brand_model.dart';
-import 'package:beauty_queen/widgets/custom_button.dart';
+import 'package:beauty_queen/widgets/based/custom_button.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +18,7 @@ import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../models/city_area_model.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/error_pop_up.dart';
 
 class MyDataScreen extends StatefulWidget {
   const MyDataScreen({super.key});
@@ -130,10 +130,10 @@ class _MyDataScreen extends State<MyDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: kWhiteColor,
+        surfaceTintColor: AppColors.kWhiteColor,
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: kWhiteColor,
+        backgroundColor: AppColors.kWhiteColor,
         actions: [
           IconButton(
               onPressed: () {
@@ -142,14 +142,14 @@ class _MyDataScreen extends State<MyDataScreen> {
               icon: Icon(
                 Icons.arrow_forward_ios,
                 size: 30.r,
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
               )),
         ],
         title: Text(
           tr('ourData'),
           style: TextStyle(
               fontFamily: kTheArabicSansLight,
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontSize: 27.sp,
               fontWeight: FontWeight.w600),
         ),
@@ -709,7 +709,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                         Expanded(
                             child: CustomButton(
                                 text: tr('save'),
-                                backgroundColor: kPrimaryColor,
+                                backgroundColor: AppColors.kPrimaryColor,
                                 // width: 160.w,
                                 height: 40.26.h,
                                 borderRadius: 47.34.r,
@@ -725,7 +725,9 @@ class _MyDataScreen extends State<MyDataScreen> {
                                         phoneController2: phoneController2.text,
                                         emailController: emailController.text);
                                     ErrorPopUp(
-                                        message: tr('updated'), title: tr('message'), isError: false);
+                                        message: tr('updated'),
+                                        title: tr('message'),
+                                        isError: false);
                                     Navigator.of(context).pop();
                                   } on DioException catch (e, s) {
                                     print('error:$e');
@@ -751,16 +753,16 @@ class _MyDataScreen extends State<MyDataScreen> {
                                 textStyle: TextStyle(
                                     fontFamily: kTheArabicSansLight,
                                     fontSize: 20.85.sp,
-                                    color: kWhiteColor,
+                                    color: AppColors.kWhiteColor,
                                     fontWeight: FontWeight.w700))),
                         15.pw,
                       },
                       Expanded(
                         child: CustomButton(
-                            border:
-                                Border.all(color: kPrimaryColor, width: 1.56.w),
+                            border: Border.all(
+                                color: AppColors.kPrimaryColor, width: 1.56.w),
                             text: tr('edit2'),
-                            backgroundColor: kWhiteColor,
+                            backgroundColor: AppColors.kWhiteColor,
                             // width: 160.w,
                             height: 40.26.h,
                             borderRadius: 47.34.r,
@@ -770,7 +772,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                             textStyle: TextStyle(
                                 fontFamily: kTheArabicSansLight,
                                 fontSize: 20.85.sp,
-                                color: kPrimaryColor,
+                                color: AppColors.kPrimaryColor,
                                 fontWeight: FontWeight.w700)),
                       )
                     ],

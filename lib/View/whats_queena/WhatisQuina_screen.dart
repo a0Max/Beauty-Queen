@@ -32,7 +32,7 @@ class WhatisQuinaScreen extends StatelessWidget {
                   fontFamily: kTheArabicSansLight,
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
-                  color: kBlackColor,
+                  color: AppColors.kBlackColor,
                 ),
                 textAlign: TextAlign.justify,
               ),

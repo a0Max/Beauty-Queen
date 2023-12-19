@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../const/colors.dart';
-import '../const/images.dart';
-import '../const/styles.dart';
+import '../../const/app_colors.dart';
+import '../../const/colors.dart';
+import '../../const/images.dart';
+import '../../const/styles.dart';
 
 void showModalSheet(BuildContext context) {
   showModalBottomSheet(
@@ -14,7 +14,7 @@ void showModalSheet(BuildContext context) {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0,
-          backgroundColor: kWhiteColor,
+          backgroundColor: AppColors.kWhiteColor,
           actions: [
             IconButton(
                 onPressed: () {
@@ -23,14 +23,14 @@ void showModalSheet(BuildContext context) {
                 icon: Icon(
                   Icons.close,
                   size: 30.r,
-                  color: kPrimaryColor,
+                  color: AppColors.kPrimaryColor,
                 )),
           ],
           title: Text(
             "المحفظة",
             style: TextStyle(
                 fontFamily: kTheArabicSansLight,
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
                 fontSize: 23.74.sp,
                 fontWeight: FontWeight.w600),
           ),
@@ -48,7 +48,7 @@ void showModalSheet(BuildContext context) {
                   "تعبئة رصيد المحفظة ",
                   style: TextStyle(
                       fontFamily: kTheArabicSansLight,
-                      color: kPrimaryColor,
+                      color: AppColors.kPrimaryColor,
                       fontSize: 23.74.sp,
                       fontWeight: FontWeight.w600),
                 ),
@@ -60,7 +60,8 @@ void showModalSheet(BuildContext context) {
                   width: 398.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13.r),
-                      border: Border.all(width: 1, color: kPrimaryColor)),
+                      border:
+                          Border.all(width: 1, color: AppColors.kPrimaryColor)),
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -68,12 +69,12 @@ void showModalSheet(BuildContext context) {
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         errorBorder: InputBorder.none,
-                        fillColor: klPinkColor,
+                        fillColor: AppColors.klPinkColor,
                         prefixIcon: Image.asset(ksubtractImage),
                         hintText: 'أدخل رقم البطاقة',
                         hintStyle: TextStyle(
                             fontFamily: kTheArabicSansLight,
-                            color: kPrimaryColor,
+                            color: AppColors.kPrimaryColor,
                             fontSize: 21.1.sp,
                             fontWeight: FontWeight.w600)),
                   ),
@@ -85,14 +86,14 @@ void showModalSheet(BuildContext context) {
                   height: 68.h,
                   width: 398.w,
                   decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      color: AppColors.kPrimaryColor,
                       borderRadius: BorderRadius.circular(47.r)),
                   child: Center(
                     child: Text(
                       "تعبئة الرصيد ",
                       style: TextStyle(
                           fontFamily: kTheArabicSansLight,
-                          color: kWhiteColor,
+                          color: AppColors.kWhiteColor,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w700),
                     ),

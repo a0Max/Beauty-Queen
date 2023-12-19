@@ -1,26 +1,28 @@
 import 'package:beauty_queen/const/colors.dart';
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 const kPrimaryTextStyle = TextStyle(
-  color: kPrimaryColor,
+  color: AppColors.kPrimaryColor,
   fontFamily: 'Lama Sans',
   fontWeight: FontWeight.w700,
 );
 
 const kSecondaryTextStyle = TextStyle(
-  color: kSecondaryColor,
+  color: AppColors.kSecondaryColor,
   fontFamily: 'TheSans',
   fontWeight: FontWeight.w400,
 );
 
 const kHintTextStyle = TextStyle(
-  color: kHintTextColor,
+  color: AppColors.kHintTextColor,
   fontFamily: 'Lama Sans',
   fontWeight: FontWeight.w600,
 );
 
 const kWelcomeTextStyle = TextStyle(
-  color: kTextBlackColor,
+  color: AppColors.kTextBlackColor,
   fontSize: 29.02,
   fontFamily: 'TheSans',
   fontWeight: FontWeight.w400,
@@ -28,7 +30,7 @@ const kWelcomeTextStyle = TextStyle(
 );
 
 const kInfoTextStyle = TextStyle(
-  color: kTextGrayColor,
+  color: AppColors.kTextGrayColor,
   fontSize: 20.21,
   fontFamily: 'TheSansArabic',
   fontWeight: FontWeight.w300,
@@ -36,7 +38,7 @@ const kInfoTextStyle = TextStyle(
 );
 
 const kExistingAccountTextStyle = TextStyle(
-  color: kPrimaryColor,
+  color: AppColors.kPrimaryColor,
   fontSize: 21.21,
   fontFamily: 'Lama Sans',
   fontWeight: FontWeight.w700,
@@ -59,7 +61,7 @@ const kTheSansTextStyleGray = TextStyle(
   height: 1.5,
 );
 const kTajawalTextStyleBlack = TextStyle(
-  color: kBlackColor,
+  color: AppColors.kBlackColor,
   fontSize: 15,
   fontFamily: 'Tajawal',
   fontWeight: FontWeight.w700,

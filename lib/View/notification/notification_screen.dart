@@ -35,10 +35,10 @@ class _NotificationScreen extends State<NotificationScreen> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: kWhiteColor,
+        surfaceTintColor: AppColors.kWhiteColor,
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: kWhiteColor,
+        backgroundColor: AppColors.kWhiteColor,
         actions: [
           IconButton(
               onPressed: () {
@@ -47,14 +47,14 @@ class _NotificationScreen extends State<NotificationScreen> {
               icon: Icon(
                 Icons.arrow_forward_ios,
                 size: 30.r,
-                color: kBlackColor,
+                color: AppColors.kBlackColor,
               )),
         ],
         title: Text(
           tr('notification'),
           style: TextStyle(
               fontFamily: kTheArabicSansLight,
-              color: kBlackColor,
+              color: AppColors.kBlackColor,
               fontSize: 27.sp,
               fontWeight: FontWeight.w600),
         ),
@@ -90,7 +90,8 @@ class _NotificationScreen extends State<NotificationScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  controller.notificationList.value[index].text ??
+                                  controller
+                                          .notificationList.value[index].text ??
                                       '',
                                   style: const TextStyle(
                                     color: Colors.black,
@@ -101,25 +102,26 @@ class _NotificationScreen extends State<NotificationScreen> {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
-                                if(controller.notificationList.value[index]
-                                    .specialLine!=null)
-                                Text(
-                                  controller.notificationList.value[index]
-                                          .specialLine ??
-                                      '',
-                                  style: const TextStyle(
-                                    color: AppColors.mainColor,
-                                    fontSize: 17.15,
-                                    fontFamily: 'TheSans',
-                                    fontWeight: FontWeight.w400,
+                                if (controller.notificationList.value[index]
+                                        .specialLine !=
+                                    null)
+                                  Text(
+                                    controller.notificationList.value[index]
+                                            .specialLine ??
+                                        '',
+                                    style: const TextStyle(
+                                      color: AppColors.mainColor,
+                                      fontSize: 17.15,
+                                      fontFamily: 'TheSans',
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
                                 10.ph,
                                 Text(
-                                  controller
-                                          .notificationList.value[index].createdAt
+                                  controller.notificationList.value[index]
+                                          .createdAt
                                           .split('T')
                                           .first ??
                                       '',

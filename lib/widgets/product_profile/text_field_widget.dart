@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../const/app_colors.dart';
-
+import '../../const/app_colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String? hintText;
@@ -33,12 +32,12 @@ class TextFieldWidget extends StatelessWidget {
       this.rightWidget,
       this.obscureText,
       this.oldData,
-        this.borderRadius,
-        this.inputFormatters,
-        this.onFieldSubmitted,
+      this.borderRadius,
+      this.inputFormatters,
+      this.onFieldSubmitted,
       this.titleText,
       this.autoFoucs,
-        this.height,
+      this.height,
       this.maxLinesInt,
       this.leftWidget,
       this.textAlign,
@@ -71,26 +70,24 @@ class TextFieldWidget extends StatelessWidget {
               maxLength: maxLength,
               decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(borderRadius??10.0),
-                    borderSide: BorderSide(
-                        color: borderColor ?? AppColors.mainColor),
+                    borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+                    borderSide:
+                        BorderSide(color: borderColor ?? AppColors.mainColor),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(borderRadius??10.0),
-                    borderSide: BorderSide(
-                        color: borderColor ?? AppColors.greyColor),
+                    borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+                    borderSide:
+                        BorderSide(color: borderColor ?? AppColors.greyColor),
                   ),
-                  focusedErrorBorder:OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(borderRadius??10.0),
-                    borderSide: const BorderSide(
-                        color: AppColors.redColor),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+                    borderSide: const BorderSide(color: AppColors.redColor),
                   ),
                   suffixIcon: rightWidget,
                   filled: true,
                   errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius??10.0),
-                    borderSide: const BorderSide(
-                      color: AppColors.redColor),
+                    borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+                    borderSide: const BorderSide(color: AppColors.redColor),
                   ),
                   prefixIcon: leftWidget,
                   counterText: '',

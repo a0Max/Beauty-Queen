@@ -11,8 +11,8 @@ import 'package:pin_code_text_field/pin_code_text_field.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
-import '../../widgets/custom_button_2.dart';
-import '../../widgets/error_pop_up.dart';
+import '../../widgets/based/custom_button_2.dart';
+import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
 import 'enter_new_password.dart';
 
@@ -50,25 +50,30 @@ class _OtpPage extends State<OtpPage> {
       LoadingScreen.show(context);
 
       await otpController.checkTheOtp(sms: _otp ?? '');
-      if (widget.isForget ==true){
+      if (widget.isForget == true) {
         Get.back();
-        Get.to(()=>EnterNewPassword(phone: widget.phone,),);
-      }else {
+        Get.to(
+          () => EnterNewPassword(
+            phone: widget.phone,
+          ),
+        );
+      } else {
         Get.back();
-        Get.off(const CongratulationsPage(),);
+        Get.off(
+          const CongratulationsPage(),
+        );
       }
     } on DioException catch (e) {
       if (!context.mounted) return;
 
       Get.back();
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: tr('Error'));
-
+      ErrorPopUp(
+          message: (e.response?.data as Map).values.first, title: tr('Error'));
     } catch (e) {
       if (!context.mounted) return;
 
       Get.back();
       ErrorPopUp(message: tr('something_wrong'), title: tr('Error'));
-
     }
   }
 
@@ -105,11 +110,14 @@ class _OtpPage extends State<OtpPage> {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(AppImages.imageLockOfOtp,
+                    SvgPicture.asset(
+                      AppImages.imageLockOfOtp,
                       height: 50.h,
                       // width: 208.79.w,
                     ),
-                    const SizedBox(width: 20,),
+                    const SizedBox(
+                      width: 20,
+                    ),
                     Text(
                       tr('activate_code'),
                       style: TextStyle(
@@ -190,7 +198,8 @@ class _OtpPage extends State<OtpPage> {
                     defaultBorderColor: AppColors.kCDGColor,
                     hasTextBorderColor: AppColors.kCDGColor,
                     maxLength: 4,
-                    pinBoxOuterPadding: const EdgeInsets.symmetric(horizontal: 15),
+                    pinBoxOuterPadding:
+                        const EdgeInsets.symmetric(horizontal: 15),
                     hasError: false,
                     pinBoxColor: Theme.of(context).scaffoldBackgroundColor,
                     pinBoxRadius: 13,
@@ -201,8 +210,7 @@ class _OtpPage extends State<OtpPage> {
                     onDone: (text) {
                       checkOTP();
                     },
-                    pinBoxWidth:
-                        (MediaQuery.of(context).size.width - 180) / 4,
+                    pinBoxWidth: (MediaQuery.of(context).size.width - 180) / 4,
                     pinBoxHeight: 75,
                     wrapAlignment: WrapAlignment.spaceAround,
                     pinBoxDecoration:
@@ -218,35 +226,36 @@ class _OtpPage extends State<OtpPage> {
                 ),
 
                 SizedBox(height: 16.h), // Optional: add some vertical spacing
-                Obx(() =>GestureDetector(
-                  onTap: () {
-                    if (otpController.initialCountdownSeconds.value==0) {
-                      sendSmsToPhone();
-                    }
-                  },
-                  child:otpController.initialCountdownSeconds.value==0?
-                      Text(tr('Resend'),
-                        style: TextStyle(
-                          // color: AppColors.kCDGColor,
-                          fontSize: 16.50.sp,
-                          fontFamily: kTheArabicSansLight,
-                          fontWeight: FontWeight.w400,
-                          // Adjusted the height to 1.0 instead of 0 to prevent potential issues
-                        ),)
-                      :  Text(
-                    '${tr('will_send_the_otp_again')} ${"${(otpController.initialCountdownSeconds.value ~/ 60).toString().padLeft(2, '0')}:${(otpController.initialCountdownSeconds.value % 60).toString().padLeft(2, '0')}"}',
-                    textAlign:
-                        TextAlign.center, // Align the text to the center
-                    style: TextStyle(
-                      color: AppColors.kCDGColor,
-                      fontSize: 16.50.sp,
-                      fontFamily: kTheArabicSansLight,
-                      fontWeight: FontWeight.w400,
-                      // Adjusted the height to 1.0 instead of 0 to prevent potential issues
-                    ),
-                  ),
-                )
-                ),
+                Obx(() => GestureDetector(
+                      onTap: () {
+                        if (otpController.initialCountdownSeconds.value == 0) {
+                          sendSmsToPhone();
+                        }
+                      },
+                      child: otpController.initialCountdownSeconds.value == 0
+                          ? Text(
+                              tr('Resend'),
+                              style: TextStyle(
+                                // color: AppColors.kCDGColor,
+                                fontSize: 16.50.sp,
+                                fontFamily: kTheArabicSansLight,
+                                fontWeight: FontWeight.w400,
+                                // Adjusted the height to 1.0 instead of 0 to prevent potential issues
+                              ),
+                            )
+                          : Text(
+                              '${tr('will_send_the_otp_again')} ${"${(otpController.initialCountdownSeconds.value ~/ 60).toString().padLeft(2, '0')}:${(otpController.initialCountdownSeconds.value % 60).toString().padLeft(2, '0')}"}',
+                              textAlign: TextAlign
+                                  .center, // Align the text to the center
+                              style: TextStyle(
+                                color: AppColors.kCDGColor,
+                                fontSize: 16.50.sp,
+                                fontFamily: kTheArabicSansLight,
+                                fontWeight: FontWeight.w400,
+                                // Adjusted the height to 1.0 instead of 0 to prevent potential issues
+                              ),
+                            ),
+                    )),
                 SizedBox(
                   height: 12.h,
                 ),
