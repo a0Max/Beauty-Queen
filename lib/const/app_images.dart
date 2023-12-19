@@ -75,8 +75,8 @@ class AppImages{
   static const String badge1Image = "${mainPathToSvg}badge1.svg";
   static const String markerImage = "${mainPathToSvg}marker.svg";
   static const String badge1ImagePng = "${mainPathToImages}badge1.png";
-  static const String badge2ImagePng = "${mainPathToImages}badge1.png";
-  static const String badge3ImagePng = "${mainPathToImages}badge1.png";
+  static const String badge2ImagePng = "${mainPathToImages}badge2.png";
+  static const String badge3ImagePng = "${mainPathToImages}badge3.png";
   static const String queenaImage = "${mainPathToImages}queena.png";
   static const String lineOfBadgeImage = "${mainPathToImages}line_of_badge.png";
   static const String queenaSilverImage = "${mainPathToImages}queenaSilver.png";
