@@ -1,13 +1,22 @@
 import 'package:beauty_queen/const/app_images.dart';
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/images.dart';
 import '../../const/styles.dart';
+import '../../controller/wallet_controller/wallet_controller.dart';
+import '../based/error_pop_up.dart';
+import '../based/loading.dart';
 
 Future showModalSheet(BuildContext context) {
+  TextEditingController codeController = TextEditingController();
+  WalletController controller = Get.put(WalletController());
+
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -65,6 +74,7 @@ Future showModalSheet(BuildContext context) {
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
+                    controller: codeController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(13.r),
@@ -95,21 +105,55 @@ Future showModalSheet(BuildContext context) {
                   SizedBox(
                     height: 100.h,
                   ),
-                  Container(
-                    height: 68.h,
-                    width: MediaQuery.of(context).size.width,
-                    // margin: const EdgeInsets.symmetric(horizontal: 15),
-                    decoration: BoxDecoration(
-                        color: AppColors.kPrimaryColor,
-                        borderRadius: BorderRadius.circular(47.r)),
-                    child: Center(
-                      child: Text(
-                        "تعبئة الرصيد ",
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: AppColors.kWhiteColor,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w700),
+                  InkWell(
+                    onTap: () async {
+                      try {
+                        LoadingScreen.show(context);
+
+                        await controller.checkGiftCard(
+                            code: codeController.text);
+
+                        Navigator.of(context).pop();
+                        ErrorPopUp(
+                            message: tr('promoCodeAccepted2'),
+                            title: tr('promoCodeAccepted'),
+                            isError: false);
+                        Navigator.of(context).pop();
+                      } on DioException catch (e) {
+                        Navigator.of(context).pop();
+
+                        ErrorPopUp(
+                            message: (e.response?.data as Map).values.first,
+                            title: 'خطا');
+                      } catch (e) {
+                        Navigator.of(context).pop();
+
+                        if (e == 'Check Network connection') {
+                          ErrorPopUp(
+                              message: tr('network_connection'), title: 'خطا');
+                        } else {
+                          ErrorPopUp(
+                              message: tr('check_code_card'), title: 'خطا');
+                        }
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(47.r),
+                    child: Container(
+                      height: 68.h,
+                      width: MediaQuery.of(context).size.width,
+                      // margin: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(
+                          color: AppColors.kPrimaryColor,
+                          borderRadius: BorderRadius.circular(47.r)),
+                      child: Center(
+                        child: Text(
+                          "تعبئة الرصيد ",
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.kWhiteColor,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ),
                   ),

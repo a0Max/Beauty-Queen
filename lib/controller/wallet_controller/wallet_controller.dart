@@ -18,7 +18,7 @@ class WalletController extends GetxController {
 
       // walletList.value = await _api.getWalletTransactionsataRequest();
       List<TransactionsModel> walletData =
-          await _api.getWalletTransactionsataRequest();
+          await _api.getWalletTransactionsDataRequest();
       calculateTheTotalOfWallet(walletData: walletData);
     } on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
@@ -30,6 +30,10 @@ class WalletController extends GetxController {
       }
     }
     loadingWallet.value = false;
+  }
+
+  checkGiftCard({required String code}) async {
+    await _api.checkGiftCardTransactionsDataRequest(code: code);
   }
 
   calculateTheTotalOfWallet({required List<TransactionsModel> walletData}) {

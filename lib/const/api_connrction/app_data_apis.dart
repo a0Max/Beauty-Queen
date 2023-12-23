@@ -122,7 +122,7 @@ class AppDataApis extends ApiProvider {
     }
   }
 
-  Future<List<TransactionsModel>> getWalletTransactionsataRequest() async {
+  Future<List<TransactionsModel>> getWalletTransactionsDataRequest() async {
     final token = await getUserToken();
     final checkNetwork = await getCheckNetwork();
     final cookies = await getCookies();
@@ -146,6 +146,32 @@ class AppDataApis extends ApiProvider {
       response.data['transactions']
           .forEach((e) => l.add(TransactionsModel.fromJson(e)));
       return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+  Future checkGiftCardTransactionsDataRequest({required String code}) async {
+    final token = await getUserToken();
+    final checkNetwork = await getCheckNetwork();
+    final cookies = await getCookies();
+
+    if (checkNetwork == false) {
+      throw 'Check Network connection';
+    }
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.checkGiftCardCodeDataEndPoint}',
+      queryParameters: {'code': code},
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
     } else {
       throw response.data;
     }

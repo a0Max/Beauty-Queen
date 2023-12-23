@@ -188,5 +188,6 @@
   "promoCodeAccepted2": "تم التفعيل البروموكود بنجاح",
   "notification": "الإشعارات",
   "FAQ": "الأسئلة المتكررة",
-  "upgrade_success": "تم ترقيه حسابك بنجاح"
+  "upgrade_success": "تم ترقيه حسابك بنجاح",
+  "check_code_card": "يرجى التحقق من رقم البطاقة"
 }

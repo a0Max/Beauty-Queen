@@ -84,6 +84,7 @@ abstract class ApiProvider {
   static const String getOrderDetailsDataEndPoint = "get/orderDetails";
   static const String getOrderHistoryDataEndPoint = "get/orderHistory";
   static const String getFAQDataEndPoint = "getFAQ";
+  static const String checkGiftCardCodeDataEndPoint = "checkGiftCardCode";
   static const String getWalletTransactionsDataEndPoint =
       "get/walletTransactions";
 
