@@ -4,16 +4,23 @@ import 'package:beauty_queen/View/fav/favourtie_screen.dart';
 import 'package:beauty_queen/View/search/search_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/styles.dart';
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../View/user_profile/mydata_screen.dart';
 import '../../View/user_profile/normalprofile.dart';
 import '../../View/cart/cart_screen.dart';
 import '../../const/app_colors.dart';
+import '../../const/vars.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/search/search_controller.dart';
+import 'error_pop_up.dart';
+import 'loading.dart';
 
 class CustomAppBar extends StatelessWidget {
   final bool? isScrolled;
@@ -70,6 +77,8 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthController controller = Get.put(AuthController());
+
     return AppBar(
       elevation: 0,
       iconTheme: const IconThemeData(color: Colors.transparent),
@@ -88,33 +97,63 @@ class CustomAppBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.kPrimaryColor,
       centerTitle: true,
-      title: Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: 'خصومات و شحن مجاني بترقية حسابك الى كوينا',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.5.sp,
-                fontFamily: kTheArabicSansLight,
-                fontWeight: FontWeight.w600,
-                // height: 0,
+      title: controller.userData.value.accountType != AccountTypes.queena
+          ? GestureDetector(
+              onTap: () async {
+                try {
+                  LoadingScreen.show(context);
+
+                  await controller.upgradeAccount();
+
+                  Navigator.of(context).pop();
+                  ErrorPopUp(
+                      message: tr('update_success'),
+                      title: tr('upgrade_success'),
+                      isError: false);
+                  Get.to(const MyDataScreen(
+                    openToEdit: true,
+                  ));
+                } on DioException catch (e) {
+                  ErrorPopUp(
+                      message: (e.response?.data as Map).values.first,
+                      title: 'خطا');
+                } catch (e) {
+                  if (e == 'Check Network connection') {
+                    ErrorPopUp(message: tr('network_connection'), title: 'خطا');
+                  } else {
+                    ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+                  }
+                }
+              },
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'خصومات و شحن مجاني بترقية حسابك الى كوينا',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.5.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w600,
+                        // height: 0,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'سجلي الان',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.5.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.kWhiteColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            TextSpan(
-              text: 'سجلي الان',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.5.sp,
-                fontFamily: kTheArabicSansLight,
-                fontWeight: FontWeight.w600,
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.kWhiteColor,
-              ),
-            ),
-          ],
-        ),
-      ),
+            )
+          : const SizedBox(),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: Container(

@@ -122,7 +122,9 @@ class AuthController extends GetxController {
 
   RxBool allowToEdit = false.obs;
   applyToEdit() {
+    print("${allowToEdit.value}");
     allowToEdit.value = !(allowToEdit.value);
+    print("${allowToEdit.value}");
   }
 
   applyToSaveEdit(
@@ -213,5 +215,10 @@ class AuthController extends GetxController {
     print('googleAuth?.accessToken:${googleUser?.photoUrl}');
     print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
     print('googleAuth?.accessToken:${googleAuth?.accessToken}');
+  }
+
+  upgradeAccount() async {
+    await _api.upgradeUserStateRequest();
+    await getUserData();
   }
 }

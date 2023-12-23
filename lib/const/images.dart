@@ -11,5 +11,5 @@ const ksmallcardImage = 'assets/images/smallcard.png';
 const kpaperImage = 'assets/images/paper.png';
 const facepowderImage = 'assets/images/facepowder.png';
 const makeupboxImage = 'assets/images/box.png';
-const ksubtractImage = 'assets/images/Subtract.png';
+// const ksubtractImage = 'assets/images/Subtract.png';
 const kgiftImagetwo = 'assets/images/GiftCard.png';

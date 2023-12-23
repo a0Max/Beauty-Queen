@@ -305,4 +305,29 @@ class UserDataApis extends ApiProvider {
       throw response.data;
     }
   }
+
+  Future<void> upgradeUserStateRequest() async {
+    final cookies = await getCookies();
+    final token = await getUserToken();
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.upgradeUserDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+
+          // 'Country-Id': await _getCountryCode(),
+        },
+      ),
+    );
+    await setTheHeader(response.headers);
+
+    if (validResponse(response.statusCode!)) {
+    } else {
+      throw response.data;
+    }
+  }
 }
