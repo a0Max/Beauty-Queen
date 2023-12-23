@@ -18,6 +18,7 @@ SalesProductsModel _$SalesProductsModelFromJson(Map<String, dynamic> json) =>
       stock: json['stock'] as String?,
       price: json['price'] as String?,
       priceRangeFrom: json['price_range_from'] as String?,
+      isAddedToWishlist: json['is_added_to_wishlist'] as bool?,
       priceRangeTo: json['price_range_to'] as String?,
       maximumOrderQuantity: json['maximum_order_quantity'] as String?,
       isGift: json['is_gift'] as String?,
@@ -113,6 +114,7 @@ Map<String, dynamic> _$SalesProductsModelToJson(SalesProductsModel instance) =>
       'label_id': instance.labelId,
       'is_out_of_stock': instance.isOutOfStock,
       'is_complete_your_outfit': instance.isCompleteYourOutfit,
+      'is_added_to_wishlist': instance.isAddedToWishlist,
       'complete_your_outfit_description':
           instance.completeYourOutfitDescription,
       'is_banner': instance.isBanner,

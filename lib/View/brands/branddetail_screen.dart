@@ -275,8 +275,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                                           .value
                                           .products
                                           ?.data?[index]
-                                          .wishlist
-                                          ?.isNotEmpty ??
+                                          .isAddedToWishlist ??
                                       false,
                                 )),
                       ),

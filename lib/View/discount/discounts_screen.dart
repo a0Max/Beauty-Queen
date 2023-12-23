@@ -275,8 +275,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                                           .value
                                           .sales
                                           ?.data?[index]
-                                          .wishlist
-                                          ?.isNotEmpty ??
+                                          .isAddedToWishlist ??
                                       false,
                                 )),
                       ),

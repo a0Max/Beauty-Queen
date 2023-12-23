@@ -45,7 +45,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
   @override
   void initState() {
     super.initState();
-    isFavorite = widget.favorite ?? false;
+    isFavorite = widget.favorite;
   }
 
   @override
@@ -405,8 +405,6 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     fit: BoxFit.fill,
                   ),
                 ),
-
-                ///Todo: miss after add change and if i liked
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(

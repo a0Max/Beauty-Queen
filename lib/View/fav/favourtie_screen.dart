@@ -111,7 +111,7 @@ class _FavScreen extends State<FavScreen> {
                                         .wishlistList.value[index].product ??
                                     SalesProductsModel(),
                                 favorite: _controller.wishlistList.value[index]
-                                        .product.wishlist?.isNotEmpty ??
+                                        .product.isAddedToWishlist ??
                                     false,
                               ),
                             ],

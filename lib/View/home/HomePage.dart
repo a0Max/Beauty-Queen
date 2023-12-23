@@ -373,8 +373,7 @@ class _HomePageState extends State<HomePage> {
                                             .homeData
                                             .value
                                             .newArrivals?[index]
-                                            .wishlist
-                                            ?.isNotEmpty ??
+                                            .isAddedToWishlist ??
                                         false,
                                   );
                                 },
@@ -756,8 +755,7 @@ class _HomePageState extends State<HomePage> {
                                                     .homeData
                                                     .value
                                                     .salesProducts?[value]
-                                                    .wishlist
-                                                    ?.isNotEmpty ??
+                                                    .isAddedToWishlist ??
                                                 false,
                                           ),
                                           if ((_controller.homeData.value
@@ -782,8 +780,7 @@ class _HomePageState extends State<HomePage> {
                                                       .homeData
                                                       .value
                                                       .salesProducts?[value + 1]
-                                                      .wishlist
-                                                      ?.isNotEmpty ??
+                                                      .isAddedToWishlist ??
                                                   false,
                                             )
                                           }
@@ -938,8 +935,7 @@ class _HomePageState extends State<HomePage> {
                                                 .value
                                                 .discover
                                                 ?.products?[index]
-                                                .wishlist
-                                                ?.isNotEmpty ??
+                                                .isAddedToWishlist ??
                                             false,
                                       );
                                     },

@@ -223,11 +223,8 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                                       newArrival: controller
                                               .dataProducts.value[index] ??
                                           SalesProductsModel(),
-                                      favorite: controller
-                                              .dataProducts
-                                              .value[index]
-                                              .wishlist
-                                              ?.isNotEmpty ??
+                                      favorite: controller.dataProducts
+                                              .value[index].isAddedToWishlist ??
                                           false,
                                     )),
                           ),

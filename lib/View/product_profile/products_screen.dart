@@ -1004,8 +1004,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                     .value
                                                     .last
                                                     .p?[value]
-                                                    .wishlist
-                                                    ?.isNotEmpty ??
+                                                    .isAddedToWishlist ??
                                                 false,
                                           ),
                                           if ((controller.productData.value.last
@@ -1035,8 +1034,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       .value
                                                       .last
                                                       .p?[value + 1]
-                                                      .wishlist
-                                                      ?.isNotEmpty ??
+                                                      .isAddedToWishlist ??
                                                   false,
                                             )
                                           }
@@ -1111,8 +1109,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                     .value
                                                     .last
                                                     .sameBrandProducts?[value]
-                                                    .wishlist
-                                                    ?.isNotEmpty ??
+                                                    .isAddedToWishlist ??
                                                 false,
                                           ),
                                           if ((controller
@@ -1147,8 +1144,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       .last
                                                       .sameBrandProducts?[
                                                           value + 1]
-                                                      .wishlist
-                                                      ?.isNotEmpty ??
+                                                      .isAddedToWishlist ??
                                                   false,
                                             )
                                           }

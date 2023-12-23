@@ -105,82 +105,92 @@ class _SearchScreen extends State<SearchScreen> {
             child: Column(
               children: [
                 Container(
-                  alignment: Alignment.centerRight,
+                    alignment: Alignment.centerRight,
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: Text('${tr('result_of_search')}: ${_controller.keyWord.value}', style: TextStyle(
-                      fontFamily: kTheArabicSansLight,
-                      color: AppColors.kGrayColor,
-                      fontSize: 17.sp,
-                      fontWeight: FontWeight.w400,
-                    ),)),
+                    child: Text(
+                      '${tr('result_of_search')}: ${_controller.keyWord.value}',
+                      style: TextStyle(
+                        fontFamily: kTheArabicSansLight,
+                        color: AppColors.kGrayColor,
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )),
 
                 SizedBox(
                   height: 14.h,
                 ),
-                (_controller.isLoading.value == true)?
-                const ShimmerCategories()
-                    :(_controller.generalSearchData.value.brands?.isNotEmpty ??
-                    false) ?
-                  Container(
-                    height: 140.h,
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          _controller.generalSearchData.value.brands?.length ??
-                              0,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                            onTap: () {
-                              Get.to(BrandDetailScreen(
-                                brandId: int.parse(_controller.generalSearchData
-                                        .value.brands?[index].id
-                                        .toString() ??
-                                    '0'),
-                              ));
-                            },
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 10.h),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 1,
-                                          blurRadius: 8,
-                                          offset: const Offset(0, 1),
-                                        ),
-                                      ],
-                                    ),
-                                    child: CachedNetworkImage(
-                                      imageUrl: Connection.urlOfBrands(
-                                          image: _controller.generalSearchData
-                                                  .value.brands?[index].logo ??
-                                              ''),
-                                      height: 105.h,
-                                      width: 105.w,
-                                    ),
-                                  ),
-                                  Text(
-                                    _controller.generalSearchData.value
-                                            .brands?[index].titleAr ??
-                                        '',
-                                    style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
-                                      color: AppColors.kBlackColor,
-                                      fontSize: 12.64.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )
-                                ]));
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          25.pw,
-                    ),
-                  ):SizedBox(),
-
+                (_controller.isLoading.value == true)
+                    ? const ShimmerCategories()
+                    : (_controller.generalSearchData.value.brands?.isNotEmpty ??
+                            false)
+                        ? Container(
+                            height: 140.h,
+                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _controller
+                                      .generalSearchData.value.brands?.length ??
+                                  0,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      Get.to(BrandDetailScreen(
+                                        brandId: int.parse(_controller
+                                                .generalSearchData
+                                                .value
+                                                .brands?[index]
+                                                .id
+                                                .toString() ??
+                                            '0'),
+                                      ));
+                                    },
+                                    child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(top: 10.h),
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 8,
+                                                  offset: const Offset(0, 1),
+                                                ),
+                                              ],
+                                            ),
+                                            child: CachedNetworkImage(
+                                              imageUrl: Connection.urlOfBrands(
+                                                  image: _controller
+                                                          .generalSearchData
+                                                          .value
+                                                          .brands?[index]
+                                                          .logo ??
+                                                      ''),
+                                              height: 105.h,
+                                              width: 105.w,
+                                            ),
+                                          ),
+                                          Text(
+                                            _controller.generalSearchData.value
+                                                    .brands?[index].titleAr ??
+                                                '',
+                                            style: TextStyle(
+                                              fontFamily: kTheArabicSansLight,
+                                              color: AppColors.kBlackColor,
+                                              fontSize: 12.64.sp,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          )
+                                        ]));
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) => 25.pw,
+                            ),
+                          )
+                        : SizedBox(),
 
                 ///////////////filter////////////
                 Padding(
@@ -304,24 +314,37 @@ class _SearchScreen extends State<SearchScreen> {
                 ),
                 _controller.isLoading.value == true
                     ? Wrap(
-                  runSpacing: 7,
-                  children:
-                  List.generate(2, (index) => const ShimmerItem()),
-                )
-                    :Wrap(
-                  runSpacing: 7,
-                  children: List.generate(
-                      _controller.generalSearchData.value.products?.data?.length??0,
-                      (index) => CustomCardWidget(
-                            imageUrl: Connection.urlOfProducts(
-                                image: _controller
-                                        .generalSearchData.value.products?.data?[index].mainImage ??
-                                    ''),
-                            newArrival: _controller.generalSearchData.value.products?.data?[index] ??
-                                SalesProductsModel(),
-                        favorite: _controller.generalSearchData.value.products?.data?[index].wishlist?.isNotEmpty??false,
-                          )),
-                ),
+                        runSpacing: 7,
+                        children:
+                            List.generate(2, (index) => const ShimmerItem()),
+                      )
+                    : Wrap(
+                        runSpacing: 7,
+                        children: List.generate(
+                            _controller.generalSearchData.value.products?.data
+                                    ?.length ??
+                                0,
+                            (index) => CustomCardWidget(
+                                  imageUrl: Connection.urlOfProducts(
+                                      image: _controller
+                                              .generalSearchData
+                                              .value
+                                              .products
+                                              ?.data?[index]
+                                              .mainImage ??
+                                          ''),
+                                  newArrival: _controller.generalSearchData
+                                          .value.products?.data?[index] ??
+                                      SalesProductsModel(),
+                                  favorite: _controller
+                                          .generalSearchData
+                                          .value
+                                          .products
+                                          ?.data?[index]
+                                          .isAddedToWishlist ??
+                                      false,
+                                )),
+                      ),
                 const SizedBox(
                   height: 40,
                 ),
