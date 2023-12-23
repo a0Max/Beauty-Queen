@@ -214,9 +214,4 @@ class AuthController extends GetxController {
     print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
     print('googleAuth?.accessToken:${googleAuth?.accessToken}');
   }
-
-  sendMessageToManagies(
-      {required String phone, required String message}) async {
-    await _api.sendMessageRequest(phone: phone, message: message);
-  }
 }

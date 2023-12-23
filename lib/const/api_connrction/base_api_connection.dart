@@ -50,6 +50,7 @@ abstract class ApiProvider {
   static const String userEndPoint = "user";
   static const String logoutEndPoint = "logout";
   static const String updatePasswordEndPoint = "updatePassword";
+  static const String updateUserPasswordEndPoint = "updateUserPassword";
   static const String productEndPoint = "product";
   static const String addToCartProductEndPoint = "addToCart";
   static const String cartCounterProductEndPoint = "cartCounter";
@@ -82,6 +83,8 @@ abstract class ApiProvider {
   static const String getOrderDetailsDataEndPoint = "get/orderDetails";
   static const String getOrderHistoryDataEndPoint = "get/orderHistory";
   static const String getFAQDataEndPoint = "getFAQ";
+  static const String getWalletTransactionsDataEndPoint =
+      "get/walletTransactions";
 
 ////////////////////////////////////////////////////////////////////////////
 

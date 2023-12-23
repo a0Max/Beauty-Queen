@@ -1,14 +1,16 @@
 import 'package:get/get.dart';
 
+import '../../const/api_connrction/app_data_apis.dart';
 import '../../const/api_connrction/user_data_apis.dart';
 
-class AboutAppController extends GetxController{
+class AboutAppController extends GetxController {
   RxBool stateOfMenu = false.obs;
 
   void changeStateOfMenu() {
-      stateOfMenu.value = !stateOfMenu.value;
+    stateOfMenu.value = !stateOfMenu.value;
   }
-  final _api = UserDataApis();
+
+  final _api = AppDataApis();
 
   RxList aboutData = [].obs;
   geAbout() async {
@@ -23,5 +25,4 @@ class AboutAppController extends GetxController{
     myStickerData.value = await _api.getTransactionsataRequest();
     loadingOfMySticker.value = false;
   }
-
 }

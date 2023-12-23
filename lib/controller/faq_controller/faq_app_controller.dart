@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../const/api_connrction/app_data_apis.dart';
 import '../../const/api_connrction/user_data_apis.dart';
 
 class FAQAppController extends GetxController {
@@ -9,7 +10,7 @@ class FAQAppController extends GetxController {
     stateOfMenu.value = !stateOfMenu.value;
   }
 
-  final _api = UserDataApis();
+  final _api = AppDataApis();
   RxBool loadingOfMySticker = false.obs;
 
   RxList fAqData = [].obs;

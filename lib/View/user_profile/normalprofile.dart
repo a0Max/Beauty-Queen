@@ -5,6 +5,7 @@ import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,6 +14,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
+import '../../controller/wallet_controller/wallet_controller.dart';
 import '../../widgets/user_profile/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
@@ -22,13 +24,26 @@ import 'mysticker_screen.dart';
 import '../orders/orders_screen.dart';
 import 'contact_us_screen.dart';
 
-class NormalProfileScreen extends StatelessWidget {
+class NormalProfileScreen extends StatefulWidget {
   const NormalProfileScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    AuthController controller = Get.put(AuthController());
+  State<StatefulWidget> createState() {
+    return _NormalProfileScreen();
+  }
+}
 
+class _NormalProfileScreen extends State<NormalProfileScreen> {
+  AuthController controller = Get.put(AuthController());
+  WalletController controller2 = Get.put(WalletController());
+  @override
+  void initState() {
+    super.initState();
+    controller2.getAllWallet();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(() => Padding(
@@ -122,106 +137,110 @@ class NormalProfileScreen extends StatelessWidget {
                   ),
                   if (controller.userData.value.accountType ==
                       AccountTypes.queena) ...{
-                    Container(
-                      height: 98.h,
-                      width: 398.w,
-                      decoration: BoxDecoration(
-                        color: AppColors
-                            .kWhiteColor, // Set the fill color to white
-                        borderRadius: BorderRadius.circular(16.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(32, 0, 0, 0),
-                            blurRadius: 28.r,
-                            offset: const Offset(0, 4),
-                            spreadRadius: 0,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(right: 24.w),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: tr('wallet'),
-                                      style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        color: AppColors.kTextGrayColor,
-                                        fontSize: 16.58.sp,
-                                        fontWeight: FontWeight.w500,
-                                      )),
-                                  TextSpan(
-                                      text: '100.00  ',
-                                      style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        color: AppColors.kPrimaryColor,
-                                        fontSize: 28.45.sp,
-                                        fontWeight: FontWeight.w700,
-                                      )),
-                                  TextSpan(
-                                      text: tr('Del'),
-                                      style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        color: AppColors.kPrimaryColor,
-                                        fontSize: 24.45.sp,
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              showModalSheet(context);
-                            },
-                            child: Container(
-                              height: 41.56.h,
-                              width: 107.w,
-                              decoration: BoxDecoration(
-                                  color: AppColors.kPrimaryColor,
-                                  borderRadius: BorderRadius.circular(27.41.r)),
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 5.68.w),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 30.h,
-                                      width: 30.w,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColors.kWhiteColor,
-                                      ),
-                                      child: const Icon(
-                                        Icons.add,
-                                        color: AppColors.kPrimaryColor,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Text(
-                                      tr('fill'),
-                                      style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          color: AppColors.kWhiteColor,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    )
-                                  ],
+                    controller2.loadingWallet.value == true
+                        ? const CupertinoActivityIndicator()
+                        : Container(
+                            height: 98.h,
+                            width: 398.w,
+                            decoration: BoxDecoration(
+                              color: AppColors
+                                  .kWhiteColor, // Set the fill color to white
+                              borderRadius: BorderRadius.circular(16.r),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color.fromARGB(32, 0, 0, 0),
+                                  blurRadius: 28.r,
+                                  offset: const Offset(0, 4),
+                                  spreadRadius: 0,
                                 ),
-                              ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 24.w),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                            text: tr('wallet'),
+                                            style: TextStyle(
+                                              fontFamily: kTheArabicSansLight,
+                                              color: AppColors.kTextGrayColor,
+                                              fontSize: 16.58.sp,
+                                              fontWeight: FontWeight.w500,
+                                            )),
+                                        TextSpan(
+                                            text:
+                                                '${controller2.walletAmountState.value}  ',
+                                            style: TextStyle(
+                                              fontFamily: kTheArabicSansLight,
+                                              color: AppColors.kPrimaryColor,
+                                              fontSize: 28.45.sp,
+                                              fontWeight: FontWeight.w700,
+                                            )),
+                                        TextSpan(
+                                            text: tr('Del'),
+                                            style: TextStyle(
+                                              fontFamily: kTheArabicSansLight,
+                                              color: AppColors.kPrimaryColor,
+                                              fontSize: 24.45.sp,
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const Spacer(),
+                                GestureDetector(
+                                  onTap: () {
+                                    showModalSheet(context);
+                                  },
+                                  child: Container(
+                                    height: 41.56.h,
+                                    width: 107.w,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.kPrimaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(27.41.r)),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: 5.68.w),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 30.h,
+                                            width: 30.w,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: AppColors.kWhiteColor,
+                                            ),
+                                            child: const Icon(
+                                              Icons.add,
+                                              color: AppColors.kPrimaryColor,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          Text(
+                                            tr('fill'),
+                                            style: TextStyle(
+                                                fontFamily: kTheArabicSansLight,
+                                                color: AppColors.kWhiteColor,
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w700),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 19.w,
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            width: 19.w,
-                          ),
-                        ],
-                      ),
-                    ),
                   },
                   SizedBox(
                     height: 13.h,

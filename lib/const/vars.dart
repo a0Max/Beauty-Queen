@@ -15,11 +15,13 @@ abstract class Connection {
   static const googleLogin = '${baseURL}auth/google/redirect';
   static const magazineUrl = 'https://magazine.beautyqueen.ly/';
   static String urlOfSlider({required String image}) {
-   return "$storageURL/slides/$image";
+    return "$storageURL/slides/$image";
   }
+
   static String urlOfCategories({required String image}) {
     return "${storageURL}categories/$image";
   }
+
   static String urlOfProducts({required String image}) {
     return "${storageURL}products/$image";
   }
@@ -27,27 +29,35 @@ abstract class Connection {
   static String urlOfSpecial({required String image}) {
     return "${storageURL}special/$image";
   }
+
   static String urlOfOptions({required String image}) {
     return "${storageURL}options/$image";
   }
+
   static String urlOfBanner({required String image}) {
     return "${storageURL}banner/$image";
   }
+
   static String urlOfEvent({required String image}) {
     return "${storageURL}events/$image";
   }
+
   static String urlOfDiscover({required String image}) {
     return "${storageURL}discover/$image";
   }
+
   static String urlOfBrands({required String image}) {
     return "$storageURLOfBrand/$image";
   }
+
   static String urlOfBrands2({required String image}) {
     return "${storageURLOfBrand}brands/$image";
   }
+
   static String urlOfBrands3({required String image}) {
     return "${storageURL}Brands/$image";
   }
+
   static String urlOfStorage({required String image}) {
     return "$storageURL/$image";
   }
@@ -60,77 +70,75 @@ abstract class Connection {
     GridItemData(
       imageAsset: AppImages.khandgranateImage, // Replace with your image
       label: tr("kPerfumes"),
-      id:44,
+      id: 44,
     ),
     GridItemData(
       imageAsset: AppImages.kpaintImage, // Replace with your image
       label: tr('kMakeup'),
-      id:43,
+      id: 43,
     ),
     // Add more data for additional grid items
     GridItemData(
       imageAsset: AppImages.kshampooImage, // Replace with your image
       label: tr('kHaircare'),
-      id:46,
+      id: 46,
     ),
     GridItemData(
       imageAsset: AppImages.kSkincare, // Replace with your image
       label: tr('kSkincare'),
-      id:45,
+      id: 45,
     ),
     GridItemData(
       imageAsset: AppImages.khandpumpImage, // Replace with your image
       label: tr('kBodyCareAndRelaxation'),
-      id:48,
+      id: 48,
     ),
     GridItemData(
       imageAsset: AppImages.kPersonalCare, // Replace with your image
       label: tr('kPersonalCare'),
-      id:47,
+      id: 47,
     ),
 
     GridItemData(
       imageAsset: AppImages.contactLenses, // Replace with your image
       label: tr('contactـlenses'),
-      id:50,
+      id: 50,
     ),
     GridItemData(
       imageAsset: AppImages.shavingAndHairRemoval, // Replace with your image
       label: tr('Shaving_and_hair_removal'),
-      id:49,
+      id: 49,
     ),
 
     GridItemData(
       imageAsset: AppImages.knailImage, // Replace with your image
       label: tr('kNails'),
-      id:52,
+      id: 52,
     ),
     GridItemData(
       imageAsset: AppImages.eyelashes, // Replace with your image
       label: tr('kLashes'),
-      id:51,
+      id: 51,
     ),
     GridItemData(
       imageAsset: AppImages.kBladeImage, // Replace with your image
       label: tr('kElectricalAppliances'),
-      id:53,
+      id: 53,
     ),
     GridItemData(
       imageAsset: AppImages.kfirstaidImage, // Replace with your image
       label: tr('kPharmacyOfBeauty'),
-      id:183,
+      id: 183,
     ),
   ];
-
 }
 
-abstract class TypeOfOptions{
+abstract class TypeOfOptions {
   static const size = 'الحجم';
   static const color = 'اللون';
-
 }
 
-abstract class SortTypes{
+abstract class SortTypes {
   static const latest = 'latest';
   static const selling = 'selling';
   static const priceAsc = 'priceAsc';
@@ -143,28 +151,30 @@ abstract class SortTypes{
   };
 }
 
-abstract class AccountTypes{
+abstract class AccountTypes {
   static const queena = 'queena1';
 }
 
-abstract class LinkTypes{
+abstract class LinkTypes {
   static const brand = 'brand';
   static const product = 'product';
 }
 
-abstract class SocialMedia{
+abstract class SocialMedia {
   static const email = 'magazine@beautyqueen.ly';
   static const phone = '0919900224';
 }
 
-abstract class LocationMapLatLng{
+abstract class LocationMapLatLng {
   static const lat = 32.85027077679638;
   static const lng = 13.203011592591462;
 }
 
-
-abstract class OrderState{
+abstract class OrderState {
   static const shipped = 'shipped';
   static const cancelled = 'cancelled';
 }
 
+abstract class WalletState {
+  static const add = 'add';
+}

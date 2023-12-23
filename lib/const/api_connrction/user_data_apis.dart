@@ -251,31 +251,6 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-  Future<List<NotificationModel>> getNotificationsDataRequest() async {
-    final token = await getUserToken();
-    final cookies = await getCookies();
-
-    final response = await dio.get(
-      '${Connection.apiURL}${ApiProvider.getNotificationsDataEndPoint}',
-      options: Options(
-        headers: {
-          ...apiHeaders,
-          'Accept-Language': await ApiProvider.getAppLanguage(),
-          if (cookies != null) "Cookie": '$cookies',
-          if (token != null) "Authorization": 'Bearer $token',
-        },
-      ),
-    );
-    if (validResponse(response.statusCode!)) {
-      final List<NotificationModel> l = [];
-      response.data['notifications']
-          .forEach((e) => l.add(NotificationModel.fromJson(e)));
-      return l;
-    } else {
-      throw response.data;
-    }
-  }
-
   Future<List<CityAreaModel>> getAreaDataRequest({required int cityId}) async {
     final token = await getUserToken();
     final response = await dio.get(
@@ -306,7 +281,7 @@ class UserDataApis extends ApiProvider {
     final token = await getUserToken();
 
     final response = await dio.post(
-      '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
+      '${Connection.apiURL}${ApiProvider.updateUserPasswordEndPoint}',
       queryParameters: {
         "password": currentPassword,
         "new_password": newPassword,
@@ -326,102 +301,6 @@ class UserDataApis extends ApiProvider {
     await setTheHeader(response.headers);
 
     if (validResponse(response.statusCode!)) {
-    } else {
-      throw response.data;
-    }
-  }
-
-  Future<List<DepartmentsModel>> getAboutMEDataRequest() async {
-    final token = await getUserToken();
-
-    final response = await dio.get(
-      '${Connection.apiURL}${ApiProvider.getAboutTheStoreDataEndPoint}',
-      options: Options(
-        headers: {
-          ...apiHeaders,
-          'Accept-Language': await ApiProvider.getAppLanguage(),
-          // 'Country-Id': await _getCountryCode(),
-          if (token != null) "Authorization": 'Bearer $token',
-        },
-      ),
-    );
-    if (validResponse(response.statusCode!)) {
-      final List<DepartmentsModel> l = [];
-      response.data['departments']
-          .forEach((e) => l.add(DepartmentsModel.fromJson(e)));
-      return l;
-    } else {
-      throw response.data;
-    }
-  }
-
-  Future<bool> sendMessageRequest(
-      {required String phone, required String message}) async {
-    final token = await getUserToken();
-    final cookies = await getCookies();
-
-    final response = await dio.post(
-      '${Connection.apiURL}${ApiProvider.sendMessageDataEndPoint}',
-      queryParameters: {'phone': phone, 'message': message},
-      options: Options(
-        headers: {
-          ...apiHeaders,
-          'Accept-Language': await ApiProvider.getAppLanguage(),
-          if (cookies != null) "Cookie": '$cookies',
-          if (token != null) "Authorization": 'Bearer $token',
-        },
-      ),
-    );
-    if (validResponse(response.statusCode!)) {
-      return true;
-    } else {
-      throw response.data;
-    }
-  }
-
-  Future<List<TransactionsModel>> getTransactionsataRequest() async {
-    final token = await getUserToken();
-
-    final response = await dio.get(
-      '${Connection.apiURL}${ApiProvider.getQueenaTransactionsDataEndPoint}',
-      options: Options(
-        headers: {
-          ...apiHeaders,
-          'Accept-Language': await ApiProvider.getAppLanguage(),
-          // 'Country-Id': await _getCountryCode(),
-          if (token != null) "Authorization": 'Bearer $token',
-        },
-      ),
-    );
-    if (validResponse(response.statusCode!)) {
-      final List<TransactionsModel> l = [];
-      response.data['transactions']
-          .forEach((e) => l.add(TransactionsModel.fromJson(e)));
-      return l;
-    } else {
-      throw response.data;
-    }
-  }
-
-  Future<List<FAQModel>> getFAQDataRequest() async {
-    final token = await getUserToken();
-    final cookies = await getCookies();
-
-    final response = await dio.get(
-      '${Connection.apiURL}${ApiProvider.getFAQDataEndPoint}',
-      options: Options(
-        headers: {
-          ...apiHeaders,
-          'Accept-Language': await ApiProvider.getAppLanguage(),
-          if (cookies != null) "Cookie": '$cookies',
-          if (token != null) "Authorization": 'Bearer $token',
-        },
-      ),
-    );
-    if (validResponse(response.statusCode!)) {
-      final List<FAQModel> l = [];
-      response.data['questions'].forEach((e) => l.add(FAQModel.fromJson(e)));
-      return l;
     } else {
       throw response.data;
     }

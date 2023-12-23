@@ -8,6 +8,7 @@ import '../../const/app_images.dart';
 import 'package:flutter/material.dart';
 
 import '../../controller/auth_controller/auth_controler.dart';
+import '../../controller/message_controller/message_controler.dart';
 import '../based/button_widget.dart';
 import '../based/loading.dart';
 import '../based/error_pop_up.dart';
@@ -21,7 +22,7 @@ class CommentWidget extends StatelessWidget {
   TextEditingController messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final AuthController _controller = Get.put(AuthController());
+    final MessageController _controller = Get.put(MessageController());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

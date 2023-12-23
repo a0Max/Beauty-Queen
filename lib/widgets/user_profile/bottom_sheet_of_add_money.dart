@@ -1,108 +1,124 @@
+import 'package:beauty_queen/const/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/images.dart';
 import '../../const/styles.dart';
 
-void showModalSheet(BuildContext context) {
-  showModalBottomSheet(
+Future showModalSheet(BuildContext context) {
+  return showModalBottomSheet(
     context: context,
-    builder: (BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          backgroundColor: AppColors.kWhiteColor,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.close,
-                  size: 30.r,
-                  color: AppColors.kPrimaryColor,
-                )),
-          ],
-          title: Text(
-            "المحفظة",
-            style: TextStyle(
-                fontFamily: kTheArabicSansLight,
-                color: AppColors.kBlackColor,
-                fontSize: 23.74.sp,
-                fontWeight: FontWeight.w600),
-          ),
-          centerTitle: true,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    builder: (context) => SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 50.h,
-                ),
-                Text(
-                  "تعبئة رصيد المحفظة ",
-                  style: TextStyle(
-                      fontFamily: kTheArabicSansLight,
-                      color: AppColors.kPrimaryColor,
-                      fontSize: 23.74.sp,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Container(
-                  height: 68.29.h,
-                  width: 398.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.r),
-                      border:
-                          Border.all(width: 1, color: AppColors.kPrimaryColor)),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        disabledBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        fillColor: AppColors.klPinkColor,
-                        prefixIcon: Image.asset(ksubtractImage),
-                        hintText: 'أدخل رقم البطاقة',
-                        hintStyle: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: AppColors.kPrimaryColor,
-                            fontSize: 21.1.sp,
-                            fontWeight: FontWeight.w600)),
-                  ),
-                ),
-                SizedBox(
-                  height: 100.h,
-                ),
-                Container(
-                  height: 68.h,
-                  width: 398.w,
-                  decoration: BoxDecoration(
-                      color: AppColors.kPrimaryColor,
-                      borderRadius: BorderRadius.circular(47.r)),
-                  child: Center(
-                    child: Text(
-                      "تعبئة الرصيد ",
-                      style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          color: AppColors.kWhiteColor,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 15),
+                    // height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(),
+                        Text(
+                          "المحفظة",
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.kBlackColor,
+                              fontSize: 23.74.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              size: 30.r,
+                              color: AppColors.kPrimaryColor,
+                            )),
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  Text(
+                    "تعبئة رصيد المحفظة ",
+                    style: TextStyle(
+                        fontFamily: kTheArabicSansLight,
+                        color: AppColors.kPrimaryColor,
+                        fontSize: 23.74.sp,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(13.r),
+                          borderSide: BorderSide(
+                              width: 1.w, color: AppColors.kPinkColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(13.r),
+                          borderSide: BorderSide(
+                              width: 1.w, color: AppColors.kPinkColor),
+                        ),
+                        filled: true,
+                        prefixIcon: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: SvgPicture.asset(
+                            AppImages.subtractImage,
+                            // width: 35.w,
+                          ),
+                        ),
+                        prefixIconConstraints: BoxConstraints(minWidth: 30.w),
+                        hintText: 'أدخل رقم البطاقة',
+                        hintStyle: const TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            color: AppColors.kPrimaryColor,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                  SizedBox(
+                    height: 100.h,
+                  ),
+                  Container(
+                    height: 68.h,
+                    width: MediaQuery.of(context).size.width,
+                    // margin: const EdgeInsets.symmetric(horizontal: 15),
+                    decoration: BoxDecoration(
+                        color: AppColors.kPrimaryColor,
+                        borderRadius: BorderRadius.circular(47.r)),
+                    child: Center(
+                      child: Text(
+                        "تعبئة الرصيد ",
+                        style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            color: AppColors.kWhiteColor,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
-      );
-    },
+      ),
+    ),
   );
 }
