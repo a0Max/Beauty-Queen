@@ -1,10 +1,10 @@
-
 import 'package:beauty_queen/const/vars.dart';
 import 'package:beauty_queen/models/notification_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../models/city_area_model.dart';
 import '../../models/departments_model.dart';
+import '../../models/faq_model.dart';
 import '../../models/transactions_model.dart';
 import '../../models/user_model.dart';
 import 'base_api_connection.dart';
@@ -117,29 +117,31 @@ class UserDataApis extends ApiProvider {
   }
 
   Future<void> forgetPasswordRequest(
-      {required String phone, required String password, required String rePassword}) async {
+      {required String phone,
+      required String password,
+      required String rePassword}) async {
     //updatePassword
     final cookies = await getCookies();
     final response = await dio.post(
-        '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
-        queryParameters: {
-          "phone": phone,
-          "password": password,
-          'password_confirmation': rePassword
+      '${Connection.apiURL}${ApiProvider.updatePasswordEndPoint}',
+      queryParameters: {
+        "phone": phone,
+        "password": password,
+        'password_confirmation': rePassword
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          // 'Content-Type': "text/html; charset=UTF-8"
         },
-        options: Options(
-          headers: {
-            ...apiHeaders,
-            'Accept-Language': await ApiProvider.getAppLanguage(),
-            if (cookies != null) "Cookie": '$cookies',
-            // 'Content-Type': "text/html; charset=UTF-8"
-          },
-        ),
-      );
-      if (validResponse(response.statusCode!)) {
-      } else {
-        throw response.data;
-      }
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+    } else {
+      throw response.data;
+    }
   }
 
   Future<UserModel> userDataRequest() async {
@@ -192,25 +194,24 @@ class UserDataApis extends ApiProvider {
     required String? brand1,
     required String? brand2,
     required String? brand3,
-}) async {
+  }) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.updateUserDataDataEndPoint}',
       queryParameters: {
-        'name':name,
-        'last_name':lastName,
-        'birth_date':birthDate,
-        'phone':phone,
-        'city_id':cityId,
-        'area_id':areaId,
-        'phone2':phone2,
-        'email':email,
-        'whatsapp_phone':whatsappPhone,
-        'brand1':brand1,
-        'brand2':brand2,
-        'brand3':brand3,
-
+        'name': name,
+        'last_name': lastName,
+        'birth_date': birthDate,
+        'phone': phone,
+        'city_id': cityId,
+        'area_id': areaId,
+        'phone2': phone2,
+        'email': email,
+        'whatsapp_phone': whatsappPhone,
+        'brand1': brand1,
+        'brand2': brand2,
+        'brand3': brand3,
       },
       options: Options(
         headers: {
@@ -250,7 +251,6 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-
   Future<List<NotificationModel>> getNotificationsDataRequest() async {
     final token = await getUserToken();
     final cookies = await getCookies();
@@ -268,7 +268,8 @@ class UserDataApis extends ApiProvider {
     );
     if (validResponse(response.statusCode!)) {
       final List<NotificationModel> l = [];
-      response.data['notifications'].forEach((e) => l.add(NotificationModel.fromJson(e)));
+      response.data['notifications']
+          .forEach((e) => l.add(NotificationModel.fromJson(e)));
       return l;
     } else {
       throw response.data;
@@ -297,9 +298,10 @@ class UserDataApis extends ApiProvider {
     }
   }
 
-
   Future<void> updatePasswordRequest(
-      {required String currentPassword, required String newPassword, required String reNewPassword}) async {
+      {required String currentPassword,
+      required String newPassword,
+      required String reNewPassword}) async {
     final cookies = await getCookies();
     final token = await getUserToken();
 
@@ -324,7 +326,6 @@ class UserDataApis extends ApiProvider {
     await setTheHeader(response.headers);
 
     if (validResponse(response.statusCode!)) {
-
     } else {
       throw response.data;
     }
@@ -346,24 +347,22 @@ class UserDataApis extends ApiProvider {
     );
     if (validResponse(response.statusCode!)) {
       final List<DepartmentsModel> l = [];
-      response.data['departments'].forEach((e) => l.add(DepartmentsModel.fromJson(e)));
+      response.data['departments']
+          .forEach((e) => l.add(DepartmentsModel.fromJson(e)));
       return l;
     } else {
       throw response.data;
     }
   }
 
-
-  Future<bool> sendMessageRequest({required String phone, required String message}) async {
+  Future<bool> sendMessageRequest(
+      {required String phone, required String message}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
 
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.sendMessageDataEndPoint}',
-      queryParameters: {
-        'phone': phone,
-        'message': message
-      },
+      queryParameters: {'phone': phone, 'message': message},
       options: Options(
         headers: {
           ...apiHeaders,
@@ -396,11 +395,35 @@ class UserDataApis extends ApiProvider {
     );
     if (validResponse(response.statusCode!)) {
       final List<TransactionsModel> l = [];
-      response.data['transactions'].forEach((e) => l.add(TransactionsModel.fromJson(e)));
+      response.data['transactions']
+          .forEach((e) => l.add(TransactionsModel.fromJson(e)));
       return l;
     } else {
       throw response.data;
     }
   }
 
+  Future<List<FAQModel>> getFAQDataRequest() async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getFAQDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      final List<FAQModel> l = [];
+      response.data['questions'].forEach((e) => l.add(FAQModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+  }
 }

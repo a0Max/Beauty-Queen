@@ -16,6 +16,7 @@ import '../../controller/auth_controller/auth_controler.dart';
 import '../../widgets/user_profile/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
+import '../faq/faq_app.dart';
 import '../notification/notification_screen.dart';
 import 'mysticker_screen.dart';
 import '../orders/orders_screen.dart';
@@ -500,6 +501,39 @@ class NormalProfileScreen extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const ContactUsScreen()));
+                            },
+                            icon: const Icon(Icons.arrow_forward_ios))
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: AppColors.kDividerrColor,
+                    thickness: 2,
+                  ),
+                  InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
+                      Get.to(const FAQScreen());
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(AppImages.infoCircleImage),
+                        SizedBox(
+                          width: 25.w,
+                        ),
+                        Text(
+                          tr('FAQ'),
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.kBlackColor,
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () {
+                              Get.to(const FAQScreen());
                             },
                             icon: const Icon(Icons.arrow_forward_ios))
                       ],

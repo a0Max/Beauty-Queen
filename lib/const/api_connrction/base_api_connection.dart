@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/user_model.dart';
 
-
 abstract class ApiProvider {
   //Singleton
   ApiProvider() {
@@ -69,17 +68,20 @@ abstract class ApiProvider {
   static const String getAreasDataEndPoint = "get/areas";
   static const String updateUserPasswordDataEndPoint = "updateUserPassword";
   static const String updateUserDataDataEndPoint = "updateUserData";
-  static const String getCurrentCategoryChildrenDataEndPoint = "getCurrentCategoryChildren";
+  static const String getCurrentCategoryChildrenDataEndPoint =
+      "getCurrentCategoryChildren";
   static const String getQueenaProductsDataEndPoint = "get/queenaProducts";
   static const String getQueenaOffersDataEndPoint = "get/queenaOffers";
   static const String getAboutTheStoreDataEndPoint = "getAboutTheStore";
   static const String sendMessageDataEndPoint = "sendMessage";
   static const String getEventsDataEndPoint = "get/events";
   static const String getEventDataEndPoint = "get/event";
-  static const String getQueenaTransactionsDataEndPoint = "get/queenaTransactions";
+  static const String getQueenaTransactionsDataEndPoint =
+      "get/queenaTransactions";
   static const String checkPromoCodeDataEndPoint = "checkPromoCode";
   static const String getOrderDetailsDataEndPoint = "get/orderDetails";
   static const String getOrderHistoryDataEndPoint = "get/orderHistory";
+  static const String getFAQDataEndPoint = "getFAQ";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -91,19 +93,18 @@ abstract class ApiProvider {
 
   setTheHeader(Headers headers) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String cookies =(headers['set-cookie']?.first??'').split(";").first;
+    String cookies = (headers['set-cookie']?.first ?? '').split(";").first;
 
     prefs.setString('set-cookie', cookies);
   }
 
   getCookies() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-   return prefs.getString('set-cookie');
+    return prefs.getString('set-cookie');
   }
 ////////////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////// UTILS /////////////////////////////////////
-
 
   static Future<String> getAppLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -119,9 +120,9 @@ abstract class ApiProvider {
       return prefs.getString('locale')!.split('_')[0];
     }
   }
+
   getCheckNetwork() async {
     bool result = await InternetConnectionChecker().hasConnection;
     return result;
   }
 }
-
