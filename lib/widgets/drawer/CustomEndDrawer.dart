@@ -20,6 +20,7 @@ import '../../View/user_profile/normalprofile.dart';
 import '../../View/orders/orders_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/queen_controller/queen_controller.dart';
 
 class MyEndDrawer extends StatelessWidget {
   const MyEndDrawer({super.key});
@@ -117,7 +118,9 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const AlKasamScreen(showBack: true,));
+                  Get.to(const AlKasamScreen(
+                    showBack: true,
+                  ));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -142,7 +145,9 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const BrandScreen(showBack: true,));
+                  Get.to(const BrandScreen(
+                    showBack: true,
+                  ));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -167,7 +172,9 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const DiscountScreen(showBack: true,));
+                  Get.to(const DiscountScreen(
+                    showBack: true,
+                  ));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -192,7 +199,9 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const GuidanceScreen(showBack: true,));
+                  Get.to(const GuidanceScreen(
+                    showBack: true,
+                  ));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -242,8 +251,11 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  controller.updateCurrentCategoryId(newId:183, getChild: false);
-                  Get.to(const FliterScreen(categoryId: 183,));
+                  controller.updateCurrentCategoryId(
+                      newId: 183, getChild: false);
+                  Get.to(const FliterScreen(
+                    categoryId: 183,
+                  ));
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -268,9 +280,12 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  controller.updateCurrentCategoryId(newId:53, getChild: false);
-                  Get.to(const FliterScreen(categoryId: 53,));
-                  },
+                  controller.updateCurrentCategoryId(
+                      newId: 53, getChild: false);
+                  Get.to(const FliterScreen(
+                    categoryId: 53,
+                  ));
+                },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
                   child: Text(
@@ -342,7 +357,11 @@ class MyEndDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const QuinaprogramScreen());
+                  Get.to(
+                      const QuinaprogramScreen(
+                        reCreate: true,
+                      ),
+                      routeName: '/QuinaprogramScreen');
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
@@ -398,8 +417,7 @@ class MyEndDrawer extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const ContactUsScreen()));
+                            builder: (context) => const ContactUsScreen()));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 20.w, top: 5.h),
@@ -429,8 +447,7 @@ class MyEndDrawer extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const AboutAppScreen()));
+                            builder: (context) => const AboutAppScreen()));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 20.w, top: 5.h),

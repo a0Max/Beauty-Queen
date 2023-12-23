@@ -16,6 +16,7 @@ class QueenController extends GetxController
 
   @override
   void onInit() {
+    print('onInit');
     tabsController = TabController(length: 3, vsync: this);
     tabsController!.animation?.addListener(() {
       final tabIndex = ((tabsController!.animation?.value ?? 0) + 0.5).floor();
@@ -27,6 +28,11 @@ class QueenController extends GetxController
   }
 
   @override
+  void refresh() {
+    print('refresh');
+  }
+
+  @override
   void onClose() {
     tabsController!.dispose();
     super.onClose();
@@ -34,7 +40,7 @@ class QueenController extends GetxController
 
   RxInt currentTab = 0.obs;
 
-  void changeTab(int tabIndex) {
+  Future<void> changeTab(int tabIndex) async {
     currentTab.value = tabIndex;
   }
 

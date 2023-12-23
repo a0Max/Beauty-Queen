@@ -11,12 +11,14 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
+import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
 import '../../widgets/product_profile/details_static.dart';
 import '../../widgets/shimmer/shimmer_profile.dart';
+import '../whats_queena/Quinaprogram_screen.dart';
 import 'tab_screen_two.dart';
 
 class ItemProfilePage extends StatefulWidget {
@@ -53,6 +55,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
       canPop: true,
       onPopInvoked: (val) {
         controller.removeLast();
+        print(Get.previousRoute);
       },
       child: Scaffold(
         body: Obx(() => Column(
@@ -312,7 +315,13 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                     .offerPrice
                                                                     ?.split('')
                                                                     .first !=
-                                                                '0') ...{
+                                                                '0' &&
+                                                            controller
+                                                                    .productData
+                                                                    .last
+                                                                    .product
+                                                                    .isQueena !=
+                                                                "1") ...{
                                                           SizedBox(
                                                               width: (MediaQuery.of(
                                                                               context)
@@ -442,9 +451,67 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                         )
                                       : SizedBox(),
                               SizedBox(
-                                height: 27.h,
+                                height: 17.h,
                               ),
                               // ///////////container//////////
+                              if (controller.isLoading.value != true &&
+                                  ((controller.productData?.last?.product
+                                              ?.isQueena ==
+                                          "1") ??
+                                      false)) ...{
+                                Row(
+                                  children: [
+                                    Text(tr('collect')),
+                                    Text(
+                                      " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
+                                      style:
+                                          TextStyle(color: AppColors.mainColor),
+                                    ),
+                                    Text(tr('con_collect')),
+                                  ],
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             const QuinaprogramScreen()));
+                                    // final QueenController tabcontroller =
+                                    //     Get.put(QueenController());
+                                    // tabcontroller.currentTab.update((val) {
+                                    //   val = 0;
+                                    // });
+                                    // (0);
+
+                                    final QueenController myController =
+                                        Get.put(QueenController());
+                                    if (Get.previousRoute ==
+                                        '/QuinaprogramScreen') {
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      Get.to(const QuinaprogramScreen(),
+                                          routeName: '/QuinaprogramScreen');
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text('برنامج كوينا للولاء'),
+                                      Text('التفاصيل',
+                                          style: TextStyle(
+                                            color: AppColors.mainColor,
+                                            decoration:
+                                                TextDecoration.underline,
+                                            decorationColor:
+                                                AppColors.mainColor,
+                                          )),
+                                    ],
+                                  ),
+                                )
+                              },
+                              SizedBox(
+                                height: 10.h,
+                              ),
                               (controller.productData.isNotEmpty ?? false)
                                   ? SizedBox(
                                       width: MediaQuery.of(context).size.width,
