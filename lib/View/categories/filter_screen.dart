@@ -392,7 +392,8 @@ class _FliterScreenState extends State<FliterScreen> {
                                           .value
                                           .products
                                           ?.data?[index]
-                                          .isAddedToWishlist ??
+                                          .wishlist
+                                          ?.isNotEmpty ??
                                       false,
                                 )),
                       ),

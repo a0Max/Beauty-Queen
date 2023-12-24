@@ -412,7 +412,8 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                                           .value
                                           .gifts
                                           ?.data?[index]
-                                          .isAddedToWishlist ??
+                                          .wishlist
+                                          ?.isNotEmpty ??
                                       false,
                                 )),
                       ),

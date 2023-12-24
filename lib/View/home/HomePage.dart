@@ -373,7 +373,8 @@ class _HomePageState extends State<HomePage> {
                                             .homeData
                                             .value
                                             .newArrivals?[index]
-                                            .isAddedToWishlist ??
+                                            .wishlist
+                                            ?.isNotEmpty ??
                                         false,
                                   );
                                 },
@@ -754,8 +755,9 @@ class _HomePageState extends State<HomePage> {
                                             favorite: _controller
                                                     .homeData
                                                     .value
-                                                    .salesProducts?[value]
-                                                    .isAddedToWishlist ??
+                                                    .newArrivals?[index]
+                                                    .wishlist
+                                                    ?.isNotEmpty ??
                                                 false,
                                           ),
                                           if ((_controller.homeData.value
@@ -779,8 +781,9 @@ class _HomePageState extends State<HomePage> {
                                               favorite: _controller
                                                       .homeData
                                                       .value
-                                                      .salesProducts?[value + 1]
-                                                      .isAddedToWishlist ??
+                                                      .newArrivals?[index + 1]
+                                                      .wishlist
+                                                      ?.isNotEmpty ??
                                                   false,
                                             )
                                           }
@@ -933,9 +936,9 @@ class _HomePageState extends State<HomePage> {
                                         favorite: _controller
                                                 .homeData
                                                 .value
-                                                .discover
-                                                ?.products?[index]
-                                                .isAddedToWishlist ??
+                                                .newArrivals?[index]
+                                                .wishlist
+                                                ?.isNotEmpty ??
                                             false,
                                       );
                                     },

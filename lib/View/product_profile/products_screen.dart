@@ -464,8 +464,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     Text(tr('collect')),
                                     Text(
                                       " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
-                                      style:
-                                          const TextStyle(color: AppColors.mainColor),
+                                      style: const TextStyle(
+                                          color: AppColors.mainColor),
                                     ),
                                     Text(tr('con_collect')),
                                   ],
@@ -1071,7 +1071,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                     .value
                                                     .last
                                                     .p?[value]
-                                                    .isAddedToWishlist ??
+                                                    .wishlist
+                                                    ?.isNotEmpty ??
                                                 false,
                                           ),
                                           if ((controller.productData.value.last
@@ -1101,7 +1102,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       .value
                                                       .last
                                                       .p?[value + 1]
-                                                      .isAddedToWishlist ??
+                                                      .wishlist
+                                                      ?.isNotEmpty ??
                                                   false,
                                             )
                                           }
@@ -1176,7 +1178,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                     .value
                                                     .last
                                                     .sameBrandProducts?[value]
-                                                    .isAddedToWishlist ??
+                                                    .wishlist
+                                                    ?.isNotEmpty ??
                                                 false,
                                           ),
                                           if ((controller
@@ -1211,7 +1214,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       .last
                                                       .sameBrandProducts?[
                                                           value + 1]
-                                                      .isAddedToWishlist ??
+                                                      .wishlist
+                                                      ?.isNotEmpty ??
                                                   false,
                                             )
                                           }

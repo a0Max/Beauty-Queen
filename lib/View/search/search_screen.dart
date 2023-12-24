@@ -341,7 +341,8 @@ class _SearchScreen extends State<SearchScreen> {
                                           .value
                                           .products
                                           ?.data?[index]
-                                          .isAddedToWishlist ??
+                                          .wishlist
+                                          ?.isNotEmpty ??
                                       false,
                                 )),
                       ),
