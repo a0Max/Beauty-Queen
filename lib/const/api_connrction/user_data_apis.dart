@@ -326,4 +326,31 @@ class UserDataApis extends ApiProvider {
       throw response.data;
     }
   }
+
+  Future<UserModel> sendRequestOfGoogleLogin(
+      {required String googleId,
+      required String email,
+      required String? name}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.socialGoogleDataEndPoint}',
+      queryParameters: {'name': name, 'google_id': googleId, 'email': email},
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return UserModel.fromMap(
+        response.data,
+      );
+    } else {
+      throw response.data;
+    }
+  }
 }

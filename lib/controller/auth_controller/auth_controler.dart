@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:beauty_queen/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,7 @@ import '../../const/api_connrction/user_data_apis.dart';
 import '../../models/brand_model.dart';
 import '../../models/city_area_model.dart';
 import '../../widgets/based/error_pop_up.dart';
+import '../../widgets/based/loading.dart';
 
 class AuthController extends GetxController {
   var obscureText = true.obs;
@@ -216,6 +218,10 @@ class AuthController extends GetxController {
       print('googleAuth?.accessToken:${googleUser?.photoUrl}');
       print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
       print('googleAuth?.accessToken:${googleAuth?.accessToken}');
+      await googleLoginData(
+          googleId: googleAuth?.accessToken ?? '',
+          email: googleUser?.email ?? '',
+          name: googleUser?.displayName ?? '');
     } catch (e) {
       print('errir:$e');
       print('errir:${e.runtimeType}');
@@ -225,5 +231,33 @@ class AuthController extends GetxController {
   upgradeAccount() async {
     await _api.upgradeUserStateRequest();
     await getUserData();
+  }
+
+  googleLoginData(
+      {required String googleId,
+      required String email,
+      required String name}) async {
+    var context = Get.context;
+
+    try {
+      LoadingScreen.show(context!);
+      userData.value = await _api.sendRequestOfGoogleLogin(
+          googleId: googleId, email: email, name: name);
+      getUserData();
+      Get.back();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MainView(),
+          ),
+          (route) => false);
+    } on DioException catch (e) {
+      Get.back();
+
+      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
+    } catch (e) {
+      Get.back();
+      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
+    }
   }
 }
