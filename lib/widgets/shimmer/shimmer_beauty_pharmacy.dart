@@ -20,7 +20,7 @@ class ShimmerBeautyPharmacy extends StatelessWidget {
               width: kScreenWidth,
               margin: const EdgeInsets.only(bottom: 170),
               height: 200.h,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white
               ),
             ),

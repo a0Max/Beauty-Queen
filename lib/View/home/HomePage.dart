@@ -886,7 +886,7 @@ class _HomePageState extends State<HomePage> {
                                     Get.put(AlkasamController());
                                 controller.updateCurrentCategoryId(
                                     newId: 187, getChild: false);
-                                Get.to(FliterScreen(
+                                Get.to(const FliterScreen(
                                   categoryId: 187,
                                 ));
                               },

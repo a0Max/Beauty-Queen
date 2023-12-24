@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 
-import '../../models/general_search_model.dart';
 import '../../models/order_details_model.dart';
 import '../../models/order_model.dart';
 import '../vars.dart';
 import 'base_api_connection.dart';
-import 'package:quiver/strings.dart';
 
 class OrderDataApis extends ApiProvider {
 

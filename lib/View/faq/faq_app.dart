@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
-import '../../controller/about_controller/about_app_controller.dart';
 import '../../controller/faq_controller/faq_app_controller.dart';
 import '../../widgets/about_app/item_of_app.dart';
 

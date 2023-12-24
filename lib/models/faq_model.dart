@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'sales_products_model.dart';
-import 'slides_model.dart';
 
 part 'faq_model.g.dart';
 

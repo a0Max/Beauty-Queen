@@ -15,7 +15,6 @@ import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
-import '../discount/filterby_screen.dart';
 import 'filterby_quina_items_screen.dart';
 
 class QuinaproductsScreen extends StatefulWidget {

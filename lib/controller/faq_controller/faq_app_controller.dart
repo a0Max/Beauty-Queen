@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/app_data_apis.dart';
-import '../../const/api_connrction/user_data_apis.dart';
 
 class FAQAppController extends GetxController {
   RxBool stateOfMenu = false.obs;

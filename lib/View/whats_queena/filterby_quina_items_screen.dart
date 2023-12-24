@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../controller/queen_controller/queen_controller.dart';
-import '../../controller/search/search_controller.dart';
 
 class FilterByQuinaItemsContainer extends StatefulWidget {
   const FilterByQuinaItemsContainer({super.key});

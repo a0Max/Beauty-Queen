@@ -727,7 +727,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                                       title: tr('message'),
                                       isError: false);
                                   Navigator.of(context).pop();
-                                } on DioException catch (e, s) {
+                                } on DioException catch (e) {
                                   print('error:$e');
                                   ErrorPopUp(
                                       message: (e.response?.data as Map)

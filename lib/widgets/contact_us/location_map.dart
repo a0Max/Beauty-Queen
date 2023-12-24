@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
@@ -59,7 +58,7 @@ class _LocationMap extends State<LocationMap> {
                       LocationMapLatLng.lat, LocationMapLatLng.lng),
                   initialRotation: 0,
                   interactionOptions:
-                      InteractionOptions(flags: InteractiveFlag.none),
+                      const InteractionOptions(flags: InteractiveFlag.none),
                   initialCenter: const LatLng(
                       LocationMapLatLng.lat, LocationMapLatLng.lng),
                   initialZoom: 15,

@@ -235,8 +235,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                             ),
                                             (controller
                                                             .productData
-                                                            ?.value
-                                                            ?.last
+                                                            .value
+                                                            .last
                                                             ?.product
                                                             ?.offerPrice !=
                                                         null ??
@@ -431,7 +431,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       }
                                                     ],
                                                   )
-                                                : SizedBox(),
+                                                : const SizedBox(),
                                             Align(
                                               alignment: Alignment.topRight,
                                               child: Text(
@@ -449,13 +449,13 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                             ),
                                           ],
                                         )
-                                      : SizedBox(),
+                                      : const SizedBox(),
                               SizedBox(
                                 height: 17.h,
                               ),
                               // ///////////container//////////
                               if (controller.isLoading.value != true &&
-                                  ((controller.productData?.last?.product
+                                  ((controller.productData.last?.product
                                               ?.isQueena ==
                                           "1") ??
                                       false)) ...{
@@ -465,7 +465,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     Text(
                                       " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
                                       style:
-                                          TextStyle(color: AppColors.mainColor),
+                                          const TextStyle(color: AppColors.mainColor),
                                     ),
                                     Text(tr('con_collect')),
                                   ],
@@ -494,7 +494,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           routeName: '/QuinaprogramScreen');
                                     }
                                   },
-                                  child: Row(
+                                  child: const Row(
                                     children: [
                                       Text('برنامج كوينا للولاء'),
                                       Text('التفاصيل',
@@ -841,7 +841,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                 )),
                                       ),
                                     )
-                                  : SizedBox(),
+                                  : const SizedBox(),
                               SizedBox(
                                 height: 17.h,
                               ),
@@ -990,7 +990,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               controller.index.value == 0
                                   ? (controller.productData.isNotEmpty ?? false)
                                       ? TabScreenOne()
-                                      : SizedBox()
+                                      : const SizedBox()
                                   : TabScreenTwo(),
                               //////////////////////////////////
                               SizedBox(
@@ -1010,7 +1010,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                   .last.product_banner?.file ??
                                               ''),
                                     )
-                                  : SizedBox(),
+                                  : const SizedBox(),
                               SizedBox(
                                 height: 32.h,
                               ),
@@ -1108,7 +1108,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                         ],
                                       );
                                     }))
-                                : SizedBox()
+                                : const SizedBox()
                           ],
                         ),
                         Column(
@@ -1218,7 +1218,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                         ],
                                       );
                                     }))
-                                : SizedBox()
+                                : const SizedBox()
                           ],
                         )
                       ],

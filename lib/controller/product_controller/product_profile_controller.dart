@@ -45,7 +45,7 @@ class ProductProfileController extends GetxController
           await _api.getProductDataRequest(productId: productId);
       selectedOptions.value =
           List.generate(newData.productOptions?.length ?? 0, (index) => null);
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       productData.add(newData);
     } on DioException catch (e) {
       print('error:$e');

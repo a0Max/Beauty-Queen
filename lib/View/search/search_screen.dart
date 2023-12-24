@@ -190,7 +190,7 @@ class _SearchScreen extends State<SearchScreen> {
                                   (BuildContext context, int index) => 25.pw,
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                 ///////////////filter////////////
                 Padding(

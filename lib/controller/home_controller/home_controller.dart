@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,7 +8,6 @@ import 'package:get/get.dart';
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/home_model.dart';
 import '../../models/product_options_model.dart';
-import '../../models/sales_products_model.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/based/error_pop_up.dart';
@@ -33,7 +31,7 @@ class HomeController extends GetxController {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
       homeData.value = HomeModel();
-      print('error:${e}');
+      print('error:$e');
       if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
       } else {

@@ -26,7 +26,7 @@ class ProductController extends GetxController {
       cartData.value = await _api.cartDataRequest();
       updatePricesAndCount();
       isLoading.value = false;
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e) {
       if (e == 'Check Network connection') {

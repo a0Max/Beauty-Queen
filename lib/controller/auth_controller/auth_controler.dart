@@ -168,10 +168,10 @@ class AuthController extends GetxController {
     try {
       loadingBrands.value = true;
       brandsData.value = await _api2.breandsDataRequest();
-    } on DioException catch (e, s) {
+    } on DioException catch (e) {
       brandsData.value = [];
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e, s) {
+    } catch (e) {
       brandsData.value = [];
       if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');

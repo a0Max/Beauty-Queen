@@ -163,6 +163,7 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                           height: 120.h,
                                         );
                                       }
+                                      return null;
                                     }),
                               ),
                             ],

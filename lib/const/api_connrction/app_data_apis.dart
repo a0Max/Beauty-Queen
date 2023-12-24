@@ -1,12 +1,9 @@
 import 'package:beauty_queen/const/vars.dart';
 import 'package:beauty_queen/models/notification_model.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../models/city_area_model.dart';
 import '../../models/departments_model.dart';
 import '../../models/faq_model.dart';
 import '../../models/transactions_model.dart';
-import '../../models/user_model.dart';
 import 'base_api_connection.dart';
 
 class AppDataApis extends ApiProvider {

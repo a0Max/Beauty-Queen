@@ -324,7 +324,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                               ),
                                                             ),
                                                             padding:
-                                                                EdgeInsets.only(
+                                                                const EdgeInsets.only(
                                                                     top: 15),
                                                             child:
                                                                 const ShowModalSheetDetailOrder());

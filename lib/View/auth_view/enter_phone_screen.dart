@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
-import '../../controller/auth_controller/otp_controller.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../welcome/welcome_screen.dart';

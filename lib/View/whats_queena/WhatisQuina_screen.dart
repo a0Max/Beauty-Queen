@@ -3,11 +3,9 @@
 import 'package:beauty_queen/const/app_colors.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
-import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../widgets/whats_queen/custom_stack.dart';
 
@@ -121,7 +119,7 @@ class WhatisQuinaScreen extends StatelessWidget {
               height: 20.h,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../controller/wallet_controller/wallet_controller.dart';
 import '../based/error_pop_up.dart';
@@ -35,12 +34,12 @@ Future showModalSheet(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 15),
+                    margin: const EdgeInsets.symmetric(vertical: 15),
                     // height: 50,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(),
+                        const SizedBox(),
                         Text(
                           "المحفظة",
                           style: TextStyle(

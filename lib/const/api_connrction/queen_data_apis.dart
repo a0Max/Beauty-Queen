@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 
 import '../../models/general_search_model.dart';
 import '../vars.dart';

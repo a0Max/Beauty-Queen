@@ -67,7 +67,7 @@ class SocialLogin extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5),
                       child: Container(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: SvgPicture.asset(listOfSocialMedia[index].image)),
                       onTap: () async {
                         try {

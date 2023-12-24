@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/app_data_apis.dart';
-import '../../const/api_connrction/user_data_apis.dart';
 import '../../models/transactions_model.dart';
 import '../../widgets/based/error_pop_up.dart';
 

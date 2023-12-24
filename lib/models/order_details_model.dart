@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'city_area_model.dart';
-import 'offer_image_model.dart';
 import 'transactions_model.dart';
 
 part 'order_details_model.g.dart';

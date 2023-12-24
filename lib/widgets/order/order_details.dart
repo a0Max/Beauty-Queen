@@ -50,7 +50,7 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Obx(() => controller.loadingDetailsOrders.value == true
-              ? ShimmerTicket()
+              ? const ShimmerTicket()
               : Column(
                   children: [
                     // SizedBox(

@@ -481,7 +481,7 @@ class _CartScreen extends State<CartScreen> {
                                               child: Container(
                                                 height: 52.7.h,
                                                 // width: 124.28.w,
-                                                padding: EdgeInsets.symmetric(
+                                                padding: const EdgeInsets.symmetric(
                                                     horizontal: 10),
                                                 decoration: BoxDecoration(
                                                   color:

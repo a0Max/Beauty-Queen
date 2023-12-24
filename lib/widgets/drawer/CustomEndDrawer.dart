@@ -15,12 +15,10 @@ import '../../View/user_profile/contact_us_screen.dart';
 import '../../View/whats_queena/Quinaprogram_screen.dart';
 import '../../View/offers/beautypharmacyscreen.dart';
 import '../../View/discount/discounts_screen.dart';
-import '../../View/discount/filterby_screen.dart';
 import '../../View/user_profile/normalprofile.dart';
 import '../../View/orders/orders_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
-import '../../controller/queen_controller/queen_controller.dart';
 
 class MyEndDrawer extends StatelessWidget {
   const MyEndDrawer({super.key});

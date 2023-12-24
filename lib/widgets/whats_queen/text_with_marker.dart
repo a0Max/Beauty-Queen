@@ -20,14 +20,14 @@ class TextWithMarker extends StatelessWidget{
           width: 6.w,
         ),
         5.pw,
-        Container(
+        SizedBox(
             width: (MediaQuery.of(context).size.width /
                 3) -
                 (11.w),
             child: Text(
               body,
 
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 9,
                 fontFamily: kTheArabicSansLight,

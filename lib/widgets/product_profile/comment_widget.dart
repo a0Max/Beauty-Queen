@@ -7,7 +7,6 @@ import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import 'package:flutter/material.dart';
 
-import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/message_controller/message_controler.dart';
 import '../based/button_widget.dart';
 import '../based/loading.dart';
@@ -22,7 +21,7 @@ class CommentWidget extends StatelessWidget {
   TextEditingController messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final MessageController _controller = Get.put(MessageController());
+    final MessageController controller = Get.put(MessageController());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +79,7 @@ class CommentWidget extends StatelessWidget {
           children: [
             Expanded(
                 flex: 2,
-                child: Container(
+                child: SizedBox(
                   height: 50,
                   child: TextField(
                     controller: phoneController,
@@ -88,11 +87,11 @@ class CommentWidget extends StatelessWidget {
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: BorderSide(color: AppColors.mainColor),
+                          borderSide: const BorderSide(color: AppColors.mainColor),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: BorderSide(color: AppColors.greyColor),
+                          borderSide: const BorderSide(color: AppColors.greyColor),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
@@ -134,7 +133,7 @@ class CommentWidget extends StatelessWidget {
               try {
                 LoadingScreen.show(context);
 
-                await _controller.sendMessageToManagies(
+                await controller.sendMessageToManagies(
                     phone: phoneController.text,
                     message: messageController.text);
                 Navigator.of(context).pop();
@@ -144,7 +143,7 @@ class CommentWidget extends StatelessWidget {
                     title: tr('message'),
                     isError: false);
                 Navigator.of(context).pop();
-              } on DioException catch (e, s) {
+              } on DioException catch (e) {
                 Navigator.of(context).pop();
                 ErrorPopUp(
                     message: (e.response?.data as Map).values.first,
