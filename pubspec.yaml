@@ -45,6 +45,7 @@ dependencies:
   webview_flutter: ^4.4.2
   google_sign_in: ^6.2.1
   flutter_map: ^6.1.0
+  firebase_core: ^2.24.2
 
 dev_dependencies:
   flutter_test:

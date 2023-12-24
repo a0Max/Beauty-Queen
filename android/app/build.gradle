@@ -27,7 +27,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 android {
-    namespace "com.example.beauty_queen"
+    namespace "com.beauty.beauty_queen"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -45,7 +45,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.beauty_queen"
+        applicationId "com.beauty.beauty_queen"
         minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()

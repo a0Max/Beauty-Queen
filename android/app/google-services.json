@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "636984093820",
+    "project_id": "beautyqueen-93be2",
+    "storage_bucket": "beautyqueen-93be2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636984093820:android:919f94285aaa3d7b282df9",
+        "android_client_info": {
+          "package_name": "com.beauty.beauty_queen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636984093820-rkv4d8m107fscmeijno3cimuj1pg0ced.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4SGyMVmRhMnCox2grhQMaRXpCwmyPRJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636984093820-rkv4d8m107fscmeijno3cimuj1pg0ced.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636984093820-49aeump8ofbp5cchprfgfk7aehelaoma.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.beautyQueen"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636984093820:android:7ec1737cb18de5fc282df9",
+        "android_client_info": {
+          "package_name": "com.example.beauty_queen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636984093820-b00p1rrdbssupnn415mq926t68vanobo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beauty_queen",
+            "certificate_hash": "6785b325b07fc1c33bc54f0516a63170be7313f8"
+          }
+        },
+        {
+          "client_id": "636984093820-rkv4d8m107fscmeijno3cimuj1pg0ced.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4SGyMVmRhMnCox2grhQMaRXpCwmyPRJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636984093820-rkv4d8m107fscmeijno3cimuj1pg0ced.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636984093820-49aeump8ofbp5cchprfgfk7aehelaoma.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.beautyQueen"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -206,15 +206,20 @@ class AuthController extends GetxController {
   }
 
   googleLogin() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-    print('googleAuth?.accessToken:${googleUser?.email}');
-    print('googleAuth?.accessToken:${googleUser?.id}');
-    print('googleAuth?.accessToken:${googleUser?.displayName}');
-    print('googleAuth?.accessToken:${googleUser?.photoUrl}');
-    print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
-    print('googleAuth?.accessToken:${googleAuth?.accessToken}');
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      print('googleAuth?.accessToken:${googleUser?.email}');
+      print('googleAuth?.accessToken:${googleUser?.id}');
+      print('googleAuth?.accessToken:${googleUser?.displayName}');
+      print('googleAuth?.accessToken:${googleUser?.photoUrl}');
+      print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
+      print('googleAuth?.accessToken:${googleAuth?.accessToken}');
+    } catch (e) {
+      print('errir:$e');
+      print('errir:${e.runtimeType}');
+    }
   }
 
   upgradeAccount() async {

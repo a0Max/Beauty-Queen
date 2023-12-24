@@ -1,5 +1,6 @@
 import 'package:beauty_queen/View/welcome/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 
@@ -7,10 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'const/app_colors.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await EasyLocalization.ensureInitialized();
 
   runApp(EasyLocalization(
@@ -40,9 +44,6 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             home: const SplashScreen(),
-            // home: MainView(),
-            // home: EnterNewPassword(phone: '5345',),
-
             debugShowCheckedModeBanner: false,
             builder: (context, widget) {
               return Directionality(
