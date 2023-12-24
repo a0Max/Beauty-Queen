@@ -26,6 +26,7 @@ class AppDataApis extends ApiProvider {
       ),
     );
     if (validResponse(response.statusCode!)) {
+      makeNotificationsReadDataRequest();
       final List<NotificationModel> l = [];
       response.data['notifications']
           .forEach((e) => l.add(NotificationModel.fromJson(e)));
@@ -33,6 +34,23 @@ class AppDataApis extends ApiProvider {
     } else {
       throw response.data;
     }
+  }
+
+  Future<void> makeNotificationsReadDataRequest() async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    await dio.get(
+      '${Connection.apiURL}${ApiProvider.readNotificationsDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
   }
 
   Future<List<DepartmentsModel>> getAboutMEDataRequest() async {
