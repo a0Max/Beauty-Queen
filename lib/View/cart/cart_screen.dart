@@ -15,7 +15,7 @@ import '../../const/vars.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/shimmer/shimmer_cart_item.dart';
-import '../cart_tab_screen.dart';
+import '../complete_order/cart_tab_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -481,8 +481,9 @@ class _CartScreen extends State<CartScreen> {
                                               child: Container(
                                                 height: 52.7.h,
                                                 // width: 124.28.w,
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 10),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
                                                 decoration: BoxDecoration(
                                                   color:
                                                       AppColors.kPrimaryColor,

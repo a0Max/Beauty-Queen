@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../const/api_connrction/user_data_apis.dart';
+import '../models/city_area_model.dart';
+import 'auth_controller/auth_controler.dart';
+
 class BasketController extends GetxController {
-  var selectedIndex = 0.obs;
   final RxBool isLineVisible = false.obs;
   Color containerColor = Colors.white;
 
@@ -17,19 +20,11 @@ class BasketController extends GetxController {
         'عين زارة'
         'بجانب مول طرابلس للتسوق'
   ];
-  void changeTab(int index) {
-    selectedIndex.value = index;
-  }
+
   // Create an observable variable to track the radio button state
 
   void updateSelection(bool value) {
     isSelected.value = value;
-  }
-
-  var selectedPaymentMethod2 = 'الاستلام بخدمة التوصيل'.obs;
-
-  void selectPaymentMethod2(String value) {
-    selectedPaymentMethod2.value = value;
   }
 
   var selectedPaymentMethod = 'cash'.obs;
@@ -40,5 +35,47 @@ class BasketController extends GetxController {
 
   void showLine() {
     isLineVisible.value = true;
+  }
+
+  //////////////////////////////////////////////////////////////
+  final _api = UserDataApis();
+
+  RxInt selectedIndex = 0.obs;
+  void changeTab(int index) {
+    selectedIndex.value = index;
+  }
+
+  RxBool loadingArea = false.obs;
+  var selectedCityData = CityAreaModel().obs;
+  var selectedAreaData = CityAreaModel().obs;
+  RxList areaData = [].obs;
+
+  updateSelectedCity({required CityAreaModel newCity}) async {
+    selectedCityData.value = newCity;
+    selectedAreaData.value = CityAreaModel();
+    if (newCity.hasArea == '1') {
+      loadingArea.value = true;
+      await getArea(cityId: newCity.id ?? 0);
+      loadingArea.value = false;
+    }
+  }
+
+  getArea({required int cityId}) async {
+    areaData.value = await _api.getAreaDataRequest(cityId: cityId);
+  }
+
+  updateSelectedArea({required CityAreaModel newArea}) {
+    selectedAreaData.value = newArea;
+  }
+
+  RxBool isChecked = false.obs;
+  updateChecked({required bool? newCheck}) {
+    isChecked.value = newCheck ?? false;
+  }
+
+  var selectedPaymentMethod2 = 'الاستلام بخدمة التوصيل'.obs;
+
+  void selectPaymentMethod2(String value) {
+    selectedPaymentMethod2.value = value;
   }
 }

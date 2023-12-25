@@ -8,9 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import '../const/app_colors.dart';
-import '../controller/basketController.dart';
-import 'productadded_screen.dart';
+import '../../const/app_colors.dart';
+import '../../controller/basketController.dart';
+import '../productadded_screen.dart';
+import 'delivery_screen.dart';
 
 class TabView extends StatefulWidget {
   const TabView({super.key});
@@ -29,8 +30,6 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
     _tabController = TabController(length: 3, vsync: this);
 
     _tabController.animation?.addListener(() {
-      // This listener will trigger every time there's an animation tick,
-      // i.e., when we're dragging the TabBarView left or right.
       final tabIndex = ((_tabController.animation?.value ?? 0) + 0.5).floor();
       if (tabIndex != basketController.selectedIndex.value) {
         basketController.changeTab(tabIndex);
@@ -44,603 +43,155 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  // int stepsCount = 3;
+  final BasketController controller = Get.put(BasketController());
+  List listOfTabText = ['التسليم', 'الدفع', 'الملخص'];
+  List listOfTabBody = [
+    const DeliveryScreen(),
+    const PaymentScreen(),
+    const SummaryScreen(),
+  ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.kWhiteColor,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(Icons.arrow_forward_ios)),
-        ],
-        centerTitle: true,
-        title: Text(
-          "سلّــتي",
-          style: TextStyle(
-            color: AppColors.kBlackColor,
-            fontSize: 28.sp, // Replace with 28.sp if you're using scaled fonts
-            fontFamily: kTheArabicSansLight,
-          ),
-        ),
-        bottom: TabBar(
-          controller: _tabController,
-          onTap: (index) {
-            basketController.changeTab(index);
-            if (index != basketController.selectedIndex.value + 1) {
-              return;
-            }
-
-            // Move to the next step
-            _tabController.animateTo(index);
-          },
-          labelStyle: TextStyle(
-            fontFamily: kTheArabicSansLight,
-            fontSize: 14.sp, // Replace with 14.sp if you're using scaled fonts
-            fontWeight: FontWeight.w700,
-          ),
-          labelColor: AppColors.kBlackColor,
-          indicatorColor: Colors.transparent,
-          tabs: [
-            Tab(
-              text: "التسليم",
-              icon: Obx(() => _buildTabIcon(0)),
-            ),
-            Tab(
-              text: "الدفع",
-              icon: Obx(() => _buildTabIcon(1)),
-            ),
-            Tab(
-              text: "الملخص",
-              icon: Obx(() => _buildTabIcon(2)),
-            ),
-          ],
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: const [
-          DeliveryScreen(),
-          PaymentScreen(),
-          SummaryScreen(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTabIcon(int index) {
-    final isSelected = index == basketController.selectedIndex.value;
-
-    return Container(
-      height: 32.h, // Replace with 32.h if you're using scaled sizes
-      width: 32.w, // Replace with 32.w if you're using scaled sizes
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1.w, // Replace with 1.w if you're using scaled sizes
-          color: isSelected ? AppColors.kPrimaryColor : Colors.grey,
-        ),
-        shape: BoxShape.circle,
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(3
-            .r), // Replace with EdgeInsets.all(3.r) if you're using scaled sizes
-        child: Container(
-          height: 28.59.h, // Replace with 28.59.h if you're using scaled sizes
-          width: 28.59.w, // Replace with 28.59.w if you're using scaled sizes
-          decoration: BoxDecoration(
-            color: isSelected ? AppColors.kPrimaryColor : Colors.grey,
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Text(
-              (index + 1).toString(),
+    return Obx(() => Scaffold(
+          appBar: AppBar(
+            backgroundColor: AppColors.kTextGrayColor.withOpacity(.1),
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: const Icon(Icons.arrow_forward_ios)),
+            ],
+            centerTitle: true,
+            title: Text(
+              "سلّــتي",
               style: TextStyle(
+                color: AppColors.kBlackColor,
                 fontSize:
-                    14.sp, // Replace with 14.sp if you're using scaled fonts
+                    28.sp, // Replace with 28.sp if you're using scaled fonts
                 fontFamily: kTheArabicSansLight,
-                color:
-                    isSelected ? AppColors.kWhiteColor : AppColors.kBlackColor,
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class DeliveryScreen extends StatefulWidget {
-  const DeliveryScreen({super.key});
-
-  @override
-  State<DeliveryScreen> createState() => _DeliveryScreenState();
-}
-
-class _DeliveryScreenState extends State<DeliveryScreen> {
-  bool isChecked = false;
-  @override
-  Widget build(BuildContext context) {
-    final BasketController basketController = Get.put(BasketController());
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 19.w),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(60),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    children: [
-                      Image.asset(kcarImage),
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                      Text(
-                        'طريقة الإستلام',
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 22.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.kBlackColor),
-                      ),
-                    ],
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (int i = 1; i <= listOfTabText.length; i++) ...[
+                          Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color:
+                                            ((controller.selectedIndex.value) +
+                                                        1) <
+                                                    i
+                                                ? Colors.transparent
+                                                : AppColors.mainColor)
+                                    //     : null
+                                    ),
+                                child: Container(
+                                  height: 31,
+                                  width: 31,
+                                  margin: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                      color: ((controller.selectedIndex.value) +
+                                                  1) <
+                                              i
+                                          ? AppColors.kLightGreyBlueColor
+                                          : AppColors.mainColor,
+                                      shape: BoxShape.circle,
+                                      border: ((controller
+                                                      .selectedIndex.value) +
+                                                  1) <
+                                              i
+                                          ? Border.all(
+                                              color: const Color(0xFFC1C1C1))
+                                          : null),
+                                  child: Center(
+                                    child: (controller.selectedIndex.value) >= i
+                                        ? const Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                          )
+                                        : Text(
+                                            '$i',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline2
+                                                ?.copyWith(
+                                                    fontSize: 16,
+                                                    color: Colors.white),
+                                          ),
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: Text(
+                                  listOfTabText[i - 1],
+                                  style: TextStyle(
+                                    fontSize: 14
+                                        .sp, // Replace with 14.sp if you're using scaled fonts
+                                    fontFamily: kTheArabicSansLight,
+                                    color: (controller.selectedIndex.value) >=
+                                            (i - 1)
+                                        ? Colors.black
+                                        : AppColors.kLightGreyBlueColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (i != listOfTabText.length) ...[
+                            Container(
+                              width: ((MediaQuery.of(context).size.width -
+                                      (36 + 8 + 8 + 16 + 16)) /
+                                  listOfTabText.length),
+                              margin: const EdgeInsets.symmetric(vertical: 20),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Container(
+                                      alignment: Alignment.topCenter,
+                                      height: 1,
+                                      width: 50,
+                                      color:
+                                          i != (controller.selectedIndex.value)
+                                              ? AppColors.kLightGreyBlueColor
+                                              : AppColors.mainColor,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                ],
+                              ),
+                            )
+                          ]
+                        ],
+                      ],
+                    ),
                   ),
                   Divider(
-                    color: AppColors.kTextGrayColor,
-                    thickness: 1.w,
-                  ),
-                  SizedBox(
-                    height: 44.h,
-                  ),
-                  ListTile(
-                    leading: Transform.scale(
-                      scale: 1.5,
-                      child: Obx(
-                        () => Radio(
-                          fillColor: MaterialStateProperty.resolveWith<Color>(
-                              (states) {
-                            return AppColors
-                                .kPrimaryColor; // Unselected color for the radio button
-                          }),
-                          activeColor: AppColors.kWhiteColor,
-                          value: 'الاستلام بخدمة التوصيل',
-                          groupValue:
-                              basketController.selectedPaymentMethod2.value,
-                          onChanged: (value) => basketController
-                              .selectPaymentMethod2(value.toString()),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      'الاستلام بخدمة التوصيل',
-                      style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.kPrimaryColor),
-                    ),
-                  ),
-
-                  Divider(
-                    color: AppColors.kTextGrayColor,
-                    thickness: 1.w,
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-
-                  Container(
-                    height: 68.29.h,
-                    width: 398.w,
-                    padding: EdgeInsets.all(16.r),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.r),
-                      border: Border.all(
-                        color: AppColors.kTextGrayColor,
-                      ),
-                    ),
-                    child: Obx(
-                      () => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            basketController.selectedValue.value.isNotEmpty
-                                ? basketController.selectedValue.value
-                                : 'المدينة',
-                            style: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 21.sp,
-                              fontWeight: FontWeight.w600,
-                              color: basketController
-                                      .selectedValue.value.isNotEmpty
-                                  ? AppColors.kPrimaryColor
-                                  : AppColors.kBlackColor,
-                            ),
-                          ),
-                          DropdownButton<String>(
-                            value: basketController.selectedValue.value.isEmpty
-                                ? null
-                                : basketController.selectedValue.value,
-                            items: <String>[
-                              'طرابلس',
-                            ].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              basketController.selectedValue.value =
-                                  newValue ?? '';
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  ///////////////////////////contianer 2///////////////////////////
-                  Container(
-                    height: 68.29.h,
-                    width: 398.w,
-                    padding: EdgeInsets.all(16.r),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.r),
-                      border: Border.all(
-                        color: AppColors.kTextGrayColor,
-                      ),
-                    ),
-                    child: Obx(
-                      () => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            basketController.selectedValue2.value.isNotEmpty
-                                ? basketController.selectedValue2.value
-                                : 'المنطقة',
-                            style: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 21.sp,
-                              fontWeight: FontWeight.w600,
-                              color: basketController
-                                      .selectedValue2.value.isNotEmpty
-                                  ? AppColors.kPrimaryColor
-                                  : AppColors.kBlackColor,
-                            ),
-                          ),
-                          DropdownButton<String>(
-                            value: basketController.selectedValue2.value.isEmpty
-                                ? null
-                                : basketController.selectedValue2.value,
-                            items: <String>[
-                              'المنطقة',
-                            ].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              basketController.selectedValue2.value =
-                                  newValue ?? '';
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  /////////////////////////container 3////////////////////
-
-                  ReusableTextFormField(
-                    height: 87.32.h,
-                    width: 398.w,
-                    labelText: '   العنـــوان',
-                    labelstyle: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 21.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.kBlackColor),
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  /////////////////container 4////////////////
-                  ReusableTextFormField(
-                    height: 87.32.h,
-                    width: 398.w,
-                    labelText: '   مـــلاحظات إضافية',
-                    labelstyle: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 21.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.kBlackColor),
-                  ),
-                  SizedBox(
-                    height: 34.h,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 28.h,
-                        width: 28.w,
-                        child: Checkbox(
-                          side: BorderSide(
-                              color: AppColors.kTextGrayColor, width: 1.5.w),
-                          checkColor: AppColors.kWhiteColor,
-                          activeColor: AppColors.kPrimaryColor,
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              isChecked = value ?? false;
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                          width: 8
-                              .w), // Add some spacing between the checkbox and text
-                      Text(
-                        'حفظ البيانات للإستخدام في المرة القادمة',
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.kBlackColor),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  ////////////////container 5////////////////
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-
-            ////////////////text////////////
-            SizedBox(
-              height: 30.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.55.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'الوقت المتوقع للوصول:',
-                    style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.kBlackColor),
-                  ),
-                  Text(
-                    '24 ساعة',
-                    style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.kBlackColor),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 27.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.55.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${tr('total')}:',
-                    style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.kBlackColor),
-                  ),
-                  // Text(
-                  //   '345 دل',
-                  //   style: TextStyle(
-                  //       fontFamily: kTheArabicSansLight,
-                  //       fontSize: 24.sp,
-                  //       fontWeight: FontWeight.w600,
-                  //       color: kPrimaryColor),
-                  // ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 26.h,
-            ),
-            ///////////dvider/////////////
-            Row(children: <Widget>[
-              Expanded(
-                  child: Divider(
-                endIndent: 10.w,
-                color: AppColors.kTextGrayColor,
-                thickness: 1.w,
-                indent: 10.w,
-              )),
-              Text(
-                'أو',
-                style: TextStyle(
-                    fontFamily: kTheArabicSansLight,
-                    fontSize: 28.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.kBlackColor),
-              ),
-              Expanded(
-                  child: Divider(
-                endIndent: 10.w,
-                color: AppColors.kTextGrayColor,
-                thickness: 1.w,
-                indent: 10.w,
-              )),
-            ]),
-            SizedBox(
-              height: 27.h,
-            ),
-            Container(
-              height: 75.2.h,
-              width: 459.62.w,
-              decoration:
-                  BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
-                BoxShadow(
-                  color: const Color.fromARGB(32, 0, 0, 0),
-                  blurRadius: 28.r,
-                  offset: const Offset(0, 4),
-                  spreadRadius: 0,
-                ),
-              ]),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ListTile(
-                      leading: Transform.scale(
-                        scale: 1.5,
-                        child: Obx(
-                          () => Radio(
-                            fillColor: MaterialStateProperty.resolveWith<Color>(
-                                (states) {
-                              return AppColors
-                                  .kPrimaryColor; // Unselected color for the radio button
-                            }),
-                            activeColor: AppColors.kWhiteColor,
-                            value: 'الحجز والإستلام من المتجر',
-                            groupValue:
-                                basketController.selectedPaymentMethod2.value,
-                            onChanged: (value) => basketController
-                                .selectPaymentMethod2(value.toString()),
-                          ),
-                        ),
-                      ),
-                      title: Text(
-                        'الحجز والإستلام من المتجر',
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.kTextGrayColor),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 10.h, left: 10.w),
-                      child: Container(
-                        clipBehavior: Clip.none,
-                        height: 45.52.h,
-                        width: 98.19.w,
-                        decoration: BoxDecoration(
-                            color: AppColors.kPrimaryColor,
-                            borderRadius: BorderRadius.circular(22.24.r)),
-                        child: Center(
-                          child: Text(
-                            'قريباً..',
-                            style: TextStyle(
-                                fontFamily: kTheArabicSansLight,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.kWhiteColor),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 160.h,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 25.h),
-        child: FloatingActionButton.extended(
-          onPressed: () {},
-          label: Container(
-            height: 157.07.h,
-            width: 431.77.w,
-            decoration: BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
-              BoxShadow(
-                color: const Color.fromARGB(32, 0, 0, 0),
-                blurRadius: 28.r,
-                offset: const Offset(0, 4),
-                spreadRadius: 0,
-              ),
-            ]),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(
-                  width: 27.w,
-                ),
-                Text.rich(TextSpan(children: [
-                  TextSpan(
-                    text: tr('total'),
-                    style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 18.83.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.klPinkColor),
-                  ),
-                  TextSpan(
-                    text: '900 دل',
-                    style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        fontSize: 34.01.sp,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.kBlackColor),
+                    color: AppColors.kTextGrayColor.withOpacity(.3),
                   )
-                ])),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 62.7.h,
-                    width: 220.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.kPrimaryColor,
-                      borderRadius: BorderRadius.circular(46.r),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'الإستمرار',
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 23.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.kWhiteColor),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
+          body: listOfTabBody[controller.selectedIndex.value],
+        ));
   }
 }
 
