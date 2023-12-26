@@ -173,8 +173,15 @@ abstract class LocationMapLatLng {
 abstract class OrderState {
   static const shipped = 'shipped';
   static const cancelled = 'cancelled';
+  static const pending = 'pending';
+  static const confirmed = 'confirmed';
+  static const delayed = 'delayed';
+  static const readyToPickup = 'readyToPickup';
+  static const atShippingAgent = 'atShippingAgent';
 }
 
 abstract class WalletState {
   static const add = 'add';
+  static const refund = 'refund';
+  static const deduction = 'deduction';
 }

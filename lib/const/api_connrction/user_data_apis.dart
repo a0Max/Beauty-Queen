@@ -142,13 +142,15 @@ class UserDataApis extends ApiProvider {
 
   Future<UserModel> userDataRequest() async {
     final token = await getUserToken();
+    final cookies = await getCookies();
+
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.userEndPoint}',
       options: Options(
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          // 'Country-Id': await _getCountryCode(),
+          if (cookies != null) "Cookie": '$cookies',
           if (token != null) "Authorization": 'Bearer $token',
         },
       ),
@@ -227,13 +229,15 @@ class UserDataApis extends ApiProvider {
 
   Future<List<CityAreaModel>> getCityDataRequest() async {
     final token = await getUserToken();
+    final cookies = await getCookies();
+
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getCitiesDataEndPoint}',
       options: Options(
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          // 'Country-Id': await _getCountryCode(),
+          if (cookies != null) "Cookie": '$cookies',
           if (token != null) "Authorization": 'Bearer $token',
         },
       ),
@@ -249,13 +253,15 @@ class UserDataApis extends ApiProvider {
 
   Future<List<CityAreaModel>> getAreaDataRequest({required int cityId}) async {
     final token = await getUserToken();
+    final cookies = await getCookies();
+
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getAreasDataEndPoint}/$cityId',
       options: Options(
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          // 'Country-Id': await _getCountryCode(),
+          if (cookies != null) "Cookie": '$cookies',
           if (token != null) "Authorization": 'Bearer $token',
         },
       ),
@@ -331,8 +337,8 @@ class UserDataApis extends ApiProvider {
       {required String googleId,
       required String email,
       required String? name}) async {
-    final token = await getUserToken();
-    final cookies = await getCookies();
+    // final token = await getUserToken();
+    // final cookies = await getCookies();
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.socialGoogleDataEndPoint}',
       queryParameters: {'name': name, 'google_id': googleId, 'email': email},
@@ -340,11 +346,13 @@ class UserDataApis extends ApiProvider {
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          if (cookies != null) "Cookie": '$cookies',
-          if (token != null) "Authorization": 'Bearer $token',
+          // if (cookies != null) "Cookie": '$cookies',
+          // if (token != null) "Authorization": 'Bearer $token',
         },
       ),
     );
+    await setTheHeader(response.headers);
+
     if (validResponse(response.statusCode!)) {
       return UserModel.fromMap(
         response.data,

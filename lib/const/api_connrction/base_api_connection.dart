@@ -87,6 +87,9 @@ abstract class ApiProvider {
   static const String getFAQDataEndPoint = "getFAQ";
   static const String checkGiftCardCodeDataEndPoint = "checkGiftCardCode";
   static const String socialGoogleDataEndPoint = "auth/social/google";
+  static const String getCartDetailsDataEndPoint = "getCartDetails";
+  static const String updateShippingCostDataEndPoint = "updateShippingCost";
+  static const String storeCartDataEndPoint = "store/cart";
   static const String getWalletTransactionsDataEndPoint =
       "get/walletTransactions";
 
@@ -101,7 +104,12 @@ abstract class ApiProvider {
   setTheHeader(Headers headers) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cookies = (headers['set-cookie']?.first ?? '').split(";").first;
-
+    print('#########################');
+    headers.forEach((name, values) {
+      print('$name - $values');
+    });
+    print('cookies:$cookies');
+    print('#########################');
     prefs.setString('set-cookie', cookies);
   }
 

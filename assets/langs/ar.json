@@ -6,6 +6,8 @@
   "password_lower_letter": "كلمة المرور يجب أن تحتوي على حرف أقل",
   "password_upper_letter": "كلمة المرور يجب أن تحتوي على حرف علوي",
   "password_number_letter": "كلمة المرور يجب أن تحتوي على حرف رقم",
+  "city_required": "يجب اختيار المدينة",
+  "area_required": "يجب اختيار المنطقة",
   "kWelcomeBack": "مرحبًا بعودتك!",
   "kEnterYourPhoneNumber": "أدخل رقم هاتفك",
   "kPhoneNumber": "رقم الهاتف",
@@ -195,5 +197,6 @@
   "field_required": "هذا الحق مطلوب",
   "address": "العنـــوان",
   "extra_note": "مـــلاحظات إضافية",
-  "not_availble_now2": "عذراً، هذه الخدمة غير متوفرة حالياً"
+  "not_availble_now2": "عذراً، هذه الخدمة غير متوفرة حالياً",
+  "no_enaph_money": "عذراً, لا يوجد مال كافي في المحفظه لاستخدامهاً"
 }

@@ -155,6 +155,93 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                             AppColors.redColor,
                                                       ),
                                                     ),
+                                                  } else if (controller
+                                                          .listOfOrders
+                                                          .value[index]
+                                                          .status ==
+                                                      OrderState.pending) ...{
+                                                    Text(
+                                                      'قيد الانتظار',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontSize: 15.sp,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            AppColors.redColor,
+                                                      ),
+                                                    ),
+                                                  } else if (controller
+                                                          .listOfOrders
+                                                          .value[index]
+                                                          .status ==
+                                                      OrderState.confirmed) ...{
+                                                    Text(
+                                                      'مؤكد',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontSize: 15.sp,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            AppColors.redColor,
+                                                      ),
+                                                    ),
+                                                  } else if (controller
+                                                          .listOfOrders
+                                                          .value[index]
+                                                          .status ==
+                                                      OrderState.delayed) ...{
+                                                    Text(
+                                                      'تأخير',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontSize: 15.sp,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            AppColors.redColor,
+                                                      ),
+                                                    ),
+                                                  } else if (controller
+                                                          .listOfOrders
+                                                          .value[index]
+                                                          .status ==
+                                                      OrderState
+                                                          .readyToPickup) ...{
+                                                    Text(
+                                                      'جاهز للاستلام',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontSize: 15.sp,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            AppColors.redColor,
+                                                      ),
+                                                    ),
+                                                  } else if (controller
+                                                          .listOfOrders
+                                                          .value[index]
+                                                          .status ==
+                                                      OrderState
+                                                          .atShippingAgent) ...{
+                                                    Text(
+                                                      'مع وكيل الشحن',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontSize: 15.sp,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            AppColors.redColor,
+                                                      ),
+                                                    ),
                                                   } else ...{
                                                     Text(
                                                       controller.order.value
@@ -324,7 +411,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                               ),
                                                             ),
                                                             padding:
-                                                                const EdgeInsets.only(
+                                                                const EdgeInsets
+                                                                    .only(
                                                                     top: 15),
                                                             child:
                                                                 const ShowModalSheetDetailOrder());

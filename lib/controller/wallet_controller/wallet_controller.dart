@@ -38,9 +38,12 @@ class WalletController extends GetxController {
   calculateTheTotalOfWallet({required List<TransactionsModel> walletData}) {
     double total = 0.0;
 
-    ///todo: calculate all wallet states
     for (TransactionsModel wallet in walletData) {
       if (wallet.type == WalletState.add) {
+        total = total + num.parse("${wallet.amount}");
+      } else if (wallet.type == WalletState.deduction) {
+        total = total - num.parse("${wallet.amount}");
+      } else if (wallet.type == WalletState.refund) {
         total = total + num.parse("${wallet.amount}");
       }
     }

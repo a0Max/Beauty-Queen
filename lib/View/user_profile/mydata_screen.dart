@@ -16,6 +16,7 @@ import '../../controller/auth_controller/auth_controler.dart';
 import '../../models/city_area_model.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/based/error_pop_up.dart';
+import '../../widgets/based/loading.dart';
 
 class MyDataScreen extends StatefulWidget {
   final bool? openToEdit;
@@ -713,6 +714,8 @@ class _MyDataScreen extends State<MyDataScreen> {
                               borderRadius: 47.34.r,
                               onPressed: () async {
                                 try {
+                                  LoadingScreen.show(context);
+
                                   await controller.applyToSaveEdit(
                                       nameController: nameController.text,
                                       nickNameController:
@@ -722,6 +725,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                                           whatsAppController.text,
                                       phoneController2: phoneController2.text,
                                       emailController: emailController.text);
+                                  Navigator.of(context).pop();
                                   ErrorPopUp(
                                       message: tr('updated'),
                                       title: tr('message'),
@@ -729,12 +733,14 @@ class _MyDataScreen extends State<MyDataScreen> {
                                   Navigator.of(context).pop();
                                 } on DioException catch (e) {
                                   print('error:$e');
+                                  Navigator.of(context).pop();
                                   ErrorPopUp(
                                       message: (e.response?.data as Map)
                                           .values
                                           .first,
                                       title: 'خطا');
                                 } catch (e) {
+                                  Navigator.of(context).pop();
                                   print('error:$e');
                                   if (e == 'Check Network connection') {
                                     ErrorPopUp(

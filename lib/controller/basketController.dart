@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../const/api_connrction/order_data_apis.dart';
 import '../const/api_connrction/user_data_apis.dart';
 import '../models/city_area_model.dart';
+import '../models/sub_models.dart';
 import 'auth_controller/auth_controler.dart';
 
 class BasketController extends GetxController {
@@ -38,7 +40,8 @@ class BasketController extends GetxController {
   }
 
   //////////////////////////////////////////////////////////////
-  final _api = UserDataApis();
+  // final _api = UserDataApis();
+  final _api2 = OrderDataApis();
 
   RxInt selectedIndex = 0.obs;
   void changeTab(int index) {
@@ -48,24 +51,33 @@ class BasketController extends GetxController {
   RxBool loadingArea = false.obs;
   var selectedCityData = CityAreaModel().obs;
   var selectedAreaData = CityAreaModel().obs;
-  RxList areaData = [].obs;
+  var areaData = SubModels().obs;
 
   updateSelectedCity({required CityAreaModel newCity}) async {
     selectedCityData.value = newCity;
     selectedAreaData.value = CityAreaModel();
-    if (newCity.hasArea == '1') {
-      loadingArea.value = true;
-      await getArea(cityId: newCity.id ?? 0);
-      loadingArea.value = false;
-    }
+    // if (newCity.hasArea == '1') {
+    totalOrderDelivery.value = SubModels();
+
+    loadingArea.value = true;
+    await getArea(cityId: newCity.id ?? 0);
+    loadingArea.value = false;
+
+    // }else{
+    //
+    // }
   }
 
   getArea({required int cityId}) async {
-    areaData.value = await _api.getAreaDataRequest(cityId: cityId);
+    areaData.value = await _api2.getAreaDataRequest(cityId: cityId);
+    if (areaData.value.shippingCost != null) {
+      totalOrderDelivery.value = areaData.value;
+    }
   }
 
   updateSelectedArea({required CityAreaModel newArea}) {
     selectedAreaData.value = newArea;
+    getTotalOrderDelivery(areaId: selectedAreaData.value.id.toString());
   }
 
   RxBool isChecked = false.obs;
@@ -77,5 +89,24 @@ class BasketController extends GetxController {
 
   void selectPaymentMethod2(String value) {
     selectedPaymentMethod2.value = value;
+  }
+
+  var totalOrderDetails = SubModels().obs;
+  var totalOrderDelivery = SubModels().obs;
+  getTotalOrderDetails() async {
+    totalOrderDetails.value = await _api2.getDataDetails();
+  }
+
+  getTotalOrderDelivery({required String areaId}) async {
+    totalOrderDelivery.value =
+        await _api2.updateShippingCostDetails(areaId: areaId);
+  }
+
+  RxString finalAddress = ''.obs;
+  RxString finalNote = ''.obs;
+
+  addAddressTextAndNote({required String address, required String? note}) {
+    finalAddress.value = address;
+    finalNote.value = note ?? '';
   }
 }

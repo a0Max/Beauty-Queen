@@ -14,8 +14,9 @@ import '../../const/validator.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/basketController.dart';
 import '../../models/city_area_model.dart';
-import '../../widgets/CustomFormField.dart';
+import 'package:quiver/strings.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
+import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/complete_order/dotted_line_painter.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 
@@ -30,7 +31,16 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   AuthController controller = Get.put(AuthController());
   final BasketController basketController = Get.put(BasketController());
   TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController extraNoteController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    basketController.getTotalOrderDetails();
+  }
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +50,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
+                    child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     children: [
                       Padding(
@@ -180,7 +193,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               )
                             } else if (basketController.loadingArea.value !=
                                     true &&
-                                basketController.areaData.value.isNotEmpty &&
+                                (basketController
+                                        .areaData.value.areas?.isNotEmpty ??
+                                    false) &&
                                 basketController
                                         .selectedCityData.value.hasArea !=
                                     "0") ...{
@@ -206,11 +221,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                           null
                                       ? null
                                       : basketController.selectedAreaData.value,
-                                  items: basketController.areaData.value
-                                      .map((value) {
+                                  items: basketController.areaData.value.areas
+                                      ?.map((value) {
                                     return DropdownMenuItem<CityAreaModel>(
                                       value: value,
-                                      child: Text(value.name,
+                                      child: Text(value.name ?? '',
                                           style: TextStyle(
                                             color: AppColors.kBlackColor,
                                             fontSize: 14.sp,
@@ -257,6 +272,25 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 keyboardType: TextInputType.name,
                                 validatorTextField: (val) {
                                   return Validator().validatorRequired(val);
+                                },
+                              ),
+                            ),
+                            20.ph,
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15.w),
+                              child: TextFieldAuthWidget(
+                                hindText: tr('kEnterYourPhoneNumber'),
+                                // titleText: tr('kPhoneNumber'),
+                                controler: phoneController,
+                                keyboardType: TextInputType.phone,
+                                hintStyle: TextStyle(
+                                  color: const Color(0xFF2C3E50),
+                                  fontSize: 17.69.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                validatorTextField: (val) {
+                                  return Validator().validatorPhoneNumber(val);
                                 },
                               ),
                             ),
@@ -345,7 +379,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         color: AppColors.kBlackColor),
                                   ),
                                   Text(
-                                    '24',
+                                    basketController.totalOrderDelivery.value
+                                            .shippingCost ??
+                                        '',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 22.sp,
@@ -371,7 +407,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         color: AppColors.kBlackColor),
                                   ),
                                   Text(
-                                    '24 ساعة',
+                                    basketController.totalOrderDelivery.value
+                                            .shippingTime ??
+                                        '',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 22.sp,
@@ -404,7 +442,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         color: AppColors.kBlackColor),
                                   ),
                                   Text(
-                                    '345 دل',
+                                    '${num.parse("${basketController.totalOrderDetails.value.totalPrice ?? '0'}") + num.parse(basketController.totalOrderDelivery.value.shippingCost ?? '0')} ${tr('Del')}',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
                                         fontSize: 24.sp,
@@ -535,7 +573,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       ),
                     ],
                   ),
-                ),
+                )),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 20),
@@ -564,7 +602,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               color: AppColors.klPinkColor),
                         ),
                         Text(
-                          '${tr('Del')}',
+                          '${num.parse("${basketController.totalOrderDetails.value.totalPrice ?? '0'}") + num.parse(basketController.totalOrderDelivery.value.shippingCost ?? '0')} ${tr('Del')}',
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               fontSize: 24.sp,
@@ -575,6 +613,32 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        if (basketController.selectedPaymentMethod2.value ==
+                            'الاستلام بخدمة التوصيل') {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          _formKey.currentState!.save();
+                          if (basketController.selectedCityData.value.id
+                                  .toString() ==
+                              'null') {
+                            ErrorPopUp(
+                                message: tr('city_required'), title: 'خطا');
+                            return;
+                          }
+                          if (basketController.selectedAreaData.value.id
+                                      .toString() ==
+                                  'null' &&
+                              basketController.selectedCityData.value.hasArea ==
+                                  '1') {
+                            ErrorPopUp(
+                                message: tr('area_required'), title: 'خطا');
+                            return;
+                          }
+                        }
+                        basketController.addAddressTextAndNote(
+                            address: addressController.text,
+                            note: extraNoteController.text);
                         basketController.changeTab(1);
                       },
                       child: Container(

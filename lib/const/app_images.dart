@@ -112,4 +112,6 @@ class AppImages {
   static const String kpageblacktwoImage = '${mainPathToImages}blacktwo.png';
   static const String kpageeyeoneImage = '${mainPathToImages}eyeone.png';
   static const String kpageeyetwoImage = '${mainPathToImages}eyetwo.png';
+  static const String paymentImage = '${mainPathToSvg}payment.svg';
+  static const String walletImage = '${mainPathToSvg}wallet.svg';
 }
