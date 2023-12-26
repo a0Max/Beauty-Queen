@@ -18,6 +18,7 @@ import '../../const/styles.dart';
 
 import '../../const/vars.dart';
 import '../../controller/gift_controller/gift_controller.dart';
+import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
@@ -43,6 +44,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
   double searchBarTranslationY = 0.0;
   double containerheight = 1.0;
   final GiftController controller = Get.put(GiftController());
+  final NavController _controllerNav = Get.put(NavController());
 
   @override
   void initState() {
@@ -102,6 +104,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
           isScrolled: _isScrolled,
           searchBarHeight: searchBarHeight,
           containerHeight: containerheight,
+          countCart: _controllerNav.countCart.value,
           // Replace with your variable for scroll state
           searchBarWidth: searchBarWidth, // Replace with your desired width
           searchBarTranslationY: searchBarTranslationY,

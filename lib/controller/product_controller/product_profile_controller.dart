@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../View/cart/cart_screen.dart';
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/options_model.dart';
 import '../../models/product_model.dart';
@@ -184,6 +185,9 @@ class ProductProfileController extends GetxController
               dilougText: tr('addedSuccessfully'),
               buttonOneText: tr('continuesShopping'),
               buttonTwoText: tr('continuesOrder'),
+              onButtonTwoPressed: () {
+                Get.to(CartScreen());
+              },
             );
           });
     } on DioException catch (e) {

@@ -6,25 +6,23 @@ import 'base_api_connection.dart';
 import 'package:quiver/strings.dart';
 
 class SearchDataApis extends ApiProvider {
-
-
   Future<GeneralSearchModel> getSearchDataRequest(
       {String? keySort,
-        List? selectedLabels,
-        required int page,
-        required String keyWord,
-        List? selectedPrices,
-        List? selectedBrands}) async {
+      List? selectedLabels,
+      required int page,
+      required String keyWord,
+      List? selectedPrices,
+      List? selectedBrands}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getSearchProductEndPoint}/$keyWord',
       queryParameters: {
-        if (isBlank(keySort)==false) 'sort': keySort,
+        if (isBlank(keySort) == false) 'sort': keySort,
         if (selectedLabels?.isNotEmpty ?? false) 'label[]': selectedLabels,
         if (selectedPrices?.isNotEmpty ?? false) 'price[]': selectedPrices,
         if (selectedBrands?.isNotEmpty ?? false) 'brands[]': selectedBrands,

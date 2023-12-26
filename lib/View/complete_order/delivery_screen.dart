@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -130,8 +132,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 underline: const SizedBox(),
                                 iconEnabledColor: Colors.transparent,
                                 isDense: true,
-                                // onTap:  controller.allowToEdit.value==true?null:log('open')
-                                // ,
+                                onTap: () => log('open'),
                                 isExpanded: true,
                                 value: basketController
                                             .selectedCityData.value.id ==

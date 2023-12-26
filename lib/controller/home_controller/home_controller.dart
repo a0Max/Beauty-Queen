@@ -1,10 +1,10 @@
-
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../View/cart/cart_screen.dart';
 import '../../const/api_connrction/home_data_apis.dart';
 import '../../models/home_model.dart';
 import '../../models/product_options_model.dart';
@@ -79,6 +79,9 @@ class HomeController extends GetxController {
               dilougText: tr('addedSuccessfully'),
               buttonOneText: tr('continuesShopping'),
               buttonTwoText: tr('continuesOrder'),
+              onButtonTwoPressed: () {
+                Get.to(CartScreen());
+              },
             );
           });
       NavController.to.getCountOfCart();

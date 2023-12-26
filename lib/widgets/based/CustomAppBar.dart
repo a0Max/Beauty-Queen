@@ -65,13 +65,15 @@ class CustomAppBar extends StatelessWidget {
     // var context = Get.context;
     final currentRoute = ModalRoute.of(context);
     final currentScreenName = currentRoute?.settings.name;
-    print('currentScreenName:$currentScreenName');
-    if (currentScreenName == "/SearchScreen") {
-      final SearchController0 controller = Get.put(SearchController0());
-      controller.getSearchDetails(
-          currentPage: 1, subKeyWord: searchController.text);
-    } else {
-      Get.to(() => SearchScreen(subKeyWord: searchController.text));
+    if (searchController.text != '') {
+      print('currentScreenName:$currentScreenName');
+      if (currentScreenName == "/SearchScreen") {
+        final SearchController0 controller = Get.put(SearchController0());
+        controller.getSearchDetails(
+            currentPage: 1, subKeyWord: searchController.text);
+      } else {
+        Get.to(() => SearchScreen(subKeyWord: searchController.text));
+      }
     }
   }
 

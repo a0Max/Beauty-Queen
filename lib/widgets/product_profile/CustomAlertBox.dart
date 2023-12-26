@@ -15,6 +15,7 @@ class CustomAlertDialog extends StatelessWidget {
   final double? width;
   final bool buttonTwo;
   final VoidCallback? onButtonOnePressed;
+  final VoidCallback? onButtonTwoPressed;
   const CustomAlertDialog(
       {super.key,
       this.dilougText,
@@ -23,6 +24,7 @@ class CustomAlertDialog extends StatelessWidget {
       this.height = 124.95,
       this.buttonTwo = true,
       this.onButtonOnePressed,
+      this.onButtonTwoPressed,
       this.width = 367.06});
 
   @override
@@ -82,7 +84,7 @@ class CustomAlertDialog extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Get.back();
-                      onButtonOnePressed?.call();
+                      onButtonTwoPressed?.call();
                     },
                     child: Container(
                       height: 42.65.h,
