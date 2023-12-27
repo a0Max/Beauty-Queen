@@ -78,26 +78,27 @@ class _DiscountScreenState extends State<DiscountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
-          child: CustomAppBar(
-            showarrowIcon: widget.showBack == true ? true : false,
-            showBagIcon: widget.showBack == true ? false : true,
-            showFavIcon: widget.showBack == true ? false : true,
-            showPersonIcon: widget.showBack == true ? false : true,
-            countCart: _controllerNav.countCart.value,
-            onPressed: () {
-              _scaffoldKey.currentState?.openEndDrawer();
-            },
-            isScrolled: _isScrolled,
-            searchBarWidth: searchBarWidth, // Replace with your desired width
-            searchBarTranslationY: searchBarTranslationY,
-            searchBarTranslationX: searchBarTranslationX,
-          )),
-      endDrawer: const MyEndDrawer(),
-      body: Obx(() => SingleChildScrollView(
+    return Obx(() => Scaffold(
+          key: _scaffoldKey,
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+              child: CustomAppBar(
+                showarrowIcon: widget.showBack == true ? true : false,
+                showBagIcon: widget.showBack == true ? false : true,
+                showFavIcon: widget.showBack == true ? false : true,
+                showPersonIcon: widget.showBack == true ? false : true,
+                countCart: _controllerNav.countCart.value,
+                onPressed: () {
+                  _scaffoldKey.currentState?.openEndDrawer();
+                },
+                isScrolled: _isScrolled,
+                searchBarWidth:
+                    searchBarWidth, // Replace with your desired width
+                searchBarTranslationY: searchBarTranslationY,
+                searchBarTranslationX: searchBarTranslationX,
+              )),
+          endDrawer: const MyEndDrawer(),
+          body: SingleChildScrollView(
             controller: _scrollController,
             child: Column(
               children: [
@@ -346,7 +347,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 }
               ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

@@ -171,14 +171,16 @@ class CustomAppBar extends StatelessWidget {
                     SizedBox(
                       width: 10.w,
                     ),
-                  GestureDetector(
-                    onTap: onPressed,
-                    child: SvgPicture.asset(
-                      AppImages.imageMenu,
-                      height: 20.h,
-                      width: 20.w,
-                    ),
-                  ),
+                  onPressed != null
+                      ? GestureDetector(
+                          onTap: onPressed,
+                          child: SvgPicture.asset(
+                            AppImages.imageMenu,
+                            height: 20.h,
+                            width: 20.w,
+                          ),
+                        )
+                      : const SizedBox(),
                   SizedBox(
                     width: 16.w,
                   ),

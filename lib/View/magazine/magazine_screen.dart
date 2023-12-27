@@ -1,4 +1,5 @@
 import 'package:beauty_queen/const/vars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class MagazineScreen extends StatefulWidget {
 
 class _MagazineScreen extends State<MagazineScreen> {
   late final WebViewController _webViewController;
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -25,7 +27,13 @@ class _MagazineScreen extends State<MagazineScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            // Update loading bar.
+            setState(() {
+              if (progress == 100) {
+                isLoading = false;
+              } else {
+                isLoading = true;
+              }
+            });
           },
           onPageStarted: (url) async {
             print('url:$url');
@@ -62,9 +70,11 @@ class _MagazineScreen extends State<MagazineScreen> {
                 )),
           ),
           Expanded(
-            child: WebViewWidget(
-              controller: _webViewController,
-            ),
+            child: isLoading == true
+                ? const CupertinoActivityIndicator()
+                : WebViewWidget(
+                    controller: _webViewController,
+                  ),
           )
         ],
       ),

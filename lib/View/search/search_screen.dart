@@ -93,9 +93,7 @@ class _SearchScreen extends State<SearchScreen> {
             countCart: _controllerNav.countCart.value,
 
             isScrolled: _isScrolled,
-            onPressed: () {
-              _scaffoldKey.currentState?.openEndDrawer();
-            },
+
             // Replace with your variable for scroll state
             searchBarWidth: searchBarWidth, // Replace with your desired width
             searchBarTranslationY: searchBarTranslationY,

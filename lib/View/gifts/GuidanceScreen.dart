@@ -83,36 +83,36 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
-        child: CustomAppBar(
-          // showBagIcon: true,
-          // showFavIcon: true,
-          // showPersonIcon: true,
-          showarrowIcon: widget.showBack == true ? true : false,
-          showBagIcon: widget.showBack == true ? false : true,
-          showFavIcon: widget.showBack == true ? false : true,
-          showPersonIcon: widget.showBack == true ? false : true,
+    return Obx(() => Scaffold(
+          key: _scaffoldKey,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+            child: CustomAppBar(
+              // showBagIcon: true,
+              // showFavIcon: true,
+              // showPersonIcon: true,
+              showarrowIcon: widget.showBack == true ? true : false,
+              showBagIcon: widget.showBack == true ? false : true,
+              showFavIcon: widget.showBack == true ? false : true,
+              showPersonIcon: widget.showBack == true ? false : true,
 
-          onPressed: () {
-            // Handle the button click here, e.g., open the end drawer.
-            _scaffoldKey.currentState?.openEndDrawer();
-          },
-          isScrolled: _isScrolled,
-          searchBarHeight: searchBarHeight,
-          containerHeight: containerheight,
-          countCart: _controllerNav.countCart.value,
-          // Replace with your variable for scroll state
-          searchBarWidth: searchBarWidth, // Replace with your desired width
-          searchBarTranslationY: searchBarTranslationY,
-          searchBarTranslationX: searchBarTranslationX,
-          // Replace with your desired translation value
-        ),
-      ),
-      endDrawer: const MyEndDrawer(),
-      body: Obx(() => SingleChildScrollView(
+              onPressed: () {
+                // Handle the button click here, e.g., open the end drawer.
+                _scaffoldKey.currentState?.openEndDrawer();
+              },
+              isScrolled: _isScrolled,
+              searchBarHeight: searchBarHeight,
+              containerHeight: containerheight,
+              countCart: _controllerNav.countCart.value,
+              // Replace with your variable for scroll state
+              searchBarWidth: searchBarWidth, // Replace with your desired width
+              searchBarTranslationY: searchBarTranslationY,
+              searchBarTranslationX: searchBarTranslationX,
+              // Replace with your desired translation value
+            ),
+          ),
+          endDrawer: const MyEndDrawer(),
+          body: SingleChildScrollView(
             controller: _scrollController,
             child: Column(
               children: [
@@ -485,7 +485,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                 }
               ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

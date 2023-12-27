@@ -23,6 +23,7 @@ import '../../widgets/home/custom_horizontal_list.dart';
 import '../../widgets/loading/home_loading.dart';
 import '../brands/branddetail_screen.dart';
 import '../categories/filter_screen.dart';
+import '../magazine/magazine_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
 import '../product_profile/products_screen.dart';
 
@@ -912,7 +913,7 @@ class _HomePageState extends State<HomePage> {
                                 top: 230.h,
                                 // left: 15.w,
                                 child: SizedBox(
-                                  height: 342,
+                                  height: 363,
                                   width: MediaQuery.of(context).size.width,
                                   child: ListView.builder(
                                     shrinkWrap: true,
@@ -1205,24 +1206,30 @@ class _HomePageState extends State<HomePage> {
                                 padding: EdgeInsets.only(
                                   bottom: 25.h,
                                 ),
-                                child: Container(
-                                  height: 29.83.h,
-                                  width: 85.59.w,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1.5.w,
-                                          color: AppColors.kWhiteColor),
-                                      borderRadius: BorderRadius.circular(8.r)),
-                                  child: Center(
-                                    child: Text(tr('let_me_know_now'),
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.03.sp,
-                                          fontFamily: kTheArabicSansLight,
-                                          fontWeight: FontWeight.w600,
-                                          height: 1.5,
-                                          letterSpacing: 0.13,
-                                        )),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.to(const MagazineScreen());
+                                  },
+                                  child: Container(
+                                    height: 29.83.h,
+                                    width: 85.59.w,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1.5.w,
+                                            color: AppColors.kWhiteColor),
+                                        borderRadius:
+                                            BorderRadius.circular(8.r)),
+                                    child: Center(
+                                      child: Text(tr('let_me_know_now'),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12.03.sp,
+                                            fontFamily: kTheArabicSansLight,
+                                            fontWeight: FontWeight.w600,
+                                            height: 1.5,
+                                            letterSpacing: 0.13,
+                                          )),
+                                    ),
                                   ),
                                 ),
                               ),
