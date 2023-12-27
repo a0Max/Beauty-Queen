@@ -44,42 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDl0ScbJK84QvFROKAHi-WRxvqNg43rzTU',
-    appId: '1:636984093820:web:1951508f3244faa9282df9',
-    messagingSenderId: '636984093820',
-    projectId: 'beautyqueen-93be2',
-    authDomain: 'beautyqueen-93be2.firebaseapp.com',
-    storageBucket: 'beautyqueen-93be2.appspot.com',
-    measurementId: 'G-5E4QP6C1P5',
+    apiKey: 'AIzaSyAgO1csL-ElHWZDxnNneI-qWMjjwtBYL0U',
+    appId: '1:149808100906:web:108d9fdf723c64980c7553',
+    messagingSenderId: '149808100906',
+    projectId: 'beauty-queen-b415e',
+    authDomain: 'beauty-queen-b415e.firebaseapp.com',
+    storageBucket: 'beauty-queen-b415e.appspot.com',
+    measurementId: 'G-D4FK8FFE34',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA4SGyMVmRhMnCox2grhQMaRXpCwmyPRJY',
-    appId: '1:636984093820:android:919f94285aaa3d7b282df9',
-    messagingSenderId: '636984093820',
-    projectId: 'beautyqueen-93be2',
-    storageBucket: 'beautyqueen-93be2.appspot.com',
+    apiKey: 'AIzaSyCBZsN62nlw65ATdCpWGXLYdgXX0kA4qFE',
+    appId: '1:149808100906:android:a39ce5ae4f5c9ffd0c7553',
+    messagingSenderId: '149808100906',
+    projectId: 'beauty-queen-b415e',
+    storageBucket: 'beauty-queen-b415e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCCv6S6nD8pVh6ZL2CjUjIr_3sslEzg_V8',
-    appId: '1:636984093820:ios:847bcfa40feec8ef282df9',
-    messagingSenderId: '636984093820',
-    projectId: 'beautyqueen-93be2',
-    storageBucket: 'beautyqueen-93be2.appspot.com',
-    androidClientId: '636984093820-b00p1rrdbssupnn415mq926t68vanobo.apps.googleusercontent.com',
-    iosClientId: '636984093820-m8ecnbpcn4uvaqh1udal57q4srnt52mi.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBrP5elUt9I3WmSIyVthu4qVG01jJg8b4I',
+    appId: '1:149808100906:ios:a548c013c8b2f4ab0c7553',
+    messagingSenderId: '149808100906',
+    projectId: 'beauty-queen-b415e',
+    storageBucket: 'beauty-queen-b415e.appspot.com',
+    iosClientId: '149808100906-h6gs137k56sfhvdnmf0dnk25q66574qh.apps.googleusercontent.com',
     iosBundleId: 'com.beauty.beautyQueen',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCCv6S6nD8pVh6ZL2CjUjIr_3sslEzg_V8',
-    appId: '1:636984093820:ios:528b10523a96dc76282df9',
-    messagingSenderId: '636984093820',
-    projectId: 'beautyqueen-93be2',
-    storageBucket: 'beautyqueen-93be2.appspot.com',
-    androidClientId: '636984093820-b00p1rrdbssupnn415mq926t68vanobo.apps.googleusercontent.com',
-    iosClientId: '636984093820-htc70bu5jnnrn0hsop07mve4at39v2f9.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBrP5elUt9I3WmSIyVthu4qVG01jJg8b4I',
+    appId: '1:149808100906:ios:2e8001ccafb182910c7553',
+    messagingSenderId: '149808100906',
+    projectId: 'beauty-queen-b415e',
+    storageBucket: 'beauty-queen-b415e.appspot.com',
+    iosClientId: '149808100906-4qhajedfa9dpq0etajnq2olsf1ek42fe.apps.googleusercontent.com',
     iosBundleId: 'com.example.beautyQueen.RunnerTests',
   );
 }

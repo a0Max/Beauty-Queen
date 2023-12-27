@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>636984093820-m8ecnbpcn4uvaqh1udal57q4srnt52mi.apps.googleusercontent.com</string>
+	<string>149808100906-h6gs137k56sfhvdnmf0dnk25q66574qh.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.636984093820-m8ecnbpcn4uvaqh1udal57q4srnt52mi</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>636984093820-b00p1rrdbssupnn415mq926t68vanobo.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.149808100906-h6gs137k56sfhvdnmf0dnk25q66574qh</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCCv6S6nD8pVh6ZL2CjUjIr_3sslEzg_V8</string>
+	<string>AIzaSyBrP5elUt9I3WmSIyVthu4qVG01jJg8b4I</string>
 	<key>GCM_SENDER_ID</key>
-	<string>636984093820</string>
+	<string>149808100906</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.beauty.beautyQueen</string>
 	<key>PROJECT_ID</key>
-	<string>beautyqueen-93be2</string>
+	<string>beauty-queen-b415e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>beautyqueen-93be2.appspot.com</string>
+	<string>beauty-queen-b415e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:636984093820:ios:847bcfa40feec8ef282df9</string>
+	<string>1:149808100906:ios:a548c013c8b2f4ab0c7553</string>
 </dict>
 </plist>
