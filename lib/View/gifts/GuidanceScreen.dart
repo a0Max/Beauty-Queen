@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
 import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -157,7 +156,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                           borderRadius: BorderRadius.circular(15.r)),
                       child: Stack(
                         children: [
-                          Image.asset(kgiftImagetwo),
+                          Image.asset(AppImages.kgiftImagetwo),
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
@@ -216,7 +215,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                           borderRadius: BorderRadius.circular(15.r)),
                       child: Stack(
                         children: [
-                          Image.asset(kgiftImagetwo),
+                          Image.asset(AppImages.kgiftImagetwo),
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(

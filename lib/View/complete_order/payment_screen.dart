@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
-import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
@@ -168,9 +167,8 @@ class _PaymentScreen extends State<PaymentScreen> {
                                     padding: EdgeInsets.only(left: 10.w),
                                     child: Align(
                                       alignment: Alignment.bottomLeft,
-                                      child: Image.asset(
-                                        kqueencrownImage,
-                                      ),
+                                      child: SvgPicture.asset(
+                                          AppImages.kqueencrownImage),
                                     ),
                                   ),
                                 ],
@@ -354,9 +352,8 @@ class _PaymentScreen extends State<PaymentScreen> {
                                                 EdgeInsets.only(left: 10.w),
                                             child: Align(
                                               alignment: Alignment.bottomLeft,
-                                              child: Image.asset(
-                                                kqueencrownImage,
-                                              ),
+                                              child: SvgPicture.asset(
+                                                  AppImages.kqueencrownImage),
                                             ),
                                           ),
                                         ],

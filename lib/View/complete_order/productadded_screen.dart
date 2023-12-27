@@ -9,14 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../const/app_colors.dart';
-import '../const/images.dart';
-import '../const/vars.dart';
-import '../controller/basketController.dart';
-import '../controller/orders_controller/orders_controller.dart';
-import '../widgets/drawer/drawer_final_ticket.dart';
-import '../widgets/order/order_details.dart';
-import 'orders/orders_screen.dart';
+import '../../const/app_colors.dart';
+import '../../const/vars.dart';
+import '../../controller/basketController.dart';
+import '../../controller/orders_controller/orders_controller.dart';
+import '../../widgets/drawer/drawer_final_ticket.dart';
+import '../../widgets/order/order_details.dart';
+import '../orders/orders_screen.dart';
 
 class ProductAddedScreen extends StatelessWidget {
   const ProductAddedScreen({super.key});

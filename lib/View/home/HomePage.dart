@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
-import '../../const/images.dart';
+import '../../const/app_images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
@@ -1160,7 +1160,7 @@ class _HomePageState extends State<HomePage> {
                         child: Stack(
                           children: [
                             Image(
-                              image: const AssetImage(kMagzineImage),
+                              image: const AssetImage(AppImages.kMagzineImage),
                               height: 300.h,
                               width: 420.w,
                             ),

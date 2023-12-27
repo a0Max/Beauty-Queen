@@ -1,6 +1,5 @@
 // ignore_for_file: unrelated_type_equality_checks, library_private_types_in_public_api
 
-import 'package:beauty_queen/const/images.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../const/app_colors.dart';
 import '../../controller/basketController.dart';
-import '../productadded_screen.dart';
+import 'productadded_screen.dart';
 import 'delivery_screen.dart';
 import 'payment_screen.dart';
 import 'summary_screen.dart';

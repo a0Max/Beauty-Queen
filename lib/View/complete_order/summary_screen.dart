@@ -12,7 +12,7 @@ import '../../const/vars.dart';
 import '../../controller/basketController.dart';
 import '../../widgets/order/rps_custom_painter.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
-import '../productadded_screen.dart';
+import 'productadded_screen.dart';
 
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({super.key});
@@ -555,6 +555,7 @@ class SummaryScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      ///todo send request to add the order
                       Get.to(const ProductAddedScreen());
                     },
                     child: Container(

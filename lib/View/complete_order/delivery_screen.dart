@@ -9,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
-import '../../const/images.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
 import '../../controller/auth_controller/auth_controler.dart';
