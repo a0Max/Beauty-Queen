@@ -1,4 +1,5 @@
 // ignore_for_file: file_names, library_private_types_in_public_api, avoid_unnecessary_containers
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -948,6 +949,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
+                      20.ph,
 
                       ///organicItems
                       Row(
