@@ -17,7 +17,9 @@ import '../../models/sales_products_model.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
 import '../../widgets/product_profile/details_static.dart';
+import '../../widgets/shimmer/shimmer_new_items.dart';
 import '../../widgets/shimmer/shimmer_profile.dart';
+import '../../widgets/shimmer/shimmer_text.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
 import 'tab_screen_two.dart';
 
@@ -1015,216 +1017,271 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                 height: 32.h,
                               ),
                             ])),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
-                                tr('related_product'),
-                                style: TextStyle(
-                                    fontFamily: kTheArabicSansLight,
-                                    fontSize: 17.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColors.kPrimaryColor),
-                              ),
-                            ),
-                            (controller.productData.isNotEmpty ?? false)
-                                ? CarouselSlider(
-                                    options: CarouselOptions(
-                                      viewportFraction:
-                                          1.0, // Set to 1.0 for full width current page
-                                      aspectRatio: 1.0,
-                                      autoPlay: true,
-                                      enlargeCenterPage:
-                                          true, // Make the current page full width
-                                    ),
-                                    items: List.generate(
-                                        ((controller.productData.value.last.p
-                                                        ?.length ??
-                                                    0) /
-                                                2)
-                                            .roundToDouble()
-                                            .toInt(), (index) {
-                                      int value = index * 2;
-                                      return Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomCardWidget(
-                                            // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                            imageUrl: Connection.urlOfProducts(
-                                                image: controller
-                                                        .productData
-                                                        .value
-                                                        .last
-                                                        .p?[value]
-                                                        .mainImage ??
-                                                    ''),
-                                            newArrival: controller.productData
-                                                    .value.last.p?[value] ??
-                                                SalesProductsModel(),
-                                            favorite: controller
-                                                    .productData
-                                                    .value
-                                                    .last
-                                                    .p?[value]
-                                                    .wishlist
-                                                    ?.isNotEmpty ??
-                                                false,
-                                          ),
-                                          if ((controller.productData.value.last
-                                                      .p?.length ??
-                                                  0) >
-                                              value + 1) ...{
-                                            CustomCardWidget(
-                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                              imageUrl:
-                                                  Connection.urlOfProducts(
-                                                      image: controller
-                                                              .productData
-                                                              .value
-                                                              .last
-                                                              .p?[value + 1]
-                                                              .mainImage ??
-                                                          ''),
+                        controller.isLoading.value == true
+                            ? const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ShimmerText(),
+                                  ShimmerNewItems(),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  (controller.productData.value.last.p
+                                                  ?.length ??
+                                              0) >
+                                          0
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 15),
+                                              child: Text(
+                                                tr('related_product'),
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        kTheArabicSansLight,
+                                                    fontSize: 17.sp,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: AppColors
+                                                        .kPrimaryColor),
+                                              ),
+                                            ),
+                                            (controller.productData
+                                                        .isNotEmpty ??
+                                                    false)
+                                                ? CarouselSlider(
+                                                    options: CarouselOptions(
+                                                      viewportFraction:
+                                                          1.0, // Set to 1.0 for full width current page
+                                                      aspectRatio: 1.0,
+                                                      autoPlay: true,
+                                                      enlargeCenterPage:
+                                                          true, // Make the current page full width
+                                                    ),
+                                                    items: List.generate(
+                                                        ((controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .p
+                                                                        ?.length ??
+                                                                    0) /
+                                                                2)
+                                                            .roundToDouble()
+                                                            .toInt(), (index) {
+                                                      int value = index * 2;
+                                                      return Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          CustomCardWidget(
+                                                            // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                            imageUrl: Connection.urlOfProducts(
+                                                                image: controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .p?[value]
+                                                                        .mainImage ??
+                                                                    ''),
+                                                            newArrival: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .p?[value] ??
+                                                                SalesProductsModel(),
+                                                            favorite: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .p?[value]
+                                                                    .wishlist
+                                                                    ?.isNotEmpty ??
+                                                                false,
+                                                          ),
+                                                          if ((controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .p
+                                                                      ?.length ??
+                                                                  0) >
+                                                              value + 1) ...{
+                                                            CustomCardWidget(
+                                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                              imageUrl: Connection.urlOfProducts(
+                                                                  image: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .p?[value +
+                                                                              1]
+                                                                          .mainImage ??
+                                                                      ''),
 
-                                              newArrival: controller
-                                                      .productData
-                                                      .value
-                                                      .last
-                                                      .p?[value + 1] ??
-                                                  SalesProductsModel(),
-                                              favorite: controller
-                                                      .productData
-                                                      .value
-                                                      .last
-                                                      .p?[value + 1]
-                                                      .wishlist
-                                                      ?.isNotEmpty ??
-                                                  false,
-                                            )
-                                          }
-                                        ],
-                                      );
-                                    }))
-                                : const SizedBox()
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
-                                tr('same_brand'),
-                                style: TextStyle(
-                                    fontFamily: kTheArabicSansLight,
-                                    fontSize: 17.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColors.kPrimaryColor),
-                              ),
-                            ),
-                            (controller.productData.isNotEmpty ?? false)
-                                ? CarouselSlider(
-                                    options: CarouselOptions(
-                                      viewportFraction:
-                                          1.0, // Set to 1.0 for full width current page
-                                      aspectRatio: 1.0,
-                                      autoPlay: true,
-                                      enlargeCenterPage:
-                                          true, // Make the current page full width
-                                    ),
-                                    items: List.generate(
-                                        ((controller
-                                                        .productData
-                                                        .value
-                                                        .last
-                                                        .sameBrandProducts
-                                                        ?.length ??
-                                                    0) /
-                                                2)
-                                            .roundToDouble()
-                                            .toInt(), (index) {
-                                      int value = index * 2;
-                                      return Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomCardWidget(
-                                            // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                            imageUrl: Connection.urlOfProducts(
-                                                image: controller
-                                                        .productData
-                                                        .value
-                                                        .last
-                                                        .sameBrandProducts?[
-                                                            value]
-                                                        .mainImage ??
-                                                    ''),
-                                            newArrival: controller
-                                                        .productData
-                                                        .value
-                                                        .last
-                                                        .sameBrandProducts?[
-                                                    value] ??
-                                                SalesProductsModel(),
-                                            favorite: controller
-                                                    .productData
-                                                    .value
-                                                    .last
-                                                    .sameBrandProducts?[value]
-                                                    .wishlist
-                                                    ?.isNotEmpty ??
-                                                false,
-                                          ),
-                                          if ((controller
-                                                      .productData
-                                                      .value
-                                                      .last
-                                                      .sameBrandProducts
-                                                      ?.length ??
-                                                  0) >
-                                              value + 1) ...{
-                                            CustomCardWidget(
-                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                              imageUrl: Connection.urlOfProducts(
-                                                  image: controller
-                                                          .productData
-                                                          .value
-                                                          .last
-                                                          .sameBrandProducts?[
-                                                              value + 1]
-                                                          .mainImage ??
-                                                      ''),
-                                              newArrival: controller
-                                                          .productData
-                                                          .value
-                                                          .last
-                                                          .sameBrandProducts?[
-                                                      value + 1] ??
-                                                  SalesProductsModel(),
-                                              favorite: controller
-                                                      .productData
-                                                      .value
-                                                      .last
-                                                      .sameBrandProducts?[
-                                                          value + 1]
-                                                      .wishlist
-                                                      ?.isNotEmpty ??
-                                                  false,
-                                            )
-                                          }
-                                        ],
-                                      );
-                                    }))
-                                : const SizedBox()
-                          ],
-                        )
+                                                              newArrival: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .p?[
+                                                                      value +
+                                                                          1] ??
+                                                                  SalesProductsModel(),
+                                                              favorite: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .p?[value +
+                                                                          1]
+                                                                      .wishlist
+                                                                      ?.isNotEmpty ??
+                                                                  false,
+                                                            )
+                                                          }
+                                                        ],
+                                                      );
+                                                    }))
+                                                : const SizedBox()
+                                          ],
+                                        )
+                                      : const SizedBox(),
+                                  (controller.productData.value.last
+                                                  .sameBrandProducts?.length ??
+                                              0) >
+                                          0
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 15),
+                                              child: Text(
+                                                tr('same_brand'),
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        kTheArabicSansLight,
+                                                    fontSize: 17.sp,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: AppColors
+                                                        .kPrimaryColor),
+                                              ),
+                                            ),
+                                            (controller.productData
+                                                        .isNotEmpty ??
+                                                    false)
+                                                ? CarouselSlider(
+                                                    options: CarouselOptions(
+                                                      viewportFraction:
+                                                          1.0, // Set to 1.0 for full width current page
+                                                      aspectRatio: 1.0,
+                                                      autoPlay: true,
+                                                      enlargeCenterPage:
+                                                          true, // Make the current page full width
+                                                    ),
+                                                    items: List.generate(
+                                                        ((controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .sameBrandProducts
+                                                                        ?.length ??
+                                                                    0) /
+                                                                2)
+                                                            .roundToDouble()
+                                                            .toInt(), (index) {
+                                                      int value = index * 2;
+                                                      return Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          CustomCardWidget(
+                                                            // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                            imageUrl: Connection.urlOfProducts(
+                                                                image: controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .sameBrandProducts?[
+                                                                            value]
+                                                                        .mainImage ??
+                                                                    ''),
+                                                            newArrival: controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .sameBrandProducts?[
+                                                                    value] ??
+                                                                SalesProductsModel(),
+                                                            favorite: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .sameBrandProducts?[
+                                                                        value]
+                                                                    .wishlist
+                                                                    ?.isNotEmpty ??
+                                                                false,
+                                                          ),
+                                                          if ((controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts
+                                                                      ?.length ??
+                                                                  0) >
+                                                              value + 1) ...{
+                                                            CustomCardWidget(
+                                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                              imageUrl: Connection.urlOfProducts(
+                                                                  image: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[value +
+                                                                              1]
+                                                                          .mainImage ??
+                                                                      ''),
+                                                              newArrival: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[
+                                                                      value +
+                                                                          1] ??
+                                                                  SalesProductsModel(),
+                                                              favorite: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts?[
+                                                                          value +
+                                                                              1]
+                                                                      .wishlist
+                                                                      ?.isNotEmpty ??
+                                                                  false,
+                                                            )
+                                                          }
+                                                        ],
+                                                      );
+                                                    }))
+                                                : const SizedBox()
+                                          ],
+                                        )
+                                      : const SizedBox()
+                                ],
+                              )
                       ],
                     ),
                   ),

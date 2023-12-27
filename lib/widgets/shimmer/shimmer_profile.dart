@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'shimmer_text.dart';
+
 class ShimmerProfile extends StatelessWidget {
   const ShimmerProfile({super.key});
 
@@ -36,7 +38,8 @@ class ShimmerProfile extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.4), // Customize the shadow color
+                    color: Colors.grey
+                        .withOpacity(0.4), // Customize the shadow color
                     spreadRadius: 0.5, // Customize how far the shadow spreads
                     blurRadius: 9, // Customize the blur radius
                     offset: const Offset(0, 5), // Customize the offset
@@ -44,34 +47,17 @@ class ShimmerProfile extends StatelessWidget {
                 ],
                 color: Colors.white,
               ),
-              width:MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width,
               height: 258.48.h,
             ),
-
             SizedBox(
               height: 13.h,
             ),
-            Container(
-
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              width: MediaQuery.of(context).size.width/2,
-              height: 20,
-            ),
+            const ShimmerText(),
             SizedBox(
               height: 13.h,
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              width: MediaQuery.of(context).size.width/2,
-              height: 20,
-            )
-
+            const ShimmerText()
           ],
         ));
   }

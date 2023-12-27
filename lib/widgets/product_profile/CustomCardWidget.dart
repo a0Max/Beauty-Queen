@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/home_controller/home_controller.dart';
+import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/options_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
@@ -45,6 +46,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
     super.initState();
     isFavorite = widget.favorite;
   }
+
+  final NavController controller = Get.put(NavController());
 
   @override
   Widget build(BuildContext context) {
@@ -367,6 +370,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                   productOptionId:
                                       selectedParentOption?.id ?? 0,
                                   productParentId: selectedOption?.id ?? 0);
+                              await controller.getCountOfCart();
                             }
                           },
                           child: Container(
@@ -612,6 +616,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   onTap: () async {
                     await _controller.addToCart(
                         productId: widget.newArrival.id ?? 0);
+                    await controller.getCountOfCart();
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
