@@ -56,38 +56,38 @@ class LoginVia extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              InkWell(
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                onTap: () {},
-                child: Container(
-                  width: (MediaQuery.of(context).size.width - 100) / 2,
-                  padding: const EdgeInsets.symmetric(vertical: 17),
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          width: 1.11.w, color: const Color(0xFFE4E4E4)),
-                      borderRadius: BorderRadius.circular(8.84.r),
-                    ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x42C6C6C6),
-                        blurRadius: 24.32,
-                        offset: Offset(0, 4.42),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
-                  child: SvgPicture.asset(
-                    AppImages.imageFacebook,
-                    height: 25,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
+              // InkWell(
+              //   highlightColor: Colors.transparent,
+              //   splashColor: Colors.transparent,
+              //   onTap: () {},
+              //   child: Container(
+              //     width: (MediaQuery.of(context).size.width - 100) / 2,
+              //     padding: const EdgeInsets.symmetric(vertical: 17),
+              //     decoration: ShapeDecoration(
+              //       color: Colors.white,
+              //       shape: RoundedRectangleBorder(
+              //         side: BorderSide(
+              //             width: 1.11.w, color: const Color(0xFFE4E4E4)),
+              //         borderRadius: BorderRadius.circular(8.84.r),
+              //       ),
+              //       shadows: const [
+              //         BoxShadow(
+              //           color: Color(0x42C6C6C6),
+              //           blurRadius: 24.32,
+              //           offset: Offset(0, 4.42),
+              //           spreadRadius: 0,
+              //         )
+              //       ],
+              //     ),
+              //     child: SvgPicture.asset(
+              //       AppImages.imageFacebook,
+              //       height: 25,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 20,
+              // ),
               InkWell(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
