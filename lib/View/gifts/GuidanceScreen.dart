@@ -19,9 +19,11 @@ import '../../const/vars.dart';
 import '../../controller/gift_controller/gift_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
+import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
+import '../cart/cart_screen.dart';
 import 'filterby_gifts_screen.dart';
 
 class GuidanceScreen extends StatefulWidget {
@@ -179,7 +181,24 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                                         color: AppColors.kPrimaryColor),
                                   ),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomAlertDialog(
+                                              height: 180.64.h,
+                                              dilougText:
+                                                  tr('addedSuccessfully'),
+                                              buttonOneText:
+                                                  tr('continuesShopping'),
+                                              buttonTwoText:
+                                                  tr('continuesOrder'),
+                                              onButtonTwoPressed: () {
+                                                Get.to(const CartScreen());
+                                              },
+                                            );
+                                          });
+                                    },
                                     child: Container(
                                       height: 36.28.h,
                                       width: 132.47.w,
@@ -238,7 +257,24 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                                         color: AppColors.kPrimaryColor),
                                   ),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomAlertDialog(
+                                              height: 180.64.h,
+                                              dilougText:
+                                                  tr('addedSuccessfully'),
+                                              buttonOneText:
+                                                  tr('continuesShopping'),
+                                              buttonTwoText:
+                                                  tr('continuesOrder'),
+                                              onButtonTwoPressed: () {
+                                                Get.to(const CartScreen());
+                                              },
+                                            );
+                                          });
+                                    },
                                     child: Container(
                                       height: 36.28.h,
                                       width: 132.47.w,

@@ -11,7 +11,7 @@ import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
-import '../../controller/basketController.dart';
+import '../../controller/complete_order_controller/basketController.dart';
 import '../../controller/wallet_controller/wallet_controller.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 

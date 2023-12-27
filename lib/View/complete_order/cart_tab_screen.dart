@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/app_colors.dart';
-import '../../controller/basketController.dart';
+import '../../controller/complete_order_controller/basketController.dart';
 import 'productadded_screen.dart';
 import 'delivery_screen.dart';
 import 'payment_screen.dart';

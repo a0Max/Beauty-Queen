@@ -5,47 +5,24 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../const/api_connrction/order_data_apis.dart';
-import '../const/api_connrction/user_data_apis.dart';
-import '../models/city_area_model.dart';
-import '../models/order_model.dart';
-import '../models/sub_models.dart';
-import '../widgets/based/error_pop_up.dart';
-import 'auth_controller/auth_controler.dart';
+import '../../const/api_connrction/order_data_apis.dart';
+import '../../const/api_connrction/user_data_apis.dart';
+import '../../models/city_area_model.dart';
+import '../../models/order_model.dart';
+import '../../models/sub_models.dart';
+import '../../widgets/based/error_pop_up.dart';
+import '../auth_controller/auth_controler.dart';
 
 class BasketController extends GetxController {
-  final RxBool isLineVisible = false.obs;
   Color containerColor = Colors.white;
 
-  RxBool isSelected = true.obs;
-  var selectedValue = ''.obs;
-  var selectedValue2 = ''.obs;
-  var selectedValue3 = ''.obs;
-  final List<String> dropdownItems = [
-    'طرابلس'
-        'عين زارة'
-        'بجانب مول طرابلس للتسوق'
-  ];
-
-  // Create an observable variable to track the radio button state
-
-  void updateSelection(bool value) {
-    isSelected.value = value;
-  }
+  final _api2 = OrderDataApis();
 
   var selectedPaymentMethod = 'cash'.obs;
 
   void selectPaymentMethod(String value) {
     selectedPaymentMethod.value = value;
   }
-
-  void showLine() {
-    isLineVisible.value = true;
-  }
-
-  //////////////////////////////////////////////////////////////
-  // final _api = UserDataApis();
-  final _api2 = OrderDataApis();
 
   RxInt selectedIndex = 0.obs;
   void changeTab(int index) {
@@ -122,16 +99,6 @@ class BasketController extends GetxController {
 
   sendToCreateOrder({required String email, required String name}) async {
     try {
-      print("address:${finalAddress.value}");
-      print("area:${selectedAreaData.value.id.toString()}");
-      print("city:${selectedCityData.value.id.toString()}");
-      print("name:${name}");
-      print("saveData:${isChecked.value}");
-      print("notes:${finalNote.value}");
-      print("phone:${finalPhone.value}");
-      print("type:${selectedPaymentMethod2.value}");
-      print("payment_method:${selectedPaymentMethod.value}");
-      print("email:${email}");
       finalOrderData.value = await _api2.getOrderIdRequest(
           address: finalAddress.value,
           area: selectedAreaData.value.id.toString(),

@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
-import '../../controller/basketController.dart';
+import '../../controller/complete_order_controller/basketController.dart';
 import '../../widgets/order/rps_custom_painter.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
 import 'productadded_screen.dart';

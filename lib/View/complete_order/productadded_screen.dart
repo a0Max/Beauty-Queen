@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
-import '../../controller/basketController.dart';
+import '../../controller/complete_order_controller/basketController.dart';
 import '../../controller/orders_controller/orders_controller.dart';
 import '../../widgets/drawer/drawer_final_ticket.dart';
 import '../../widgets/order/order_details.dart';
