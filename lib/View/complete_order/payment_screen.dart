@@ -1,3 +1,4 @@
+import 'package:beauty_queen/widgets/based/loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -404,19 +405,12 @@ class _PaymentScreen extends State<PaymentScreen> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: () {
-                        print(
-                            'addressController:${basketController.finalAddress}');
-                        print(
-                            'extraNoteController:${basketController.finalNote}');
-                        print(
-                            'selectedAreaData:${basketController.selectedAreaData.value}');
-                        print(
-                            'selectedCityData:${basketController.selectedCityData.value.id.toString()}');
-                        print('is-checked:${basketController.isChecked.value}');
-
-                        print(basketController.selectedPaymentMethod2.value);
-                        print(basketController.selectedPaymentMethod.value);
+                      onTap: () async {
+                        LoadingScreen.show(context);
+                        await basketController.sendToCreateOrder(
+                            email: controller.userData.value.email ?? '',
+                            name: controller.userData.value.name ?? '');
+                        Navigator.of(context).pop();
                         basketController.changeTab(2);
                       },
                       child: Container(

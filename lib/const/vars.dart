@@ -178,6 +178,7 @@ abstract class OrderState {
   static const delayed = 'delayed';
   static const readyToPickup = 'readyToPickup';
   static const atShippingAgent = 'atShippingAgent';
+  static const inCart = 'in_cart';
 }
 
 abstract class WalletState {

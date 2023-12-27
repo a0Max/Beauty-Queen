@@ -453,6 +453,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                         fontWeight: FontWeight.w700,
                         // height: 1,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -139,11 +139,16 @@ class OrderDataApis extends ApiProvider {
     }
   }
 
-  ///todo get the orderID
   Future<SubModels> getOrderIdRequest(
       {required String address,
       required String? area,
       required String city,
+      required String email,
+      required String name,
+      required bool saveData,
+      required String? note,
+      required String type,
+      required String? phone,
       required String paymentMethod}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
@@ -159,16 +164,18 @@ class OrderDataApis extends ApiProvider {
               },
             ),
             data: {
-          'address': '',
-          'area': '',
-          'city': '',
-          'email': '',
-          'name': '',
-          'notes': '',
-          'payment_method': '',
-          'phone': '',
-          'saveData': ""
+          'address': address,
+          'area': area,
+          'city': city,
+          'email': email,
+          'name': name,
+          'notes': note,
+          'payment_method': paymentMethod,
+          'phone': phone,
+          'saveData': saveData,
+          'type': type
         });
+
     if (validResponse(response.statusCode!)) {
       return SubModels.fromJson(response.data);
     } else {

@@ -5,7 +5,7 @@ import 'products_model.dart';
 part 'cart_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class CartModel{
+class CartModel {
   List<ProductsModel>? products;
   String? totalPrice;
   String? promoCode;
@@ -14,10 +14,10 @@ class CartModel{
 
   CartModel(
       {this.products,
-        this.totalPrice,
-        this.promoCode,
-        this.totalQty,
-        this.initialPrice});
+      this.totalPrice,
+      this.promoCode,
+      this.totalQty,
+      this.initialPrice});
 
   factory CartModel.fromJson(Map<String, dynamic> json) {
     return _$CartModelFromJson(json);

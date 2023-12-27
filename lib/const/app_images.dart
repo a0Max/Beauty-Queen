@@ -112,6 +112,10 @@ class AppImages {
   static const String kpageblacktwoImage = '${mainPathToImages}blacktwo.png';
   static const String kpageeyeoneImage = '${mainPathToImages}eyeone.png';
   static const String kpageeyetwoImage = '${mainPathToImages}eyetwo.png';
+  static const String carImage = '${mainPathToImages}car.png';
   static const String paymentImage = '${mainPathToSvg}payment.svg';
   static const String walletImage = '${mainPathToSvg}wallet.svg';
+  static const String billPaymentImage = '${mainPathToSvg}bill_payment.svg';
+  static const String doneOrderImage = '${mainPathToSvg}done_order.svg';
+  static const String billImage = '${mainPathToSvg}bill.svg';
 }

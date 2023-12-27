@@ -133,72 +133,26 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                                       color: AppColors.kBlackColor,
                                     ),
                                   ),
-                                  if (controller.order.value.order?.status ==
-                                      OrderState.shipped) ...{
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 7, vertical: 7),
-                                      decoration: BoxDecoration(
-                                          color: AppColors.lightGreenColor,
-                                          borderRadius:
-                                              BorderRadius.circular(9.r)),
-                                      child: Center(
-                                        child: Text(
-                                          'تم التسليم',
-                                          style: TextStyle(
-                                            fontFamily: kTheArabicSansLight,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColors.greenColor,
-                                          ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 7, vertical: 7),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.lightGreenColor,
+                                        borderRadius:
+                                            BorderRadius.circular(9.r)),
+                                    child: Center(
+                                      child: Text(
+                                        controller.order.value.order
+                                            ?.getTheTextOfFinalState(),
+                                        style: TextStyle(
+                                          fontFamily: kTheArabicSansLight,
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.greenColor,
                                         ),
                                       ),
-                                    )
-                                  } else if (controller
-                                          .order.value.order?.status ==
-                                      OrderState.cancelled) ...{
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 7, vertical: 7),
-                                      decoration: BoxDecoration(
-                                          color: AppColors.klPinkColor,
-                                          borderRadius:
-                                              BorderRadius.circular(9.r)),
-                                      child: Center(
-                                        child: Text(
-                                          'ألغيت',
-                                          style: TextStyle(
-                                            fontFamily: kTheArabicSansLight,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColors.redColor,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  } else ...{
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 7, vertical: 7),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(9.r)),
-                                      child: Center(
-                                        child: Text(
-                                          controller
-                                                  .order.value.order?.status ??
-                                              '',
-                                          style: TextStyle(
-                                            fontFamily: kTheArabicSansLight,
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColors.mainColor,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  },
+                                    ),
+                                  )
                                 ],
                               ),
                               ...List.generate(
@@ -529,7 +483,7 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                                       width: 10.w,
                                     ),
                                     Text(
-                                      "${controller.order.value.order?.city.name}, ${controller.order.value.order?.area.name}",
+                                      "${controller.order.value.order?.city?.name ?? ''}, ${controller.order.value.order?.area?.name ?? ''}",
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           fontSize: 18.1.sp,

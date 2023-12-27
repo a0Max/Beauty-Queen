@@ -1,13 +1,8 @@
 const kMagzineImage = 'assets/images/Magazine.png';
 const kqueencrownImage = 'assets/images/queencrown.png';
-const krevitImage = 'assets/images/revit.png';
-const kcarImage = 'assets/images/car.png';
-const kdollarImage = 'assets/images/dollar.png';
-const kcardImage = 'assets/images/card.png';
 const kcheckImage = 'assets/images/check.png';
 const ksmallcardImage = 'assets/images/smallcard.png';
 const kpaperImage = 'assets/images/paper.png';
 const facepowderImage = 'assets/images/facepowder.png';
 const makeupboxImage = 'assets/images/box.png';
-// const ksubtractImage = 'assets/images/Subtract.png';
 const kgiftImagetwo = 'assets/images/GiftCard.png';

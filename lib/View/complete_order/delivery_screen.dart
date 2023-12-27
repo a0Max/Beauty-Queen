@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -64,7 +65,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                             ),
                             Row(
                               children: [
-                                Image.asset(kcarImage),
+                                Image.asset(
+                                  AppImages.carImage,
+                                  width: 35,
+                                  height: 35,
+                                ),
                                 SizedBox(
                                   width: 16.w,
                                 ),
@@ -106,7 +111,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         .kPrimaryColor; // Unselected color for the radio button
                                   }),
                                   activeColor: AppColors.kWhiteColor,
-                                  value: 'الاستلام بخدمة التوصيل',
+                                  value: '1',
                                   groupValue: basketController
                                       .selectedPaymentMethod2.value,
                                   onChanged: (value) => basketController
@@ -507,7 +512,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                               .kPrimaryColor; // Unselected color for the radio button
                                         }),
                                         activeColor: AppColors.kWhiteColor,
-                                        value: 'الحجز والإستلام من المتجر',
+                                        value: '2',
                                         groupValue: basketController
                                             .selectedPaymentMethod2.value,
                                         onChanged: (value) {
@@ -614,7 +619,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     GestureDetector(
                       onTap: () {
                         if (basketController.selectedPaymentMethod2.value ==
-                            'الاستلام بخدمة التوصيل') {
+                            '1') {
                           if (!_formKey.currentState!.validate()) {
                             return;
                           }
@@ -638,6 +643,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         }
                         basketController.addAddressTextAndNote(
                             address: addressController.text,
+                            phone: phoneController.text,
                             note: extraNoteController.text);
                         basketController.changeTab(1);
                       },

@@ -13,6 +13,8 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
           ? null
           : OrderDetailsModel.fromJson(json['order'] as Map<String, dynamic>),
       subtotal: json['subtotal'] as int?,
+      flashDiscountStatus: json['flash_discount_status'] as String?,
+      flashDiscountEndAt: json['flash_discount_end_at'] as String?,
       totalPrice: json['total_price'] as int?,
       totalQty: json['total_qty'] as int?,
     );
@@ -25,4 +27,6 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'shipping_cost': instance.shippingCost,
       'total_price': instance.totalPrice,
       'order': instance.order?.toJson(),
+      'flash_discount_status': instance.flashDiscountStatus,
+      'flash_discount_end_at': instance.flashDiscountEndAt,
     };
