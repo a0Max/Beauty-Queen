@@ -220,9 +220,8 @@ class ProductProfileController extends GetxController
     }
   }
 
-  RxString comment = ''.obs;
-  updateComment({required String newComment}) {
-    comment.value = newComment;
+  clearImage() {
+    imagePath = ''.obs;
   }
 
   RxInt rate = 0.obs;
@@ -247,16 +246,15 @@ class ProductProfileController extends GetxController
         });
   }
 
-  verifyToAddReview() async {
+  verifyToAddReview({required String comment}) async {
     await _api.addReview(
-        comment: comment.value,
+        comment: comment,
         productId: "${productData.value.last.product?.id ?? 0}",
         image: imagePath.value);
   }
 
   clearData() {
     rate.value = 0;
-    comment.value = '';
     imagePath.value = '';
   }
 

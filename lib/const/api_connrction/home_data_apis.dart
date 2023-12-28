@@ -253,31 +253,29 @@ class HomeDataApis extends ApiProvider {
       throw 'Check Network connection';
     }
 
-    File file = File(image.toString());
-    String fileName = file.path.split('/').last;
-    // File imageFile = File(image.toString());
-    // List<int> imageBytes = await imageFile.readAsBytes();
-    // FormData formData = FormData.fromMap({
-    //   if(isBlank(rating.toString())==false)'rating': rating,
-    //   'product_id': productId,
-    //   'comment': comment,
-    //   if (image != null)
-    //     "images": await MultipartFile.fromFile(file.path, filename: fileName),
-    // });
+    MultipartFile? images2;
+    if (image != null) {
+      File imageFile = File(image.toString());
+      images2 = await MultipartFile.fromFile(
+        imageFile.path,
+        filename: imageFile.path.split('/').last,
+      );
+    }
+
+    FormData formData = FormData.fromMap({
+      if (rating != null) 'rating': rating,
+      'product_id': productId,
+      'comment': comment,
+      if (image != null) "images[]": images2
+    });
 
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.submitReviewProductEndPoint}',
-      queryParameters: {
-        'rating': rating ?? 1,
-        'product_id': productId,
-        'comment': comment,
-        // if (image != null) "images": Uint8List.fromList(imageBytes),
-        if (image != null)
-          "images": await MultipartFile.fromFile(file.path, filename: fileName),
-      },
+      data: formData,
       options: Options(
         headers: {
           ...apiHeaders,
+          'Content-Type': 'multipart/form-data',
           'Accept-Language': await ApiProvider.getAppLanguage(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',

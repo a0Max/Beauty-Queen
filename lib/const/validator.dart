@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 
 class Validator {
-  String? validatorRequired(String val) {
-    return (val.length <= 4) ? tr('field_required') : null;
+  String? validatorRequired(String? val) {
+    return (val == null || val.length <= 4) ? tr('field_required') : null;
   }
 
   String? validatorPhoneNumber(String val) {
