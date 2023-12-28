@@ -81,6 +81,8 @@ abstract class ApiProvider {
   static const String getReviewsDataEndPoint = "get/reviews";
   static const String submitReactionDataEndPoint = "submitReaction";
   static const String upgradeUserDataEndPoint = "upgradeUser";
+  static const String confirmOrderDataEndPoint = "confirmOrder";
+  static const String cancelOrderDataEndPoint = "cancelOrder";
   static const String getQueenaTransactionsDataEndPoint =
       "get/queenaTransactions";
   static const String checkPromoCodeDataEndPoint = "checkPromoCode";

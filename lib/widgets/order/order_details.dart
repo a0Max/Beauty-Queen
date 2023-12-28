@@ -1,14 +1,24 @@
+import 'dart:developer';
+
 import 'package:beauty_queen/const/app_colors.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../View/complete_order/productadded_screen.dart';
+import '../../View/home/bottom_nav_screen.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
+import '../../controller/complete_order_controller/basketController.dart';
 import '../../controller/orders_controller/orders_controller.dart';
+import '../based/error_pop_up.dart';
+import '../based/loading.dart';
+import '../product_profile/CustomAlertBox.dart';
 import '../product_profile/custom_color_container.dart';
 import '../shimmer/shimmer_ticket.dart';
 import 'rps_custom_painter.dart';
@@ -133,26 +143,116 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                                       color: AppColors.kBlackColor,
                                     ),
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 7, vertical: 7),
-                                    decoration: BoxDecoration(
-                                        color: AppColors.lightGreenColor,
-                                        borderRadius:
-                                            BorderRadius.circular(9.r)),
-                                    child: Center(
-                                      child: Text(
-                                        controller.order.value.order
-                                            ?.getTheTextOfFinalState(),
-                                        style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.greenColor,
+                                  Column(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 7, vertical: 7),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.lightGreenColor,
+                                            borderRadius:
+                                                BorderRadius.circular(9.r)),
+                                        child: Center(
+                                          child: Text(
+                                            controller.order.value.order
+                                                ?.getTheTextOfFinalState(),
+                                            style: TextStyle(
+                                              fontFamily: kTheArabicSansLight,
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: AppColors.greenColor,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
+                                      if (controller
+                                              .order.value.order?.status ==
+                                          OrderState.pending) ...{
+                                        InkWell(
+                                          onTap: () async {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return CustomAlertDialog(
+                                                    height: 180.64.h,
+                                                    dilougText:
+                                                        tr('cancelOrder'),
+                                                    buttonOneText: tr('no'),
+                                                    buttonTwoText: tr('yes'),
+                                                    onButtonTwoPressed:
+                                                        () async {
+                                                      Navigator.of(context)
+                                                          .pop();
+
+                                                      BasketController
+                                                          basketController =
+                                                          Get.put(
+                                                              BasketController());
+
+                                                      try {
+                                                        LoadingScreen.show(
+                                                            context);
+                                                        await basketController
+                                                            .cancelOrder(
+                                                                orderId:
+                                                                    '${controller.order.value.order?.id}');
+                                                        // controller.order.value.order.id
+                                                        // Navigator.of(context)
+                                                        //     .pop();
+
+                                                        controller.getOrders();
+                                                        if (Get.previousRoute ==
+                                                            '/OrdersScreen') {
+                                                          Get.back();
+                                                        } else {
+                                                          Get.offAll(
+                                                              const MainView());
+                                                        }
+                                                      } on DioException catch (e) {
+                                                        log('error1:$e');
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        ErrorPopUp(
+                                                            message: (e.response
+                                                                    ?.data)
+                                                                .values
+                                                                .first,
+                                                            title: 'خطا');
+                                                      } catch (e) {
+                                                        log('error3:$e');
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        if (e ==
+                                                            'Check Network connection') {
+                                                          ErrorPopUp(
+                                                              message: tr(
+                                                                  'network_connection'),
+                                                              title: 'خطا');
+                                                        } else {
+                                                          ErrorPopUp(
+                                                              message: tr(
+                                                                  'something_wrong'),
+                                                              title: 'خطا');
+                                                        }
+                                                      }
+                                                    },
+                                                  );
+                                                });
+                                          },
+                                          child: Text(
+                                            'الغاء',
+                                            style: TextStyle(
+                                              fontFamily: kTheArabicSansLight,
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: AppColors.redColor,
+                                            ),
+                                          ),
+                                        )
+                                      }
+                                    ],
+                                  ),
                                 ],
                               ),
                               ...List.generate(

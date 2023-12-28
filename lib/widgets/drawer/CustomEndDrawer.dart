@@ -43,7 +43,8 @@ class MyEndDrawer extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(const OrdersScreen());
+                        Get.to(const OrdersScreen(),
+                            routeName: '/OrdersScreen');
                       },
                       child: Container(
                         height: 35.94.h,

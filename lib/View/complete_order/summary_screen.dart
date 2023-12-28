@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +13,8 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/complete_order_controller/basketController.dart';
+import '../../widgets/based/error_pop_up.dart';
+import '../../widgets/based/loading.dart';
 import '../../widgets/order/rps_custom_painter.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
 import 'productadded_screen.dart';
@@ -554,9 +559,44 @@ class SummaryScreen extends StatelessWidget {
                     ],
                   ),
                   GestureDetector(
-                    onTap: () {
-                      ///todo send request to add the order
-                      Get.to(const ProductAddedScreen());
+                    onTap: () async {
+                      try {
+                        LoadingScreen.show(context);
+                        await basketController.completeOrder(
+                            orderId:
+                                '${basketController.order.value.order?.id}');
+                        Navigator.of(context).pop();
+                        basketController.clearData();
+                        Get.to(ProductAddedScreen());
+                        // Navigator.pushAndRemoveUntil(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const ProductAddedScreen(),
+                        //     ),
+                        //     (route) => false);
+                      } on DioException catch (e) {
+                        log('error1:$e');
+                        Navigator.of(context).pop();
+                        // try {
+                        ErrorPopUp(
+                            message: (e.response?.data).values.first,
+                            title: 'خطا');
+                        // } catch (e) {
+                        //   log('error2:$e');
+                        //   ErrorPopUp(
+                        //       message: tr('something_wrong'), title: 'خطا');
+                        // }
+                      } catch (e) {
+                        log('error3:$e');
+                        Navigator.of(context).pop();
+                        if (e == 'Check Network connection') {
+                          ErrorPopUp(
+                              message: tr('network_connection'), title: 'خطا');
+                        } else {
+                          ErrorPopUp(
+                              message: tr('something_wrong'), title: 'خطا');
+                        }
+                      }
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 10),

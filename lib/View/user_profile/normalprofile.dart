@@ -253,7 +253,8 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(const OrdersScreen());
+                              Get.to(const OrdersScreen(),
+                                  routeName: '/OrdersScreen');
                             },
                             child: Container(
                               height: 115.h,

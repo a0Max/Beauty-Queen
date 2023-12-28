@@ -124,4 +124,16 @@ class BasketController extends GetxController {
       }
     }
   }
+
+  completeOrder({required String orderId}) async {
+    await _api2.confirmOrderDataRequest(orderId: orderId);
+  }
+
+  cancelOrder({required String orderId}) async {
+    await _api2.cancelOrderDataRequest(orderId: orderId);
+  }
+
+  clearData() {
+    selectedIndex = 0.obs;
+  }
 }

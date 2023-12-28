@@ -311,7 +311,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                                                   }),
                                                   activeColor:
                                                       AppColors.kWhiteColor,
-                                                  value: 'محفظتي',
+                                                  value: 'user_balance',
                                                   groupValue: basketController
                                                       .selectedPaymentMethod
                                                       .value,

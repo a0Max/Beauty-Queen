@@ -139,6 +139,50 @@ class OrderDataApis extends ApiProvider {
     }
   }
 
+  Future<void> confirmOrderDataRequest({required String orderId}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.confirmOrderDataEndPoint}',
+      queryParameters: {'id': orderId},
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+    } else {
+      throw response.data;
+    }
+  }
+
+  Future<void> cancelOrderDataRequest({required String orderId}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.cancelOrderDataEndPoint}',
+      queryParameters: {'id': orderId},
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+    } else {
+      throw response.data;
+    }
+  }
+
   Future<SubModels> getOrderIdRequest(
       {required String address,
       required String? area,

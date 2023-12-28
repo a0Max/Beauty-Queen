@@ -4,6 +4,7 @@ import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   final BasketController basketController = Get.put(BasketController());
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController extraNoteController = TextEditingController();
+  TextEditingController extraNoteController = TextEditingController(
+      text: kDebugMode ? 'هذا الاوردر هو عبارة عن test' : '');
 
   @override
   void initState() {
