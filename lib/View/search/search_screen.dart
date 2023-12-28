@@ -13,6 +13,7 @@ import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/search/search_controller.dart';
 import '../../models/sales_products_model.dart';
@@ -78,12 +79,17 @@ class _SearchScreen extends State<SearchScreen> {
     super.dispose();
   }
 
+  final AuthController userController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+          preferredSize:
+              userController.userData.value.accountType == AccountTypes.queena
+                  ? Size.fromHeight(_isScrolled ? 80.h : 145.h)
+                  : Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
             showarrowIcon: true,
             showBagIcon: false,

@@ -12,6 +12,7 @@ import '../../const/app_images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../models/sales_products_model.dart';
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final HomeController _controller = Get.put(HomeController());
   final NavController _controllerNav = Get.put(NavController());
+  final AuthController userController = Get.put(AuthController());
 
   final ScrollController _scrollController = ScrollController();
   bool _isScrolled = false;
@@ -86,7 +88,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+        preferredSize:
+            userController.userData.value.accountType == AccountTypes.queena
+                ? Size.fromHeight(_isScrolled ? 80.h : 145.h)
+                : Size.fromHeight(_isScrolled ? 100.h : 160.h),
         child: Obx(() => CustomAppBar(
               showBagIcon: true,
               showFavIcon: true,

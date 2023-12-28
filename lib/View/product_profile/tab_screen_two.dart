@@ -122,20 +122,13 @@ class TabScreenTwo extends StatelessWidget {
                           onPressed: () {
                             controller.clearImage();
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.close_sharp,
                             color: Colors.black,
                             size: 15,
                           )),
                     ),
                   )
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //
-                  //     borderRadius: ,
-                  //       image:
-                  //           DecorationImage(image: CachedNetworkImageProvider(''))),
-                  // )
                 ],
               ),
             20.ph,

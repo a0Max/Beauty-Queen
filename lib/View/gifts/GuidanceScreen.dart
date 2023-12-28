@@ -16,6 +16,7 @@ import '../../const/app_images.dart';
 import '../../const/styles.dart';
 
 import '../../const/vars.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/gift_controller/gift_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
@@ -83,12 +84,21 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
     super.dispose();
   }
 
+  final AuthController userController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           key: _scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+            preferredSize:
+                userController.userData.value.accountType == AccountTypes.queena
+                    ? Size.fromHeight(_isScrolled
+                        ? 80.h
+                        : widget.showBack == true
+                            ? 145.h
+                            : 130.h)
+                    : Size.fromHeight(_isScrolled ? 100.h : 160.h),
             child: CustomAppBar(
               // showBagIcon: true,
               // showFavIcon: true,

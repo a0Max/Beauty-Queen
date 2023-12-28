@@ -11,6 +11,7 @@ import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
@@ -71,12 +72,17 @@ class _FliterScreenState extends State<FliterScreen> {
     super.dispose();
   }
 
+  final AuthController userController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+          preferredSize:
+              userController.userData.value.accountType == AccountTypes.queena
+                  ? Size.fromHeight(_isScrolled ? 80.h : 145.h)
+                  : Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
             showFavIcon: false,
             showarrowIcon: true,

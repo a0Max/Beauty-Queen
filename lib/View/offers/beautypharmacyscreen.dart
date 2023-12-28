@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../const/size.dart';
 import '../../const/vars.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/gift_controller/gift_controller.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/shimmer/shimmer_beauty_pharmacy.dart';
@@ -61,13 +62,18 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
     super.dispose();
   }
 
+  final AuthController userController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
         key: scaffoldKey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+          preferredSize:
+              userController.userData.value.accountType == AccountTypes.queena
+                  ? Size.fromHeight(_isScrolled ? 80.h : 145.h)
+                  : Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
             showBagIcon2: false,
             showarrowIcon: true,

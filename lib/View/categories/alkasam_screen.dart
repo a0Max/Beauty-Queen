@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
+import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
@@ -64,12 +66,21 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
     super.dispose();
   }
 
+  final AuthController userController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(_isScrolled ? 100.h : 160.h),
+          preferredSize:
+              userController.userData.value.accountType == AccountTypes.queena
+                  ? Size.fromHeight(_isScrolled
+                      ? 80.h
+                      : widget.showBack == true
+                          ? 145.h
+                          : 130.h)
+                  : Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
             showarrowIcon: widget.showBack == true ? true : false,
             showBagIcon: widget.showBack == true ? false : true,
