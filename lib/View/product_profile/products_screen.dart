@@ -402,34 +402,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                             ),
                                                           ),
                                                         }
-                                                        // if (isBlank(controller.productData.value.last
-                                                        //     .getMinMax()
-                                                        //     .first) && controller.productData.value.last
-                                                        //     .getMinMax()
-                                                        //     .first != '')...{
-                                                        //   Text(
-                                                        //     "${controller.productData.value.last
-                                                        //         .getMinMax()
-                                                        //         .first} ${tr('Del')} ",
-                                                        //     style: TextStyle(
-                                                        //         fontFamily: kTheArabicSansLight,
-                                                        //         decoration: TextDecoration
-                                                        //             .lineThrough,
-                                                        //         fontSize: 15.sp,
-                                                        //         fontWeight: FontWeight.w400,
-                                                        //         color: AppColors.kBlackColor),
-                                                        //   ),
-                                                        // },
-                                                        // Text(
-                                                        //   "${controller.productData.value.last
-                                                        //       .getMinMax()
-                                                        //       .last} ${tr('Del')} ",
-                                                        //   style: TextStyle(
-                                                        //       fontFamily: kTheArabicSansLight,
-                                                        //       fontSize: 15.sp,
-                                                        //       fontWeight: FontWeight.w400,
-                                                        //       color: AppColors.kPrimaryColor),
-                                                        // ),
                                                       }
                                                     ],
                                                   )

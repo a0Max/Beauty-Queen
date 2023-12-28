@@ -11,9 +11,11 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../View/cart/cart_screen.dart';
 import '../../const/api_connrction/home_data_apis.dart';
+import '../../const/vars.dart';
 import '../../models/options_model.dart';
 import '../../models/product_model.dart';
 import '../../models/product_options_model.dart';
+import '../../models/reviews_model.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/based/error_pop_up.dart';
 
@@ -48,6 +50,7 @@ class ProductProfileController extends GetxController
           List.generate(newData.productOptions?.length ?? 0, (index) => null);
       await Future.delayed(const Duration(milliseconds: 500));
       productData.add(newData);
+      getAllReviewsOfProduct(productId: productId);
     } on DioException catch (e) {
       print('error:$e');
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
@@ -60,6 +63,14 @@ class ProductProfileController extends GetxController
       }
     }
     isLoading.value = false;
+  }
+
+  getAllReviewsOfProduct({required int productId}) async {
+    List<ReviewsModel>? reviewsData =
+        await _api.getReviewsData(productId: productId.toString());
+    if (reviewsData != null && reviewsData.isNotEmpty) {
+      productData.last.reviews = reviewsData;
+    }
   }
 
   removeLast() {
@@ -209,6 +220,11 @@ class ProductProfileController extends GetxController
     }
   }
 
+  RxString comment = ''.obs;
+  updateComment({required String newComment}) {
+    comment.value = newComment;
+  }
+
   RxInt rate = 0.obs;
   currentRate({required int newRate}) {
     rate.value = newRate;
@@ -231,33 +247,36 @@ class ProductProfileController extends GetxController
         });
   }
 
-  verifyToAddReview({required String comment}) async {
-    try {
-      await _api.addReview(
-          comment: comment,
-          productId: "${productData.value.last.product?.id ?? 0}",
-          image: imagePath.value);
-      showCompleteComment();
-    } on DioException catch (e) {
-      ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
-      log('verifyToAddReview:error:$e');
-      ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
-    }
+  verifyToAddReview() async {
+    await _api.addReview(
+        comment: comment.value,
+        productId: "${productData.value.last.product?.id ?? 0}",
+        image: imagePath.value);
   }
 
   clearData() {
     rate.value = 0;
+    comment.value = '';
     imagePath.value = '';
   }
 
   updateToLike({required int index}) {
-    // productData
-    //     .value.
-    // productData.last.p[index].wishlist?.add(ProductOptionsModel());
-    // update();
     productData.last.update((val) {
       val?.p?[index].wishlist?.add(ProductOptionsModel());
     });
+  }
+
+  addLikeReaction({required String productId}) async {
+    await _api.addReaction(
+        productId: productId, reactionCode: ReactionCode.like);
+    await getAllReviewsOfProduct(
+        productId: int.parse("${productData.value.last?.product?.id ?? 0}"));
+  }
+
+  addDisLikeReaction({required String productId}) async {
+    await _api.addReaction(
+        productId: productId, reactionCode: ReactionCode.disLike);
+    await getAllReviewsOfProduct(
+        productId: int.parse("${productData.value.last?.product?.id ?? 0}"));
   }
 }

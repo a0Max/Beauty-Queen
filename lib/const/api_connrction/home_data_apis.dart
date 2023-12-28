@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 
@@ -6,6 +7,7 @@ import '../../models/general_search_model.dart';
 import '../../models/home_model.dart';
 import '../../models/product_model.dart';
 import '../../models/product_options_model.dart';
+import '../../models/reviews_model.dart';
 import '../vars.dart';
 import 'base_api_connection.dart';
 import 'package:quiver/strings.dart';
@@ -15,7 +17,7 @@ class HomeDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.get(
@@ -43,7 +45,7 @@ class HomeDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.get(
@@ -80,7 +82,7 @@ class HomeDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.post(
@@ -111,11 +113,69 @@ class HomeDataApis extends ApiProvider {
     }
   }
 
+  Future<List<ReviewsModel>> getReviewsData({required String productId}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false) {
+      throw 'Check Network connection';
+    }
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getReviewsDataEndPoint}/$productId',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+        },
+      ),
+    );
+
+    if (validResponse(response.statusCode!)) {
+      final List<ReviewsModel> l = [];
+      response.data['reviews'].forEach((e) => l.add(ReviewsModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+  addReaction({required String productId, required String reactionCode}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+    final checkNetwork = await getCheckNetwork();
+    if (checkNetwork == false) {
+      throw 'Check Network connection';
+    }
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.submitReactionDataEndPoint}',
+      queryParameters: {
+        'id': productId,
+        'reaction': reactionCode,
+      },
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (token != null) "Authorization": 'Bearer $token',
+          if (cookies != null) "Cookie": '$cookies',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      // int count = response.data['counter'];
+      // return count;
+    } else {
+      throw 0;
+    }
+  }
+
   Future<int> getCartRequest() async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.get(
@@ -144,19 +204,19 @@ class HomeDataApis extends ApiProvider {
   Future<GeneralSearchModel> getSalesDataRequest(
       {String? keySort,
       List? selectedLabels,
-        required int page,
+      required int page,
       List? selectedPrices,
       List? selectedBrands}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.get(
       '${Connection.apiURL}${ApiProvider.getSalesEndPoint}',
       queryParameters: {
-        if (isBlank(keySort)==false) 'sort': keySort,
+        if (isBlank(keySort) == false) 'sort': keySort,
         if (selectedLabels?.isNotEmpty ?? false) 'label[]': selectedLabels,
         if (selectedPrices?.isNotEmpty ?? false) 'price[]': selectedPrices,
         if (selectedBrands?.isNotEmpty ?? false) 'brands[]': selectedBrands,
@@ -181,21 +241,22 @@ class HomeDataApis extends ApiProvider {
     }
   }
 
-  addReview({
-    required String comment,
-    int? rating,
-    String? image,
-    required String productId
-    }) async {
+  addReview(
+      {required String comment,
+      int? rating,
+      String? image,
+      required String productId}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
+
     File file = File(image.toString());
     String fileName = file.path.split('/').last;
-
+    // File imageFile = File(image.toString());
+    // List<int> imageBytes = await imageFile.readAsBytes();
     // FormData formData = FormData.fromMap({
     //   if(isBlank(rating.toString())==false)'rating': rating,
     //   'product_id': productId,
@@ -207,18 +268,17 @@ class HomeDataApis extends ApiProvider {
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.submitReviewProductEndPoint}',
       queryParameters: {
-        'rating': rating??1,
+        'rating': rating ?? 1,
         'product_id': productId,
         'comment': comment,
+        // if (image != null) "images": Uint8List.fromList(imageBytes),
         if (image != null)
-        "images": await MultipartFile.fromFile(file.path, filename: fileName),
-        },
-
+          "images": await MultipartFile.fromFile(file.path, filename: fileName),
+      },
       options: Options(
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
         },
@@ -232,20 +292,18 @@ class HomeDataApis extends ApiProvider {
     }
   }
 
-  addWishlistRequest({
-    required int productId
-  }) async {
+  addWishlistRequest({required int productId}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.addWishlistProductEndPoint}',
       queryParameters: {
         'id': productId,
-        },
+      },
       options: Options(
         headers: {
           ...apiHeaders,
@@ -262,14 +320,11 @@ class HomeDataApis extends ApiProvider {
     }
   }
 
-
-  removeWishlistRequest({
-    required int productId
-  }) async {
+  removeWishlistRequest({required int productId}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.post(
@@ -297,7 +352,7 @@ class HomeDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.get(
@@ -314,11 +369,11 @@ class HomeDataApis extends ApiProvider {
 
     if (validResponse(response.statusCode!)) {
       final List<ProductOptionsModel> l = [];
-      response.data['items'].forEach((e) => l.add(ProductOptionsModel.fromJson(e)));
+      response.data['items']
+          .forEach((e) => l.add(ProductOptionsModel.fromJson(e)));
       return l;
     } else {
       throw response.data;
     }
-
   }
 }

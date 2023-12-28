@@ -13,7 +13,7 @@ abstract class ApiProvider {
   ApiProvider() {
     // Attach Interceptors.
     dio.interceptors.add(_performanceInterceptor);
-    // if (kDebugMode) dio.interceptors.add(_logger);
+    if (kDebugMode) dio.interceptors.add(_logger);
   }
 
   // static final ApiProvider instance = ApiProvider._();
@@ -78,6 +78,8 @@ abstract class ApiProvider {
   static const String sendMessageDataEndPoint = "sendMessage";
   static const String getEventsDataEndPoint = "get/events";
   static const String getEventDataEndPoint = "get/event";
+  static const String getReviewsDataEndPoint = "get/reviews";
+  static const String submitReactionDataEndPoint = "submitReaction";
   static const String upgradeUserDataEndPoint = "upgradeUser";
   static const String getQueenaTransactionsDataEndPoint =
       "get/queenaTransactions";

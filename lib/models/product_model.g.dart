@@ -23,6 +23,9 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       p: (json['p'] as List<dynamic>?)
           ?.map((e) => SalesProductsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      reviews: (json['reviews'] as List<dynamic>?)
+          ?.map((e) => ReviewsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       is_flash_discount: json['is_flash_discount'] == null
           ? null
           : IsFlashDiscount.fromJson(
@@ -47,6 +50,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'sameBrandProducts':
           instance.sameBrandProducts?.map((e) => e.toJson()).toList(),
       'p': instance.p?.map((e) => e.toJson()).toList(),
+      'reviews': instance.reviews?.map((e) => e.toJson()).toList(),
       'is_flash_discount': instance.is_flash_discount?.toJson(),
       'product_banner': instance.product_banner?.toJson(),
       'discover_brand': instance.discover_brand?.toJson(),

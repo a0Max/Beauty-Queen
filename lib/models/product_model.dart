@@ -4,6 +4,7 @@ import 'discover_brand.dart';
 import 'is_flash_discount.dart';
 import 'product_banner_model.dart';
 import 'product_options_model.dart';
+import 'reviews_model.dart';
 import 'sales_products_model.dart';
 
 part 'product_model.g.dart';
@@ -15,6 +16,7 @@ class ProductModel {
   List<ProductOptionsModel>? productOptions;
   List<SalesProductsModel>? sameBrandProducts;
   List<SalesProductsModel>? p;
+  List<ReviewsModel>? reviews;
   IsFlashDiscount? is_flash_discount;
   ProductBanner? product_banner;
   DiscoverBrand? discover_brand;
@@ -25,6 +27,7 @@ class ProductModel {
       this.productOptions,
       this.sameBrandProducts,
       this.p,
+      this.reviews,
       this.is_flash_discount,
       this.product_banner,
       this.discover_brand});
@@ -47,6 +50,9 @@ class ProductModel {
               json['product'] as Map<String, dynamic>),
       productCategories: (json['productCategories'] as List<dynamic>?)
           ?.map((e) => ProductOptionsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reviews: (json['reviews'] as List<dynamic>?)
+          ?.map((e) => ReviewsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       productOptions: (json['productOptions'] as List<dynamic>?)
           ?.map((e) => ProductOptionsModel.fromJson(e as Map<String, dynamic>))
@@ -73,7 +79,7 @@ class ProductModel {
 
   List<String> getMinMax() {
     List<String> finalPrices = ['', ''];
-    if (productOptions?.isEmpty??true){
+    if (productOptions?.isEmpty ?? true) {
       finalPrices[1] = (product?.price ?? '');
 
       return finalPrices;

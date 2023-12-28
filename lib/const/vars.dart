@@ -186,3 +186,8 @@ abstract class WalletState {
   static const refund = 'refund';
   static const deduction = 'deduction';
 }
+
+abstract class ReactionCode {
+  static const like = '1';
+  static const disLike = '0';
+}

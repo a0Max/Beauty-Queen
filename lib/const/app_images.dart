@@ -121,4 +121,6 @@ class AppImages {
   static const String billPaymentImage = '${mainPathToSvg}bill_payment.svg';
   static const String doneOrderImage = '${mainPathToSvg}done_order.svg';
   static const String billImage = '${mainPathToSvg}bill.svg';
+  static const String likeImage = '${mainPathToSvg}like.svg';
+  static const String disLikeImage = '${mainPathToSvg}dislike.svg';
 }
