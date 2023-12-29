@@ -14,6 +14,7 @@ import '../../controller/product_controller/product_profile_controller.dart';
 import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
 import '../../models/sales_products_model.dart';
+import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
 import '../../widgets/product_profile/details_static.dart';
@@ -540,15 +541,43 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                           radix:
                                                                               16)),
                                                                   onClick: () {
-                                                                    controller.updateToSelected(
-                                                                        index:
-                                                                            index,
-                                                                        selected: controller
-                                                                            .productData
-                                                                            .value
-                                                                            .last
-                                                                            .productOptions?[index]
-                                                                            .options?[index2]);
+                                                                    print(controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .productOptions?[
+                                                                            index]
+                                                                        .options?[
+                                                                            index2]
+                                                                        .stock);
+                                                                    if ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
+                                                                        controller.productData.value.last.productOptions?[index].options?[index2].stock ==
+                                                                            "0" ||
+                                                                        num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                                '0') <=
+                                                                            0)) {
+                                                                      showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (BuildContext context) {
+                                                                            return CustomAlertDialog(
+                                                                              buttonTwo: false,
+                                                                              dilougText: tr('will_be_avaible_soon'),
+                                                                              buttonOneText: tr('okay'),
+                                                                            );
+                                                                          });
+                                                                    } else {
+                                                                      controller.updateToSelected(
+                                                                          index:
+                                                                              index,
+                                                                          selected: controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .productOptions?[index]
+                                                                              .options?[index2]);
+                                                                    }
                                                                   },
                                                                 )),
                                                       ),
@@ -594,11 +623,41 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         ),
                                                         onChanged:
                                                             (selectedItem) {
-                                                          controller
-                                                              .updateToSelected(
-                                                                  index: index,
-                                                                  selected:
-                                                                      selectedItem);
+                                                          if ((selectedItem
+                                                                      ?.stock ==
+                                                                  null ||
+                                                              selectedItem
+                                                                      ?.stock ==
+                                                                  "0" ||
+                                                              num.parse(selectedItem
+                                                                          ?.stock ??
+                                                                      '0') <=
+                                                                  0)) {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return CustomAlertDialog(
+                                                                    buttonTwo:
+                                                                        false,
+                                                                    dilougText:
+                                                                        tr('will_be_avaible_soon'),
+                                                                    buttonOneText:
+                                                                        tr('okay'),
+                                                                  );
+                                                                });
+                                                          } else {
+                                                            print(selectedItem
+                                                                ?.stock);
+                                                            controller
+                                                                .updateToSelected(
+                                                                    index:
+                                                                        index,
+                                                                    selected:
+                                                                        selectedItem);
+                                                          }
                                                         },
                                                         value: controller
                                                                 .selectedOptions[
@@ -691,15 +750,43 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                           index2]
                                                                       .size,
                                                                   onClick: () {
-                                                                    controller.updateToSelected(
-                                                                        index:
-                                                                            index,
-                                                                        selected: controller
-                                                                            .productData
-                                                                            .value
-                                                                            .last
-                                                                            .productOptions?[index]
-                                                                            .options?[index2]);
+                                                                    if ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
+                                                                        controller.productData.value.last.productOptions?[index].options?[index2].stock ==
+                                                                            "0" ||
+                                                                        num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                                '0') <=
+                                                                            0)) {
+                                                                      showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (BuildContext context) {
+                                                                            return CustomAlertDialog(
+                                                                              buttonTwo: false,
+                                                                              dilougText: tr('will_be_avaible_soon'),
+                                                                              buttonOneText: tr('okay'),
+                                                                            );
+                                                                          });
+                                                                    } else {
+                                                                      print(controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .productOptions?[
+                                                                              index]
+                                                                          .options?[
+                                                                              index2]
+                                                                          .stock);
+                                                                      controller.updateToSelected(
+                                                                          index:
+                                                                              index,
+                                                                          selected: controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .productOptions?[index]
+                                                                              .options?[index2]);
+                                                                    }
                                                                   },
                                                                 )),
                                                       ),
@@ -745,11 +832,41 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         ),
                                                         onChanged:
                                                             (selectedItem) {
-                                                          controller
-                                                              .updateToSelected(
-                                                                  index: index,
-                                                                  selected:
-                                                                      selectedItem);
+                                                          if ((selectedItem
+                                                                      ?.stock ==
+                                                                  null ||
+                                                              selectedItem
+                                                                      ?.stock ==
+                                                                  "0" ||
+                                                              num.parse(selectedItem
+                                                                          ?.stock ??
+                                                                      '0') <=
+                                                                  0)) {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return CustomAlertDialog(
+                                                                    buttonTwo:
+                                                                        false,
+                                                                    dilougText:
+                                                                        tr('will_be_avaible_soon'),
+                                                                    buttonOneText:
+                                                                        tr('okay'),
+                                                                  );
+                                                                });
+                                                          } else {
+                                                            controller
+                                                                .updateToSelected(
+                                                                    index:
+                                                                        index,
+                                                                    selected:
+                                                                        selectedItem);
+                                                          }
+                                                          // print(selectedItem
+                                                          //     ?.stock);
                                                         },
                                                         value: controller
                                                                 .selectedOptions[
