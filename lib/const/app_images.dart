@@ -123,4 +123,5 @@ class AppImages {
   static const String billImage = '${mainPathToSvg}bill.svg';
   static const String likeImage = '${mainPathToSvg}like.svg';
   static const String disLikeImage = '${mainPathToSvg}dislike.svg';
+  static const String pointsQueenaImage = '${mainPathToSvg}points_queena.svg';
 }

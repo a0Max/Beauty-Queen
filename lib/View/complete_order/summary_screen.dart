@@ -479,7 +479,7 @@ class SummaryScreen extends StatelessWidget {
                                       color: AppColors.kTextGrayColor),
                                 ),
                                 Text(
-                                  '${num.parse(basketController.order.value.shippingCost ?? '0')} ${tr('Del')}',
+                                  '${num.parse("${basketController.order.value.shippingCost ?? 0}")} ${tr('Del')}',
                                   style: TextStyle(
                                       fontFamily: kTheArabicSansLight,
                                       fontSize: 18.1.sp,

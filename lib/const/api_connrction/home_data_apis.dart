@@ -126,8 +126,8 @@ class HomeDataApis extends ApiProvider {
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
-          if (token != null) "Authorization": 'Bearer $token',
-          if (cookies != null) "Cookie": '$cookies',
+          // if (token != null) "Authorization": 'Bearer $token',
+          // if (cookies != null) "Cookie": '$cookies',
         },
       ),
     );

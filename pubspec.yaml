@@ -50,6 +50,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.0
   json_serializable: ^6.7.1
   build_runner: ^2.4.6 # flutter pub run build_runner build --delete-conflicting-outputs
@@ -70,3 +71,7 @@ flutter:
       fonts:
         - asset: assets/fonts/TheSansArabic Light.ttf
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/ICON.png"

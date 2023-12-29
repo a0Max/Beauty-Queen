@@ -9,7 +9,7 @@ class OrderModel {
   int? subtotal;
   int? discount;
   int? totalQty;
-  String? shippingCost;
+  dynamic shippingCost;
   int? totalPrice;
   OrderDetailsModel? order;
   String? flashDiscountStatus;
@@ -27,7 +27,7 @@ class OrderModel {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
-        shippingCost: json['shippingCost'] as String?,
+        shippingCost: json['shippingCost'],
         discount: json['discount'] as int?,
         order: json['order'] == null
             ? null

@@ -1,5 +1,6 @@
 import 'package:beauty_queen/View/product_profile/tab_screen_one.dart';
 import 'package:beauty_queen/const/app_images.dart';
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -429,45 +430,53 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                 height: 17.h,
                               ),
                               // ///////////container//////////
-                              if (controller.isLoading.value != true &&
-                                  (controller.productData.last?.product
-                                          ?.isQueena ==
-                                      "1")) ...{
-                                Row(
-                                  children: [
-                                    Text(tr('collect')),
-                                    Text(
-                                      " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
-                                      style: const TextStyle(
-                                          color: AppColors.mainColor),
-                                    ),
-                                    Text(tr('con_collect')),
-                                  ],
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    if (Get.previousRoute ==
-                                        '/QuinaprogramScreen') {
-                                      Navigator.of(context).pop();
-                                    } else {
-                                      Get.to(const QuinaprogramScreen(),
-                                          routeName: '/QuinaprogramScreen');
-                                    }
-                                  },
-                                  child: const Row(
+                              if (controller.isLoading.value == false &&
+                                  (controller.productData.isNotEmpty ??
+                                      false)) ...{
+                                if ((controller
+                                        .productData.last?.product?.isQueena ==
+                                    "1")) ...{
+                                  Row(
                                     children: [
-                                      Text('برنامج كوينا للولاء'),
-                                      Text('التفاصيل',
-                                          style: TextStyle(
-                                            color: AppColors.mainColor,
-                                            decoration:
-                                                TextDecoration.underline,
-                                            decorationColor:
-                                                AppColors.mainColor,
-                                          )),
+                                      SvgPicture.asset(
+                                        AppImages.pointsQueenaImage,
+                                        width: 30.w,
+                                      ),
+                                      10.pw,
+                                      Text(tr('collect')),
+                                      Text(
+                                        " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
+                                        style: const TextStyle(
+                                            color: AppColors.mainColor),
+                                      ),
+                                      Text(tr('con_collect')),
                                     ],
                                   ),
-                                )
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (Get.previousRoute ==
+                                          '/QuinaprogramScreen') {
+                                        Navigator.of(context).pop();
+                                      } else {
+                                        Get.to(const QuinaprogramScreen(),
+                                            routeName: '/QuinaprogramScreen');
+                                      }
+                                    },
+                                    child: const Row(
+                                      children: [
+                                        Text('برنامج كوينا للولاء'),
+                                        Text('التفاصيل',
+                                            style: TextStyle(
+                                              color: AppColors.mainColor,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              decorationColor:
+                                                  AppColors.mainColor,
+                                            )),
+                                      ],
+                                    ),
+                                  )
+                                },
                               },
                               SizedBox(
                                 height: 10.h,

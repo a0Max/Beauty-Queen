@@ -50,7 +50,7 @@ class ProductProfileController extends GetxController
           List.generate(newData.productOptions?.length ?? 0, (index) => null);
       await Future.delayed(const Duration(milliseconds: 500));
       productData.add(newData);
-      getAllReviewsOfProduct(productId: productId);
+      await getAllReviewsOfProduct(productId: productId);
     } on DioException catch (e) {
       print('error:$e');
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
@@ -69,7 +69,9 @@ class ProductProfileController extends GetxController
     List<ReviewsModel>? reviewsData =
         await _api.getReviewsData(productId: productId.toString());
     if (reviewsData != null && reviewsData.isNotEmpty) {
-      productData.last.reviews = reviewsData;
+      print('reviewsData:$reviewsData');
+      (productData.last.reviews = reviewsData);
+      update();
     }
   }
 
