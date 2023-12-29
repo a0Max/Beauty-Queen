@@ -1,5 +1,5 @@
-
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../models/cart_model.dart';
 import '../vars.dart';
@@ -10,7 +10,7 @@ class CartDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.get(
@@ -22,31 +22,27 @@ class CartDataApis extends ApiProvider {
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
     if (validResponse(response.statusCode!)) {
       return CartModel.fromJson(response.data);
-
     } else {
       throw response.data;
     }
   }
 
-  Future changeQuantityDataRequest({required String productId, required int productQuantity}) async {
+  Future changeQuantityDataRequest(
+      {required String productId, required int productQuantity}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.changeQuantityProductEndPoint}',
-      queryParameters: {
-        'id':productId,
-        'quantity': productQuantity
-      },
+      queryParameters: {'id': productId, 'quantity': productQuantity},
       options: Options(
         headers: {
           ...apiHeaders,
@@ -54,12 +50,10 @@ class CartDataApis extends ApiProvider {
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
     if (validResponse(response.statusCode!)) {
-
     } else {
       throw response.data;
     }
@@ -69,14 +63,12 @@ class CartDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.removeFromCartProductEndPoint}',
-      queryParameters: {
-        'id':productId
-      },
+      queryParameters: {'id': productId},
       options: Options(
         headers: {
           ...apiHeaders,
@@ -84,12 +76,10 @@ class CartDataApis extends ApiProvider {
           // 'Country-Id': await _getCountryCode(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
     if (validResponse(response.statusCode!)) {
-
     } else {
       throw response.data;
     }
@@ -99,29 +89,29 @@ class CartDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
     final checkNetwork = await getCheckNetwork();
-    if (checkNetwork == false){
+    if (checkNetwork == false) {
       throw 'Check Network connection';
     }
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.checkPromoCodeDataEndPoint}',
-      queryParameters: {
-        'code':code
-      },
+      queryParameters: {'code': code},
       options: Options(
         headers: {
           ...apiHeaders,
           'Accept-Language': await ApiProvider.getAppLanguage(),
           if (token != null) "Authorization": 'Bearer $token',
           if (cookies != null) "Cookie": '$cookies',
-
         },
       ),
     );
     if (validResponse(response.statusCode!)) {
-      return true;
+      if ((response.data['promoCode']) == true) {
+        return true;
+      } else {
+        throw 'checkPromoCode';
+      }
     } else {
       throw response.data;
     }
   }
-
 }

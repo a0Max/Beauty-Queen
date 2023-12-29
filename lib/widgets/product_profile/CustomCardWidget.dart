@@ -22,6 +22,7 @@ class CustomCardWidget extends StatefulWidget {
   final SalesProductsModel newArrival;
   final double? width;
   final bool favorite;
+  final bool? hideLike;
 
   const CustomCardWidget({
     super.key,
@@ -29,6 +30,7 @@ class CustomCardWidget extends StatefulWidget {
     required this.newArrival,
     this.width,
     required this.favorite,
+    this.hideLike = false,
   });
 
   @override
@@ -407,23 +409,27 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: isFavorite ? Colors.red : const Color(0xff13110C),
-                      // size: 30,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isFavorite = true;
-                      });
-                      _controller.addWishlist(
-                          postId: widget.newArrival.id ?? 0);
-                    },
-                  ),
-                ),
+                child: widget.hideLike == false
+                    ? Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          icon: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavorite
+                                ? Colors.red
+                                : const Color(0xff13110C),
+                            // size: 30,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isFavorite = true;
+                            });
+                            _controller.addWishlist(
+                                postId: widget.newArrival.id ?? 0);
+                          },
+                        ),
+                      )
+                    : SizedBox(),
               ),
               Container(
                 height: 100,

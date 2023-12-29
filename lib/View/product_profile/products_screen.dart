@@ -429,10 +429,9 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               ),
                               // ///////////container//////////
                               if (controller.isLoading.value != true &&
-                                  ((controller.productData.last?.product
-                                              ?.isQueena ==
-                                          "1") ??
-                                      false)) ...{
+                                  (controller.productData.last?.product
+                                          ?.isQueena ==
+                                      "1")) ...{
                                 Row(
                                   children: [
                                     Text(tr('collect')),
@@ -446,20 +445,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             const QuinaprogramScreen()));
-                                    // final QueenController tabcontroller =
-                                    //     Get.put(QueenController());
-                                    // tabcontroller.currentTab.update((val) {
-                                    //   val = 0;
-                                    // });
-                                    // (0);
-
-                                    final QueenController myController =
-                                        Get.put(QueenController());
                                     if (Get.previousRoute ==
                                         '/QuinaprogramScreen') {
                                       Navigator.of(context).pop();
@@ -1357,25 +1342,49 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                           // SizedBox(width: 17.w),
                         ],
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          controller.addToCart();
-                        },
-                        child: Container(
-                            height: 47.61.h,
-                            width: MediaQuery.of(context).size.width / 2,
-                            color: AppColors.kPrimaryColor,
-                            child: Center(
-                              child: Text(
-                                tr('addToCart'),
-                                style: TextStyle(
+                      if (controller.isLoading.value != true) ...{
+                        if (controller.productData.value.last.product.stock ==
+                                null ||
+                            controller.productData.value.last.product.stock ==
+                                "0") ...{
+                          Container(
+                              height: 47.61.h,
+                              width: MediaQuery.of(context).size.width / 2,
+                              color: AppColors.kCDGColor,
+                              child: Center(
+                                child: Text(
+                                  tr('not_availble_now'),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14.11.sp,
                                     fontFamily: kTheArabicSansLight,
-                                    color: AppColors.kWhiteColor,
-                                    fontSize: 15.89.sp,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )),
-                      ),
+                                    fontWeight: FontWeight.w700,
+                                    // height: 0.09,
+                                  ),
+                                ),
+                              ))
+                        } else ...{
+                          GestureDetector(
+                            onTap: () {
+                              controller.addToCart();
+                            },
+                            child: Container(
+                                height: 47.61.h,
+                                width: MediaQuery.of(context).size.width / 2,
+                                color: AppColors.kPrimaryColor,
+                                child: Center(
+                                  child: Text(
+                                    tr('addToCart'),
+                                    style: TextStyle(
+                                        fontFamily: kTheArabicSansLight,
+                                        color: AppColors.kWhiteColor,
+                                        fontSize: 15.89.sp,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )),
+                          ),
+                        }
+                      }
                     ],
                   ),
                 ),
