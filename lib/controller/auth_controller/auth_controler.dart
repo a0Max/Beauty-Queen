@@ -30,6 +30,7 @@ class AuthController extends GetxController {
   login(String phone, String password) async {
     userData.value = await _api.loginRequest(phone: phone, password: password);
     getUserData();
+    getCities();
   }
 
   var passwordObscureText = true.obs;
