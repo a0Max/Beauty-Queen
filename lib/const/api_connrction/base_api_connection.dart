@@ -42,6 +42,7 @@ abstract class ApiProvider {
   static const String registerEndPoint = "register";
   static const String sendVerificationCodeEndPoint = "sendVerificationCode";
   static const String checkCodeEndPoint = "checkCode";
+  static const String getNewArrivalsEndPoint = "get/new-arrivals";
   static const String homepageEndPoint = "homepage";
   static const String getSalesEndPoint = "get/sales";
   static const String parentCategoriesPageEndPoint = "get/parentCategories";

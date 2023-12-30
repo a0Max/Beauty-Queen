@@ -26,6 +26,7 @@ import '../../widgets/loading/home_loading.dart';
 import '../brands/branddetail_screen.dart';
 import '../categories/filter_screen.dart';
 import '../magazine/magazine_screen.dart';
+import '../new_arrived/new_arrived_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
 import '../product_profile/products_screen.dart';
 
@@ -327,16 +328,21 @@ class _HomePageState extends State<HomePage> {
                                 height: 0,
                               ),
                             ),
-                            Text(
-                              tr('see_all'),
-                              style: TextStyle(
-                                color: AppColors.kPrimaryColor,
-                                fontSize: 18.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w400,
-                                decoration: TextDecoration.underline,
-                                decorationColor: AppColors.kPrimaryColor,
-                                height: 0,
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(const NewArrivedScreen());
+                              },
+                              child: Text(
+                                tr('see_all'),
+                                style: TextStyle(
+                                  color: AppColors.kPrimaryColor,
+                                  fontSize: 18.sp,
+                                  fontFamily: kTheArabicSansLight,
+                                  fontWeight: FontWeight.w400,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: AppColors.kPrimaryColor,
+                                  height: 0,
+                                ),
                               ),
                             ),
                           ],

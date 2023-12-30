@@ -13,6 +13,7 @@ class GeneralSearchModel {
   PaginationModel? products;
   PaginationModel? offers;
   PaginationModel? gifts;
+  PaginationModel? newArrivals;
   int? salesCount;
   int? count;
   List<BrandModel>? brands;
@@ -24,18 +25,18 @@ class GeneralSearchModel {
 
   GeneralSearchModel(
       {this.sales,
-        this.salesCount,
-        this.offers,
-        this.brandsIds,
-        this.brands,
-        this.count,
-        this.gifts,
-        this.prices,
-        this.brand,
-        this.products,
-        this.labels,
-        this.info});
-
+      this.salesCount,
+      this.newArrivals,
+      this.offers,
+      this.brandsIds,
+      this.brands,
+      this.count,
+      this.gifts,
+      this.prices,
+      this.brand,
+      this.products,
+      this.labels,
+      this.info});
 
   factory GeneralSearchModel.fromJson(Map<String, dynamic> json) {
     return _$GeneralSearchModelFromJson(json);

@@ -9,6 +9,7 @@ abstract class Connection {
   static const base = 'beautyqueen.ly';
   static const baseURL = 'https://$base/';
   static const apiURL = '${baseURL}api/v1/';
+  static const apiURL2 = '${baseURL}api/';
   static const storageURL = '${baseURL}storage/';
   static const storageURLOfBrand = 'https://beautyqueen.twic.pics/brands';
   static const logoURL = '${baseURL}logo.png';

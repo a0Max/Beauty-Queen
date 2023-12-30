@@ -23,6 +23,7 @@ class CustomCardWidget extends StatefulWidget {
   final double? width;
   final bool favorite;
   final bool? hideLike;
+  final bool? newArrived;
 
   const CustomCardWidget({
     super.key,
@@ -31,6 +32,7 @@ class CustomCardWidget extends StatefulWidget {
     this.width,
     required this.favorite,
     this.hideLike = false,
+    this.newArrived = false,
   });
 
   @override
@@ -400,36 +402,53 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 ],
               )
             } else ...{
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 200.h,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(widget.imageUrl),
-                    fit: BoxFit.fill,
+              Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200.h,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: CachedNetworkImageProvider(widget.imageUrl),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    child: widget.hideLike == false
+                        ? Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                              icon: Icon(
+                                isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: isFavorite
+                                    ? Colors.red
+                                    : const Color(0xff13110C),
+                                // size: 30,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  isFavorite = true;
+                                });
+                                _controller.addWishlist(
+                                    postId: widget.newArrival.id ?? 0);
+                              },
+                            ),
+                          )
+                        : SizedBox(),
                   ),
-                ),
-                child: widget.hideLike == false
-                    ? Align(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                          icon: Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border,
-                            color: isFavorite
-                                ? Colors.red
-                                : const Color(0xff13110C),
-                            // size: 30,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              isFavorite = true;
-                            });
-                            _controller.addWishlist(
-                                postId: widget.newArrival.id ?? 0);
-                          },
-                        ),
-                      )
-                    : SizedBox(),
+                  if (widget.newArrived == true)
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      color: Colors.black,
+                      child: Text(
+                        tr('newArrived'),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )
+                ],
               ),
               Container(
                 height: 100,

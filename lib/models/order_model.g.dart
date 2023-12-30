@@ -7,7 +7,7 @@ part of 'order_model.dart';
 // **************************************************************************
 
 OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
-      shippingCost: json['shipping_cost'] as String?,
+      shippingCost: json['shipping_cost'],
       discount: json['discount'] as int?,
       order: json['order'] == null
           ? null
