@@ -68,6 +68,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
     _scrollController.dispose();
     super.dispose();
   }
+
   final AuthController userController = Get.put(AuthController());
 
   @override
@@ -76,9 +77,9 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
       key: scaffoldKey,
       appBar: PreferredSize(
         preferredSize:
-        userController.userData.value.accountType == AccountTypes.queena
-            ? Size.fromHeight(_isScrolled ? 80.h : 145.h)
-            : Size.fromHeight(_isScrolled ? 100.h : 160.h),
+            userController.userData.value.accountType == AccountTypes.queena
+                ? Size.fromHeight(_isScrolled ? 80.h : 145.h)
+                : Size.fromHeight(_isScrolled ? 100.h : 160.h),
         child: CustomAppBar(
           showBagIcon2: false,
           showarrowIcon: true,
@@ -260,28 +261,17 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                     : Wrap(
                         runSpacing: 7,
                         children: List.generate(
-                            controller.generalSearchData.value.products?.data
-                                    ?.length ??
-                                0,
+                            controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
                                   imageUrl: Connection.urlOfProducts(
-                                      image: controller
-                                              .generalSearchData
-                                              .value
-                                              .products
-                                              ?.data?[index]
-                                              .mainImage ??
+                                      image: controller.dataProducts
+                                              .value[index].mainImage ??
                                           ''),
-                                  newArrival: controller.generalSearchData.value
-                                          .products?.data?[index] ??
-                                      SalesProductsModel(),
-                                  favorite: controller
-                                          .generalSearchData
-                                          .value
-                                          .products
-                                          ?.data?[index]
-                                          .wishlist
-                                          ?.isNotEmpty ??
+                                  newArrival:
+                                      controller.dataProducts.value[index] ??
+                                          SalesProductsModel(),
+                                  favorite: controller.dataProducts.value[index]
+                                          .wishlist?.isNotEmpty ??
                                       false,
                                 )),
                       ),

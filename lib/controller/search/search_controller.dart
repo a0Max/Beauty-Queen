@@ -16,9 +16,10 @@ class SearchController0 extends GetxController {
   RxString keyWord = ''.obs;
 
   getSearchDetails({required String subKeyWord, int? currentPage}) async {
-    isLoading.value = true;
-    generalSearchData.value = GeneralSearchModel();
-    dataProducts.value = [];
+    if (currentPage == 1) {
+      generalSearchData.value = GeneralSearchModel();
+      dataProducts.value = [];
+    }
     try {
       keyWord.value = subKeyWord;
       if (currentPage == null) {
@@ -32,6 +33,8 @@ class SearchController0 extends GetxController {
             selectedBrands: selectedBrands.value);
         dataProducts.addAll(generalSearchData.value.products?.data ?? []);
       } else {
+        isLoading.value = true;
+
         page = 1;
         generalSearchData.value = await _api.getSearchDataRequest(
             page: 1,

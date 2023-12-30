@@ -270,24 +270,16 @@ class _DiscountScreenState extends State<DiscountScreen> {
                     : Wrap(
                         runSpacing: 7,
                         children: List.generate(
-                            _controller.generalSearchData.value.sales?.data
-                                    ?.length ??
-                                0,
+                            _controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
                                   imageUrl: Connection.urlOfProducts(
-                                      image: _controller.generalSearchData.value
-                                              .sales?.data?[index].mainImage ??
+                                      image: _controller.dataProducts
+                                              .value[index].mainImage ??
                                           ''),
-                                  newArrival: _controller.generalSearchData
-                                          .value.sales?.data?[index] ??
+                                  newArrival: _controller.dataProducts[index] ??
                                       SalesProductsModel(),
-                                  favorite: _controller
-                                          .generalSearchData
-                                          .value
-                                          .sales
-                                          ?.data?[index]
-                                          .wishlist
-                                          ?.isNotEmpty ??
+                                  favorite: _controller.dataProducts
+                                          .value[index].wishlist?.isNotEmpty ??
                                       false,
                                 )),
                       ),

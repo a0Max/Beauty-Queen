@@ -327,28 +327,17 @@ class _SearchScreen extends State<SearchScreen> {
                     : Wrap(
                         runSpacing: 7,
                         children: List.generate(
-                            _controller.generalSearchData.value.products?.data
-                                    ?.length ??
-                                0,
+                            _controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
                                   imageUrl: Connection.urlOfProducts(
-                                      image: _controller
-                                              .generalSearchData
-                                              .value
-                                              .products
-                                              ?.data?[index]
-                                              .mainImage ??
+                                      image: _controller.dataProducts
+                                              .value[index].mainImage ??
                                           ''),
-                                  newArrival: _controller.generalSearchData
-                                          .value.products?.data?[index] ??
-                                      SalesProductsModel(),
-                                  favorite: _controller
-                                          .generalSearchData
-                                          .value
-                                          .products
-                                          ?.data?[index]
-                                          .wishlist
-                                          ?.isNotEmpty ??
+                                  newArrival:
+                                      _controller.dataProducts.value[index] ??
+                                          SalesProductsModel(),
+                                  favorite: _controller.dataProducts
+                                          .value[index].wishlist?.isNotEmpty ??
                                       false,
                                 )),
                       ),

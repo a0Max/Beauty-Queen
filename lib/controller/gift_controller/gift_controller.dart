@@ -16,7 +16,6 @@ class GiftController extends GetxController {
   int page = 1;
 
   Future<void> getGiftsDataController({int? currentPage}) async {
-    isLoading.value = true;
     try {
       if (currentPage == null) {
         page = page + 1;
@@ -29,6 +28,7 @@ class GiftController extends GetxController {
             selectedBrands: selectedBrands.value);
         dataProducts.addAll(generalSearchData.value.gifts?.data ?? []);
       } else {
+        isLoading.value = true;
         page = 1;
         generalSearchData.value = await _api.getGiftsDataRequest(
             page: 1,

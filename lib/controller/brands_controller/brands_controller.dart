@@ -62,7 +62,6 @@ class BrandsController extends GetxController {
   }
 
   getDetailsOfBrand({required int idOfBrand, int? currentPage}) async {
-    isLoading.value = true;
     try {
       if (currentPage == null) {
         page = page + 1;
@@ -75,6 +74,8 @@ class BrandsController extends GetxController {
             selectedBrands: selectedBrands.value);
         dataProducts.addAll(generalSearchData.value.products?.data ?? []);
       } else {
+        isLoading.value = true;
+
         page = 1;
         generalSearchData.value = await _api.getDetailOfBrandsDataRequest(
             page: 1,

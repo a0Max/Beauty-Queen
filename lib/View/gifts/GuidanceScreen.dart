@@ -444,24 +444,17 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                     : Wrap(
                         runSpacing: 7,
                         children: List.generate(
-                            controller.generalSearchData.value.gifts?.data
-                                    ?.length ??
-                                0,
+                            controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
                                   imageUrl: Connection.urlOfProducts(
-                                      image: controller.generalSearchData.value
-                                              .gifts?.data?[index].mainImage ??
+                                      image: controller.dataProducts
+                                              .value[index].mainImage ??
                                           ''),
-                                  newArrival: controller.generalSearchData.value
-                                          .gifts?.data?[index] ??
-                                      SalesProductsModel(),
-                                  favorite: controller
-                                          .generalSearchData
-                                          .value
-                                          .gifts
-                                          ?.data?[index]
-                                          .wishlist
-                                          ?.isNotEmpty ??
+                                  newArrival:
+                                      controller.dataProducts.value[index] ??
+                                          SalesProductsModel(),
+                                  favorite: controller.dataProducts.value[index]
+                                          .wishlist?.isNotEmpty ??
                                       false,
                                 )),
                       ),

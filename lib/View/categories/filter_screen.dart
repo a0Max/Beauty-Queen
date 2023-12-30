@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
@@ -378,31 +379,94 @@ class _FliterScreenState extends State<FliterScreen> {
                     : Wrap(
                         runSpacing: 7,
                         children: List.generate(
-                            _controller.generalSearchData.value.products?.data
-                                    ?.length ??
-                                0,
+                            _controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
                                   imageUrl: Connection.urlOfProducts(
-                                      image: _controller
-                                              .generalSearchData
-                                              .value
-                                              .products
-                                              ?.data?[index]
-                                              .mainImage ??
+                                      image: _controller.dataProducts
+                                              .value[index].mainImage ??
                                           ''),
-                                  newArrival: _controller.generalSearchData
-                                          .value.products?.data?[index] ??
-                                      SalesProductsModel(),
-                                  favorite: _controller
-                                          .generalSearchData
-                                          .value
-                                          .products
-                                          ?.data?[index]
-                                          .wishlist
-                                          ?.isNotEmpty ??
+                                  newArrival:
+                                      _controller.dataProducts.value[index] ??
+                                          SalesProductsModel(),
+                                  favorite: _controller.dataProducts
+                                          .value[index].wishlist?.isNotEmpty ??
                                       false,
                                 )),
                       ),
+                Container(
+                  height: 160,
+                  child: (_controller.dataProducts.value.isNotEmpty)
+                      ? Column(
+                          children: [
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Text(
+                                '${tr('result')}: ${_controller.dataProducts.value.length} ${tr('to')} ${_controller.generalSearchData.value.products?.total ?? 0}'),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2,
+                              height: 30,
+                              child: LinearGauge(
+                                gaugeOrientation: GaugeOrientation.horizontal,
+                                start: 0,
+                                end: double.parse(
+                                    "${_controller.generalSearchData.value.products?.total ?? 1}"),
+                                valueBar: [
+                                  ValueBar(
+                                      value: double.parse(
+                                          "${_controller.dataProducts.value.length}"),
+                                      color: AppColors.mainColor,
+                                      borderRadius: 15,
+                                      valueBarThickness: 10)
+                                ],
+                                linearGaugeBoxDecoration:
+                                    const LinearGaugeBoxDecoration(
+                                        backgroundColor: AppColors.kShadowColor,
+                                        thickness: 10,
+                                        borderRadius: 15),
+                                rulers: RulerStyle(
+                                  rulerPosition: RulerPosition.center,
+                                  showLabel: false,
+                                  showSecondaryRulers: false,
+                                  showPrimaryRulers: false,
+                                  secondaryRulersHeight: 0,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _controller.getCategoriesDataController();
+                              },
+                              child: Container(
+                                // height: 59.70.h,
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                width: MediaQuery.of(context).size.width / 2,
+                                decoration: ShapeDecoration(
+                                  color: AppColors.kPrimaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.84),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(tr('showMore'),
+                                      style: TextStyle(
+                                          fontSize: 22.11.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppColors.kWhiteColor,
+                                          fontFamily: kTheArabicSansLight)),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      : SizedBox(),
+                )
+                // if (_controller.dataProducts.value.isNotEmpty) ...{
+                //
+                // }
               ]),
             )));
   }

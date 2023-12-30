@@ -48,8 +48,9 @@ class AlkasamController extends GetxController {
   int pageCategory = 1;
   Future<void> getCategoriesDataController(
       {int? currentPage, bool? getByParent}) async {
-    isLoading.value = true;
-    generalSearchData.value = GeneralSearchModel();
+    if (currentPage == 1) {
+      generalSearchData.value = GeneralSearchModel();
+    }
     try {
       int currentParent = 0;
       if (getByParent == true || childCurrentCategoryId.value == 0) {
@@ -59,8 +60,7 @@ class AlkasamController extends GetxController {
       }
       if (currentPage == null) {
         pageCategory = pageCategory + 1;
-
-        generalSearchData.value = await _api.getCategoryDataRequest(
+        GeneralSearchModel tempData = await _api.getCategoryDataRequest(
           page: pageCategory,
           keySort: keySort.value,
           selectedLabels: selectedLabels.value,
@@ -68,8 +68,11 @@ class AlkasamController extends GetxController {
           selectedBrands: selectedBrands.value,
           categoryId: currentParent,
         );
+        generalSearchData.value = tempData;
         dataProducts.addAll(generalSearchData.value.products?.data ?? []);
       } else {
+        isLoading.value = true;
+
         pageCategory = 1;
         generalSearchData.value = await _api.getCategoryDataRequest(
             page: 1,

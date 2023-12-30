@@ -16,7 +16,6 @@ class SalesController extends GetxController {
   int page = 1;
 
   Future<void> getSalesDataController({int? currentPage}) async {
-    isLoading.value = true;
     try {
       if (currentPage == null) {
         page = page + 1;
@@ -29,6 +28,8 @@ class SalesController extends GetxController {
             selectedBrands: selectedBrands.value);
         dataProducts.addAll(generalSearchData.value.sales?.data ?? []);
       } else {
+        isLoading.value = true;
+
         page = 1;
         generalSearchData.value = await _api.getSalesDataRequest(
             page: 1,
