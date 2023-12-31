@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
@@ -40,9 +41,41 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   void initState() {
     super.initState();
     basketController.getTotalOrderDetails();
+    getDataOrder();
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  getDataOrder() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? saveOrderState = prefs.getBool('saveDataOrder');
+    if (saveOrderState == true) {
+      addressController =
+          TextEditingController(text: prefs.getString('address'));
+      phoneController = TextEditingController(text: prefs.getString('phone'));
+      extraNoteController =
+          TextEditingController(text: prefs.getString('note'));
+      String? countryId = prefs.getString('cityId');
+      String? areaId = prefs.getString('areaId');
+      if (countryId != null) {
+        final cityList = controller.citiesData.value
+            .where((element) => "${element.id}" == countryId);
+        if (cityList.isNotEmpty) {
+          CityAreaModel tempCity = cityList.first;
+          await basketController.updateSelectedCity(newCity: tempCity);
+        }
+      }
+      if (areaId != null) {
+        final areaList = basketController.areaData.value.areas
+            ?.where((element) => "${element.id}" == areaId);
+
+        if (areaList?.isNotEmpty ?? false) {
+          CityAreaModel tempArea = areaList?.first ?? CityAreaModel();
+          basketController.updateSelectedArea(newArea: tempArea);
+        }
+      }
+      basketController.updateChecked(newCheck: true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

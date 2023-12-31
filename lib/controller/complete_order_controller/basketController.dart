@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../const/api_connrction/order_data_apis.dart';
 import '../../const/api_connrction/user_data_apis.dart';
@@ -93,6 +94,39 @@ class BasketController extends GetxController {
     finalAddress.value = address;
     finalPhone.value = phone;
     finalNote.value = note ?? '';
+    print('isChecked.value:${isChecked.value}');
+    if (isChecked.value == true) {
+      saveTheOrderData(
+          phone: phone,
+          address: address,
+          note: note ?? '',
+          cityId: "${selectedCityData.value.id ?? ''}",
+          areaId: "${selectedAreaData.value.id ?? ''}");
+    } else {
+      disapleToSaveOrderData();
+    }
+  }
+
+  saveTheOrderData(
+      {required String phone,
+      required String address,
+      required String note,
+      required String cityId,
+      required String? areaId}) async {
+    print('saveTheOrderData');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('phone', phone);
+    prefs.setString('address', address);
+    prefs.setString('note', note);
+    prefs.setString('cityId', cityId);
+    prefs.setString('areaId', areaId ?? '');
+    prefs.setBool('saveDataOrder', true);
+  }
+
+  disapleToSaveOrderData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setBool('saveDataOrder', false);
   }
 
   var order = OrderModel().obs;
