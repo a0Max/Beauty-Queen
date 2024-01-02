@@ -135,13 +135,13 @@ class _SignUpPage extends State<SignUpPage> {
                           // Adjusted the height to 1.0 instead of 0 to prevent potential issues
                         ),
                       ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 14.h),
                       TextFieldAuthWidget(
                         hindText: tr('kFirstNameHint'),
                         controler: nameController,
                         hintStyle: TextStyle(
                           color: const Color(0xFF2C3E50),
-                          fontSize: 17.69.sp,
+                          fontSize: 14.69.sp,
                           fontFamily: kTheArabicSansLight,
                           fontWeight: FontWeight.w600,
                         ),
@@ -156,7 +156,7 @@ class _SignUpPage extends State<SignUpPage> {
                         controler: phoneController,
                         hintStyle: TextStyle(
                           color: const Color(0xFF2C3E50),
-                          fontSize: 17.69.sp,
+                          fontSize: 14.69.sp,
                           fontFamily: kTheArabicSansLight,
                           fontWeight: FontWeight.w600,
                         ),
@@ -171,7 +171,7 @@ class _SignUpPage extends State<SignUpPage> {
                             controler: passwordController,
                             hintStyle: TextStyle(
                               color: const Color(0xFF2C3E50),
-                              fontSize: 17.69.sp,
+                              fontSize: 14.69.sp,
                               fontFamily: kTheArabicSansLight,
                               fontWeight: FontWeight.w600,
                             ),
@@ -199,7 +199,7 @@ class _SignUpPage extends State<SignUpPage> {
                                 _controller.confirmPasswordObscureText.value,
                             hintStyle: TextStyle(
                               color: const Color(0xFF2C3E50),
-                              fontSize: 17.69.sp,
+                              fontSize: 14.69.sp,
                               fontFamily: kTheArabicSansLight,
                               fontWeight: FontWeight.w600,
                             ),
@@ -251,9 +251,9 @@ class _SignUpPage extends State<SignUpPage> {
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: AppColors.kPrimaryColor,
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 21.21.sp,
-                            fontWeight: FontWeight.bold,
+                            fontFamily: kTheArabicSansBold,
+                            fontSize: 17.21.sp,
+                            fontWeight: FontWeight.w600,
                             color: AppColors.kPrimaryColor),
                       ),
                     ),

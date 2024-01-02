@@ -127,7 +127,16 @@ class _EventsScreen extends State<EventsScreen> {
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 15.h),
                                                 child: GestureDetector(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                DetailsEventsScreen(
+                                                                  eventId:
+                                                                      "${controller.eventsList[index].id}",
+                                                                )));
+                                                  },
                                                   child: Container(
                                                     // height: 49.70.h,
                                                     decoration: ShapeDecoration(

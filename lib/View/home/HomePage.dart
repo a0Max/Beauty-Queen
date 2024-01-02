@@ -739,7 +739,7 @@ class _HomePageState extends State<HomePage> {
                                     options: CarouselOptions(
                                       viewportFraction:
                                           1.0, // Set to 1.0 for full width current page
-                                      aspectRatio: 1.0,
+                                      aspectRatio: 1.1,
                                       autoPlay: true,
                                       onPageChanged: (index, reason) {
                                         _controller.updateSalesProducts(
@@ -921,7 +921,7 @@ class _HomePageState extends State<HomePage> {
                         height: 51.h,
                       ),
                       SizedBox(
-                        height: 600.h,
+                        height: 565.h,
                         child: Stack(
                           children: [
                             GestureDetector(
@@ -1004,7 +1004,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           SizedBox(
                               width: Get.width,
-                              height: 448.h,
+                              height: 408.h,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: _controller
@@ -1012,8 +1012,8 @@ class _HomePageState extends State<HomePage> {
                                     0,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    width: 257.0.w,
-                                    height: 448.0.h,
+                                    width: 225.0.w,
+                                    height: 400.0.h,
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 10.0),
                                     child: GestureDetector(
@@ -1031,8 +1031,8 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           Container(
-                                            width: 257.0.w,
-                                            height: 258.56.h,
+                                            width: 200.0.w,
+                                            height: 200.56.h,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image:
@@ -1052,7 +1052,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           // Pink Container
                                           Container(
-                                            width: 257.0.w,
+                                            width: 200.0.w,
                                             height: 179.38.h,
                                             color: AppColors.kPrimaryColor,
                                             child: Padding(
@@ -1076,11 +1076,11 @@ class _HomePageState extends State<HomePage> {
                                                     textAlign: TextAlign.right,
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 19.18.sp,
+                                                      fontSize: 15.18.sp,
                                                       fontFamily:
-                                                          kTheArabicSansLight,
+                                                          kTheArabicSansBold,
                                                       fontWeight:
-                                                          FontWeight.w700,
+                                                          FontWeight.w500,
                                                       // height: 0.05,
                                                     ),
                                                     overflow:
@@ -1090,7 +1090,7 @@ class _HomePageState extends State<HomePage> {
                                                     height: 15.h,
                                                   ),
                                                   SizedBox(
-                                                    width: 226.11.w,
+                                                    width: 196.11.w,
                                                     child: Text(
                                                       _controller
                                                               .homeData
@@ -1103,13 +1103,13 @@ class _HomePageState extends State<HomePage> {
                                                           TextAlign.right,
                                                       style: TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 13.18.sp,
+                                                        fontSize: 11.18.sp,
                                                         fontFamily:
-                                                            kTheArabicSansLight,
+                                                            kTheArabicSansBold,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        height: 1.5,
-                                                        letterSpacing: 0.13,
+                                                        // height: 1.5,
+                                                        // letterSpacing: 0.13,
                                                       ),
                                                     ),
                                                   ),
@@ -1151,9 +1151,9 @@ class _HomePageState extends State<HomePage> {
                               ))
                         ],
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
+                      // SizedBox(
+                      //   height: 10.h,
+                      // ),
 
                       ///specials
                       Align(

@@ -53,8 +53,8 @@ class DetailsStatic extends StatelessWidget {
                   title,
                   style: const TextStyle(
                       fontSize: 16,
-                      fontFamily: kTheArabicSansLight,
-                      fontWeight: FontWeight.w400,
+                      fontFamily: kTheArabicSansBold,
+                      fontWeight: FontWeight.w300,
                       color: AppColors.mainColor),
                   overflow: TextOverflow.visible,
                 ),
@@ -74,7 +74,7 @@ class DetailsStatic extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 13,
                   fontFamily: kTheArabicSansLight,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               if (isPhone == true) ...{

@@ -156,9 +156,9 @@ class _LogInPage extends State<LogInPage> {
                           tr('kForgotPassword'),
                           style: TextStyle(
                             color: AppColors.kSecondaryColor,
-                            fontSize: 17.69.sp,
+                            fontSize: 14.sp,
                             fontFamily: kTheArabicSansLight,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
@@ -180,16 +180,16 @@ class _LogInPage extends State<LogInPage> {
                           child: Text(tr('kLogin'),
                               style: TextStyle(
                                   fontSize: 22.11.sp,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w700,
                                   color: AppColors.kWhiteColor,
                                   fontFamily: kTheArabicSansLight)),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 40.h),
                     const LoginVia(),
                     SizedBox(
-                      height: 38.h,
+                      height: 20.h,
                     ),
                     Center(
                       child: GestureDetector(
@@ -204,7 +204,7 @@ class _LogInPage extends State<LogInPage> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: AppColors.kPrimaryColor,
-                                fontSize: 21.01.sp,
+                                fontSize: 18.sp,
                                 fontFamily: kTheArabicSansLight,
                                 fontWeight: FontWeight.w700,
                                 decoration: TextDecoration.underline,

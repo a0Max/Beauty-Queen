@@ -101,8 +101,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               children: [
                                 Image.asset(
                                   AppImages.carImage,
-                                  width: 35,
-                                  height: 35,
+                                  width: 30,
+                                  height: 30,
                                 ),
                                 SizedBox(
                                   width: 16.w,
@@ -211,11 +211,10 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 hint: Text(
                                   tr('city'),
                                   style: TextStyle(
-                                    color: AppColors.kBlackColor,
-                                    fontSize: 18.sp,
+                                    color: const Color(0xFF2C3E50),
+                                    fontSize: 17.69.sp,
                                     fontFamily: kTheArabicSansLight,
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
@@ -266,11 +265,10 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                       value: value,
                                       child: Text(value.name ?? '',
                                           style: TextStyle(
-                                            color: AppColors.kBlackColor,
-                                            fontSize: 14.sp,
+                                            color: const Color(0xFF2C3E50),
+                                            fontSize: 17.69.sp,
                                             fontFamily: kTheArabicSansLight,
-                                            fontWeight: FontWeight.w400,
-                                            height: 0,
+                                            fontWeight: FontWeight.w600,
                                           )),
                                     );
                                   }).toList(),
@@ -413,7 +411,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                     'تكلفه التوصيل:',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        fontSize: 18.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.kBlackColor),
                                   ),
@@ -423,7 +421,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         '',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        fontSize: 22.sp,
+                                        fontSize: 19.sp,
                                         fontWeight: FontWeight.w600,
                                         color: AppColors.kBlackColor),
                                   ),
@@ -441,7 +439,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                     'الوقت المتوقع للوصول:',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        fontSize: 18.sp,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.kBlackColor),
                                   ),
@@ -451,7 +449,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         '',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        fontSize: 22.sp,
+                                        fontSize: 19.sp,
                                         fontWeight: FontWeight.w600,
                                         color: AppColors.kBlackColor),
                                   ),
@@ -476,7 +474,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                     '${tr('total')}:',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        fontSize: 24.sp,
+                                        fontSize: 20.sp,
                                         fontWeight: FontWeight.w600,
                                         color: AppColors.kBlackColor),
                                   ),
@@ -484,7 +482,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                     '${num.parse("${basketController.totalOrderDetails.value.totalPrice ?? '0'}") + num.parse(basketController.totalOrderDelivery.value.shippingCost ?? '0')} ${tr('Del')}',
                                     style: TextStyle(
                                         fontFamily: kTheArabicSansLight,
-                                        fontSize: 24.sp,
+                                        fontSize: 21.sp,
                                         fontWeight: FontWeight.w600,
                                         color: AppColors.kPrimaryColor),
                                   ),
@@ -512,7 +510,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               Expanded(
                                   child: Divider(
                                 endIndent: 10.w,
-                                color: AppColors.kTextGrayColor,
+                                color: AppColors.kTextGrayColor.withOpacity(.3),
                                 thickness: 1.w,
                                 indent: 10.w,
                               )),
@@ -527,7 +525,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               Expanded(
                                   child: Divider(
                                 endIndent: 10.w,
-                                color: AppColors.kTextGrayColor,
+                                color: AppColors.kTextGrayColor.withOpacity(.3),
                                 thickness: 1.w,
                                 indent: 10.w,
                               )),
@@ -583,8 +581,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         bottom: 10.h, left: 10.w),
                                     child: Container(
                                       clipBehavior: Clip.none,
-                                      height: 45.52.h,
-                                      width: 98.19.w,
+                                      height: 35.52.h,
+                                      width: 80.19.w,
                                       decoration: BoxDecoration(
                                           color: AppColors.kPrimaryColor,
                                           borderRadius:
@@ -594,7 +592,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                           'قريباً..',
                                           style: TextStyle(
                                               fontFamily: kTheArabicSansLight,
-                                              fontSize: 20.sp,
+                                              fontSize: 17.sp,
                                               fontWeight: FontWeight.w600,
                                               color: AppColors.kWhiteColor),
                                         ),
@@ -645,7 +643,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               fontSize: 24.sp,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.bold,
                               color: AppColors.kPrimaryColor),
                         )
                       ],

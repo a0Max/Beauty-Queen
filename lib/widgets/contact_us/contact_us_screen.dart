@@ -8,6 +8,7 @@ import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import 'package:flutter/material.dart';
 
+import '../../const/styles.dart';
 import '../../const/vars.dart';
 
 class ContactUsScreen0 extends StatelessWidget {
@@ -39,10 +40,10 @@ class ContactUsScreen0 extends StatelessWidget {
             Text(
               tr('call_us'),
               style: const TextStyle(
-                fontFamily: 'TheSans',
+                fontFamily: kTheArabicSansBold,
                 fontSize: 18.74,
                 color: AppColors.mainColor,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             )
           ],
@@ -52,21 +53,22 @@ class ContactUsScreen0 extends StatelessWidget {
           onTap: () {
             _makePhoneCall(SocialMedia.phone);
           },
-          child: const Row(
+          child: Row(
             children: [
               Text(
                 'رقـــــــــــــم المتجـــــــــــر',
                 style: TextStyle(
-                  fontFamily: 'TheSans',
+                  fontFamily: kTheArabicSansLight,
                   fontSize: 15.74,
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
                 ),
               ),
+              20.pw,
               Text(
                 SocialMedia.phone,
                 style: TextStyle(
-                  fontFamily: 'TheSans',
+                  fontFamily: kTheArabicSansLight,
                   fontSize: 15.74,
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
@@ -80,21 +82,22 @@ class ContactUsScreen0 extends StatelessWidget {
           onTap: () {
             _makePhoneCall(SocialMedia.phone);
           },
-          child: const Row(
+          child: Row(
             children: [
               Text(
                 'رقم خدمة العملاء',
                 style: TextStyle(
-                  fontFamily: 'TheSans',
+                  fontFamily: kTheArabicSansLight,
                   fontSize: 15.74,
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
                 ),
               ),
+              24.pw,
               Text(
                 SocialMedia.phone,
                 style: TextStyle(
-                  fontFamily: 'TheSans',
+                  fontFamily: kTheArabicSansLight,
                   fontSize: 15.74,
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
@@ -104,13 +107,12 @@ class ContactUsScreen0 extends StatelessWidget {
           ),
         ),
         15.ph,
-        Text(
-            tr('des_contact'),
+        Text(tr('des_contact'),
             style: const TextStyle(
               color: AppColors.kTextDGColor,
               fontSize: 14,
               fontWeight: FontWeight.w200,
-              fontFamily: 'TheSans',
+              fontFamily: kTheArabicSansLight,
             )),
       ],
     );

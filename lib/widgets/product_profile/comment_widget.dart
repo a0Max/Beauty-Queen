@@ -7,6 +7,7 @@ import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import 'package:flutter/material.dart';
 
+import '../../const/styles.dart';
 import '../../controller/message_controller/message_controler.dart';
 import '../based/button_widget.dart';
 import '../based/loading.dart';
@@ -39,10 +40,10 @@ class CommentWidget extends StatelessWidget {
             Text(
               tr('information'),
               style: const TextStyle(
-                fontFamily: 'TheSans',
+                fontFamily: kTheArabicSansBold,
                 fontSize: 18.74,
                 color: AppColors.mainColor,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             )
           ],
@@ -58,7 +59,7 @@ class CommentWidget extends StatelessWidget {
         const Text(
           '*يرجي إدخال 50 كلمة كحد أقصيً',
           style: TextStyle(
-            fontFamily: 'TheSans',
+            fontFamily: kTheArabicSansLight,
             fontSize: 14.74,
             color: AppColors.kTextDGColor,
             fontWeight: FontWeight.w200,
@@ -68,7 +69,7 @@ class CommentWidget extends StatelessWidget {
         const Text(
           'رقم الهاتف',
           style: TextStyle(
-            fontFamily: 'TheSans',
+            fontFamily: kTheArabicSansLight,
             fontSize: 15.74,
             // color: AppColors.kTextDGColor,
             fontWeight: FontWeight.w600,
@@ -87,11 +88,13 @@ class CommentWidget extends StatelessWidget {
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: const BorderSide(color: AppColors.mainColor),
+                          borderSide:
+                              const BorderSide(color: AppColors.mainColor),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
-                          borderSide: const BorderSide(color: AppColors.greyColor),
+                          borderSide:
+                              const BorderSide(color: AppColors.greyColor),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(2.0),
@@ -122,7 +125,7 @@ class CommentWidget extends StatelessWidget {
             marginHeight: 15,
             paddingVertical: 0,
             textStyle: const TextStyle(
-              fontFamily: 'TheSans',
+              fontFamily: kTheArabicSansLight,
               fontSize: 16.74,
               color: Colors.white,
               // color: AppColors.kTextDGColor,

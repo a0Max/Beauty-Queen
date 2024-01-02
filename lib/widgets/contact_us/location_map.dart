@@ -8,6 +8,7 @@ import '../../const/app_images.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../const/styles.dart';
 import '../../const/vars.dart';
 
 class LocationMap extends StatefulWidget {
@@ -39,10 +40,10 @@ class _LocationMap extends State<LocationMap> {
             const Text(
               'موقعنا على خرائط قوقل',
               style: TextStyle(
-                fontFamily: 'TheSans',
+                fontFamily: kTheArabicSansBold,
                 fontSize: 18.74,
                 color: AppColors.mainColor,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             )
           ],

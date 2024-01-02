@@ -229,11 +229,14 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                       overflow: TextOverflow.visible,
                       style: TextStyle(
                           fontSize: 16.11.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.bold,
                           // color: Colors.white,
                           fontFamily: kTheArabicSansLight)),
                   15.ph,
-                  HtmlWidget(controller.event.value.description ?? ''),
+                  HtmlWidget(
+                    controller.event.value.description ?? '',
+                    textStyle: TextStyle(fontFamily: kTheArabicSansLight),
+                  ),
                 ]),
               ))
       ]),

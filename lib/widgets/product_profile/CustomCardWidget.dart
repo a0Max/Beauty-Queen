@@ -661,7 +661,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 7),
                     alignment: Alignment.center,
                     decoration:
                         const BoxDecoration(color: AppColors.kPrimaryColor),

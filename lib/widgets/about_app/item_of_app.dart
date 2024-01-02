@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 
+import '../../const/styles.dart';
 import '../../controller/about_controller/about_app_controller.dart';
 
 class ItemOfApp extends StatelessWidget {
@@ -41,7 +42,10 @@ class ItemOfApp extends StatelessWidget {
                                   .textTheme
                                   .headlineMedium
                                   ?.copyWith(
-                                      fontSize: 18, color: AppColors.mainColor),
+                                      fontSize: 18,
+                                      color: AppColors.mainColor,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: kTheArabicSansBold),
                             ),
                             const Icon(Icons.keyboard_arrow_down_rounded)
                           ],
@@ -51,7 +55,11 @@ class ItemOfApp extends StatelessWidget {
                       if (controller.stateOfMenu.value == true) ...{
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: HtmlWidget(description),
+                          child: HtmlWidget(
+                            description,
+                            textStyle:
+                                TextStyle(fontFamily: kTheArabicSansLight),
+                          ),
                         ),
                       }
                     ],

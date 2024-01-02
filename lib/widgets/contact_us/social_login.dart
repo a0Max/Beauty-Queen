@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
+import '../../const/styles.dart';
 import '../../models/social_media_model.dart';
 
 class SocialLogin extends StatelessWidget {
@@ -16,13 +17,12 @@ class SocialLogin extends StatelessWidget {
         url: 'https://www.tiktok.com/@beautyqueen.ly0?_t=8Y6WKdWaGJi&_r=1',
         image: AppImages.tiktokImage),
     SocialMediaModel(
-        url: 'https://www.snapchat.com/add/beautyqueenyl?share_id=ODFGMDlBQzUtMjJFQS00NjBCLTgxRUEtMTIzMTQ1RjQxRDAz&locale=en_LY',
+        url:
+            'https://www.snapchat.com/add/beautyqueenyl?share_id=ODFGMDlBQzUtMjJFQS00NjBCLTgxRUEtMTIzMTQ1RjQxRDAz&locale=en_LY',
         image: AppImages.snapChatImage),
-
     SocialMediaModel(
         url: 'https://instagram.com/beautyqueen.ly?igshid=YmMyMTA2M2Y=',
         image: AppImages.instegramImage),
-
     SocialMediaModel(
         url: 'https://www.facebook.com/beautyqueenmakeup.ly/',
         image: AppImages.facebook1Image),
@@ -45,10 +45,10 @@ class SocialLogin extends StatelessWidget {
             Text(
               tr('soutiol_media'),
               style: const TextStyle(
-                fontFamily: 'TheSans',
+                fontFamily: kTheArabicSansBold,
                 fontSize: 18.74,
                 color: AppColors.mainColor,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             )
           ],
@@ -68,11 +68,13 @@ class SocialLogin extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                       child: Container(
                           padding: const EdgeInsets.all(7),
-                          child: SvgPicture.asset(listOfSocialMedia[index].image)),
+                          child:
+                              SvgPicture.asset(listOfSocialMedia[index].image)),
                       onTap: () async {
                         try {
-                          await launchUrl(Uri.parse(listOfSocialMedia[index].url),
-                          mode: LaunchMode.externalApplication);
+                          await launchUrl(
+                              Uri.parse(listOfSocialMedia[index].url),
+                              mode: LaunchMode.externalApplication);
                         } catch (e) {
                           log('_makePhoneCall: error:$e');
                         }

@@ -45,13 +45,13 @@ class SummaryScreen extends StatelessWidget {
                             children: [
                               SvgPicture.asset(AppImages.billPaymentImage),
                               SizedBox(
-                                width: 20.w,
+                                width: 10.w,
                               ),
                               Text(
                                 'تأكيد الطلب',
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
-                                    fontSize: 20.sp,
+                                    fontSize: 17.sp,
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.kBlackColor),
                               ),
@@ -60,8 +60,8 @@ class SummaryScreen extends StatelessWidget {
                                 'عدد العناصر (${basketController.order.value.totalQty ?? 0})',
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
-                                    fontSize: 24.sp,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 21.sp,
+                                    fontWeight: FontWeight.bold,
                                     color: AppColors.kBlackColor),
                               ),
                             ],
@@ -96,16 +96,17 @@ class SummaryScreen extends StatelessWidget {
                                           'تاريخ و وقت الطلب:',
                                           style: TextStyle(
                                             fontFamily: kTheArabicSansLight,
-                                            fontSize: 17.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.kBlackColor,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.kTextDGColor
+                                                .withOpacity(.5),
                                           ),
                                         ),
                                         Text(
                                           '${basketController.order.value.order?.createdAt?.split("T").first} ${basketController.order.value.order?.createdAt?.split("T").last.substring(0, 5)}',
                                           style: TextStyle(
                                             fontFamily: kTheArabicSansLight,
-                                            fontSize: 18.sp,
+                                            fontSize: 15.sp,
                                             fontWeight: FontWeight.w600,
                                             color: AppColors.kPrimaryColor,
                                           ),
@@ -118,16 +119,17 @@ class SummaryScreen extends StatelessWidget {
                                           'رقم الطلب:',
                                           style: TextStyle(
                                             fontFamily: kTheArabicSansLight,
-                                            fontSize: 17.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.kBlackColor,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.kTextDGColor
+                                                .withOpacity(.5),
                                           ),
                                         ),
                                         Text(
                                           '${basketController.order.value.order?.id ?? ''}#',
                                           style: TextStyle(
                                             fontFamily: kTheArabicSansLight,
-                                            fontSize: 22.sp,
+                                            fontSize: 15.sp,
                                             fontWeight: FontWeight.w600,
                                             color: AppColors.kPrimaryColor,
                                           ),
@@ -135,15 +137,6 @@ class SummaryScreen extends StatelessWidget {
                                       ],
                                     )
                                   ],
-                                ),
-                                Text(
-                                  'منتجات (${basketController.order.value.totalQty ?? 0})',
-                                  style: TextStyle(
-                                    fontFamily: kTheArabicSansLight,
-                                    fontSize: 22.53.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.kBlackColor,
-                                  ),
                                 ),
                                 ...List.generate(
                                     basketController
@@ -169,6 +162,7 @@ class SummaryScreen extends StatelessWidget {
                                                           '',
                                                     ) // controller.order.value.order?.items?[index].products.first,
                                                     ),
+                                                5.pw,
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -219,7 +213,7 @@ class SummaryScreen extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 kTheArabicSansLight,
-                                                            fontSize: 15.7.sp,
+                                                            fontSize: 13.7.sp,
                                                             fontWeight:
                                                                 FontWeight.w500,
                                                             color: AppColors
@@ -419,12 +413,191 @@ class SummaryScreen extends StatelessWidget {
                                 Text(
                                   '${num.parse("${basketController.order.value.subtotal ?? '0'}")} ${tr('Del')}',
                                   style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
+                                      fontFamily: kTheArabicSansBold,
                                       fontSize: 18.1.sp,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.kBlackColor),
                                 ),
                               ]),
+
+                          // Container(
+                          //   margin: const EdgeInsets.symmetric(horizontal: 16),
+                          //   child: Column(
+                          //     children: [
+                          //       Container(
+                          //         // height: 137.9.h,
+                          //
+                          //         width: MediaQuery.of(context).size.width,
+                          //         padding: EdgeInsets.symmetric(vertical: 10.h),
+                          //         decoration: BoxDecoration(
+                          //             borderRadius: BorderRadius.circular(14.r),
+                          //             color: AppColors.kWhiteColor,
+                          //             boxShadow: [
+                          //               BoxShadow(blurRadius: 0.5.r)
+                          //             ]),
+                          //         child: Padding(
+                          //           padding: EdgeInsets.only(right: 20.w),
+                          //           child: Column(
+                          //             children: [
+                          //               // SizedBox(
+                          //               //   height: 10.h,
+                          //               // ),
+                          //               Align(
+                          //                 alignment: Alignment.topRight,
+                          //                 child: Text(
+                          //                   'طريقة الإستلام',
+                          //                   style: TextStyle(
+                          //                       fontFamily: kTheArabicSansLight,
+                          //                       fontSize: 19.sp,
+                          //                       fontWeight: FontWeight.w600,
+                          //                       color: AppColors.klPinkColor),
+                          //                 ),
+                          //               ),
+                          //               Row(children: [
+                          //                 SvgPicture.asset(
+                          //                     AppImages.homeIconImage),
+                          //                 SizedBox(
+                          //                   width: 10.w,
+                          //                 ),
+                          //                 Text(
+                          //                   "${_controller.order.value.order?.city?.name ?? ''}, ${controller.order.value.order?.area?.name ?? ''}",
+                          //                   style: TextStyle(
+                          //                       fontFamily: kTheArabicSansLight,
+                          //                       fontSize: 18.1.sp,
+                          //                       fontWeight: FontWeight.w500,
+                          //                       color: AppColors.kBlackColor),
+                          //                 ),
+                          //               ]),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       ),
+                          //       SizedBox(
+                          //         height: 27.h,
+                          //       ),
+                          //       ////////////rows///////////
+                          //       Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [
+                          //             Text(
+                          //               'الاجمالي',
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w400,
+                          //                   color: AppColors.kTextGrayColor),
+                          //             ),
+                          //             Text(
+                          //               "${controller.order.value.subtotal}",
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w500,
+                          //                   color: AppColors.kBlackColor),
+                          //             ),
+                          //           ]),
+                          //       ///////////second row////////
+                          //       Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [
+                          //             Text(
+                          //               'خصم البروموكود',
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w400,
+                          //                   color: AppColors.kTextGrayColor),
+                          //             ),
+                          //             Text(
+                          //               "-${controller.order.value.discount}",
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w500,
+                          //                   color: AppColors.kBlackColor),
+                          //             ),
+                          //           ]),
+                          //       /////////third row//////////////
+                          //       Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [
+                          //             Text(
+                          //               'تخفيض الفاتورة',
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w400,
+                          //                   color: AppColors.kTextGrayColor),
+                          //             ),
+                          //             Text(
+                          //               "-${controller.order.value.order?.specialDiscount ?? ''}",
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w500,
+                          //                   color: AppColors.kBlackColor),
+                          //             ),
+                          //           ]),
+                          //       Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [
+                          //             Text(
+                          //               'تكلفة التوصيل',
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w400,
+                          //                   color: AppColors.kTextGrayColor),
+                          //             ),
+                          //             Text(
+                          //               "${controller.order.value.shippingCost}",
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 18.1.sp,
+                          //                   fontWeight: FontWeight.w500,
+                          //                   color: AppColors.kBlackColor),
+                          //             ),
+                          //           ]),
+                          //       Divider(
+                          //         color: AppColors.kTextGrayColor,
+                          //         thickness: 1.w,
+                          //       ),
+                          //       // SizedBox(
+                          //       //   height: 30.h,
+                          //       // ),
+                          //       Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [
+                          //             Text(
+                          //               'قيمة الفاتورة',
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 19.sp,
+                          //                   fontWeight: FontWeight.w600,
+                          //                   color: AppColors.kBlackColor),
+                          //             ),
+                          //             Text(
+                          //               "${controller.order.value.totalPrice}",
+                          //               style: TextStyle(
+                          //                   fontFamily: kTheArabicSansLight,
+                          //                   fontSize: 22.44.sp,
+                          //                   fontWeight: FontWeight.w600,
+                          //                   color: AppColors.kPrimaryColor),
+                          //             ),
+                          //           ]),
+                          //       ///////////////////////// fourth container
+                          //
+                          //       SizedBox(
+                          //         height: 50.h,
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           ///////////second row////////
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -440,7 +613,7 @@ class SummaryScreen extends StatelessWidget {
                                 Text(
                                   '-${num.parse("${basketController.order.value.discount ?? '0'}")} ${tr('Del')}',
                                   style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
+                                      fontFamily: kTheArabicSansBold,
                                       fontSize: 18.1.sp,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.kBlackColor),
@@ -461,7 +634,7 @@ class SummaryScreen extends StatelessWidget {
                                 Text(
                                   '-${num.parse(basketController.order.value.flashDiscountStatus ?? '0')} ${tr('Del')}',
                                   style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
+                                      fontFamily: kTheArabicSansBold,
                                       fontSize: 18.1.sp,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.kBlackColor),
@@ -481,14 +654,14 @@ class SummaryScreen extends StatelessWidget {
                                 Text(
                                   '${num.parse("${basketController.order.value.shippingCost ?? 0}")} ${tr('Del')}',
                                   style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
+                                      fontFamily: kTheArabicSansBold,
                                       fontSize: 18.1.sp,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.kBlackColor),
                                 ),
                               ]),
                           Divider(
-                            color: AppColors.kTextGrayColor,
+                            color: AppColors.kTextGrayColor.withOpacity(.3),
                             thickness: 1.w,
                           ),
                           15.ph,
@@ -506,7 +679,7 @@ class SummaryScreen extends StatelessWidget {
                                 Text(
                                   '${num.parse("${basketController.order.value.totalPrice ?? '0'}")} ${tr('Del')}',
                                   style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
+                                      fontFamily: kTheArabicSansBold,
                                       fontSize: 22.44.sp,
                                       fontWeight: FontWeight.w600,
                                       color: AppColors.kPrimaryColor),
@@ -553,7 +726,7 @@ class SummaryScreen extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             fontSize: 24.sp,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.bold,
                             color: AppColors.kPrimaryColor),
                       )
                     ],
@@ -603,7 +776,7 @@ class SummaryScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 2,
                       decoration: BoxDecoration(
                         color: AppColors.kPrimaryColor,
-                        borderRadius: BorderRadius.circular(46.r),
+                        // borderRadius: BorderRadius.circular(46.r),
                       ),
                       child: Center(
                         child: Text(

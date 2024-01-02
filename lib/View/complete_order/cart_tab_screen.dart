@@ -1,5 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks, library_private_types_in_public_api
 
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,9 +77,10 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
               ),
             ),
             bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(60),
+              preferredSize: const Size.fromHeight(80),
               child: Column(
                 children: [
+                  10.ph,
                   Container(
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -1,3 +1,4 @@
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/widgets/based/loading.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,9 +50,13 @@ class _PaymentScreen extends State<PaymentScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 17.w),
                     child: Column(
                       children: [
+                        20.ph,
                         Row(
                           children: [
-                            SvgPicture.asset(AppImages.paymentImage),
+                            SvgPicture.asset(
+                              AppImages.paymentImage,
+                              height: 45,
+                            ),
                             SizedBox(
                               width: 20.w,
                             ),
@@ -65,9 +70,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 43.h,
-                        ),
+                        30.ph,
                         GestureDetector(
                           onTap: () {
                             basketController.selectPaymentMethod('cash');
@@ -87,6 +90,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                               child: Stack(
                                 children: [
                                   ListTile(
+                                    contentPadding: EdgeInsets.all(10),
                                     leading: Padding(
                                       padding: EdgeInsets.only(bottom: 30.h),
                                       child: Container(
@@ -117,11 +121,11 @@ class _PaymentScreen extends State<PaymentScreen> {
                                                   'cash'
                                               ? AppColors.kWhiteColor
                                               : AppColors.kBlackColor,
-                                          fontSize: 21.sp,
+                                          fontSize: 18.sp,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     subtitle: Text(
-                                      "سيتم تسليم قيمة البضاعة إلى مندوب \nالتوصيل عند الاستلام",
+                                      "سيتم تسليم قيمة البضاعة إلى مندوب التوصيل عند الاستلام",
                                       style: TextStyle(
                                           fontFamily: kTheArabicSansLight,
                                           color: basketController
@@ -225,6 +229,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                                       child: Stack(
                                         children: [
                                           ListTile(
+                                            contentPadding: EdgeInsets.all(10),
                                             leading: SvgPicture.asset(
                                                 AppImages.walletImage),
                                             title: Text(
@@ -237,7 +242,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                                                           'user_balance'
                                                       ? AppColors.kWhiteColor
                                                       : AppColors.kBlackColor,
-                                                  fontSize: 21.sp,
+                                                  fontSize: 18.sp,
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             subtitle:
@@ -398,7 +403,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               fontSize: 24.sp,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.bold,
                               color: AppColors.kPrimaryColor),
                         )
                       ],
@@ -417,7 +422,6 @@ class _PaymentScreen extends State<PaymentScreen> {
                         width: MediaQuery.of(context).size.width / 2,
                         decoration: BoxDecoration(
                           color: AppColors.kPrimaryColor,
-                          borderRadius: BorderRadius.circular(46.r),
                         ),
                         child: Center(
                           child: Text(

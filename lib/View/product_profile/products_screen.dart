@@ -261,10 +261,10 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                             '',
                                                         style: TextStyle(
                                                             fontFamily:
-                                                                kTheArabicSansLight,
-                                                            fontSize: 17.sp,
+                                                                kTheArabicSansBold,
+                                                            fontSize: 15.sp,
                                                             fontWeight:
-                                                                FontWeight.w700,
+                                                                FontWeight.w400,
                                                             color: AppColors
                                                                 .kPrimaryColor),
                                                       ),
@@ -281,7 +281,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                           "${controller.selectedOptions.value.first.price} ${tr('Del')} ",
                                                           style: TextStyle(
                                                               fontFamily:
-                                                                  kTheArabicSansLight,
+                                                                  kTheArabicSansBold,
                                                               fontSize: 15.sp,
                                                               fontWeight:
                                                                   FontWeight
@@ -351,7 +351,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                           15.16
                                                                               .sp,
                                                                       fontFamily:
-                                                                          kTheArabicSansLight,
+                                                                          kTheArabicSansBold,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w400,
@@ -375,7 +375,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                           15.16
                                                                               .sp,
                                                                       fontFamily:
-                                                                          kTheArabicSansLight,
+                                                                          kTheArabicSansBold,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w400,
@@ -396,7 +396,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                               fontSize:
                                                                   15.16.sp,
                                                               fontFamily:
-                                                                  kTheArabicSansLight,
+                                                                  kTheArabicSansBold,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w400,
@@ -408,6 +408,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                     ],
                                                   )
                                                 : const SizedBox(),
+                                            10.ph,
                                             Align(
                                               alignment: Alignment.topRight,
                                               child: Text(
@@ -417,7 +418,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                 style: TextStyle(
                                                     fontFamily:
                                                         kTheArabicSansLight,
-                                                    fontSize: 17.sp,
+                                                    fontSize: 15.sp,
                                                     fontWeight: FontWeight.w700,
                                                     color:
                                                         AppColors.kBlackColor),
@@ -593,124 +594,128 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       const SizedBox(
                                                         height: 10,
                                                       ),
-                                                      DropdownButtonFormField<
-                                                          OptionsModel>(
-                                                        isExpanded: true,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText: controller
+                                                      Container(
+                                                        height: 50,
+                                                        child:
+                                                            DropdownButtonFormField<
+                                                                OptionsModel>(
+                                                          padding:
+                                                              EdgeInsets.zero,
+                                                          isExpanded: true,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText: controller
+                                                                .productData
+                                                                .value
+                                                                .last
+                                                                .productOptions?[
+                                                                    index]
+                                                                .title,
+                                                            // filled: true,
+                                                            fillColor:
+                                                                Colors.white,
+                                                            border:
+                                                                const OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: Colors
+                                                                          .black,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .zero),
+                                                            focusedBorder:
+                                                                const OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .zero,
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          onChanged:
+                                                              (selectedItem) {
+                                                            if ((selectedItem
+                                                                        ?.stock ==
+                                                                    null ||
+                                                                selectedItem
+                                                                        ?.stock ==
+                                                                    "0" ||
+                                                                num.parse(selectedItem
+                                                                            ?.stock ??
+                                                                        '0') <=
+                                                                    0)) {
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (BuildContext
+                                                                          context) {
+                                                                    return CustomAlertDialog(
+                                                                      buttonTwo:
+                                                                          false,
+                                                                      dilougText:
+                                                                          tr('will_be_avaible_soon'),
+                                                                      buttonOneText:
+                                                                          tr('okay'),
+                                                                    );
+                                                                  });
+                                                            } else {
+                                                              print(selectedItem
+                                                                  ?.stock);
+                                                              controller
+                                                                  .updateToSelected(
+                                                                      index:
+                                                                          index,
+                                                                      selected:
+                                                                          selectedItem);
+                                                            }
+                                                          },
+                                                          value: controller
+                                                                  .selectedOptions[
+                                                              index],
+                                                          items: controller
                                                               .productData
                                                               .value
                                                               .last
                                                               .productOptions?[
                                                                   index]
-                                                              .title,
-                                                          filled: true,
-                                                          fillColor:
-                                                              Colors.white,
-                                                          border:
-                                                              const OutlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: Colors
-                                                                        .black,
+                                                              .options
+                                                              ?.map<
+                                                                      DropdownMenuItem<
+                                                                          OptionsModel>>(
+                                                                  (value) {
+                                                            return DropdownMenuItem<
+                                                                OptionsModel>(
+                                                              value: value,
+                                                              child: Row(
+                                                                children: [
+                                                                  Container(
+                                                                      width:
+                                                                          20.w,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                        image: DecorationImage(
+                                                                            image:
+                                                                                CachedNetworkImageProvider(Connection.urlOfOptions(image: value.mainImage?.file ?? ''))),
+                                                                      )),
+                                                                  Padding(
+                                                                    padding: EdgeInsets
+                                                                        .all(8
+                                                                            .r),
                                                                   ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .zero),
-                                                          focusedBorder:
-                                                              const OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .zero,
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                          ),
+                                                                  Text(
+                                                                      "${value.title} "),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          }).toList(),
                                                         ),
-                                                        onChanged:
-                                                            (selectedItem) {
-                                                          if ((selectedItem
-                                                                      ?.stock ==
-                                                                  null ||
-                                                              selectedItem
-                                                                      ?.stock ==
-                                                                  "0" ||
-                                                              num.parse(selectedItem
-                                                                          ?.stock ??
-                                                                      '0') <=
-                                                                  0)) {
-                                                            showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (BuildContext
-                                                                        context) {
-                                                                  return CustomAlertDialog(
-                                                                    buttonTwo:
-                                                                        false,
-                                                                    dilougText:
-                                                                        tr('will_be_avaible_soon'),
-                                                                    buttonOneText:
-                                                                        tr('okay'),
-                                                                  );
-                                                                });
-                                                          } else {
-                                                            print(selectedItem
-                                                                ?.stock);
-                                                            controller
-                                                                .updateToSelected(
-                                                                    index:
-                                                                        index,
-                                                                    selected:
-                                                                        selectedItem);
-                                                          }
-                                                        },
-                                                        value: controller
-                                                                .selectedOptions[
-                                                            index],
-                                                        items: controller
-                                                            .productData
-                                                            .value
-                                                            .last
-                                                            .productOptions?[
-                                                                index]
-                                                            .options
-                                                            ?.map<
-                                                                    DropdownMenuItem<
-                                                                        OptionsModel>>(
-                                                                (value) {
-                                                          return DropdownMenuItem<
-                                                              OptionsModel>(
-                                                            value: value,
-                                                            child: Row(
-                                                              children: [
-                                                                Container(
-                                                                    width: 20.w,
-                                                                    height:
-                                                                        20.h,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      shape: BoxShape
-                                                                          .circle,
-                                                                      image: DecorationImage(
-                                                                          image:
-                                                                              CachedNetworkImageProvider(Connection.urlOfOptions(image: value.mainImage?.file ?? ''))),
-                                                                    )),
-                                                                Padding(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(8
-                                                                              .r),
-                                                                ),
-                                                                Text(
-                                                                    "${value.title} "),
-                                                              ],
-                                                            ),
-                                                          );
-                                                        }).toList(),
                                                       ),
                                                     } else ...{
                                                       Wrap(
@@ -951,15 +956,17 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 border: Border.all(
-                                                    color:
-                                                        AppColors.kCDGColor2)),
+                                                    color: AppColors.kCDGColor2
+                                                        .withOpacity(.1))),
                                             child: SvgPicture.asset(
                                                 AppImages.imageNewItem),
                                           ),
                                           Text(
                                             tr('newْnusedProduct'),
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    kTheArabicSansLight),
                                             textAlign: TextAlign.center,
                                           )
                                         ],
@@ -980,15 +987,17 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 border: Border.all(
-                                                    color:
-                                                        AppColors.kCDGColor2)),
+                                                    color: AppColors.kCDGColor2
+                                                        .withOpacity(.1))),
                                             child: SvgPicture.asset(
                                                 AppImages.imageOriginalItem),
                                           ),
                                           Text(
                                             tr('original'),
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    kTheArabicSansLight),
                                             textAlign: TextAlign.center,
                                           )
                                         ],

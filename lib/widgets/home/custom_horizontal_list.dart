@@ -36,12 +36,12 @@ class CustomImageList extends StatelessWidget {
             ));
           },
           child: Padding(
-            padding: EdgeInsets.all(10.r),
+            padding: EdgeInsets.all(5.r),
             child: Column(
               children: [
                 Container(
-                  width: 92.03.w,
-                  height: 92.03.h,
+                  width: 87.03.w,
+                  height: 87.03.h,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(Connection.urlOfCategories(
@@ -52,7 +52,7 @@ class CustomImageList extends StatelessWidget {
                         .circle, // Use BoxShape.circle to make it circular
                   ),
                 ),
-                4.ph,
+                6.ph,
                 Text(
                   dataOfItem[index].title ?? '',
                   style: TextStyle(

@@ -95,7 +95,7 @@ class LoginVia extends StatelessWidget {
                   controller.googleLogin();
                 },
                 child: Container(
-                  width: (MediaQuery.of(context).size.width - 100) / 2,
+                  width: (MediaQuery.of(context).size.width - 50),
                   padding: const EdgeInsets.symmetric(vertical: 17),
                   decoration: ShapeDecoration(
                     color: Colors.white,

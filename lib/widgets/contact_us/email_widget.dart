@@ -7,10 +7,10 @@ import '../../const/app_images.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../const/styles.dart';
 import '../../const/vars.dart';
 
-
-class EmailWidget extends StatelessWidget{
+class EmailWidget extends StatelessWidget {
   const EmailWidget({super.key});
 
   @override
@@ -31,10 +31,10 @@ class EmailWidget extends StatelessWidget{
             Text(
               tr('email2'),
               style: const TextStyle(
-                fontFamily: 'TheSans',
+                fontFamily: kTheArabicSansBold,
                 fontSize: 18.74,
                 color: AppColors.mainColor,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             )
           ],
@@ -43,22 +43,20 @@ class EmailWidget extends StatelessWidget{
         GestureDetector(
           onTap: () async {
             await launchUrl(
-            Uri.parse(
-                'mailto:${SocialMedia.email}'),
-            mode: LaunchMode.externalApplication,
+              Uri.parse('mailto:${SocialMedia.email}'),
+              mode: LaunchMode.externalApplication,
             );
           },
-          child: const Text(SocialMedia.email,
+          child: const Text(
+            SocialMedia.email,
             style: TextStyle(
-              fontFamily: 'TheSans',
+              fontFamily: kTheArabicSansLight,
               fontSize: 14.74,
               fontWeight: FontWeight.w400,
             ),
           ),
         ),
-
       ],
     );
   }
-
 }

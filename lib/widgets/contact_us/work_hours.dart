@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
+import '../../const/styles.dart';
 
 class WorkHours extends StatelessWidget {
   const WorkHours({super.key});
@@ -26,33 +27,29 @@ class WorkHours extends StatelessWidget {
             const Text(
               'ساعات العمل',
               style: TextStyle(
-                fontFamily: 'TheSans',
+                fontFamily: kTheArabicSansBold,
                 fontSize: 18.74,
                 color: AppColors.mainColor,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             )
           ],
         ),
         15.ph,
-        const Text(
-          'كل أيام الأسبوع من الساعة 10 صباحاً إلى الساعة 8:30 مساءاً',
+        const Text('كل أيام الأسبوع من الساعة 10 صباحاً إلى الساعة 8:30 مساءاً',
             style: TextStyle(
               color: AppColors.kTextDGColor,
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w200,
-              fontFamily: 'TheSans',
-            )
-        ),
-        const Text(
-          ' يوم الجمعة من الساعة 4 بعد الظهر إلى الساعة 8.300 مساءً',
+              fontFamily: kTheArabicSansLight,
+            )),
+        const Text('يوم الجمعة من الساعة 4 بعد الظهر إلى الساعة 8.300 مساءً',
             style: TextStyle(
               color: AppColors.kTextDGColor,
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w200,
-              fontFamily: 'TheSans',
-            )
-        ),
+              fontFamily: kTheArabicSansLight,
+            )),
       ],
     );
   }

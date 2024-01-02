@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 
+import '../../const/styles.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
 
 class TabScreenOne extends StatelessWidget {
@@ -20,7 +21,9 @@ class TabScreenOne extends StatelessWidget {
           height: 30.h,
         ),
         HtmlWidget(
-            controller.productData.value.last.product?.description ?? ''),
+          controller.productData.value.last.product?.description ?? '',
+          textStyle: TextStyle(fontFamily: kTheArabicSansLight),
+        ),
         SizedBox(
           height: 17.h,
         ),
