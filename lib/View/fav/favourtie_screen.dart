@@ -129,11 +129,6 @@ class _FavScreen extends State<FavScreen> {
                                 ),
                                 10.ph,
                                 CustomCardWidget(
-                                  sale: _controller.wishlistList.value?[index]
-                                              .isDiscount ==
-                                          "1"
-                                      ? true
-                                      : false,
                                   hideLike: true,
                                   imageUrl: Connection.urlOfProducts(
                                       image: _controller.wishlistList
