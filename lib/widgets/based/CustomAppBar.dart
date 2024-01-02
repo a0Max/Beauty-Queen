@@ -302,10 +302,10 @@ class CustomAppBar extends StatelessWidget {
               if (isScrolled == false) ...{
                 AnimatedContainer(
                   height: 44.h,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
+                  padding: EdgeInsets.only(
+                    right: 16.w,
                   ),
-                  margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
+                  margin: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
                   width: Get.width * searchBarWidth!,
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
@@ -329,8 +329,8 @@ class CustomAppBar extends StatelessWidget {
                       prefix: SizedBox(width: 20.w),
                       hintText: 'إبحث عن منتج أو ماركة',
                       hintStyle: TextStyle(
-                        color: AppColors.kGrayColor,
-                        fontSize: 16.59.sp,
+                        color: AppColors.kGrayColor.withOpacity(.6),
+                        fontSize: 14.sp,
                         fontFamily: kTheArabicSansLight,
                         fontWeight: FontWeight.w300,
                       ),

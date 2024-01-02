@@ -219,12 +219,14 @@ class _HomePageState extends State<HomePage> {
                       ),
 
                       ///categories
+                      10.ph,
                       SizedBox(
                         height: 140.h,
                         child: CustomImageList(
                             dataOfItem:
                                 _controller.homeData.value.categories ?? []),
                       ),
+                      15.ph,
 
                       /// New Items
                       SizedBox(
@@ -291,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                                             maxLines: 3,
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 13.1.sp,
+                                              fontSize: 12.1.sp,
                                               fontFamily: kTheArabicSansLight,
                                               fontWeight: FontWeight.w700,
                                               // height: 1.5,
@@ -310,7 +312,7 @@ class _HomePageState extends State<HomePage> {
 
                       ///newArrivals
                       const SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -323,8 +325,8 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                 color: AppColors.kPrimaryColor,
                                 fontSize: 21.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w700,
+                                fontFamily: kTheArabicSansBold,
+                                fontWeight: FontWeight.w600,
                                 height: 0,
                               ),
                             ),
@@ -336,9 +338,9 @@ class _HomePageState extends State<HomePage> {
                                 tr('see_all'),
                                 style: TextStyle(
                                   color: AppColors.kPrimaryColor,
-                                  fontSize: 18.sp,
                                   fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16.sp,
                                   decoration: TextDecoration.underline,
                                   decorationColor: AppColors.kPrimaryColor,
                                   height: 0,
@@ -355,11 +357,11 @@ class _HomePageState extends State<HomePage> {
                         child: Stack(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 30.h),
+                              padding: EdgeInsets.only(top: 0.h),
                               child: Container(
-                                color: AppColors.kBorderColor,
+                                color: AppColors.kBorderColor.withOpacity(.2),
                                 width: kScreenWidth,
-                                height: 300.38.h,
+                                height: 340.h < 305 ? 305 : 340.h,
                               ),
                             ),
                             SizedBox(
@@ -414,8 +416,8 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                 color: AppColors.kPrimaryColor,
                                 fontSize: 21.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w700,
+                                fontFamily: kTheArabicSansBold,
+                                fontWeight: FontWeight.w600,
                                 height: 0,
                               ),
                             ),
@@ -427,9 +429,9 @@ class _HomePageState extends State<HomePage> {
                                 tr('see_all'),
                                 style: TextStyle(
                                   color: AppColors.kPrimaryColor,
-                                  fontSize: 18.sp,
+                                  fontSize: 16.sp,
                                   fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
                                   decoration: TextDecoration.underline,
                                   decorationColor: AppColors.kPrimaryColor,
                                   height: 0,
@@ -521,8 +523,8 @@ class _HomePageState extends State<HomePage> {
                                                       AppColors.kPrimaryColor,
                                                   fontSize: 18.sp,
                                                   fontFamily:
-                                                      kTheArabicSansLight,
-                                                  fontWeight: FontWeight.w700,
+                                                      kTheArabicSansBold,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
                                               ),
                                               Text(
@@ -537,10 +539,10 @@ class _HomePageState extends State<HomePage> {
                                                   color:
                                                       AppColors.kBlackPinkColor,
                                                   height: 2,
-                                                  fontSize: 14.sp,
+                                                  fontSize: 13.sp,
                                                   fontFamily:
                                                       kTheArabicSansLight,
-                                                  fontWeight: FontWeight.w400,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
                                               ),
                                               SizedBox(
@@ -589,6 +591,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                               ),
+                                              15.ph
                                             ],
                                           ),
                                         ),
@@ -694,8 +697,8 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                       color: AppColors.kPrimaryColor,
                                       fontSize: 21.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w700,
+                                      fontFamily: kTheArabicSansBold,
+                                      fontWeight: FontWeight.w600,
                                       height: 0,
                                     ),
                                   ),
@@ -709,9 +712,9 @@ class _HomePageState extends State<HomePage> {
                                       tr('all_offers_sale_down'),
                                       style: TextStyle(
                                         color: AppColors.kPrimaryColor,
-                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16.sp,
                                         fontFamily: kTheArabicSansLight,
-                                        fontWeight: FontWeight.w400,
                                         decorationColor:
                                             AppColors.kPrimaryColor,
                                         decoration: TextDecoration.underline,
@@ -847,7 +850,7 @@ class _HomePageState extends State<HomePage> {
                       ///brands
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 0),
+                            horizontal: 20.0, vertical: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -857,8 +860,8 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                 color: AppColors.kPrimaryColor,
                                 fontSize: 21.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w700,
+                                fontFamily: kTheArabicSansBold,
+                                fontWeight: FontWeight.w600,
                                 height: 0,
                               ),
                             ),
@@ -872,9 +875,9 @@ class _HomePageState extends State<HomePage> {
                                 tr('all_brands'),
                                 style: TextStyle(
                                   color: AppColors.kPrimaryColor,
-                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16.sp,
                                   fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
                                   decorationColor: AppColors.kPrimaryColor,
                                   decoration: TextDecoration.underline,
                                   height: 0,
@@ -925,7 +928,7 @@ class _HomePageState extends State<HomePage> {
                                 top: 230.h,
                                 // left: 15.w,
                                 child: SizedBox(
-                                  height: 363,
+                                  height: 345,
                                   width: MediaQuery.of(context).size.width,
                                   child: ListView.builder(
                                     shrinkWrap: true,
@@ -1088,18 +1091,19 @@ class _HomePageState extends State<HomePage> {
                                                       textAlign:
                                                           TextAlign.right,
                                                       style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14.63.sp,
-                                                        fontFamily:
-                                                            kTheArabicSansLight,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .underline,
-                                                        height: 0.08,
-                                                        letterSpacing: -0.15,
-                                                      ),
+                                                          color: Colors.white,
+                                                          fontSize: 14.63.sp,
+                                                          fontFamily:
+                                                              kTheArabicSansLight,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                          height: 0.08,
+                                                          letterSpacing: -0.15,
+                                                          decorationColor:
+                                                              Colors.white),
                                                     ),
                                                   )
                                                 ],
@@ -1128,8 +1132,8 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                               color: AppColors.kPrimaryColor,
                               fontSize: 21.sp,
-                              fontFamily: kTheArabicSansLight,
-                              fontWeight: FontWeight.w700,
+                              fontFamily: kTheArabicSansBold,
+                              fontWeight: FontWeight.w600,
                               height: 0,
                             ),
                           ),

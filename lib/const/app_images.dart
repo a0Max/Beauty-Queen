@@ -21,6 +21,9 @@ class AppImages {
   static const String imageShop = "${mainPathToSvg}shop.svg";
   static const String imageCategoriesSelected =
       "${mainPathToSvg}Categories_selected.svg";
+
+  static const String imageCategoriesSelectedPng =
+      "${mainPathToImages}Categories_selected.png";
   static const String imageDisSelected = "${mainPathToSvg}dis_selected.svg";
   static const String imageDiscountsSelected =
       "${mainPathToSvg}Discounts_selected.svg";
@@ -28,6 +31,8 @@ class AppImages {
   static const String imageHomeSelected = "${mainPathToSvg}Home_Selected.svg";
   static const String imageCategoriesUnSelected =
       "${mainPathToSvg}Categories_unselected.svg";
+  static const String imageCategoriesUnSelectedPng =
+      "${mainPathToImages}Categories_unselected.png";
   static const String imageDisUnSelected = "${mainPathToSvg}dis_unselected.svg";
   static const String imageDiscountsUnSelected =
       "${mainPathToSvg}Discounts_unselected.svg";

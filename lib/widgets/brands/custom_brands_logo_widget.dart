@@ -1,3 +1,4 @@
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -30,19 +31,34 @@ class CustomProductWidget extends StatelessWidget {
           ));
         },
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          CachedNetworkImage(
-            imageUrl: imagePath,
-            height: 85.h,
-            width: 85.w,
-          ),
-          Text(
-            productName,
-            style: TextStyle(
-              fontFamily: kTheArabicSansLight,
-              color: AppColors.kBlackColor,
-              fontSize: 12.64.sp,
-              fontWeight: FontWeight.w400,
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 15,
+                  offset: Offset(0, 3), // changes the shadow position
+                ),
+              ],
             ),
+            child: CachedNetworkImage(
+              imageUrl: imagePath,
+              height: 80.h,
+              width: 80.w,
+            ),
+          ),
+          10.ph,
+          Container(
+            width: 85.w,
+            child: Text(productName,
+                style: TextStyle(
+                  fontFamily: kTheArabicSansLight,
+                  color: AppColors.kBlackColor,
+                  fontSize: 12.64.sp,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center),
           )
         ]));
   }

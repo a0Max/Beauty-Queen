@@ -595,7 +595,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   alignment: Alignment.center,
-                  decoration: const BoxDecoration(color: AppColors.kCDGColor),
+                  decoration: BoxDecoration(
+                      color: AppColors.kTextDGColor.withOpacity(.5)),
                   child: Text(
                     tr('not_availble_now'),
                     textAlign: TextAlign.center,

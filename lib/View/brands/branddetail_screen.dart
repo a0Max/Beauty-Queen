@@ -1,3 +1,4 @@
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,6 +15,9 @@ import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
+import '../../widgets/based/filter_widget.dart';
+import '../../widgets/based/see_more.dart';
+import '../../widgets/based/sort_drop_down.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
@@ -121,14 +125,30 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                                         '')),
                           )
                         : const SizedBox(),
+                if ((controller.generalSearchData.value.brand?.mobileSlides
+                            ?.isNotEmpty ??
+                        false) &&
+                    controller.generalSearchData.value.brand?.mobileSlides
+                            ?.first.file !=
+                        null &&
+                    controller.isLoading.value != true) ...{
+                  CachedNetworkImage(
+                      imageUrl: Connection.urlOfBrands3(
+                          image: controller.generalSearchData.value.brand
+                                  ?.mobileSlides?.first.file ??
+                              '')),
+                },
                 SizedBox(
                   height: 16.h,
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: HtmlWidget(controller
-                          .generalSearchData.value.brand?.shortDescription ??
-                      ''),
+                  child: HtmlWidget(
+                    controller
+                            .generalSearchData.value.brand?.shortDescription ??
+                        '',
+                    textStyle: TextStyle(fontFamily: kTheArabicSansBold),
+                  ),
                 ),
 
                 SizedBox(
@@ -138,100 +158,29 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Row(
                     children: [
-                      Container(
-                        height: 39.76.h,
-                        width: 180.w,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: AppColors.kPrimaryColor, width: 1.5.w),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: DropdownButton<String>(
-                                iconEnabledColor: Colors.transparent,
-                                isDense: true,
-                                isExpanded: true,
-                                alignment: Alignment.center,
-                                value: controller.valueSort.value == ''
-                                    ? null
-                                    : controller.valueSort.value,
-                                items: SortTypes.listOfTTypesOfSort.values
-                                    .map((value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value,
-                                        style: TextStyle(
-                                          color: AppColors.kBlackColor,
-                                          fontSize: 14.sp,
-                                          fontFamily: kTheArabicSansLight,
-                                          fontWeight: FontWeight.w400,
-                                          height: 0,
-                                        )),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  SortTypes.listOfTTypesOfSort
-                                      .forEach((key, value) {
-                                    if (value == newValue) {
-                                      controller.updateSortType(
-                                          newKeySort: key,
-                                          newValueSort: value,
-                                          idOfBrand: widget.brandId);
-                                    }
-                                  });
-                                },
-                                hint: Text(tr('classificationBy'),
-                                    style: TextStyle(
-                                      color: AppColors.kBlackColor,
-                                      fontSize: 18.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 3.w),
-                              child: SvgPicture.asset(AppImages.sortTypeImage),
-                            ),
-                          ],
-                        ),
+                      SortDropDown(
+                        value: controller.valueSort.value == ''
+                            ? null
+                            : controller.valueSort.value,
+                        onChanged: (String? newValue) {
+                          SortTypes.listOfTTypesOfSort.forEach((key, value) {
+                            if (value == newValue) {
+                              controller.updateSortType(
+                                  newKeySort: key,
+                                  newValueSort: value,
+                                  idOfBrand: widget.brandId);
+                            }
+                          });
+                        },
                       ),
                       //////////////second///////////////
-                      Container(
-                        height: 39.76.h,
-                        width: 180.w,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: AppColors.kPrimaryColor, width: 1.5.w),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(FilterByBrandsContainer(
-                                  brandId: widget.brandId,
-                                ));
-                              },
-                              child: Text(tr('filter_result'),
-                                  style: TextStyle(
-                                    color: AppColors.kBlackColor,
-                                    fontSize: 18.sp,
-                                    fontFamily: kTheArabicSansLight,
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  )),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 3.w),
-                              child:
-                                  SvgPicture.asset(AppImages.filterTypeImage),
-                            ),
-                          ],
-                        ),
-                      ),
+                      FilterWidget(
+                        onTap: () {
+                          Get.to(FilterByBrandsContainer(
+                            brandId: widget.brandId,
+                          ));
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -248,9 +197,12 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                           fontFamily: kTheArabicSansLight,
                           color: AppColors.kGrayColor,
                           fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w700,
                         )),
                   ),
+                ),
+                SizedBox(
+                  height: 19.h,
                 ),
                 controller.isLoading.value == true
                     ? Wrap(
@@ -259,7 +211,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                             List.generate(2, (index) => const ShimmerItem()),
                       )
                     : Wrap(
-                        runSpacing: 7,
+                        runSpacing: 24,
                         children: List.generate(
                             controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
@@ -277,64 +229,15 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                       ),
 
                 if (controller.dataProducts.value.isNotEmpty) ...{
-                  Text(
-                      '${tr('result')}: ${controller.dataProducts.value.length} ${tr('to')} ${controller.generalSearchData.value.products?.total}'),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 30,
-                    child: LinearGauge(
-                      gaugeOrientation: GaugeOrientation.horizontal,
-                      start: 0,
-                      end: double.parse(
-                          "${controller.generalSearchData.value.products?.total ?? 1}"),
-                      valueBar: [
-                        ValueBar(
-                            value: double.parse(
-                                "${controller.dataProducts.value.length}"),
-                            color: AppColors.mainColor,
-                            borderRadius: 15,
-                            valueBarThickness: 10)
-                      ],
-                      linearGaugeBoxDecoration: const LinearGaugeBoxDecoration(
-                          backgroundColor: AppColors.kShadowColor,
-                          thickness: 10,
-                          borderRadius: 15),
-                      rulers: RulerStyle(
-                        rulerPosition: RulerPosition.center,
-                        showLabel: false,
-                        showSecondaryRulers: false,
-                        showPrimaryRulers: false,
-                        secondaryRulersHeight: 0,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
+                  SeeMoreWidget(
+                    currentDataProductsLength:
+                        "${controller.dataProducts.value.length ?? 0}",
+                    totalDataProductsLength:
+                        "${controller.generalSearchData.value.products?.total ?? 1}",
                     onTap: () {
                       controller.getDetailsOfBrand(idOfBrand: widget.brandId);
                     },
-                    child: Container(
-                      // height: 59.70.h,
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      width: MediaQuery.of(context).size.width / 2,
-                      decoration: ShapeDecoration(
-                        color: AppColors.kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.84),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(tr('showMore'),
-                            style: TextStyle(
-                                fontSize: 22.11.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.kWhiteColor,
-                                fontFamily: kTheArabicSansLight)),
-                      ),
-                    ),
-                  )
+                  ),
                 }
                 // SizedBox(
                 //   height: 50.h,

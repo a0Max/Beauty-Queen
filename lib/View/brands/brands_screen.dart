@@ -1,3 +1,4 @@
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
 import 'package:flutter/material.dart';
@@ -211,9 +212,11 @@ class _BrandScreenState extends State<BrandScreen> {
                             ],
                           ),
                         ),
+                        20.ph,
                         Wrap(
-                          spacing: 5,
-                          runSpacing: 10,
+                          spacing: 10,
+                          runSpacing: 30,
+                          alignment: WrapAlignment.center,
                           children: List.generate(
                             _controller
                                 .brandsData[
@@ -239,7 +242,8 @@ class _BrandScreenState extends State<BrandScreen> {
                                   .toString(),
                             ),
                           ),
-                        )
+                        ),
+                        23.ph,
                       ],
                     );
                   },

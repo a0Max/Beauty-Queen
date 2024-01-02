@@ -1,3 +1,4 @@
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -51,11 +52,12 @@ class CustomImageList extends StatelessWidget {
                         .circle, // Use BoxShape.circle to make it circular
                   ),
                 ),
+                4.ph,
                 Text(
                   dataOfItem[index].title ?? '',
                   style: TextStyle(
                       fontFamily: kTheArabicSansLight,
-                      fontSize: 15.sp,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w700,
                       color: AppColors.kBlackColor), // Customize the text style
                 ),

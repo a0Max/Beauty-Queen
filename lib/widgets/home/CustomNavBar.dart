@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, unrelated_type_equality_checks
 
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class ReusableBottomNavigationBar extends StatelessWidget {
           selectedImagePath: AppImages.imageHomeSelected),
       NavigationItem(
           title: tr('categories'),
-          unselectedImagePath: AppImages.imageCategoriesUnSelected,
-          selectedImagePath: AppImages.imageCategoriesSelected),
+          unselectedImagePath: AppImages.imageCategoriesUnSelectedPng,
+          selectedImagePath: AppImages.imageCategoriesSelectedPng),
       NavigationItem(
           title: tr('discounts'),
           unselectedImagePath: AppImages.imageDiscountsUnSelected,
@@ -70,10 +71,28 @@ class ReusableBottomNavigationBar extends StatelessWidget {
           },
           items: navigationItems.map((item) {
             return BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                controller.currentIndex == navigationItems.indexOf(item)
-                    ? item.selectedImagePath // Use selected image
-                    : item.unselectedImagePath, // Use unselected image
+              icon: Column(
+                children: [
+                  5.ph,
+                  item.unselectedImagePath.split('.').last != 'png'
+                      ? SvgPicture.asset(
+                          controller.currentIndex ==
+                                  navigationItems.indexOf(item)
+                              ? item.selectedImagePath // Use selected image
+                              : item
+                                  .unselectedImagePath, // Use unselected image
+                          height: 25,
+                        )
+                      : Image.asset(
+                          controller.currentIndex ==
+                                  navigationItems.indexOf(item)
+                              ? item.selectedImagePath // Use selected image
+                              : item
+                                  .unselectedImagePath, // Use unselected image
+                          height: 25,
+                        ),
+                  5.ph,
+                ],
               ),
               label: item.title,
             );

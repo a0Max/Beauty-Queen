@@ -13,6 +13,9 @@ import '../../const/app_images.dart';
 import '../../const/vars.dart';
 import '../../controller/queen_controller/queen_offer_controller.dart';
 import '../../models/sales_products_model.dart';
+import '../../widgets/based/filter_widget.dart';
+import '../../widgets/based/see_more.dart';
+import '../../widgets/based/sort_drop_down.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 
@@ -90,105 +93,24 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Row(
                               children: [
-                                Container(
-                                  height: 39.76.h,
-                                  width: 180.w,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: AppColors.kPrimaryColor,
-                                        width: 1.5.w),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: DropdownButton<String>(
-                                          iconEnabledColor: Colors.transparent,
-                                          isDense: true,
-                                          isExpanded: true,
-                                          alignment: Alignment.center,
-                                          value:
-                                              controller.valueSort.value == ''
-                                                  ? null
-                                                  : controller.valueSort.value,
-                                          items: SortTypes
-                                              .listOfTTypesOfSort.values
-                                              .map((value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value,
-                                                  style: TextStyle(
-                                                    color:
-                                                        AppColors.kBlackColor,
-                                                    fontSize: 14.sp,
-                                                    fontFamily:
-                                                        kTheArabicSansLight,
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 0,
-                                                  )),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newValue) {
-                                            SortTypes.listOfTTypesOfSort
-                                                .forEach((key, value) {
-                                              if (value == newValue) {
-                                                controller.updateSortType(
-                                                    newKeySort: key,
-                                                    newValueSort: value);
-                                              }
-                                            });
-                                          },
-                                          hint: Text(tr('classificationBy'),
-                                              style: TextStyle(
-                                                color: AppColors.kBlackColor,
-                                                fontSize: 18.sp,
-                                                fontFamily: kTheArabicSansLight,
-                                                fontWeight: FontWeight.w400,
-                                                height: 0,
-                                              )),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 3.w),
-                                        child: SvgPicture.asset(
-                                            AppImages.sortTypeImage),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                SortDropDown(
+                                    value: controller.valueSort.value == ''
+                                        ? null
+                                        : controller.valueSort.value,
+                                    onChanged: (String? newValue) {
+                                      SortTypes.listOfTTypesOfSort
+                                          .forEach((key, value) {
+                                        if (value == newValue) {
+                                          controller.updateSortType(
+                                              newKeySort: key,
+                                              newValueSort: value);
+                                        }
+                                      });
+                                    }),
                                 //////////////second///////////////
-                                Container(
-                                  height: 39.76.h,
-                                  width: 180.w,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: AppColors.kPrimaryColor,
-                                        width: 1.5.w),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          // Get.to(const FilterByGiftsContainer());
-                                        },
-                                        child: Text(tr('filter_result'),
-                                            style: TextStyle(
-                                              color: AppColors.kBlackColor,
-                                              fontSize: 18.sp,
-                                              fontFamily: kTheArabicSansLight,
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                            )),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 3.w),
-                                        child: SvgPicture.asset(
-                                            AppImages.filterTypeImage),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                FilterWidget(
+                                  onTap: () {},
+                                )
                               ],
                             ),
                           ),
@@ -232,68 +154,15 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                                     )),
                           ),
                           if (controller.dataProducts.value.isNotEmpty) ...{
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                                '${tr('result')}: ${controller.dataProducts.value.length} ${tr('to')} ${controller.generalSearchData.value.products?.total ?? 0}'),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
-                              height: 30,
-                              child: LinearGauge(
-                                gaugeOrientation: GaugeOrientation.horizontal,
-                                start: 0,
-                                end: double.parse(
-                                    "${controller.generalSearchData.value.products?.total ?? 1}"),
-                                valueBar: [
-                                  ValueBar(
-                                      value: double.parse(
-                                          "${controller.dataProducts.value.length}"),
-                                      color: AppColors.mainColor,
-                                      borderRadius: 15,
-                                      valueBarThickness: 10)
-                                ],
-                                linearGaugeBoxDecoration:
-                                    const LinearGaugeBoxDecoration(
-                                        backgroundColor: AppColors.kShadowColor,
-                                        thickness: 10,
-                                        borderRadius: 15),
-                                rulers: RulerStyle(
-                                  rulerPosition: RulerPosition.center,
-                                  showLabel: false,
-                                  showSecondaryRulers: false,
-                                  showPrimaryRulers: false,
-                                  secondaryRulersHeight: 0,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
+                            SeeMoreWidget(
+                              currentDataProductsLength:
+                                  "${controller.dataProducts.value.length}",
+                              totalDataProductsLength:
+                                  "${controller.generalSearchData.value.products?.total ?? 1}",
                               onTap: () {
                                 controller.getQueenOfferDataController();
                               },
-                              child: Container(
-                                // height: 59.70.h,
-                                padding: EdgeInsets.symmetric(vertical: 10.h),
-                                width: MediaQuery.of(context).size.width / 2,
-                                decoration: ShapeDecoration(
-                                  color: AppColors.kPrimaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.84),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text(tr('showMore'),
-                                      style: TextStyle(
-                                          fontSize: 22.11.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.kWhiteColor,
-                                          fontFamily: kTheArabicSansLight)),
-                                ),
-                              ),
-                            )
+                            ),
                           }
                         ],
                       ),
