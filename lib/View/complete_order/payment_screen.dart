@@ -205,7 +205,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                                           });
                                     } else {
                                       basketController
-                                          .selectPaymentMethod('محفظتي');
+                                          .selectPaymentMethod('user_balance');
                                     }
                                   },
                                   child: Container(
@@ -214,7 +214,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                                       decoration: BoxDecoration(
                                           color: basketController
                                                       .selectedPaymentMethod ==
-                                                  'محفظتي'
+                                                  'user_balance'
                                               ? AppColors.kPrimaryColor
                                               : Colors.white,
                                           boxShadow: [
@@ -234,7 +234,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                                                       kTheArabicSansLight,
                                                   color: basketController
                                                               .selectedPaymentMethod ==
-                                                          'محفظتي'
+                                                          'user_balance'
                                                       ? AppColors.kWhiteColor
                                                       : AppColors.kBlackColor,
                                                   fontSize: 21.sp,
@@ -250,7 +250,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                                                         kTheArabicSansLight,
                                                     color: basketController
                                                                 .selectedPaymentMethod ==
-                                                            'محفظتي'
+                                                            'user_balance'
                                                         ? AppColors.kWhiteColor
                                                         : AppColors
                                                             .kPrimaryColor,
@@ -293,6 +293,8 @@ class _PaymentScreen extends State<PaymentScreen> {
                                                       MaterialStateProperty
                                                           .resolveWith<Color>(
                                                               (states) {
+                                                    print(basketController
+                                                        .containerColor);
                                                     if (states.contains(
                                                         MaterialState
                                                             .selected)) {
