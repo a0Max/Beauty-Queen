@@ -684,7 +684,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         width: MediaQuery.of(context).size.width / 2,
                         decoration: BoxDecoration(
                           color: AppColors.kPrimaryColor,
-                          borderRadius: BorderRadius.circular(46.r),
+                          // borderRadius: BorderRadius.circular(46.r),
                         ),
                         child: Center(
                           child: Text(
