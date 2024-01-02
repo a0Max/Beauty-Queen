@@ -311,6 +311,11 @@ class _FliterScreenState extends State<FliterScreen> {
                         children: List.generate(
                             _controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
+                                  sale: _controller.dataProducts.value?[index]
+                                              .isDiscount ==
+                                          "1"
+                                      ? true
+                                      : false,
                                   imageUrl: Connection.urlOfProducts(
                                       image: _controller.dataProducts
                                               .value[index].mainImage ??

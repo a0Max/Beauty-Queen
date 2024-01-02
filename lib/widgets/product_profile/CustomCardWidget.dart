@@ -24,6 +24,7 @@ class CustomCardWidget extends StatefulWidget {
   final bool favorite;
   final bool? hideLike;
   final bool? newArrived;
+  final bool? sale;
 
   const CustomCardWidget({
     super.key,
@@ -33,6 +34,7 @@ class CustomCardWidget extends StatefulWidget {
     required this.favorite,
     this.hideLike = false,
     this.newArrived = false,
+    this.sale = false,
   });
 
   @override
@@ -445,6 +447,17 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       color: Colors.black,
                       child: Text(
                         tr('newArrived'),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  if (widget.sale == true)
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      color: AppColors.mainColor,
+                      child: Text(
+                        tr('discounts'),
                         style: TextStyle(color: Colors.white),
                       ),
                     )

@@ -138,6 +138,11 @@ class _QuinaOffersScreen extends State<QuinaOffersScreen> {
                             children: List.generate(
                                 controller.dataProducts.value.length,
                                 (index) => CustomCardWidget(
+                                      sale: controller.dataProducts
+                                                  .value?[index].isDiscount ==
+                                              "1"
+                                          ? true
+                                          : false,
                                       imageUrl: Connection.urlOfProducts(
                                           image: controller.dataProducts
                                                   .value[index].mainImage ??

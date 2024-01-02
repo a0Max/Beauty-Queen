@@ -379,6 +379,11 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                         children: List.generate(
                             controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
+                                  sale: controller.dataProducts.value?[index]
+                                              .isDiscount ==
+                                          "1"
+                                      ? true
+                                      : false,
                                   imageUrl: Connection.urlOfProducts(
                                       image: controller.dataProducts
                                               .value[index].mainImage ??

@@ -374,6 +374,14 @@ class _HomePageState extends State<HomePage> {
                                     0,
                                 itemBuilder: (context, index) {
                                   return CustomCardWidget(
+                                    sale: _controller
+                                                .homeData
+                                                .value
+                                                .newArrivals?[index]
+                                                .isDiscount ==
+                                            "1"
+                                        ? true
+                                        : false,
                                     imageUrl: Connection.urlOfProducts(
                                         image: _controller
                                                 .homeData
@@ -756,6 +764,14 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           CustomCardWidget(
+                                            sale: _controller
+                                                        .homeData
+                                                        .value
+                                                        .newArrivals?[value]
+                                                        .isDiscount ==
+                                                    "1"
+                                                ? true
+                                                : false,
                                             imageUrl: Connection.urlOfProducts(
                                                 image: _controller
                                                         .homeData
@@ -781,6 +797,15 @@ class _HomePageState extends State<HomePage> {
                                                   0) >
                                               value + 1) ...{
                                             CustomCardWidget(
+                                              sale: _controller
+                                                          .homeData
+                                                          .value
+                                                          .newArrivals?[
+                                                              value + 1]
+                                                          .isDiscount ==
+                                                      "1"
+                                                  ? true
+                                                  : false,
                                               imageUrl:
                                                   Connection.urlOfProducts(
                                                       image: _controller
@@ -938,6 +963,14 @@ class _HomePageState extends State<HomePage> {
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
                                       return CustomCardWidget(
+                                        sale: _controller
+                                                    .homeData
+                                                    .value
+                                                    .newArrivals?[index]
+                                                    .isDiscount ==
+                                                "1"
+                                            ? true
+                                            : false,
                                         imageUrl: Connection.urlOfProducts(
                                             image: _controller
                                                     .homeData
