@@ -4,6 +4,7 @@ import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -594,128 +595,137 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       const SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Container(
-                                                        height: 50,
-                                                        child:
-                                                            DropdownButtonFormField<
-                                                                OptionsModel>(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          isExpanded: true,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            labelText: controller
-                                                                .productData
-                                                                .value
-                                                                .last
-                                                                .productOptions?[
-                                                                    index]
-                                                                .title,
-                                                            // filled: true,
-                                                            fillColor:
-                                                                Colors.white,
-                                                            border:
-                                                                const OutlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Colors
-                                                                          .black,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .zero),
-                                                            focusedBorder:
-                                                                const OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .zero,
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          onChanged:
-                                                              (selectedItem) {
-                                                            if ((selectedItem
-                                                                        ?.stock ==
-                                                                    null ||
-                                                                selectedItem
-                                                                        ?.stock ==
-                                                                    "0" ||
-                                                                num.parse(selectedItem
-                                                                            ?.stock ??
-                                                                        '0') <=
-                                                                    0)) {
-                                                              showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (BuildContext
-                                                                          context) {
-                                                                    return CustomAlertDialog(
-                                                                      buttonTwo:
-                                                                          false,
-                                                                      dilougText:
-                                                                          tr('will_be_avaible_soon'),
-                                                                      buttonOneText:
-                                                                          tr('okay'),
-                                                                    );
-                                                                  });
-                                                            } else {
-                                                              print(selectedItem
-                                                                  ?.stock);
-                                                              controller
-                                                                  .updateToSelected(
-                                                                      index:
-                                                                          index,
-                                                                      selected:
-                                                                          selectedItem);
-                                                            }
-                                                          },
-                                                          value: controller
-                                                                  .selectedOptions[
-                                                              index],
-                                                          items: controller
+                                                      DropdownButtonFormField<
+                                                          OptionsModel>(
+                                                        // padding: EdgeInsets
+                                                        //     .symmetric(
+                                                        //         horizontal: 10,
+                                                        //         vertical: 0),
+                                                        isExpanded: true,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          10,
+                                                                      vertical:
+                                                                          0),
+                                                          labelText: controller
                                                               .productData
                                                               .value
                                                               .last
                                                               .productOptions?[
                                                                   index]
-                                                              .options
-                                                              ?.map<
-                                                                      DropdownMenuItem<
-                                                                          OptionsModel>>(
-                                                                  (value) {
-                                                            return DropdownMenuItem<
-                                                                OptionsModel>(
-                                                              value: value,
-                                                              child: Row(
-                                                                children: [
-                                                                  Container(
-                                                                      width:
-                                                                          20.w,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        shape: BoxShape
-                                                                            .circle,
-                                                                        image: DecorationImage(
-                                                                            image:
-                                                                                CachedNetworkImageProvider(Connection.urlOfOptions(image: value.mainImage?.file ?? ''))),
-                                                                      )),
-                                                                  Padding(
-                                                                    padding: EdgeInsets
-                                                                        .all(8
-                                                                            .r),
+                                                              .title,
+                                                          // filled: true,
+                                                          fillColor:
+                                                              Colors.white,
+                                                          border:
+                                                              const OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .black,
                                                                   ),
-                                                                  Text(
-                                                                      "${value.title} "),
-                                                                ],
-                                                              ),
-                                                            );
-                                                          }).toList(),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .zero),
+                                                          focusedBorder:
+                                                              const OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .zero,
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
                                                         ),
+                                                        onChanged:
+                                                            (selectedItem) {
+                                                          if ((selectedItem
+                                                                      ?.stock ==
+                                                                  null ||
+                                                              selectedItem
+                                                                      ?.stock ==
+                                                                  "0" ||
+                                                              num.parse(selectedItem
+                                                                          ?.stock ??
+                                                                      '0') <=
+                                                                  0)) {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return CustomAlertDialog(
+                                                                    buttonTwo:
+                                                                        false,
+                                                                    dilougText:
+                                                                        tr('will_be_avaible_soon'),
+                                                                    buttonOneText:
+                                                                        tr('okay'),
+                                                                  );
+                                                                });
+                                                          } else {
+                                                            print(selectedItem
+                                                                ?.stock);
+                                                            controller
+                                                                .updateToSelected(
+                                                                    index:
+                                                                        index,
+                                                                    selected:
+                                                                        selectedItem);
+                                                          }
+                                                        },
+                                                        value: controller
+                                                                .selectedOptions[
+                                                            index],
+                                                        items: controller
+                                                            .productData
+                                                            .value
+                                                            .last
+                                                            .productOptions?[
+                                                                index]
+                                                            .options
+                                                            ?.map<
+                                                                    DropdownMenuItem<
+                                                                        OptionsModel>>(
+                                                                (value) {
+                                                          return DropdownMenuItem<
+                                                              OptionsModel>(
+                                                            value: value,
+                                                            child: Row(
+                                                              children: [
+                                                                Container(
+                                                                    width: 20.w,
+                                                                    height:
+                                                                        20.h,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(int.parse(
+                                                                          "ff${value.color?.toUpperCase().replaceAll('#', '') ?? ''}",
+                                                                          radix:
+                                                                              16)),
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                    )),
+                                                                // Text('dd'),
+                                                                Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(8
+                                                                              .r),
+                                                                ),
+                                                                Text(
+                                                                    "${value.title} "),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        }).toList(),
                                                       ),
                                                     } else ...{
                                                       Wrap(
@@ -812,6 +822,13 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         isExpanded: true,
                                                         decoration:
                                                             InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          10,
+                                                                      vertical:
+                                                                          0),
                                                           labelText: controller
                                                               .productData
                                                               .value
