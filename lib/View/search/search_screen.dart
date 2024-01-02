@@ -271,9 +271,9 @@ class _SearchScreen extends State<SearchScreen> {
                                       false,
                                 )),
                       ),
-                const SizedBox(
-                  height: 40,
-                ),
+                // const SizedBox(
+                //   height: 40,
+                // ),
 
                 if (_controller.dataProducts.value.isNotEmpty) ...{
                   SeeMoreWidget(

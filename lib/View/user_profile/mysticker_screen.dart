@@ -32,7 +32,6 @@ class _MyStickerScreen extends State<MyStickerScreen> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(160.h),
           child: CustomAppBar(
-            showBagIcon2: false,
             showarrowIcon: true,
             searchBarWidth: 76.w,
           )),

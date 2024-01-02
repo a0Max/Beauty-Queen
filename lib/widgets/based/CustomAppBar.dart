@@ -3,6 +3,7 @@
 import 'package:beauty_queen/View/fav/favourtie_screen.dart';
 import 'package:beauty_queen/View/search/search_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -36,10 +37,9 @@ class CustomAppBar extends StatelessWidget {
   final bool showFavIcon;
   final bool showPersonIcon;
   final bool showBagIcon;
-  final bool showBagIcon2;
+  // final bool showBagIcon2;
   final bool showarrowIcon;
   final bool showarrowIcon2;
-  final bool showimageIcon;
 
   CustomAppBar(
       {super.key,
@@ -56,9 +56,7 @@ class CustomAppBar extends StatelessWidget {
       this.showFavIcon = false,
       this.showPersonIcon = false,
       this.showBagIcon = false,
-      this.showarrowIcon = false,
-      this.showimageIcon = false,
-      this.showBagIcon2 = false});
+      this.showarrowIcon = false});
   TextEditingController searchController = TextEditingController();
 
   goToSearchScreen({required BuildContext context}) {
@@ -166,13 +164,15 @@ class CustomAppBar extends StatelessWidget {
                 height: 20.h,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (showMenuIcon)
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                  onPressed != null
-                      ? GestureDetector(
+                  if (onPressed != null) ...{
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        GestureDetector(
                           onTap: onPressed,
                           child: SvgPicture.asset(
                             AppImages.imageMenu,
@@ -180,33 +180,22 @@ class CustomAppBar extends StatelessWidget {
                             width: 20.w,
                           ),
                         )
-                      : const SizedBox(),
-                  SizedBox(
-                    width: 16.w,
-                  ),
-                  if (isScrolled != true && showBagIcon2)
-                    SvgPicture.asset(
-                      AppImages.imageShop,
-                      height: 20.h,
-                      width: 20.w,
-                    ),
-                  const Spacer(),
-                  if (isScrolled != true && showFavIcon)
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(const FavScreen());
-                      },
-                      child: SvgPicture.asset(
-                        AppImages.imageLoveSvg,
-                        height: 30.h,
-                        width: 30.w,
-                      ),
-                    ),
+                      ],
+                    )
+                  } else ...{
+                    const SizedBox()
+                  },
                   if (isScrolled == true) ...{
                     SizedBox(
                         height: 44.h,
                         width: MediaQuery.of(context).size.width -
-                            (30.w + 10.w + 20.w + 16.w + 20.w + 30.w + 9.w),
+                            (30.w +
+                                10.w +
+                                20.w +
+                                16.w +
+                                (onPressed != null ? 20.w : 0.w) +
+                                (showFavIcon ? 30.w : 0.w) +
+                                9.w),
                         child: TextField(
                           controller: searchController,
                           style: const TextStyle(
@@ -252,51 +241,80 @@ class CustomAppBar extends StatelessWidget {
                           maxLines: 1,
                         )),
                   },
-                  SizedBox(
-                    width: 9.w,
-                  ),
-                  if (showPersonIcon)
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(const NormalProfileScreen());
-                      },
-                      child: SvgPicture.asset(
-                        AppImages.imagePerson,
-                        height: 30.h,
-                        width: 30.w,
-                      ),
-                    ),
-                  SizedBox(
-                    width: 9.w,
-                  ),
-                  if (showBagIcon)
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(const CartScreen());
-                      },
-                      child: Badge(
-                        label: Text(countCart.toString()),
-                        isLabelVisible: (countCart != null) && (countCart != 0),
-                        child: SvgPicture.asset(
-                          AppImages.imageShop,
-                          height: 30.h,
-                          width: 30.w,
+                  Row(
+                    children: [
+                      if (isScrolled != true && showFavIcon) ...{
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(const FavScreen());
+                          },
+                          child: SvgPicture.asset(
+                            AppImages.imageLoveSvg,
+                            height: 30.h,
+                            width: 30.w,
+                          ),
                         ),
-                      ),
-                    ),
-                  SizedBox(
-                    width: 8.w,
-                  ),
-                  if (showarrowIcon)
-                    IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: AppColors.kBlackColor,
-                          size: 30,
-                        )),
+                      },
+                      if (showPersonIcon) ...{
+                        Row(
+                          children: [
+                            9.pw,
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(const NormalProfileScreen());
+                              },
+                              child: SvgPicture.asset(
+                                AppImages.imagePerson,
+                                height: 30.h,
+                                width: 30.w,
+                              ),
+                            ),
+                            9.pw
+                          ],
+                        )
+                      },
+                      if (showBagIcon) ...{
+                        Row(
+                          children: [
+                            9.pw,
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(const CartScreen());
+                              },
+                              child: Badge(
+                                label: Text(countCart.toString()),
+                                isLabelVisible:
+                                    (countCart != null) && (countCart != 0),
+                                child: SvgPicture.asset(
+                                  AppImages.imageShop,
+                                  height: 30.h,
+                                  width: 30.w,
+                                ),
+                              ),
+                            ),
+                            9.pw
+                          ],
+                        )
+                      },
+                      if (showarrowIcon) ...{
+                        Row(
+                          children: [
+                            8.pw,
+                            IconButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: AppColors.kBlackColor,
+                                  size: 30,
+                                )),
+                            8.pw
+                          ],
+                        )
+                      }
+                    ],
+                  )
                 ],
               ),
               if (isScrolled == false) ...{
