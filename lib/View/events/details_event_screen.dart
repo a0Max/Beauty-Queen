@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
+import '../../const/vars.dart';
 import '../../controller/events_controller/events_controller.dart';
 
 class DetailsEventsScreen extends StatefulWidget {
@@ -86,17 +87,27 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {
                                       if (index > 0) {
-                                        return Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              image: DecorationImage(
-                                                  image:
-                                                      CachedNetworkImageProvider(
-                                                          controller.listOfImage
-                                                                  .value[
-                                                              index - 1]),
-                                                  fit: BoxFit.fill)),
+                                        return GestureDetector(
+                                          onTap: () {
+                                            controller.updateCurrentImage(
+                                                newCurrentImage: controller
+                                                    .listOfImage
+                                                    .value[index - 1]);
+                                            // Connection.urlOfEvent(image: event.value.mainImage?.file ?? ''));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                image: DecorationImage(
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                            controller
+                                                                    .listOfImage
+                                                                    .value[
+                                                                index - 1]),
+                                                    fit: BoxFit.fill)),
+                                          ),
                                         );
                                       } else {
                                         return SizedBox(
@@ -116,16 +127,24 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                     controller: _pageController2,
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            image: DecorationImage(
-                                                image:
-                                                    CachedNetworkImageProvider(
-                                                        controller.listOfImage
-                                                            .value[index]),
-                                                fit: BoxFit.fill)),
+                                      return GestureDetector(
+                                        onTap: () {
+                                          controller.updateCurrentImage(
+                                              newCurrentImage: controller
+                                                  .listOfImage.value[index]);
+                                          // Connection.urlOfEvent(image: event.value.mainImage?.file ?? ''));
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              image: DecorationImage(
+                                                  image:
+                                                      CachedNetworkImageProvider(
+                                                          controller.listOfImage
+                                                              .value[index]),
+                                                  fit: BoxFit.fill)),
+                                        ),
                                       );
                                     }),
                               ),
@@ -142,17 +161,27 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                           controller.listOfImage
                                                   .value[index + 1] !=
                                               null) {
-                                        return Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              image: DecorationImage(
-                                                  image:
-                                                      CachedNetworkImageProvider(
-                                                          controller.listOfImage
-                                                                  .value[
-                                                              index + 1]),
-                                                  fit: BoxFit.fill)),
+                                        return GestureDetector(
+                                          onTap: () {
+                                            controller.updateCurrentImage(
+                                                newCurrentImage: controller
+                                                    .listOfImage
+                                                    .value[index + 1]);
+                                            // Connection.urlOfEvent(image: event.value.mainImage?.file ?? ''));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                image: DecorationImage(
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                            controller
+                                                                    .listOfImage
+                                                                    .value[
+                                                                index + 1]),
+                                                    fit: BoxFit.fill)),
+                                          ),
                                         );
                                       } else {
                                         SizedBox(
