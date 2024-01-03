@@ -15,8 +15,6 @@ import '../../const/vars.dart';
 import '../../controller/complete_order_controller/basketController.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
-import '../../widgets/order/rps_custom_painter.dart';
-import '../../widgets/order/ticket1.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
 import 'productadded_screen.dart';
 
