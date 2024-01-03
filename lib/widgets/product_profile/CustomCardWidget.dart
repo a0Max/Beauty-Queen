@@ -437,7 +437,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                               },
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                   ),
                   if (widget.newArrived == true)
                     Container(

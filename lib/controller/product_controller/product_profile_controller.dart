@@ -279,4 +279,8 @@ class ProductProfileController extends GetxController
     await getAllReviewsOfProduct(
         productId: int.parse("${productData.value.last?.product?.id ?? 0}"));
   }
+
+  addWishlist({required int postId}) async {
+    await _api.addWishlistRequest(productId: postId);
+  }
 }

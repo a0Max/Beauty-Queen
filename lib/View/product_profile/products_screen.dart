@@ -38,6 +38,7 @@ class ItemProfilePage extends StatefulWidget {
 class _ItemProfilePageState extends State<ItemProfilePage> {
   final ProductProfileController controller =
       Get.put(ProductProfileController());
+  bool isFavorite = false;
 
   @override
   void initState() {
@@ -51,6 +52,11 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
 
   getDataOfProduct() async {
     await controller.getCurrentProduct(productId: widget.itemId);
+    setState(() {
+      isFavorite =
+          controller.productData.value.last.product.wishlist?.isNotEmpty ??
+              false;
+    });
   }
 
   // String? selectedDropdownItem;
@@ -62,6 +68,11 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
       onPopInvoked: (val) {
         controller.removeLast();
         print(Get.previousRoute);
+        // if (Get.previousRoute == '/MainView') {
+        //   final HomeController _controller = Get.put(HomeController());
+        //
+        //   _controller.getHomeDataController();
+        // }
       },
       child: Scaffold(
         body: Obx(() => Column(
@@ -183,18 +194,55 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                             ?.getCurrentImages()
                                                             .length ??
                                                         0,
-                                                    (index) => CachedNetworkImage(
-                                                        imageUrl: controller
-                                                                    .productData
-                                                                    .value
-                                                                    .last
-                                                                    .product
-                                                                    ?.getCurrentImages()[
-                                                                index] ??
-                                                            '',
-                                                        width: 258.48.w,
-                                                        height: 258.48.h,
-                                                        fit: BoxFit.cover))),
+                                                    (index) => Stack(
+                                                          children: [
+                                                            CachedNetworkImage(
+                                                                imageUrl: controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .product
+                                                                        ?.getCurrentImages()[index] ??
+                                                                    '',
+                                                                width: 258.48.w,
+                                                                height: 258.48.h,
+                                                                fit: BoxFit.fitWidth),
+                                                            // Align(
+                                                            //   alignment:
+                                                            //       Alignment
+                                                            //           .topLeft,
+                                                            //   child: IconButton(
+                                                            //     icon: Icon(
+                                                            //       isFavorite
+                                                            //           ? Icons
+                                                            //               .favorite
+                                                            //           : Icons
+                                                            //               .favorite_border,
+                                                            //       color: isFavorite
+                                                            //           ? Colors
+                                                            //               .red
+                                                            //           : const Color(
+                                                            //               0xff13110C),
+                                                            //       // size: 30,
+                                                            //     ),
+                                                            //     onPressed: () {
+                                                            //       setState(() {
+                                                            //         isFavorite =
+                                                            //             true;
+                                                            //       });
+                                                            //       controller.addWishlist(
+                                                            //           postId: controller
+                                                            //                   .productData
+                                                            //                   .value
+                                                            //                   .last
+                                                            //                   .product
+                                                            //                   .id ??
+                                                            //               0);
+                                                            //     },
+                                                            //   ),
+                                                            // )
+                                                          ],
+                                                        ))),
                                             SizedBox(
                                               height: 10.h,
                                             ),
