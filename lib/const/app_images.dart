@@ -94,6 +94,7 @@ class AppImages {
   static const String queenaSilverImage = "${mainPathToImages}queenaSilver.png";
   static const String queenaPinkImage = "${mainPathToImages}queenaPink.png";
   static const String queenaGoldImage = "${mainPathToImages}queenaGold.png";
+  static const String billPhoto = "${mainPathToImages}ticket3.png";
   static const String queena2Image = "${mainPathToImages}queena2.png";
   static const String queenaPageImage = "${mainPathToImages}queenaPage.jpg";
   static const String queenaCryingImage = "${mainPathToImages}queenaCrying.png";

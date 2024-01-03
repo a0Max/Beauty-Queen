@@ -22,6 +22,8 @@ import '../product_profile/CustomAlertBox.dart';
 import '../product_profile/custom_color_container.dart';
 import '../shimmer/shimmer_ticket.dart';
 import 'rps_custom_painter.dart';
+import 'ticket1.dart';
+import 'ticket2.dart';
 
 class ShowModalSheetDetailOrder extends StatelessWidget {
   const ShowModalSheetDetailOrder({super.key});
@@ -68,376 +70,429 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                     // ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 16),
-                      child: CustomPaint(
-                        size: Size(
-                            MediaQuery.of(context).size.width,
-                            (MediaQuery.of(context).size.width *
-                                    1.3283208020050126)
-                                .toDouble()),
-                        painter: RPSCustomPainter(),
+                      child: SizedBox(
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          width: MediaQuery.of(context).size.width,
+                          height: (15 +
+                                  50 +
+                                  60 +
+                                  50 +
+                                  44 +
+                                  (controller.order.value.order?.items
+                                              ?.length ??
+                                          0) *
+                                      127.h +
+                                  (controller.order.value.order?.items?.fold(
+                                          0,
+                                          (sum, item) =>
+                                              (sum ?? 0) +
+                                              (item.options?.length ?? 0) *
+                                                  40.h) ??
+                                      0))
+                              .toDouble(),
+                          decoration: BoxDecoration(
+                            image: const DecorationImage(
+                                image: AssetImage(AppImages.billPhoto),
+                                fit: BoxFit.fill),
+                            // color: cardColor(context),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
                           child: Column(
                             children: [
                               15.ph,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        'تاريخ و وقت الطلب:',
-                                        style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          fontSize: 17.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: AppColors.kBlackColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${controller.order.value.order?.createdAt?.split("T").first} ${controller.order.value.order?.createdAt?.split("T").last.substring(0, 5)}',
-                                        style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.kPrimaryColor,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        'رقم الطلب:',
-                                        style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          fontSize: 17.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: AppColors.kBlackColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${controller.order.value.order?.id ?? ''}#',
-                                        style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          fontSize: 22.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.kPrimaryColor,
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'منتجات (${controller.order.value.totalQty})',
-                                    style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
-                                      fontSize: 22.53.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.kBlackColor,
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 7, vertical: 7),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.lightGreenColor,
-                                            borderRadius:
-                                                BorderRadius.circular(9.r)),
-                                        child: Center(
-                                          child: Text(
-                                            controller.order.value.order
-                                                ?.getTheTextOfFinalState(),
-                                            style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppColors.greenColor,
-                                            ),
+                              Container(
+                                height: 60,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'تاريخ و وقت الطلب:',
+                                          style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.kBlackColor,
                                           ),
                                         ),
-                                      ),
-                                      if (controller
-                                              .order.value.order?.status ==
-                                          OrderState.pending) ...{
-                                        InkWell(
-                                          onTap: () async {
-                                            showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return CustomAlertDialog(
-                                                    height: 180.64.h,
-                                                    dilougText:
-                                                        tr('cancelOrder'),
-                                                    buttonOneText: tr('no'),
-                                                    buttonTwoText: tr('yes'),
-                                                    onButtonTwoPressed:
-                                                        () async {
-                                                      Navigator.of(context)
-                                                          .pop();
-
-                                                      BasketController
-                                                          basketController =
-                                                          Get.put(
-                                                              BasketController());
-
-                                                      try {
-                                                        LoadingScreen.show(
-                                                            context);
-                                                        await basketController
-                                                            .cancelOrder(
-                                                                orderId:
-                                                                    '${controller.order.value.order?.id}');
-                                                        // controller.order.value.order.id
-                                                        // Navigator.of(context)
-                                                        //     .pop();
-
-                                                        controller.getOrders();
-                                                        if (Get.previousRoute ==
-                                                            '/OrdersScreen') {
-                                                          Get.back();
-                                                        } else {
-                                                          Get.offAll(
-                                                              const MainView());
-                                                        }
-                                                      } on DioException catch (e) {
-                                                        log('error1:$e');
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        ErrorPopUp(
-                                                            message: (e.response
-                                                                    ?.data)
-                                                                .values
-                                                                .first,
-                                                            title: 'خطا');
-                                                      } catch (e) {
-                                                        log('error3:$e');
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        if (e ==
-                                                            'Check Network connection') {
-                                                          ErrorPopUp(
-                                                              message: tr(
-                                                                  'network_connection'),
-                                                              title: 'خطا');
-                                                        } else {
-                                                          ErrorPopUp(
-                                                              message: tr(
-                                                                  'something_wrong'),
-                                                              title: 'خطا');
-                                                        }
-                                                      }
-                                                    },
-                                                  );
-                                                });
-                                          },
-                                          child: Text(
-                                            'الغاء',
-                                            style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppColors.redColor,
-                                            ),
+                                        Text(
+                                          '${controller.order.value.order?.createdAt?.split("T").first} ${controller.order.value.order?.createdAt?.split("T").last.substring(0, 5)}',
+                                          style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColors.kPrimaryColor,
                                           ),
                                         )
-                                      }
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'رقم الطلب:',
+                                          style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.kBlackColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          '${controller.order.value.order?.id ?? ''}#',
+                                          style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 22.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColors.kPrimaryColor,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              50.ph,
+                              Container(
+                                height: 50,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'منتجات (${controller.order.value.totalQty})',
+                                      style: TextStyle(
+                                        fontFamily: kTheArabicSansLight,
+                                        fontSize: 22.53.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.kBlackColor,
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 7, vertical: 7),
+                                          decoration: BoxDecoration(
+                                              color: AppColors.lightGreenColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(9.r)),
+                                          child: Center(
+                                            child: Text(
+                                              controller.order.value.order
+                                                  ?.getTheTextOfFinalState(),
+                                              style: TextStyle(
+                                                fontFamily: kTheArabicSansLight,
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.greenColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        if (controller
+                                                .order.value.order?.status ==
+                                            OrderState.pending) ...{
+                                          InkWell(
+                                            onTap: () async {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return CustomAlertDialog(
+                                                      height: 180.64.h,
+                                                      dilougText:
+                                                          tr('cancelOrder'),
+                                                      buttonOneText: tr('no'),
+                                                      buttonTwoText: tr('yes'),
+                                                      onButtonTwoPressed:
+                                                          () async {
+                                                        Navigator.of(context)
+                                                            .pop();
+
+                                                        BasketController
+                                                            basketController =
+                                                            Get.put(
+                                                                BasketController());
+
+                                                        try {
+                                                          LoadingScreen.show(
+                                                              context);
+                                                          await basketController
+                                                              .cancelOrder(
+                                                                  orderId:
+                                                                      '${controller.order.value.order?.id}');
+                                                          // controller.order.value.order.id
+                                                          // Navigator.of(context)
+                                                          //     .pop();
+
+                                                          controller
+                                                              .getOrders();
+                                                          if (Get.previousRoute ==
+                                                              '/OrdersScreen') {
+                                                            Get.back();
+                                                          } else {
+                                                            Get.offAll(
+                                                                const MainView());
+                                                          }
+                                                        } on DioException catch (e) {
+                                                          log('error1:$e');
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          ErrorPopUp(
+                                                              message: (e
+                                                                      .response
+                                                                      ?.data)
+                                                                  .values
+                                                                  .first,
+                                                              title: 'خطا');
+                                                        } catch (e) {
+                                                          log('error3:$e');
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          if (e ==
+                                                              'Check Network connection') {
+                                                            ErrorPopUp(
+                                                                message: tr(
+                                                                    'network_connection'),
+                                                                title: 'خطا');
+                                                          } else {
+                                                            ErrorPopUp(
+                                                                message: tr(
+                                                                    'something_wrong'),
+                                                                title: 'خطا');
+                                                          }
+                                                        }
+                                                      },
+                                                    );
+                                                  });
+                                            },
+                                            child: Text(
+                                              'الغاء',
+                                              style: TextStyle(
+                                                fontFamily: kTheArabicSansLight,
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.redColor,
+                                              ),
+                                            ),
+                                          )
+                                        }
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                               ...List.generate(
                                   controller.order.value.order?.items?.length ??
                                       0,
                                   (index) => Column(
                                         children: [
-                                          Row(
-                                            children: [
-                                              CachedNetworkImage(
-                                                  height: 97.h,
-                                                  width: 97.w,
-                                                  imageUrl:
-                                                      Connection.urlOfProducts(
-                                                    image: controller
-                                                            .order
-                                                            .value
-                                                            .order
-                                                            ?.items?[index]
-                                                            .products
-                                                            ?.first
-                                                            .mainImage ??
-                                                        '',
-                                                  ) // controller.order.value.order?.items?[index].products.first,
-                                                  ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            3,
-                                                    child: Text(
-                                                      controller
+                                          Container(
+                                            // height: 120.h,
+                                            child: Row(
+                                              children: [
+                                                CachedNetworkImage(
+                                                    height: 97.h,
+                                                    width: 97.w,
+                                                    imageUrl: Connection
+                                                        .urlOfProducts(
+                                                      image: controller
                                                               .order
                                                               .value
                                                               .order
                                                               ?.items?[index]
                                                               .products
                                                               ?.first
-                                                              .brand
-                                                              ?.title ??
+                                                              .mainImage ??
                                                           '',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              kTheArabicSansLight,
-                                                          fontSize: 17.44.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: AppColors
-                                                              .kBlackColor),
+                                                    ) // controller.order.value.order?.items?[index].products.first,
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            3,
-                                                    child: Text(
-                                                      controller
-                                                              .order
-                                                              .value
-                                                              .order
-                                                              ?.items?[index]
-                                                              .products
-                                                              ?.first
-                                                              .title ??
-                                                          '',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              kTheArabicSansLight,
-                                                          fontSize: 15.7.sp,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: AppColors
-                                                              .kGrayColor),
-                                                    ),
-                                                  ),
-                                                  if (controller
-                                                          .order
-                                                          .value
-                                                          .order
-                                                          ?.items?[index]
-                                                          .option !=
-                                                      null) ...{
-                                                    ...List.generate(
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              3,
+                                                      child: Text(
                                                         controller
                                                                 .order
                                                                 .value
                                                                 .order
                                                                 ?.items?[index]
-                                                                .options
-                                                                ?.length ??
-                                                            0,
-                                                        (index2) => Row(
-                                                              // crossAxisAlignment: CrossAxisAlignment.end,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                if (controller
-                                                                        .order
-                                                                        .value
-                                                                        .order
-                                                                        ?.items?[
-                                                                            index]
-                                                                        .options?[
-                                                                            index2]
-                                                                        .isColor ==
-                                                                    "1") ...{
-                                                                  ColorContainer(
-                                                                    height:
-                                                                        20.h,
-                                                                    currentId:
-                                                                        0,
-                                                                    width: 50.w,
-                                                                    color: Color(int.parse(
-                                                                        "ff${controller.order.value.order?.items?[index].options?[index2].color?.toUpperCase().replaceAll('#', '') ?? ''}",
-                                                                        radix:
-                                                                            16)),
-                                                                  )
-                                                                } else ...{
-                                                                  Text(
-                                                                      controller
-                                                                              .order
-                                                                              .value
-                                                                              .order
-                                                                              ?.items?[
-                                                                                  index]
-                                                                              .options?[
-                                                                                  index2]
-                                                                              .title ??
-                                                                          '',
-                                                                      style: TextStyle(
-                                                                          fontFamily:
-                                                                              kTheArabicSansLight,
-                                                                          fontSize: 14.83
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w600,
-                                                                          color:
-                                                                              AppColors.kBlackColor)),
-                                                                },
-                                                              ],
-                                                            ))
-                                                  }
-                                                ],
-                                              ),
-                                              const Spacer(),
-                                              SizedBox(
-                                                height: 97.h,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '${controller.order.value.order?.items?[index].price}د.ل',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              kTheArabicSansLight,
-                                                          fontSize: 16.57.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: AppColors
-                                                              .mainColor),
+                                                                .products
+                                                                ?.first
+                                                                .brand
+                                                                ?.title ??
+                                                            '',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                kTheArabicSansLight,
+                                                            fontSize: 17.44.sp,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: AppColors
+                                                                .kBlackColor),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              3,
+                                                      child: Text(
+                                                        controller
+                                                                .order
+                                                                .value
+                                                                .order
+                                                                ?.items?[index]
+                                                                .products
+                                                                ?.first
+                                                                .title ??
+                                                            '',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                kTheArabicSansLight,
+                                                            fontSize: 15.7.sp,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: AppColors
+                                                                .kGrayColor),
+                                                      ),
                                                     ),
                                                     if (controller
                                                             .order
                                                             .value
                                                             .order
                                                             ?.items?[index]
-                                                            .option ==
+                                                            .option !=
                                                         null) ...{
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          const SizedBox(),
-                                                          Text(
+                                                      ...List.generate(
+                                                          controller
+                                                                  .order
+                                                                  .value
+                                                                  .order
+                                                                  ?.items?[
+                                                                      index]
+                                                                  .options
+                                                                  ?.length ??
+                                                              0,
+                                                          (index2) => Container(
+                                                                height: 20.h,
+                                                                child: Row(
+                                                                  // crossAxisAlignment: CrossAxisAlignment.end,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    if (controller
+                                                                            .order
+                                                                            .value
+                                                                            .order
+                                                                            ?.items?[index]
+                                                                            .options?[index2]
+                                                                            .isColor ==
+                                                                        "1") ...{
+                                                                      ColorContainer(
+                                                                        height:
+                                                                            20.h,
+                                                                        currentId:
+                                                                            0,
+                                                                        width:
+                                                                            50.w,
+                                                                        color: Color(int.parse(
+                                                                            "ff${controller.order.value.order?.items?[index].options?[index2].color?.toUpperCase().replaceAll('#', '') ?? ''}",
+                                                                            radix:
+                                                                                16)),
+                                                                      )
+                                                                    } else ...{
+                                                                      Text(
+                                                                          controller.order.value.order?.items?[index].options?[index2].title ??
+                                                                              '',
+                                                                          style: TextStyle(
+                                                                              fontFamily: kTheArabicSansLight,
+                                                                              fontSize: 14.83.sp,
+                                                                              fontWeight: FontWeight.w600,
+                                                                              color: AppColors.kBlackColor)),
+                                                                    },
+                                                                  ],
+                                                                ),
+                                                              ))
+                                                    }
+                                                  ],
+                                                ),
+                                                const Spacer(),
+                                                SizedBox(
+                                                  height: 97.h,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        '${controller.order.value.order?.items?[index].price}د.ل',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                kTheArabicSansLight,
+                                                            fontSize: 16.57.sp,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: AppColors
+                                                                .mainColor),
+                                                      ),
+                                                      if (controller
+                                                              .order
+                                                              .value
+                                                              .order
+                                                              ?.items?[index]
+                                                              .option ==
+                                                          null) ...{
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const SizedBox(),
+                                                            Text(
+                                                              '${controller.order.value.order?.items?[index].quantity}x قطعة',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      kTheArabicSansLight,
+                                                                  fontSize:
+                                                                      14.83.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: AppColors
+                                                                      .kBlackColor),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      } else if (controller
+                                                              .order
+                                                              .value
+                                                              .order
+                                                              ?.items?[index]
+                                                              .option !=
+                                                          null) ...{
+                                                        ...List.generate(
+                                                          controller
+                                                                  .order
+                                                                  .value
+                                                                  .order
+                                                                  ?.items?[
+                                                                      index]
+                                                                  .options
+                                                                  ?.length ??
+                                                              0,
+                                                          (index2) => Text(
                                                             '${controller.order.value.order?.items?[index].quantity}x قطعة',
                                                             style: TextStyle(
                                                                 fontFamily:
@@ -450,43 +505,13 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                                                                 color: AppColors
                                                                     .kBlackColor),
                                                           ),
-                                                        ],
-                                                      )
-                                                    } else if (controller
-                                                            .order
-                                                            .value
-                                                            .order
-                                                            ?.items?[index]
-                                                            .option !=
-                                                        null) ...{
-                                                      ...List.generate(
-                                                        controller
-                                                                .order
-                                                                .value
-                                                                .order
-                                                                ?.items?[index]
-                                                                .options
-                                                                ?.length ??
-                                                            0,
-                                                        (index2) => Text(
-                                                          '${controller.order.value.order?.items?[index].quantity}x قطعة',
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  kTheArabicSansLight,
-                                                              fontSize:
-                                                                  14.83.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: AppColors
-                                                                  .kBlackColor),
-                                                        ),
-                                                      )
-                                                    }
-                                                  ],
-                                                ),
-                                              )
-                                            ],
+                                                        )
+                                                      }
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                           if (((controller.order.value.order
                                                           ?.items?.length ??

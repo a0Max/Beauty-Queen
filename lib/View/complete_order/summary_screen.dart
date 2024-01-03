@@ -72,16 +72,44 @@ class SummaryScreen extends StatelessWidget {
                     20.ph,
                     Container(
                         margin: const EdgeInsets.symmetric(horizontal: 16),
-                        child: CustomPaint(
-                          size: Size(
-                              MediaQuery.of(context).size.width,
-                              (MediaQuery.of(context).size.width *
-                                      1.3283208020050126)
-                                  .toDouble()),
-                          painter: RPSCustomPainter(),
+                        child: SizedBox(
+                          // size: Size(
+                          //     MediaQuery.of(context).size.width,
+                          //     (MediaQuery.of(context).size.width *
+                          //             1.3283208020050126)
+                          //         .toDouble()),
+                          // painter: RPSCustomPainter(),
                           child: Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 20.w, vertical: 10.h),
+                            width: MediaQuery.of(context).size.width,
+                            height: (15 +
+                                    50 +
+                                    60 +
+                                    50 +
+                                    44 +
+                                    (basketController.order.value.order?.items
+                                                ?.length ??
+                                            0) *
+                                        127.h +
+                                    (basketController.order.value.order?.items
+                                            ?.fold(
+                                                0,
+                                                (sum, item) =>
+                                                    (sum ?? 0) +
+                                                    (item.options?.length ??
+                                                            0) *
+                                                        40.h) ??
+                                        0))
+                                .toDouble(),
+                            decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage(AppImages.billPhoto),
+                                  fit: BoxFit.fill),
+                              // color: cardColor(context),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            // margin: EdgeInsets.symmetric(
+                            //     horizontal: 20.w, vertical: 10.h),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -138,6 +166,7 @@ class SummaryScreen extends StatelessWidget {
                                     )
                                   ],
                                 ),
+                                50.ph,
                                 ...List.generate(
                                     basketController
                                             .order.value.order?.items?.length ??
