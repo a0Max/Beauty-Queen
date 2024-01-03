@@ -23,6 +23,7 @@ import '../../widgets/product_profile/details_static.dart';
 import '../../widgets/shimmer/shimmer_new_items.dart';
 import '../../widgets/shimmer/shimmer_profile.dart';
 import '../../widgets/shimmer/shimmer_text.dart';
+import '../brands/branddetail_screen.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
 import 'tab_screen_two.dart';
 
@@ -1115,11 +1116,38 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                 height: 27.h,
                               ),
                               (controller.productData.isNotEmpty ?? false)
-                                  ? CachedNetworkImage(
-                                      imageUrl: Connection.urlOfStorage(
-                                          image: controller.productData.value
-                                                  .last.product_banner?.file ??
-                                              ''),
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        print(
+                                            "${controller.productData.value.last.product_banner?.bannerLinkType}");
+                                        if (controller
+                                                .productData
+                                                .value
+                                                .last
+                                                .product_banner
+                                                ?.bannerLinkType ==
+                                            LinkTypes.brands) {
+                                          Get.to(BrandDetailScreen(
+                                            brandId: int.parse(controller
+                                                    .productData
+                                                    .value
+                                                    .last
+                                                    .product_banner
+                                                    ?.bannerLinkId ??
+                                                '0'),
+                                          ));
+                                        }
+                                      },
+                                      child: CachedNetworkImage(
+                                        imageUrl: Connection.urlOfStorage(
+                                            image: controller
+                                                    .productData
+                                                    .value
+                                                    .last
+                                                    .product_banner
+                                                    ?.file ??
+                                                ''),
+                                      ),
                                     )
                                   : const SizedBox(),
                               SizedBox(
