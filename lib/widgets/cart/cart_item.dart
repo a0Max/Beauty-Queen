@@ -43,16 +43,29 @@ class CartItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          product.brand ?? '',
-                          style: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 18.39.sp,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.kBlackColor),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
+                        if (product.brand != null) ...{
+                          Text(
+                            product.brand ?? '',
+                            style: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                fontSize: 18.39.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.kBlackColor),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          )
+                        } else if (product.code == GiftCode.gift100 ||
+                            product.code == GiftCode.gift250 ||
+                            product.code == GiftCode.gift500) ...{
+                          Text(
+                            product.code ?? '',
+                            style: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                fontSize: 16.55.sp,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.blackColor),
+                          ),
+                        },
                         const Spacer(),
                         Text(
                           '${tr('Del')}${product.price}',
@@ -84,7 +97,7 @@ class CartItem extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: AppColors.kGrayColor),
                       ),
-                    }
+                    },
                   ],
                 ),
               ),

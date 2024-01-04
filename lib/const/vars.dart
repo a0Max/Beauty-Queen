@@ -193,3 +193,9 @@ abstract class ReactionCode {
   static const like = '1';
   static const disLike = '0';
 }
+
+abstract class GiftCode {
+  static const gift500 = 'GIFT500';
+  static const gift100 = 'GIFT100';
+  static const gift250 = 'GIFT250';
+}
