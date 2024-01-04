@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:developer';
+
 import 'package:beauty_queen/const/api_connrction/cart_data_apis.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -69,8 +71,13 @@ class ProductController extends GetxController {
 
   Future<void> increment({required int index}) async {
     ProductsModel? product = cartData.value.products?[index];
-    if (int.parse("${product?.stock ?? 1}") >
-        int.parse("${product?.qty ?? 1}")) {
+    log('${int.parse("${product?.maximum_order_quantity}")}');
+    log('${int.parse("${product?.qty}")}');
+    log('${(int.parse("${product?.maximum_order_quantity}") > int.parse("${product?.qty}"))}"');
+    if ((int.parse("${product?.maximum_order_quantity}") >
+            int.parse("${product?.qty}") &&
+        num.parse("${product?.stock ?? 1}") >
+            int.parse("${product?.qty ?? 1}"))) {
       product?.qty = int.parse("${product.qty ?? 1}") + 1;
       await _api.changeQuantityDataRequest(
           productId: product?.rowId ?? '', productQuantity: product?.qty);

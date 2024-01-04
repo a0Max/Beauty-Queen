@@ -4,6 +4,7 @@ import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/controller/cart_controller/productController.dart';
+import 'package:beauty_queen/widgets/cart/cart_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -16,6 +17,7 @@ import '../../const/app_colors.dart';
 // import '../../const/images.dart';
 import '../../const/vars.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
+import '../../models/products_model.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/shimmer/shimmer_cart_item.dart';
@@ -131,220 +133,13 @@ class _CartScreen extends State<CartScreen> {
                                               productController.cartData.value
                                                       .products?.length ??
                                                   0,
-                                              (index) => Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
-                                                        child: Row(
-                                                          children: [
-                                                            CachedNetworkImage(
-                                                              imageUrl: Connection.urlOfProducts(
-                                                                  image: productController
-                                                                          .cartData
-                                                                          .value
-                                                                          .products?[
-                                                                              index]
-                                                                          .main_image ??
-                                                                      ''),
-                                                              height: 97.h,
-                                                              width: 97.w,
-                                                            ),
-                                                            5.pw,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width -
-                                                                  130.w,
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        productController.cartData.value.products?[index].brand ??
-                                                                            '',
-                                                                        style: TextStyle(
-                                                                            fontFamily:
-                                                                                kTheArabicSansLight,
-                                                                            fontSize:
-                                                                                18.39.sp,
-                                                                            fontWeight: FontWeight.w600,
-                                                                            color: AppColors.kBlackColor),
-                                                                        overflow:
-                                                                            TextOverflow.ellipsis,
-                                                                        maxLines:
-                                                                            1,
-                                                                      ),
-                                                                      const Spacer(),
-                                                                      Text(
-                                                                        '${tr('Del')}${productController.cartData.value.products?[index].price}',
-                                                                        style: TextStyle(
-                                                                            fontFamily:
-                                                                                kTheArabicSansLight,
-                                                                            fontSize:
-                                                                                17.47.sp,
-                                                                            fontWeight: FontWeight.bold,
-                                                                            color: AppColors.kBlackColor),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  10.ph,
-                                                                  Text(
-                                                                    productController
-                                                                            .cartData
-                                                                            .value
-                                                                            .products?[index]
-                                                                            .title ??
-                                                                        '',
-                                                                    style: TextStyle(
-                                                                        fontFamily:
-                                                                            kTheArabicSansLight,
-                                                                        fontSize: 14
-                                                                            .sp,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400,
-                                                                        color: AppColors
-                                                                            .kGrayColor
-                                                                            .withOpacity(.4)),
-                                                                    maxLines: 2,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                  ),
-                                                                  if (productController
-                                                                          .cartData
-                                                                          .value
-                                                                          .products?[
-                                                                              index]
-                                                                          .opTitle !=
-                                                                      null) ...{
-                                                                    Text(
-                                                                      productController
-                                                                              .cartData
-                                                                              .value
-                                                                              .products?[index]
-                                                                              .opTitle ??
-                                                                          '',
-                                                                      style: TextStyle(
-                                                                          fontFamily:
-                                                                              kTheArabicSansLight,
-                                                                          fontSize: 16.55
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              AppColors.kGrayColor),
-                                                                    ),
-                                                                  }
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10.h,
-                                                      ),
-                                                      Align(
-                                                        alignment:
-                                                            Alignment.topLeft,
-                                                        child: Container(
-                                                          height: 40.7.h,
-                                                          width: 110.53.w,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                width: 1.w,
-                                                                color: AppColors
-                                                                    .kTextGrayColor),
-                                                          ),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            children: [
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    productController
-                                                                        .increment(
-                                                                            index:
-                                                                                index);
-                                                                  },
-                                                                  icon:
-                                                                      const Icon(
-                                                                    Icons.add,
-                                                                    color: AppColors
-                                                                        .kBlackColor,
-                                                                    size: 20,
-                                                                  )),
-                                                              Text(
-                                                                '${productController.cartData.value.products?[index].qty}',
-                                                                style: TextStyle(
-                                                                    color: AppColors
-                                                                        .kBlackColor,
-                                                                    fontSize:
-                                                                        19.92
-                                                                            .sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600),
-                                                              ),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    productController
-                                                                        .decrement(
-                                                                            index:
-                                                                                index);
-                                                                  },
-                                                                  icon: productController
-                                                                              .cartData
-                                                                              .value
-                                                                              .products?[
-                                                                                  index]
-                                                                              .qty ==
-                                                                          1
-                                                                      ? SvgPicture
-                                                                          .asset(
-                                                                          AppImages
-                                                                              .imageDelete,
-                                                                          height:
-                                                                              15.01.h,
-                                                                          width:
-                                                                              13.26.w,
-                                                                        )
-                                                                      : const Icon(
-                                                                          CupertinoIcons
-                                                                              .minus,
-                                                                          color:
-                                                                              AppColors.kBlackColor,
-                                                                          size:
-                                                                              20,
-                                                                        ))
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 21.h,
-                                                      ),
-                                                      const Divider(
-                                                        thickness: 1,
-                                                        color: AppColors
-                                                            .kTextGrayColor,
-                                                      ),
-                                                    ],
+                                              (index) => CartItem(
+                                                    product: productController
+                                                            .cartData
+                                                            .value
+                                                            .products?[index] ??
+                                                        ProductsModel(),
+                                                    index: index,
                                                   )),
                                           SizedBox(
                                             height: 21.h,

@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
 import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -18,11 +19,13 @@ import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/gift_controller/gift_controller.dart';
+import '../../controller/home_controller/home_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
+import '../../widgets/gifts/gift_widget.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
@@ -160,164 +163,43 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      height: 309.31.h,
-                      width: 170.w,
-                      decoration: BoxDecoration(
-                          color: AppColors.kPrimaryColor,
-                          borderRadius: BorderRadius.circular(15.r)),
-                      child: Stack(
-                        children: [
-                          Image.asset(AppImages.kgiftImagetwo),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              height: 117.69.h,
-                              width: 170.w,
-                              decoration: BoxDecoration(
-                                  color: AppColors.klPinkColor,
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(15.r),
-                                      bottomRight: Radius.circular(15.r))),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "بطاقة هدايا بقيمة 250\n              دينار",
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15.sp,
-                                        color: AppColors.kPrimaryColor),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return CustomAlertDialog(
-                                              height: 180.64.h,
-                                              dilougText:
-                                                  tr('addedSuccessfully'),
-                                              buttonOneText:
-                                                  tr('continuesShopping'),
-                                              buttonTwoText:
-                                                  tr('continuesOrder'),
-                                              onButtonTwoPressed: () {
-                                                Get.to(const CartScreen());
-                                              },
-                                            );
-                                          });
-                                    },
-                                    child: Container(
-                                      height: 36.28.h,
-                                      width: 132.47.w,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.kPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(15.r)),
-                                      child: Center(
-                                        child: Text(
-                                          tr('add_to_bags'),
-                                          style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 15.sp,
-                                              color: AppColors.kWhiteColor),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  height: 270.69.h,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      GiftWidget(
+                        price: '100',
+                        onTap: () {
+                          final HomeController _controller =
+                              Get.put(HomeController());
+                          _controller.addToCart(productId: 1513);
+                        },
                       ),
-                    ),
-                    //////////////////////second container/////////////////
-                    Container(
-                      height: 309.31.h,
-                      width: 170.w,
-                      decoration: BoxDecoration(
-                          color: AppColors.kPrimaryColor,
-                          borderRadius: BorderRadius.circular(15.r)),
-                      child: Stack(
-                        children: [
-                          Image.asset(AppImages.kgiftImagetwo),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              height: 117.69.h,
-                              width: 170.w,
-                              decoration: BoxDecoration(
-                                  color: AppColors.klPinkColor,
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(15.r),
-                                      bottomRight: Radius.circular(15.r))),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "بطاقة هدايا بقيمة 250\n              دينار",
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15.sp,
-                                        color: AppColors.kPrimaryColor),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return CustomAlertDialog(
-                                              height: 180.64.h,
-                                              dilougText:
-                                                  tr('addedSuccessfully'),
-                                              buttonOneText:
-                                                  tr('continuesShopping'),
-                                              buttonTwoText:
-                                                  tr('continuesOrder'),
-                                              onButtonTwoPressed: () {
-                                                Get.to(const CartScreen());
-                                              },
-                                            );
-                                          });
-                                    },
-                                    child: Container(
-                                      height: 36.28.h,
-                                      width: 132.47.w,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.kPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(15.r)),
-                                      child: Center(
-                                        child: Text(
-                                          tr('add_to_bags'),
-                                          style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 15.sp,
-                                              color: AppColors.kWhiteColor),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
+                      10.pw,
+                      GiftWidget(
+                        price: '250',
+                        onTap: () {
+                          final HomeController _controller =
+                              Get.put(HomeController());
+                          _controller.addToCart(productId: 1514);
+                        },
                       ),
-                    ),
-                  ],
+                      10.pw,
+                      GiftWidget(
+                        price: '500',
+                        onTap: () {
+                          final HomeController _controller =
+                              Get.put(HomeController());
+                          _controller.addToCart(productId: 1515);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
-                  height: 55.h,
+                  height: 25.h,
                 ),
                 //////////custom drop down////////////
 
