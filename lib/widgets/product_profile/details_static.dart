@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:beauty_queen/const/app_colors.dart';
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,11 +65,13 @@ class DetailsStatic extends StatelessWidget {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 40),
+          padding: const EdgeInsets.only(top: 7, bottom: 7, right: 70),
           decoration: const BoxDecoration(color: AppColors.kcontainerGrayColor),
           alignment: Alignment.centerRight,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // 25.pw,
               Text(
                 body,
                 style: const TextStyle(
@@ -76,7 +79,9 @@ class DetailsStatic extends StatelessWidget {
                   fontFamily: kTheArabicSansLight,
                   fontWeight: FontWeight.w600,
                 ),
+                overflow: TextOverflow.visible,
               ),
+
               if (isPhone == true) ...{
                 Row(
                   children: [

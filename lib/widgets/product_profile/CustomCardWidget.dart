@@ -412,7 +412,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: CachedNetworkImageProvider(widget.imageUrl),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     child: widget.hideLike == false
@@ -447,24 +447,31 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       color: Colors.black,
                       child: Text(
                         tr('newArrived'),
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                            fontFamily: kTheArabicSansLight),
                       ),
                     ),
                   if (widget.sale == true)
                     Container(
                       margin: EdgeInsets.only(top: 10),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                       color: AppColors.mainColor,
                       child: Text(
                         tr('discounts'),
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                            fontFamily: kTheArabicSansLight),
                       ),
                     )
                 ],
               ),
               Container(
-                height: 100,
+                height: 110,
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 9),
                 child: Column(
@@ -475,7 +482,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       widget.newArrival.brand?.title ?? '',
                       style: TextStyle(
                         color: const Color(0xFFDE0F7E),
-                        fontSize: 16.sp,
+                        fontSize: 15.sp,
                         fontFamily: kTheArabicSansLight,
                         fontWeight: FontWeight.w600,
                         // height: 0.07,

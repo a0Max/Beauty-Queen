@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                                           height: 270.h,
                                           width:
                                               MediaQuery.of(context).size.width,
-                                          fit: BoxFit.contain,
+                                          fit: BoxFit.fitWidth,
                                           imageBuilder:
                                               (context, imageProvider) =>
                                                   Container(
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: imageProvider,
-                                                fit: BoxFit.cover,
+                                                fit: BoxFit.fitWidth,
                                               ),
                                             ),
                                           ),
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Positioned(
-                              bottom: 10,
+                              bottom: 20,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: List.generate(
@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                       ///categories
                       10.ph,
                       SizedBox(
-                        height: 140.h,
+                        height: 150.h,
                         child: CustomImageList(
                             dataOfItem:
                                 _controller.homeData.value.categories ?? []),
@@ -665,7 +665,7 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             width: MediaQuery.of(context).size.width,
                             height: 179.28.h,
-                            margin: const EdgeInsets.only(bottom: 10),
+                            margin: const EdgeInsets.only(bottom: 17),
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: CachedNetworkImageProvider(
@@ -680,7 +680,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       SizedBox(
-                        height: 40.h,
+                        height: 8.h,
                       ),
 
                       /// salesProducts
@@ -694,7 +694,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 15.w, vertical: 10.h),
+                                  horizontal: 15.w, vertical: 0.h),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -1012,7 +1012,7 @@ class _HomePageState extends State<HomePage> {
                                     0,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    width: 225.0.w,
+                                    width: 245.0.w,
                                     height: 400.0.h,
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 10.0),
@@ -1031,8 +1031,8 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           Container(
-                                            width: 200.0.w,
-                                            height: 200.56.h,
+                                            width: 240.0.w,
+                                            height: 240.0.w,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image:
@@ -1053,7 +1053,7 @@ class _HomePageState extends State<HomePage> {
                                           // Pink Container
                                           Container(
                                             width: 200.0.w,
-                                            height: 179.38.h,
+                                            height: 159.38.h,
                                             color: AppColors.kPrimaryColor,
                                             child: Padding(
                                               padding: const EdgeInsets.only(

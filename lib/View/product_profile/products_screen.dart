@@ -1008,7 +1008,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                   spacing: 10.w,
                                   children: [
                                     SizedBox(
-                                      width: 60.w,
+                                      width: 57.w,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
@@ -1030,7 +1030,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           Text(
                                             tr('newْnusedProduct'),
                                             style: const TextStyle(
-                                                fontSize: 12,
+                                                fontSize: 10,
                                                 fontFamily:
                                                     kTheArabicSansLight),
                                             textAlign: TextAlign.center,
@@ -1061,7 +1061,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           Text(
                                             tr('original'),
                                             style: TextStyle(
-                                                fontSize: 12,
+                                                fontSize: 10,
                                                 fontFamily:
                                                     kTheArabicSansLight),
                                             textAlign: TextAlign.center,

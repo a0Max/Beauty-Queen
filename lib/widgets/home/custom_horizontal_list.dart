@@ -53,13 +53,18 @@ class CustomImageList extends StatelessWidget {
                   ),
                 ),
                 6.ph,
-                Text(
-                  dataOfItem[index].title ?? '',
-                  style: TextStyle(
-                      fontFamily: kTheArabicSansLight,
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.kBlackColor), // Customize the text style
+                Container(
+                  width: 87.03.w + 5.r + 5.r,
+                  child: Text(
+                    dataOfItem[index].title ?? '',
+                    style: TextStyle(
+                        fontFamily: kTheArabicSansLight,
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.kBlackColor),
+                    overflow: TextOverflow.visible,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
