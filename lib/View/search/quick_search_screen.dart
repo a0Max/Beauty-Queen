@@ -1,5 +1,6 @@
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -88,7 +89,7 @@ class _QuickSearchScreen extends State<QuickSearchScreen> {
         body: Obx(() => SingleChildScrollView(
             controller: _scrollController,
             child: controller.loadingQuickSearch.value == true
-                ? const Center(child: CircularProgressIndicator())
+                ? const Center(child: CupertinoActivityIndicator())
                 : Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
