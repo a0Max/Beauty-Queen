@@ -1348,11 +1348,177 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                       ?.isNotEmpty ??
                                                                   false,
                                                             )
+                                                          } else ...{
+                                                            CustomCardWidget(
+                                                              sale: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[
+                                                                              0]
+                                                                          .isDiscount ==
+                                                                      "1"
+                                                                  ? true
+                                                                  : false,
+                                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                              imageUrl: Connection.urlOfProducts(
+                                                                  image: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[
+                                                                              0]
+                                                                          .mainImage ??
+                                                                      ''),
+                                                              newArrival: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts?[0] ??
+                                                                  SalesProductsModel(),
+                                                              favorite: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts?[
+                                                                          0]
+                                                                      .wishlist
+                                                                      ?.isNotEmpty ??
+                                                                  false,
+                                                            )
                                                           }
                                                         ],
                                                       );
                                                     }))
                                                 : const SizedBox()
+                                          ],
+                                        )
+                                      : const SizedBox(),
+                                  controller.productData.value.last
+                                              ?.discover_brand !=
+                                          null
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                padding: const EdgeInsets.only(
+                                                    right: 15),
+                                                child: Text(
+                                                  'إكتشفي هذه الماركة ... ${controller.productData.value.last?.product?.brand?.titleAr ?? ''}',
+                                                  style: TextStyle(
+                                                    fontFamily:
+                                                        kTheArabicSansBold,
+                                                    color: AppColors.mainColor,
+                                                    fontSize: 16.sp,
+                                                    fontWeight: FontWeight.w200,
+                                                  ),
+                                                )),
+                                            15.ph,
+                                            controller.productData.value.last
+                                                            ?.discover_brand !=
+                                                        null &&
+                                                    controller
+                                                            .productData
+                                                            .value
+                                                            .last
+                                                            ?.discover_brand
+                                                            .mobileImage !=
+                                                        null &&
+                                                    controller
+                                                            .productData
+                                                            .value
+                                                            .last
+                                                            ?.discover_brand
+                                                            .mobileImage
+                                                            .file !=
+                                                        null
+                                                ? CachedNetworkImage(
+                                                    imageUrl:
+                                                        Connection.urlOfBrands3(
+                                                            image: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    ?.discover_brand
+                                                                    .mobileImage
+                                                                    .file ??
+                                                                ''))
+                                                : SizedBox(),
+                                            15.ph,
+                                            Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                child: Column(children: [
+                                                  Text(
+                                                    controller
+                                                            .productData
+                                                            .value
+                                                            .last
+                                                            ?.discover_brand
+                                                            ?.description ??
+                                                        '',
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          kTheArabicSansLight,
+                                                      color:
+                                                          AppColors.kGrayColor,
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  15.ph,
+                                                  Center(
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        Get.to(
+                                                            BrandDetailScreen(
+                                                          brandId: int.parse(
+                                                              "${controller.productData.value.last?.product?.brand?.id ?? 0}"),
+                                                        ));
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 13),
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2,
+                                                        decoration:
+                                                            ShapeDecoration(
+                                                          color: AppColors
+                                                              .kPrimaryColor,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                          ),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                              'عرض التفاصيل و كل المنتجات',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      15.11.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: AppColors
+                                                                      .kWhiteColor,
+                                                                  fontFamily:
+                                                                      kTheArabicSansLight)),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ])),
+                                            20.ph,
                                           ],
                                         )
                                       : const SizedBox(),
@@ -1492,6 +1658,44 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                       .sameBrandProducts?[
                                                                           value +
                                                                               1]
+                                                                      .wishlist
+                                                                      ?.isNotEmpty ??
+                                                                  false,
+                                                            )
+                                                          } else ...{
+                                                            CustomCardWidget(
+                                                              sale: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[
+                                                                              0]
+                                                                          .isDiscount ==
+                                                                      "1"
+                                                                  ? true
+                                                                  : false,
+                                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                              imageUrl: Connection.urlOfProducts(
+                                                                  image: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[
+                                                                              0]
+                                                                          .mainImage ??
+                                                                      ''),
+                                                              newArrival: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts?[0] ??
+                                                                  SalesProductsModel(),
+                                                              favorite: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts?[
+                                                                          0]
                                                                       .wishlist
                                                                       ?.isNotEmpty ??
                                                                   false,

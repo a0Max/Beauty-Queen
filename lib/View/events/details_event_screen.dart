@@ -83,6 +83,7 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                 height: 120.h,
                                 width: MediaQuery.of(context).size.width / 4,
                                 child: PageView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
                                     controller: _pageController3,
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {
@@ -124,6 +125,8 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                 height: 120.h,
                                 width: MediaQuery.of(context).size.width / 4,
                                 child: PageView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    // pageSnapping: false,
                                     controller: _pageController2,
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {
@@ -152,6 +155,7 @@ class _DetailsEventsScreen extends State<DetailsEventsScreen> {
                                 height: 120.h,
                                 width: MediaQuery.of(context).size.width / 4,
                                 child: PageView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
                                     controller: _pageController1,
                                     itemCount: controller.listOfImage.length,
                                     itemBuilder: (context, index) {

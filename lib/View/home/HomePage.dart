@@ -365,7 +365,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(
-                              height: 340.h < 305 ? 305 : 340.h,
+                              height: 340.h < 305 ? 305 : 345.h,
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
@@ -827,6 +827,38 @@ class _HomePageState extends State<HomePage> {
                                                       ?.isNotEmpty ??
                                                   false,
                                             )
+                                          } else ...{
+                                            CustomCardWidget(
+                                              sale: _controller
+                                                          .homeData
+                                                          .value
+                                                          .newArrivals?[
+                                                              value - 1]
+                                                          .isDiscount ==
+                                                      "1"
+                                                  ? true
+                                                  : false,
+                                              imageUrl:
+                                                  Connection.urlOfProducts(
+                                                      image: _controller
+                                                              .homeData
+                                                              .value
+                                                              .salesProducts?[
+                                                                  value - 1]
+                                                              .mainImage ??
+                                                          ''),
+                                              newArrival: _controller.homeData
+                                                          .value.salesProducts?[
+                                                      value - 1] ??
+                                                  SalesProductsModel(),
+                                              favorite: _controller
+                                                      .homeData
+                                                      .value
+                                                      .newArrivals?[index - 1]
+                                                      .wishlist
+                                                      ?.isNotEmpty ??
+                                                  false,
+                                            )
                                           }
                                         ],
                                       );
@@ -921,7 +953,7 @@ class _HomePageState extends State<HomePage> {
                         height: 51.h,
                       ),
                       SizedBox(
-                        height: 565.h,
+                        height: 575.h,
                         child: Stack(
                           children: [
                             GestureDetector(
@@ -953,7 +985,7 @@ class _HomePageState extends State<HomePage> {
                                 top: 230.h,
                                 // left: 15.w,
                                 child: SizedBox(
-                                  height: 345,
+                                  height: 346,
                                   width: MediaQuery.of(context).size.width,
                                   child: ListView.builder(
                                     shrinkWrap: true,

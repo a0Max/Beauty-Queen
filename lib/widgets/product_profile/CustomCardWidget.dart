@@ -577,7 +577,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                           Row(
                             children: [
                               Text(
-                                widget.newArrival.price ?? '',
+                                ((widget.newArrival.productOptions
+                                                ?.isNotEmpty ??
+                                            false) &&
+                                        widget.newArrival.price == '0.00')
+                                    ? widget.newArrival.productOptions?.first
+                                            .options?.first.price ??
+                                        ''
+                                    : widget.newArrival.price ?? '',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                   color: const Color(0xFFDE0F7E),
