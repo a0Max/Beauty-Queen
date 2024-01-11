@@ -231,83 +231,103 @@ class _HomePageState extends State<HomePage> {
                       /// New Items
                       SizedBox(
                         height: 350.h,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount:
-                              _controller.homeData.value.newItems?.length ?? 0,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                if (_controller.homeData.value.newItems?[index]
-                                        .linkId !=
-                                    null) {
-                                  Get.to(ItemProfilePage(
-                                      itemId: int.parse(_controller.homeData
-                                              .value.newItems?[index].linkId ??
-                                          '0')));
-                                }
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 9.w),
-                                child: SizedBox(
-                                  width: 262.45.w,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      Container(
-                                        width: 262.45.w,
-                                        height: 262.45.h,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: CachedNetworkImageProvider(
-                                                Connection.urlOfSpecial(
-                                                    image: _controller
+                        child: CarouselSlider(
+                            options: CarouselOptions(
+                              height: 340.h,
+                              viewportFraction: 0.7,
+                              aspectRatio: 16 / 9,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: false,
+                              scrollDirection: Axis.horizontal,
+                              scrollPhysics: BouncingScrollPhysics(),
+                            ),
+                            items: List.generate(
+                                _controller.homeData.value.newItems?.length ??
+                                    0,
+                                (index) => GestureDetector(
+                                      onTap: () {
+                                        if (_controller.homeData.value
+                                                .newItems?[index].linkId !=
+                                            null) {
+                                          Get.to(ItemProfilePage(
+                                              itemId: int.parse(_controller
+                                                      .homeData
+                                                      .value
+                                                      .newItems?[index]
+                                                      .linkId ??
+                                                  '0')));
+                                        }
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 9.w),
+                                        child: SizedBox(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Container(
+                                                width: 262.45.w,
+                                                height: 262.45.h,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: CachedNetworkImageProvider(
+                                                        Connection.urlOfSpecial(
+                                                            image: _controller
+                                                                    .homeData
+                                                                    .value
+                                                                    .newItems?[
+                                                                        index]
+                                                                    .image ??
+                                                                '')),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 262.45.w,
+                                                height: 77.h,
+                                                alignment: Alignment.center,
+                                                decoration: const BoxDecoration(
+                                                    color: AppColors
+                                                        .kPrimaryColor),
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(9.r),
+                                                  child: Text(
+                                                    _controller
                                                             .homeData
                                                             .value
                                                             .newItems?[index]
-                                                            .image ??
-                                                        '')),
-                                            fit: BoxFit.fill,
+                                                            .description ??
+                                                        '',
+                                                    textAlign: TextAlign.right,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 3,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12.1.sp,
+                                                      fontFamily:
+                                                          kTheArabicSansLight,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      // height: 1.5,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                      Container(
-                                        width: 262.45.w,
-                                        height: 77.h,
-                                        alignment: Alignment.center,
-                                        decoration: const BoxDecoration(
-                                            color: AppColors.kPrimaryColor),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(9.r),
-                                          child: Text(
-                                            _controller
-                                                    .homeData
-                                                    .value
-                                                    .newItems?[index]
-                                                    .description ??
-                                                '',
-                                            textAlign: TextAlign.right,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 3,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12.1.sp,
-                                              fontFamily: kTheArabicSansLight,
-                                              fontWeight: FontWeight.w700,
-                                              // height: 1.5,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                                    ))
+                            // },
+                            ),
                       ),
 
                       ///newArrivals
