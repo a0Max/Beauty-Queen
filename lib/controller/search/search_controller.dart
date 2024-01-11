@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/search_data_apis.dart';
+import '../../models/general_quick_search_model.dart';
 import '../../models/general_search_model.dart';
 import '../../models/product_options_model.dart';
 import '../../widgets/based/error_pop_up.dart';
@@ -11,6 +12,8 @@ class SearchController0 extends GetxController {
   RxBool isLoading = false.obs;
   final _api = SearchDataApis();
   var generalSearchData = GeneralSearchModel().obs;
+  var generalQuickSearchData = GeneralQuickSearchModel().obs;
+  RxBool loadingQuickSearch = false.obs;
   int page = 1;
   RxList dataProducts = [].obs;
   RxString keyWord = ''.obs;
@@ -57,6 +60,16 @@ class SearchController0 extends GetxController {
       }
     }
     isLoading.value = false;
+  }
+
+  getTheQuickSearch({required String keyWord}) async {
+    loadingQuickSearch.value = true;
+    this.keyWord.value = keyWord;
+
+    generalQuickSearchData.value = await _api.getQuickSearchDataRequest(
+      keyWord: keyWord,
+    );
+    loadingQuickSearch.value = false;
   }
 
   var keySort = RxString('');

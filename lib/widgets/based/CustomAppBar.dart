@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../View/search/quick_search_screen.dart';
 import '../../View/user_profile/mydata_screen.dart';
 import '../../View/user_profile/normalprofile.dart';
 import '../../View/cart/cart_screen.dart';
@@ -30,6 +31,7 @@ class CustomAppBar extends StatelessWidget {
   final double? containerHeight;
   final int? countCart;
   final double? searchBarTranslationY;
+  final bool? makeSearchBarNotClickable;
   final double? searchBarTranslationX;
 
   final VoidCallback? onPressed;
@@ -45,6 +47,7 @@ class CustomAppBar extends StatelessWidget {
       {super.key,
       this.searchBarHeight = 0.0,
       this.isScrolled = false,
+      this.makeSearchBarNotClickable = false,
       this.countCart = 0,
       this.containerHeight = 0.0,
       this.searchBarWidth = 0.0,
@@ -197,6 +200,21 @@ class CustomAppBar extends StatelessWidget {
                                 (showFavIcon ? 30.w : 0.w) +
                                 9.w),
                         child: TextField(
+                          readOnly:
+                              makeSearchBarNotClickable == false ? true : false,
+                          autofocus: makeSearchBarNotClickable ?? false,
+                          onTap: () {
+                            if (makeSearchBarNotClickable == false) {
+                              Get.to(() => const QuickSearchScreen());
+                            }
+                          },
+                          onChanged: (val) {
+                            if (makeSearchBarNotClickable == true) {
+                              final SearchController0 controller =
+                                  Get.put(SearchController0());
+                              controller.getTheQuickSearch(keyWord: val);
+                            }
+                          },
                           controller: searchController,
                           style: const TextStyle(
                             fontFamily: kTheArabicSansLight,
@@ -333,6 +351,19 @@ class CustomAppBar extends StatelessWidget {
                     isScrolled! ? -20.0 : 0,
                   ),
                   child: TextField(
+                    autofocus: makeSearchBarNotClickable ?? false,
+                    onTap: () {
+                      if (makeSearchBarNotClickable == false) {
+                        Get.to(() => const QuickSearchScreen());
+                      }
+                    },
+                    onChanged: (val) {
+                      if (makeSearchBarNotClickable == true) {
+                        final SearchController0 controller =
+                            Get.put(SearchController0());
+                        controller.getTheQuickSearch(keyWord: val);
+                      }
+                    },
                     controller: searchController,
                     style: const TextStyle(
                       fontFamily: kTheArabicSansLight,
