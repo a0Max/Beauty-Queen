@@ -1,6 +1,7 @@
 class AppImages {
   static const String mainPathToImages = 'assets/images/';
   static const String mainPathToSvg = 'assets/svg/';
+  static const String mainPathToLottie = 'assets/lottie/';
   static const String imageClock = "${mainPathToSvg}clock.svg";
   static const String imagesInternet = "${mainPathToSvg}internet.svg";
   static const String imagePhoneCall = "${mainPathToSvg}phone-call.svg";
@@ -19,6 +20,8 @@ class AppImages {
   static const String imagePerson = "${mainPathToSvg}person.svg";
   static const String imageSearch = "${mainPathToSvg}search.svg";
   static const String imageShop = "${mainPathToSvg}shop.svg";
+  static const String gifLogo = "${mainPathToLottie}animated_gif.json";
+  static const String logoGif = "${mainPathToLottie}logo_gif.gif";
   static const String imageCategoriesSelected =
       "${mainPathToSvg}Categories_selected.svg";
 

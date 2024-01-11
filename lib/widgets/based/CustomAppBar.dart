@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../View/search/quick_search_screen.dart';
 import '../../View/user_profile/mydata_screen.dart';
@@ -281,8 +282,8 @@ class CustomAppBar extends StatelessWidget {
                               onTap: () {
                                 Get.to(const NormalProfileScreen());
                               },
-                              child: SvgPicture.asset(
-                                AppImages.imagePerson,
+                              child: Lottie.asset(
+                                AppImages.gifLogo,
                                 height: 30.h,
                                 width: 30.w,
                               ),
