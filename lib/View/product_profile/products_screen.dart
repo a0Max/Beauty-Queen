@@ -1267,15 +1267,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                 .spaceBetween,
                                                         children: [
                                                           CustomCardWidget(
-                                                            sale: controller
-                                                                        .productData
-                                                                        .value
-                                                                        .last
-                                                                        .p?[value]
-                                                                        .isDiscount ==
-                                                                    "1"
-                                                                ? true
-                                                                : false,
                                                             // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                             imageUrl: Connection.urlOfProducts(
                                                                 image: controller
@@ -1309,16 +1300,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                   0) >
                                                               value + 1) ...{
                                                             CustomCardWidget(
-                                                              sale: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .p?[value +
-                                                                              1]
-                                                                          .isDiscount ==
-                                                                      "1"
-                                                                  ? true
-                                                                  : false,
                                                               // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                               imageUrl: Connection.urlOfProducts(
                                                                   image: controller
@@ -1350,16 +1331,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                             )
                                                           } else ...{
                                                             CustomCardWidget(
-                                                              sale: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .sameBrandProducts?[
-                                                                              0]
-                                                                          .isDiscount ==
-                                                                      "1"
-                                                                  ? true
-                                                                  : false,
                                                               // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                               imageUrl: Connection.urlOfProducts(
                                                                   image: controller
@@ -1577,16 +1548,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                 .spaceBetween,
                                                         children: [
                                                           CustomCardWidget(
-                                                            sale: controller
-                                                                        .productData
-                                                                        .value
-                                                                        .last
-                                                                        .sameBrandProducts?[
-                                                                            value]
-                                                                        .isDiscount ==
-                                                                    "1"
-                                                                ? true
-                                                                : false,
                                                             // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                             imageUrl: Connection.urlOfProducts(
                                                                 image: controller
@@ -1623,16 +1584,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                   0) >
                                                               value + 1) ...{
                                                             CustomCardWidget(
-                                                              sale: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .sameBrandProducts?[value +
-                                                                              1]
-                                                                          .isDiscount ==
-                                                                      "1"
-                                                                  ? true
-                                                                  : false,
                                                               // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                               imageUrl: Connection.urlOfProducts(
                                                                   image: controller
@@ -1664,16 +1615,6 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                             )
                                                           } else ...{
                                                             CustomCardWidget(
-                                                              sale: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .sameBrandProducts?[
-                                                                              0]
-                                                                          .isDiscount ==
-                                                                      "1"
-                                                                  ? true
-                                                                  : false,
                                                               // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                               imageUrl: Connection.urlOfProducts(
                                                                   image: controller

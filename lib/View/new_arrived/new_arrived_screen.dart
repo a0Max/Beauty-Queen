@@ -213,7 +213,6 @@ class _NewArrivedScreen extends State<NewArrivedScreen> {
                         children: List.generate(
                             controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
-                                  newArrived: true,
                                   imageUrl: Connection.urlOfProducts(
                                       image: controller.dataProducts
                                               .value[index].mainImage ??

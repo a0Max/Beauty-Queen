@@ -226,6 +226,30 @@ class UserDataApis extends ApiProvider {
       throw response.data;
     }
   }
+  // Future<List<CityAreaModel>> getCityDataRequest() async {
+  //   final token =
+  //       "\$2y\$10\$PPmVhaAgGfx0udZ8SncFweHXTBJfvaGJkr.No4W5KyV/oGSMwbv.q";
+  //   // final cookies = await getCookies();
+  //
+  //   final response = await dio.get(
+  //     'https://test.kafiil.com/api/test/user/who-am-i',
+  //     options: Options(
+  //       headers: {
+  //         // 'Host': 'test.kafiil.com',
+  //         'Accept-Language': 'ar',
+  //         ...apiHeaders,
+  //         "Authorization": '$token',
+  //       },
+  //     ),
+  //   );
+  //   if (validResponse(response.statusCode!)) {
+  //     final List<CityAreaModel> l = [];
+  //     response.data['cities'].forEach((e) => l.add(CityAreaModel.fromJson(e)));
+  //     return l;
+  //   } else {
+  //     throw response.data;
+  //   }
+  // }
 
   Future<List<CityAreaModel>> getCityDataRequest() async {
     final token = await getUserToken();

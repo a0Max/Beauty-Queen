@@ -23,8 +23,8 @@ class CustomCardWidget extends StatefulWidget {
   final double? width;
   final bool favorite;
   final bool? hideLike;
-  final bool? newArrived;
-  final bool? sale;
+  final bool? hideTage;
+  // final bool? sale;
 
   const CustomCardWidget({
     super.key,
@@ -33,8 +33,8 @@ class CustomCardWidget extends StatefulWidget {
     this.width,
     required this.favorite,
     this.hideLike = false,
-    this.newArrived = false,
-    this.sale = false,
+    this.hideTage = false,
+    // this.sale = false,
   });
 
   @override
@@ -456,7 +456,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   //   ),
                   // if (widget.sale == true)
                   if ((widget.newArrival.labels != null) &&
-                      (widget.newArrival.labels?.isNotEmpty ?? false))
+                      (widget.newArrival.labels?.isNotEmpty ?? false) &&
+                      widget.hideTage != true)
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
