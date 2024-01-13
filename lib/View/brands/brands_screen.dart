@@ -24,9 +24,7 @@ class BrandScreen extends StatefulWidget {
 }
 
 class _BrandScreenState extends State<BrandScreen> {
-  List<String> characters =
-      List.generate(26, (index) => String.fromCharCode(65 + index));
-  String? selectedAlphabet = '';
+  // String? selectedAlphabet = '';
   bool showAllBrands = false;
   final BrandsController _controller = Get.put(BrandsController());
 
@@ -84,6 +82,12 @@ class _BrandScreenState extends State<BrandScreen> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
+    } else if (columnKey == '0-9' && _controller.nonEnglishKeysMap.isNotEmpty) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -134,35 +138,39 @@ class _BrandScreenState extends State<BrandScreen> {
             SizedBox(
               height: 30.h,
             ),
-            for (int i = 0; i < characters.length; i += 6)
+            for (int i = 0; i < _controller.characters.length; i += 6)
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    for (int j = i; j < i + 6 && j < characters.length; j++)
-                      GestureDetector(
-                        onTap: () {
-                          _scrollToColumn(characters[j]);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(8.r),
-                          color: selectedAlphabet == characters[j] &&
-                                  !showAllBrands
-                              ? AppColors.kPrimaryColor
-                              : Colors.transparent,
-                          child: Text(
-                            characters[j],
-                            style: TextStyle(
-                                color: selectedAlphabet == characters[j] &&
-                                        !showAllBrands
-                                    ? Colors.white
-                                    : AppColors.kPrimaryColor,
-                                fontSize: 26.sp,
-                                fontWeight: FontWeight.w400),
+                    for (int j = i;
+                        j < i + 6 && j < _controller.characters.length;
+                        j++)
+                      // if (_controller.characters[j] != '') ...{
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (_controller.characters[j] != '') {
+                              _scrollToColumn(_controller.characters[j]);
+                            }
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            alignment: Alignment.center,
+                            child: Text(
+                              _controller.characters[j],
+                              style: TextStyle(
+                                  color: AppColors.kPrimaryColor,
+                                  fontSize: 26.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       ),
+                    // }
+                    // Expanded(child: SizedBox()),
+                    // Expanded(child: SizedBox())
                   ],
                 ),
               ),

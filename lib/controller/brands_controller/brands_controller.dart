@@ -12,9 +12,12 @@ import '../../models/product_options_model.dart';
 import '../../widgets/based/error_pop_up.dart';
 
 class BrandsController extends GetxController {
+  RxList characters =
+      List.generate(26, (index) => String.fromCharCode(65 + index)).obs;
   RxBool isLoading = false.obs;
   final _api = BrandsDataApis();
   RxMap brandsData = {}.obs;
+  List<BrandModel> nonEnglishKeysMap = [];
   var generalSearchData = GeneralSearchModel().obs;
   int page = 1;
   RxList dataProducts = [].obs;
@@ -27,8 +30,37 @@ class BrandsController extends GetxController {
     return listWeaklyRateData;
   }
 
+  Map<String?, List<BrandModel>> filterMap(
+      Map<String?, List<BrandModel>> originalMap) {
+    Map<String?, List<BrandModel>> filteredMap = {};
+
+    originalMap.forEach((key, value) {
+      if (isEnglishKey(key)) {
+        filteredMap[key] = value;
+      } else {
+        nonEnglishKeysMap.addAll(value);
+      }
+    });
+
+    return filteredMap;
+  }
+
+  bool isEnglishKey(String? key) {
+    if (key == null) {
+      return false;
+    }
+
+    return key.replaceAll(RegExp(r'[a-zA-Z]'), '') == '';
+  }
+
   Future<void> getBrandsDataController() async {
     try {
+      if (!characters.value.contains('0-9')) {
+        characters.value.add('0-9');
+        characters.value.add('');
+        characters.value.add('');
+        characters.value.add('');
+      }
       final List<BrandModel> tempBrandsData = await _api.breandsDataRequest();
       tempBrandsData.sort((a, b) => a.titleAr?.compareTo(b.titleAr ?? '') ?? 0);
       Map<String?, List<BrandModel>> groupedMap =
@@ -39,7 +71,10 @@ class BrandsController extends GetxController {
             ..sort((a, b) => a.key?.compareTo(b.key ?? '') ?? 0);
 
       Map<String?, List<BrandModel>> sortedMap = Map.fromEntries(sortedEntries);
-
+      sortedMap = filterMap(sortedMap);
+      if (nonEnglishKeysMap.isNotEmpty) {
+        sortedMap.addAll({'0-9': nonEnglishKeysMap});
+      }
       brandsData.value = sortedMap;
     } on DioException catch (e, s) {
       log('getBrandsDataController:error:$e');
