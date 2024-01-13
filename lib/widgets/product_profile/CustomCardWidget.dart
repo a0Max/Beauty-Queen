@@ -439,30 +439,36 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                           )
                         : const SizedBox(),
                   ),
-                  if (widget.newArrived == true)
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      color: Colors.black,
-                      child: Text(
-                        tr('newArrived'),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            fontFamily: kTheArabicSansLight),
-                      ),
-                    ),
-                  if (widget.sale == true)
+                  // if (widget.newArrived == true)
+                  //   Container(
+                  //     margin: EdgeInsets.only(top: 10),
+                  //     padding:
+                  //         EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  //     color: Colors.black,
+                  //     child: Text(
+                  //       tr('newArrived'),
+                  //       style: TextStyle(
+                  //           color: Colors.white,
+                  //           fontWeight: FontWeight.w600,
+                  //           fontSize: 12,
+                  //           fontFamily: kTheArabicSansLight),
+                  //     ),
+                  //   ),
+                  // if (widget.sale == true)
+                  if ((widget.newArrival.labels != null) &&
+                      (widget.newArrival.labels?.isNotEmpty ?? false))
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      color: AppColors.mainColor,
+                      color: Color(int.parse(
+                          "ff${widget.newArrival.labels?.first.backgroundColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
+                          radix: 16)),
                       child: Text(
-                        tr('discounts'),
+                        widget.newArrival.labels?.first.text ?? '',
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Color(int.parse(
+                                "ff${widget.newArrival.labels?.first.textColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
+                                radix: 16)),
                             fontWeight: FontWeight.w600,
                             fontSize: 12,
                             fontFamily: kTheArabicSansLight),
