@@ -1,6 +1,7 @@
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -131,11 +132,25 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                             ?.first.file !=
                         null &&
                     controller.isLoading.value != true) ...{
-                  CachedNetworkImage(
-                      imageUrl: Connection.urlOfBrands3(
-                          image: controller.generalSearchData.value.brand
-                                  ?.mobileSlides?.first.file ??
-                              '')),
+                  CarouselSlider(
+                      options: CarouselOptions(
+                        viewportFraction:
+                            1.0, // Set to 1.0 for full width current page
+                        aspectRatio: 2.7,
+                        autoPlay: true,
+                        enlargeCenterPage:
+                            true, // Make the current page full width
+                      ),
+                      items: List.generate(
+                        controller.generalSearchData.value.brand?.mobileSlides
+                                ?.length ??
+                            0,
+                        (index) => CachedNetworkImage(
+                            imageUrl: Connection.urlOfBrands3(
+                                image: controller.generalSearchData.value.brand
+                                        ?.mobileSlides?[index].file ??
+                                    '')),
+                      ))
                 },
                 SizedBox(
                   height: 16.h,
@@ -146,7 +161,9 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                     controller
                             .generalSearchData.value.brand?.shortDescription ??
                         '',
-                    textStyle: TextStyle(fontFamily: kTheArabicSansBold),
+                    textStyle: TextStyle(
+                        fontFamily: kTheArabicSansBold,
+                        fontWeight: FontWeight.w200),
                   ),
                 ),
 
@@ -214,11 +231,6 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                         children: List.generate(
                             controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
-                                  sale: controller.dataProducts.value[index]
-                                              .isDiscount ==
-                                          "1"
-                                      ? true
-                                      : false,
                                   imageUrl: Connection.urlOfProducts(
                                       image: controller.dataProducts
                                               .value[index].mainImage ??
