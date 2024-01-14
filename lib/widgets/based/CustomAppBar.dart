@@ -277,18 +277,18 @@ class CustomAppBar extends StatelessWidget {
                       if (showPersonIcon) ...{
                         Row(
                           children: [
-                            9.pw,
+                            5.pw,
                             GestureDetector(
                               onTap: () {
                                 Get.to(const NormalProfileScreen());
                               },
-                              child: Lottie.asset(
-                                AppImages.gifLogo,
-                                height: 30.h,
-                                width: 30.w,
+                              child: Image.asset(
+                                AppImages.logoGif,
+                                height: 40.h,
+                                width: 40.w,
                               ),
                             ),
-                            9.pw
+                            0.pw
                           ],
                         )
                       },
