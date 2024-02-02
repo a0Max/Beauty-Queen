@@ -1,11 +1,47 @@
 import 'package:beauty_queen/const/vars.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../models/city_area_model.dart';
 import '../../models/user_model.dart';
 import 'base_api_connection.dart';
 
 class UserDataApis extends ApiProvider {
+  Future<String?> _getFirebaseToken() async =>
+      await FirebaseMessaging.instance.getToken().catchError((e) => null);
+
+  Future<void> addDevice() async {
+    print('addDevice');
+    final token = await getUserToken();
+
+    final fbToken = await _getFirebaseToken();
+    if (fbToken == null) return;
+
+    final response = await dio.post(
+      '${Connection.apiURL}${ApiProvider.addDeviceEndPoint}',
+      queryParameters: {'token': fbToken},
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    if (validResponse(response.statusCode!)) {
+      //ok
+      // return UserModel.fromMap(
+      //   response.data['user'],
+      //   token: response.data['token'],
+      // );
+    } else {
+      // Err
+      throw response.data;
+    }
+  }
+
   Future<UserModel> loginRequest({String? phone, String? password}) async {
     final response = await dio.post(
       '${Connection.apiURL}${ApiProvider.loginEndPoint}',

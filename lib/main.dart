@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'const/app_colors.dart';
+import 'const/notification.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -21,6 +22,8 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  NotificationHelper();
   runApp(EasyLocalization(
       supportedLocales: const [Locale('ar')],
       useOnlyLangCode: true,

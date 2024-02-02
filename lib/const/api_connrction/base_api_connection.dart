@@ -39,6 +39,7 @@ abstract class ApiProvider {
 
   ////////////////////////////// END POINTS ///////////////////////////////////
   static const String loginEndPoint = "login";
+  static const String addDeviceEndPoint = "storeDeviceToken";
   static const String registerEndPoint = "register";
   static const String sendVerificationCodeEndPoint = "sendVerificationCode";
   static const String checkCodeEndPoint = "checkCode";

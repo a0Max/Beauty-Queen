@@ -12,6 +12,7 @@ import '../../View/home/bottom_nav_screen.dart';
 import '../../View/welcome/welcome_screen.dart';
 import '../../const/api_connrction/brands_data_api.dart';
 import '../../const/api_connrction/user_data_apis.dart';
+import '../../const/notification.dart';
 import '../../models/brand_model.dart';
 import '../../models/city_area_model.dart';
 import '../../widgets/based/error_pop_up.dart';
@@ -80,6 +81,7 @@ class AuthController extends GetxController {
 
   getUserData() async {
     userData.value = await _api.userDataRequest();
+    await NotificationHelper().onTokenRefresh();
   }
 
   logoutUserData() async {
@@ -213,12 +215,12 @@ class AuthController extends GetxController {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
-      print('googleAuth?.accessToken:${googleUser?.email}');
-      print('googleAuth?.accessToken:${googleUser?.id}');
-      print('googleAuth?.accessToken:${googleUser?.displayName}');
-      print('googleAuth?.accessToken:${googleUser?.photoUrl}');
-      print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
-      print('googleAuth?.accessToken:${googleAuth?.accessToken}');
+      // print('googleAuth?.accessToken:${googleUser?.email}');
+      // print('googleAuth?.accessToken:${googleUser?.id}');
+      // print('googleAuth?.accessToken:${googleUser?.displayName}');
+      // print('googleAuth?.accessToken:${googleUser?.photoUrl}');
+      // print('googleAuth?.accessToken:${googleUser?.serverAuthCode}');
+      // print('googleAuth?.accessToken:${googleAuth?.accessToken}');
       await googleLoginData(
           googleId: googleAuth?.accessToken ?? '',
           email: googleUser?.email ?? '',
