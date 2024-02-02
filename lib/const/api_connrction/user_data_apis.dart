@@ -13,7 +13,7 @@ class UserDataApis extends ApiProvider {
   Future<void> addDevice() async {
     print('addDevice');
     final token = await getUserToken();
-
+    await FirebaseMessaging.instance.subscribeToTopic("all_users");
     final fbToken = await _getFirebaseToken();
     if (fbToken == null) return;
 
