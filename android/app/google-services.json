@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "149808100906-o0o1s4ip6q2qllbl37dgql62o98tir94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beauty.beauty_queen",
+            "certificate_hash": "69217648181f9b498b9e0b4f1bf7fa50ca584e44"
+          }
+        },
+        {
           "client_id": "149808100906-bm2jlg25vpppdemi20um8fmpjk221g3s.apps.googleusercontent.com",
           "client_type": 3
         }

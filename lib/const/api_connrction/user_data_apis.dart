@@ -15,6 +15,8 @@ class UserDataApis extends ApiProvider {
     final token = await getUserToken();
     await FirebaseMessaging.instance.subscribeToTopic("all_users");
     final fbToken = await _getFirebaseToken();
+    print("$fbToken");
+    print("####################");
     if (fbToken == null) return;
 
     final response = await dio.post(

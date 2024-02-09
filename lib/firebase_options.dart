@@ -63,12 +63,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBrP5elUt9I3WmSIyVthu4qVG01jJg8b4I',
-    appId: '1:149808100906:ios:a548c013c8b2f4ab0c7553',
+    appId: '1:149808100906:ios:d7f3838b5b334d600c7553',
     messagingSenderId: '149808100906',
     projectId: 'beauty-queen-b415e',
     storageBucket: 'beauty-queen-b415e.appspot.com',
-    iosClientId: '149808100906-h6gs137k56sfhvdnmf0dnk25q66574qh.apps.googleusercontent.com',
-    iosBundleId: 'com.beauty.beautyQueen',
+    androidClientId: '149808100906-o0o1s4ip6q2qllbl37dgql62o98tir94.apps.googleusercontent.com',
+    iosClientId: '149808100906-eh70sisu8ndkec8m14mmt8fkvbsrot6d.apps.googleusercontent.com',
+    iosBundleId: 'com.beauty.greatbeautyQueen',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '149808100906',
     projectId: 'beauty-queen-b415e',
     storageBucket: 'beauty-queen-b415e.appspot.com',
+    androidClientId: '149808100906-o0o1s4ip6q2qllbl37dgql62o98tir94.apps.googleusercontent.com',
     iosClientId: '149808100906-4qhajedfa9dpq0etajnq2olsf1ek42fe.apps.googleusercontent.com',
     iosBundleId: 'com.example.beautyQueen.RunnerTests',
   );
