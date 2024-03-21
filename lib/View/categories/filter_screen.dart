@@ -2,6 +2,7 @@ import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:beauty_queen/widgets/shimmer/shimmer_category_filter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -112,18 +113,24 @@ class _FliterScreenState extends State<FliterScreen> {
                   alignment: Alignment.topRight,
                   child: Padding(
                     padding: EdgeInsets.only(right: 17.h),
-                    child: Obx(
-                      () => Text.rich(TextSpan(
-                          text: "${tr('categories')} / ",
-                          style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: AppColors.kGrayColor,
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    child: Obx(() => Row(
                           children: [
-                            TextSpan(
-                              text: _controller.categoryData.value
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                "${tr('categories')} / ",
+                                style: TextStyle(
+                                  fontFamily: kTheArabicSansLight,
+                                  color: AppColors.kGrayColor,
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              _controller.categoryData.value
                                   .where((element) =>
                                       element.id == widget.categoryId)
                                   .toList()
@@ -136,8 +143,8 @@ class _FliterScreenState extends State<FliterScreen> {
                                 fontWeight: FontWeight.w600,
                               ),
                             )
-                          ])),
-                    ),
+                          ],
+                        )),
                   ),
                 ),
 
@@ -150,6 +157,8 @@ class _FliterScreenState extends State<FliterScreen> {
                             height: 139.17.h,
                             width: MediaQuery.of(context).size.width,
                             child: CachedNetworkImage(
+                                height: 139.17.h,
+                                width: MediaQuery.of(context).size.width,
                                 imageUrl: Connection.urlOfStorage(
                                     image: _controller.generalSearchData.value
                                             .info?.banner ??

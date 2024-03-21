@@ -136,8 +136,13 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                       options: CarouselOptions(
                         viewportFraction:
                             1.0, // Set to 1.0 for full width current page
-                        aspectRatio: 2.7,
-                        autoPlay: true,
+                        aspectRatio: 2.74,
+                        autoPlay: (controller.generalSearchData.value.brand
+                                        ?.mobileSlides?.length ??
+                                    0) >
+                                1
+                            ? true
+                            : false,
                         enlargeCenterPage:
                             true, // Make the current page full width
                       ),
