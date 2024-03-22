@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:widget_zoom/widget_zoom.dart';
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
+import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
 import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
@@ -26,6 +27,7 @@ import '../../widgets/shimmer/shimmer_profile.dart';
 import '../../widgets/shimmer/shimmer_text.dart';
 import '../brands/branddetail_screen.dart';
 import '../categories/alkasam_screen.dart';
+import '../categories/filter_screen2.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
 import 'tab_screen_two.dart';
 
@@ -152,31 +154,73 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                     0) -
                                                                 1) !=
                                                             index
-                                                        ? Text(
-                                                            '${controller.productData.value.last.product?.category?[index].title ?? ''} / ',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  kTheArabicSansLight,
-                                                              color: AppColors
-                                                                  .kGrayColor,
-                                                              fontSize: 16.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ))
-                                                        : Text(
-                                                            '${controller.productData.value.last.product?.category?[index].title ?? ''} ',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  kTheArabicSansLight,
-                                                              color: AppColors
-                                                                  .kBlackColor,
-                                                              fontSize: 16.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                            ),
-                                                          ),
+                                                        ? GestureDetector(
+                                                            onTap: () {
+                                                              final AlkasamController
+                                                                  controller0 =
+                                                                  Get.put(
+                                                                      AlkasamController());
+                                                              controller0
+                                                                  .updateCurrentCategoryId(
+                                                                      newId: int
+                                                                          .parse(
+                                                                              "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                                      getChild:
+                                                                          null);
+                                                              Get.to(
+                                                                  FliterScreen2(
+                                                                categoryId:
+                                                                    int.parse(
+                                                                        "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                              ));
+                                                            },
+                                                            child: Text(
+                                                                '${controller.productData.value.last.product?.category?[index].title ?? ''} / ',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      kTheArabicSansLight,
+                                                                  color: AppColors
+                                                                      .kGrayColor,
+                                                                  fontSize:
+                                                                      16.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                )))
+                                                        : GestureDetector(
+                                                            onTap: () {
+                                                              final AlkasamController
+                                                                  controller0 =
+                                                                  Get.put(
+                                                                      AlkasamController());
+                                                              controller0
+                                                                  .updateCurrentCategoryId(
+                                                                      newId: int
+                                                                          .parse(
+                                                                              "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                                      getChild:
+                                                                          null);
+                                                              Get.to(
+                                                                  FliterScreen2(
+                                                                categoryId:
+                                                                    int.parse(
+                                                                        "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                              ));
+                                                            },
+                                                            child: Text(
+                                                              '${controller.productData.value.last.product?.category?[index].title ?? ''} ',
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    kTheArabicSansLight,
+                                                                color: AppColors
+                                                                    .kBlackColor,
+                                                                fontSize: 16.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ),
+                                                            )),
                                                   )
                                                 ])),
                                             SizedBox(

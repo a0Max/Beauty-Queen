@@ -113,38 +113,58 @@ class _FliterScreenState extends State<FliterScreen2> {
                   alignment: Alignment.topRight,
                   child: Padding(
                     padding: EdgeInsets.only(right: 17.h),
-                    child: Obx(() => Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text(
-                                "${tr('categories')} / ",
-                                style: TextStyle(
-                                  fontFamily: kTheArabicSansLight,
-                                  color: AppColors.kGrayColor,
-                                  fontSize: 17.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "${tr('categories')} / ",
+                            style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.kGrayColor,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w400,
                             ),
-                            Text(
-                              _controller.categoryData.value
-                                  .where((element) =>
-                                      element.id == widget.categoryId)
-                                  .toList()
-                                  .first
-                                  .title,
-                              style: TextStyle(
-                                fontFamily: kTheArabicSansLight,
-                                color: AppColors.kBlackColor,
-                                fontSize: 17.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          ],
-                        )),
+                          ),
+                        ),
+                        Row(
+                          children: List.generate(
+                              _controller.parentsCategoryData.length,
+                              (index) => GestureDetector(
+                                    onTap: () {
+                                      _controller.updateCurrentCategoryId(
+                                          newId: int.parse(
+                                              "${_controller.parentsCategoryData[index].id ?? 0}"),
+                                          getChild: null);
+                                      Get.to(FliterScreen2(
+                                        categoryId: int.parse(
+                                            "${_controller.parentsCategoryData[index].id ?? 0}"),
+                                      ));
+                                    },
+                                    child: Text(
+                                      "${_controller.parentsCategoryData[index].title} / ",
+                                      style: TextStyle(
+                                        fontFamily: kTheArabicSansLight,
+                                        color: AppColors.kGrayColor,
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  )),
+                        ),
+                        Text(
+                          "${_controller.subCategoryData.value.title ?? ''}",
+                          style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            color: AppColors.kBlackColor,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
 
@@ -164,72 +184,6 @@ class _FliterScreenState extends State<FliterScreen2> {
                                             .info?.banner ??
                                         '')))
                         : const SizedBox(),
-                SizedBox(
-                  height: 24.h,
-                ),
-                _controller.isLoading.value == true
-                    ? SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: List.generate(
-                            4,
-                            (index) => const ShimmerCategoryFilter(),
-                          ),
-                        ),
-                      )
-                    : SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          // children: List.generate(
-                          //   _controller.categoryData.value
-                          //       .where((element) =>
-                          //           element.id == widget.categoryId)
-                          //       .toList()
-                          //       .first
-                          //       .children
-                          //       .length,
-                          //   (index) => Padding(
-                          //     padding: EdgeInsets.only(right: 8.82.w),
-                          //     child: Obx(
-                          //       () => MyCustomContainer(
-                          //         text: _controller.categoryData.value
-                          //             .where((element) =>
-                          //                 element.id == widget.categoryId)
-                          //             .toList()
-                          //             .first
-                          //             .children[index]
-                          //             .title,
-                          //         isSelected: _controller.categoryData.value
-                          //                 .where((element) =>
-                          //                     element.id == widget.categoryId)
-                          //                 .toList()
-                          //                 .first
-                          //                 .children[index]
-                          //                 .id ==
-                          //             _controller.currentCategoryId.value,
-                          //         onTap: () {
-                          //           _controller.updateCurrentCategoryId(
-                          //               newId: _controller.categoryData.value
-                          //                       .where((element) =>
-                          //                           element.id ==
-                          //                           widget.categoryId)
-                          //                       .toList()
-                          //                       .first
-                          //                       .children[index]
-                          //                       .id ??
-                          //                   0,
-                          //               getChild: true);
-                          //         },
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                          children: [
-                            Text(
-                                '${_controller.categoryData.value.where((element) => element.id == widget.categoryId).toList()}')
-                          ],
-                        ),
-                      ),
                 SizedBox(
                   height: 10.h,
                 ),

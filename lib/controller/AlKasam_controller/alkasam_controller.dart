@@ -3,7 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/alkasam_data_api.dart';
+import '../../models/categories_model.dart';
 import '../../models/general_search_model.dart';
+import '../../models/get_category_model.dart';
 import '../../models/product_options_model.dart';
 import '../../widgets/based/error_pop_up.dart';
 
@@ -28,7 +30,11 @@ class AlkasamController extends GetxController {
   }
 
   RxInt currentCategoryId = 0.obs;
-  updateCurrentCategoryId({required int newId, required bool getChild}) async {
+  RxList parentsCategoryData = [].obs;
+  Rx<CategoryModel> subCategoryData = CategoryModel().obs;
+  updateCurrentCategoryId({required int newId, required bool? getChild}) async {
+    parentsCategoryData.value = [];
+    subCategoryData.value = CategoryModel();
     currentCategoryId.value = newId;
     getCategoriesDataController(currentPage: 1, getByParent: true);
     childCurrentCategoryId.value = 0;
@@ -36,6 +42,11 @@ class AlkasamController extends GetxController {
     if (getChild == true) {
       childCategoryData.value =
           await _api.getChildDataRequest(parentId: currentCategoryId.value);
+    } else if (getChild == null) {
+      GetCategoryModel value =
+          await _api.getChildDataRequest2(parentId: currentCategoryId.value);
+      parentsCategoryData.value = value.parents ?? [];
+      subCategoryData.value = value.category ?? CategoryModel();
     }
   }
 

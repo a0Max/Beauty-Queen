@@ -73,6 +73,7 @@ abstract class ApiProvider {
   static const String getAreasDataEndPoint = "get/areas";
   static const String updateUserPasswordDataEndPoint = "updateUserPassword";
   static const String updateUserDataDataEndPoint = "updateUserData";
+  static const String getCategoryDataEndPoint2 = "get/category";
   static const String getCurrentCategoryChildrenDataEndPoint =
       "getCurrentCategoryChildren";
   static const String getQueenaProductsDataEndPoint = "get/queenaProducts";
