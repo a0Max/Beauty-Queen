@@ -733,6 +733,10 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         value: controller
                                                                 .selectedOptions[
                                                             index],
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              kTheArabicSansLight,
+                                                        ),
                                                         items: controller
                                                             .productData
                                                             .value
@@ -869,6 +873,10 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       DropdownButtonFormField<
                                                           OptionsModel>(
                                                         isExpanded: true,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              kTheArabicSansLight,
+                                                        ),
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:
