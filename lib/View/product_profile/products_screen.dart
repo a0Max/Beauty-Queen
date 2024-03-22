@@ -179,6 +179,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                             ),
                                             CarouselSlider(
                                                 options: CarouselOptions(
+                                                  padEnds: false,
                                                   height: 258.48.h,
                                                   enableInfiniteScroll: false,
                                                   onPageChanged:
