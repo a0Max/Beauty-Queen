@@ -118,72 +118,79 @@ class _QuickSearchScreen extends State<QuickSearchScreen> {
                               )
                             : SizedBox(),
                         20.ph,
-                        ListView.separated(
-                            shrinkWrap: true,
-                            itemBuilder: (conetxt, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ItemProfilePage(
-                                              itemId: controller
-                                                      .generalQuickSearchData
-                                                      .value
-                                                      .products?[index]
-                                                      .id ??
-                                                  0)));
-                                },
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 70,
-                                      width: 70,
-                                      child: CachedNetworkImage(
-                                          imageUrl: Connection.urlOfProducts(
-                                              image: controller
-                                                      .generalQuickSearchData
-                                                      .value
-                                                      .products?[index]
-                                                      .mainImage ??
-                                                  '')),
-                                    ),
-                                    10.pw,
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width -
-                                          (10 + 70 + 40),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            controller
-                                                    .generalQuickSearchData
-                                                    .value
-                                                    .products?[index]
-                                                    .title ??
-                                                '',
-                                            style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontSize: 13.1.sp,
-                                              // fontWeight: FontWeight.w600,
-                                              // color: AppColors.kPrimaryColor
-                                            ),
+                        Listener(
+                            onPointerDown: (event) {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                            },
+                            child: ListView.separated(
+                                shrinkWrap: true,
+                                itemBuilder: (conetxt, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => ItemProfilePage(
+                                                  itemId: controller
+                                                          .generalQuickSearchData
+                                                          .value
+                                                          .products?[index]
+                                                          .id ??
+                                                      0)));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 70,
+                                          width: 70,
+                                          child: CachedNetworkImage(
+                                              imageUrl: Connection.urlOfProducts(
+                                                  image: controller
+                                                          .generalQuickSearchData
+                                                          .value
+                                                          .products?[index]
+                                                          .mainImage ??
+                                                      '')),
+                                        ),
+                                        10.pw,
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              (10 + 70 + 40),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                controller
+                                                        .generalQuickSearchData
+                                                        .value
+                                                        .products?[index]
+                                                        .title ??
+                                                    '',
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      kTheArabicSansLight,
+                                                  fontSize: 13.1.sp,
+                                                  // fontWeight: FontWeight.w600,
+                                                  // color: AppColors.kPrimaryColor
+                                                ),
+                                              ),
+                                              const Text('...'),
+                                            ],
                                           ),
-                                          const Text('...'),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                            separatorBuilder: (conetxt, index) {
-                              return 10.ph;
-                            },
-                            itemCount: controller.generalQuickSearchData.value
-                                    .products?.length ??
-                                0),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (conetxt, index) {
+                                  return 10.ph;
+                                },
+                                itemCount: controller.generalQuickSearchData
+                                        .value.products?.length ??
+                                    0)),
                       ],
                     ),
                   ))));
