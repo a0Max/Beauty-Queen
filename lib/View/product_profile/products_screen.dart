@@ -25,6 +25,7 @@ import '../../widgets/shimmer/shimmer_new_items.dart';
 import '../../widgets/shimmer/shimmer_profile.dart';
 import '../../widgets/shimmer/shimmer_text.dart';
 import '../brands/branddetail_screen.dart';
+import '../categories/alkasam_screen.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
 import 'tab_screen_two.dart';
 
@@ -113,21 +114,25 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                     .width,
                                                 alignment: Alignment.topRight,
                                                 child: Wrap(children: [
-                                                  Text(
-                                                    '${tr('sections')} / ',
-                                                    style: TextStyle(
-                                                      fontFamily:
-                                                          kTheArabicSansLight,
-                                                      color:
-                                                          AppColors.kGrayColor,
-                                                      fontSize: 16.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.visible,
-                                                  ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        Get.to(AlKasamScreen());
+                                                      },
+                                                      child: Text(
+                                                        '${tr('sections')} / ',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              kTheArabicSansLight,
+                                                          color: AppColors
+                                                              .kGrayColor,
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .visible,
+                                                      )),
                                                   ...List.generate(
                                                     controller
                                                             .productData
