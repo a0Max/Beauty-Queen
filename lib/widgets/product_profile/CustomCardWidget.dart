@@ -117,6 +117,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                                   .title ??
                                               '',
                                           style: const TextStyle(
+                                              fontFamily: kTheArabicSansLight,
                                               color: AppColors.kGreyBlueColor,
                                               fontSize: 18),
                                         ),
@@ -139,6 +140,8 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                                     item.title ?? '',
                                                     style: const TextStyle(
                                                         fontSize: 14,
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
                                                         color: Colors.white),
                                                     // maxLines: 1,
                                                     // overflow: TextOverflow.ellipsis,
@@ -182,8 +185,15 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                                             .kTextBlackColor
                                                             .withOpacity(.9),
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(14),
+                                                            const BorderRadius
+                                                                .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        14),
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            14)),
                                                       ),
                                                       elevation: 0,
                                                       scrollbarTheme:
@@ -500,7 +510,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 12.sp,
+                        fontSize: 10.sp,
                         fontFamily: kTheArabicSansLight,
                         fontWeight: FontWeight.w700,
                         // height: 1,
