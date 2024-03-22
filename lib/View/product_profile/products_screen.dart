@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:widget_zoom/widget_zoom.dart';
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
@@ -196,51 +197,21 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         0,
                                                     (index) => Stack(
                                                           children: [
-                                                            CachedNetworkImage(
-                                                                imageUrl: controller
-                                                                        .productData
-                                                                        .value
-                                                                        .last
-                                                                        .product
-                                                                        ?.getCurrentImages()[index] ??
-                                                                    '',
-                                                                width: 258.48.w,
-                                                                height: 258.48.h,
-                                                                fit: BoxFit.fitWidth),
-                                                            // Align(
-                                                            //   alignment:
-                                                            //       Alignment
-                                                            //           .topLeft,
-                                                            //   child: IconButton(
-                                                            //     icon: Icon(
-                                                            //       isFavorite
-                                                            //           ? Icons
-                                                            //               .favorite
-                                                            //           : Icons
-                                                            //               .favorite_border,
-                                                            //       color: isFavorite
-                                                            //           ? Colors
-                                                            //               .red
-                                                            //           : const Color(
-                                                            //               0xff13110C),
-                                                            //       // size: 30,
-                                                            //     ),
-                                                            //     onPressed: () {
-                                                            //       setState(() {
-                                                            //         isFavorite =
-                                                            //             true;
-                                                            //       });
-                                                            //       controller.addWishlist(
-                                                            //           postId: controller
-                                                            //                   .productData
-                                                            //                   .value
-                                                            //                   .last
-                                                            //                   .product
-                                                            //                   .id ??
-                                                            //               0);
-                                                            //     },
-                                                            //   ),
-                                                            // )
+                                                            WidgetZoom(
+                                                              heroAnimationTag:
+                                                                  'tag',
+                                                              zoomWidget: CachedNetworkImage(
+                                                                  imageUrl: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .product
+                                                                          ?.getCurrentImages()[index] ??
+                                                                      '',
+                                                                  width: 258.48.w,
+                                                                  height: 258.48.h,
+                                                                  fit: BoxFit.fitWidth),
+                                                            ),
                                                           ],
                                                         ))),
                                             SizedBox(
