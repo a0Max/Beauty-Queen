@@ -518,6 +518,19 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
+                    Text(
+                      widget.newArrival.note ?? '',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10.sp,
+                        fontFamily: kTheArabicSansLight,
+                        fontWeight: FontWeight.w700,
+                        // height: 1,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
