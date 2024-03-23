@@ -110,7 +110,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
               // showFavIcon: true,
               // showPersonIcon: true,
               showarrowIcon: widget.showBack == true ? true : false,
-              showBagIcon: widget.showBack == true ? false : true,
+              showBagIcon: true,
               showFavIcon: widget.showBack == true ? false : true,
               showPersonIcon: widget.showBack == true ? false : true,
 

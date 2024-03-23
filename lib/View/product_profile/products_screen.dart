@@ -18,6 +18,7 @@ import '../../controller/product_controller/product_profile_controller.dart';
 import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
 import '../../models/sales_products_model.dart';
+import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
@@ -26,6 +27,7 @@ import '../../widgets/shimmer/shimmer_new_items.dart';
 import '../../widgets/shimmer/shimmer_profile.dart';
 import '../../widgets/shimmer/shimmer_text.dart';
 import '../brands/branddetail_screen.dart';
+import '../cart/cart_screen.dart';
 import '../categories/alkasam_screen.dart';
 import '../categories/filter_screen2.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
@@ -64,6 +66,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
   }
 
   // String? selectedDropdownItem;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +82,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
         // }
       },
       child: Scaffold(
+        key: _scaffoldKey,
+        endDrawer: const MyEndDrawer(),
         body: Obx(() => Column(
               children: [
                 Expanded(
@@ -88,21 +93,55 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                         SizedBox(
                           height: 43.h,
                         ),
-                        Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Column(children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: IconButton(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                10.pw,
+                                GestureDetector(
+                                  onTap: () {
+                                    _scaffoldKey.currentState?.openEndDrawer();
+                                  },
+                                  child: SvgPicture.asset(
+                                    AppImages.imageMenu,
+                                    height: 20.h,
+                                    width: 20.w,
+                                  ),
+                                ),
+                                // 10.pw,
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(const CartScreen());
+                                  },
+                                  child: SvgPicture.asset(
+                                    AppImages.imageShop,
+                                    height: 30.h,
+                                    width: 30.w,
+                                  ),
+                                ),
+                                10.pw,
+                                IconButton(
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    icon: Icon(
-                                      Icons.arrow_forward_ios_sharp,
-                                      size: 25.r,
+                                    icon: const Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: AppColors.kBlackColor,
+                                      size: 25,
                                     )),
-                              ),
-
+                                10.pw,
+                              ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(children: [
                               controller.isLoading.value == true
                                   ? const ShimmerProfile()
                                   : (controller.productData.isNotEmpty ?? false)
@@ -530,7 +569,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           '/QuinaprogramScreen') {
                                         Navigator.of(context).pop();
                                       } else {
-                                        Get.to(const QuinaprogramScreen(),
+                                        Get.to(QuinaprogramScreen(),
                                             routeName: '/QuinaprogramScreen');
                                       }
                                     },

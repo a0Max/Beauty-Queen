@@ -2,13 +2,17 @@ import 'package:beauty_queen/const/extensions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/events_controller/events_controller.dart';
+import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
+import '../cart/cart_screen.dart';
 import 'details_event_screen.dart';
 
 class EventsScreen extends StatefulWidget {
@@ -28,21 +32,58 @@ class _EventsScreen extends State<EventsScreen> {
     controller.getEvents();
   }
 
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const MyEndDrawer(),
+      key: scaffoldKey,
       body: Obx(() => ListView(children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 30.r,
-                    color: AppColors.kBlackColor,
-                  )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    10.pw,
+                    GestureDetector(
+                      onTap: () {
+                        scaffoldKey.currentState?.openEndDrawer();
+                      },
+                      child: SvgPicture.asset(
+                        AppImages.imageMenu,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const CartScreen());
+                      },
+                      child: SvgPicture.asset(
+                        AppImages.imageShop,
+                        height: 30.h,
+                        width: 30.w,
+                      ),
+                    ),
+                    10.pw,
+                    IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.kBlackColor,
+                          size: 25,
+                        )),
+                    10.pw,
+                  ],
+                ),
+              ],
             ),
             Text(
               'المعرض',

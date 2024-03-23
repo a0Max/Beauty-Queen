@@ -83,7 +83,7 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
                   : Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
             showarrowIcon: widget.showBack == true ? true : false,
-            showBagIcon: widget.showBack == true ? false : true,
+            showBagIcon: true,
             showFavIcon: widget.showBack == true ? false : true,
             showPersonIcon: widget.showBack == true ? false : true,
 

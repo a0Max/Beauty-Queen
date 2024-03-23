@@ -199,7 +199,8 @@ class CustomAppBar extends StatelessWidget {
                                 16.w +
                                 (onPressed != null ? 20.w : 0.w) +
                                 (showFavIcon ? 30.w : 0.w) +
-                                9.w),
+                                9.w +
+                                (showarrowIcon2 == true ? 0 : 20.w)),
                         child: TextField(
                           readOnly:
                               makeSearchBarNotClickable == false ? true : false,

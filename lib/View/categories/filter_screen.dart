@@ -90,6 +90,7 @@ class _FliterScreenState extends State<FliterScreen> {
                   : Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
             showFavIcon: false,
+            showBagIcon: true,
             showarrowIcon: true,
             onPressed: () {
               _scaffoldKey.currentState?.openEndDrawer();

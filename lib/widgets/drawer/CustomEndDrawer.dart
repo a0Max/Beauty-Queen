@@ -357,7 +357,7 @@ class MyEndDrawer extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Get.to(
-                      const QuinaprogramScreen(
+                      QuinaprogramScreen(
                         reCreate: true,
                       ),
                       routeName: '/QuinaprogramScreen');

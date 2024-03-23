@@ -1,19 +1,23 @@
 // ignore_for_file: unrelated_type_equality_checks, file_names
 
 import 'package:beauty_queen/const/app_images.dart';
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/queen_controller/queen_controller.dart';
+import '../cart/cart_screen.dart';
 import 'QuinaOffers_screen.dart';
 import 'Quinaproducts_screen.dart';
 import 'WhatisQuina_screen.dart';
 
 class QuinaprogramScreen extends StatelessWidget {
   final bool? reCreate;
-  const QuinaprogramScreen({super.key, this.reCreate});
+  QuinaprogramScreen({super.key, this.reCreate});
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +32,50 @@ class QuinaprogramScreen extends StatelessWidget {
             SizedBox(
               height: 50.h,
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 30.r,
-                    color: AppColors.kBlackColor,
-                  )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    10.pw,
+                    GestureDetector(
+                      onTap: () {
+                        scaffoldKey.currentState?.openEndDrawer();
+                      },
+                      child: SvgPicture.asset(
+                        AppImages.imageMenu,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const CartScreen());
+                      },
+                      child: SvgPicture.asset(
+                        AppImages.imageShop,
+                        height: 30.h,
+                        width: 30.w,
+                      ),
+                    ),
+                    10.pw,
+                    IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.kBlackColor,
+                          size: 25,
+                        )),
+                    10.pw,
+                  ],
+                ),
+              ],
             ),
             Image.asset(AppImages.queenaImage),
             SizedBox(

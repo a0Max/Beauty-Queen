@@ -87,10 +87,12 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                 : Size.fromHeight(_isScrolled ? 100.h : 160.h),
         child: CustomAppBar(
           showarrowIcon: true,
-          // onPressed: () {
-          //   // Handle the button click here, e.g., open the end drawer.
-          //   // scaffoldKey.currentState?.openEndDrawer();
-          // },
+          showBagIcon: true,
+
+          onPressed: () {
+            // Handle the button click here, e.g., open the end drawer.
+            scaffoldKey.currentState?.openEndDrawer();
+          },
           isScrolled: _isScrolled,
           // Replace with your variable for scroll state
           searchBarWidth: searchBarWidth, // Replace with your desired width

@@ -76,6 +76,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                   : Size.fromHeight(_isScrolled ? 100.h : 160.h),
           child: CustomAppBar(
             showarrowIcon: true,
+            showBagIcon: true,
             onPressed: () {
               // Handle the button click here, e.g., open the end drawer.
               scaffoldKey.currentState?.openEndDrawer();
