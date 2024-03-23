@@ -422,7 +422,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: CachedNetworkImageProvider(widget.imageUrl),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                     child: widget.hideLike == false

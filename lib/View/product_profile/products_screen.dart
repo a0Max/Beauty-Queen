@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -279,30 +280,27 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                   },
                                                 ),
                                                 items: List.generate(
-                                                    controller.productData.value
-                                                            .last.product
-                                                            ?.getCurrentImages()
-                                                            .length ??
-                                                        0,
-                                                    (index) => Stack(
-                                                          children: [
-                                                            WidgetZoom(
-                                                              heroAnimationTag:
-                                                                  'tag',
-                                                              zoomWidget: CachedNetworkImage(
-                                                                  imageUrl: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .product
-                                                                          ?.getCurrentImages()[index] ??
-                                                                      '',
-                                                                  width: 258.48.w,
-                                                                  height: 258.48.h,
-                                                                  fit: BoxFit.fitWidth),
-                                                            ),
-                                                          ],
-                                                        ))),
+                                                  controller.productData.value
+                                                          .last.product
+                                                          ?.getCurrentImages()
+                                                          .length ??
+                                                      0,
+                                                  (index) => WidgetZoom(
+                                                    heroAnimationTag: 'tag',
+                                                    zoomWidget: CachedNetworkImage(
+                                                        imageUrl: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .product
+                                                                    ?.getCurrentImages()[
+                                                                index] ??
+                                                            '',
+                                                        width: 258.48.w,
+                                                        height: 258.48.h,
+                                                        fit: BoxFit.fitWidth),
+                                                  ),
+                                                )),
                                             SizedBox(
                                               height: 10.h,
                                             ),
@@ -360,23 +358,33 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        controller
-                                                                .productData
-                                                                .value
-                                                                .last
-                                                                .product
-                                                                ?.brand
-                                                                ?.title ??
-                                                            '',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                kTheArabicSansBold,
-                                                            fontSize: 15.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .kPrimaryColor),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Get.to(
+                                                              BrandDetailScreen(
+                                                            brandId: int.parse(
+                                                                "${controller.productData.value.last.product?.brand?.id ?? 0}"),
+                                                          ));
+                                                        },
+                                                        child: Text(
+                                                          controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .product
+                                                                  ?.brand
+                                                                  ?.title ??
+                                                              '',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  kTheArabicSansBold,
+                                                              fontSize: 15.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: AppColors
+                                                                  .kPrimaryColor),
+                                                        ),
                                                       ),
                                                       if ((controller
                                                               .selectedOptions
@@ -713,6 +721,10 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         isExpanded: true,
                                                         decoration:
                                                             InputDecoration(
+                                                          labelStyle: TextStyle(
+                                                            fontFamily:
+                                                                kTheArabicSansLight,
+                                                          ),
                                                           contentPadding:
                                                               EdgeInsets
                                                                   .symmetric(
