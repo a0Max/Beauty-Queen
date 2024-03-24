@@ -196,7 +196,10 @@ class UserDataApis extends ApiProvider {
     if (validResponse(response.statusCode!)) {
       final List<UserModel> l = [];
       response.data.forEach((e) => l.add(UserModel.fromMap(e)));
-      return l.first;
+      if (l.first.isPhoneVerified != '1') {
+        return l.first;
+      }
+      throw response.data;
     } else {
       throw response.data;
     }
