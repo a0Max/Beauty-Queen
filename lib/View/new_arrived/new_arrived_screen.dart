@@ -24,6 +24,7 @@ import '../../models/sales_products_model.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
@@ -94,6 +95,7 @@ class _NewArrivedScreen extends State<NewArrivedScreen> {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           key: _scaffoldKey,
+          bottomNavigationBar: const ReusableBottomNavigationBar2(),
           appBar: PreferredSize(
             preferredSize:
                 userController.userData.value.accountType == AccountTypes.queena

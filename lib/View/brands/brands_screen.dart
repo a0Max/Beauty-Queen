@@ -13,6 +13,7 @@ import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/brands/custom_brands_logo_widget.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 
 class BrandScreen extends StatefulWidget {
   final bool? showBack;
@@ -101,6 +102,8 @@ class _BrandScreenState extends State<BrandScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      bottomNavigationBar:
+          widget.showBack == true ? const ReusableBottomNavigationBar2() : null,
       appBar: PreferredSize(
         preferredSize:
             userController.userData.value.accountType == AccountTypes.queena

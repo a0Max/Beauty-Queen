@@ -15,6 +15,7 @@ import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/wallet_controller/wallet_controller.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/user_profile/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
@@ -46,6 +47,7 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      bottomNavigationBar: const ReusableBottomNavigationBar2(),
       body: Obx(() => Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: SingleChildScrollView(

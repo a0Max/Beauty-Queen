@@ -9,6 +9,7 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/about_controller/about_app_controller.dart';
 import '../../widgets/about_app/item_of_app.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 
 class AboutAppScreen extends StatefulWidget {
   const AboutAppScreen({super.key});
@@ -31,6 +32,7 @@ class _AboutAppScreen extends State<AboutAppScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const ReusableBottomNavigationBar2(),
       appBar: AppBar(
         surfaceTintColor: AppColors.kWhiteColor,
         automaticallyImplyLeading: false,

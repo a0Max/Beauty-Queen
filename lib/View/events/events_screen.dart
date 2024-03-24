@@ -11,6 +11,7 @@ import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/events_controller/events_controller.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../cart/cart_screen.dart';
 import 'details_event_screen.dart';
@@ -37,6 +38,7 @@ class _EventsScreen extends State<EventsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const ReusableBottomNavigationBar2(),
       endDrawer: const MyEndDrawer(),
       key: scaffoldKey,
       body: Obx(() => ListView(children: [

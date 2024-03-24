@@ -11,6 +11,7 @@ import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/categories/CustomGirdview.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 
 class AlKasamScreen extends StatefulWidget {
   final bool? showBack;
@@ -104,6 +105,9 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
           ),
         ),
         endDrawer: const MyEndDrawer(),
+        bottomNavigationBar: widget.showBack == true
+            ? const ReusableBottomNavigationBar2()
+            : null,
         body: SingleChildScrollView(
           controller: _scrollController,
           child: Column(

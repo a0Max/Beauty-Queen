@@ -19,6 +19,7 @@ import '../../models/sales_products_model.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
@@ -86,6 +87,9 @@ class _DiscountScreenState extends State<DiscountScreen> {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           key: _scaffoldKey,
+          bottomNavigationBar: widget.showBack == true
+              ? const ReusableBottomNavigationBar2()
+              : null,
           appBar: PreferredSize(
               preferredSize: userController.userData.value.accountType ==
                       AccountTypes.queena

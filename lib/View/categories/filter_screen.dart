@@ -19,6 +19,7 @@ import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/categories/custom_fliter_ container.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
@@ -83,6 +84,7 @@ class _FliterScreenState extends State<FliterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
+        bottomNavigationBar: const ReusableBottomNavigationBar2(),
         appBar: PreferredSize(
           preferredSize:
               userController.userData.value.accountType == AccountTypes.queena

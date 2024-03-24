@@ -10,6 +10,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../cart/cart_screen.dart';
 
 class MagazineScreen extends StatefulWidget {
@@ -62,6 +63,7 @@ class _MagazineScreen extends State<MagazineScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      bottomNavigationBar: const ReusableBottomNavigationBar2(),
       endDrawer: const MyEndDrawer(),
       key: scaffoldKey,
       body: Column(

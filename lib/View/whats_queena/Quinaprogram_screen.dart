@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/queen_controller/queen_controller.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../cart/cart_screen.dart';
 import 'QuinaOffers_screen.dart';
 import 'Quinaproducts_screen.dart';
@@ -25,6 +26,7 @@ class QuinaprogramScreen extends StatelessWidget {
       final QueenController tabcontroller = Get.put(QueenController());
     }
     return Scaffold(
+      bottomNavigationBar: const ReusableBottomNavigationBar2(),
       body: GetBuilder<QueenController>(builder: (tabcontroller) {
         tabcontroller = Get.put(QueenController());
         return Column(

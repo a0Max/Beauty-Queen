@@ -15,6 +15,7 @@ import '../../controller/gift_controller/gift_controller.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 
@@ -60,6 +61,7 @@ class _FavScreen extends State<FavScreen> {
         }
       },
       child: Scaffold(
+        bottomNavigationBar: const ReusableBottomNavigationBar2(),
         appBar: AppBar(
             elevation: 0,
             automaticallyImplyLeading: false,

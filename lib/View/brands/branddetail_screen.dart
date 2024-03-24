@@ -19,6 +19,7 @@ import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
@@ -102,6 +103,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
         ),
       ),
       endDrawer: const MyEndDrawer(),
+      bottomNavigationBar: const ReusableBottomNavigationBar2(),
       body: Obx(() => SingleChildScrollView(
             controller: _scrollController,
             child: Column(

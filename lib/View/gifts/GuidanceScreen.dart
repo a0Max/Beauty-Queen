@@ -26,6 +26,7 @@ import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
 import '../../widgets/gifts/gift_widget.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
@@ -96,6 +97,9 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           key: _scaffoldKey,
+          bottomNavigationBar: widget.showBack == true
+              ? const ReusableBottomNavigationBar2()
+              : null,
           appBar: PreferredSize(
             preferredSize:
                 userController.userData.value.accountType == AccountTypes.queena

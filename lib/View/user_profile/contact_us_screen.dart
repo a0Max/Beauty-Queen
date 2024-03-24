@@ -8,6 +8,7 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../widgets/contact_us/contact_us_screen.dart';
 import '../../widgets/contact_us/location_map.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/comment_widget.dart';
 import '../../widgets/contact_us/email_widget.dart';
 import '../../widgets/contact_us/social_login.dart';
@@ -19,6 +20,7 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const ReusableBottomNavigationBar2(),
       appBar: AppBar(
         surfaceTintColor: AppColors.kWhiteColor,
         automaticallyImplyLeading: false,

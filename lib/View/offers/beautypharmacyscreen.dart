@@ -12,6 +12,7 @@ import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/gift_controller/gift_controller.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
+import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/shimmer/shimmer_beauty_pharmacy.dart';
 import '../product_profile/products_screen.dart';
 
@@ -69,6 +70,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
         key: scaffoldKey,
+        bottomNavigationBar: const ReusableBottomNavigationBar2(),
         appBar: PreferredSize(
           preferredSize:
               userController.userData.value.accountType == AccountTypes.queena
