@@ -617,7 +617,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                     : widget.newArrival.price ?? '',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: const Color(0xFFDE0F7E),
+                                  color: Colors.black,
                                   fontSize: 15.16.sp,
                                   fontFamily: kTheArabicSansLight,
                                   fontWeight: FontWeight.w400,
@@ -628,7 +628,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                 'د.ل',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  color: const Color(0xFFDE0F7E),
+                                  color: Colors.black,
                                   fontSize: 10.99.sp,
                                   fontFamily: kTheArabicSansLight,
                                   fontWeight: FontWeight.w400,
