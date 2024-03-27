@@ -40,6 +40,9 @@ GeneralSearchModel _$GeneralSearchModelFromJson(Map<String, dynamic> json) =>
       labels: (json['labels'] as List<dynamic>?)
           ?.map((e) => LabelModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      categories: (json['categories'] as List<dynamic>?)
+          ?.map((e) => SubCategoryModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       info: json['info'] == null
           ? null
           : ProductBanner.fromJson(json['info'] as Map<String, dynamic>),
@@ -59,5 +62,6 @@ Map<String, dynamic> _$GeneralSearchModelToJson(GeneralSearchModel instance) =>
       'brand': instance.brand?.toJson(),
       'prices': instance.prices,
       'labels': instance.labels?.map((e) => e.toJson()).toList(),
+      'categories': instance.categories?.map((e) => e.toJson()).toList(),
       'info': instance.info?.toJson(),
     };

@@ -54,10 +54,13 @@ class AlkasamDataApis extends ApiProvider {
     }
   }
 
-  Future<GetCategoryModel> getChildDataRequest2({required int parentId}) async {
+  Future<GetCategoryModel> getChildDataRequest2(
+      {required int parentId, int? subId}) async {
     final token = await getUserToken();
     final response = await dio.get(
-      '${Connection.apiURL2}${ApiProvider.getCategoryDataEndPoint2}/$parentId/null',
+      subId == null
+          ? '${Connection.apiURL2}${ApiProvider.getCategoryDataEndPoint2}/$parentId/null'
+          : '${Connection.apiURL2}${ApiProvider.getCategoryDataEndPoint2}/$parentId/$subId',
       options: Options(
         headers: {
           ...apiHeaders,
@@ -103,12 +106,15 @@ class AlkasamDataApis extends ApiProvider {
       List? selectedLabels,
       required int page,
       required int categoryId,
+      int? subId,
       List? selectedPrices,
       List? selectedBrands}) async {
     final token = await getUserToken();
     final cookies = await getCookies();
     final response = await dio.get(
-      '${Connection.apiURL}${ApiProvider.getCategoryDataEndPoint}/$categoryId',
+      subId == null
+          ? '${Connection.apiURL}${ApiProvider.getCategoryDataEndPoint}/$categoryId'
+          : '${Connection.apiURL}${ApiProvider.getCategoryDataEndPoint}/$categoryId/$subId',
       queryParameters: {
         if (isBlank(keySort) == false) 'sort': keySort,
         if (selectedLabels?.isNotEmpty ?? false) 'label[]': selectedLabels,

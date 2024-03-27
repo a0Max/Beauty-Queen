@@ -155,7 +155,7 @@ class _FliterScreenState extends State<FliterScreen2> {
                                   )),
                         ),
                         Text(
-                          "${_controller.subCategoryData.value.title ?? ''}",
+                          _controller.subCategoryData.value.title ?? '',
                           style: TextStyle(
                             fontFamily: kTheArabicSansLight,
                             color: AppColors.kBlackColor,

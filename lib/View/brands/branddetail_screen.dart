@@ -3,6 +3,7 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import '../../const/vars.dart';
+import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/brands_controller/brands_controller.dart';
 import '../../models/sales_products_model.dart';
@@ -24,6 +26,7 @@ import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
+import '../categories/filter_screen2.dart';
 import 'filterby_category_screen.dart';
 
 class BrandDetailScreen extends StatefulWidget {
@@ -192,6 +195,71 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                 SizedBox(
                   height: 61.h,
                 ),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
+                    child: SizedBox(
+                      height: 140,
+                      child:
+                          ListView(scrollDirection: Axis.horizontal, children: [
+                        ...List.generate(
+                            controller.generalSearchData.value.categories
+                                    ?.length ??
+                                0,
+                            (index) => Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        final AlkasamController controller0 =
+                                            Get.put(AlkasamController());
+                                        controller0.updateCurrentCategoryId(
+                                            newId: int.parse(
+                                                "${controller.generalSearchData.value.categories?[index].id ?? 0}"),
+                                            getChild: null,
+                                            subId: controller.generalSearchData
+                                                .value.brand?.id);
+                                        Get.to(FliterScreen2(
+                                          categoryId: int.parse(
+                                              "${controller.generalSearchData.value.categories?[index].id ?? 0}"),
+                                        ));
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                    image: CachedNetworkImageProvider(
+                                                        Connection.urlOfBrands3(
+                                                            image: controller
+                                                                    .generalSearchData
+                                                                    .value
+                                                                    .categories?[
+                                                                        index]
+                                                                    .image
+                                                                    ?.file ??
+                                                                '')))),
+                                          ),
+                                          Text(
+                                            controller.generalSearchData.value
+                                                    .categories?[index].title ??
+                                                '',
+                                            style: TextStyle(
+                                              fontFamily: kTheArabicSansLight,
+                                              color: AppColors.kGrayColor,
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    10.pw,
+                                  ],
+                                )),
+                      ]),
+                    )),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Row(

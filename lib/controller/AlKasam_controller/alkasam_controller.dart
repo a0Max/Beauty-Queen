@@ -32,21 +32,24 @@ class AlkasamController extends GetxController {
   RxInt currentCategoryId = 0.obs;
   RxList parentsCategoryData = [].obs;
   Rx<CategoryModel> subCategoryData = CategoryModel().obs;
-  updateCurrentCategoryId({required int newId, required bool? getChild}) async {
+  updateCurrentCategoryId(
+      {required int newId, required bool? getChild, int? subId}) async {
     parentsCategoryData.value = [];
     subCategoryData.value = CategoryModel();
     currentCategoryId.value = newId;
-    getCategoriesDataController(currentPage: 1, getByParent: true);
+    getCategoriesDataController(
+        currentPage: 1, getByParent: true, subId: subId);
     childCurrentCategoryId.value = 0;
     childCategoryData.value = [];
     if (getChild == true) {
       childCategoryData.value =
           await _api.getChildDataRequest(parentId: currentCategoryId.value);
     } else if (getChild == null) {
-      GetCategoryModel value =
-          await _api.getChildDataRequest2(parentId: currentCategoryId.value);
+      GetCategoryModel value = await _api.getChildDataRequest2(
+          parentId: currentCategoryId.value, subId: subId);
       parentsCategoryData.value = value.parents ?? [];
       subCategoryData.value = value.category ?? CategoryModel();
+      childCategoryData.value = value.category?.children ?? [];
     }
   }
 
@@ -58,7 +61,7 @@ class AlkasamController extends GetxController {
 
   int pageCategory = 1;
   Future<void> getCategoriesDataController(
-      {int? currentPage, bool? getByParent}) async {
+      {int? currentPage, bool? getByParent, int? subId}) async {
     if (currentPage == 1) {
       generalSearchData.value = GeneralSearchModel();
     }
@@ -73,6 +76,7 @@ class AlkasamController extends GetxController {
         pageCategory = pageCategory + 1;
         GeneralSearchModel tempData = await _api.getCategoryDataRequest(
           page: pageCategory,
+          subId: subId,
           keySort: keySort.value,
           selectedLabels: selectedLabels.value,
           selectedPrices: selectedPrices.value,
@@ -87,6 +91,7 @@ class AlkasamController extends GetxController {
         pageCategory = 1;
         generalSearchData.value = await _api.getCategoryDataRequest(
             page: 1,
+            subId: subId,
             keySort: keySort.value,
             selectedLabels: selectedLabels.value,
             selectedPrices: selectedPrices.value,

@@ -1,9 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'brand_model.dart';
+import 'categories_model.dart';
 import 'label_model.dart';
 import 'pagination_model.dart';
 import 'product_banner_model.dart';
+import 'sub_categories_model.dart';
 
 part 'general_search_model.g.dart';
 
@@ -21,6 +23,7 @@ class GeneralSearchModel {
   BrandModel? brand;
   List<String>? prices;
   List<LabelModel>? labels;
+  List<SubCategoryModel>? categories;
   ProductBanner? info;
 
   GeneralSearchModel(
@@ -32,6 +35,7 @@ class GeneralSearchModel {
       this.brands,
       this.count,
       this.gifts,
+      this.categories,
       this.prices,
       this.brand,
       this.products,
