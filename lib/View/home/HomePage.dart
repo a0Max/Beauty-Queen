@@ -465,7 +465,7 @@ class _HomePageState extends State<HomePage> {
                       CarouselSlider(
                         options: CarouselOptions(
                           viewportFraction: 1.0,
-                          aspectRatio: 1.1,
+                          aspectRatio: 1.15,
                           autoPlay: true,
                           onPageChanged: (index, reason) {
                             _controller.updateCurrentOffer(newSlider: index);
@@ -686,7 +686,7 @@ class _HomePageState extends State<HomePage> {
                                         image: _controller.homeData.value
                                                 .banners?[index].banner ??
                                             '')),
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           ),
