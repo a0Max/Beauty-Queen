@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:beauty_queen/View/product_profile/tab_screen_one.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:widget_zoom/widget_zoom.dart';
 import '../../const/app_colors.dart';
@@ -22,6 +25,7 @@ import '../../models/sales_products_model.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
+import '../../widgets/product_profile/CustomCardWidget2.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
 import '../../widgets/product_profile/details_static.dart';
 import '../../widgets/shimmer/shimmer_new_items.dart';
@@ -69,6 +73,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
   // String? selectedDropdownItem;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -1240,6 +1245,138 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                 thickness: 1.w,
                                 color: AppColors.kTextGrayColor,
                               ),
+                              (controller.productData.isNotEmpty ?? false)
+                                  ? Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'أكملي إطلالتك...',
+                                            style: TextStyle(
+                                                fontFamily: kTheArabicSansBold,
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.mainColor),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                          10.ph,
+                                          HtmlWidget(
+                                            "${controller.productData.value.last.product.completeYourOutfitDescription ?? ''}",
+                                            textStyle: TextStyle(
+                                                fontFamily:
+                                                    kTheArabicSansLight),
+                                          ),
+                                          10.ph,
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 200.h,
+                                            child: CarouselSlider(
+                                              options: CarouselOptions(
+                                                viewportFraction:
+                                                    1.0, // Set to 1.0 for full width current page
+                                                // aspectRatio: 1.3,
+                                                autoPlay: true,
+                                                onPageChanged: (index, reason) {
+                                                  setState(() {
+                                                    currentIndex = index;
+                                                  });
+                                                  log("currentIndex:$currentIndex");
+                                                  // _controller.updateCurrentSlider(
+                                                  //     newSlider: index);
+                                                },
+                                                enlargeCenterPage:
+                                                    true, // Make the current page full width
+                                              ),
+                                              items: List.generate(
+                                                  controller
+                                                          .productData
+                                                          .value
+                                                          .last
+                                                          .completeYourOutfit
+                                                          .length ??
+                                                      0,
+                                                  (index) => Container(
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade500)),
+                                                        child:
+                                                            CustomCardWidget2(
+                                                          hideTage: true,
+                                                          imageUrl: Connection.urlOfProducts(
+                                                              image: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .completeYourOutfit[
+                                                                          index]
+                                                                      .mainImage ??
+                                                                  ''),
+                                                          newArrival: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .completeYourOutfit[
+                                                                  index] ??
+                                                              SalesProductsModel(),
+                                                          favorite: controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .completeYourOutfit[
+                                                                      index]
+                                                                  .wishlist
+                                                                  ?.isNotEmpty ??
+                                                              false,
+                                                        ),
+                                                      )),
+                                              disableGesture: true,
+                                            ),
+                                          ),
+                                          10.ph,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: List.generate(
+                                                controller
+                                                        .productData
+                                                        .value
+                                                        .last
+                                                        .completeYourOutfit
+                                                        .length ??
+                                                    0,
+                                                (index) => Container(
+                                                      margin: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 6),
+                                                      height:
+                                                          currentIndex == index
+                                                              ? 13
+                                                              : 10,
+                                                      width:
+                                                          currentIndex == index
+                                                              ? 13
+                                                              : 10,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: currentIndex ==
+                                                                  index
+                                                              ? AppColors
+                                                                  .kPinkColor
+                                                              : AppColors
+                                                                  .klPinkColor),
+                                                    )),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  : SizedBox(),
                               SizedBox(
                                 height: 27.h,
                               ),

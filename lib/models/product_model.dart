@@ -15,6 +15,7 @@ class ProductModel {
   List<ProductOptionsModel>? productCategories;
   List<ProductOptionsModel>? productOptions;
   List<SalesProductsModel>? sameBrandProducts;
+  List<SalesProductsModel>? completeYourOutfit;
   List<SalesProductsModel>? p;
   List<ReviewsModel>? reviews;
   IsFlashDiscount? is_flash_discount;
@@ -28,6 +29,7 @@ class ProductModel {
       this.sameBrandProducts,
       this.p,
       this.reviews,
+      this.completeYourOutfit,
       this.is_flash_discount,
       this.product_banner,
       this.discover_brand});
@@ -53,6 +55,9 @@ class ProductModel {
           .toList(),
       reviews: (json['reviews'] as List<dynamic>?)
           ?.map((e) => ReviewsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      completeYourOutfit: (json['complete_your_outfit'] as List<dynamic>?)
+          ?.map((e) => SalesProductsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       productOptions: (json['productOptions'] as List<dynamic>?)
           ?.map((e) => ProductOptionsModel.fromJson(e as Map<String, dynamic>))
