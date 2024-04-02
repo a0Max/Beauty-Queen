@@ -101,6 +101,7 @@ abstract class ApiProvider {
   static const String orderSummaryDataEndPoint = "orderSummary";
   static const String getWalletTransactionsDataEndPoint =
       "get/walletTransactions";
+  static const String getMagazinesDataEndPoint = "getMagazines";
 
 ////////////////////////////////////////////////////////////////////////////
 
