@@ -52,15 +52,20 @@ class _SignUpPage extends State<SignUpPage> {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-
-      Navigator.pushAndRemoveUntil(
+      Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OtpPage(
-              phone: phoneController.text,
-            ),
-          ),
-          (route) => false);
+              builder: (context) => OtpPage(
+                    phone: phoneController.text,
+                  )));
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => OtpPage(
+      //         phone: phoneController.text,
+      //       ),
+      //     ),
+      //     (route) => false);
     } on DioError catch (e) {
       if (!context.mounted) return;
 

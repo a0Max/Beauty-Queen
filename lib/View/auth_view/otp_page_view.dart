@@ -2,7 +2,7 @@ import 'package:beauty_queen/View/auth_view/finished_registration.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/controller/auth_controller/otp_controller.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -132,26 +132,30 @@ class _OtpPage extends State<OtpPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      _buildTextSpan(
-                          tr('please_enter_the4_digit_of_otp'),
-                          TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 19.59.sp,
-                              fontWeight: FontWeight.w300,
-                              color: AppColors.kTextGrayColor)),
-                      _buildTextSpan(
-                          ' ${widget.phone}',
-                          TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 19.59.sp,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.kBlackColor)),
-                    ],
+                Directionality(
+                  // add this
+                  textDirection: TextDirection.rtl,
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        _buildTextSpan(
+                            tr('please_enter_the4_digit_of_otp'),
+                            TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                fontSize: 19.59.sp,
+                                fontWeight: FontWeight.w300,
+                                color: AppColors.kTextGrayColor)),
+                        _buildTextSpan(
+                            ' ${widget.phone}',
+                            TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                fontSize: 19.59.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.kBlackColor)),
+                      ],
+                    ),
+                    textAlign: TextAlign.right,
                   ),
-                  textAlign: TextAlign.right,
                 ),
                 SizedBox(height: 10.h),
                 Container(
