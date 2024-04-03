@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../View/auth_view/otp_page_view.dart';
 import '../../View/home/bottom_nav_screen.dart';
 import '../../View/welcome/welcome_screen.dart';
 import '../../const/api_connrction/brands_data_api.dart';
@@ -30,7 +31,7 @@ class AuthController extends GetxController {
 
   login(String phone, String password) async {
     userData.value = await _api.loginRequest(phone: phone, password: password);
-    getUserData();
+    await getUserData();
     getCities();
   }
 
@@ -73,7 +74,15 @@ class AuthController extends GetxController {
     showProgress.value = false;
     await Future.delayed(const Duration(milliseconds: 500));
     if (userData.value.id != null) {
-      Get.off(() => const MainView());
+      if (userData.value.isPhoneVerified == "0") {
+        Get.off(() => const WelcomeScreen());
+
+        Get.to(OtpPage(
+          phone: userData.value.phone ?? '',
+        ));
+      } else {
+        Get.off(() => const MainView());
+      }
     } else {
       Get.off(() => const WelcomeScreen());
     }

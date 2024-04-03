@@ -18,6 +18,7 @@ import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/auth_widgets/loginVia.dart';
 import 'enter_phone_screen.dart';
+import 'otp_page_view.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -49,12 +50,18 @@ class _LogInPage extends State<LogInPage> {
 
       Navigator.of(context).pop();
 
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const MainView(),
-          ),
-          (route) => false);
+      if (_controller.userData.value.isPhoneVerified == "0") {
+        Get.to(OtpPage(
+          phone: _controller.userData.value.phone ?? '',
+        ));
+      } else {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainView(),
+            ),
+            (route) => false);
+      }
     } on DioException catch (e) {
       if (!context.mounted) return;
 
