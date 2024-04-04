@@ -16,8 +16,14 @@ abstract class Connection {
   static const googleLogin = '${baseURL}auth/google/redirect';
   static const magazineUrl = 'https://beautyqueen.ly/magazines/';
   static const magazineVideoUrl = 'https://beautyqueen.ly/storage/magazines/';
+  static const flashImageUrl = 'https://beautyqueen.ly/storage/flash/';
+  // static const flashImageUrl = 'https://dev.beautyqueen.ly/storage/flash';
   static String urlOfSlider({required String image}) {
     return "$storageURL/slides/$image";
+  }
+
+  static String urlOfFlash({required String image}) {
+    return "$flashImageUrl/$image";
   }
 
   static String urlOfCategories({required String image}) {

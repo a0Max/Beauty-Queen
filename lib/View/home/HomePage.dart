@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
@@ -422,6 +423,146 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 15.h,
                       ),
+
+                      ///flash_discount
+                      if (_controller.homeData.value.flash_discount_status ==
+                          "1") ...{
+                        Container(
+                          child: Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: Connection.urlOfFlash(
+                                    image: _controller.homeData.value
+                                            .flash_discount_mobile_image ??
+                                        ''),
+                                height: 350.h,
+                                width: MediaQuery.of(context).size.width,
+                                fit: BoxFit.fill,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  height: 350.h,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                                placeholder: (context, url) => const SizedBox(),
+                                errorWidget: (context, url, error) =>
+                                    const SizedBox(),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 250.h),
+                                height: 340.h < 305 ? 305 : 345.h,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: _controller.homeData.value
+                                          .flash_discount_products?.length ??
+                                      0,
+                                  itemBuilder: (context, index) {
+                                    return CustomCardWidget(
+                                      hideTage: true,
+                                      imageUrl: Connection.urlOfProducts(
+                                          image: _controller
+                                                  .homeData
+                                                  .value
+                                                  .flash_discount_products?[
+                                                      index]
+                                                  .mainImage ??
+                                              ''),
+                                      newArrival: _controller.homeData.value
+                                                  .flash_discount_products?[
+                                              index] ??
+                                          SalesProductsModel(),
+                                      favorite: _controller
+                                              .homeData
+                                              .value
+                                              .flash_discount_products?[index]
+                                              .wishlist
+                                              ?.isNotEmpty ??
+                                          false,
+                                    );
+                                  },
+                                ),
+                              ),
+                              Positioned(
+                                top: 100.h,
+                                left: 30,
+                                child: CountdownTimer(
+                                  endTime: DateTime.parse(_controller.homeData
+                                              .value.flash_discount_end_at ??
+                                          '')
+                                      .millisecondsSinceEpoch,
+                                  widgetBuilder:
+                                      (context, currentRemainingTime) {
+                                    return Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              'ثانيه:',
+                                              style: timerTextStyle.copyWith(
+                                                  fontSize: 15),
+                                            ),
+                                            Text(
+                                              currentRemainingTime?.sec
+                                                      .toString() ??
+                                                  '',
+                                              style: timerTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                        5.pw,
+                                        Column(
+                                          children: [
+                                            Text(
+                                              'دقيقه:',
+                                              style: timerTextStyle.copyWith(
+                                                  fontSize: 15),
+                                            ),
+                                            Text(
+                                              currentRemainingTime?.min
+                                                      .toString() ??
+                                                  '',
+                                              style: timerTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                        5.pw,
+                                        Column(
+                                          children: [
+                                            Text(
+                                              'ساعه:',
+                                              style: timerTextStyle.copyWith(
+                                                  fontSize: 15),
+                                            ),
+                                            Text(
+                                              currentRemainingTime?.hours
+                                                      .toString() ??
+                                                  '',
+                                              style: timerTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  onEnd: () {
+                                    print('Countdown ended');
+                                    // You can do something here when the countdown ends
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                      },
 
                       ///offers
                       Padding(

@@ -14,6 +14,7 @@ class HomeModel {
   List<CategoryModel>? categories;
   List<SalesProductsModel>? salesProducts;
   List<SalesProductsModel>? offers;
+  List<SalesProductsModel>? flash_discount_products;
   List<BrandModel>? brands;
   List<SlidesModel>? slides;
   List<SpecialsModel>? specials;
@@ -22,8 +23,30 @@ class HomeModel {
   List<SalesProductsModel>? newArrivals;
   List<SlidesModel>? banners;
   DiscoverModel? discover;
+  String? flash_discount_title;
+  String? flash_discount_desktop_image;
+  String? flash_discount_mobile_image;
+  String? flash_discount_end_at;
+  String? flash_discount_status;
 
-  HomeModel({this.discover, this.categories,this.organicItems,this.banners,this.newArrivals, this.salesProducts, this.offers, this.brands, this.slides, this.specials, this.newItems});
+  HomeModel(
+      {this.discover,
+      this.flash_discount_title,
+      this.flash_discount_desktop_image,
+      this.flash_discount_products,
+      this.flash_discount_status,
+      this.flash_discount_mobile_image,
+      this.flash_discount_end_at,
+      this.categories,
+      this.organicItems,
+      this.banners,
+      this.newArrivals,
+      this.salesProducts,
+      this.offers,
+      this.brands,
+      this.slides,
+      this.specials,
+      this.newItems});
 
   factory HomeModel.fromJson(Map<String, dynamic> json) {
     return _$HomeModelFromJson(json);

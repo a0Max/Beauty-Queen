@@ -31,8 +31,10 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPage extends State<LogInPage> {
   final AuthController _controller = Get.put(AuthController());
+  // 0927386249
   TextEditingController phoneController =
       TextEditingController(text: kDebugMode ? "0922255002" : "");
+  // 012895550899
   TextEditingController passwordController =
       TextEditingController(text: kDebugMode ? "moly123456" : "");
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

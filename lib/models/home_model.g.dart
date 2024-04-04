@@ -10,6 +10,17 @@ HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => HomeModel(
       discover: json['discover'] == null
           ? null
           : DiscoverModel.fromJson(json['discover'] as Map<String, dynamic>),
+      flash_discount_title: json['flash_discount_title'] as String?,
+      flash_discount_desktop_image:
+          json['flash_discount_desktop_image'] as String?,
+      flash_discount_products: (json['flash_discount_products']
+              as List<dynamic>?)
+          ?.map((e) => SalesProductsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      flash_discount_status: json['flash_discount_status'] as String?,
+      flash_discount_mobile_image:
+          json['flash_discount_mobile_image'] as String?,
+      flash_discount_end_at: json['flash_discount_end_at'] as String?,
       categories: (json['categories'] as List<dynamic>?)
           ?.map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -46,6 +57,8 @@ Map<String, dynamic> _$HomeModelToJson(HomeModel instance) => <String, dynamic>{
       'categories': instance.categories?.map((e) => e.toJson()).toList(),
       'salesProducts': instance.salesProducts?.map((e) => e.toJson()).toList(),
       'offers': instance.offers?.map((e) => e.toJson()).toList(),
+      'flash_discount_products':
+          instance.flash_discount_products?.map((e) => e.toJson()).toList(),
       'brands': instance.brands?.map((e) => e.toJson()).toList(),
       'slides': instance.slides?.map((e) => e.toJson()).toList(),
       'specials': instance.specials?.map((e) => e.toJson()).toList(),
@@ -54,4 +67,9 @@ Map<String, dynamic> _$HomeModelToJson(HomeModel instance) => <String, dynamic>{
       'newArrivals': instance.newArrivals?.map((e) => e.toJson()).toList(),
       'banners': instance.banners?.map((e) => e.toJson()).toList(),
       'discover': instance.discover?.toJson(),
+      'flash_discount_title': instance.flash_discount_title,
+      'flash_discount_desktop_image': instance.flash_discount_desktop_image,
+      'flash_discount_mobile_image': instance.flash_discount_mobile_image,
+      'flash_discount_end_at': instance.flash_discount_end_at,
+      'flash_discount_status': instance.flash_discount_status,
     };

@@ -51,6 +51,12 @@ const kTheSansTextStyle = TextStyle(
   fontFamily: 'TheSans',
   fontWeight: FontWeight.w700,
 );
+const timerTextStyle = TextStyle(
+  color: Color(0xFFDE0F7E),
+  fontSize: 28,
+  fontFamily: 'TheSans',
+  fontWeight: FontWeight.w700,
+);
 
 const kTheSansTextStyleGray = TextStyle(
   color: Color(0xFF707070),
