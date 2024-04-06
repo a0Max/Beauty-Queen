@@ -3,6 +3,7 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/controller/auth_controller/otp_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -177,15 +178,20 @@ class _OtpPage extends State<OtpPage> {
                       SizedBox(
                           width: 8
                               .w), // Adjust the spacing between the texts as necessary
-                      Text(
-                        tr('edit'),
-                        style: TextStyle(
-                            fontSize: 17.59.sp,
-                            fontFamily: kTheArabicSansLight,
-                            color: AppColors.redColor,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
-                            decorationColor: AppColors.redColor),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          tr('edit'),
+                          style: TextStyle(
+                              fontSize: 17.59.sp,
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.redColor,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                              decorationColor: AppColors.redColor),
+                        ),
                       ),
                     ],
                   ),
