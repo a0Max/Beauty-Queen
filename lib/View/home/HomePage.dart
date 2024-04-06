@@ -386,7 +386,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(
-                              height: 340.h < 305 ? 305 : 345.h,
+                              height: 340.h < 305.h ? 309.h : 349.h,
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
@@ -1116,7 +1116,7 @@ class _HomePageState extends State<HomePage> {
                                 top: 230.h,
                                 // left: 15.w,
                                 child: SizedBox(
-                                  height: 340.h,
+                                  height: 343.h,
                                   width: MediaQuery.of(context).size.width,
                                   child: ListView.builder(
                                     shrinkWrap: true,
@@ -1312,6 +1312,10 @@ class _HomePageState extends State<HomePage> {
                       // ),
 
                       ///specials
+
+                      SizedBox(
+                        height: 30.h,
+                      ),
                       Align(
                         alignment: Alignment.topRight,
                         child: Padding(
@@ -1329,7 +1333,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       SizedBox(
-                        height: 30.h,
+                        height: 10.h,
                       ),
                       Wrap(
                         spacing: 10,

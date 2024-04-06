@@ -177,89 +177,121 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                           fit: BoxFit.fill,
                         )
                 },
-                SizedBox(
-                  height: 16.h,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: HtmlWidget(
-                    controller
-                            .generalSearchData.value.brand?.shortDescription ??
-                        '',
-                    textStyle: TextStyle(
-                        fontFamily: kTheArabicSansBold,
-                        fontWeight: FontWeight.w200),
-                  ),
-                ),
-
+                if (controller.isLoading.value == true) ...{
+                  const SizedBox()
+                } else ...{
+                  if (controller.generalSearchData.value.brand
+                              ?.shortDescription !=
+                          null &&
+                      (controller.generalSearchData.value.brand!
+                              .shortDescription?.isNotEmpty ??
+                          false)) ...{
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: HtmlWidget(
+                        controller.generalSearchData.value.brand
+                                ?.shortDescription ??
+                            '',
+                        textStyle: TextStyle(
+                            fontFamily: kTheArabicSansBold,
+                            fontWeight: FontWeight.w200),
+                      ),
+                    ),
+                  },
+                },
                 SizedBox(
                   height: 61.h,
                 ),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: SizedBox(
-                      height: 140,
-                      child:
-                          ListView(scrollDirection: Axis.horizontal, children: [
-                        ...List.generate(
-                            controller.generalSearchData.value.categories
-                                    ?.length ??
-                                0,
-                            (index) => Row(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        final AlkasamController controller0 =
-                                            Get.put(AlkasamController());
-                                        controller0.updateCurrentCategoryId(
-                                            newId: int.parse(
-                                                "${controller.generalSearchData.value.categories?[index].id ?? 0}"),
-                                            getChild: null,
-                                            subId: controller.generalSearchData
-                                                .value.brand?.id);
-                                        Get.to(FliterScreen2(
-                                          categoryId: int.parse(
-                                              "${controller.generalSearchData.value.categories?[index].id ?? 0}"),
-                                        ));
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            width: 100,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                    image: CachedNetworkImageProvider(
-                                                        Connection.urlOfBrands3(
-                                                            image: controller
-                                                                    .generalSearchData
-                                                                    .value
-                                                                    .categories?[
-                                                                        index]
-                                                                    .image
-                                                                    ?.file ??
-                                                                '')))),
-                                          ),
-                                          Text(
-                                            controller.generalSearchData.value
-                                                    .categories?[index].title ??
-                                                '',
-                                            style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              color: AppColors.kGrayColor,
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w500,
+                if (controller.isLoading.value == true) ...{
+                  const SizedBox()
+                } else ...{
+                  if (controller.generalSearchData.value.categories != null &&
+                      (controller
+                              .generalSearchData.value.categories?.isNotEmpty ??
+                          false)) ...{
+                    SizedBox(
+                      height: 61.h,
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: SizedBox(
+                          height: 140,
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                ...List.generate(
+                                    controller.generalSearchData.value
+                                            .categories?.length ??
+                                        0,
+                                    (index) => Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                final AlkasamController
+                                                    controller0 = Get.put(
+                                                        AlkasamController());
+                                                controller0.updateCurrentCategoryId(
+                                                    newId: int.parse(
+                                                        "${controller.generalSearchData.value.categories?[index].id ?? 0}"),
+                                                    getChild: null,
+                                                    subId: controller
+                                                        .generalSearchData
+                                                        .value
+                                                        .brand
+                                                        ?.id);
+                                                Get.to(FliterScreen2(
+                                                  categoryId: int.parse(
+                                                      "${controller.generalSearchData.value.categories?[index].id ?? 0}"),
+                                                ));
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    width: 100,
+                                                    height: 100,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        image: DecorationImage(
+                                                            image: CachedNetworkImageProvider(Connection.urlOfBrands3(
+                                                                image: controller
+                                                                        .generalSearchData
+                                                                        .value
+                                                                        .categories?[
+                                                                            index]
+                                                                        .image
+                                                                        ?.file ??
+                                                                    '')))),
+                                                  ),
+                                                  Text(
+                                                    controller
+                                                            .generalSearchData
+                                                            .value
+                                                            .categories?[index]
+                                                            .title ??
+                                                        '',
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          kTheArabicSansLight,
+                                                      color:
+                                                          AppColors.kGrayColor,
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    10.pw,
-                                  ],
-                                )),
-                      ]),
-                    )),
+                                            10.pw,
+                                          ],
+                                        )),
+                              ]),
+                        )),
+                  },
+                },
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Row(

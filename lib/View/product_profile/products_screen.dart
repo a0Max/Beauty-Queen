@@ -1252,46 +1252,108 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'أكملي إطلالتك...',
-                                            style: TextStyle(
-                                                fontFamily: kTheArabicSansBold,
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.bold,
-                                                color: AppColors.mainColor),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          10.ph,
-                                          HtmlWidget(
-                                            "${controller.productData.value.last.product.completeYourOutfitDescription ?? ''}",
-                                            textStyle: TextStyle(
-                                                fontFamily:
-                                                    kTheArabicSansLight),
-                                          ),
-                                          10.ph,
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 200.h,
-                                            child: CarouselSlider(
-                                              options: CarouselOptions(
-                                                viewportFraction:
-                                                    1.0, // Set to 1.0 for full width current page
-                                                // aspectRatio: 1.3,
-                                                autoPlay: true,
-                                                onPageChanged: (index, reason) {
-                                                  setState(() {
-                                                    currentIndex = index;
-                                                  });
-                                                  log("currentIndex:$currentIndex");
-                                                  // _controller.updateCurrentSlider(
-                                                  //     newSlider: index);
-                                                },
-                                                enlargeCenterPage:
-                                                    true, // Make the current page full width
+                                          if (controller.productData.value.last
+                                                      .completeYourOutfit !=
+                                                  null &&
+                                              controller
+                                                  .productData
+                                                  .value
+                                                  .last
+                                                  .completeYourOutfit
+                                                  .isNotEmpty) ...{
+                                            Text(
+                                              'أكملي إطلالتك...',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      kTheArabicSansBold,
+                                                  fontSize: 16.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColors.mainColor),
+                                              textAlign: TextAlign.start,
+                                            ),
+                                            10.ph,
+                                            HtmlWidget(
+                                              "${controller.productData.value.last.product.completeYourOutfitDescription ?? ''}",
+                                              textStyle: TextStyle(
+                                                  fontFamily:
+                                                      kTheArabicSansLight),
+                                            ),
+                                            10.ph,
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 200.h,
+                                              child: CarouselSlider(
+                                                options: CarouselOptions(
+                                                  viewportFraction: 1.0,
+                                                  // Set to 1.0 for full width current page
+                                                  // aspectRatio: 1.3,
+                                                  autoPlay: true,
+                                                  onPageChanged:
+                                                      (index, reason) {
+                                                    setState(() {
+                                                      currentIndex = index;
+                                                    });
+                                                    log("currentIndex:$currentIndex");
+                                                    // _controller.updateCurrentSlider(
+                                                    //     newSlider: index);
+                                                  },
+                                                  enlargeCenterPage:
+                                                      true, // Make the current page full width
+                                                ),
+                                                items: List.generate(
+                                                    controller
+                                                            .productData
+                                                            .value
+                                                            .last
+                                                            .completeYourOutfit
+                                                            .length ??
+                                                        0,
+                                                    (index) => Container(
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade500)),
+                                                          child:
+                                                              CustomCardWidget2(
+                                                            hideTage: true,
+                                                            imageUrl: Connection.urlOfProducts(
+                                                                image: controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .completeYourOutfit[
+                                                                            index]
+                                                                        .mainImage ??
+                                                                    ''),
+                                                            newArrival: controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .completeYourOutfit[
+                                                                    index] ??
+                                                                SalesProductsModel(),
+                                                            favorite: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .completeYourOutfit[
+                                                                        index]
+                                                                    .wishlist
+                                                                    ?.isNotEmpty ??
+                                                                false,
+                                                          ),
+                                                        )),
+                                                disableGesture: true,
                                               ),
-                                              items: List.generate(
+                                            ),
+                                            10.ph,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: List.generate(
                                                   controller
                                                           .productData
                                                           .value
@@ -1300,79 +1362,30 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                           .length ??
                                                       0,
                                                   (index) => Container(
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 6),
+                                                        height: currentIndex ==
+                                                                index
+                                                            ? 13
+                                                            : 10,
+                                                        width: currentIndex ==
+                                                                index
+                                                            ? 13
+                                                            : 10,
                                                         decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade500)),
-                                                        child:
-                                                            CustomCardWidget2(
-                                                          hideTage: true,
-                                                          imageUrl: Connection.urlOfProducts(
-                                                              image: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .completeYourOutfit[
-                                                                          index]
-                                                                      .mainImage ??
-                                                                  ''),
-                                                          newArrival: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .completeYourOutfit[
-                                                                  index] ??
-                                                              SalesProductsModel(),
-                                                          favorite: controller
-                                                                  .productData
-                                                                  .value
-                                                                  .last
-                                                                  .completeYourOutfit[
-                                                                      index]
-                                                                  .wishlist
-                                                                  ?.isNotEmpty ??
-                                                              false,
-                                                        ),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color:
+                                                                currentIndex ==
+                                                                        index
+                                                                    ? AppColors
+                                                                        .kPinkColor
+                                                                    : AppColors
+                                                                        .klPinkColor),
                                                       )),
-                                              disableGesture: true,
-                                            ),
-                                          ),
-                                          10.ph,
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: List.generate(
-                                                controller
-                                                        .productData
-                                                        .value
-                                                        .last
-                                                        .completeYourOutfit
-                                                        .length ??
-                                                    0,
-                                                (index) => Container(
-                                                      margin: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 6),
-                                                      height:
-                                                          currentIndex == index
-                                                              ? 13
-                                                              : 10,
-                                                      width:
-                                                          currentIndex == index
-                                                              ? 13
-                                                              : 10,
-                                                      decoration: BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: currentIndex ==
-                                                                  index
-                                                              ? AppColors
-                                                                  .kPinkColor
-                                                              : AppColors
-                                                                  .klPinkColor),
-                                                    )),
-                                          )
+                                            )
+                                          }
                                         ],
                                       ),
                                     )
