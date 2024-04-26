@@ -435,12 +435,12 @@ class _HomePageState extends State<HomePage> {
                                     image: _controller.homeData.value
                                             .flash_discount_mobile_image ??
                                         ''),
-                                height: 350.h,
+                                height: 520.h,
                                 width: MediaQuery.of(context).size.width,
                                 fit: BoxFit.fill,
                                 imageBuilder: (context, imageProvider) =>
                                     Container(
-                                  height: 350.h,
+                                  height: 520.h,
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
@@ -489,7 +489,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Positioned(
-                                top: 100.h,
+                                top: 160.h,
                                 left: 30,
                                 child: CountdownTimer(
                                   endTime: DateTime.parse(_controller.homeData
