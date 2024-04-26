@@ -158,6 +158,19 @@ class _HomePageState extends State<HomePage> {
                                             Get.to(ItemProfilePage(
                                                 itemId: int.parse(_controller
                                                     .sliders[index].linkId)));
+                                          } else if (_controller
+                                                  .sliders[index].linkType ==
+                                              LinkTypes.category) {
+                                            AlkasamController controller =
+                                                Get.put(AlkasamController());
+                                            controller.updateCurrentCategoryId(
+                                                newId: int.parse(_controller
+                                                    .sliders[index].linkId),
+                                                getChild: null);
+                                            Get.to(FliterScreen2(
+                                              categoryId: int.parse(_controller
+                                                  .sliders[index].linkId),
+                                            ));
                                           }
                                         },
                                         child: CachedNetworkImage(
@@ -1212,13 +1225,45 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                final AlkasamController controller =
-                                    Get.put(AlkasamController());
-                                controller.updateCurrentCategoryId(
-                                    newId: 187, getChild: false);
-                                Get.to(const FliterScreen(
-                                  categoryId: 187,
-                                ));
+                                if (_controller.homeData.value.discover?.info
+                                        ?.linkType ==
+                                    LinkTypes.brand) {
+                                  Get.to(BrandDetailScreen(
+                                    brandId: int.parse(_controller.homeData
+                                            .value.discover?.info?.linkId ??
+                                        '0'),
+                                  ));
+                                } else if (_controller.homeData.value.discover
+                                        ?.info?.linkType ==
+                                    LinkTypes.product) {
+                                  Get.to(ItemProfilePage(
+                                      itemId: int.parse(_controller.homeData
+                                              .value.discover?.info?.linkId ??
+                                          '0')));
+                                } else if (_controller.homeData.value.discover
+                                        ?.info?.linkType ==
+                                    LinkTypes.category) {
+                                  AlkasamController controller =
+                                      Get.put(AlkasamController());
+                                  controller.updateCurrentCategoryId(
+                                      newId: int.parse(_controller.homeData
+                                              .value.discover?.info?.linkId ??
+                                          '0'),
+                                      getChild: null);
+                                  Get.to(FliterScreen2(
+                                    categoryId: int.parse(_controller.homeData
+                                            .value.discover?.info?.linkId ??
+                                        '0'),
+                                  ));
+                                } else {
+                                  final AlkasamController controller =
+                                      Get.put(AlkasamController());
+                                  controller.updateCurrentCategoryId(
+                                      newId: 187, getChild: false);
+                                  Get.to(const FliterScreen(
+                                    categoryId: 187,
+                                  ));
+                                }
                               },
                               child: Container(
                                 // width: 705.83.w,
