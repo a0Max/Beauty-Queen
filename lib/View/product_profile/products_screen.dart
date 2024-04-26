@@ -64,9 +64,14 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
   getDataOfProduct() async {
     await controller.getCurrentProduct(productId: widget.itemId);
     setState(() {
-      isFavorite =
-          controller.productData.value.last.product.wishlist?.isNotEmpty ??
-              false;
+      try {
+        isFavorite =
+            controller.productData.value.last.product.wishlist?.isNotEmpty ??
+                false;
+      } catch (e) {
+        log("###########${controller.productData.value}");
+        print("###########${controller.productData.value}");
+      }
     });
   }
 

@@ -8,8 +8,8 @@ part of 'is_flash_discount.dart';
 
 IsFlashDiscount _$IsFlashDiscountFromJson(Map<String, dynamic> json) =>
     IsFlashDiscount(
-      status: json['status'] as bool?,
-      endAt: json['end_at'] as bool?,
+      status: json['status'],
+      endAt: json['end_at'],
     );
 
 Map<String, dynamic> _$IsFlashDiscountToJson(IsFlashDiscount instance) =>
