@@ -33,23 +33,36 @@ class AlkasamController extends GetxController {
   RxList parentsCategoryData = [].obs;
   Rx<CategoryModel> subCategoryData = CategoryModel().obs;
   updateCurrentCategoryId(
-      {required int newId, required bool? getChild, int? subId}) async {
-    parentsCategoryData.value = [];
-    subCategoryData.value = CategoryModel();
+      {required int newId,
+      required bool? getChild,
+      int? subId,
+      bool? notRestartChildren}) async {
     currentCategoryId.value = newId;
     getCategoriesDataController(
         currentPage: 1, getByParent: true, subId: subId);
     childCurrentCategoryId.value = 0;
-    childCategoryData.value = [];
+    if (notRestartChildren != true) {
+      childCategoryData.value = [];
+      parentsCategoryData.value = [];
+      subCategoryData.value = CategoryModel();
+    } else {
+      childCurrentCategoryId.value = newId;
+    }
     if (getChild == true) {
-      childCategoryData.value =
-          await _api.getChildDataRequest(parentId: currentCategoryId.value);
+      if (notRestartChildren != true) {
+        childCategoryData.value =
+            await _api.getChildDataRequest(parentId: currentCategoryId.value);
+      }
     } else if (getChild == null) {
       GetCategoryModel value = await _api.getChildDataRequest2(
           parentId: currentCategoryId.value, subId: subId);
-      parentsCategoryData.value = value.parents ?? [];
-      subCategoryData.value = value.category ?? CategoryModel();
-      childCategoryData.value = value.category?.children ?? [];
+      if (notRestartChildren != true) {
+        subCategoryData.value = value.category ?? CategoryModel();
+
+        parentsCategoryData.value = value.parents ?? [];
+
+        childCategoryData.value = value.category?.children ?? [];
+      }
     }
   }
 

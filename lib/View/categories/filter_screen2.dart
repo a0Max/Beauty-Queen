@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:beauty_queen/widgets/shimmer/shimmer_category_filter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,7 +29,8 @@ import 'filterby_category_screen.dart';
 
 class FliterScreen2 extends StatefulWidget {
   final int categoryId;
-  const FliterScreen2({super.key, required this.categoryId});
+  final int? brandId;
+  const FliterScreen2({super.key, required this.categoryId, this.brandId});
 
   @override
   State<FliterScreen2> createState() => _FliterScreenState();
@@ -204,10 +207,21 @@ class _FliterScreenState extends State<FliterScreen2> {
                                       .childCategoryData.value[index].id ==
                                   _controller.childCurrentCategoryId.value,
                               onTap: () {
-                                _controller.updateChildCurrentCategoryId(
-                                    newId: _controller.childCategoryData
-                                            .value[index].id ??
-                                        0);
+                                if (widget.brandId == null) {
+                                  _controller.updateChildCurrentCategoryId(
+                                      newId: _controller.childCategoryData
+                                              .value[index].id ??
+                                          0);
+                                } else {
+                                  _controller.updateCurrentCategoryId(
+                                      newId: _controller.childCategoryData
+                                              .value[index].id ??
+                                          0,
+                                      getChild: true,
+                                      notRestartChildren: true,
+                                      subId: int.parse("${widget.brandId}"));
+                                  log('##:${_controller.childCategoryData.value[index].id}');
+                                }
                               },
                             ),
                           ),

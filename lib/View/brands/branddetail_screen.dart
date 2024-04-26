@@ -240,6 +240,8 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                                                         .brand
                                                         ?.id);
                                                 Get.to(FliterScreen2(
+                                                  brandId: int.parse(
+                                                      "${widget.brandId}"),
                                                   categoryId: int.parse(
                                                       "${controller.generalSearchData.value.categories?[index].id ?? 0}"),
                                                 ));
