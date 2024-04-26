@@ -26,6 +26,7 @@ import '../../widgets/home/custom_horizontal_list.dart';
 import '../../widgets/loading/home_loading.dart';
 import '../brands/branddetail_screen.dart';
 import '../categories/filter_screen.dart';
+import '../categories/filter_screen2.dart';
 import '../magazine/magazine_screen.dart';
 import '../new_arrived/new_arrived_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
@@ -454,8 +455,8 @@ class _HomePageState extends State<HomePage> {
                                     const SizedBox(),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 250.h),
-                                height: 340.h < 305 ? 305 : 345.h,
+                                margin: EdgeInsets.only(top: 420.h),
+                                height: 340.h < 305 ? 305 : 350.h,
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -814,6 +815,21 @@ class _HomePageState extends State<HomePage> {
                                   itemId: int.parse(_controller.homeData.value
                                           .banners?[index].linkId ??
                                       '0')));
+                            } else if (_controller
+                                    .homeData.value.banners?[index].linkType ==
+                                LinkTypes.category) {
+                              AlkasamController controller =
+                                  Get.put(AlkasamController());
+                              controller.updateCurrentCategoryId(
+                                  newId: int.parse(_controller.homeData.value
+                                          .banners?[index].linkId ??
+                                      '0'),
+                                  getChild: null);
+                              Get.to(FliterScreen2(
+                                categoryId: int.parse(_controller.homeData.value
+                                        .banners?[index].linkId ??
+                                    '0'),
+                              ));
                             }
                           },
                           child: Container(

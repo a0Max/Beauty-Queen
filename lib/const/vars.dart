@@ -167,6 +167,7 @@ abstract class LinkTypes {
   static const brand = 'brand';
   static const brands = 'brands';
   static const product = 'product';
+  static const category = 'category';
 }
 
 abstract class SocialMedia {

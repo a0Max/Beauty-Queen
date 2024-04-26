@@ -340,7 +340,7 @@ class _FliterScreenState extends State<FliterScreen> {
                     currentDataProductsLength:
                         "${_controller.dataProducts.value.length}",
                     totalDataProductsLength:
-                        "${_controller.generalSearchData.value.products?.total ?? 1}",
+                        "${_controller.generalSearchData.value.products?.total ?? _controller.dataProducts.value.length}",
                     onTap: () {
                       _controller.getCategoriesDataController();
                     },
