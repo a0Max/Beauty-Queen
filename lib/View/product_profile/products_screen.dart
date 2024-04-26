@@ -10,6 +10,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -1120,72 +1121,214 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
-                                child: Wrap(
-                                  alignment: WrapAlignment.start,
-                                  spacing: 10.w,
+                                child: Row(
+                                  // alignment: WrapAlignment.start,
+                                  // spacing: 10.w,
                                   children: [
-                                    SizedBox(
-                                      width: 57.w,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(5),
-                                            width: 50.w,
-                                            height: 50.h,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    color: AppColors.kCDGColor2
-                                                        .withOpacity(.1))),
-                                            child: SvgPicture.asset(
-                                                AppImages.imageNewItem),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(
+                                          width: 57.w,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(5),
+                                                width: 50.w,
+                                                height: 50.h,
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                        color: AppColors
+                                                            .kCDGColor2
+                                                            .withOpacity(.1))),
+                                                child: SvgPicture.asset(
+                                                    AppImages.imageNewItem),
+                                              ),
+                                              Text(
+                                                tr('newْnusedProduct'),
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontFamily:
+                                                        kTheArabicSansLight),
+                                                textAlign: TextAlign.center,
+                                              )
+                                            ],
                                           ),
-                                          Text(
-                                            tr('newْnusedProduct'),
-                                            style: const TextStyle(
-                                                fontSize: 10,
-                                                fontFamily:
-                                                    kTheArabicSansLight),
-                                            textAlign: TextAlign.center,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 60.w,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(5),
-                                            width: 50.w,
-                                            height: 50.h,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    color: AppColors.kCDGColor2
-                                                        .withOpacity(.1))),
-                                            child: SvgPicture.asset(
-                                                AppImages.imageOriginalItem),
+                                        ),
+                                        10.pw,
+                                        SizedBox(
+                                          width: 60.w,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(5),
+                                                width: 50.w,
+                                                height: 50.h,
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                        color: AppColors
+                                                            .kCDGColor2
+                                                            .withOpacity(.1))),
+                                                child: SvgPicture.asset(
+                                                    AppImages
+                                                        .imageOriginalItem),
+                                              ),
+                                              Text(
+                                                tr('original'),
+                                                style: TextStyle(
+                                                    fontSize: 10,
+                                                    fontFamily:
+                                                        kTheArabicSansLight),
+                                                textAlign: TextAlign.center,
+                                              )
+                                            ],
                                           ),
-                                          Text(
-                                            tr('original'),
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontFamily:
-                                                    kTheArabicSansLight),
-                                            textAlign: TextAlign.center,
-                                          )
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
+                                    Expanded(
+                                      child: (controller
+                                                  .productData.isNotEmpty ??
+                                              false)
+                                          ? ("${controller.productData.value.last.is_flash_discount.status}" ==
+                                                  "true")
+                                              ? CountdownTimer(
+                                                  endTime: DateTime.parse(controller
+                                                              .productData
+                                                              .value
+                                                              .last
+                                                              .is_flash_discount
+                                                              .endAt ??
+                                                          '')
+                                                      .millisecondsSinceEpoch,
+                                                  widgetBuilder: (context,
+                                                      currentRemainingTime) {
+                                                    return Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'ثانيه:',
+                                                              style: timerTextStyle
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          0.6 *
+                                                                              14),
+                                                            ),
+                                                            Text(
+                                                              currentRemainingTime
+                                                                      ?.sec
+                                                                      .toString() ??
+                                                                  '',
+                                                              style: timerTextStyle
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          3 * 14),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            const Text(
+                                                              ':',
+                                                              style:
+                                                                  timerTextStyle,
+                                                            ),
+                                                            10.ph,
+                                                          ],
+                                                        ),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'دقيقه:',
+                                                              style: timerTextStyle
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          0.6 *
+                                                                              14),
+                                                            ),
+                                                            Text(
+                                                              currentRemainingTime
+                                                                      ?.min
+                                                                      .toString() ??
+                                                                  '',
+                                                              style: timerTextStyle
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          3 * 14),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            const Text(
+                                                              ':',
+                                                              style:
+                                                                  timerTextStyle,
+                                                            ),
+                                                            10.ph,
+                                                          ],
+                                                        ),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'ساعه:',
+                                                              style: timerTextStyle
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          0.6 *
+                                                                              14),
+                                                            ),
+                                                            Text(
+                                                              currentRemainingTime
+                                                                      ?.hours
+                                                                      .toString() ??
+                                                                  '',
+                                                              style: timerTextStyle
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          3 * 14),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                  onEnd: () {
+                                                    print('Countdown ended');
+                                                    // You can do something here when the countdown ends
+                                                  },
+                                                )
+                                              : SizedBox()
+                                          : SizedBox(),
+                                    )
                                   ],
                                 ),
                               ),

@@ -490,73 +490,167 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Positioned(
-                                top: 160.h,
-                                left: 30,
-                                child: CountdownTimer(
-                                  endTime: DateTime.parse(_controller.homeData
-                                              .value.flash_discount_end_at ??
-                                          '')
-                                      .millisecondsSinceEpoch,
-                                  widgetBuilder:
-                                      (context, currentRemainingTime) {
-                                    return Row(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'ثانيه:',
-                                              style: timerTextStyle.copyWith(
-                                                  fontSize: 15),
-                                            ),
-                                            Text(
-                                              currentRemainingTime?.sec
-                                                      .toString() ??
-                                                  '',
-                                              style: timerTextStyle,
-                                            ),
-                                          ],
-                                        ),
-                                        5.pw,
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'دقيقه:',
-                                              style: timerTextStyle.copyWith(
-                                                  fontSize: 15),
-                                            ),
-                                            Text(
-                                              currentRemainingTime?.min
-                                                      .toString() ??
-                                                  '',
-                                              style: timerTextStyle,
-                                            ),
-                                          ],
-                                        ),
-                                        5.pw,
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'ساعه:',
-                                              style: timerTextStyle.copyWith(
-                                                  fontSize: 15),
-                                            ),
-                                            Text(
-                                              currentRemainingTime?.hours
-                                                      .toString() ??
-                                                  '',
-                                              style: timerTextStyle,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                  onEnd: () {
-                                    print('Countdown ended');
-                                    // You can do something here when the countdown ends
-                                  },
-                                ),
-                              )
+                                  top: 160.h,
+                                  left: 30,
+                                  child: CountdownTimer(
+                                    endTime: DateTime.parse(_controller.homeData
+                                                .value.flash_discount_end_at ??
+                                            '')
+                                        .millisecondsSinceEpoch,
+                                    widgetBuilder:
+                                        (context, currentRemainingTime) {
+                                      return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'ثانيه:',
+                                                style: timerTextStyle.copyWith(
+                                                    fontSize: 0.6 * 14),
+                                              ),
+                                              Text(
+                                                currentRemainingTime?.sec
+                                                        .toString() ??
+                                                    '',
+                                                style: timerTextStyle.copyWith(
+                                                    fontSize: 3 * 14),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              const Text(
+                                                ':',
+                                                style: timerTextStyle,
+                                              ),
+                                              10.ph,
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'دقيقه:',
+                                                style: timerTextStyle.copyWith(
+                                                    fontSize: 0.6 * 14),
+                                              ),
+                                              Text(
+                                                currentRemainingTime?.min
+                                                        .toString() ??
+                                                    '',
+                                                style: timerTextStyle.copyWith(
+                                                    fontSize: 3 * 14),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              const Text(
+                                                ':',
+                                                style: timerTextStyle,
+                                              ),
+                                              10.ph,
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'ساعه:',
+                                                style: timerTextStyle.copyWith(
+                                                    fontSize: 0.6 * 14),
+                                              ),
+                                              Text(
+                                                currentRemainingTime?.hours
+                                                        .toString() ??
+                                                    '',
+                                                style: timerTextStyle.copyWith(
+                                                    fontSize: 3 * 14),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                    onEnd: () {
+                                      print('Countdown ended');
+                                      // You can do something here when the countdown ends
+                                    },
+                                  )
+
+                                  // CountdownTimer(
+                                  //   endTime: DateTime.parse(_controller.homeData
+                                  //               .value.flash_discount_end_at ??
+                                  //           '')
+                                  //       .millisecondsSinceEpoch,
+                                  //   widgetBuilder:
+                                  //       (context, currentRemainingTime) {
+                                  //     return Row(
+                                  //       children: [
+                                  //         Column(
+                                  //           children: [
+                                  //             Text(
+                                  //               'ثانيه:',
+                                  //               style: timerTextStyle.copyWith(
+                                  //                   fontSize: 15),
+                                  //             ),
+                                  //             Text(
+                                  //               currentRemainingTime?.sec
+                                  //                       .toString() ??
+                                  //                   '',
+                                  //               style: timerTextStyle,
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //         5.pw,
+                                  //         Column(
+                                  //           children: [
+                                  //             Text(
+                                  //               'دقيقه:',
+                                  //               style: timerTextStyle.copyWith(
+                                  //                   fontSize: 15),
+                                  //             ),
+                                  //             Text(
+                                  //               currentRemainingTime?.min
+                                  //                       .toString() ??
+                                  //                   '',
+                                  //               style: timerTextStyle,
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //         5.pw,
+                                  //         Column(
+                                  //           children: [
+                                  //             Text(
+                                  //               'ساعه:',
+                                  //               style: timerTextStyle.copyWith(
+                                  //                   fontSize: 15),
+                                  //             ),
+                                  //             Text(
+                                  //               currentRemainingTime?.hours
+                                  //                       .toString() ??
+                                  //                   '',
+                                  //               style: timerTextStyle,
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //       ],
+                                  //     );
+                                  //   },
+                                  //   onEnd: () {
+                                  //     print('Countdown ended');
+                                  //     // You can do something here when the countdown ends
+                                  //   },
+                                  // ),
+                                  )
                             ],
                           ),
                         ),
