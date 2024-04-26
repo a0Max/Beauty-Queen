@@ -4,6 +4,7 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ import '../../const/app_images.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/AlKasam_controller/flash_discounts_controller.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
@@ -27,6 +29,7 @@ import '../../widgets/loading/home_loading.dart';
 import '../brands/branddetail_screen.dart';
 import '../categories/filter_screen.dart';
 import '../categories/filter_screen2.dart';
+import '../flash-discounts/flash-discounts.dart';
 import '../magazine/magazine_screen.dart';
 import '../new_arrived/new_arrived_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
@@ -431,28 +434,38 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           child: Stack(
                             children: [
-                              CachedNetworkImage(
-                                imageUrl: Connection.urlOfFlash(
-                                    image: _controller.homeData.value
-                                            .flash_discount_mobile_image ??
-                                        ''),
-                                height: 520.h,
-                                width: MediaQuery.of(context).size.width,
-                                fit: BoxFit.fill,
-                                imageBuilder: (context, imageProvider) =>
-                                    Container(
+                              GestureDetector(
+                                onTap: () {
+                                  FlashDiscountsController controller =
+                                      Get.put(FlashDiscountsController());
+                                  controller.getCategoriesDataController(
+                                      currentPage: 1);
+                                  Get.to(FlashDiscountsScreen());
+                                },
+                                child: CachedNetworkImage(
+                                  imageUrl: Connection.urlOfFlash(
+                                      image: _controller.homeData.value
+                                              .flash_discount_mobile_image ??
+                                          ''),
                                   height: 520.h,
                                   width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.fill,
+                                  fit: BoxFit.fill,
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    height: 520.h,
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
+                                  placeholder: (context, url) =>
+                                      const SizedBox(),
+                                  errorWidget: (context, url, error) =>
+                                      const SizedBox(),
                                 ),
-                                placeholder: (context, url) => const SizedBox(),
-                                errorWidget: (context, url, error) =>
-                                    const SizedBox(),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 420.h),

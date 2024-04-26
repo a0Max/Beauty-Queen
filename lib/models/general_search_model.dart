@@ -18,6 +18,7 @@ class GeneralSearchModel {
   PaginationModel? newArrivals;
   int? salesCount;
   int? count;
+  String? title;
   List<BrandModel>? brands;
   List<BrandModel>? brandsIds;
   BrandModel? brand;
@@ -33,6 +34,7 @@ class GeneralSearchModel {
       this.offers,
       this.brandsIds,
       this.brands,
+      this.title,
       this.count,
       this.gifts,
       this.categories,

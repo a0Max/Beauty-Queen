@@ -13,12 +13,14 @@ import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
+import '../../models/label_model.dart';
 import '../../models/options_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
 
 class CustomCardWidget extends StatefulWidget {
   final String imageUrl;
+  final LabelModel? newTag;
   final SalesProductsModel newArrival;
   final double? width;
   final bool favorite;
@@ -31,6 +33,7 @@ class CustomCardWidget extends StatefulWidget {
     required this.imageUrl,
     required this.newArrival,
     this.width,
+    this.newTag,
     required this.favorite,
     this.hideLike = false,
     this.hideTage = false,
@@ -467,7 +470,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   // if (widget.sale == true)
                   if ((widget.newArrival.labels != null) &&
                       (widget.newArrival.labels?.isNotEmpty ?? false) &&
-                      widget.hideTage != true)
+                      widget.hideTage != true) ...{
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -485,6 +488,26 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                             fontFamily: kTheArabicSansLight),
                       ),
                     )
+                  } else if (widget.newTag != null &&
+                      widget.hideTage != true) ...{
+                    Container(
+                        margin: EdgeInsets.only(top: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        color: Color(int.parse(
+                            "ff${widget.newTag?.backgroundColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
+                            radix: 16)),
+                        child: Text(
+                          widget.newTag?.text ?? '',
+                          style: TextStyle(
+                              color: Color(int.parse(
+                                  "ff${widget.newTag?.textColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
+                                  radix: 16)),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              fontFamily: kTheArabicSansLight),
+                        ))
+                  }
                 ],
               ),
               Container(
