@@ -1,3 +1,5 @@
+import 'package:beauty_queen/const/vars.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,7 +18,9 @@ class ColorContainer extends StatelessWidget {
     this.height,
     this.width,
     this.color,
-    this.onClick, this.selectedId, this.currentId,
+    this.onClick,
+    this.selectedId,
+    this.currentId,
   });
 
   @override
@@ -26,15 +30,16 @@ class ColorContainer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: color,
-            border: Border.all(color:selectedId==currentId?AppColors.mainColor:Colors.transparent )
-        ),
+            border: Border.all(
+                color: selectedId == currentId
+                    ? AppColors.mainColor
+                    : Colors.transparent)),
         height: height,
         width: width,
       ),
     );
   }
 }
-
 
 class TextContainer extends StatelessWidget {
   final double? height;
@@ -49,7 +54,9 @@ class TextContainer extends StatelessWidget {
     this.height,
     this.width,
     this.text,
-    this.onClick, this.selectedId, this.currentId,
+    this.onClick,
+    this.selectedId,
+    this.currentId,
   });
 
   @override
@@ -58,13 +65,19 @@ class TextContainer extends StatelessWidget {
       onTap: onClick,
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color:selectedId==currentId?AppColors.mainColor:AppColors.kCDGColor2 ),
-          borderRadius: BorderRadius.circular(5)
-        ),
+            border: Border.all(
+                color: selectedId == currentId
+                    ? AppColors.mainColor
+                    : AppColors.kCDGColor2),
+            borderRadius: BorderRadius.circular(5)),
         // height: height,
         // width: width,
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-        child: Text(text??''),
+        // padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        child: CachedNetworkImage(
+          imageUrl: Connection.urlOfOptions(image: text ?? ''),
+          height: 50,
+          width: 50,
+        ),
       ),
     );
   }

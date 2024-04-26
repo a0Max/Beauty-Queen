@@ -13,6 +13,7 @@ class ProductOptionsModel {
   int? productId;
   int? userId;
   String? createdAt;
+  String? isColor;
   String? updatedAt;
   List<OptionsModel>? options;
   SalesProductsModel? product;
@@ -23,8 +24,9 @@ class ProductOptionsModel {
       {this.id,
       this.title,
       this.productId,
-        this.product,
-        this.userId,
+      this.product,
+      this.isColor,
+      this.userId,
       this.createdAt,
       this.updatedAt,
       this.options,
@@ -41,9 +43,11 @@ class ProductOptionsModel {
         productId: json['product_id'] as int?,
         userId: json['user_id'] as int?,
         createdAt: json['created_at'] as String?,
+        isColor: json['is_color'] as String?,
         product: json['product'] == null
             ? null
-            : SalesProductsModel.fromJson(json['product'] as Map<String, dynamic>),
+            : SalesProductsModel.fromJson(
+                json['product'] as Map<String, dynamic>),
         updatedAt: json['updated_at'] as String?,
         options: (json['options'] as List<dynamic>?)
             ?.map((e) => OptionsModel.fromJson(e as Map<String, dynamic>))
@@ -58,9 +62,11 @@ class ProductOptionsModel {
         title: json['title'] as String?,
         productId: json['product_id'] as int?,
         createdAt: json['created_at'] as String?,
+        isColor: json['is_color'] as String?,
         product: json['product'] == null
             ? null
-            : SalesProductsModel.fromJson(json['product'] as Map<String, dynamic>),
+            : SalesProductsModel.fromJson(
+                json['product'] as Map<String, dynamic>),
         userId: json['user_id'] as int?,
         updatedAt: json['updated_at'] as String?,
         options: (json['options'] as List<dynamic>?)

@@ -629,14 +629,24 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     if (controller
-                                                            .productData
-                                                            .value
-                                                            .last
-                                                            .productOptions?[
-                                                                index]
-                                                            .title ==
-                                                        TypeOfOptions
-                                                            .color) ...{
+                                                                .productData
+                                                                .value
+                                                                .last
+                                                                .productOptions?[
+                                                                    index]
+                                                                .title ==
+                                                            TypeOfOptions
+                                                                .color &&
+                                                        controller
+                                                                .productData
+                                                                .value
+                                                                .last
+                                                                .productOptions?[
+                                                                    index]
+                                                                .options
+                                                                .first
+                                                                .isColor ==
+                                                            "1") ...{
                                                       Wrap(
                                                         spacing: 10,
                                                         runSpacing: 10,
@@ -856,7 +866,14 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                               .r),
                                                                 ),
                                                                 Text(
-                                                                    "${value.title} "),
+                                                                    "${value.title} ",
+                                                                    style: kHintTextStyle.copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontSize:
+                                                                            0.8 *
+                                                                                14)),
                                                               ],
                                                             ),
                                                           );
@@ -907,7 +924,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                           index]
                                                                       .options?[
                                                                           index2]
-                                                                      .size,
+                                                                      .mainImage
+                                                                      ?.file,
                                                                   onClick: () {
                                                                     if ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
                                                                         controller.productData.value.last.productOptions?[index].options?[index2].stock ==
@@ -1002,6 +1020,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         ),
                                                         onChanged:
                                                             (selectedItem) {
+                                                          log('selectedItem:${selectedItem?.title}');
+                                                          log('selectedItem:${selectedItem?.id}');
                                                           if ((selectedItem
                                                                       ?.stock ==
                                                                   null ||
@@ -1076,7 +1096,14 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                               .r),
                                                                 ),
                                                                 Text(
-                                                                    "${value.title} "),
+                                                                    "${value.title}",
+                                                                    style: kHintTextStyle.copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontSize:
+                                                                            0.8 *
+                                                                                14)),
                                                               ],
                                                             ),
                                                           );
