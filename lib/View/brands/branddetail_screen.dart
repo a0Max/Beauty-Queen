@@ -202,9 +202,6 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                     ),
                   },
                 },
-                SizedBox(
-                  height: 61.h,
-                ),
                 if (controller.isLoading.value == true) ...{
                   const SizedBox()
                 } else ...{
@@ -213,7 +210,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                               .generalSearchData.value.categories?.isNotEmpty ??
                           false)) ...{
                     SizedBox(
-                      height: 61.h,
+                      height: 20.h,
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12.w),
