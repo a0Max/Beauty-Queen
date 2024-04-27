@@ -19,6 +19,7 @@ class AppImages {
   static const String imageMenu = "${mainPathToSvg}menu.svg";
   static const String imagePerson = "${mainPathToSvg}person.svg";
   static const String imageSearch = "${mainPathToSvg}search.svg";
+  static const String orderState = "${mainPathToSvg}order_state.svg";
   static const String imageShop = "${mainPathToSvg}shop.svg";
   static const String gifLogo = "${mainPathToLottie}animated_gif.json";
   static const String logoGif = "${mainPathToLottie}logo_gif.gif";
