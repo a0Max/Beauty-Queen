@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,12 +14,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/validator.dart';
+import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/complete_order_controller/basketController.dart';
+import '../../controller/wallet_controller/wallet_controller.dart';
 import '../../models/city_area_model.dart';
 import 'package:quiver/strings.dart';
+import '../../models/way_to_pay.dart';
 import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/based/error_pop_up.dart';
+import '../../widgets/based/loading.dart';
 import '../../widgets/complete_order/dotted_line_painter.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 
@@ -36,7 +41,10 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController extraNoteController = TextEditingController(
       text: kDebugMode ? 'هذا الاوردر هو عبارة عن test' : '');
+  WalletController controller2 = Get.put(WalletController());
 
+  WayToPay? resultOfWayToPay;
+  List<WayToPay> listOfWayToPay = [];
   @override
   void initState() {
     super.initState();
@@ -46,6 +54,20 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   getDataOrder() async {
+    await controller2.getAllWallet();
+    listOfWayToPay
+        .add(WayToPay(wayToPay: "نقداً عند الاستلام", keyOfWayToPay: 'cash'));
+    if (controller.userData.value.accountType == AccountTypes.queena) {
+      log('controller2.walletAmountState.value:${controller2.walletAmountState.value}');
+      listOfWayToPay.add(WayToPay(
+          wayToPay: "${controller2.walletAmountState.value}محفظتي ",
+          price: controller2.walletAmountState.value,
+          keyOfWayToPay: 'user_balance'));
+    }
+    basketController.selectPaymentMethod('cash');
+    setState(() {
+      resultOfWayToPay = listOfWayToPay.first;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? saveOrderState = prefs.getBool('saveDataOrder');
     if (saveOrderState == true) {
@@ -80,165 +102,154 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kTextGrayColor.withOpacity(.1),
-      body: Obx(() => Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                    child: Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 19.w),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Row(
-                              children: [
-                                Image.asset(
-                                  AppImages.carImage,
-                                  width: 30,
-                                  height: 30,
-                                ),
-                                SizedBox(
-                                  width: 16.w,
-                                ),
-                                Text(
-                                  'طريقة الإستلام',
-                                  style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
-                                      fontSize: 22.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.kBlackColor),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 33.h,
-                            ),
-                          ],
+      // backgroundColor: AppColors.kTextGrayColor.withOpacity(.1),
+      body: Obx(
+        () => SingleChildScrollView(
+            child: Column(
+          children: [
+            Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 19.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'تحديد طريقة استلام الطلب',
+                          style: kTheSansTextStyle.copyWith(
+                              fontWeight: FontWeight.w700,
+                              fontFamily: kTheArabicSansBold,
+                              fontSize: 15.sp),
                         ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.symmetric(
-                                vertical: BorderSide(
-                                    color: AppColors.kTextGrayColor
-                                        .withOpacity(.3)))),
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: Transform.scale(
-                                scale: 1.5,
-                                child: Radio(
-                                  fillColor:
-                                      MaterialStateProperty.resolveWith<Color>(
-                                          (states) {
-                                    return AppColors
-                                        .kPrimaryColor; // Unselected color for the radio button
-                                  }),
-                                  activeColor: AppColors.kWhiteColor,
-                                  value: '1',
-                                  groupValue: basketController
-                                      .selectedPaymentMethod2.value,
-                                  onChanged: (value) => basketController
-                                      .selectPaymentMethod2(value.toString()),
-                                ),
+                        5.ph,
+                        GestureDetector(
+                          onTap: () {
+                            basketController.selectPaymentMethod2('1');
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.radio_button_checked,
+                                color: AppColors.kPrimaryColor,
                               ),
-                              title: Text(
+                              Text(
                                 'الاستلام بخدمة التوصيل',
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
-                                    fontSize: 20.sp,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.kPrimaryColor),
                               ),
-                            ),
-                            Divider(
-                              color: AppColors.kTextGrayColor.withOpacity(.3),
-                              thickness: 1.w,
-                              indent: 10.w,
-                              endIndent: 10.w,
-                            ),
-                            30.ph,
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 15.w),
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              height: 49.76.h,
-                              alignment: Alignment.center,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(11.06.r),
-                                border: Border.all(
-                                    width: 1.11.w,
-                                    color: const Color(0xFFD9DEE2)),
-                              ),
-                              child: DropdownButton<CityAreaModel>(
-                                underline: const SizedBox(),
-                                iconEnabledColor: Colors.transparent,
-                                isDense: true,
-                                onTap: () => log('open'),
-                                isExpanded: true,
-                                value: basketController
-                                            .selectedCityData.value.id ==
-                                        null
-                                    ? null
-                                    : basketController.selectedCityData.value,
-                                items: controller.citiesData.value.map((value) {
-                                  return DropdownMenuItem<CityAreaModel>(
-                                    value: value,
-                                    child: Text(value.name,
-                                        style: TextStyle(
-                                          color: AppColors.kBlackColor,
-                                          fontSize: 14.sp,
-                                          fontFamily: kTheArabicSansLight,
-                                          fontWeight: FontWeight.w400,
-                                          height: 0,
-                                        )),
+                            ],
+                          ),
+                        ),
+                        5.ph,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CustomAlertDialog(
+                                    buttonTwo: false,
+                                    dilougText: tr('not_availble_now2'),
+                                    buttonOneText: tr('okay'),
                                   );
-                                }).toList(),
-                                onChanged: (CityAreaModel? newValue) {
-                                  basketController.updateSelectedCity(
-                                      newCity: newValue ?? CityAreaModel());
-                                },
-                                hint: Text(
-                                  tr('city'),
-                                  style: TextStyle(
-                                    color: const Color(0xFF2C3E50),
-                                    fontSize: 17.69.sp,
-                                    fontFamily: kTheArabicSansLight,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  textAlign: TextAlign.start,
-                                ),
-                                icon: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.black,
-                                ),
+                                });
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.radio_button_off,
+                                color: AppColors.greyColor.withOpacity(.4),
                               ),
+                              Text(
+                                'الحجز و الاستلام من المتجر',
+                                style: TextStyle(
+                                    fontFamily: kTheArabicSansLight,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.kPrimaryColor),
+                              ),
+                            ],
+                          ),
+                        ),
+                        30.ph,
+                        Container(
+                          // margin: EdgeInsets.symmetric(horizontal: 15.w),
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          height: 49.76.h,
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(11.06.r),
+                            border: Border.all(
+                                width: 1.11.w, color: const Color(0xFFD9DEE2)),
+                          ),
+                          child: DropdownButton<CityAreaModel>(
+                            underline: const SizedBox(),
+                            iconEnabledColor: Colors.transparent,
+                            isDense: true,
+                            onTap: () => log('open'),
+                            isExpanded: true,
+                            value: basketController.selectedCityData.value.id ==
+                                    null
+                                ? null
+                                : basketController.selectedCityData.value,
+                            items: controller.citiesData.value.map((value) {
+                              return DropdownMenuItem<CityAreaModel>(
+                                value: value,
+                                child: Text(value.name,
+                                    style: TextStyle(
+                                      color: AppColors.kBlackColor,
+                                      fontSize: 14.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    )),
+                              );
+                            }).toList(),
+                            onChanged: (CityAreaModel? newValue) {
+                              basketController.updateSelectedCity(
+                                  newCity: newValue ?? CityAreaModel());
+                            },
+                            hint: Text(
+                              tr('city'),
+                              style: TextStyle(
+                                color: const Color(0xFF2C3E50),
+                                fontSize: 17.69.sp,
+                                fontFamily: kTheArabicSansLight,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              textAlign: TextAlign.start,
                             ),
-                            20.ph,
-                            if (basketController.loadingArea.value == true) ...{
-                              const Center(
-                                child: CupertinoActivityIndicator(),
-                              )
-                            } else if (basketController.loadingArea.value !=
-                                    true &&
-                                (basketController
-                                        .areaData.value.areas?.isNotEmpty ??
-                                    false) &&
-                                basketController
-                                        .selectedCityData.value.hasArea !=
-                                    "0") ...{
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        if (basketController.loadingArea.value == true) ...{
+                          const Center(
+                            child: CupertinoActivityIndicator(),
+                          )
+                        } else if (basketController.loadingArea.value != true &&
+                            (basketController
+                                    .areaData.value.areas?.isNotEmpty ??
+                                false) &&
+                            basketController.selectedCityData.value.hasArea !=
+                                "0") ...{
+                          Column(
+                            children: [
+                              15.ph,
                               Container(
-                                margin: EdgeInsets.symmetric(horizontal: 15.w),
+                                // margin: EdgeInsets.symmetric(horizontal: 15.w),
                                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                                 height: 49.76.h,
                                 alignment: Alignment.center,
@@ -293,416 +304,347 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                   ),
                                 ),
                               ),
+                            ],
+                          )
+                        },
+                        15.ph,
+                        TextFieldAuthWidget(
+                          hindText: tr('address'),
+                          controler: addressController,
+                          hintStyle: TextStyle(
+                            color: const Color(0xFF2C3E50),
+                            fontSize: 17.69.sp,
+                            fontFamily: kTheArabicSansLight,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          keyboardType: TextInputType.name,
+                          validatorTextField: (val) {
+                            return Validator().validatorRequired(val);
+                          },
+                        ),
+                        15.ph,
+                        TextFieldAuthWidget(
+                          hindText: tr('kEnterYourPhoneNumber'),
+                          // titleText: tr('kPhoneNumber'),
+                          controler: phoneController,
+                          keyboardType: TextInputType.phone,
+                          hintStyle: TextStyle(
+                            color: const Color(0xFF2C3E50),
+                            fontSize: 17.69.sp,
+                            fontFamily: kTheArabicSansLight,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          validatorTextField: (val) {
+                            return Validator().validatorPhoneNumber(val);
+                          },
+                        ),
+                        15.ph,
+                        TextFieldAuthWidget(
+                          hindText: tr('extra_note'),
+                          controler: extraNoteController,
+                          hintStyle: TextStyle(
+                            color: const Color(0xFF2C3E50),
+                            fontSize: 17.69.sp,
+                            fontFamily: kTheArabicSansLight,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          keyboardType: TextInputType.name,
+                        ),
+                        15.ph,
+                        Container(
+                          // margin: EdgeInsets.symmetric(horizontal: 15.w),
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          height: 49.76.h,
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(11.06.r),
+                            border: Border.all(
+                                width: 1.11.w, color: const Color(0xFFD9DEE2)),
+                          ),
+                          child: DropdownButton<WayToPay>(
+                            underline: const SizedBox(),
+                            iconEnabledColor: Colors.transparent,
+                            isDense: true,
+                            // onTap: () => log('open'),
+                            isExpanded: true,
+                            value: resultOfWayToPay,
+                            //             ==
+                            //         null
+                            //     ? null
+                            //     : basketController.selectedCityData.value,
+                            items: listOfWayToPay.map((value) {
+                              return DropdownMenuItem<WayToPay>(
+                                value: value,
+                                child: Text(value.wayToPay,
+                                    style: TextStyle(
+                                      color: AppColors.kBlackColor,
+                                      fontSize: 14.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    )),
+                              );
+                            }).toList(),
+                            onChanged: (WayToPay? newValue) {
+                              setState(() {
+                                resultOfWayToPay = newValue;
+                              });
+                              if (newValue?.keyOfWayToPay == 'cash') {
+                                basketController.selectPaymentMethod('cash');
+                              } else if (newValue?.keyOfWayToPay ==
+                                  'user_balance') {
+                                if (num.parse(
+                                            "${basketController.totalOrderDetails.value.totalPrice ?? '0'}") +
+                                        num.parse(basketController
+                                                .totalOrderDelivery
+                                                .value
+                                                .shippingCost ??
+                                            '0') >
+                                    num.parse(
+                                        controller2.walletAmountState.value)) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return CustomAlertDialog(
+                                          buttonTwo: false,
+                                          dilougText: tr('no_enaph_money'),
+                                          buttonOneText: tr('okay'),
+                                        );
+                                      });
+                                } else {
+                                  basketController
+                                      .selectPaymentMethod('user_balance');
+                                }
+                              }
+
+                              // basketController.updateSelectedCity(
+                              //     newCity: newValue ?? CityAreaModel());
                             },
-                            20.ph,
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 15.w),
-                              child: TextFieldAuthWidget(
-                                hindText: tr('address'),
-                                controler: addressController,
-                                hintStyle: TextStyle(
-                                  color: const Color(0xFF2C3E50),
-                                  fontSize: 17.69.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                keyboardType: TextInputType.name,
-                                validatorTextField: (val) {
-                                  return Validator().validatorRequired(val);
-                                },
+                            hint: Text(
+                              'طريقة الدقع',
+                              style: TextStyle(
+                                color: const Color(0xFF2C3E50),
+                                fontSize: 17.69.sp,
+                                fontFamily: kTheArabicSansLight,
+                                fontWeight: FontWeight.w600,
                               ),
+                              textAlign: TextAlign.start,
                             ),
-                            20.ph,
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 15.w),
-                              child: TextFieldAuthWidget(
-                                hindText: tr('kEnterYourPhoneNumber'),
-                                // titleText: tr('kPhoneNumber'),
-                                controler: phoneController,
-                                keyboardType: TextInputType.phone,
-                                hintStyle: TextStyle(
-                                  color: const Color(0xFF2C3E50),
-                                  fontSize: 17.69.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                validatorTextField: (val) {
-                                  return Validator().validatorPhoneNumber(val);
-                                },
-                              ),
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
                             ),
-                            20.ph,
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 15.w),
-                              child: TextFieldAuthWidget(
-                                hindText: tr('extra_note'),
-                                controler: extraNoteController,
-                                hintStyle: TextStyle(
-                                  color: const Color(0xFF2C3E50),
-                                  fontSize: 17.69.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                keyboardType: TextInputType.name,
-                              ),
+                          ),
+                        ),
+                        15.ph,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'تكلفه التوصيل:',
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansBold,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.mainColor),
                             ),
-                            20.ph,
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 15.w),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 28.h,
-                                    width: 28.w,
-                                    child: Checkbox(
-                                      side: BorderSide(
-                                          color: AppColors.kTextGrayColor,
-                                          width: 1.5.w),
-                                      checkColor: AppColors.kWhiteColor,
-                                      activeColor: AppColors.kPrimaryColor,
-                                      value: basketController.isChecked.value,
-                                      onChanged: (bool? value) {
-                                        basketController.updateChecked(
-                                            newCheck: value);
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                      width: 8
-                                          .w), // Add some spacing between the checkbox and text
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width -
-                                        (8.w +
-                                            28.w +
-                                            15.w +
-                                            15.w +
-                                            19.w +
-                                            19.w +
-                                            2.w),
-                                    child: Text(
-                                      'حفظ البيانات للإستخدام في المرة القادمة',
-                                      style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.kBlackColor),
-                                      overflow: TextOverflow.visible,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              basketController
+                                      .totalOrderDelivery.value.shippingCost ??
+                                  '',
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansLight,
+                                  fontSize: 19.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.kBlackColor),
                             ),
                           ],
                         ),
-                      ),
-                      Container(
-                        color: AppColors.kTextGrayColor.withOpacity(.1),
-                        child: Column(
+                        10.ph,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            15.ph,
-                            Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 20.55.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'تكلفه التوصيل:',
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.kBlackColor),
-                                  ),
-                                  Text(
-                                    basketController.totalOrderDelivery.value
-                                            .shippingCost ??
-                                        '',
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 19.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.kBlackColor),
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              'الوقت المتوقع للوصول:',
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansBold,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.mainColor),
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 20.55.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'الوقت المتوقع للوصول:',
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.kBlackColor),
-                                  ),
-                                  Text(
-                                    basketController.totalOrderDelivery.value
-                                            .shippingTime ??
-                                        '',
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 19.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.kBlackColor),
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              basketController
+                                      .totalOrderDelivery.value.shippingTime ??
+                                  '',
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansLight,
+                                  fontSize: 19.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.kBlackColor),
                             ),
-                            15.ph,
+                          ],
+                        ),
+                        10.ph,
+                        Row(
+                          children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: CustomPaint(
-                                painter: DottedLinePainter(),
+                              height: 28.h,
+                              width: 28.w,
+                              child: Checkbox(
+                                side: BorderSide(
+                                    color: AppColors.kTextGrayColor,
+                                    width: 1.5.w),
+                                checkColor: AppColors.kWhiteColor,
+                                activeColor: AppColors.kPrimaryColor,
+                                value: basketController.isChecked.value,
+                                onChanged: (bool? value) {
+                                  basketController.updateChecked(
+                                      newCheck: value);
+                                },
                               ),
                             ),
-                            15.ph,
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '${tr('total')}:',
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.kBlackColor),
-                                  ),
-                                  Text(
-                                    '${num.parse("${basketController.totalOrderDetails.value.totalPrice ?? '0'}") + num.parse(basketController.totalOrderDelivery.value.shippingCost ?? '0')} ${tr('Del')}',
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 21.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.kPrimaryColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            15.ph
-                          ],
-                        ),
-                      ),
-                      Container(
-                        color: AppColors.kTextGrayColor.withOpacity(.4),
-                        height: 10.h,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
-                          color: AppColors.kTextGrayColor.withOpacity(.1),
-                        ),
-                        child: Column(
-                          children: [
-                            15.ph,
-                            Row(children: <Widget>[
-                              Expanded(
-                                  child: Divider(
-                                endIndent: 10.w,
-                                color: AppColors.kTextGrayColor.withOpacity(.3),
-                                thickness: 1.w,
-                                indent: 10.w,
-                              )),
-                              Text(
-                                'أو',
+                            SizedBox(
+                                width: 8
+                                    .w), // Add some spacing between the checkbox and text
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width -
+                                  (8.w +
+                                      28.w +
+                                      15.w +
+                                      15.w +
+                                      19.w +
+                                      19.w +
+                                      2.w),
+                              child: Text(
+                                'حفظ البيانات للإستخدام في المرة القادمة',
                                 style: TextStyle(
                                     fontFamily: kTheArabicSansLight,
-                                    fontSize: 28.sp,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.kBlackColor),
+                                overflow: TextOverflow.visible,
                               ),
-                              Expanded(
-                                  child: Divider(
-                                endIndent: 10.w,
-                                color: AppColors.kTextGrayColor.withOpacity(.3),
-                                thickness: 1.w,
-                                indent: 10.w,
-                              )),
-                            ]),
-                            15.ph,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ListTile(
-                                    leading: Transform.scale(
-                                      scale: 1.5,
-                                      child: Radio(
-                                        fillColor: MaterialStateProperty
-                                            .resolveWith<Color>((states) {
-                                          return AppColors
-                                              .kPrimaryColor; // Unselected color for the radio button
-                                        }),
-                                        activeColor: AppColors.kWhiteColor,
-                                        value: '2',
-                                        groupValue: basketController
-                                            .selectedPaymentMethod2.value,
-                                        onChanged: (value) {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return CustomAlertDialog(
-                                                  buttonTwo: false,
-                                                  dilougText:
-                                                      tr('not_availble_now2'),
-                                                  buttonOneText: tr('okay'),
-                                                );
-                                              });
-                                          // basketController
-                                          //     .selectPaymentMethod2(
-                                          //     value.toString());
-                                        },
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'الحجز والإستلام من المتجر',
-                                      style: TextStyle(
-                                          fontFamily: kTheArabicSansLight,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.kTextGrayColor),
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        bottom: 10.h, left: 10.w),
-                                    child: Container(
-                                      clipBehavior: Clip.none,
-                                      height: 35.52.h,
-                                      width: 80.19.w,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.kPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(22.24.r)),
-                                      child: Center(
-                                        child: Text(
-                                          'قريباً..',
-                                          style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppColors.kWhiteColor),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 160.h,
-                      ),
-                    ],
-                  ),
-                )),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                width: MediaQuery.of(context).size.width,
-                decoration:
-                    BoxDecoration(color: AppColors.kWhiteColor, boxShadow: [
-                  BoxShadow(
-                    blurRadius: 10.r,
-                    offset: const Offset(0, 4),
-                    spreadRadius: 0,
-                  ),
-                ]),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    // SizedBox(width: 30.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tr('total'),
-                          style: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 15.83.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.klPinkColor),
-                        ),
-                        Text(
-                          '${num.parse("${basketController.totalOrderDetails.value.totalPrice ?? '0'}") + num.parse(basketController.totalOrderDelivery.value.shippingCost ?? '0')} ${tr('Del')}',
-                          style: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.kPrimaryColor),
+                        10.ph,
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'إجمالي الطلب:',
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansBold,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.mainColor),
+                            ),
+                            20.pw,
+                            Text(
+                              '${num.parse("${basketController.totalOrderDetails.value.totalPrice ?? '0'}") + num.parse(basketController.totalOrderDelivery.value.shippingCost ?? '0')} ${tr('Del')}',
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansLight,
+                                  fontSize: 21.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.kPrimaryColor),
+                            ),
+                          ],
                         )
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        if (basketController.selectedPaymentMethod2.value ==
-                            '1') {
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          }
-                          _formKey.currentState!.save();
-                          if (basketController.selectedCityData.value.id
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    if (basketController.selectedPaymentMethod2.value == '1') {
+                      if (!_formKey.currentState!.validate()) {
+                        return;
+                      }
+                      _formKey.currentState!.save();
+                      if (basketController.selectedCityData.value.id
+                              .toString() ==
+                          'null') {
+                        ErrorPopUp(message: tr('city_required'), title: 'خطا');
+                        return;
+                      }
+                      if (basketController.selectedAreaData.value.id
                                   .toString() ==
-                              'null') {
-                            ErrorPopUp(
-                                message: tr('city_required'), title: 'خطا');
-                            return;
-                          }
-                          if (basketController.selectedAreaData.value.id
-                                      .toString() ==
-                                  'null' &&
-                              basketController.selectedCityData.value.hasArea ==
-                                  '1') {
-                            ErrorPopUp(
-                                message: tr('area_required'), title: 'خطا');
-                            return;
-                          }
-                        }
-                        basketController.addAddressTextAndNote(
-                            address: addressController.text,
-                            phone: phoneController.text,
-                            note: extraNoteController.text);
-                        basketController.changeTab(1);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        width: MediaQuery.of(context).size.width / 2,
-                        decoration: BoxDecoration(
-                          color: AppColors.kPrimaryColor,
-                          // borderRadius: BorderRadius.circular(46.r),
-                        ),
-                        child: Center(
-                          child: Text(
-                            tr('continus'),
-                            style: TextStyle(
-                                fontFamily: kTheArabicSansLight,
-                                fontSize: 24.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.kWhiteColor),
-                          ),
-                        ),
+                              'null' &&
+                          basketController.selectedCityData.value.hasArea ==
+                              '1') {
+                        ErrorPopUp(message: tr('area_required'), title: 'خطا');
+                        return;
+                      }
+                    }
+                    basketController.addAddressTextAndNote(
+                        address: addressController.text,
+                        phone: phoneController.text,
+                        note: extraNoteController.text);
+                    LoadingScreen.show(context);
+                    await basketController.sendToCreateOrder(
+                        email: controller.userData.value.email ?? '',
+                        name: controller.userData.value.name ?? '');
+                    Navigator.of(context).pop();
+                    basketController.changeTab(1);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    width: MediaQuery.of(context).size.width - 40,
+                    decoration: BoxDecoration(
+                      color: AppColors.kPrimaryColor,
+                      // borderRadius: BorderRadius.circular(46.r),
+                    ),
+                    child: Center(
+                      child: Text(
+                        tr('continus'),
+                        style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.kWhiteColor),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
-          )),
+                10.ph,
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    width: MediaQuery.of(context).size.width - 40,
+                    decoration: BoxDecoration(
+                      color: AppColors.kPrimaryColor,
+                      // borderRadius: BorderRadius.circular(46.r),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'الرجوع',
+                        style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.kWhiteColor),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        )),
+      ),
     );
   }
 }

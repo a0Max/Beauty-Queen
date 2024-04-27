@@ -46,10 +46,8 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
 
   // int stepsCount = 3;
   final BasketController controller = Get.put(BasketController());
-  List listOfTabText = ['التسليم', 'الدفع', 'الملخص'];
   List listOfTabBody = [
     const DeliveryScreen(),
-    const PaymentScreen(),
     const SummaryScreen(),
   ];
   @override
@@ -74,121 +72,6 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
                 fontSize:
                     28.sp, // Replace with 28.sp if you're using scaled fonts
                 fontFamily: kTheArabicSansLight,
-              ),
-            ),
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(80),
-              child: Column(
-                children: [
-                  10.ph,
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (int i = 1; i <= listOfTabText.length; i++) ...[
-                          Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color:
-                                            ((controller.selectedIndex.value) +
-                                                        1) <
-                                                    i
-                                                ? Colors.transparent
-                                                : AppColors.mainColor)
-                                    //     : null
-                                    ),
-                                child: Container(
-                                  height: 31,
-                                  width: 31,
-                                  margin: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                      color: ((controller.selectedIndex.value) +
-                                                  1) <
-                                              i
-                                          ? AppColors.kLightGreyBlueColor
-                                          : AppColors.mainColor,
-                                      shape: BoxShape.circle,
-                                      border: ((controller
-                                                      .selectedIndex.value) +
-                                                  1) <
-                                              i
-                                          ? Border.all(
-                                              color: const Color(0xFFC1C1C1))
-                                          : null),
-                                  child: Center(
-                                    child: (controller.selectedIndex.value) >= i
-                                        ? const Icon(
-                                            Icons.check,
-                                            color: Colors.white,
-                                          )
-                                        : Text(
-                                            '$i',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline2
-                                                ?.copyWith(
-                                                    fontSize: 16,
-                                                    color: Colors.white),
-                                          ),
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  listOfTabText[i - 1],
-                                  style: TextStyle(
-                                    fontSize: 14
-                                        .sp, // Replace with 14.sp if you're using scaled fonts
-                                    fontFamily: kTheArabicSansLight,
-                                    color: (controller.selectedIndex.value) >=
-                                            (i - 1)
-                                        ? Colors.black
-                                        : AppColors.kLightGreyBlueColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          if (i != listOfTabText.length) ...[
-                            Container(
-                              width: ((MediaQuery.of(context).size.width -
-                                      (36 + 8 + 8 + 16 + 16)) /
-                                  listOfTabText.length),
-                              margin: const EdgeInsets.symmetric(vertical: 20),
-                              child: Row(
-                                children: [
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Container(
-                                      alignment: Alignment.topCenter,
-                                      height: 1,
-                                      width: 50,
-                                      color:
-                                          i != (controller.selectedIndex.value)
-                                              ? AppColors.kLightGreyBlueColor
-                                              : AppColors.mainColor,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                ],
-                              ),
-                            )
-                          ]
-                        ],
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    color: AppColors.kTextGrayColor.withOpacity(.3),
-                  )
-                ],
               ),
             ),
           ),
