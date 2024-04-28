@@ -84,13 +84,13 @@ class ProductController extends GetxController {
       cartData.update((val) {
         val?.products?[index].qty = product?.qty;
       });
+      totalPrice.value =
+          totalPrice.value + (1 * double.parse("${product?.price ?? 1}"));
+      totalCount.value = totalCount.value + 1;
       update();
     } else {
       arrivedToMax();
     }
-    totalPrice.value =
-        totalPrice.value + (1 * double.parse("${product?.price ?? 1}"));
-    totalCount.value = totalCount.value + 1;
   }
 
   Future<void> decrement({required int index}) async {

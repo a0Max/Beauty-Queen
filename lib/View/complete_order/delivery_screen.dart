@@ -381,7 +381,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                       color: AppColors.kBlackColor,
                                       fontSize: 14.sp,
                                       fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w700,
                                       height: 0,
                                     )),
                               );

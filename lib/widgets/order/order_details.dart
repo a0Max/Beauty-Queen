@@ -264,6 +264,18 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                               ),
                             ),
                           ),
+                          10.ph,
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "تفاصيل الطلب",
+                              style: TextStyle(
+                                  fontFamily: kTheArabicSansBold,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.mainColor),
+                            ),
+                          ),
                           5.ph,
                           Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

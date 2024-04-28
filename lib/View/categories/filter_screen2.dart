@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/widgets/drawer/CustomEndDrawer.dart';
 import 'package:beauty_queen/widgets/shimmer/shimmer_category_filter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
@@ -170,7 +172,18 @@ class _FliterScreenState extends State<FliterScreen2> {
                     ),
                   ),
                 ),
-
+                if (_controller.generalSearchData.value.info?.description !=
+                    null) ...{
+                  15.ph,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: HtmlWidget(
+                      _controller.generalSearchData.value.info?.description ??
+                          '',
+                      textStyle: TextStyle(fontFamily: kTheArabicSansLight),
+                    ),
+                  )
+                },
                 _controller.isLoading.value == true
                     ? ShimmerSlider(
                         height: 139.17.h,
