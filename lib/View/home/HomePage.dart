@@ -541,9 +541,7 @@ class _HomePageState extends State<HomePage> {
                                                     fontSize: 0.6 * 14),
                                               ),
                                               Text(
-                                                currentRemainingTime?.sec
-                                                        .toString() ??
-                                                    '',
+                                                "${currentRemainingTime?.sec ?? '00'}",
                                                 style: timerTextStyle.copyWith(
                                                     fontSize: 3 * 14),
                                               ),
@@ -568,9 +566,7 @@ class _HomePageState extends State<HomePage> {
                                                     fontSize: 0.6 * 14),
                                               ),
                                               Text(
-                                                currentRemainingTime?.min
-                                                        .toString() ??
-                                                    '',
+                                                "${currentRemainingTime?.min ?? '00'}",
                                                 style: timerTextStyle.copyWith(
                                                     fontSize: 3 * 14),
                                               ),
@@ -595,9 +591,7 @@ class _HomePageState extends State<HomePage> {
                                                     fontSize: 0.6 * 14),
                                               ),
                                               Text(
-                                                currentRemainingTime?.hours
-                                                        .toString() ??
-                                                    '',
+                                                "${currentRemainingTime?.hours ?? '00'}",
                                                 style: timerTextStyle.copyWith(
                                                     fontSize: 3 * 14),
                                               ),
