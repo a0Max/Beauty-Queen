@@ -525,6 +525,13 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                     .last
                                                                     .product
                                                                     .isQueena !=
+                                                                "1" &&
+                                                            controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .product
+                                                                    .isOffer ==
                                                                 "1") ...{
                                                           SizedBox(
                                                               width: (MediaQuery.of(

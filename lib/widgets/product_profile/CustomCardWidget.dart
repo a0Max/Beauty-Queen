@@ -577,6 +577,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                         if (widget.newArrival.offerPrice != null &&
                             widget.newArrival.offerPrice != '' &&
                             widget.newArrival.offerPrice != '' &&
+                            widget.newArrival.isOffer == '1' &&
                             widget.newArrival.offerPrice?.split('').first !=
                                 '0') ...{
                           SizedBox(
