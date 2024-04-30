@@ -1096,6 +1096,20 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                             (index2) =>
                                                                 TextContainer(
                                                                   height: 50.h,
+                                                                  inStock: ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
+                                                                      controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .productOptions?[
+                                                                                  index]
+                                                                              .options?[
+                                                                                  index2]
+                                                                              .stock ==
+                                                                          "0" ||
+                                                                      num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                              '0') <=
+                                                                          0)),
                                                                   width: 50.w,
                                                                   currentId: controller
                                                                       .productData

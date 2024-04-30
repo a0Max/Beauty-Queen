@@ -67,6 +67,7 @@ class TextContainer extends StatelessWidget {
   final int? selectedId;
   final int? currentId;
   final VoidCallback? onClick;
+  final bool? inStock;
 
   const TextContainer({
     super.key,
@@ -74,6 +75,7 @@ class TextContainer extends StatelessWidget {
     this.width,
     this.text,
     this.onClick,
+    this.inStock,
     this.selectedId,
     this.currentId,
   });
@@ -82,21 +84,32 @@ class TextContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onClick,
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-                color: selectedId == currentId
-                    ? AppColors.mainColor
-                    : AppColors.kCDGColor2),
-            borderRadius: BorderRadius.circular(5)),
-        // height: height,
-        // width: width,
-        // padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-        child: CachedNetworkImage(
-          imageUrl: Connection.urlOfOptions(image: text ?? ''),
-          height: 50,
-          width: 50,
-        ),
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: selectedId == currentId
+                        ? AppColors.mainColor
+                        : AppColors.kCDGColor2),
+                borderRadius: BorderRadius.circular(5)),
+            // height: height,
+            // width: width,
+            // padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+            child: CachedNetworkImage(
+              imageUrl: Connection.urlOfOptions(image: text ?? ''),
+              height: 50,
+              width: 50,
+            ),
+          ),
+          if (inStock == true) ...{
+            SvgPicture.asset(
+              AppImages.imageBlockItem,
+              height: 50,
+              width: 50,
+            )
+          }
+        ],
       ),
     );
   }
