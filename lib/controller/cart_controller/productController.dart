@@ -71,11 +71,11 @@ class ProductController extends GetxController {
 
   Future<void> increment({required int index}) async {
     ProductsModel? product = cartData.value.products?[index];
-    log('${int.parse("${product?.maximum_order_quantity}")}');
-    log('${int.parse("${product?.qty}")}');
-    log('${(int.parse("${product?.maximum_order_quantity}") > int.parse("${product?.qty}"))}"');
-    if ((int.parse("${product?.maximum_order_quantity}") >
-            int.parse("${product?.qty}") &&
+    // log('${int.parse("${product?.maximum_order_quantity}")}');
+    // log('${int.parse("${product?.qty}")}');
+    // log('${(int.parse("${product?.maximum_order_quantity}") > int.parse("${product?.qty}"))}"');
+    if ((int.parse("${product?.maximum_order_quantity ?? 0}") >
+            int.parse("${product?.qty ?? 0}") &&
         num.parse("${product?.stock ?? 1}") >
             int.parse("${product?.qty ?? 1}"))) {
       product?.qty = int.parse("${product.qty ?? 1}") + 1;
