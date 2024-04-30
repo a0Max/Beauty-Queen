@@ -20,10 +20,11 @@ import '../../controller/product_controller/product_profile_controller.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/product_profile/rating_widget.dart';
 
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 class TabScreenTwo extends StatelessWidget {
   TabScreenTwo({super.key});
   final TextEditingController commentController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
