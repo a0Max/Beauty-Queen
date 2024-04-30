@@ -23,6 +23,7 @@ class CustomCardWidget extends StatefulWidget {
   final LabelModel? newTag;
   final SalesProductsModel newArrival;
   final double? width;
+  final String? isDiscount;
   final bool favorite;
   final bool? hideLike;
   final bool? hideTage;
@@ -33,6 +34,7 @@ class CustomCardWidget extends StatefulWidget {
     required this.imageUrl,
     required this.newArrival,
     this.width,
+    this.isDiscount,
     this.newTag,
     required this.favorite,
     this.hideLike = false,
@@ -503,6 +505,21 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                               color: Color(int.parse(
                                   "ff${widget.newTag?.textColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
                                   radix: 16)),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              fontFamily: kTheArabicSansLight),
+                        ))
+                  },
+                  if (widget.isDiscount == '1') ...{
+                    Container(
+                        margin: EdgeInsets.only(top: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        color: Color(int.parse("ffde0f7e", radix: 16)),
+                        child: Text(
+                          'تخفيض',
+                          style: TextStyle(
+                              color: Color(int.parse("fffafafa", radix: 16)),
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
                               fontFamily: kTheArabicSansLight),

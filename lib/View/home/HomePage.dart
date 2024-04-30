@@ -1284,7 +1284,7 @@ class _HomePageState extends State<HomePage> {
                                 top: 230.h,
                                 // left: 15.w,
                                 child: SizedBox(
-                                  height: 343.h,
+                                  height: 344.h,
                                   width: MediaQuery.of(context).size.width,
                                   child: ListView.builder(
                                     shrinkWrap: true,

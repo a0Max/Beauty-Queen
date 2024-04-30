@@ -207,16 +207,17 @@ class _DiscountScreenState extends State<DiscountScreen> {
                         children: List.generate(
                             _controller.dataProducts.value.length ?? 0,
                             (index) => CustomCardWidget(
-                                  imageUrl: Connection.urlOfProducts(
-                                      image: _controller.dataProducts
-                                              .value[index].mainImage ??
-                                          ''),
-                                  newArrival: _controller.dataProducts[index] ??
-                                      SalesProductsModel(),
-                                  favorite: _controller.dataProducts
-                                          .value[index].wishlist?.isNotEmpty ??
-                                      false,
-                                )),
+                                imageUrl: Connection.urlOfProducts(
+                                    image: _controller.dataProducts.value[index]
+                                            .mainImage ??
+                                        ''),
+                                newArrival: _controller.dataProducts[index] ??
+                                    SalesProductsModel(),
+                                favorite: _controller.dataProducts.value[index]
+                                        .wishlist?.isNotEmpty ??
+                                    false,
+                                isDiscount: _controller
+                                    .dataProducts.value[index].isOffer)),
                       ),
                 // const SizedBox(
                 //   height: 40,

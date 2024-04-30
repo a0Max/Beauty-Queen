@@ -13,6 +13,7 @@ class AppImages {
   static const String imageFacebook = "${mainPathToSvg}facebook.svg";
   static const String imageLockOfOtp = "${mainPathToSvg}lock.svg";
   static const String imageLogoLogin = "${mainPathToSvg}logo_login.svg";
+  static const String imageBlockItem = "${mainPathToSvg}blockItem.svg";
   static const String imageCongratulations =
       "${mainPathToSvg}congratulations.svg";
   static const String imageLoveSvg = "${mainPathToSvg}love.svg";

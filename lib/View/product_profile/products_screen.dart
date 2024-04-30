@@ -161,6 +161,18 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
+                                            Text(
+                                              controller.productData.value.last
+                                                      .product?.brand?.title ??
+                                                  '',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      kTheArabicSansBold,
+                                                  fontSize: 15.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  color:
+                                                      AppColors.kPrimaryColor),
+                                            ),
                                             Container(
                                                 width: MediaQuery.of(context)
                                                     .size
@@ -536,7 +548,178 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                       }
                                                     ],
                                                   )
-                                                : const SizedBox(),
+                                                : Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Get.to(
+                                                              BrandDetailScreen(
+                                                            brandId: int.parse(
+                                                                "${controller.productData.value.last.product?.brand?.id ?? 0}"),
+                                                          ));
+                                                        },
+                                                        child: Text(
+                                                          controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .product
+                                                                  ?.brand
+                                                                  ?.title ??
+                                                              '',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  kTheArabicSansBold,
+                                                              fontSize: 15.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: AppColors
+                                                                  .kPrimaryColor),
+                                                        ),
+                                                      ),
+                                                      if ((controller
+                                                              .selectedOptions
+                                                              .value
+                                                              .isNotEmpty) &&
+                                                          controller
+                                                                  .selectedOptions
+                                                                  .value
+                                                                  .first !=
+                                                              null) ...{
+                                                        Text(
+                                                          "${controller.selectedOptions.value.first.price} ${tr('Del')} ",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  kTheArabicSansBold,
+                                                              fontSize: 15.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: AppColors
+                                                                  .kPrimaryColor),
+                                                        ),
+                                                      } else ...{
+                                                        if (controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .product
+                                                                    .offerPrice !=
+                                                                null &&
+                                                            controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .product
+                                                                    .offerPrice !=
+                                                                '' &&
+                                                            controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .product
+                                                                    .offerPrice !=
+                                                                '' &&
+                                                            controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .product
+                                                                    .offerPrice
+                                                                    ?.split('')
+                                                                    .first !=
+                                                                '0' &&
+                                                            controller
+                                                                    .productData
+                                                                    .last
+                                                                    .product
+                                                                    .isQueena !=
+                                                                "1") ...{
+                                                          SizedBox(
+                                                              width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      2) -
+                                                                  40,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          15.16
+                                                                              .sp,
+                                                                      fontFamily:
+                                                                          kTheArabicSansBold,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      decoration:
+                                                                          TextDecoration
+                                                                              .lineThrough,
+                                                                      height:
+                                                                          0.08,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .right,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: const Color(
+                                                                          0xFFDE0F7E),
+                                                                      fontSize:
+                                                                          15.16
+                                                                              .sp,
+                                                                      fontFamily:
+                                                                          kTheArabicSansBold,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      height:
+                                                                          0.08,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ))
+                                                        } else ...{
+                                                          Text(
+                                                            "${controller.productData.value.last.product.price ?? ''}${tr('Del')}",
+                                                            textAlign:
+                                                                TextAlign.right,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize:
+                                                                  15.16.sp,
+                                                              fontFamily:
+                                                                  kTheArabicSansBold,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              height: 0.08,
+                                                            ),
+                                                          ),
+                                                        }
+                                                      }
+                                                    ],
+                                                  ),
                                             10.ph,
                                             Align(
                                               alignment: Alignment.topRight,
@@ -667,6 +850,20 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                 ColorContainer(
                                                                   height: 50.h,
                                                                   width: 50.w,
+                                                                  inStock: ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
+                                                                      controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .productOptions?[
+                                                                                  index]
+                                                                              .options?[
+                                                                                  index2]
+                                                                              .stock ==
+                                                                          "0" ||
+                                                                      num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                              '0') <=
+                                                                          0)),
                                                                   currentId: controller
                                                                       .productData
                                                                       .value
@@ -1617,10 +1814,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               )
                             : Column(
                                 children: [
-                                  (controller.productData.value.last.p
-                                                  ?.length ??
-                                              0) >
-                                          0
+                                  (controller.productData.value.isNotEmpty ==
+                                          true)
                                       ? Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1665,11 +1860,9 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                             .toInt(), (index) {
                                                       int value = index * 2;
                                                       return Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .spaceBetween,
+                                                                .start,
                                                         children: [
                                                           CustomCardWidget(
                                                             // width: (MediaQuery.of(context).size.width / 2) - 40,
@@ -1735,33 +1928,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                   false,
                                                             )
                                                           } else ...{
-                                                            CustomCardWidget(
-                                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                                              imageUrl: Connection.urlOfProducts(
-                                                                  image: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .sameBrandProducts?[
-                                                                              0]
-                                                                          .mainImage ??
-                                                                      ''),
-                                                              newArrival: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .sameBrandProducts?[0] ??
-                                                                  SalesProductsModel(),
-                                                              favorite: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .sameBrandProducts?[
-                                                                          0]
-                                                                      .wishlist
-                                                                      ?.isNotEmpty ??
-                                                                  false,
-                                                            )
+                                                            const SizedBox()
                                                           }
                                                         ],
                                                       );
@@ -1770,9 +1937,11 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           ],
                                         )
                                       : const SizedBox(),
-                                  controller.productData.value.last
-                                              ?.discover_brand !=
-                                          null
+                                  (controller.productData.value.isNotEmpty ==
+                                              true) &&
+                                          controller.productData.value.last
+                                                  ?.discover_brand !=
+                                              null
                                       ? Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1898,10 +2067,16 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                           ],
                                         )
                                       : const SizedBox(),
-                                  (controller.productData.value.last
-                                                  .sameBrandProducts?.length ??
-                                              0) >
-                                          0
+                                  (controller.productData.value.isNotEmpty ==
+                                              true) &&
+                                          (controller
+                                                      .productData
+                                                      .value
+                                                      .last
+                                                      .sameBrandProducts
+                                                      ?.length ??
+                                                  0) >
+                                              0
                                       ? Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -2160,10 +2335,12 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                         ],
                       ),
                       if (controller.isLoading.value != true) ...{
-                        if (controller.productData.value.last.product.stock ==
-                                null ||
-                            controller.productData.value.last.product.stock ==
-                                "0") ...{
+                        if ((controller.productData.value.isNotEmpty == true) &&
+                            (controller.productData.value.last.product.stock ==
+                                    null ||
+                                controller
+                                        .productData.value.last.product.stock ==
+                                    "0")) ...{
                           Container(
                               height: 47.61.h,
                               width: MediaQuery.of(context).size.width / 2,

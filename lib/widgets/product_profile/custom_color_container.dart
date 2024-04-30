@@ -1,7 +1,9 @@
+import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/vars.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../const/app_colors.dart';
 
@@ -11,6 +13,7 @@ class ColorContainer extends StatelessWidget {
   final Color? color;
   final int? selectedId;
   final int? currentId;
+  final bool? inStock;
   final VoidCallback? onClick;
 
   const ColorContainer({
@@ -18,6 +21,7 @@ class ColorContainer extends StatelessWidget {
     this.height,
     this.width,
     this.color,
+    this.inStock,
     this.onClick,
     this.selectedId,
     this.currentId,
@@ -28,14 +32,29 @@ class ColorContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onClick,
       child: Container(
-        decoration: BoxDecoration(
-            color: color,
-            border: Border.all(
-                color: selectedId == currentId
-                    ? AppColors.mainColor
-                    : Colors.transparent)),
         height: height,
         width: width,
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: color,
+                  border: Border.all(
+                      color: selectedId == currentId
+                          ? AppColors.mainColor
+                          : Colors.transparent)),
+              height: height,
+              width: width,
+            ),
+            if (inStock == true) ...{
+              SvgPicture.asset(
+                AppImages.imageBlockItem,
+                height: height,
+                width: width,
+              )
+            }
+          ],
+        ),
       ),
     );
   }
