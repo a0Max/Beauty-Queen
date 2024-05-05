@@ -41,8 +41,8 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
           title: Text(
             "سجل الطلبات",
             style: TextStyle(
-                fontFamily: kTheArabicSansLight,
-                color: AppColors.kBlackColor,
+                fontFamily: kTheArabicSansBold,
+                color: AppColors.mainColor,
                 fontSize: 23.74.sp,
                 fontWeight: FontWeight.w600),
           ),
@@ -147,6 +147,16 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                                         15.ph
                                       ]))),
                           10.ph,
+                          if (OrderState.getImageState(
+                                  state:
+                                      controller.order.value.order?.status) !=
+                              null) ...{
+                            Image.asset(OrderState.getImageState(
+                                    state:
+                                        controller.order.value.order?.status) ??
+                                ''),
+                            10.ph,
+                          },
                           Card(
                             color: AppColors.kShadowColor,
                             elevation: 0,
@@ -192,8 +202,13 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                                             ),
                                           } else ...{
                                             Text(
-                                              controller.order.value.order
-                                                  ?.getTheTextOfFinalState(),
+                                              OrderState.getMessageState(
+                                                      state: controller
+                                                          .order
+                                                          .value
+                                                          .order
+                                                          ?.status) ??
+                                                  '',
                                               style: TextStyle(
                                                 fontFamily: kTheArabicSansLight,
                                                 fontSize: 13.sp,

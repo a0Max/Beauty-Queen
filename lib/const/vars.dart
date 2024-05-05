@@ -181,14 +181,79 @@ abstract class LocationMapLatLng {
 }
 
 abstract class OrderState {
+  static const String mainPathToImages = 'assets/images/';
+
   static const shipped = 'shipped';
+  static const shippedImage = '$mainPathToImages/Shipped.png';
+  static const shippedMessage =
+      '.لقد تم تسليم طلبك بنجاح شكراً لاختيارك متجرنا وثقتك بنا، نتمني عودتك من جديد.';
   static const cancelled = 'cancelled';
+  static const cancelledImage = '$mainPathToImages/Cancelled.png';
+  // static const cancelledMessage = '$mainPathToImages/Cancelled.png';
+
   static const pending = 'pending';
+  static const pendingImage = '$mainPathToImages/Pending.png';
+  static const pendingMessage =
+      'سيتم تأكيد طلبك..شكراً لاختيارك متجرناخلال ساعات العمل والاهتمام بكل ملاحظاتك.';
+
   static const confirmed = 'confirmed';
+  static const confirmedImage = '$mainPathToImages/Confirmed.png';
+  static const confirmedMessage =
+      'لقد تم تأكيد طلبك و مطابقته بالفاتورة وسيصلك خلال الوقت المحدد.';
+
   static const delayed = 'delayed';
+  static const delayedImage = '$mainPathToImages/Delayed.png';
+  static const delayedMessage =
+      'لقد تم تأجيل موعد التوصيل. طلبك الآن لدى مندوب التوصيل سيتواصل معك في اقرب موعد.';
+
   static const readyToPickup = 'readyToPickup';
+  static const shippingImage = '$mainPathToImages/Shipping.png';
+  static const shippingMessage =
+      'طلبك الآن مع مندوب التوصيل انتظري اتصاله عندما يكون قريباً من عنوانك';
+
   static const atShippingAgent = 'atShippingAgent';
   static const inCart = 'in_cart';
+  static String? getImageState({required String? state}) {
+    switch (state) {
+      case shipped:
+        return shippedImage;
+      case cancelled:
+        return cancelledImage;
+      case pending:
+        return pendingImage;
+      case confirmed:
+        return confirmedImage;
+      case delayed:
+        return delayedImage;
+      case atShippingAgent:
+        return shippingImage;
+      case readyToPickup:
+        return shippingImage;
+      default:
+        return null;
+    }
+  }
+
+  static String? getMessageState({required String? state}) {
+    switch (state) {
+      case shipped:
+        return shippedMessage;
+      // case cancelled:
+      //   return cancelledImage;
+      case pending:
+        return pendingMessage;
+      case confirmed:
+        return confirmedMessage;
+      case delayed:
+        return delayedMessage;
+      case atShippingAgent:
+        return shippingMessage;
+      case readyToPickup:
+        return shippingMessage;
+      default:
+        return null;
+    }
+  }
 }
 
 abstract class WalletState {
