@@ -10,6 +10,7 @@ import '../../controller/orders_controller/orders_controller.dart';
 import '../../widgets/order/order_details.dart';
 import '../../widgets/order/pink_ticket.dart';
 import '../../widgets/shimmer/shimmer_orders.dart';
+import 'details_of_order.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -41,7 +42,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
             "طلباتي",
             style: TextStyle(
                 color: AppColors.kBlackColor,
-                fontSize: 27.74.sp,
+                fontSize: 23.74.sp,
+                fontFamily: kTheArabicSansBold,
                 fontWeight: FontWeight.w400),
           ),
           centerTitle: true,
@@ -370,53 +372,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                 onTap: () {
                                                   controller.getDetailsOfOrder(
                                                       id: "${controller.listOfOrders.value[index]?.id}");
-                                                  showModalBottomSheet(
-                                                      context: context,
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.white,
-                                                      elevation: 0,
-                                                      shape:
-                                                          const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  16.0),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  16.0),
-                                                        ),
-                                                      ),
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return Container(
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height -
-                                                                200,
-                                                            decoration:
-                                                                const BoxDecoration(
-                                                              // color: Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        16.0),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        16.0),
-                                                              ),
-                                                            ),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 15),
-                                                            child:
-                                                                const ShowModalSheetDetailOrder());
-                                                      });
+                                                  Get.to(DetailsOfOrder(),
+                                                      routeName:
+                                                          '/DetailsOfOrder');
                                                 },
                                                 child: Container(
                                                     height: 41.22.h,
