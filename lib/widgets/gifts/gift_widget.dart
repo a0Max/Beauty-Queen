@@ -28,7 +28,7 @@ class GiftWidget extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 117.69.h,
+              height: 100.h,
               width: 170.w,
               decoration: BoxDecoration(
                   color: AppColors.klPinkColor,
@@ -36,14 +36,15 @@ class GiftWidget extends StatelessWidget {
                       bottomLeft: Radius.circular(15.r),
                       bottomRight: Radius.circular(15.r))),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                // crossAxisAlignment: CrossAxisAlignment.,
                 children: [
                   Text(
                     "بطاقة هدايا بقيمة $price دينار",
                     style: TextStyle(
                         fontFamily: kTheArabicSansLight,
                         fontWeight: FontWeight.w700,
-                        fontSize: 15.sp,
+                        fontSize: 13.sp,
                         color: AppColors.kPrimaryColor),
                     textAlign: TextAlign.center,
                   ),

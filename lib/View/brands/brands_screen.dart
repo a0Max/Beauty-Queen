@@ -165,8 +165,11 @@ class _BrandScreenState extends State<BrandScreen> {
                               _controller.characters[j],
                               style: TextStyle(
                                   color: AppColors.kPrimaryColor,
-                                  fontSize: 26.sp,
-                                  fontWeight: FontWeight.w400),
+                                  fontSize: 16 +
+                                      (0.6 *
+                                          MediaQuery.of(context).size.width /
+                                          100),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),

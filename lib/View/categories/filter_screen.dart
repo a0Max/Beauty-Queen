@@ -340,6 +340,8 @@ class _FliterScreenState extends State<FliterScreen> {
                                       image: _controller.dataProducts
                                               .value[index].mainImage ??
                                           ''),
+                                  isDiscount: _controller
+                                      .dataProducts.value[index].isOffer,
                                   newArrival:
                                       _controller.dataProducts.value[index] ??
                                           SalesProductsModel(),

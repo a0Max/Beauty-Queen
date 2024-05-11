@@ -1,4 +1,5 @@
 import 'package:beauty_queen/const/app_colors.dart';
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/widgets/based/CustomAppBar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -139,13 +140,13 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                       onTap: () {},
                                       child: Stack(
                                         fit: StackFit.loose,
-                                        alignment: Alignment.bottomCenter,
+                                        alignment: Alignment.topCenter,
                                         children: [
                                           Container(
                                             width: kScreenWidth,
                                             margin: const EdgeInsets.only(
                                                 bottom: 170),
-                                            height: 200.h,
+                                            height: 170.h,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: CachedNetworkImageProvider(
@@ -163,8 +164,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                             ),
                                           ),
                                           Positioned(
-                                            // bottom: -120,
-
+                                            top: 150.h,
                                             child: Container(
                                               margin: const EdgeInsets.only(
                                                   left: 20,
@@ -174,7 +174,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                                       .size
                                                       .width -
                                                   40,
-                                              height: 181.04.h,
+                                              // height: 181.04.h,
                                               padding:
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 20),
@@ -196,9 +196,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  SizedBox(
-                                                    height: 22.h,
-                                                  ),
+                                                  10.ph,
                                                   Text(
                                                     controller
                                                             .generalSearchData2
@@ -216,6 +214,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                                       fontWeight:
                                                           FontWeight.w700,
                                                     ),
+                                                    textAlign: TextAlign.center,
                                                   ),
                                                   Text(
                                                     controller
@@ -238,7 +237,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                                     ),
                                                   ),
                                                   SizedBox(
-                                                    height: 18.h,
+                                                    height: 10.h,
                                                   ),
                                                   InkWell(
                                                     borderRadius:
@@ -285,6 +284,9 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                                         ),
                                                       ),
                                                     ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
                                                   ),
                                                 ],
                                               ),

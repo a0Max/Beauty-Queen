@@ -580,49 +580,174 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                             widget.newArrival.isOffer == '1' &&
                             widget.newArrival.offerPrice?.split('').first !=
                                 '0') ...{
-                          SizedBox(
-                              width: widget.width ??
-                                  (MediaQuery.of(context).size.width / 2) - 40,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                          if ((widget.newArrival.productOptions?.isNotEmpty ??
+                                  false) &&
+                              ((widget.newArrival.productOptions?.first.options
+                                          ?.first.offerPrice ??
+                                      '') !=
+                                  (widget.newArrival.productOptions?.first
+                                          .options?.last.offerPrice ??
+                                      ''))) ...{
+                            Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      widget.newArrival.productOptions?.first
+                                              .options?.first.offerPrice ??
+                                          '',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15.16.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        height: 0.08,
+                                      ),
+                                    ),
+                                    Text(
+                                      'د.ل',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 10.99.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        height: 0.15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '-',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10.99.sp,
+                                    fontFamily: kTheArabicSansLight,
+                                    fontWeight: FontWeight.w400,
+                                    height: 0.15,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      widget.newArrival.productOptions?.first
+                                              .options?.last.offerPrice ??
+                                          '',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15.16.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        height: 0.08,
+                                      ),
+                                    ),
+                                    Text(
+                                      'د.ل',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 10.99.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        fontWeight: FontWeight.w400,
+                                        height: 0.15,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          } else ...{
+                            SizedBox(
+                                width: widget.width ??
+                                    (MediaQuery.of(context).size.width / 2) -
+                                        40,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          widget.newArrival.price ?? '',
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15.16.sp,
+                                            fontFamily: kTheArabicSansLight,
+                                            fontWeight: FontWeight.w400,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                            height: 0.08,
+                                          ),
+                                        ),
+                                        Text(
+                                          tr('Del'),
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10.99.sp,
+                                            fontFamily: kTheArabicSansLight,
+                                            fontWeight: FontWeight.w400,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          widget.newArrival.offerPrice ?? '',
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: const Color(0xFFDE0F7E),
+                                            fontSize: 15.16.sp,
+                                            fontFamily: kTheArabicSansLight,
+                                            fontWeight: FontWeight.w400,
+                                            height: 0.08,
+                                          ),
+                                        ),
+                                        Text(
+                                          'د.ل',
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: const Color(0xFFDE0F7E),
+                                            fontSize: 10.99.sp,
+                                            fontFamily: kTheArabicSansLight,
+                                            fontWeight: FontWeight.w400,
+                                            height: 0.15,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ))
+                          }
+                        } else ...{
+                          if ((widget.newArrival.productOptions?.isNotEmpty ??
+                              false)) ...{
+                            if ((widget.newArrival.productOptions?.isNotEmpty ??
+                                    false) &&
+                                ((widget.newArrival.productOptions?.first
+                                            .options?.first.price ??
+                                        '') !=
+                                    (widget.newArrival.productOptions?.first
+                                            .options?.last.price ??
+                                        ''))) ...{
+                              Row(
                                 children: [
                                   Row(
                                     children: [
                                       Text(
-                                        widget.newArrival.price ?? '',
+                                        widget.newArrival.productOptions?.first
+                                                .options?.first.price ??
+                                            '',
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 15.16.sp,
-                                          fontFamily: kTheArabicSansLight,
-                                          fontWeight: FontWeight.w400,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          height: 0.08,
-                                        ),
-                                      ),
-                                      Text(
-                                        tr('Del'),
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 10.99.sp,
-                                          fontFamily: kTheArabicSansLight,
-                                          fontWeight: FontWeight.w400,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        widget.newArrival.offerPrice ?? '',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: const Color(0xFFDE0F7E),
                                           fontSize: 15.16.sp,
                                           fontFamily: kTheArabicSansLight,
                                           fontWeight: FontWeight.w400,
@@ -633,7 +758,46 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                         'د.ل',
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
-                                          color: const Color(0xFFDE0F7E),
+                                          color: Colors.black,
+                                          fontSize: 10.99.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0.15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    '-',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10.99.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0.15,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        widget.newArrival.productOptions?.first
+                                                .options?.last.price ??
+                                            '',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15.16.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0.08,
+                                        ),
+                                      ),
+                                      Text(
+                                        'د.ل',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Colors.black,
                                           fontSize: 10.99.sp,
                                           fontFamily: kTheArabicSansLight,
                                           fontWeight: FontWeight.w400,
@@ -643,41 +807,77 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                     ],
                                   )
                                 ],
-                              ))
-                        } else ...{
-                          Row(
-                            children: [
-                              Text(
-                                ((widget.newArrival.productOptions
-                                                ?.isNotEmpty ??
-                                            false) &&
-                                        widget.newArrival.price == '0.00')
-                                    ? widget.newArrival.productOptions?.first
-                                            .options?.first.price ??
-                                        ''
-                                    : widget.newArrival.price ?? '',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15.16.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
-                                  height: 0.08,
+                              )
+                            } else ...{
+                              Row(
+                                children: [
+                                  Text(
+                                    ((widget.newArrival.productOptions
+                                                    ?.isNotEmpty ??
+                                                false) &&
+                                            widget.newArrival.price == '0.00')
+                                        ? widget.newArrival.productOptions
+                                                ?.first.options?.first.price ??
+                                            ''
+                                        : widget.newArrival.price ?? '',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15.16.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0.08,
+                                    ),
+                                  ),
+                                  Text(
+                                    'د.ل',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10.99.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0.15,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            }
+                          } else ...{
+                            Row(
+                              children: [
+                                Text(
+                                  ((widget.newArrival.productOptions
+                                                  ?.isNotEmpty ??
+                                              false) &&
+                                          widget.newArrival.price == '0.00')
+                                      ? widget.newArrival.productOptions?.first
+                                              .options?.first.price ??
+                                          ''
+                                      : widget.newArrival.price ?? '',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15.16.sp,
+                                    fontFamily: kTheArabicSansLight,
+                                    fontWeight: FontWeight.w400,
+                                    height: 0.08,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'د.ل',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 10.99.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
-                                  height: 0.15,
+                                Text(
+                                  'د.ل',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10.99.sp,
+                                    fontFamily: kTheArabicSansLight,
+                                    fontWeight: FontWeight.w400,
+                                    height: 0.15,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
+                              ],
+                            )
+                          }
                         }
                       ],
                     ),

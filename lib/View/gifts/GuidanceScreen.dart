@@ -9,6 +9,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:get/get.dart';
 
@@ -138,6 +139,15 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
             controller: _scrollController,
             child: Column(
               children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: HtmlWidget(
+                    controller.generalSearchData.value.info?.description ?? '',
+                    textStyle: TextStyle(
+                        fontFamily: kTheArabicSansBold,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
                 controller.isLoading.value == true
                     ? ShimmerSlider(
                         height: 139.17.h,
@@ -158,10 +168,10 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                 Center(
                   child: Text(tr('giftCard'),
                       style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        color: AppColors.kBlackColor,
-                        fontSize: 23.sp,
-                        fontWeight: FontWeight.w400,
+                        fontFamily: kTheArabicSansBold,
+                        color: AppColors.mainColor,
+                        fontSize: 17.5.sp,
+                        fontWeight: FontWeight.bold,
                       )),
                 ),
                 SizedBox(
@@ -269,6 +279,8 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                                       image: controller.dataProducts
                                               .value[index].mainImage ??
                                           ''),
+                                  isDiscount: controller
+                                      .dataProducts.value[index].isOffer,
                                   newArrival:
                                       controller.dataProducts.value[index] ??
                                           SalesProductsModel(),

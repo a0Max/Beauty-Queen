@@ -263,6 +263,8 @@ class _SearchScreen extends State<SearchScreen> {
                                       image: _controller.dataProducts
                                               .value[index].mainImage ??
                                           ''),
+                                  isDiscount: _controller
+                                      .dataProducts.value[index].isOffer,
                                   newArrival:
                                       _controller.dataProducts.value[index] ??
                                           SalesProductsModel(),

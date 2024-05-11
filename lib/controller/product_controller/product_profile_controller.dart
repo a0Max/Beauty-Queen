@@ -79,6 +79,7 @@ class ProductProfileController extends GetxController
     if (productData.isNotEmpty) {
       productData.removeLast();
     }
+    selectedOptions.clear();
   }
 
   RxList selectedOptions = [].obs;

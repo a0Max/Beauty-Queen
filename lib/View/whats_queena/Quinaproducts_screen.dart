@@ -143,6 +143,8 @@ class _QuinaproductsScreen extends State<QuinaproductsScreen> {
                                           image: controller.dataProducts
                                                   .value[index].mainImage ??
                                               ''),
+                                      isDiscount: controller
+                                          .dataProducts.value[index].isOffer,
                                       newArrival: controller
                                               .dataProducts.value[index] ??
                                           SalesProductsModel(),

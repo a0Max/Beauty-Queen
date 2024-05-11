@@ -356,6 +356,8 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                                       image: controller.dataProducts
                                               .value[index].mainImage ??
                                           ''),
+                                  isDiscount: controller
+                                      .dataProducts.value[index].isOffer,
                                   newArrival:
                                       controller.dataProducts.value[index] ??
                                           SalesProductsModel(),

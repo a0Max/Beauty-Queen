@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../const/app_colors.dart';
+import '../../const/styles.dart';
 
 class ColorContainer extends StatelessWidget {
   final double? height;
@@ -68,6 +69,7 @@ class TextContainer extends StatelessWidget {
   final int? currentId;
   final VoidCallback? onClick;
   final bool? inStock;
+  final bool? isText;
 
   const TextContainer({
     super.key,
@@ -75,6 +77,7 @@ class TextContainer extends StatelessWidget {
     this.width,
     this.text,
     this.onClick,
+    this.isText,
     this.inStock,
     this.selectedId,
     this.currentId,
@@ -96,18 +99,35 @@ class TextContainer extends StatelessWidget {
             // height: height,
             // width: width,
             // padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-            child: CachedNetworkImage(
-              imageUrl: Connection.urlOfOptions(image: text ?? ''),
-              height: 50,
-              width: 50,
-            ),
+            child: (isText != true)
+                ? CachedNetworkImage(
+                    imageUrl: Connection.urlOfOptions(image: text ?? ''),
+                    height: 50,
+                    width: 50,
+                  )
+                : Container(
+                    alignment: Alignment.center,
+                    height: 40,
+                    width: 70,
+                    child: Text(
+                      text ?? '',
+                      style: TextStyle(
+                          fontFamily: kTheArabicSansBold, fontSize: 14),
+                    ),
+                  ),
           ),
           if (inStock == true) ...{
-            SvgPicture.asset(
-              AppImages.imageBlockItem,
-              height: 50,
-              width: 50,
-            )
+            (isText != true)
+                ? SvgPicture.asset(
+                    AppImages.imageBlockItem,
+                    height: 50,
+                    width: 50,
+                  )
+                : SvgPicture.asset(
+                    AppImages.imageBlockItem,
+                    height: 40,
+                    width: 70,
+                  )
           }
         ],
       ),

@@ -233,7 +233,7 @@ class MyEndDrawer extends StatelessWidget {
                     'عروض بيوتي كوين',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: AppColors.kBlackColor,
+                      color: AppColors.mainColor,
                       fontSize: 17.sp,
                       fontFamily: kTheArabicSansLight,
                       fontWeight: FontWeight.w600,

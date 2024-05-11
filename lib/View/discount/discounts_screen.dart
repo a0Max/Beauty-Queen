@@ -139,8 +139,8 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 Center(
                   child: Text(tr('offers_sale_down'),
                       style: TextStyle(
-                        fontFamily: kTheArabicSansLight,
-                        color: AppColors.kBlackColor,
+                        fontFamily: kTheArabicSansBold,
+                        color: AppColors.mainColor,
                         fontSize: 25.sp,
                         fontWeight: FontWeight.w400,
                       )),

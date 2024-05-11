@@ -34,7 +34,7 @@ class DetailsStatic extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(bottom: 7, top: 7, right: 15.w),
+          padding: EdgeInsets.only(bottom: 7, top: 7, right: 30.w),
           decoration: const BoxDecoration(color: AppColors.klPinkColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +65,7 @@ class DetailsStatic extends StatelessWidget {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.only(top: 7, bottom: 7, right: 70),
+          padding: const EdgeInsets.only(top: 7, bottom: 7, right: 85),
           decoration: const BoxDecoration(color: AppColors.kcontainerGrayColor),
           alignment: Alignment.centerRight,
           child: Column(

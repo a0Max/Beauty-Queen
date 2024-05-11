@@ -420,6 +420,8 @@ class _HomePageState extends State<HomePage> {
                                                 .newArrivals?[index]
                                                 .mainImage ??
                                             ''),
+                                    isDiscount: _controller.homeData.value
+                                        .newArrivals?[index].isOffer,
                                     newArrival: _controller.homeData.value
                                             .newArrivals?[index] ??
                                         SalesProductsModel(),
@@ -492,6 +494,11 @@ class _HomePageState extends State<HomePage> {
                                   itemBuilder: (context, index) {
                                     return CustomCardWidget(
                                       hideTage: true,
+                                      isDiscount: _controller
+                                          .homeData
+                                          .value
+                                          .flash_discount_products?[index]
+                                          .isOffer,
                                       imageUrl: Connection.urlOfProducts(
                                           image: _controller
                                                   .homeData
@@ -1049,6 +1056,11 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           CustomCardWidget(
                                             hideTage: true,
+                                            isDiscount: _controller
+                                                .homeData
+                                                .value
+                                                .salesProducts?[index]
+                                                .isOffer,
                                             imageUrl: Connection.urlOfProducts(
                                                 image: _controller
                                                         .homeData
@@ -1075,6 +1087,11 @@ class _HomePageState extends State<HomePage> {
                                               value + 1) ...{
                                             CustomCardWidget(
                                               hideTage: true,
+                                              isDiscount: _controller
+                                                  .homeData
+                                                  .value
+                                                  .salesProducts?[index + 1]
+                                                  .isOffer,
                                               imageUrl:
                                                   Connection.urlOfProducts(
                                                       image: _controller
@@ -1099,6 +1116,11 @@ class _HomePageState extends State<HomePage> {
                                           } else ...{
                                             CustomCardWidget(
                                               hideTage: true,
+                                              isDiscount: _controller
+                                                  .homeData
+                                                  .value
+                                                  .salesProducts?[value - 1]
+                                                  .isOffer,
                                               imageUrl:
                                                   Connection.urlOfProducts(
                                                       image: _controller
@@ -1289,6 +1311,8 @@ class _HomePageState extends State<HomePage> {
                                     itemBuilder: (context, index) {
                                       return CustomCardWidget(
                                         hideTage: true,
+                                        isDiscount: _controller.homeData.value
+                                            .discover?.products?[index].isOffer,
                                         imageUrl: Connection.urlOfProducts(
                                             image: _controller
                                                     .homeData
