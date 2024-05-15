@@ -54,6 +54,7 @@ class _CartScreen extends State<CartScreen> {
         child: Scaffold(
             body: Obx(() => Column(
                   children: [
+                    10.ph,
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -102,7 +103,9 @@ class _CartScreen extends State<CartScreen> {
                                 : Column(children: [
                                     Container(
                                       color: AppColors.kPrimaryColor,
-                                      height: 50.83.h,
+                                      // height: 50.83.h,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
                                       // width: 438.44.w,
                                       width: MediaQuery.of(context).size.width,
                                       child: Row(
@@ -114,13 +117,13 @@ class _CartScreen extends State<CartScreen> {
                                             tr('minItemsPerOrder'),
                                             style: TextStyle(
                                                 fontFamily: kTheArabicSansLight,
-                                                fontSize: 19.sp,
+                                                fontSize: (16.0 * 0.8).sp,
                                                 fontWeight: FontWeight.w600,
                                                 color: AppColors.kWhiteColor),
                                           ),
-                                          const Spacer(),
-                                          SvgPicture.asset(
-                                              AppImages.kqueencrownImage),
+                                          // const Spacer(),
+                                          // SvgPicture.asset(
+                                          //     AppImages.kqueencrownImage),
                                         ],
                                       ),
                                     ),
@@ -180,6 +183,7 @@ class _CartScreen extends State<CartScreen> {
                     ),
                     (productController.cartData.value.products?.length ?? 0) > 0
                         ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
                                 margin: EdgeInsets.symmetric(horizontal: 14),
@@ -198,7 +202,7 @@ class _CartScreen extends State<CartScreen> {
                                     SizedBox(
                                       width: 13.3.w,
                                     ),
-                                    SvgPicture.asset(AppImages.imageDiscount),
+                                    // SvgPicture.asset(AppImages.imageDiscount),
                                     Expanded(
                                       child: TextField(
                                         decoration: InputDecoration(
@@ -226,12 +230,13 @@ class _CartScreen extends State<CartScreen> {
                                               borderSide: BorderSide(
                                                   color: Colors.transparent),
                                             ),
-                                            hintText: tr('addCoupon'),
+                                            hintText: 'ادخل البروموكود..',
                                             hintStyle: TextStyle(
                                                 fontFamily: kTheArabicSansLight,
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w500,
-                                                color: AppColors.kWhiteColor)),
+                                                color:
+                                                    AppColors.kGreyBlueColor)),
                                         controller: promoCodeController,
                                       ),
                                     ),
@@ -306,77 +311,37 @@ class _CartScreen extends State<CartScreen> {
                                   ],
                                 ),
                               ),
-                              40.ph,
+                              20.ph,
                               Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20),
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                    color: AppColors.kWhiteColor,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 20.r,
-                                        offset: const Offset(0, 8),
-                                        spreadRadius: 0,
-                                      ),
-                                    ]),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    // SizedBox(width: 30.w),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          tr('total'),
-                                          style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontSize: 15.83.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.klPinkColor),
-                                        ),
-                                        Text(
-                                          '${productController.totalPrice.value}${tr('Del')}',
-                                          style: TextStyle(
-                                              fontFamily: kTheArabicSansLight,
-                                              fontSize: 24.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: AppColors.kPrimaryColor),
-                                        )
-                                      ],
+                                margin: EdgeInsets.symmetric(horizontal: 14),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => const TabView());
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.kPrimaryColor,
+                                      // borderRadius:
+                                      //     BorderRadius.circular(46.r),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Get.to(() => const TabView());
-                                      },
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.kPrimaryColor,
-                                          // borderRadius:
-                                          //     BorderRadius.circular(46.r),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            tr('continus'),
-                                            style: TextStyle(
-                                                fontFamily: kTheArabicSansLight,
-                                                fontSize: 21.sp,
-                                                fontWeight: FontWeight.bold,
-                                                color: AppColors.kWhiteColor),
-                                          ),
-                                        ),
+                                    child: Center(
+                                      child: Text(
+                                        tr('continus'),
+                                        style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 21.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.kWhiteColor),
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
+                              20.ph
                             ],
                           )
                         : SizedBox(),
