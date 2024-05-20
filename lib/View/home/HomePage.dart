@@ -836,6 +836,7 @@ class _HomePageState extends State<HomePage> {
                                                         10.69.r),
                                                 onTap: () {
                                                   Get.to(ItemProfilePage(
+                                                      isQueenOffer: true,
                                                       itemId: _controller
                                                               .homeData
                                                               .value
