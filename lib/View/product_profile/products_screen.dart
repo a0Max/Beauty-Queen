@@ -1154,7 +1154,16 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                 0,
                                                             (index2) =>
                                                                 TextContainer(
-                                                                  isText: true,
+                                                                  isText: controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .productOptions?[index]
+                                                                              .options?[index2]
+                                                                              .isSize ==
+                                                                          '1'
+                                                                      ? true
+                                                                      : false,
                                                                   height: 50.h,
                                                                   inStock: ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
                                                                       controller
@@ -1189,14 +1198,34 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                               .id ??
                                                                           0,
                                                                   text: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .productOptions?[
-                                                                          index]
-                                                                      .options?[
-                                                                          index2]
-                                                                      .size,
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .productOptions?[
+                                                                                  index]
+                                                                              .options?[
+                                                                                  index2]
+                                                                              .isSize ==
+                                                                          '1'
+                                                                      ? (controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .productOptions?[
+                                                                              index]
+                                                                          .options?[
+                                                                              index2]
+                                                                          .size)
+                                                                      : (controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .productOptions?[
+                                                                              index]
+                                                                          .options?[
+                                                                              index2]
+                                                                          .mainImage
+                                                                          .file),
                                                                   onClick: () {
                                                                     if ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
                                                                         controller.productData.value.last.productOptions?[index].options?[index2].stock ==
