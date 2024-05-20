@@ -7,8 +7,9 @@ import 'product_banner_model.dart';
 
 class GeneralQuickSearchModel {
   List<GeneralQuickSearchModel0>? products;
+  BrandModel? brand;
 
-  GeneralQuickSearchModel({this.products});
+  GeneralQuickSearchModel({this.products, this.brand});
 
   GeneralQuickSearchModel.fromJson(Map<String, dynamic> json) {
     if (json['products'] != null) {
@@ -16,6 +17,9 @@ class GeneralQuickSearchModel {
       json['products'].forEach((v) {
         products!.add(new GeneralQuickSearchModel0.fromJson(v));
       });
+    }
+    if (json['brand'] != null) {
+      brand = BrandModel.fromJson(json['brand']);
     }
   }
 

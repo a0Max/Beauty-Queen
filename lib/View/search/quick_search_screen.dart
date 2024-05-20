@@ -13,6 +13,7 @@ import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/search/search_controller.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
+import '../brands/branddetail_screen.dart';
 import '../product_profile/products_screen.dart';
 
 class QuickSearchScreen extends StatefulWidget {
@@ -122,75 +123,132 @@ class _QuickSearchScreen extends State<QuickSearchScreen> {
                             onPointerDown: (event) {
                               FocusManager.instance.primaryFocus?.unfocus();
                             },
-                            child: ListView.separated(
-                                shrinkWrap: true,
-                                itemBuilder: (conetxt, index) {
-                                  return GestureDetector(
+                            child: Column(
+                              children: [
+                                ListView.separated(
+                                    shrinkWrap: true,
+                                    itemBuilder: (conetxt, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ItemProfilePage(
+                                                          itemId: controller
+                                                                  .generalQuickSearchData
+                                                                  .value
+                                                                  .products?[
+                                                                      index]
+                                                                  .id ??
+                                                              0)));
+                                        },
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              height: 70,
+                                              width: 70,
+                                              child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      Connection.urlOfProducts(
+                                                          image: controller
+                                                                  .generalQuickSearchData
+                                                                  .value
+                                                                  .products?[
+                                                                      index]
+                                                                  .mainImage ??
+                                                              '')),
+                                            ),
+                                            10.pw,
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  (10 + 70 + 40),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    controller
+                                                            .generalQuickSearchData
+                                                            .value
+                                                            .products?[index]
+                                                            .title ??
+                                                        '',
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          kTheArabicSansLight,
+                                                      fontSize: 13.1.sp,
+                                                      // fontWeight: FontWeight.w600,
+                                                      // color: AppColors.kPrimaryColor
+                                                    ),
+                                                  ),
+                                                  const Text('...'),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder: (conetxt, index) {
+                                      return 10.ph;
+                                    },
+                                    itemCount: controller.generalQuickSearchData
+                                            .value.products?.length ??
+                                        0),
+                                if (controller
+                                        .generalQuickSearchData.value.brand !=
+                                    null) ...{
+                                  10.ph,
+                                  GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => ItemProfilePage(
-                                                  itemId: controller
-                                                          .generalQuickSearchData
-                                                          .value
-                                                          .products?[index]
-                                                          .id ??
-                                                      0)));
+                                      Get.to(BrandDetailScreen(
+                                        brandId: int.parse(controller
+                                                .generalQuickSearchData
+                                                .value
+                                                .brand
+                                                ?.id
+                                                .toString() ??
+                                            '0'),
+                                      ));
                                     },
                                     child: Row(
                                       children: [
-                                        SizedBox(
-                                          height: 70,
-                                          width: 70,
-                                          child: CachedNetworkImage(
-                                              imageUrl: Connection.urlOfProducts(
-                                                  image: controller
-                                                          .generalQuickSearchData
-                                                          .value
-                                                          .products?[index]
-                                                          .mainImage ??
-                                                      '')),
+                                        CachedNetworkImage(
+                                          imageUrl: Connection.urlOfBrands3(
+                                              image: controller
+                                                      .generalQuickSearchData
+                                                      .value
+                                                      .brand
+                                                      ?.logo ??
+                                                  ''),
+                                          height: 60.h,
+                                          width: 60.w,
                                         ),
                                         10.pw,
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              (10 + 70 + 40),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                controller
-                                                        .generalQuickSearchData
-                                                        .value
-                                                        .products?[index]
-                                                        .title ??
-                                                    '',
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      kTheArabicSansLight,
-                                                  fontSize: 13.1.sp,
-                                                  // fontWeight: FontWeight.w600,
-                                                  // color: AppColors.kPrimaryColor
-                                                ),
-                                              ),
-                                              const Text('...'),
-                                            ],
+                                        Text(
+                                          'عرض صفحة ماركة  ',
+                                          style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 15.1.sp,
+                                            fontWeight: FontWeight.w600,
+                                            // color: AppColors.kPrimaryColor
                                           ),
-                                        )
+                                        ),
+                                        Text(controller.keyWord.value,
+                                            style: TextStyle(
+                                                fontFamily: kTheArabicSansLight,
+                                                fontSize: 17.1.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.mainColor))
                                       ],
                                     ),
-                                  );
-                                },
-                                separatorBuilder: (conetxt, index) {
-                                  return 10.ph;
-                                },
-                                itemCount: controller.generalQuickSearchData
-                                        .value.products?.length ??
-                                    0)),
+                                  )
+                                }
+                              ],
+                            )),
                       ],
                     ),
                   ))));
