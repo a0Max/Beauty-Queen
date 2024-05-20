@@ -20,6 +20,7 @@ import '../../const/app_colors.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
 import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
@@ -53,6 +54,7 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
   final ProductProfileController controller =
       Get.put(ProductProfileController());
   bool isFavorite = false;
+  final NavController _controllerNav = Get.put(NavController());
 
   @override
   void initState() {
@@ -132,11 +134,18 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                   onTap: () {
                                     Get.to(const CartScreen());
                                   },
-                                  child: SvgPicture.asset(
-                                    AppImages.imageShop,
-                                    height: 30.h,
-                                    width: 30.w,
-                                  ),
+                                  child: Badge(
+                                      label: Text(
+                                          (_controllerNav.countCart.value)
+                                              .toString()),
+                                      isLabelVisible:
+                                          ((_controllerNav.countCart.value) !=
+                                              0),
+                                      child: SvgPicture.asset(
+                                        AppImages.imageShop,
+                                        height: 30.h,
+                                        width: 30.w,
+                                      )),
                                 ),
                                 10.pw,
                                 IconButton(
@@ -2700,8 +2709,9 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                               ))
                         } else ...{
                           GestureDetector(
-                            onTap: () {
-                              controller.addToCart();
+                            onTap: () async {
+                              await controller.addToCart();
+                              await _controllerNav.getCountOfCart();
                             },
                             child: Container(
                                 height: 47.61.h,
