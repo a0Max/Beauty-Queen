@@ -1119,6 +1119,18 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                         fontSize:
                                                                             0.8 *
                                                                                 14)),
+                                                                if (value.code !=
+                                                                        null &&
+                                                                    value.code !=
+                                                                        '') ...{
+                                                                  Text(
+                                                                      "- ${value.code} ",
+                                                                      style: kHintTextStyle.copyWith(
+                                                                          fontWeight: FontWeight
+                                                                              .w400,
+                                                                          fontSize:
+                                                                              0.8 * 14)),
+                                                                }
                                                               ],
                                                             ),
                                                           );
@@ -1363,6 +1375,18 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                         fontSize:
                                                                             0.8 *
                                                                                 14)),
+                                                                if (value.code !=
+                                                                        null &&
+                                                                    value.code !=
+                                                                        '') ...{
+                                                                  Text(
+                                                                      "- ${value.code} ",
+                                                                      style: kHintTextStyle.copyWith(
+                                                                          fontWeight: FontWeight
+                                                                              .w400,
+                                                                          fontSize:
+                                                                              0.8 * 14)),
+                                                                }
                                                               ],
                                                             ),
                                                           );
