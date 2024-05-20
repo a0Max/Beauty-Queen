@@ -730,6 +730,7 @@ class _HomePageState extends State<HomePage> {
                           viewportFraction: 1.0,
                           aspectRatio: 1.15,
                           autoPlay: true,
+                          height: 280.h,
                           onPageChanged: (index, reason) {
                             _controller.updateCurrentOffer(newSlider: index);
                           },
@@ -742,13 +743,13 @@ class _HomePageState extends State<HomePage> {
                                   onTap: () {},
                                   child: Stack(
                                     fit: StackFit.loose,
-                                    alignment: Alignment.bottomCenter,
+                                    alignment: Alignment.topCenter,
                                     children: [
                                       Container(
                                         width: kScreenWidth,
-                                        margin:
-                                            const EdgeInsets.only(bottom: 170),
-                                        height: 200.h,
+                                        // margin:
+                                        //     const EdgeInsets.only(bottom: 170),
+                                        height: 170.h,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: CachedNetworkImageProvider(
@@ -765,8 +766,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       Positioned(
-                                        // bottom: -120,
-
+                                        top: 150.h,
                                         child: Container(
                                           margin: const EdgeInsets.only(
                                               left: 20, right: 20, bottom: 20),
@@ -774,7 +774,7 @@ class _HomePageState extends State<HomePage> {
                                                   .size
                                                   .width -
                                               40,
-                                          height: 181.04.h,
+                                          // height: 181.04.h,
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 20),
                                           decoration: BoxDecoration(
@@ -795,9 +795,7 @@ class _HomePageState extends State<HomePage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              SizedBox(
-                                                height: 22.h,
-                                              ),
+                                              10.ph,
                                               Text(
                                                 _controller.homeData.value
                                                         .offers?[index].title ??
@@ -830,7 +828,7 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: 18.h,
+                                                height: 10.h,
                                               ),
                                               InkWell(
                                                 borderRadius:
@@ -875,7 +873,9 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                               ),
-                                              15.ph
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -885,9 +885,9 @@ class _HomePageState extends State<HomePage> {
                                 )),
                         disableGesture: true,
                       ),
-                      const SizedBox(
-                        height: 13,
-                      ),
+                      // const SizedBox(
+                      //   height: 13,
+                      // ),
                       Obx(() => Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
