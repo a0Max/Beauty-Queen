@@ -27,6 +27,8 @@ import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/categories/custom_fliter_ container.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
+import '../brands/branddetail_screen.dart';
+import '../product_profile/products_screen.dart';
 import 'filterby_category_screen.dart';
 
 class FliterScreen2 extends StatefulWidget {
@@ -189,16 +191,78 @@ class _FliterScreenState extends State<FliterScreen2> {
                         height: 139.17.h,
                       )
                     : (_controller.generalSearchData.value.info?.banner != null)
-                        ? SizedBox(
-                            height: 139.17.h,
-                            width: MediaQuery.of(context).size.width,
-                            child: CachedNetworkImage(
+                        ? GestureDetector(
+                            onTap: () {
+                              if (_controller.generalSearchData.value.info
+                                      ?.bannerIsLink ==
+                                  '1') {
+                                if (_controller.generalSearchData.value.info
+                                        ?.bannerLinkType ==
+                                    LinkTypes.brand) {
+                                  Get.to(BrandDetailScreen(
+                                    brandId: int.parse(_controller
+                                            .generalSearchData
+                                            .value
+                                            .info
+                                            ?.bannerLinkId ??
+                                        '0'),
+                                  ));
+                                } else if (_controller.generalSearchData.value
+                                        .info?.bannerLinkType ==
+                                    LinkTypes.product) {
+                                  Get.to(ItemProfilePage(
+                                      itemId: int.parse(_controller
+                                              .generalSearchData
+                                              .value
+                                              .info
+                                              ?.bannerLinkId ??
+                                          '0')));
+                                } else if (_controller.generalSearchData.value
+                                        .info?.bannerLinkType ==
+                                    LinkTypes.category) {
+                                  AlkasamController controller =
+                                      Get.put(AlkasamController());
+                                  controller.updateCurrentCategoryId(
+                                      newId: int.parse(_controller
+                                              .generalSearchData
+                                              .value
+                                              .info
+                                              ?.bannerLinkId ??
+                                          '0'),
+                                      getChild: null);
+                                  Get.to(FliterScreen2(
+                                    categoryId: int.parse(_controller
+                                            .generalSearchData
+                                            .value
+                                            .info
+                                            ?.bannerLinkId ??
+                                        '0'),
+                                  ));
+                                } else if (_controller.generalSearchData.value
+                                        .info?.bannerLinkType ==
+                                    LinkTypes.brands) {
+                                  Get.to(BrandDetailScreen(
+                                    brandId: int.parse(_controller
+                                            .generalSearchData
+                                            .value
+                                            .info
+                                            ?.bannerLinkId ??
+                                        '0'),
+                                  ));
+                                }
+                              }
+                            },
+                            child: SizedBox(
                                 height: 139.17.h,
                                 width: MediaQuery.of(context).size.width,
-                                imageUrl: Connection.urlOfStorage(
-                                    image: _controller.generalSearchData.value
-                                            .info?.banner ??
-                                        '')))
+                                child: CachedNetworkImage(
+                                    height: 139.17.h,
+                                    width: MediaQuery.of(context).size.width,
+                                    imageUrl: Connection.urlOfStorage(
+                                        image: _controller.generalSearchData
+                                                .value.info?.banner ??
+                                            ''))),
+                          )
                         : const SizedBox(),
                 SizedBox(
                   height: 10.h,
