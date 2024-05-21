@@ -124,7 +124,7 @@ class CartItem extends StatelessWidget {
                           ' إزالة ',
                           style: TextStyle(
                               color: AppColors.mainColor,
-                              fontSize: 19.92.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w600),
                         ),
                       ],

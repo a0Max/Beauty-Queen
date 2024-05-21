@@ -10,6 +10,8 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -64,15 +66,16 @@ class _CartScreen extends State<CartScreen> {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: SizedBox(),
-                                ),
-                                Expanded(
-                                  flex: 5,
+                                  flex: 2,
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      20.pw,
+                                      SvgPicture.asset(
+                                        AppImages.imageShop,
+                                        height: 30.h,
+                                        width: 30.w,
+                                      ),
+                                      5.pw,
                                       Text(
                                         tr('cart'),
                                         style: TextStyle(
@@ -80,6 +83,60 @@ class _CartScreen extends State<CartScreen> {
                                             fontSize: 23.sp,
                                             fontWeight: FontWeight.w700,
                                             color: AppColors.kPrimaryColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  // flex: 5,
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          await productController.clearCart();
+                                        },
+                                        child: SizedBox(
+                                          width: 150,
+                                          height: 50,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    left: 30),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                alignment: Alignment.center,
+                                                decoration: const BoxDecoration(
+                                                    color:
+                                                        AppColors.klPinkColor),
+                                                child: Text(
+                                                  'تفريغ السلة   ',
+                                                  style: TextStyle(
+                                                    color: AppColors.mainColor,
+                                                    fontSize: 18
+                                                        .sp, // Replace with 28.sp if you're using scaled fonts
+                                                    fontFamily:
+                                                        kTheArabicSansBold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const Positioned(
+                                                left: 0,
+                                                child: CircleAvatar(
+                                                  radius: 25,
+                                                  backgroundColor:
+                                                      AppColors.mainColor,
+                                                  child: Icon(
+                                                    Icons.close,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -104,8 +161,8 @@ class _CartScreen extends State<CartScreen> {
                                     Container(
                                       color: AppColors.kPrimaryColor,
                                       // height: 50.83.h,
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10),
                                       // width: 438.44.w,
                                       width: MediaQuery.of(context).size.width,
                                       child: Row(
@@ -127,6 +184,7 @@ class _CartScreen extends State<CartScreen> {
                                         ],
                                       ),
                                     ),
+                                    10.ph,
                                     Padding(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 11.w),
@@ -186,7 +244,8 @@ class _CartScreen extends State<CartScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                margin: EdgeInsets.symmetric(horizontal: 14),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 14),
                                 height: 53.58.h,
                                 width: 398.w,
                                 decoration: BoxDecoration(
@@ -313,7 +372,8 @@ class _CartScreen extends State<CartScreen> {
                               ),
                               20.ph,
                               Container(
-                                margin: EdgeInsets.symmetric(horizontal: 14),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 14),
                                 child: GestureDetector(
                                   onTap: () {
                                     Get.to(() => const TabView());
@@ -323,7 +383,7 @@ class _CartScreen extends State<CartScreen> {
                                         vertical: 10),
                                     width:
                                         MediaQuery.of(context).size.width / 2,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: AppColors.kPrimaryColor,
                                       // borderRadius:
                                       //     BorderRadius.circular(46.r),
@@ -344,7 +404,7 @@ class _CartScreen extends State<CartScreen> {
                               20.ph
                             ],
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                   ],
                 ))),
       ),

@@ -71,26 +71,14 @@ class ProductController extends GetxController {
 
   Future<void> increment({required int index, required String newValue}) async {
     ProductsModel? product = cartData.value.products?[index];
-    // log('${int.parse("${product?.maximum_order_quantity}")}');
-    // log('${int.parse("${product?.qty}")}');
-    // log('${(int.parse("${product?.maximum_order_quantity}") > int.parse("${product?.qty}"))}"');
-    // if ((int.parse("${product?.maximum_order_quantity ?? 0}") >
-    //         int.parse("${product?.qty ?? 0}") &&
-    //     num.parse("${product?.stock ?? 1}") >
-    //         int.parse("${product?.qty ?? 1}"))) {
     product?.qty = int.parse(newValue);
     await _api.changeQuantityDataRequest(
         productId: product?.rowId ?? '', productQuantity: product?.qty);
-    cartData.update((val) {
-      val?.products?[index].qty = product?.qty;
-    });
-    totalPrice.value =
-        totalPrice.value + (1 * double.parse("${product?.price ?? 1}"));
-    totalCount.value = totalCount.value + 1;
+    cartData.value = await _api.cartDataRequest();
+    await updatePricesAndCount();
+    print('cartData.value.products?:${cartData.value.products?.length}');
+
     update();
-    // } else {
-    //   arrivedToMax();
-    // }
   }
 
   Future<void> removeFromCart({required int index}) async {
@@ -101,7 +89,7 @@ class ProductController extends GetxController {
 
     await _api.removeItemDataRequest(productId: product?.rowId ?? '');
     cartData.value = await _api.cartDataRequest();
-
+    await updatePricesAndCount();
     // cartData.value.products?.removeAt(index);
     print('cartData.value.products?:${cartData.value.products?.length}');
     update();
@@ -126,6 +114,8 @@ class ProductController extends GetxController {
   }
 
   updatePricesAndCount() {
+    totalCount.value = 0;
+    totalPrice.value = 0;
     cartData.value.products?.forEach((element) {
       totalCount.value = totalCount.value + int.parse("${element.qty ?? 1}");
       totalPrice.value = totalPrice.value +
@@ -136,5 +126,12 @@ class ProductController extends GetxController {
 
   checkCode({required String code}) async {
     await _api.checkPromoCode(code: code);
+  }
+
+  clearCart() async {
+    await _api.clearCardApi();
+    cartData.value = await _api.cartDataRequest();
+    await updatePricesAndCount();
+    update();
   }
 }
