@@ -8,12 +8,14 @@ part 'info_model.g.dart';
 class InfoModel {
   String? description;
   MagazineCoverModel? mobileBanner;
+  MagazineCoverModel? banner;
   MagazineCoverModel? desktopBanner;
   MagazineCoverModel? promoVideo;
 
   InfoModel(
       {this.description,
       this.mobileBanner,
+      this.banner,
       this.desktopBanner,
       this.promoVideo});
 

@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
@@ -1552,82 +1553,70 @@ class _HomePageState extends State<HomePage> {
                         height: 30.h,
                       ),
                       Container(
-                        height: 318.64.h,
-                        width: 484.14.w,
-                        color: AppColors.kPinkColor,
+                        height: 260.h,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                            Connection.urlOfMagazines(
+                                image: _controller.homeData.value.magazine
+                                        ?.banner?.file ??
+                                    ''),
+                          ),
+                          // fit: BoxFit.fill
+                        )),
                         child: Stack(
                           children: [
-                            Image(
-                              image: const AssetImage(AppImages.kMagzineImage),
-                              height: 300.h,
-                              width: 420.w,
-                            ),
                             Positioned(
-                              top: 180.h,
-                              right: 60.w,
-                              child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
+                              bottom: 0,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Column(
                                   children: [
-                                    TextSpan(
-                                      text:
-                                          'مجلة بيوتي كوين الإلكترونية - العدد الثاني\n',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13.18.sp,
-                                        fontFamily: kTheArabicSansLight,
-                                        fontWeight: FontWeight.w700,
-                                        height: 1.5,
-                                        letterSpacing: 0.13,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text:
-                                          'واكبي آخر صيحات الموسم مع مجلتنا مجلة الجمال\nو الموضة     ',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13.18.sp,
-                                        fontFamily: kTheArabicSansLight,
-                                        fontWeight: FontWeight.w400,
-                                        // height: 1.5,
-                                        // letterSpacing: 0.13,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  bottom: 25.h,
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.to(const MagazineScreen());
-                                  },
-                                  child: Container(
-                                    height: 29.83.h,
-                                    width: 85.59.w,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 1.5.w,
-                                            color: AppColors.kWhiteColor),
-                                        borderRadius:
-                                            BorderRadius.circular(8.r)),
-                                    child: Center(
-                                      child: Text(tr('let_me_know_now'),
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.03.sp,
+                                    Container(
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 10),
+                                      width: MediaQuery.of(context).size.width -
+                                          20,
+                                      child: HtmlWidget(
+                                        _controller.homeData.value.magazine
+                                                ?.description ??
+                                            '',
+                                        textStyle: TextStyle(
                                             fontFamily: kTheArabicSansLight,
-                                            fontWeight: FontWeight.w600,
-                                            height: 1.5,
-                                            letterSpacing: 0.13,
-                                          )),
+                                            color: Colors.white,
+                                            overflow: TextOverflow.ellipsis),
+                                      ),
                                     ),
-                                  ),
+                                    10.ph,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(const MagazineScreen());
+                                      },
+                                      child: Container(
+                                        height: 29.83.h,
+                                        width: 85.59.w,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 1.5.w,
+                                                color: AppColors.kWhiteColor),
+                                            borderRadius:
+                                                BorderRadius.circular(8.r)),
+                                        child: Center(
+                                          child: Text(tr('let_me_know_now'),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12.03.sp,
+                                                fontFamily: kTheArabicSansLight,
+                                                fontWeight: FontWeight.w600,
+                                                height: 1.5,
+                                                letterSpacing: 0.13,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                    5.ph,
+                                  ],
                                 ),
                               ),
                             ),

@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'brand_model.dart';
 import 'categories_model.dart';
 import 'discover_model.dart';
+import 'magazines/info_model.dart';
 import 'sales_products_model.dart';
 import 'slides_model.dart';
 import 'specials_model.dart';
@@ -28,6 +29,7 @@ class HomeModel {
   String? flash_discount_mobile_image;
   String? flash_discount_end_at;
   String? flash_discount_status;
+  InfoModel? magazine;
 
   HomeModel(
       {this.discover,
@@ -42,6 +44,7 @@ class HomeModel {
       this.banners,
       this.newArrivals,
       this.salesProducts,
+      this.magazine,
       this.offers,
       this.brands,
       this.slides,

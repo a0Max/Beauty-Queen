@@ -42,6 +42,10 @@ abstract class Connection {
     return "${storageURL}options/$image";
   }
 
+  static String urlOfMagazines({required String image}) {
+    return "${storageURL}magazines/$image";
+  }
+
   static String urlOfBanner({required String image}) {
     return "${storageURL}banner/$image";
   }
