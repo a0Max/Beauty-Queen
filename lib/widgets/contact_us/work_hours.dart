@@ -35,21 +35,7 @@ class WorkHours extends StatelessWidget {
             )
           ],
         ),
-        15.ph,
-        const Text('كل أيام الأسبوع من الساعة 10 صباحاً إلى الساعة 8:30 مساءاً',
-            style: TextStyle(
-              color: AppColors.kTextDGColor,
-              fontSize: 12,
-              fontWeight: FontWeight.w200,
-              fontFamily: kTheArabicSansLight,
-            )),
-        const Text('يوم الجمعة من الساعة 4 بعد الظهر إلى الساعة 8.300 مساءً',
-            style: TextStyle(
-              color: AppColors.kTextDGColor,
-              fontSize: 12,
-              fontWeight: FontWeight.w200,
-              fontFamily: kTheArabicSansLight,
-            )),
+        10.ph
       ],
     );
   }

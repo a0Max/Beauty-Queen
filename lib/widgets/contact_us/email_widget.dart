@@ -11,7 +11,8 @@ import '../../const/styles.dart';
 import '../../const/vars.dart';
 
 class EmailWidget extends StatelessWidget {
-  const EmailWidget({super.key});
+  final String? email;
+  const EmailWidget({super.key, this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +44,12 @@ class EmailWidget extends StatelessWidget {
         GestureDetector(
           onTap: () async {
             await launchUrl(
-              Uri.parse('mailto:${SocialMedia.email}'),
+              Uri.parse('mailto:${email}'),
               mode: LaunchMode.externalApplication,
             );
           },
-          child: const Text(
-            SocialMedia.email,
+          child: Text(
+            email ?? '',
             style: TextStyle(
               fontFamily: kTheArabicSansLight,
               fontSize: 14.74,

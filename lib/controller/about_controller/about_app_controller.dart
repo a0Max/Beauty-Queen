@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/app_data_apis.dart';
+import '../../models/get_contact.dart';
 
 class AboutAppController extends GetxController {
   RxBool stateOfMenu = false.obs;
@@ -23,5 +24,14 @@ class AboutAppController extends GetxController {
     loadingOfMySticker.value = true;
     myStickerData.value = await _api.getTransactionsataRequest();
     loadingOfMySticker.value = false;
+  }
+
+  RxBool isLoading = false.obs;
+  GetContactModel myContactData = GetContactModel();
+  getMyContact() async {
+    isLoading.value = true;
+    myContactData = await _api.getContactUs();
+    isLoading.value = false;
+    update();
   }
 }

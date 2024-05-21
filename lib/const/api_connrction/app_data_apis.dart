@@ -3,6 +3,7 @@ import 'package:beauty_queen/models/notification_model.dart';
 import 'package:dio/dio.dart';
 import '../../models/departments_model.dart';
 import '../../models/faq_model.dart';
+import '../../models/get_contact.dart';
 import '../../models/transactions_model.dart';
 import 'base_api_connection.dart';
 
@@ -214,6 +215,27 @@ class AppDataApis extends ApiProvider {
       final List<FAQModel> l = [];
       response.data['questions'].forEach((e) => l.add(FAQModel.fromJson(e)));
       return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+  Future<GetContactModel> getContactUs() async {
+    final response = await dio.get(
+      '${Connection.apiURL2}${ApiProvider.getContactUsDataEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // if (cookies != null) "Cookie": '$cookies',
+          // if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return GetContactModel.fromJson(
+        response.data['info'],
+      );
     } else {
       throw response.data;
     }

@@ -11,22 +11,24 @@ import '../../const/styles.dart';
 import '../../models/social_media_model.dart';
 
 class SocialLogin extends StatelessWidget {
-  SocialLogin({super.key});
-  List<SocialMediaModel> listOfSocialMedia = [
-    SocialMediaModel(
-        url: 'https://www.tiktok.com/@beautyqueen.ly0?_t=8Y6WKdWaGJi&_r=1',
-        image: AppImages.tiktokImage),
-    SocialMediaModel(
-        url:
-            'https://www.snapchat.com/add/beautyqueenyl?share_id=ODFGMDlBQzUtMjJFQS00NjBCLTgxRUEtMTIzMTQ1RjQxRDAz&locale=en_LY',
-        image: AppImages.snapChatImage),
-    SocialMediaModel(
-        url: 'https://instagram.com/beautyqueen.ly?igshid=YmMyMTA2M2Y=',
-        image: AppImages.instegramImage),
-    SocialMediaModel(
-        url: 'https://www.facebook.com/beautyqueenmakeup.ly/',
-        image: AppImages.facebook1Image),
-  ];
+  final String? face;
+  final String? ins;
+  final String? tiktok;
+  final String? snap;
+  SocialLogin({super.key, this.face, this.ins, this.tiktok, this.snap}) {
+    listOfSocialMedia = [
+      SocialMediaModel(url: tiktok ?? '', image: AppImages.tiktokImage),
+      SocialMediaModel(url: snap ?? '', image: AppImages.snapChatImage),
+      SocialMediaModel(
+          url:
+              ins ?? 'https://instagram.com/beautyqueen.ly?igshid=YmMyMTA2M2Y=',
+          image: AppImages.instegramImage),
+      SocialMediaModel(
+          url: face ?? 'https://www.facebook.com/beautyqueenmakeup.ly/',
+          image: AppImages.facebook1Image),
+    ];
+  }
+  List<SocialMediaModel> listOfSocialMedia = [];
   @override
   Widget build(BuildContext context) {
     return Column(

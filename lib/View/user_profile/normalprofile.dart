@@ -499,7 +499,7 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ContactUsScreen()));
+                              builder: (context) => ContactUsScreen()));
                     },
                     child: Row(
                       children: [
@@ -521,8 +521,7 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ContactUsScreen()));
+                                      builder: (context) => ContactUsScreen()));
                             },
                             icon: const Icon(Icons.arrow_forward_ios))
                       ],
