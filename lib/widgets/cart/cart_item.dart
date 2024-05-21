@@ -29,12 +29,21 @@ class CartItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CachedNetworkImage(
-                imageUrl:
-                    Connection.urlOfProducts(image: product.main_image ?? ''),
-                height: 97.h,
-                width: 97.w,
-              ),
+              if ((product.main_image ?? '').split('_').first == 'product') ...{
+                CachedNetworkImage(
+                  imageUrl:
+                      Connection.urlOfProducts(image: product.main_image ?? ''),
+                  height: 97.h,
+                  width: 97.w,
+                ),
+              } else ...{
+                CachedNetworkImage(
+                  imageUrl:
+                      Connection.urlOfOptions(image: product.main_image ?? ''),
+                  height: 97.h,
+                  width: 97.w,
+                ),
+              },
               5.pw,
               SizedBox(
                 width: MediaQuery.of(context).size.width - (130.w + 110.53.w),
@@ -76,16 +85,16 @@ class CartItem extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    if (product.opTitle != null) ...{
-                      Text(
-                        product.opTitle ?? '',
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 16.55.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.kGrayColor),
-                      ),
-                    },
+                    // if (product.opTitle != null) ...{
+                    Text(
+                      "${product.opTitle ?? ''} - ${product.opCode ?? ''}",
+                      style: TextStyle(
+                          fontFamily: kTheArabicSansLight,
+                          fontSize: 16.55.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.kGrayColor),
+                    ),
+                    // },
                   ],
                 ),
               ),
