@@ -508,8 +508,8 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                   .value
                                                                   .last
                                                                   .product
-                                                                  .offerPrice !=
-                                                              null) ...{
+                                                                  .offerPrice ==
+                                                              "0.00") ...{
                                                             Text(
                                                               "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
                                                               textAlign:
