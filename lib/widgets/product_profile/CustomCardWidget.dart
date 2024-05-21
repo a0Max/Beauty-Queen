@@ -5,10 +5,12 @@ import 'package:beauty_queen/widgets/product_profile/CustomAlertBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../View/brands/branddetail_screen.dart';
 import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/home_controller/home_controller.dart';
@@ -535,14 +537,22 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.newArrival.brand?.title ?? '',
-                      style: TextStyle(
-                        color: const Color(0xFFDE0F7E),
-                        fontSize: 15.sp,
-                        fontFamily: kTheArabicSansLight,
-                        fontWeight: FontWeight.w600,
-                        // height: 0.07,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(BrandDetailScreen(
+                          brandId:
+                              int.parse("${widget.newArrival.brand?.id ?? 0}"),
+                        ));
+                      },
+                      child: Text(
+                        widget.newArrival.brand?.title ?? '',
+                        style: TextStyle(
+                          color: const Color(0xFFDE0F7E),
+                          fontSize: 15.sp,
+                          fontFamily: kTheArabicSansLight,
+                          fontWeight: FontWeight.w600,
+                          // height: 0.07,
+                        ),
                       ),
                     ),
                     Text(
