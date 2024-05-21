@@ -1961,7 +1961,16 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         viewportFraction: 1.0,
                                                         // Set to 1.0 for full width current page
                                                         aspectRatio: 1.0,
-                                                        autoPlay: true,
+                                                        autoPlay: (controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .p
+                                                                        ?.length ??
+                                                                    0) >
+                                                                2
+                                                            ? true
+                                                            : false,
                                                         enlargeCenterPage:
                                                             true, // Make the current page full width
                                                       ),
@@ -2227,7 +2236,16 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                         viewportFraction: 1.0,
                                                         // Set to 1.0 for full width current page
                                                         aspectRatio: 1.0,
-                                                        autoPlay: true,
+                                                        autoPlay: (controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .sameBrandProducts
+                                                                        ?.length ??
+                                                                    0) >
+                                                                2
+                                                            ? true
+                                                            : false,
                                                         enlargeCenterPage:
                                                             true, // Make the current page full width
                                                       ),
