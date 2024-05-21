@@ -143,38 +143,48 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                                   ?.length ??
                               0) >
                           1
-                      ? CarouselSlider(
-                          options: CarouselOptions(
-                            viewportFraction:
-                                1.0, // Set to 1.0 for full width current page
-                            aspectRatio: 2.74,
-                            autoPlay: (controller.generalSearchData.value.brand
-                                            ?.mobileSlides?.length ??
-                                        0) >
-                                    1
-                                ? true
-                                : false,
-                            enlargeCenterPage:
-                                true, // Make the current page full width
+                      ? Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: CarouselSlider(
+                              options: CarouselOptions(
+                                viewportFraction:
+                                    1.0, // Set to 1.0 for full width current page
+                                aspectRatio: 2.74,
+                                autoPlay: (controller.generalSearchData.value
+                                                .brand?.mobileSlides?.length ??
+                                            0) >
+                                        1
+                                    ? true
+                                    : false,
+                                enlargeCenterPage:
+                                    true, // Make the current page full width
+                              ),
+                              items: List.generate(
+                                controller.generalSearchData.value.brand
+                                        ?.mobileSlides?.length ??
+                                    0,
+                                (index) => CachedNetworkImage(
+                                  imageUrl: Connection.urlOfBrands3(
+                                      image: controller
+                                              .generalSearchData
+                                              .value
+                                              .brand
+                                              ?.mobileSlides?[index]
+                                              .file ??
+                                          ''),
+                                  fit: BoxFit.fill,
+                                ),
+                              )),
+                        )
+                      : Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: CachedNetworkImage(
+                            imageUrl: Connection.urlOfBrands3(
+                                image: controller.generalSearchData.value.brand
+                                        ?.mobileSlides?.first.file ??
+                                    ''),
+                            fit: BoxFit.fill,
                           ),
-                          items: List.generate(
-                            controller.generalSearchData.value.brand
-                                    ?.mobileSlides?.length ??
-                                0,
-                            (index) => CachedNetworkImage(
-                              imageUrl: Connection.urlOfBrands3(
-                                  image: controller.generalSearchData.value
-                                          .brand?.mobileSlides?[index].file ??
-                                      ''),
-                              fit: BoxFit.fill,
-                            ),
-                          ))
-                      : CachedNetworkImage(
-                          imageUrl: Connection.urlOfBrands3(
-                              image: controller.generalSearchData.value.brand
-                                      ?.mobileSlides?.first.file ??
-                                  ''),
-                          fit: BoxFit.fill,
                         )
                 },
                 if (controller.isLoading.value == true) ...{
@@ -291,6 +301,7 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
                         )),
                   },
                 },
+                10.ph,
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Row(
