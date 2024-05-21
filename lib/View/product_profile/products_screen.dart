@@ -563,24 +563,51 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                               0.08,
                                                                         ),
                                                                       ),
-                                                                      Text(
-                                                                        "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
-                                                                        textAlign:
-                                                                            TextAlign.right,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              const Color(0xFFDE0F7E),
-                                                                          fontSize:
-                                                                              15.16.sp,
-                                                                          fontFamily:
-                                                                              kTheArabicSansBold,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          height:
-                                                                              0.08,
+                                                                      if (controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .product
+                                                                              .isFlashDiscount ==
+                                                                          "0") ...{
+                                                                        Text(
+                                                                          "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
+                                                                          textAlign:
+                                                                              TextAlign.right,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                const Color(0xFFDE0F7E),
+                                                                            fontSize:
+                                                                                15.16.sp,
+                                                                            fontFamily:
+                                                                                kTheArabicSansBold,
+                                                                            fontWeight:
+                                                                                FontWeight.w400,
+                                                                            height:
+                                                                                0.08,
+                                                                          ),
                                                                         ),
-                                                                      ),
+                                                                      } else ...{
+                                                                        Text(
+                                                                          "${controller.productData.value.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
+                                                                          textAlign:
+                                                                              TextAlign.right,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                const Color(0xFFDE0F7E),
+                                                                            fontSize:
+                                                                                15.16.sp,
+                                                                            fontFamily:
+                                                                                kTheArabicSansBold,
+                                                                            fontWeight:
+                                                                                FontWeight.w400,
+                                                                            height:
+                                                                                0.08,
+                                                                          ),
+                                                                        ),
+                                                                      }
                                                                     ])),
                                                           }
                                                         },
@@ -649,25 +676,51 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                             0.08,
                                                                       ),
                                                                     ),
-                                                                    Text(
-                                                                      "${controller.selectedOptions.value.first.offerPrice ?? ''}${tr('Del')}",
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .right,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: const Color(
-                                                                            0xFFDE0F7E),
-                                                                        fontSize:
-                                                                            15.16.sp,
-                                                                        fontFamily:
-                                                                            kTheArabicSansBold,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        height:
-                                                                            0.08,
+                                                                    if (controller
+                                                                            .productData
+                                                                            .value
+                                                                            .last
+                                                                            .product
+                                                                            .isFlashDiscount ==
+                                                                        "0") ...{
+                                                                      Text(
+                                                                        "${controller.selectedOptions.value.first.offerPrice ?? ''}${tr('Del')}",
+                                                                        textAlign:
+                                                                            TextAlign.right,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              const Color(0xFFDE0F7E),
+                                                                          fontSize:
+                                                                              15.16.sp,
+                                                                          fontFamily:
+                                                                              kTheArabicSansBold,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          height:
+                                                                              0.08,
+                                                                        ),
                                                                       ),
-                                                                    ),
+                                                                    } else ...{
+                                                                      Text(
+                                                                        "${controller.productData.value.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
+                                                                        textAlign:
+                                                                            TextAlign.right,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              const Color(0xFFDE0F7E),
+                                                                          fontSize:
+                                                                              15.16.sp,
+                                                                          fontFamily:
+                                                                              kTheArabicSansBold,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          height:
+                                                                              0.08,
+                                                                        ),
+                                                                      ),
+                                                                    }
                                                                   ],
                                                                 ))
                                                           }
@@ -1570,118 +1623,129 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                               false)
                                           ? ("${controller.productData.value.last.is_flash_discount.status}" ==
                                                   "true")
-                                              ? CountdownTimer(
-                                                  endTime: DateTime.parse(controller
-                                                              .productData
-                                                              .value
-                                                              .last
-                                                              .is_flash_discount
-                                                              .endAt ??
-                                                          '')
-                                                      .millisecondsSinceEpoch,
-                                                  widgetBuilder: (context,
-                                                      currentRemainingTime) {
-                                                    return Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Column(
+                                              ? Column(
+                                                  children: [
+                                                    Text(
+                                                      'اشتري سعر التخفيض قبل انتهاء الوقت',
+                                                      style:
+                                                          kTheSansTextStyleGray
+                                                              .copyWith(
+                                                                  fontSize:
+                                                                      0.6 * 18),
+                                                    ),
+                                                    CountdownTimer(
+                                                      endTime: DateTime.parse(
+                                                              controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .is_flash_discount
+                                                                      .endAt ??
+                                                                  '')
+                                                          .millisecondsSinceEpoch,
+                                                      widgetBuilder: (context,
+                                                          currentRemainingTime) {
+                                                        return Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
-                                                                  .start,
+                                                                  .end,
                                                           children: [
-                                                            Text(
-                                                              'ثانيه:',
-                                                              style: timerTextStyle
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          0.6 *
-                                                                              14),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'ثانيه:',
+                                                                  style: timerTextStyle
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              0.6 * 14),
+                                                                ),
+                                                                Text(
+                                                                  "${currentRemainingTime?.sec ?? '00'}",
+                                                                  style: timerTextStyle
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              3 * 14),
+                                                                ),
+                                                              ],
                                                             ),
-                                                            Text(
-                                                              "${currentRemainingTime?.sec ?? '00'}",
-                                                              style: timerTextStyle
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          3 * 14),
+                                                            Column(
+                                                              children: [
+                                                                const Text(
+                                                                  ':',
+                                                                  style:
+                                                                      timerTextStyle,
+                                                                ),
+                                                                10.ph,
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'دقيقه:',
+                                                                  style: timerTextStyle
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              0.6 * 14),
+                                                                ),
+                                                                Text(
+                                                                  "${currentRemainingTime?.min ?? '00'}",
+                                                                  style: timerTextStyle
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              3 * 14),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              children: [
+                                                                const Text(
+                                                                  ':',
+                                                                  style:
+                                                                      timerTextStyle,
+                                                                ),
+                                                                10.ph,
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'ساعه:',
+                                                                  style: timerTextStyle
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              0.6 * 14),
+                                                                ),
+                                                                Text(
+                                                                  "${currentRemainingTime?.hours ?? '00'}",
+                                                                  style: timerTextStyle
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              3 * 14),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ],
-                                                        ),
-                                                        Column(
-                                                          children: [
-                                                            const Text(
-                                                              ':',
-                                                              style:
-                                                                  timerTextStyle,
-                                                            ),
-                                                            10.ph,
-                                                          ],
-                                                        ),
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              'دقيقه:',
-                                                              style: timerTextStyle
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          0.6 *
-                                                                              14),
-                                                            ),
-                                                            Text(
-                                                              "${currentRemainingTime?.min ?? '00'}",
-                                                              style: timerTextStyle
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          3 * 14),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Column(
-                                                          children: [
-                                                            const Text(
-                                                              ':',
-                                                              style:
-                                                                  timerTextStyle,
-                                                            ),
-                                                            10.ph,
-                                                          ],
-                                                        ),
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              'ساعه:',
-                                                              style: timerTextStyle
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          0.6 *
-                                                                              14),
-                                                            ),
-                                                            Text(
-                                                              "${currentRemainingTime?.hours ?? '00'}",
-                                                              style: timerTextStyle
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          3 * 14),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                  onEnd: () {
-                                                    print('Countdown ended');
-                                                    // You can do something here when the countdown ends
-                                                  },
+                                                        );
+                                                      },
+                                                      onEnd: () {
+                                                        print(
+                                                            'Countdown ended');
+                                                        // You can do something here when the countdown ends
+                                                      },
+                                                    ),
+                                                  ],
                                                 )
                                               : SizedBox()
                                           : SizedBox(),

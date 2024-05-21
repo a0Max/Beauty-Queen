@@ -127,6 +127,8 @@ class _FliterScreenState extends State<FlashDiscountsScreen> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: List.generate(
                         _controller.childCategoryData.length,
                         (index) => Padding(

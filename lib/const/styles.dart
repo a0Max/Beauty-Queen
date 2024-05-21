@@ -10,7 +10,7 @@ const kPrimaryTextStyle = TextStyle(
 
 const kSecondaryTextStyle = TextStyle(
   color: AppColors.kSecondaryColor,
-  fontFamily: 'TheSans',
+  fontFamily: kTheArabicSansLight,
   fontWeight: FontWeight.w400,
 );
 
@@ -23,7 +23,7 @@ const kHintTextStyle = TextStyle(
 const kWelcomeTextStyle = TextStyle(
   color: AppColors.kTextBlackColor,
   fontSize: 29.02,
-  fontFamily: 'TheSans',
+  fontFamily: kTheArabicSansLight,
   fontWeight: FontWeight.w400,
   height: 1.0,
 );
@@ -48,20 +48,20 @@ const kExistingAccountTextStyle = TextStyle(
 const kTheSansTextStyle = TextStyle(
   color: Color(0xFFDE0F7E),
   fontSize: 30.85,
-  fontFamily: 'TheSans',
+  fontFamily: kTheArabicSansLight,
   fontWeight: FontWeight.w700,
 );
 const timerTextStyle = TextStyle(
   color: Color(0xFFDE0F7E),
   fontSize: 28,
-  fontFamily: 'TheSans',
+  fontFamily: kTheArabicSansLight,
   fontWeight: FontWeight.w700,
 );
 
 const kTheSansTextStyleGray = TextStyle(
   color: Color(0xFF707070),
   fontSize: 24.85,
-  fontFamily: 'TheSans',
+  fontFamily: kTheArabicSansLight,
   fontWeight: FontWeight.w400,
   height: 1.5,
 );

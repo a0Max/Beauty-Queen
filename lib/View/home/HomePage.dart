@@ -463,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                                       image: _controller.homeData.value
                                               .flash_discount_mobile_image ??
                                           ''),
-                                  height: 520.h,
+                                  height: 500.h,
                                   width: MediaQuery.of(context).size.width,
                                   fit: BoxFit.fill,
                                   imageBuilder: (context, imageProvider) =>
