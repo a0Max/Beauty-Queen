@@ -1980,78 +1980,137 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                           .kPrimaryColor),
                                                 ),
                                               ),
-                                              (controller.productData
+                                              if ((controller.productData
                                                           .isNotEmpty ??
-                                                      false)
-                                                  ? CarouselSlider(
-                                                      options: CarouselOptions(
-                                                        viewportFraction: 1.0,
-                                                        // Set to 1.0 for full width current page
-                                                        aspectRatio: 1.0,
-                                                        autoPlay: (controller
+                                                      false) &&
+                                                  (controller.productData.value
+                                                              .last.p?.length ??
+                                                          0) <=
+                                                      2) ...{
+                                                Row(
+                                                    children: List.generate(
+                                                        ((controller
                                                                         .productData
                                                                         .value
                                                                         .last
                                                                         .p
                                                                         ?.length ??
-                                                                    0) >
-                                                                2
-                                                            ? true
-                                                            : false,
-                                                        enlargeCenterPage:
-                                                            true, // Make the current page full width
+                                                                    0) /
+                                                                2)
+                                                            .roundToDouble()
+                                                            .toInt(), (index) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      CustomCardWidget(
+                                                        // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                        imageUrl: Connection
+                                                            .urlOfProducts(
+                                                                image: controller
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .p?[0]
+                                                                        .mainImage ??
+                                                                    ''),
+                                                        newArrival: controller
+                                                                .productData
+                                                                .value
+                                                                .last
+                                                                .p?[0] ??
+                                                            SalesProductsModel(),
+                                                        favorite: controller
+                                                                .productData
+                                                                .value
+                                                                .last
+                                                                .p?[0]
+                                                                .wishlist
+                                                                ?.isNotEmpty ??
+                                                            false,
                                                       ),
-                                                      items: List.generate(
-                                                          ((controller
+                                                      if ((controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .p
+                                                                  ?.length ??
+                                                              0) ==
+                                                          2) ...{
+                                                        CustomCardWidget(
+                                                          // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                          imageUrl: Connection
+                                                              .urlOfProducts(
+                                                                  image: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .p?[1]
+                                                                          .mainImage ??
+                                                                      ''),
+
+                                                          newArrival: controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .p?[1] ??
+                                                              SalesProductsModel(),
+                                                          favorite: controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .p?[1]
+                                                                  .wishlist
+                                                                  ?.isNotEmpty ??
+                                                              false,
+                                                        )
+                                                      } else ...{
+                                                        const SizedBox()
+                                                      }
+                                                    ],
+                                                  );
+                                                }))
+                                              } else ...{
+                                                (controller.productData
+                                                            .isNotEmpty ??
+                                                        false)
+                                                    ? CarouselSlider(
+                                                        options:
+                                                            CarouselOptions(
+                                                          viewportFraction: 1.0,
+                                                          // Set to 1.0 for full width current page
+                                                          aspectRatio: 1.0,
+                                                          autoPlay: (controller
                                                                           .productData
                                                                           .value
                                                                           .last
                                                                           .p
                                                                           ?.length ??
-                                                                      0) /
-                                                                  2)
-                                                              .roundToDouble()
-                                                              .toInt(),
-                                                          (index) {
-                                                        int value = index * 2;
-                                                        return Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            CustomCardWidget(
-                                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                                              imageUrl: Connection.urlOfProducts(
-                                                                  image: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .p?[value]
-                                                                          .mainImage ??
-                                                                      ''),
-                                                              newArrival: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .p?[value] ??
-                                                                  SalesProductsModel(),
-                                                              favorite: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .p?[value]
-                                                                      .wishlist
-                                                                      ?.isNotEmpty ??
-                                                                  false,
-                                                            ),
-                                                            if ((controller
-                                                                        .productData
-                                                                        .value
-                                                                        .last
-                                                                        .p
-                                                                        ?.length ??
-                                                                    0) >
-                                                                value + 1) ...{
+                                                                      0) >
+                                                                  2
+                                                              ? true
+                                                              : false,
+                                                          enlargeCenterPage:
+                                                              true, // Make the current page full width
+                                                        ),
+                                                        items: List.generate(
+                                                            ((controller
+                                                                            .productData
+                                                                            .value
+                                                                            .last
+                                                                            .p
+                                                                            ?.length ??
+                                                                        0) /
+                                                                    2)
+                                                                .roundToDouble()
+                                                                .toInt(),
+                                                            (index) {
+                                                          int value = index * 2;
+                                                          return Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
                                                               CustomCardWidget(
                                                                 // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                                 imageUrl: Connection.urlOfProducts(
@@ -2059,36 +2118,68 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                             .productData
                                                                             .value
                                                                             .last
-                                                                            .p?[value +
-                                                                                1]
+                                                                            .p?[value]
                                                                             .mainImage ??
                                                                         ''),
-
                                                                 newArrival: controller
-                                                                            .productData
-                                                                            .value
-                                                                            .last
-                                                                            .p?[
-                                                                        value +
-                                                                            1] ??
+                                                                        .productData
+                                                                        .value
+                                                                        .last
+                                                                        .p?[value] ??
                                                                     SalesProductsModel(),
                                                                 favorite: controller
                                                                         .productData
                                                                         .value
                                                                         .last
-                                                                        .p?[value +
-                                                                            1]
+                                                                        .p?[value]
                                                                         .wishlist
                                                                         ?.isNotEmpty ??
                                                                     false,
-                                                              )
-                                                            } else ...{
-                                                              const SizedBox()
-                                                            }
-                                                          ],
-                                                        );
-                                                      }))
-                                                  : const SizedBox()
+                                                              ),
+                                                              if ((controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .p
+                                                                          ?.length ??
+                                                                      0) >
+                                                                  value +
+                                                                      1) ...{
+                                                                CustomCardWidget(
+                                                                  // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                                  imageUrl: Connection.urlOfProducts(
+                                                                      image: controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .p?[value + 1]
+                                                                              .mainImage ??
+                                                                          ''),
+
+                                                                  newArrival: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .p?[value + 1] ??
+                                                                      SalesProductsModel(),
+                                                                  favorite: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .p?[value +
+                                                                              1]
+                                                                          .wishlist
+                                                                          ?.isNotEmpty ??
+                                                                      false,
+                                                                )
+                                                              } else ...{
+                                                                const SizedBox()
+                                                              }
+                                                            ],
+                                                          );
+                                                        }))
+                                                    : const SizedBox()
+                                              }
                                             ],
                                           )
                                         : const SizedBox(),
@@ -2255,83 +2346,147 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                           .kPrimaryColor),
                                                 ),
                                               ),
-                                              (controller.productData
+                                              if ((controller
+                                                              .productData
+                                                              .value
+                                                              .last
+                                                              .sameBrandProducts
+                                                              ?.length ??
+                                                          0) <=
+                                                      2 &&
+                                                  (controller.productData
                                                           .isNotEmpty ??
-                                                      false)
-                                                  ? CarouselSlider(
-                                                      options: CarouselOptions(
-                                                        viewportFraction: 1.0,
-                                                        // Set to 1.0 for full width current page
-                                                        aspectRatio: 1.0,
-                                                        autoPlay: (controller
+                                                      false)) ...{
+                                                Row(
+                                                  children: List.generate(
+                                                      ((controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts
+                                                                      ?.length ??
+                                                                  0) /
+                                                              2)
+                                                          .roundToDouble()
+                                                          .toInt(), (index) {
+                                                    return Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        CustomCardWidget(
+                                                          // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                          imageUrl: Connection.urlOfProducts(
+                                                              image: controller
+                                                                      .productData
+                                                                      .value
+                                                                      .last
+                                                                      .sameBrandProducts?[
+                                                                          0]
+                                                                      .mainImage ??
+                                                                  ''),
+                                                          newArrival: controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .sameBrandProducts?[0] ??
+                                                              SalesProductsModel(),
+                                                          favorite: controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .sameBrandProducts?[
+                                                                      0]
+                                                                  .wishlist
+                                                                  ?.isNotEmpty ??
+                                                              false,
+                                                        ),
+                                                        if ((controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .sameBrandProducts
+                                                                    ?.length ??
+                                                                0) ==
+                                                            2) ...{
+                                                          CustomCardWidget(
+                                                            // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                            imageUrl: Connection.urlOfProducts(
+                                                                image: controller
                                                                         .productData
                                                                         .value
                                                                         .last
-                                                                        .sameBrandProducts
-                                                                        ?.length ??
-                                                                    0) >
-                                                                2
-                                                            ? true
-                                                            : false,
-                                                        enlargeCenterPage:
-                                                            true, // Make the current page full width
-                                                      ),
-                                                      items: List.generate(
-                                                          ((controller
+                                                                        .sameBrandProducts?[
+                                                                            1]
+                                                                        .mainImage ??
+                                                                    ''),
+                                                            newArrival: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .sameBrandProducts?[1] ??
+                                                                SalesProductsModel(),
+                                                            favorite: controller
+                                                                    .productData
+                                                                    .value
+                                                                    .last
+                                                                    .sameBrandProducts?[
+                                                                        1]
+                                                                    .wishlist
+                                                                    ?.isNotEmpty ??
+                                                                false,
+                                                          )
+                                                        }
+                                                      ],
+                                                    );
+                                                  }),
+                                                )
+                                              } else ...{
+                                                (controller.productData
+                                                            .isNotEmpty ??
+                                                        false)
+                                                    ? CarouselSlider(
+                                                        options:
+                                                            CarouselOptions(
+                                                          viewportFraction: 1.0,
+                                                          // Set to 1.0 for full width current page
+                                                          aspectRatio: 1.0,
+                                                          autoPlay: (controller
                                                                           .productData
                                                                           .value
                                                                           .last
                                                                           .sameBrandProducts
                                                                           ?.length ??
-                                                                      0) /
-                                                                  2)
-                                                              .roundToDouble()
-                                                              .toInt(),
-                                                          (index) {
-                                                        int value = index * 2;
-                                                        return Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            CustomCardWidget(
-                                                              // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                                              imageUrl: Connection.urlOfProducts(
-                                                                  image: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .sameBrandProducts?[
-                                                                              value]
-                                                                          .mainImage ??
-                                                                      ''),
-                                                              newArrival: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .sameBrandProducts?[
-                                                                      value] ??
-                                                                  SalesProductsModel(),
-                                                              favorite: controller
-                                                                      .productData
-                                                                      .value
-                                                                      .last
-                                                                      .sameBrandProducts?[
-                                                                          value]
-                                                                      .wishlist
-                                                                      ?.isNotEmpty ??
-                                                                  false,
-                                                            ),
-                                                            if ((controller
-                                                                        .productData
-                                                                        .value
-                                                                        .last
-                                                                        .sameBrandProducts
-                                                                        ?.length ??
-                                                                    0) >
-                                                                value + 1) ...{
+                                                                      0) >
+                                                                  2
+                                                              ? true
+                                                              : false,
+                                                          enlargeCenterPage:
+                                                              true, // Make the current page full width
+                                                        ),
+                                                        items: List.generate(
+                                                            ((controller
+                                                                            .productData
+                                                                            .value
+                                                                            .last
+                                                                            .sameBrandProducts
+                                                                            ?.length ??
+                                                                        0) /
+                                                                    2)
+                                                                .roundToDouble()
+                                                                .toInt(),
+                                                            (index) {
+                                                          int value = index * 2;
+                                                          return Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
                                                               CustomCardWidget(
                                                                 // width: (MediaQuery.of(context).size.width / 2) - 40,
                                                                 imageUrl: Connection.urlOfProducts(
@@ -2339,61 +2494,93 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                                             .productData
                                                                             .value
                                                                             .last
-                                                                            .sameBrandProducts?[value +
-                                                                                1]
-                                                                            .mainImage ??
-                                                                        ''),
-                                                                newArrival: controller
-                                                                            .productData
-                                                                            .value
-                                                                            .last
-                                                                            .sameBrandProducts?[
-                                                                        value +
-                                                                            1] ??
-                                                                    SalesProductsModel(),
-                                                                favorite: controller
-                                                                        .productData
-                                                                        .value
-                                                                        .last
-                                                                        .sameBrandProducts?[
-                                                                            value +
-                                                                                1]
-                                                                        .wishlist
-                                                                        ?.isNotEmpty ??
-                                                                    false,
-                                                              )
-                                                            } else ...{
-                                                              CustomCardWidget(
-                                                                // width: (MediaQuery.of(context).size.width / 2) - 40,
-                                                                imageUrl: Connection.urlOfProducts(
-                                                                    image: controller
-                                                                            .productData
-                                                                            .value
-                                                                            .last
-                                                                            .sameBrandProducts?[0]
+                                                                            .sameBrandProducts?[value]
                                                                             .mainImage ??
                                                                         ''),
                                                                 newArrival: controller
                                                                         .productData
                                                                         .value
                                                                         .last
-                                                                        .sameBrandProducts?[0] ??
+                                                                        .sameBrandProducts?[value] ??
                                                                     SalesProductsModel(),
                                                                 favorite: controller
                                                                         .productData
                                                                         .value
                                                                         .last
                                                                         .sameBrandProducts?[
-                                                                            0]
+                                                                            value]
                                                                         .wishlist
                                                                         ?.isNotEmpty ??
                                                                     false,
-                                                              )
-                                                            }
-                                                          ],
-                                                        );
-                                                      }))
-                                                  : const SizedBox()
+                                                              ),
+                                                              if ((controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts
+                                                                          ?.length ??
+                                                                      0) >
+                                                                  value +
+                                                                      1) ...{
+                                                                CustomCardWidget(
+                                                                  // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                                  imageUrl: Connection.urlOfProducts(
+                                                                      image: controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .sameBrandProducts?[value + 1]
+                                                                              .mainImage ??
+                                                                          ''),
+                                                                  newArrival: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[value + 1] ??
+                                                                      SalesProductsModel(),
+                                                                  favorite: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[value +
+                                                                              1]
+                                                                          .wishlist
+                                                                          ?.isNotEmpty ??
+                                                                      false,
+                                                                )
+                                                              } else ...{
+                                                                CustomCardWidget(
+                                                                  // width: (MediaQuery.of(context).size.width / 2) - 40,
+                                                                  imageUrl: Connection.urlOfProducts(
+                                                                      image: controller
+                                                                              .productData
+                                                                              .value
+                                                                              .last
+                                                                              .sameBrandProducts?[0]
+                                                                              .mainImage ??
+                                                                          ''),
+                                                                  newArrival: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[0] ??
+                                                                      SalesProductsModel(),
+                                                                  favorite: controller
+                                                                          .productData
+                                                                          .value
+                                                                          .last
+                                                                          .sameBrandProducts?[
+                                                                              0]
+                                                                          .wishlist
+                                                                          ?.isNotEmpty ??
+                                                                      false,
+                                                                )
+                                                              }
+                                                            ],
+                                                          );
+                                                        }))
+                                                    : const SizedBox()
+                                              }
                                             ],
                                           )
                                         : const SizedBox()
