@@ -87,8 +87,8 @@ class _BrandDetailScreenState extends State<BrandDetailScreen> {
       appBar: PreferredSize(
         preferredSize:
             userController.userData.value.accountType == AccountTypes.queena
-                ? Size.fromHeight(_isScrolled ? 80.h : 145.h)
-                : Size.fromHeight(_isScrolled ? 100.h : 160.h),
+                ? Size.fromHeight(80.h)
+                : Size.fromHeight(100.h),
         child: CustomAppBar(
           showarrowIcon: true,
           showBagIcon: true,

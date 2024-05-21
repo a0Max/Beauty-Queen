@@ -189,78 +189,78 @@ class CustomAppBar extends StatelessWidget {
                   } else ...{
                     const SizedBox()
                   },
-                  if (isScrolled == true) ...{
-                    SizedBox(
-                        height: 44.h,
-                        width: MediaQuery.of(context).size.width -
-                            (30.w +
-                                10.w +
-                                20.w +
-                                16.w +
-                                (onPressed != null ? 20.w : 0.w) +
-                                (showFavIcon ? 30.w : 0.w) +
-                                9.w +
-                                (showarrowIcon2 == true ? 0 : 20.w)),
-                        child: TextField(
-                          readOnly:
-                              makeSearchBarNotClickable == false ? true : false,
-                          autofocus: makeSearchBarNotClickable ?? false,
-                          onTap: () {
-                            if (makeSearchBarNotClickable == false) {
-                              Get.to(() => const QuickSearchScreen());
-                            }
-                          },
-                          onChanged: (val) {
-                            if (makeSearchBarNotClickable == true) {
-                              final SearchController0 controller =
-                                  Get.put(SearchController0());
-                              controller.getTheQuickSearch(keyWord: val);
-                            }
-                          },
-                          controller: searchController,
-                          style: const TextStyle(
+                  // if (isScrolled == true) ...{
+                  SizedBox(
+                      height: 44.h,
+                      width: MediaQuery.of(context).size.width -
+                          (34.w +
+                              10.w +
+                              20.w +
+                              16.w +
+                              (onPressed != null ? 20.w : 0.w) +
+                              (showFavIcon ? 30.w : 0.w) +
+                              9.w +
+                              (showarrowIcon2 == true ? 0 : 20.w)),
+                      child: TextField(
+                        readOnly:
+                            makeSearchBarNotClickable == false ? true : false,
+                        autofocus: makeSearchBarNotClickable ?? false,
+                        onTap: () {
+                          if (makeSearchBarNotClickable == false) {
+                            Get.to(() => const QuickSearchScreen());
+                          }
+                        },
+                        onChanged: (val) {
+                          if (makeSearchBarNotClickable == true) {
+                            final SearchController0 controller =
+                                Get.put(SearchController0());
+                            controller.getTheQuickSearch(keyWord: val);
+                          }
+                        },
+                        controller: searchController,
+                        style: const TextStyle(
+                          fontFamily: kTheArabicSansLight,
+                        ),
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              goToSearchScreen(context: context);
+                            },
+                            icon: SvgPicture.asset(AppImages.imageSearch),
+                          ),
+                          prefix: SizedBox(width: 20.w),
+                          hintText: 'إبحث عن منتج أو ماركة',
+                          hintStyle: TextStyle(
+                            color: AppColors.kGrayColor,
+                            fontSize: 16.59.sp,
                             fontFamily: kTheArabicSansLight,
+                            fontWeight: FontWeight.w300,
                           ),
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                goToSearchScreen(context: context);
-                              },
-                              icon: SvgPicture.asset(AppImages.imageSearch),
+                          contentPadding: EdgeInsets.symmetric(vertical: 7.h),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(39.r),
+                            borderSide: const BorderSide(
+                              color: AppColors.kWhiteBlueColor,
                             ),
-                            prefix: SizedBox(width: 20.w),
-                            hintText: 'إبحث عن منتج أو ماركة',
-                            hintStyle: TextStyle(
-                              color: AppColors.kGrayColor,
-                              fontSize: 16.59.sp,
-                              fontFamily: kTheArabicSansLight,
-                              fontWeight: FontWeight.w300,
-                            ),
-                            contentPadding: EdgeInsets.symmetric(vertical: 7.h),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(39.r),
-                              borderSide: const BorderSide(
-                                color: AppColors.kWhiteBlueColor,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(39.r),
-                              borderSide: const BorderSide(
-                                color: AppColors.kWhiteBlueColor,
-                              ),
-                            ),
-                            fillColor: AppColors.kWhiteBlueColor,
-                            filled: true,
                           ),
-                          onSubmitted: (val) {
-                            goToSearchScreen(context: context);
-                          },
-                          onEditingComplete: () {
-                            goToSearchScreen(context: context);
-                          },
-                          maxLines: 1,
-                        )),
-                  },
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(39.r),
+                            borderSide: const BorderSide(
+                              color: AppColors.kWhiteBlueColor,
+                            ),
+                          ),
+                          fillColor: AppColors.kWhiteBlueColor,
+                          filled: true,
+                        ),
+                        onSubmitted: (val) {
+                          goToSearchScreen(context: context);
+                        },
+                        onEditingComplete: () {
+                          goToSearchScreen(context: context);
+                        },
+                        maxLines: 1,
+                      )),
+                  // },
                   Row(
                     children: [
                       if (isScrolled != true && showFavIcon) ...{
@@ -337,80 +337,80 @@ class CustomAppBar extends StatelessWidget {
                   )
                 ],
               ),
-              if (isScrolled == false) ...{
-                AnimatedContainer(
-                  height: 44.h,
-                  padding: EdgeInsets.only(
-                    right: 16.w,
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
-                  width: Get.width * searchBarWidth!,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  transform: Matrix4.translationValues(
-                    isScrolled! ? 20 : 10.0,
-                    searchBarTranslationY!,
-                    isScrolled! ? -20.0 : 0,
-                  ),
-                  child: TextField(
-                    autofocus: makeSearchBarNotClickable ?? false,
-                    onTap: () {
-                      if (makeSearchBarNotClickable == false) {
-                        Get.to(() => const QuickSearchScreen());
-                      }
-                    },
-                    onChanged: (val) {
-                      if (makeSearchBarNotClickable == true) {
-                        final SearchController0 controller =
-                            Get.put(SearchController0());
-                        controller.getTheQuickSearch(keyWord: val);
-                      }
-                    },
-                    controller: searchController,
-                    style: const TextStyle(
-                      fontFamily: kTheArabicSansLight,
-                    ),
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          goToSearchScreen(context: context);
-                        },
-                        icon: SvgPicture.asset(AppImages.imageSearch),
-                      ),
-                      prefix: SizedBox(width: 20.w),
-                      hintText: 'إبحث عن منتج أو ماركة',
-                      hintStyle: TextStyle(
-                        color: AppColors.kGrayColor.withOpacity(.6),
-                        fontSize: 14.sp,
-                        fontFamily: kTheArabicSansLight,
-                        fontWeight: FontWeight.w300,
-                      ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 7.h),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(39.r),
-                        borderSide: const BorderSide(
-                          color: AppColors.kWhiteBlueColor,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(39.r),
-                        borderSide: const BorderSide(
-                          color: AppColors.kWhiteBlueColor,
-                        ),
-                      ),
-                      fillColor: AppColors.kWhiteBlueColor,
-                      filled: true,
-                    ),
-                    onSubmitted: (val) {
-                      goToSearchScreen(context: context);
-                    },
-                    onEditingComplete: () {
-                      goToSearchScreen(context: context);
-                    },
-                    maxLines: 1,
-                  ),
-                )
-              },
+              // if (isScrolled == false) ...{
+              //   AnimatedContainer(
+              //     height: 44.h,
+              //     padding: EdgeInsets.only(
+              //       right: 16.w,
+              //     ),
+              //     margin: EdgeInsets.symmetric(horizontal: 0.w, vertical: 10.h),
+              //     width: Get.width * searchBarWidth!,
+              //     duration: const Duration(milliseconds: 300),
+              //     curve: Curves.easeInOut,
+              //     transform: Matrix4.translationValues(
+              //       isScrolled! ? 20 : 10.0,
+              //       searchBarTranslationY!,
+              //       isScrolled! ? -20.0 : 0,
+              //     ),
+              //     child: TextField(
+              //       autofocus: makeSearchBarNotClickable ?? false,
+              //       onTap: () {
+              //         if (makeSearchBarNotClickable == false) {
+              //           Get.to(() => const QuickSearchScreen());
+              //         }
+              //       },
+              //       onChanged: (val) {
+              //         if (makeSearchBarNotClickable == true) {
+              //           final SearchController0 controller =
+              //               Get.put(SearchController0());
+              //           controller.getTheQuickSearch(keyWord: val);
+              //         }
+              //       },
+              //       controller: searchController,
+              //       style: const TextStyle(
+              //         fontFamily: kTheArabicSansLight,
+              //       ),
+              //       decoration: InputDecoration(
+              //         suffixIcon: IconButton(
+              //           onPressed: () {
+              //             goToSearchScreen(context: context);
+              //           },
+              //           icon: SvgPicture.asset(AppImages.imageSearch),
+              //         ),
+              //         prefix: SizedBox(width: 20.w),
+              //         hintText: 'إبحث عن منتج أو ماركة',
+              //         hintStyle: TextStyle(
+              //           color: AppColors.kGrayColor.withOpacity(.6),
+              //           fontSize: 14.sp,
+              //           fontFamily: kTheArabicSansLight,
+              //           fontWeight: FontWeight.w300,
+              //         ),
+              //         contentPadding: EdgeInsets.symmetric(vertical: 7.h),
+              //         enabledBorder: OutlineInputBorder(
+              //           borderRadius: BorderRadius.circular(39.r),
+              //           borderSide: const BorderSide(
+              //             color: AppColors.kWhiteBlueColor,
+              //           ),
+              //         ),
+              //         focusedBorder: OutlineInputBorder(
+              //           borderRadius: BorderRadius.circular(39.r),
+              //           borderSide: const BorderSide(
+              //             color: AppColors.kWhiteBlueColor,
+              //           ),
+              //         ),
+              //         fillColor: AppColors.kWhiteBlueColor,
+              //         filled: true,
+              //       ),
+              //       onSubmitted: (val) {
+              //         goToSearchScreen(context: context);
+              //       },
+              //       onEditingComplete: () {
+              //         goToSearchScreen(context: context);
+              //       },
+              //       maxLines: 1,
+              //     ),
+              //   )
+              // },
               SizedBox(
                 height: 10.h,
               ),
