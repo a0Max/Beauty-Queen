@@ -105,18 +105,39 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width -
-                                          (100.w + 30.w + 20),
-                                      child: Text(
-                                        ' لقد حصلتي على ${_controller.myStickerData.value[index].queenaAmount} ملصق من الفاتورة #${_controller.myStickerData.value[index].orderId}',
-                                        style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: AppColors.kBlackColor),
-                                        textAlign: TextAlign.center,
+                                    if (_controller
+                                            .myStickerData.value[index].type ==
+                                        'add') ...{
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                (100.w + 30.w + 20),
+                                        child: Text(
+                                          ' لقد حصلتي على ${_controller.myStickerData.value[index].queenaAmount} ملصق من الفاتورة #${_controller.myStickerData.value[index].orderId}',
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: AppColors.kBlackColor),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
-                                    ),
+                                    } else if (_controller
+                                            .myStickerData.value[index].type ==
+                                        'deduction') ...{
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                (100.w + 30.w + 20),
+                                        child: Text(
+                                          ' تم سحب ${_controller.myStickerData.value[index].queenaAmount} ملصق من الفاتورة #${_controller.myStickerData.value[index].orderId}',
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: AppColors.kBlackColor),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    }
                                   ],
                                 ),
                                 const Divider()

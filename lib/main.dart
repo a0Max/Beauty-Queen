@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import 'const/app_colors.dart';
 import 'const/notification.dart';
+import 'const/styles.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -48,9 +49,9 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             theme: ThemeData(
-              scaffoldBackgroundColor: AppColors.kWhiteColor,
-              useMaterial3: true,
-            ),
+                scaffoldBackgroundColor: AppColors.kWhiteColor,
+                useMaterial3: true,
+                fontFamily: kTheArabicSansLight),
             home: const SplashScreen(),
             debugShowCheckedModeBanner: false,
             builder: (context, widget) {

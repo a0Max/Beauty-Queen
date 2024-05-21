@@ -847,13 +847,15 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                         Text(
                                           " +${double.parse("${double.parse('${controller.productData.value.last.product.offerPrice}') / 10}").toString().split('.').first} ",
                                           style: const TextStyle(
-                                              color: AppColors.mainColor),
+                                              color: AppColors.mainColor,
+                                              fontFamily: kTheArabicSansLight),
                                         ),
                                       } else ...{
                                         Text(
                                           " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
                                           style: const TextStyle(
-                                              color: AppColors.mainColor),
+                                              color: AppColors.mainColor,
+                                              fontFamily: kTheArabicSansLight),
                                         ),
                                       },
                                       Text(tr('con_collect')),
@@ -872,15 +874,20 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     },
                                     child: const Row(
                                       children: [
-                                        Text('برنامج كوينا للولاء'),
+                                        Text(
+                                          'برنامج كوينا للولاء',
+                                          style: TextStyle(
+                                              fontFamily: kTheArabicSansLight),
+                                        ),
                                         Text('التفاصيل',
                                             style: TextStyle(
-                                              color: AppColors.mainColor,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              decorationColor:
-                                                  AppColors.mainColor,
-                                            )),
+                                                color: AppColors.mainColor,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationColor:
+                                                    AppColors.mainColor,
+                                                fontFamily:
+                                                    kTheArabicSansLight)),
                                       ],
                                     ),
                                   )
