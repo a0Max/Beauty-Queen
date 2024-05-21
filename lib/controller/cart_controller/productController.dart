@@ -100,7 +100,10 @@ class ProductController extends GetxController {
     // log('${(int.parse("${product?.maximum_order_quantity}") > int.parse("${product?.qty}"))}"');
 
     await _api.removeItemDataRequest(productId: product?.rowId ?? '');
-    cartData.value.products?.removeAt(index);
+    cartData.value = await _api.cartDataRequest();
+
+    // cartData.value.products?.removeAt(index);
+    print('cartData.value.products?:${cartData.value.products?.length}');
     update();
   }
 
