@@ -842,23 +842,33 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                       ),
                                       10.pw,
                                       Text(tr('collect')),
-                                      Text(
-                                        " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
-                                        style: const TextStyle(
-                                            color: AppColors.mainColor),
-                                      ),
+                                      if ("${controller.productData.value.last.product.isOffer}" ==
+                                          '1') ...{
+                                        Text(
+                                          " +${double.parse("${double.parse('${controller.productData.value.last.product.offerPrice}') / 10}").toString().split('.').first} ",
+                                          style: const TextStyle(
+                                              color: AppColors.mainColor),
+                                        ),
+                                      } else ...{
+                                        Text(
+                                          " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
+                                          style: const TextStyle(
+                                              color: AppColors.mainColor),
+                                        ),
+                                      },
                                       Text(tr('con_collect')),
                                     ],
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      if (Get.previousRoute ==
-                                          '/QuinaprogramScreen') {
-                                        Navigator.of(context).pop();
-                                      } else {
-                                        Get.to(QuinaprogramScreen(),
-                                            routeName: '/QuinaprogramScreen');
-                                      }
+                                      // if (Get.previousRoute ==
+                                      //     '/QuinaprogramScreen') {
+                                      //   Navigator.of(context).pop();
+                                      // } else {
+                                      Get.to(QuinaprogramScreen(
+                                        reCreate: true,
+                                      ));
+                                      // }
                                     },
                                     child: const Row(
                                       children: [
