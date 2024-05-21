@@ -496,66 +496,93 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w400,
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .lineThrough,
+                                                              // decoration:
+                                                              //     TextDecoration
+                                                              //         .lineThrough,
                                                               height: 0.08,
                                                             ),
                                                           ),
                                                         } else ...{
-                                                          SizedBox(
-                                                              width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      2) -
-                                                                  40,
-                                                              child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Text(
-                                                                      "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .right,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontSize:
-                                                                            15.16.sp,
-                                                                        fontFamily:
-                                                                            kTheArabicSansBold,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        decoration:
-                                                                            TextDecoration.lineThrough,
-                                                                        height:
-                                                                            0.08,
+                                                          if (controller
+                                                                  .productData
+                                                                  .value
+                                                                  .last
+                                                                  .product
+                                                                  .offerPrice !=
+                                                              null) ...{
+                                                            Text(
+                                                              "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .right,
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize:
+                                                                    15.16.sp,
+                                                                fontFamily:
+                                                                    kTheArabicSansBold,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                // decoration:
+                                                                //     TextDecoration
+                                                                //         .lineThrough,
+                                                                height: 0.08,
+                                                              ),
+                                                            ),
+                                                          } else ...{
+                                                            SizedBox(
+                                                                width: (MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        2) -
+                                                                    40,
+                                                                child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Text(
+                                                                        "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                                        textAlign:
+                                                                            TextAlign.right,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Colors.black,
+                                                                          fontSize:
+                                                                              15.16.sp,
+                                                                          fontFamily:
+                                                                              kTheArabicSansBold,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          decoration:
+                                                                              TextDecoration.lineThrough,
+                                                                          height:
+                                                                              0.08,
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                    Text(
-                                                                      "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .right,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: const Color(
-                                                                            0xFFDE0F7E),
-                                                                        fontSize:
-                                                                            15.16.sp,
-                                                                        fontFamily:
-                                                                            kTheArabicSansBold,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        height:
-                                                                            0.08,
+                                                                      Text(
+                                                                        "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
+                                                                        textAlign:
+                                                                            TextAlign.right,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              const Color(0xFFDE0F7E),
+                                                                          fontSize:
+                                                                              15.16.sp,
+                                                                          fontFamily:
+                                                                              kTheArabicSansBold,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          height:
+                                                                              0.08,
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  ])),
+                                                                    ])),
+                                                          }
                                                         },
                                                       } else ...{
                                                         if ((controller
