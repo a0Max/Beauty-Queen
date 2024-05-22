@@ -20,30 +20,41 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final PageController _pageController = PageController();
-  final ValueNotifier<int> _currentPageNotifier = ValueNotifier<int>(0);
   Timer? _timer;
-
+  int _currentPage = 0;
+  final int _totalPages = 4;
+  final int _durationPerPage = 3; // Duration in seconds
+  final List<double> _progressList = [0.0, 0.0, 0.0, 0.0];
   @override
   void initState() {
     super.initState();
-    // Starting the auto page view navigation
     _startAutoNavigation();
   }
 
   void _startAutoNavigation() {
-    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-      if (_currentPageNotifier.value == 0) {
-        _pageController.animateToPage(
-          1,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      } else {
-        timer.cancel();
-
-        // Replace with your login page navigation logic
-      }
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+      setState(() {
+        _progressList[_currentPage] += 0.1 / _durationPerPage;
+        if (_progressList[_currentPage] >= 1.0) {
+          _progressList[_currentPage] = 1.0;
+          if (_currentPage < _totalPages - 1) {
+            _currentPage++;
+            _pageController.animateToPage(
+              _currentPage,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeIn,
+            );
+          } else {
+            _performAction();
+          }
+        }
+      });
     });
+  }
+
+  void _performAction() async {
+    await Future.delayed(const Duration(milliseconds: 300));
+    Get.off(const LogInPage());
   }
 
   @override
@@ -55,7 +66,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final WelcomeController controller = Get.put(WelcomeController());
+    // final WelcomeController controller = Get.put(WelcomeController());
     return Scaffold(
       backgroundColor: AppColors.kBlackColor,
       body: Stack(
@@ -63,162 +74,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           PageView(
             controller: _pageController,
             onPageChanged: (int index) {
-              _currentPageNotifier.value = index;
-              if (index != 0) {
-                _timer
-                    ?.cancel(); // Stop the timer when the user manually navigates to the second page
-              }
+              // _currentPageNotifier.value = index;
             },
             children: [
-              Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Image.asset(
-                      AppImages.kpageviewThreeImage,
-                    ),
-                  ),
-                  Align(
-                      alignment: Alignment.topRight,
-                      child: Image.asset(AppImages.kpageviewTwoImage)),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Image.asset(AppImages.kpageviewoneImage)),
-                  Container(
-                    height: 351.h,
-                    width: 390.w,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(AppImages.kpageblacktwoImage),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 390.w,
-                      height: 351.h,
-                      child: Image.asset(
-                        AppImages.kpageblackoneImage,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                      right: 176.w,
-                      top: 50.h,
-                      child: Image.asset(
-                        AppImages.kpageviewlogoImage,
-                        height: 53.61.h,
-                        width: 55.w,
-                      )),
-                  Positioned(
-                    right: 54.w,
-                    top: 128.h,
-                    child: Column(
-                      children: [
-                        Text(
-                          tr('all_brands_in_world'),
-                          style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 31.73.sp,
-                            color: AppColors.kWhiteColor,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(tr('on_hand'),
-                            style: TextStyle(
-                                color: AppColors.kPrimaryColor,
-                                fontFamily: kTheArabicSansBold,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 40.73.sp)),
-                      ],
-                    ),
-                  ),
-                ],
+              Image.asset(
+                AppImages.kpageviewoneImage,
+                fit: BoxFit.cover,
               ),
-
-              //////////second stack///////////////////
-              Stack(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(AppImages.kFaceImage),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 351.h,
-                    width: 390.w,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(AppImages.kpageblacktwoImage),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 390.w,
-                      height: 351.h,
-                      child: Image.asset(
-                        AppImages.kpageblackoneImage,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                      right: 176.w,
-                      top: 50.h,
-                      child: Image.asset(
-                        AppImages.kpageviewlogoImage,
-                        height: 53.61.h,
-                        width: 55.w,
-                      )),
-                  Positioned(
-                    right: 71.w,
-                    top: 128.h,
-                    child: Column(
-                      children: [
-                        Text(
-                          tr('all_needed'),
-                          style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            fontSize: 33.73.sp,
-                            color: AppColors.kWhiteColor,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(tr('in_one_place'),
-                            style: TextStyle(
-                                color: AppColors.kPrimaryColor,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 36.73.sp)),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                      top: 453.h,
-                      left: -26.w,
-                      child: Image.asset(
-                        AppImages.kpageeyeoneImage,
-                        height: 181.h,
-                        width: 186.w,
-                      )),
-                  Positioned(
-                      top: 249.35.h,
-                      right: 25.w,
-                      child: Image.asset(
-                        AppImages.kpageeyetwoImage,
-                        height: 231.65.h,
-                        width: 303.94.w,
-                      )),
-                ],
+              Image.asset(
+                AppImages.kpageviewTwoImage,
+                fit: BoxFit.cover,
+              ),
+              Image.asset(
+                AppImages.kpageviewThreeImage,
+                fit: BoxFit.cover,
+              ),
+              Image.asset(
+                AppImages.kpageviewoneImage,
+                fit: BoxFit.cover,
               ),
             ],
           ),
@@ -229,86 +102,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ValueListenableBuilder(
-                    valueListenable: _currentPageNotifier,
-                    builder: (context, int currentPage, _) {
-                      return SizedBox(
-                        width: 147.w,
-                        height: 5.h,
-                        child: Obx(
-                          () => Visibility(
-                            visible: controller.showProgress.value,
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: 72.w,
-                                  height: 5.h,
-                                  decoration: ShapeDecoration(
-                                    color: const Color(
-                                        0xffB3B3B3), // I assumed a light pink background. Adjust as needed.
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(17.r),
-                                    ),
-                                  ),
+                  SizedBox(
+                    width: 35 * 4,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: _progressList.map((progress) {
+                        return Expanded(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 30,
+                                child: LinearProgressIndicator(
+                                  borderRadius: BorderRadius.circular(10),
+                                  value: progress,
+                                  backgroundColor: Colors.grey[300],
+                                  valueColor:
+                                      const AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
                                 ),
-                                Positioned(
-                                  right: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 72.w *
-                                        controller.firstProgressValue.value,
-                                    height: 5.h,
-                                    decoration: ShapeDecoration(
-                                      color:
-                                          (currentPage == 0 || currentPage == 1)
-                                              ? Colors.white
-                                              : const Color(0xFFB3B3B3),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(14.r),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  right: 75.w,
-                                  child: Container(
-                                    width: 72.w,
-                                    height: 5.h,
-                                    decoration: ShapeDecoration(
-                                      color: const Color(
-                                          0xffB3B3B3), // I assumed a light pink background. Adjust as needed.
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(17.r),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  right: 75.w,
-                                  top: 0,
-                                  child: Container(
-                                    width: 72.w *
-                                        controller.secondProgressValue.value,
-                                    height: 5.h,
-                                    decoration: ShapeDecoration(
-                                      color: (currentPage == 1)
-                                          ? Colors.white
-                                          : const Color(0xFFB3B3B3),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(14),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(width: 5),
+                            ],
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      }).toList(),
+                    ),
                   ),
                   SizedBox(height: 15.h),
                   SizedBox(
@@ -327,14 +145,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       onPressed: () {
                         // Check if the timer has been canceled
-                        if (controller.cancelTimerFlag.value) {
-                          // Timer canceled, navigate to the login screen
-                          Get.off(const LogInPage());
-                        } else {
-                          // Timer not canceled, cancel the timer and navigate
-                          controller.cancelTimer();
-                          Get.off(const LogInPage());
-                        }
+                        // if (controller.cancelTimerFlag.value) {
+                        // Timer canceled, navigate to the login screen
+                        // Get.off(const LogInPage());
+                        // } else {
+                        // Timer not canceled, cancel the timer and navigate
+                        // controller.cancelTimer();
+                        Get.off(const LogInPage());
+                        // }
                       },
                       child: Text(tr('kLogin'),
                           style: TextStyle(
@@ -363,14 +181,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       onPressed: () {
                         // Check if the timer has been canceled
-                        if (controller.cancelTimerFlag.value) {
-                          // Timer canceled, navigate to the sign-up screen
-                          Get.off(const SignUpPage());
-                        } else {
-                          // Timer not canceled, cancel the timer and navigate
-                          controller.cancelTimer();
-                          Get.off(const SignUpPage());
-                        }
+                        // if (controller.cancelTimerFlag.value) {
+                        //   // Timer canceled, navigate to the sign-up screen
+                        //   Get.off(const SignUpPage());
+                        // } else {
+                        //   // Timer not canceled, cancel the timer and navigate
+                        //   controller.cancelTimer();
+                        Get.off(const SignUpPage());
+                        // }
                       },
                       child: Text(
                         tr('kCreateAccount'),
