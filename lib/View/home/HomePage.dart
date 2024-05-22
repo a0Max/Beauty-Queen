@@ -472,12 +472,12 @@ class _HomePageState extends State<HomePage> {
                                       image: _controller.homeData.value
                                               .flash_discount_mobile_image ??
                                           ''),
-                                  height: 500.h,
+                                  height: 400.h,
                                   width: MediaQuery.of(context).size.width,
                                   fit: BoxFit.fill,
                                   imageBuilder: (context, imageProvider) =>
                                       Container(
-                                    height: 520.h,
+                                    height: 420.h,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
@@ -493,7 +493,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 420.h),
+                                margin: EdgeInsets.only(top: 330.h),
                                 height: 340.h < 305 ? 305 : 350.h,
                                 child: ListView.builder(
                                   shrinkWrap: true,
@@ -533,7 +533,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Positioned(
-                                  top: 160.h,
+                                  top: 120.h,
                                   left: 30,
                                   child: CountdownTimer(
                                     endTime: DateTime.parse(_controller.homeData
@@ -608,7 +608,7 @@ class _HomePageState extends State<HomePage> {
                                                     fontSize: 0.6 * 14),
                                               ),
                                               Text(
-                                                "${currentRemainingTime?.hours ?? '00'}",
+                                                "${int.parse("${(currentRemainingTime?.hours)}") + (DateTime(int.parse((_controller.homeData.value.flash_discount_end_at ?? '').toString().split(" ").first.toString().split('-').first), int.parse((_controller.homeData.value.flash_discount_end_at ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((_controller.homeData.value.flash_discount_end_at ?? '').toString().split(" ").first.toString().split('-').last)).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1)).inHours) ?? '00'}",
                                                 style: timerTextStyle.copyWith(
                                                     fontSize: 3 * 14),
                                               ),

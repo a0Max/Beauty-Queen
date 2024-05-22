@@ -40,6 +40,9 @@ import '../cart/cart_screen.dart';
 import '../categories/alkasam_screen.dart';
 import '../categories/filter_screen2.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
+import 'currentPriceWithBlack.dart';
+import 'currentPriceWithPink.dart';
+import 'oldPriceWithBlack.dart';
 import 'tab_screen_two.dart';
 
 class ItemProfilePage extends StatefulWidget {
@@ -93,17 +96,39 @@ class _ItemProfilePageState extends State<ItemProfilePage>
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<ProductProfileControllerProvider>();
+    final productOptionsIsEmpty = (controller.isLoading == false)
+        ? controller.productData.last.productOptions.isEmpty
+        : null;
+    final productIsFlashDiscount = (controller.isLoading == false)
+        ? controller.productData.last.product.isFlashDiscount
+        : null;
+    final productIsOffer = (controller.isLoading == false)
+        ? controller.productData.last.product.isOffer
+        : null;
+    final productMainPrice = (controller.isLoading == false)
+        ? controller.productData.last.product.price
+        : null;
+    final productFlashDiscountPrice = (controller.isLoading == false)
+        ? controller.productData.last.product.flashDiscountPrice
+        : null;
+    final productOfferPrice = (controller.isLoading == false)
+        ? controller.productData.last.product.offerPrice
+        : null;
+    final selectedOptionsPrice =
+        ((controller.isLoading == false) || controller.selectedOptions.isEmpty)
+            ? null
+            : controller.selectedOptions.first.price;
+
+    final selectedOptions =
+        ((controller.isLoading == false) || controller.selectedOptions.isEmpty)
+            ? null
+            : controller.selectedOptions.first;
     return WillPopScope(
       // canPop: true,
       onWillPop: () async {
         print('onWillPop');
         controller.removeLastAll();
         print(Get.previousRoute);
-        // if (Get.previousRoute == '/MainView') {
-        //   final HomeController _controller = Get.put(HomeController());
-        //
-        //   _controller.getHomeDataController();
-        // }
         return true;
       },
       child: Scaffold(
@@ -453,47 +478,102 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   .kPrimaryColor),
                                                         ),
                                                       ),
-                                                      if (controller
-                                                                  .productData
-                                                                  .last
-                                                                  .productOptions ==
-                                                              null ||
-                                                          controller
-                                                              .productData
-                                                              .last
-                                                              .productOptions
-                                                              .isEmpty) ...{
-                                                        if ("${controller.productData.last.product.isOffer}" !=
-                                                            '1') ...{
-                                                          Text(
-                                                            "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
-                                                            textAlign:
-                                                                TextAlign.right,
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize:
-                                                                  15.16.sp,
-                                                              fontFamily:
-                                                                  kTheArabicSansBold,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              // decoration:
-                                                              //     TextDecoration
-                                                              //         .lineThrough,
-                                                              height: 0.08,
-                                                            ),
-                                                          ),
+                                                      if (productIsFlashDiscount !=
+                                                              '1' &&
+                                                          productIsOffer !=
+                                                              '1' &&
+                                                          productOptionsIsEmpty ==
+                                                              true) ...{
+                                                        CurrentPriceWithBlack(
+                                                          price:
+                                                              '$productMainPrice',
+                                                        )
+                                                      } else if (productIsFlashDiscount !=
+                                                              '1' &&
+                                                          productIsOffer ==
+                                                              '1' &&
+                                                          productOptionsIsEmpty ==
+                                                              true) ...{
+                                                        SizedBox(
+                                                            width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2) -
+                                                                40,
+                                                            child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  OldPriceWithBlack(
+                                                                    price:
+                                                                        '$productMainPrice',
+                                                                  ),
+                                                                  CurrentPriceWithPink(
+                                                                    price:
+                                                                        '$productOfferPrice',
+                                                                  )
+                                                                ]))
+                                                      } else if (productIsFlashDiscount ==
+                                                              '1' &&
+                                                          productIsOffer !=
+                                                              '1' &&
+                                                          productOptionsIsEmpty ==
+                                                              true) ...{
+                                                        SizedBox(
+                                                            width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2) -
+                                                                40,
+                                                            child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  OldPriceWithBlack(
+                                                                    price:
+                                                                        '$productMainPrice',
+                                                                  ),
+                                                                  CurrentPriceWithPink(
+                                                                    price:
+                                                                        '$productFlashDiscountPrice',
+                                                                  )
+                                                                ]))
+                                                      } else if (productIsFlashDiscount !=
+                                                              '1' &&
+                                                          productIsOffer !=
+                                                              '1' &&
+                                                          productOptionsIsEmpty !=
+                                                              true) ...{
+                                                        if (controller
+                                                                    .productData
+                                                                    .last
+                                                                    .productOptions?[
+                                                                        0]
+                                                                    .title ==
+                                                                TypeOfOptions
+                                                                    .color &&
+                                                            controller
+                                                                    .productData
+                                                                    .last
+                                                                    .productOptions?[
+                                                                        0]
+                                                                    .options
+                                                                    .first
+                                                                    .isColor ==
+                                                                "1") ...{
+                                                          CurrentPriceWithBlack(
+                                                            price:
+                                                                '${selectedOptionsPrice ?? productMainPrice}',
+                                                          )
                                                         } else ...{
-                                                          if (controller
-                                                                  .productData
-                                                                  .last
-                                                                  .product
-                                                                  .offerPrice ==
-                                                              "0.00") ...{
+                                                          if (selectedOptions !=
+                                                              null) ...{
                                                             Text(
-                                                              "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
+                                                              "${controller.productData.last.productOptions.first.options.first.price ?? ''} ${tr('Del')}-${controller.productData.last.productOptions.first.options.last.price ?? ''} ${tr('Del')}",
                                                               textAlign:
                                                                   TextAlign
                                                                       .right,
@@ -508,11 +588,88 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                     FontWeight
                                                                         .w400,
                                                                 // decoration:
-                                                                //     TextDecoration
-                                                                //         .lineThrough,
+                                                                // TextDecoration
+                                                                //     .lineThrough,
                                                                 height: 0.08,
                                                               ),
-                                                            ),
+                                                            )
+                                                          } else ...{
+                                                            CurrentPriceWithBlack(
+                                                              price:
+                                                                  '${context.watch<ProductProfileControllerProvider>().selectedOptions.first.price}',
+                                                            )
+                                                          }
+                                                        }
+                                                      } else if (productIsFlashDiscount !=
+                                                              '1' &&
+                                                          productIsOffer ==
+                                                              '1' &&
+                                                          productOptionsIsEmpty !=
+                                                              true) ...{
+                                                        if (controller
+                                                                .productData
+                                                                .last
+                                                                .productOptions
+                                                                .first
+                                                                .options
+                                                                .first
+                                                                .offerPrice ==
+                                                            controller
+                                                                .productData
+                                                                .last
+                                                                .productOptions
+                                                                .first
+                                                                .options
+                                                                .last
+                                                                .offerPrice) ...{
+                                                          SizedBox(
+                                                              width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      2) -
+                                                                  40,
+                                                              child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    OldPriceWithBlack(
+                                                                      price:
+                                                                          '$productMainPrice',
+                                                                    ),
+                                                                    CurrentPriceWithPink(
+                                                                      price:
+                                                                          '${selectedOptionsPrice ?? productOfferPrice}',
+                                                                    )
+                                                                  ]))
+                                                        } else ...{
+                                                          if (context
+                                                              .watch<
+                                                                  ProductProfileControllerProvider>()
+                                                              .selectedOptions
+                                                              .isEmpty) ...{
+                                                            Text(
+                                                              "${controller.productData.last.productOptions.first.options.first.offerPrice ?? ''} ${tr('Del')}-${controller.productData.last.productOptions.first.options.last.offerPrice ?? ''} ${tr('Del')}",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .right,
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize:
+                                                                    15.16.sp,
+                                                                fontFamily:
+                                                                    kTheArabicSansBold,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                // decoration:
+                                                                // TextDecoration
+                                                                //     .lineThrough,
+                                                                height: 0.08,
+                                                              ),
+                                                            )
                                                           } else ...{
                                                             SizedBox(
                                                                 width: (MediaQuery.of(context)
@@ -525,313 +682,44 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                         MainAxisAlignment
                                                                             .spaceBetween,
                                                                     children: [
-                                                                      Text(
-                                                                        "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
-                                                                        textAlign:
-                                                                            TextAlign.right,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontSize:
-                                                                              15.16.sp,
-                                                                          fontFamily:
-                                                                              kTheArabicSansBold,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          decoration:
-                                                                              TextDecoration.lineThrough,
-                                                                          height:
-                                                                              0.08,
-                                                                        ),
+                                                                      OldPriceWithBlack(
+                                                                        price:
+                                                                            '${context.watch<ProductProfileControllerProvider>().selectedOptions.first.price}',
                                                                       ),
-                                                                      if (controller
-                                                                              .productData
-                                                                              .last
-                                                                              .product
-                                                                              .isFlashDiscount ==
-                                                                          "0") ...{
-                                                                        Text(
-                                                                          "${controller.productData.last.product.offerPrice ?? ''}${tr('Del')}",
-                                                                          textAlign:
-                                                                              TextAlign.right,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                const Color(0xFFDE0F7E),
-                                                                            fontSize:
-                                                                                15.16.sp,
-                                                                            fontFamily:
-                                                                                kTheArabicSansBold,
-                                                                            fontWeight:
-                                                                                FontWeight.w400,
-                                                                            height:
-                                                                                0.08,
-                                                                          ),
-                                                                        ),
-                                                                      } else ...{
-                                                                        Text(
-                                                                          "${controller.productData.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
-                                                                          textAlign:
-                                                                              TextAlign.right,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                const Color(0xFFDE0F7E),
-                                                                            fontSize:
-                                                                                15.16.sp,
-                                                                            fontFamily:
-                                                                                kTheArabicSansBold,
-                                                                            fontWeight:
-                                                                                FontWeight.w400,
-                                                                            height:
-                                                                                0.08,
-                                                                          ),
-                                                                        ),
-                                                                      }
-                                                                    ])),
+                                                                      CurrentPriceWithPink(
+                                                                        price:
+                                                                            '${context.watch<ProductProfileControllerProvider>().selectedOptions.first.offerPrice}',
+                                                                      )
+                                                                    ]))
                                                           }
                                                         },
-                                                      } else ...{
-                                                        if ((controller
-                                                                .selectedOptions
-                                                                .isNotEmpty) &&
-                                                            controller
-                                                                    .selectedOptions
-                                                                    .first !=
-                                                                null) ...{
-                                                          if ("${controller.productData.last.product.isOffer}" !=
-                                                              '1') ...{
-                                                            Text(
-                                                              "${controller.selectedOptions.first.price ?? ''} ${tr('Del')}",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .right,
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize:
-                                                                    15.16.sp,
-                                                                fontFamily:
-                                                                    kTheArabicSansBold,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                // decoration:
-                                                                // TextDecoration.lineThrough,
-                                                                height: 0.08,
-                                                              ),
-                                                            ),
-                                                          } else ...{
-                                                            SizedBox(
-                                                                width: (MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        2) -
-                                                                    40,
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Text(
-                                                                      "${controller.selectedOptions.first.price ?? ''} ${tr('Del')}",
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .right,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontSize:
-                                                                            15.16.sp,
-                                                                        fontFamily:
-                                                                            kTheArabicSansBold,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        decoration:
-                                                                            TextDecoration.lineThrough,
-                                                                        height:
-                                                                            0.08,
-                                                                      ),
-                                                                    ),
-                                                                    if (controller
-                                                                            .productData
-                                                                            .last
-                                                                            .product
-                                                                            .isFlashDiscount ==
-                                                                        "0") ...{
-                                                                      Text(
-                                                                        "${controller.selectedOptions.first.offerPrice ?? ''}${tr('Del')}",
-                                                                        textAlign:
-                                                                            TextAlign.right,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              const Color(0xFFDE0F7E),
-                                                                          fontSize:
-                                                                              15.16.sp,
-                                                                          fontFamily:
-                                                                              kTheArabicSansBold,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          height:
-                                                                              0.08,
-                                                                        ),
-                                                                      ),
-                                                                    } else ...{
-                                                                      Text(
-                                                                        "${controller.productData.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
-                                                                        textAlign:
-                                                                            TextAlign.right,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              const Color(0xFFDE0F7E),
-                                                                          fontSize:
-                                                                              15.16.sp,
-                                                                          fontFamily:
-                                                                              kTheArabicSansBold,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          height:
-                                                                              0.08,
-                                                                        ),
-                                                                      ),
-                                                                    }
-                                                                  ],
-                                                                ))
-                                                          }
-                                                        } else ...{
-                                                          if ("${controller.productData.last.product.isOffer}" !=
-                                                              '1') ...{
-                                                            if ("${controller.productData.last.productOptions.first.options.first.price ?? ''}" !=
-                                                                "${controller.productData.last.productOptions.first.options.last.price ?? ''}") ...{
-                                                              Text(
-                                                                "${controller.productData.last.productOptions.first.options.first.price ?? ''} ${tr('Del')}-${controller.productData.last.productOptions.first.options.last.price ?? ''} ${tr('Del')}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .right,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      15.16.sp,
-                                                                  fontFamily:
-                                                                      kTheArabicSansBold,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  // decoration:
-                                                                  // TextDecoration
-                                                                  //     .lineThrough,
-                                                                  height: 0.08,
-                                                                ),
-                                                              )
-                                                            } else ...{
-                                                              Text(
-                                                                "${controller.productData.last.productOptions.first.options.first.price ?? ''} ${tr('Del')}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .right,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      15.16.sp,
-                                                                  fontFamily:
-                                                                      kTheArabicSansBold,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  // decoration:
-                                                                  // TextDecoration
-                                                                  //     .lineThrough,
-                                                                  height: 0.08,
-                                                                ),
-                                                              )
-                                                            },
-                                                          } else ...{
-                                                            if ("${controller.productData.last.productOptions.first.options.first.offerPrice ?? ''}" !=
-                                                                "${controller.productData.last.productOptions.first.options.last.offerPrice ?? ''}") ...{
-                                                              Text(
-                                                                "${controller.productData.last.productOptions.first.options.first.offerPrice ?? ''} ${tr('Del')}-${controller.productData.last.productOptions.first.options.last.offerPrice ?? ''} ${tr('Del')}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .right,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      15.16.sp,
-                                                                  fontFamily:
-                                                                      kTheArabicSansBold,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  // decoration:
-                                                                  // TextDecoration
-                                                                  //     .lineThrough,
-                                                                  height: 0.08,
-                                                                ),
-                                                              )
-                                                            } else ...{
-                                                              SizedBox(
-                                                                  width: (MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          2) -
-                                                                      40,
-                                                                  child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Text(
-                                                                          "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
-                                                                          textAlign:
-                                                                              TextAlign.right,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Colors.black,
-                                                                            fontSize:
-                                                                                15.16.sp,
-                                                                            fontFamily:
-                                                                                kTheArabicSansBold,
-                                                                            fontWeight:
-                                                                                FontWeight.w400,
-                                                                            decoration:
-                                                                                TextDecoration.lineThrough,
-                                                                            height:
-                                                                                0.08,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          "${controller.productData.last.product.offerPrice ?? ''}${tr('Del')}",
-                                                                          textAlign:
-                                                                              TextAlign.right,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                const Color(0xFFDE0F7E),
-                                                                            fontSize:
-                                                                                15.16.sp,
-                                                                            fontFamily:
-                                                                                kTheArabicSansBold,
-                                                                            fontWeight:
-                                                                                FontWeight.w400,
-                                                                            height:
-                                                                                0.08,
-                                                                          ),
-                                                                        ),
-                                                                      ]))
-                                                            }
-                                                          }
-                                                        }
+                                                      } else if (productIsFlashDiscount ==
+                                                              '1' &&
+                                                          productIsOffer !=
+                                                              '1' &&
+                                                          productOptionsIsEmpty !=
+                                                              true) ...{
+                                                        SizedBox(
+                                                            width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2) -
+                                                                40,
+                                                            child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  OldPriceWithBlack(
+                                                                    price:
+                                                                        '$productMainPrice',
+                                                                  ),
+                                                                  CurrentPriceWithPink(
+                                                                    price:
+                                                                        '${selectedOptionsPrice ?? productFlashDiscountPrice}',
+                                                                  )
+                                                                ]))
                                                       }
                                                     ],
                                                   )
@@ -1586,13 +1474,15 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                               ? Column(
                                                   children: [
                                                     Text(
-                                                      'اشتري سعر التخفيض قبل انتهاء الوقت',
+                                                      'اشتري سعر التخفيض قبل انتهاء الوقت ${DateTime.parse(controller.productData.last.is_flash_discount.endAt ?? '')}',
                                                       style:
                                                           kTheSansTextStyleGray
                                                               .copyWith(
                                                                   fontSize:
                                                                       0.6 * 18),
                                                     ),
+                                                    Text(
+                                                        "${DateTime(int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').last), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").last.toString().split(':').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").last.toString().split(':')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").last.toString().split(':').last))}"),
                                                     CountdownTimer(
                                                       endTime: DateTime.parse(
                                                               controller
@@ -1687,7 +1577,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                               0.6 * 14),
                                                                 ),
                                                                 Text(
-                                                                  "${currentRemainingTime?.hours ?? '00'}",
+                                                                  "${int.parse("${(currentRemainingTime?.hours)}") + (DateTime(int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').last)).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1)).inHours) ?? '00'}",
                                                                   style: timerTextStyle
                                                                       .copyWith(
                                                                           fontSize:
@@ -1951,23 +1841,23 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                               (controller.productData.isNotEmpty ?? false)
                                   ? GestureDetector(
                                       onTap: () {
-                                        print(
-                                            "${controller.productData.last.product_banner?.bannerLinkType}");
-                                        if (controller
-                                                .productData
-                                                .last
-                                                .product_banner
-                                                ?.bannerLinkType ==
-                                            LinkTypes.brands) {
-                                          Get.to(BrandDetailScreen(
-                                            brandId: int.parse(controller
-                                                    .productData
-                                                    .last
-                                                    .product_banner
-                                                    ?.bannerLinkId ??
-                                                '0'),
-                                          ));
-                                        }
+                                        List text = controller.productData.last
+                                            .product_banner.bannerUrlLink
+                                            .toString()
+                                            .split('/');
+                                        print('text:$text');
+                                        // if (text[1] == LinkTypes.category) {
+                                        AlkasamController controller000 =
+                                            Get.put(AlkasamController());
+                                        controller000.updateCurrentCategoryId(
+                                            newId: int.parse("${text[2]}"),
+                                            getChild: null,
+                                            subId: int.parse("${text.last}"));
+                                        Get.to(FliterScreen2(
+                                          categoryId:
+                                              int.parse(text[2].toString()),
+                                        ));
+                                        // }
                                       },
                                       child: CachedNetworkImage(
                                         imageUrl: Connection.urlOfStorage(
@@ -2612,7 +2502,19 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                 ?.length ??
                                             0,
                                         (index) => GestureDetector(
-                                              onTap: () {},
+                                              onTap: () {
+                                                Get.to(ChangeNotifierProvider(
+                                                    create: (context) =>
+                                                        ProductProfileControllerProvider(),
+                                                    child: ItemProfilePage(
+                                                        isQueenOffer: true,
+                                                        itemId: controller
+                                                                .productData
+                                                                .last
+                                                                .offers?[index]
+                                                                .id ??
+                                                            0)));
+                                              },
                                               child: Stack(
                                                 fit: StackFit.loose,
                                                 alignment: Alignment.topCenter,

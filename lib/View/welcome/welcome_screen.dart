@@ -90,7 +90,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fit: BoxFit.cover,
               ),
               Image.asset(
-                AppImages.kpageviewoneImage,
+                AppImages.kpageviewfourImage,
                 fit: BoxFit.cover,
               ),
             ],

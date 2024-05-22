@@ -115,6 +115,8 @@ class AppImages {
   static const String kFaceImage = '${mainPathToImages}Face.png';
   static const String kbannerImage = '${mainPathToImages}banner.png';
   static const String kpageviewoneImage = '${mainPathToImages}pageviewOne.png';
+  static const String kpageviewfourImage =
+      '${mainPathToImages}kpageviewfourImage.png';
   static const String kpageviewTwoImage = '${mainPathToImages}pageviewTwo.png';
   static const String kpageviewThreeImage =
       '${mainPathToImages}pageviewThree.png';
