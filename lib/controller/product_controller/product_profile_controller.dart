@@ -19,21 +19,12 @@ import '../../models/reviews_model.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/based/error_pop_up.dart';
 
-class ProductProfileController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class ProductProfileController extends GetxController {
   TabController? tabsController;
   var index = 0.obs;
   final _api = HomeDataApis();
   RxBool isLoading = false.obs;
   RxList productData = [].obs;
-  @override
-  void onInit() {
-    tabsController = TabController(length: 2, vsync: this);
-    tabsController!.addListener(() {
-      index.value = tabsController!.index;
-    });
-    super.onInit();
-  }
 
   @override
   void onClose() {
@@ -75,11 +66,16 @@ class ProductProfileController extends GetxController
     }
   }
 
-  removeLast() {
+  removeLast() async {
     if (productData.isNotEmpty) {
       productData.removeLast();
     }
-    selectedOptions.clear();
+    // await selectedOptions.clear();
+
+    selectedOptions.value = List.generate(
+        productData.last.productOptions?.length ?? 0, (index) => null);
+    await Future.delayed(const Duration(milliseconds: 500));
+    update();
   }
 
   RxList selectedOptions = [].obs;

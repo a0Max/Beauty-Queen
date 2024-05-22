@@ -115,7 +115,7 @@ class _FliterScreenState extends State<FliterScreen> {
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 SizedBox(
-                  height: 0.h,
+                  height: 10.h,
                 ),
                 Align(
                   alignment: Alignment.topRight,
