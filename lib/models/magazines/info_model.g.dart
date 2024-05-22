@@ -12,6 +12,9 @@ InfoModel _$InfoModelFromJson(Map<String, dynamic> json) => InfoModel(
           ? null
           : MagazineCoverModel.fromJson(
               json['mobile_banner'] as Map<String, dynamic>),
+      banner: json['banner'] == null
+          ? null
+          : MagazineCoverModel.fromJson(json['banner'] as Map<String, dynamic>),
       desktopBanner: json['desktop_banner'] == null
           ? null
           : MagazineCoverModel.fromJson(
@@ -25,6 +28,7 @@ InfoModel _$InfoModelFromJson(Map<String, dynamic> json) => InfoModel(
 Map<String, dynamic> _$InfoModelToJson(InfoModel instance) => <String, dynamic>{
       'description': instance.description,
       'mobile_banner': instance.mobileBanner?.toJson(),
+      'banner': instance.banner?.toJson(),
       'desktop_banner': instance.desktopBanner?.toJson(),
       'promo_video': instance.promoVideo?.toJson(),
     };

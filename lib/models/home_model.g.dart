@@ -36,6 +36,9 @@ HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => HomeModel(
       salesProducts: (json['salesProducts'] as List<dynamic>?)
           ?.map((e) => SalesProductsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      magazine: json['magazine'] == null
+          ? null
+          : InfoModel.fromJson(json['magazine'] as Map<String, dynamic>),
       offers: (json['offers'] as List<dynamic>?)
           ?.map((e) => SalesProductsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -72,4 +75,5 @@ Map<String, dynamic> _$HomeModelToJson(HomeModel instance) => <String, dynamic>{
       'flash_discount_mobile_image': instance.flash_discount_mobile_image,
       'flash_discount_end_at': instance.flash_discount_end_at,
       'flash_discount_status': instance.flash_discount_status,
+      'magazine': instance.magazine?.toJson(),
     };

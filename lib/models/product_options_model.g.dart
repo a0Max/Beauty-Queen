@@ -15,6 +15,7 @@ ProductOptionsModel _$ProductOptionsModelFromJson(Map<String, dynamic> json) =>
           ? null
           : SalesProductsModel.fromJson(
               json['product'] as Map<String, dynamic>),
+      isColor: json['is_color'] as String?,
       userId: json['user_id'] as int?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
@@ -37,6 +38,7 @@ Map<String, dynamic> _$ProductOptionsModelToJson(
       'product_id': instance.productId,
       'user_id': instance.userId,
       'created_at': instance.createdAt,
+      'is_color': instance.isColor,
       'updated_at': instance.updatedAt,
       'options': instance.options?.map((e) => e.toJson()).toList(),
       'product': instance.product?.toJson(),

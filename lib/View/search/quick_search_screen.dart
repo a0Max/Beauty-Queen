@@ -10,6 +10,7 @@ import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../controller/search/search_controller.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
@@ -134,14 +135,17 @@ class _QuickSearchScreen extends State<QuickSearchScreen> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ItemProfilePage(
-                                                          itemId: controller
-                                                                  .generalQuickSearchData
-                                                                  .value
-                                                                  .products?[
-                                                                      index]
-                                                                  .id ??
-                                                              0)));
+                                                      ChangeNotifierProvider(
+                                                          create: (context) =>
+                                                              ProductProfileControllerProvider(),
+                                                          child: ItemProfilePage(
+                                                              itemId: controller
+                                                                      .generalQuickSearchData
+                                                                      .value
+                                                                      .products?[
+                                                                          index]
+                                                                      .id ??
+                                                                  0))));
                                         },
                                         child: Row(
                                           children: [

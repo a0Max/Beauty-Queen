@@ -9,12 +9,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../View/brands/branddetail_screen.dart';
 import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../models/label_model.dart';
 import '../../models/options_model.dart';
 import '../../models/product_options_model.dart';
@@ -83,11 +85,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
         onTap: () {
           // Get.lazyPut(()=>ProductProfileController());
           // Get.to(ItemProfilePage(itemId:widget.newArrival.id??0));
+          print('%%%%%%%%%');
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      ItemProfilePage(itemId: widget.newArrival.id ?? 0)));
+                  builder: (context) => ChangeNotifierProvider(
+                      create: (context) => ProductProfileControllerProvider(),
+                      child:
+                          ItemProfilePage(itemId: widget.newArrival.id ?? 0))));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,

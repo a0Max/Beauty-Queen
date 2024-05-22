@@ -19,6 +19,7 @@ import '../../controller/AlKasam_controller/flash_discounts_controller.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
@@ -156,9 +157,14 @@ class _HomePageState extends State<HomePage> {
                                           } else if (_controller
                                                   .sliders[index].linkType ==
                                               LinkTypes.product) {
-                                            Get.to(ItemProfilePage(
-                                                itemId: int.parse(_controller
-                                                    .sliders[index].linkId)));
+                                            Get.to(ChangeNotifierProvider(
+                                                create: (context) =>
+                                                    ProductProfileControllerProvider(),
+                                                child: ItemProfilePage(
+                                                    itemId: int.parse(
+                                                        _controller
+                                                            .sliders[index]
+                                                            .linkId))));
                                           } else if (_controller
                                                   .sliders[index].linkType ==
                                               LinkTypes.category) {
@@ -269,13 +275,16 @@ class _HomePageState extends State<HomePage> {
                                         if (_controller.homeData.value
                                                 .newItems?[index].linkId !=
                                             null) {
-                                          Get.to(ItemProfilePage(
-                                              itemId: int.parse(_controller
-                                                      .homeData
-                                                      .value
-                                                      .newItems?[index]
-                                                      .linkId ??
-                                                  '0')));
+                                          Get.to(ChangeNotifierProvider(
+                                              create: (context) =>
+                                                  ProductProfileControllerProvider(),
+                                              child: ItemProfilePage(
+                                                  itemId: int.parse(_controller
+                                                          .homeData
+                                                          .value
+                                                          .newItems?[index]
+                                                          .linkId ??
+                                                      '0'))));
                                         }
                                       },
                                       child: Padding(
@@ -836,14 +845,18 @@ class _HomePageState extends State<HomePage> {
                                                     BorderRadius.circular(
                                                         10.69.r),
                                                 onTap: () {
-                                                  Get.to(ItemProfilePage(
-                                                      isQueenOffer: true,
-                                                      itemId: _controller
-                                                              .homeData
-                                                              .value
-                                                              .offers?[index]
-                                                              .id ??
-                                                          0));
+                                                  Get.to(ChangeNotifierProvider(
+                                                      create: (context) =>
+                                                          ProductProfileControllerProvider(),
+                                                      child: ItemProfilePage(
+                                                          isQueenOffer: true,
+                                                          itemId: _controller
+                                                                  .homeData
+                                                                  .value
+                                                                  .offers?[
+                                                                      index]
+                                                                  .id ??
+                                                              0)));
                                                 },
                                                 child: Container(
                                                   width: 109.71.w,
@@ -934,10 +947,13 @@ class _HomePageState extends State<HomePage> {
                             } else if (_controller
                                     .homeData.value.banners?[index].linkType ==
                                 LinkTypes.product) {
-                              Get.to(ItemProfilePage(
-                                  itemId: int.parse(_controller.homeData.value
-                                          .banners?[index].linkId ??
-                                      '0')));
+                              Get.to(ChangeNotifierProvider(
+                                  create: (context) =>
+                                      ProductProfileControllerProvider(),
+                                  child: ItemProfilePage(
+                                      itemId: int.parse(_controller.homeData
+                                              .value.banners?[index].linkId ??
+                                          '0'))));
                             } else if (_controller
                                     .homeData.value.banners?[index].linkType ==
                                 LinkTypes.category) {
@@ -1254,10 +1270,17 @@ class _HomePageState extends State<HomePage> {
                                 } else if (_controller.homeData.value.discover
                                         ?.info?.linkType ==
                                     LinkTypes.product) {
-                                  Get.to(ItemProfilePage(
-                                      itemId: int.parse(_controller.homeData
-                                              .value.discover?.info?.linkId ??
-                                          '0')));
+                                  Get.to(ChangeNotifierProvider(
+                                      create: (context) =>
+                                          ProductProfileControllerProvider(),
+                                      child: ItemProfilePage(
+                                          itemId: int.parse(_controller
+                                                  .homeData
+                                                  .value
+                                                  .discover
+                                                  ?.info
+                                                  ?.linkId ??
+                                              '0'))));
                                 } else if (_controller.homeData.value.discover
                                         ?.info?.linkType ==
                                     LinkTypes.category) {
@@ -1362,13 +1385,16 @@ class _HomePageState extends State<HomePage> {
                                         horizontal: 10.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.to(ItemProfilePage(
-                                            itemId: int.parse(_controller
-                                                    .homeData
-                                                    .value
-                                                    .organicItems?[index]
-                                                    .linkId ??
-                                                '0')));
+                                        Get.to(ChangeNotifierProvider(
+                                            create: (context) =>
+                                                ProductProfileControllerProvider(),
+                                            child: ItemProfilePage(
+                                                itemId: int.parse(_controller
+                                                        .homeData
+                                                        .value
+                                                        .organicItems?[index]
+                                                        .linkId ??
+                                                    '0'))));
                                       },
                                       child: Column(
                                         crossAxisAlignment:
@@ -1529,13 +1555,16 @@ class _HomePageState extends State<HomePage> {
                             _controller.homeData.value.specials?.length ?? 0,
                             (index) => GestureDetector(
                                   onTap: () {
-                                    Get.to(ItemProfilePage(
-                                        itemId: int.parse(_controller
-                                                .homeData
-                                                .value
-                                                .specials?[index]
-                                                .linkId ??
-                                            '0')));
+                                    Get.to(ChangeNotifierProvider(
+                                        create: (context) =>
+                                            ProductProfileControllerProvider(),
+                                        child: ItemProfilePage(
+                                            itemId: int.parse(_controller
+                                                    .homeData
+                                                    .value
+                                                    .specials?[index]
+                                                    .linkId ??
+                                                '0'))));
                                   },
                                   child: CustomProductCard(
                                     imageUrl: Connection.urlOfSpecial(

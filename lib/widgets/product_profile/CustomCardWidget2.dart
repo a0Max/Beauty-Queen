@@ -13,6 +13,7 @@ import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../models/options_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
@@ -80,7 +81,9 @@ class _CustomCardWidgetState extends State<CustomCardWidget2> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      ItemProfilePage(itemId: widget.newArrival.id ?? 0)));
+                      ChangeNotifierProvider(
+                          create: (context) => ProductProfileControllerProvider(),
+                          child:ItemProfilePage(itemId: widget.newArrival.id ?? 0))));
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,

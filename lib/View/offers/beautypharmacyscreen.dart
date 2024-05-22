@@ -12,6 +12,7 @@ import '../../const/size.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/gift_controller/gift_controller.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/shimmer/shimmer_beauty_pharmacy.dart';
@@ -244,15 +245,20 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
                                                         BorderRadius.circular(
                                                             10.69.r),
                                                     onTap: () {
-                                                      Get.to(ItemProfilePage(
-                                                          isQueenOffer: true,
-                                                          itemId: controller
-                                                                  .generalSearchData2
-                                                                  .value
-                                                                  .offers
-                                                                  ?.data?[index]
-                                                                  .id ??
-                                                              0));
+                                                      Get.to(ChangeNotifierProvider(
+                                                          create: (context) =>
+                                                              ProductProfileControllerProvider(),
+                                                          child: ItemProfilePage(
+                                                              isQueenOffer:
+                                                                  true,
+                                                              itemId: controller
+                                                                      .generalSearchData2
+                                                                      .value
+                                                                      .offers
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .id ??
+                                                                  0)));
                                                     },
                                                     child: Container(
                                                       width: 109.71.w,

@@ -22,6 +22,7 @@ import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
 import '../../models/sales_products_model.dart';
@@ -52,8 +53,8 @@ class ItemProfilePage extends StatefulWidget {
 
 class _ItemProfilePageState extends State<ItemProfilePage>
     with SingleTickerProviderStateMixin {
-  final ProductProfileController controller =
-      Get.put(ProductProfileController());
+  // final ProductProfileController controller =
+  //     Get.put(ProductProfileController());
   bool isFavorite = false;
   final NavController _controllerNav = Get.put(NavController());
   late TabController tabsController;
@@ -71,15 +72,16 @@ class _ItemProfilePageState extends State<ItemProfilePage>
   final ScrollController scrollController = ScrollController();
 
   getDataOfProduct() async {
+    final controller = context.read<ProductProfileControllerProvider>();
+
     await controller.getCurrentProduct(productId: widget.itemId);
     setState(() {
       try {
         isFavorite =
-            controller.productData.value.last.product.wishlist?.isNotEmpty ??
-                false;
+            controller.productData.last.product.wishlist?.isNotEmpty ?? false;
       } catch (e) {
-        log("###########${controller.productData.value}");
-        print("###########${controller.productData.value}");
+        log("###########${controller.productData}");
+        print("###########${controller.productData}");
       }
     });
   }
@@ -90,16 +92,19 @@ class _ItemProfilePageState extends State<ItemProfilePage>
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: true,
-      onPopInvoked: (val) {
-        controller.removeLast();
+    final controller = context.watch<ProductProfileControllerProvider>();
+    return WillPopScope(
+      // canPop: true,
+      onWillPop: () async {
+        print('onWillPop');
+        controller.removeLastAll();
         print(Get.previousRoute);
         // if (Get.previousRoute == '/MainView') {
         //   final HomeController _controller = Get.put(HomeController());
         //
         //   _controller.getHomeDataController();
         // }
+        return true;
       },
       child: Scaffold(
         key: _scaffoldKey,
@@ -169,25 +174,13 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                         Container(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Column(children: [
-                              controller.isLoading.value == true
+                              controller.isLoading == true
                                   ? const ShimmerProfile()
                                   : (controller.productData.isNotEmpty ?? false)
                                       ? Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            // Text(
-                                            //   controller.productData.value.last
-                                            //           .product?.brand?.title ??
-                                            //       '',
-                                            //   style: TextStyle(
-                                            //       fontFamily:
-                                            //           kTheArabicSansBold,
-                                            //       fontSize: 15.sp,
-                                            //       fontWeight: FontWeight.w400,
-                                            //       color:
-                                            //           AppColors.kPrimaryColor),
-                                            // ),
                                             Container(
                                                 width: MediaQuery.of(context)
                                                     .size
@@ -216,7 +209,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                   ...List.generate(
                                                     controller
                                                             .productData
-                                                            .value
                                                             .last
                                                             .product
                                                             ?.category
@@ -224,7 +216,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         0,
                                                     (index) => ((controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .product
                                                                         ?.category
@@ -242,18 +233,18 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   .updateCurrentCategoryId(
                                                                       newId: int
                                                                           .parse(
-                                                                              "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                                              "${controller.productData.last.product?.category?[index].id ?? 0}"),
                                                                       getChild:
                                                                           null);
                                                               Get.to(
                                                                   FliterScreen2(
                                                                 categoryId:
                                                                     int.parse(
-                                                                        "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                                        "${controller.productData.last.product?.category?[index].id ?? 0}"),
                                                               ));
                                                             },
                                                             child: Text(
-                                                                '${controller.productData.value.last.product?.category?[index].title ?? ''} / ',
+                                                                '${controller.productData.last.product?.category?[index].title ?? ''} / ',
                                                                 style:
                                                                     TextStyle(
                                                                   fontFamily:
@@ -276,18 +267,18 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   .updateCurrentCategoryId(
                                                                       newId: int
                                                                           .parse(
-                                                                              "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                                              "${controller.productData.last.product?.category?[index].id ?? 0}"),
                                                                       getChild:
                                                                           null);
                                                               Get.to(
                                                                   FliterScreen2(
                                                                 categoryId:
                                                                     int.parse(
-                                                                        "${controller.productData.value.last.product?.category?[index].id ?? 0}"),
+                                                                        "${controller.productData.last.product?.category?[index].id ?? 0}"),
                                                               ));
                                                             },
                                                             child: Text(
-                                                              '${controller.productData.value.last.product?.category?[index].title ?? ''} ',
+                                                              '${controller.productData.last.product?.category?[index].title ?? ''} ',
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     kTheArabicSansLight,
@@ -304,20 +295,16 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                             SizedBox(
                                               height: 43.h,
                                             ),
-                                            if (controller.selectedOptions.value
-                                                    .isNotEmpty &&
-                                                controller.selectedOptions.value
+                                            if (controller
+                                                    .selectedOptions.isNotEmpty &&
+                                                controller.selectedOptions
                                                         .first !=
                                                     null &&
-                                                (controller
-                                                            .productData
-                                                            .value
-                                                            .last
+                                                (controller.productData.last
                                                             .productOptions !=
                                                         null &&
                                                     controller
                                                         .productData
-                                                        .value
                                                         .last
                                                         .productOptions
                                                         .isNotEmpty)) ...{
@@ -336,7 +323,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                   ),
                                                   items: List.generate(
                                                     controller.selectedOptions
-                                                            .value.first
+                                                            .first
                                                             .getCurrentImages()
                                                             .length ??
                                                         0,
@@ -346,7 +333,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           imageUrl: Connection.urlOfOptions(
                                                               image: controller
                                                                       .selectedOptions
-                                                                      .value
                                                                       .first
                                                                       .getCurrentImages()[
                                                                           index]
@@ -372,8 +358,8 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                     },
                                                   ),
                                                   items: List.generate(
-                                                    controller.productData.value
-                                                            .last.product
+                                                    controller.productData.last
+                                                            .product
                                                             ?.getCurrentImages()
                                                             .length ??
                                                         0,
@@ -382,7 +368,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       zoomWidget: CachedNetworkImage(
                                                           imageUrl: controller
                                                                       .productData
-                                                                      .value
                                                                       .last
                                                                       .product
                                                                       ?.getCurrentImages()[
@@ -401,8 +386,8 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: List.generate(
-                                                  controller.productData.value
-                                                          .last.product
+                                                  controller.productData.last
+                                                          .product
                                                           ?.getCurrentImages()
                                                           .length ??
                                                       0,
@@ -411,14 +396,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                             .symmetric(
                                                             horizontal: 6),
                                                         height: controller
-                                                                    .selectedSliderIndex
-                                                                    .value ==
+                                                                    .selectedSliderIndex ==
                                                                 index
                                                             ? 13
                                                             : 10,
                                                         width: controller
-                                                                    .selectedSliderIndex
-                                                                    .value ==
+                                                                    .selectedSliderIndex ==
                                                                 index
                                                             ? 13
                                                             : 10,
@@ -426,8 +409,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                             shape:
                                                                 BoxShape.circle,
                                                             color: controller
-                                                                        .selectedSliderIndex
-                                                                        .value ==
+                                                                        .selectedSliderIndex ==
                                                                     index
                                                                 ? AppColors
                                                                     .kPinkColor
@@ -438,7 +420,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                             SizedBox(
                                               height: 10.h,
                                             ),
-                                            (controller.isLoading.value != true)
+                                            (controller.isLoading != true)
                                                 ? Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -449,13 +431,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           Get.to(
                                                               BrandDetailScreen(
                                                             brandId: int.parse(
-                                                                "${controller.productData.value.last.product?.brand?.id ?? 0}"),
+                                                                "${controller.productData.last.product?.brand?.id ?? 0}"),
                                                           ));
                                                         },
                                                         child: Text(
                                                           controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .product
                                                                   ?.brand
@@ -474,20 +455,18 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       ),
                                                       if (controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .productOptions ==
                                                               null ||
                                                           controller
                                                               .productData
-                                                              .value
                                                               .last
                                                               .productOptions
                                                               .isEmpty) ...{
-                                                        if ("${controller.productData.value.last.product.isOffer}" !=
+                                                        if ("${controller.productData.last.product.isOffer}" !=
                                                             '1') ...{
                                                           Text(
-                                                            "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                            "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
                                                             textAlign:
                                                                 TextAlign.right,
                                                             style: TextStyle(
@@ -509,13 +488,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         } else ...{
                                                           if (controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .product
                                                                   .offerPrice ==
                                                               "0.00") ...{
                                                             Text(
-                                                              "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                              "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
                                                               textAlign:
                                                                   TextAlign
                                                                       .right,
@@ -548,7 +526,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                             .spaceBetween,
                                                                     children: [
                                                                       Text(
-                                                                        "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                                        "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
                                                                         textAlign:
                                                                             TextAlign.right,
                                                                         style:
@@ -569,13 +547,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                       ),
                                                                       if (controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .product
                                                                               .isFlashDiscount ==
                                                                           "0") ...{
                                                                         Text(
-                                                                          "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
+                                                                          "${controller.productData.last.product.offerPrice ?? ''}${tr('Del')}",
                                                                           textAlign:
                                                                               TextAlign.right,
                                                                           style:
@@ -594,7 +571,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                         ),
                                                                       } else ...{
                                                                         Text(
-                                                                          "${controller.productData.value.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
+                                                                          "${controller.productData.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
                                                                           textAlign:
                                                                               TextAlign.right,
                                                                           style:
@@ -618,17 +595,15 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       } else ...{
                                                         if ((controller
                                                                 .selectedOptions
-                                                                .value
                                                                 .isNotEmpty) &&
                                                             controller
                                                                     .selectedOptions
-                                                                    .value
                                                                     .first !=
                                                                 null) ...{
-                                                          if ("${controller.productData.value.last.product.isOffer}" !=
+                                                          if ("${controller.productData.last.product.isOffer}" !=
                                                               '1') ...{
                                                             Text(
-                                                              "${controller.selectedOptions.value.first.price ?? ''} ${tr('Del')}",
+                                                              "${controller.selectedOptions.first.price ?? ''} ${tr('Del')}",
                                                               textAlign:
                                                                   TextAlign
                                                                       .right,
@@ -660,7 +635,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           .spaceBetween,
                                                                   children: [
                                                                     Text(
-                                                                      "${controller.selectedOptions.value.first.price ?? ''} ${tr('Del')}",
+                                                                      "${controller.selectedOptions.first.price ?? ''} ${tr('Del')}",
                                                                       textAlign:
                                                                           TextAlign
                                                                               .right,
@@ -682,13 +657,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                     ),
                                                                     if (controller
                                                                             .productData
-                                                                            .value
                                                                             .last
                                                                             .product
                                                                             .isFlashDiscount ==
                                                                         "0") ...{
                                                                       Text(
-                                                                        "${controller.selectedOptions.value.first.offerPrice ?? ''}${tr('Del')}",
+                                                                        "${controller.selectedOptions.first.offerPrice ?? ''}${tr('Del')}",
                                                                         textAlign:
                                                                             TextAlign.right,
                                                                         style:
@@ -707,7 +681,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                       ),
                                                                     } else ...{
                                                                       Text(
-                                                                        "${controller.productData.value.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
+                                                                        "${controller.productData.last.product.flashDiscountPrice ?? ''}${tr('Del')}",
                                                                         textAlign:
                                                                             TextAlign.right,
                                                                         style:
@@ -729,12 +703,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                 ))
                                                           }
                                                         } else ...{
-                                                          if ("${controller.productData.value.last.product.isOffer}" !=
+                                                          if ("${controller.productData.last.product.isOffer}" !=
                                                               '1') ...{
-                                                            if ("${controller.productData.value.last.productOptions.first.options.first.price ?? ''}" !=
-                                                                "${controller.productData.value.last.productOptions.first.options.last.price ?? ''}") ...{
+                                                            if ("${controller.productData.last.productOptions.first.options.first.price ?? ''}" !=
+                                                                "${controller.productData.last.productOptions.first.options.last.price ?? ''}") ...{
                                                               Text(
-                                                                "${controller.productData.value.last.productOptions.first.options.first.price ?? ''} ${tr('Del')}-${controller.productData.value.last.productOptions.first.options.last.price ?? ''} ${tr('Del')}",
+                                                                "${controller.productData.last.productOptions.first.options.first.price ?? ''} ${tr('Del')}-${controller.productData.last.productOptions.first.options.last.price ?? ''} ${tr('Del')}",
                                                                 textAlign:
                                                                     TextAlign
                                                                         .right,
@@ -757,7 +731,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               )
                                                             } else ...{
                                                               Text(
-                                                                "${controller.productData.value.last.productOptions.first.options.first.price ?? ''} ${tr('Del')}",
+                                                                "${controller.productData.last.productOptions.first.options.first.price ?? ''} ${tr('Del')}",
                                                                 textAlign:
                                                                     TextAlign
                                                                         .right,
@@ -780,10 +754,10 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               )
                                                             },
                                                           } else ...{
-                                                            if ("${controller.productData.value.last.productOptions.first.options.first.offerPrice ?? ''}" !=
-                                                                "${controller.productData.value.last.productOptions.first.options.last.offerPrice ?? ''}") ...{
+                                                            if ("${controller.productData.last.productOptions.first.options.first.offerPrice ?? ''}" !=
+                                                                "${controller.productData.last.productOptions.first.options.last.offerPrice ?? ''}") ...{
                                                               Text(
-                                                                "${controller.productData.value.last.productOptions.first.options.first.offerPrice ?? ''} ${tr('Del')}-${controller.productData.value.last.productOptions.first.options.last.offerPrice ?? ''} ${tr('Del')}",
+                                                                "${controller.productData.last.productOptions.first.options.first.offerPrice ?? ''} ${tr('Del')}-${controller.productData.last.productOptions.first.options.last.offerPrice ?? ''} ${tr('Del')}",
                                                                 textAlign:
                                                                     TextAlign
                                                                         .right,
@@ -817,7 +791,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                               .spaceBetween,
                                                                       children: [
                                                                         Text(
-                                                                          "${controller.productData.value.last.product.price ?? ''} ${tr('Del')}",
+                                                                          "${controller.productData.last.product.price ?? ''} ${tr('Del')}",
                                                                           textAlign:
                                                                               TextAlign.right,
                                                                           style:
@@ -837,7 +811,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           ),
                                                                         ),
                                                                         Text(
-                                                                          "${controller.productData.value.last.product.offerPrice ?? ''}${tr('Del')}",
+                                                                          "${controller.productData.last.product.offerPrice ?? ''}${tr('Del')}",
                                                                           textAlign:
                                                                               TextAlign.right,
                                                                           style:
@@ -866,8 +840,8 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                             Align(
                                               alignment: Alignment.topRight,
                                               child: Text(
-                                                controller.productData.value
-                                                        .last.product?.title ??
+                                                controller.productData.last
+                                                        .product?.title ??
                                                     '',
                                                 style: TextStyle(
                                                     fontFamily:
@@ -885,7 +859,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                 height: 17.h,
                               ),
                               // ///////////container//////////
-                              if (controller.isLoading.value == false &&
+                              if (controller.isLoading == false &&
                                   (controller.productData.isNotEmpty ??
                                       false)) ...{
                                 if ((controller
@@ -899,10 +873,10 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                       ),
                                       10.pw,
                                       Text(tr('collect')),
-                                      if ("${controller.productData.value.last.product.isOffer}" ==
+                                      if ("${controller.productData.last.product.isOffer}" ==
                                           '1') ...{
                                         Text(
-                                          " +${double.parse("${double.parse('${controller.productData.value.last.product.offerPrice}') / 10}").toString().split('.').first} ",
+                                          " +${double.parse("${double.parse('${controller.productData.last.product.offerPrice}') / 10}").toString().split('.').first} ",
                                           style: const TextStyle(
                                               color: AppColors.mainColor,
                                               fontFamily: kTheArabicSansLight),
@@ -953,7 +927,8 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                               SizedBox(
                                 height: 10.h,
                               ),
-                              (controller.productData.isNotEmpty ?? false)
+                              ((controller.productData.isNotEmpty ?? false) &&
+                                      controller.isLoading != true)
                                   ? SizedBox(
                                       width: MediaQuery.of(context).size.width,
                                       child: Column(
@@ -962,7 +937,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: List.generate(
-                                            controller.productData.value.last
+                                            controller.productData.last
                                                     .productOptions?.length ??
                                                 0,
                                             (index) => Column(
@@ -973,7 +948,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                   children: [
                                                     if (controller
                                                                 .productData
-                                                                .value
                                                                 .last
                                                                 .productOptions?[
                                                                     index]
@@ -982,7 +956,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                 .color &&
                                                         controller
                                                                 .productData
-                                                                .value
                                                                 .last
                                                                 .productOptions?[
                                                                     index]
@@ -998,7 +971,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         children: List.generate(
                                                             controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .productOptions?[
                                                                         index]
@@ -1009,10 +981,9 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                 ColorContainer(
                                                                   height: 50.h,
                                                                   width: 50.w,
-                                                                  inStock: ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
+                                                                  inStock: ((controller.productData.last.productOptions?[index].options?[index2].stock == null ||
                                                                       controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .productOptions?[
                                                                                   index]
@@ -1020,12 +991,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                                   index2]
                                                                               .stock ==
                                                                           "0" ||
-                                                                      num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                      num.parse(controller.productData.last.productOptions?[index].options?[index2].stock ??
                                                                               '0') <=
                                                                           0)),
                                                                   currentId: controller
                                                                       .productData
-                                                                      .value
                                                                       .last
                                                                       .productOptions?[
                                                                           index]
@@ -1042,23 +1012,22 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           0,
                                                                   color: Color(
                                                                       int.parse(
-                                                                          "ff${controller.productData.value.last.productOptions?[index].options?[index2].color?.toUpperCase().replaceAll('#', '') ?? ''}",
+                                                                          "ff${controller.productData.last.productOptions?[index].options?[index2].color?.toUpperCase().replaceAll('#', '') ?? ''}",
                                                                           radix:
                                                                               16)),
                                                                   onClick: () {
                                                                     print(controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .productOptions?[
                                                                             index]
                                                                         .options?[
                                                                             index2]
                                                                         .stock);
-                                                                    if ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
-                                                                        controller.productData.value.last.productOptions?[index].options?[index2].stock ==
+                                                                    if ((controller.productData.last.productOptions?[index].options?[index2].stock == null ||
+                                                                        controller.productData.last.productOptions?[index].options?[index2].stock ==
                                                                             "0" ||
-                                                                        num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                        num.parse(controller.productData.last.productOptions?[index].options?[index2].stock ??
                                                                                 '0') <=
                                                                             0)) {
                                                                       showDialog(
@@ -1078,7 +1047,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                               index,
                                                                           selected: controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .productOptions?[index]
                                                                               .options?[index2]);
@@ -1111,7 +1079,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           0),
                                                           labelText: controller
                                                               .productData
-                                                              .value
                                                               .last
                                                               .productOptions?[
                                                                   index]
@@ -1188,7 +1155,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         ),
                                                         items: controller
                                                             .productData
-                                                            .value
                                                             .last
                                                             .productOptions?[
                                                                 index]
@@ -1257,7 +1223,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         children: List.generate(
                                                             controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .productOptions?[
                                                                         index]
@@ -1268,7 +1233,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                 TextContainer(
                                                                   isText: controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .productOptions?[index]
                                                                               .options?[index2]
@@ -1277,10 +1241,9 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                       ? true
                                                                       : false,
                                                                   height: 50.h,
-                                                                  inStock: ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
+                                                                  inStock: ((controller.productData.last.productOptions?[index].options?[index2].stock == null ||
                                                                       controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .productOptions?[
                                                                                   index]
@@ -1288,13 +1251,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                                   index2]
                                                                               .stock ==
                                                                           "0" ||
-                                                                      num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                      num.parse(controller.productData.last.productOptions?[index].options?[index2].stock ??
                                                                               '0') <=
                                                                           0)),
                                                                   width: 50.w,
                                                                   currentId: controller
                                                                       .productData
-                                                                      .value
                                                                       .last
                                                                       .productOptions?[
                                                                           index]
@@ -1311,7 +1273,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           0,
                                                                   text: controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .productOptions?[
                                                                                   index]
@@ -1321,7 +1282,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           '1'
                                                                       ? (controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .productOptions?[
                                                                               index]
@@ -1330,7 +1290,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           .size)
                                                                       : (controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .productOptions?[
                                                                               index]
@@ -1339,10 +1298,10 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           .mainImage
                                                                           .file),
                                                                   onClick: () {
-                                                                    if ((controller.productData.value.last.productOptions?[index].options?[index2].stock == null ||
-                                                                        controller.productData.value.last.productOptions?[index].options?[index2].stock ==
+                                                                    if ((controller.productData.last.productOptions?[index].options?[index2].stock == null ||
+                                                                        controller.productData.last.productOptions?[index].options?[index2].stock ==
                                                                             "0" ||
-                                                                        num.parse(controller.productData.value.last.productOptions?[index].options?[index2].stock ??
+                                                                        num.parse(controller.productData.last.productOptions?[index].options?[index2].stock ??
                                                                                 '0') <=
                                                                             0)) {
                                                                       showDialog(
@@ -1359,7 +1318,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                     } else {
                                                                       print(controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .productOptions?[
                                                                               index]
@@ -1371,7 +1329,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                               index,
                                                                           selected: controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .productOptions?[index]
                                                                               .options?[index2]);
@@ -1400,7 +1357,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           0),
                                                           labelText: controller
                                                               .productData
-                                                              .value
                                                               .last
                                                               .productOptions?[
                                                                   index]
@@ -1625,7 +1581,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                       child: (controller
                                                   .productData.isNotEmpty ??
                                               false)
-                                          ? ("${controller.productData.value.last.is_flash_discount.status}" ==
+                                          ? ("${controller.productData.last.is_flash_discount.status}" ==
                                                   "true")
                                               ? Column(
                                                   children: [
@@ -1641,7 +1597,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       endTime: DateTime.parse(
                                                               controller
                                                                       .productData
-                                                                      .value
                                                                       .last
                                                                       .is_flash_discount
                                                                       .endAt ??
@@ -1858,12 +1813,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          if (controller.productData.value.last
+                                          if (controller.productData.last
                                                       .completeYourOutfit !=
                                                   null &&
                                               controller
                                                   .productData
-                                                  .value
                                                   .last
                                                   .completeYourOutfit
                                                   .isNotEmpty) ...{
@@ -1879,7 +1833,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                             ),
                                             10.ph,
                                             HtmlWidget(
-                                              "${controller.productData.value.last.product.completeYourOutfitDescription ?? ''}",
+                                              "${controller.productData.last.product.completeYourOutfitDescription ?? ''}",
                                               textStyle: TextStyle(
                                                   fontFamily:
                                                       kTheArabicSansLight),
@@ -1911,7 +1865,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                 items: List.generate(
                                                     controller
                                                             .productData
-                                                            .value
                                                             .last
                                                             .completeYourOutfit
                                                             .length ??
@@ -1928,7 +1881,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                             imageUrl: Connection.urlOfProducts(
                                                                 image: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .completeYourOutfit[
                                                                             index]
@@ -1936,14 +1888,12 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                     ''),
                                                             newArrival: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .completeYourOutfit[
                                                                     index] ??
                                                                 SalesProductsModel(),
                                                             favorite: controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .completeYourOutfit[
                                                                         index]
@@ -1962,7 +1912,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                               children: List.generate(
                                                   controller
                                                           .productData
-                                                          .value
                                                           .last
                                                           .completeYourOutfit
                                                           .length ??
@@ -2003,10 +1952,9 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                   ? GestureDetector(
                                       onTap: () {
                                         print(
-                                            "${controller.productData.value.last.product_banner?.bannerLinkType}");
+                                            "${controller.productData.last.product_banner?.bannerLinkType}");
                                         if (controller
                                                 .productData
-                                                .value
                                                 .last
                                                 .product_banner
                                                 ?.bannerLinkType ==
@@ -2014,7 +1962,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                           Get.to(BrandDetailScreen(
                                             brandId: int.parse(controller
                                                     .productData
-                                                    .value
                                                     .last
                                                     .product_banner
                                                     ?.bannerLinkId ??
@@ -2024,12 +1971,8 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                       },
                                       child: CachedNetworkImage(
                                         imageUrl: Connection.urlOfStorage(
-                                            image: controller
-                                                    .productData
-                                                    .value
-                                                    .last
-                                                    .product_banner
-                                                    ?.file ??
+                                            image: controller.productData.last
+                                                    .product_banner?.file ??
                                                 ''),
                                       ),
                                     )
@@ -2039,7 +1982,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                               ),
                             ])),
                         if (widget.isQueenOffer != true) ...{
-                          controller.isLoading.value == true
+                          controller.isLoading == true
                               ? const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -2049,8 +1992,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                 )
                               : Column(
                                   children: [
-                                    (controller.productData.value.isNotEmpty ==
-                                            true)
+                                    (controller.productData.isNotEmpty == true)
                                         ? Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -2074,15 +2016,14 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                               if ((controller.productData
                                                           .isNotEmpty ??
                                                       false) &&
-                                                  (controller.productData.value
-                                                              .last.p?.length ??
+                                                  (controller.productData.last.p
+                                                              ?.length ??
                                                           0) <=
                                                       2) ...{
                                                 Row(
                                                     children: List.generate(
                                                         ((controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .p
                                                                         ?.length ??
@@ -2100,20 +2041,17 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                             .urlOfProducts(
                                                                 image: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .p?[0]
                                                                         .mainImage ??
                                                                     ''),
                                                         newArrival: controller
                                                                 .productData
-                                                                .value
                                                                 .last
                                                                 .p?[0] ??
                                                             SalesProductsModel(),
                                                         favorite: controller
                                                                 .productData
-                                                                .value
                                                                 .last
                                                                 .p?[0]
                                                                 .wishlist
@@ -2122,7 +2060,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       ),
                                                       if ((controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .p
                                                                   ?.length ??
@@ -2134,7 +2071,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               .urlOfProducts(
                                                                   image: controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .p?[1]
                                                                           .mainImage ??
@@ -2142,13 +2078,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
 
                                                           newArrival: controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .p?[1] ??
                                                               SalesProductsModel(),
                                                           favorite: controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .p?[1]
                                                                   .wishlist
@@ -2173,7 +2107,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           aspectRatio: 1.0,
                                                           autoPlay: (controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .p
                                                                           ?.length ??
@@ -2187,7 +2120,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         items: List.generate(
                                                             ((controller
                                                                             .productData
-                                                                            .value
                                                                             .last
                                                                             .p
                                                                             ?.length ??
@@ -2207,20 +2139,17 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                 imageUrl: Connection.urlOfProducts(
                                                                     image: controller
                                                                             .productData
-                                                                            .value
                                                                             .last
                                                                             .p?[value]
                                                                             .mainImage ??
                                                                         ''),
                                                                 newArrival: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .p?[value] ??
                                                                     SalesProductsModel(),
                                                                 favorite: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .p?[value]
                                                                         .wishlist
@@ -2229,7 +2158,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               ),
                                                               if ((controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .p
                                                                           ?.length ??
@@ -2241,7 +2169,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   imageUrl: Connection.urlOfProducts(
                                                                       image: controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .p?[value + 1]
                                                                               .mainImage ??
@@ -2249,13 +2176,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
 
                                                                   newArrival: controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .p?[value + 1] ??
                                                                       SalesProductsModel(),
                                                                   favorite: controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .p?[value +
                                                                               1]
@@ -2274,9 +2199,9 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                             ],
                                           )
                                         : const SizedBox(),
-                                    (controller.productData.value.isNotEmpty ==
+                                    (controller.productData.isNotEmpty ==
                                                 true) &&
-                                            controller.productData.value.last
+                                            controller.productData.last
                                                     ?.discover_brand !=
                                                 null
                                         ? Column(
@@ -2288,7 +2213,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       const EdgeInsets.only(
                                                           right: 15),
                                                   child: Text(
-                                                    'إكتشفي هذه الماركة ... ${controller.productData.value.last?.product?.brand?.titleAr ?? ''}',
+                                                    'إكتشفي هذه الماركة ... ${controller.productData.last?.product?.brand?.titleAr ?? ''}',
                                                     style: TextStyle(
                                                       fontFamily:
                                                           kTheArabicSansBold,
@@ -2300,19 +2225,17 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                     ),
                                                   )),
                                               15.ph,
-                                              controller.productData.value.last
+                                              controller.productData.last
                                                               ?.discover_brand !=
                                                           null &&
                                                       controller
                                                               .productData
-                                                              .value
                                                               .last
                                                               ?.discover_brand
                                                               .mobileImage !=
                                                           null &&
                                                       controller
                                                               .productData
-                                                              .value
                                                               .last
                                                               ?.discover_brand
                                                               .mobileImage
@@ -2322,7 +2245,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       imageUrl: Connection.urlOfBrands3(
                                                           image: controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   ?.discover_brand
                                                                   .mobileImage
@@ -2338,7 +2260,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                     Text(
                                                       controller
                                                               .productData
-                                                              .value
                                                               .last
                                                               ?.discover_brand
                                                               ?.description ??
@@ -2360,7 +2281,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           Get.to(
                                                               BrandDetailScreen(
                                                             brandId: int.parse(
-                                                                "${controller.productData.value.last?.product?.brand?.id ?? 0}"),
+                                                                "${controller.productData.last?.product?.brand?.id ?? 0}"),
                                                           ));
                                                         },
                                                         child: Container(
@@ -2407,11 +2328,10 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                             ],
                                           )
                                         : const SizedBox(),
-                                    (controller.productData.value.isNotEmpty ==
+                                    (controller.productData.isNotEmpty ==
                                                 true) &&
                                             (controller
                                                         .productData
-                                                        .value
                                                         .last
                                                         .sameBrandProducts
                                                         ?.length ??
@@ -2439,7 +2359,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                               ),
                                               if ((controller
                                                               .productData
-                                                              .value
                                                               .last
                                                               .sameBrandProducts
                                                               ?.length ??
@@ -2452,7 +2371,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                   children: List.generate(
                                                       ((controller
                                                                       .productData
-                                                                      .value
                                                                       .last
                                                                       .sameBrandProducts
                                                                       ?.length ??
@@ -2472,7 +2390,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           imageUrl: Connection.urlOfProducts(
                                                               image: controller
                                                                       .productData
-                                                                      .value
                                                                       .last
                                                                       .sameBrandProducts?[
                                                                           0]
@@ -2480,13 +2397,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   ''),
                                                           newArrival: controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .sameBrandProducts?[0] ??
                                                               SalesProductsModel(),
                                                           favorite: controller
                                                                   .productData
-                                                                  .value
                                                                   .last
                                                                   .sameBrandProducts?[
                                                                       0]
@@ -2496,7 +2411,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         ),
                                                         if ((controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .sameBrandProducts
                                                                     ?.length ??
@@ -2507,7 +2421,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                             imageUrl: Connection.urlOfProducts(
                                                                 image: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .sameBrandProducts?[
                                                                             1]
@@ -2515,13 +2428,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                     ''),
                                                             newArrival: controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .sameBrandProducts?[1] ??
                                                                 SalesProductsModel(),
                                                             favorite: controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .sameBrandProducts?[
                                                                         1]
@@ -2546,7 +2457,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           aspectRatio: 1.0,
                                                           autoPlay: (controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .sameBrandProducts
                                                                           ?.length ??
@@ -2560,7 +2470,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                         items: List.generate(
                                                             ((controller
                                                                             .productData
-                                                                            .value
                                                                             .last
                                                                             .sameBrandProducts
                                                                             ?.length ??
@@ -2583,20 +2492,17 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                 imageUrl: Connection.urlOfProducts(
                                                                     image: controller
                                                                             .productData
-                                                                            .value
                                                                             .last
                                                                             .sameBrandProducts?[value]
                                                                             .mainImage ??
                                                                         ''),
                                                                 newArrival: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .sameBrandProducts?[value] ??
                                                                     SalesProductsModel(),
                                                                 favorite: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .sameBrandProducts?[
                                                                             value]
@@ -2606,7 +2512,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               ),
                                                               if ((controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .sameBrandProducts
                                                                           ?.length ??
@@ -2618,20 +2523,17 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   imageUrl: Connection.urlOfProducts(
                                                                       image: controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .sameBrandProducts?[value + 1]
                                                                               .mainImage ??
                                                                           ''),
                                                                   newArrival: controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .sameBrandProducts?[value + 1] ??
                                                                       SalesProductsModel(),
                                                                   favorite: controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .sameBrandProducts?[value +
                                                                               1]
@@ -2645,20 +2547,17 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   imageUrl: Connection.urlOfProducts(
                                                                       image: controller
                                                                               .productData
-                                                                              .value
                                                                               .last
                                                                               .sameBrandProducts?[0]
                                                                               .mainImage ??
                                                                           ''),
                                                                   newArrival: controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .sameBrandProducts?[0] ??
                                                                       SalesProductsModel(),
                                                                   favorite: controller
                                                                           .productData
-                                                                          .value
                                                                           .last
                                                                           .sameBrandProducts?[
                                                                               0]
@@ -2685,10 +2584,9 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 if (controller.productData.isNotEmpty &&
-                                    controller.productData.value.last.offers !=
+                                    controller.productData.last.offers !=
                                         null &&
-                                    controller.productData.value.last.offers
-                                            .length >
+                                    controller.productData.last.offers.length >
                                         0) ...{
                                   Text(
                                     'باقي العروض ...',
@@ -2710,7 +2608,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                           true, // Make the current page full width
                                     ),
                                     items: List.generate(
-                                        controller.productData.value.last.offers
+                                        controller.productData.last.offers
                                                 ?.length ??
                                             0,
                                         (index) => GestureDetector(
@@ -2730,7 +2628,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                             Connection.urlOfProducts(
                                                                 image: controller
                                                                         .productData
-                                                                        .value
                                                                         .last
                                                                         .offers?[
                                                                             index]
@@ -2785,7 +2682,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           Text(
                                                             controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .offers?[
                                                                         index]
@@ -2805,7 +2701,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                           Text(
                                                             controller
                                                                     .productData
-                                                                    .value
                                                                     .last
                                                                     .offers?[
                                                                         index]
@@ -2835,17 +2730,18 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                         10.69
                                                                             .r),
                                                             onTap: () {
-                                                              Get.to(ItemProfilePage(
-                                                                  isQueenOffer:
-                                                                      true,
-                                                                  itemId: controller
-                                                                          .productData
-                                                                          .value
-                                                                          .last
-                                                                          .offers?[
-                                                                              index]
-                                                                          .id ??
-                                                                      0));
+                                                              Get.to(ChangeNotifierProvider(
+                                                                  create: (context) =>
+                                                                      ProductProfileControllerProvider(),
+                                                                  child: ItemProfilePage(
+                                                                      isQueenOffer:
+                                                                          true,
+                                                                      itemId: controller
+                                                                              .productData
+                                                                              .last
+                                                                              .offers?[index]
+                                                                              .id ??
+                                                                          0)));
                                                             },
                                                             child: Container(
                                                               width: 109.71.w,
@@ -2898,7 +2794,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                     disableGesture: true,
                                   )
                                   // Text(
-                                  //     '${controller.productData.value.last.offers.length}')
+                                  //     '${controller.productData.last.offers.length}')
                                 }
                               ],
                             ),
@@ -3007,12 +2903,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                           // SizedBox(width: 17.w),
                         ],
                       ),
-                      if (controller.isLoading.value != true) ...{
-                        if ((controller.productData.value.isNotEmpty == true) &&
-                            (controller.productData.value.last.product.stock ==
+                      if (controller.isLoading != true) ...{
+                        if ((controller.productData.isNotEmpty == true) &&
+                            (controller.productData.last.product.stock ==
                                     null ||
-                                controller
-                                        .productData.value.last.product.stock ==
+                                controller.productData.last.product.stock ==
                                     "0")) ...{
                           Container(
                               height: 47.61.h,

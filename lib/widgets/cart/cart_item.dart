@@ -14,6 +14,7 @@ import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/cart_controller/productController.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../models/products_model.dart';
 
 class CartItem extends StatelessWidget {
@@ -29,8 +30,10 @@ class CartItem extends StatelessWidget {
         GestureDetector(
           onTap: () {
             if (product.id != null) {
-              Get.to(ItemProfilePage(
-                  itemId: int.parse(product.id.toString() ?? '0')));
+              Get.to(ChangeNotifierProvider(
+                  create: (context) => ProductProfileControllerProvider(),
+                  child: ItemProfilePage(
+                      itemId: int.parse(product.id.toString() ?? '0'))));
             }
           },
           child: SizedBox(

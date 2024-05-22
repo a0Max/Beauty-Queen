@@ -16,6 +16,7 @@ import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/auth_controller/auth_controler.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../models/sales_products_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/based/filter_widget.dart';
@@ -191,13 +192,16 @@ class _FliterScreenState extends State<FliterScreen> {
                                 } else if (_controller.generalSearchData.value
                                         .info?.bannerLinkType ==
                                     LinkTypes.product) {
-                                  Get.to(ItemProfilePage(
-                                      itemId: int.parse(_controller
-                                              .generalSearchData
-                                              .value
-                                              .info
-                                              ?.bannerLinkId ??
-                                          '0')));
+                                  Get.to(ChangeNotifierProvider(
+                                      create: (context) =>
+                                          ProductProfileControllerProvider(),
+                                      child: ItemProfilePage(
+                                          itemId: int.parse(_controller
+                                                  .generalSearchData
+                                                  .value
+                                                  .info
+                                                  ?.bannerLinkId ??
+                                              '0'))));
                                 } else if (_controller.generalSearchData.value
                                         .info?.bannerLinkType ==
                                     LinkTypes.category) {
