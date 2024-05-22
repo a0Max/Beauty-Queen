@@ -50,15 +50,19 @@ class ItemProfilePage extends StatefulWidget {
   State<ItemProfilePage> createState() => _ItemProfilePageState();
 }
 
-class _ItemProfilePageState extends State<ItemProfilePage> {
+class _ItemProfilePageState extends State<ItemProfilePage>
+    with SingleTickerProviderStateMixin {
   final ProductProfileController controller =
       Get.put(ProductProfileController());
   bool isFavorite = false;
   final NavController _controllerNav = Get.put(NavController());
-
+  late TabController tabsController;
+  int indexTap = 0;
   @override
   void initState() {
     super.initState();
+    tabsController = TabController(vsync: this, length: 2);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getDataOfProduct();
     });
@@ -1825,14 +1829,20 @@ class _ItemProfilePageState extends State<ItemProfilePage> {
                                     ),
                                   )
                                 ],
-                                controller: controller.tabsController,
+                                controller: tabsController,
                                 indicatorColor: AppColors.kPrimaryColor,
+                                onTap: (x) {
+                                  setState(() {
+                                    indexTap = x;
+                                  });
+                                },
                               ),
-                              controller.index.value == 0
-                                  ? (controller.productData.isNotEmpty ?? false)
-                                      ? TabScreenOne()
-                                      : const SizedBox()
-                                  : TabScreenTwo(),
+                              // Text(
+                              //     '${controller.index}, ${tabsController.index}'),
+
+                              if (controller.productData.isNotEmpty) ...{
+                                indexTap == 0 ? TabScreenOne() : TabScreenTwo(),
+                              },
                               //////////////////////////////////
                               SizedBox(
                                 height: 10.h,

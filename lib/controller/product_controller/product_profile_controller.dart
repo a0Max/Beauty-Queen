@@ -20,17 +20,9 @@ import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/based/error_pop_up.dart';
 
 class ProductProfileController extends GetxController {
-  TabController? tabsController;
-  var index = 0.obs;
   final _api = HomeDataApis();
   RxBool isLoading = false.obs;
   RxList productData = [].obs;
-
-  @override
-  void onClose() {
-    tabsController!.dispose();
-    super.onClose();
-  }
 
   getCurrentProduct({required int productId}) async {
     try {
