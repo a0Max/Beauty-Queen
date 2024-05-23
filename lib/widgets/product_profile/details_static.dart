@@ -66,7 +66,7 @@ class DetailsStatic extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width,
           padding:
-              const EdgeInsets.only(top: 7, bottom: 7, right: 85, left: 20),
+              const EdgeInsets.only(top: 7, bottom: 7, right: 85, left: 30),
           decoration: const BoxDecoration(color: AppColors.kcontainerGrayColor),
           alignment: Alignment.centerRight,
           child: Column(
