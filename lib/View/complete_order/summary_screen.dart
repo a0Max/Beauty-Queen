@@ -282,50 +282,64 @@ class SummaryScreen extends StatelessWidget {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          if (basketController
-                                                                  .order
-                                                                  .value
-                                                                  .order
-                                                                  ?.items?[
-                                                                      index]
-                                                                  .options?[
-                                                                      index2]
-                                                                  .isColor ==
-                                                              "1") ...{
-                                                            ColorContainer(
-                                                              height: 20.h,
-                                                              currentId: 0,
-                                                              width: 50.w,
-                                                              color: Color(
-                                                                  int.parse(
-                                                                      "ff${basketController.order.value.order?.items?[index].options?[index2].color?.toUpperCase().replaceAll('#', '') ?? ''}",
-                                                                      radix:
-                                                                          16)),
-                                                            )
-                                                          } else ...{
-                                                            Text(
-                                                                basketController
-                                                                        .order
-                                                                        .value
-                                                                        .order
-                                                                        ?.items?[
-                                                                            index]
-                                                                        .options?[
-                                                                            index2]
-                                                                        .title ??
-                                                                    '',
-                                                                style: TextStyle(
-                                                                    fontFamily:
-                                                                        kTheArabicSansLight,
-                                                                    fontSize:
-                                                                        14.83
-                                                                            .sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    color: AppColors
-                                                                        .kBlackColor)),
-                                                          },
+                                                          Text(
+                                                            "${basketController.order.value.order?.items?[index].options?[index2].title ?? ''} - ${basketController.order.value.order?.items?[index].options?[index2].code ?? ''}",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    kTheArabicSansLight,
+                                                                fontSize:
+                                                                    16.55.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: AppColors
+                                                                    .kGrayColor),
+                                                          ),
+                                                          // if (basketController
+                                                          //         .order
+                                                          //         .value
+                                                          //         .order
+                                                          //         ?.items?[
+                                                          //             index]
+                                                          //         .options?[
+                                                          //             index2]
+                                                          //         .isColor ==
+                                                          //     "1") ...{
+                                                          //   ColorContainer(
+                                                          //     height: 20.h,
+                                                          //     currentId: 0,
+                                                          //     width: 50.w,
+                                                          //     color: Color(
+                                                          //         int.parse(
+                                                          //             "ff${basketController.order.value.order?.items?[index].options?[index2].color?.toUpperCase().replaceAll('#', '') ?? ''}",
+                                                          //             radix:
+                                                          //                 16)),
+                                                          //   )
+                                                          // }
+                                                          // else ...{
+                                                          //   Text(
+                                                          //       basketController
+                                                          //               .order
+                                                          //               .value
+                                                          //               .order
+                                                          //               ?.items?[
+                                                          //                   index]
+                                                          //               .options?[
+                                                          //                   index2]
+                                                          //               .title ??
+                                                          //           '',
+                                                          //       style: TextStyle(
+                                                          //           fontFamily:
+                                                          //               kTheArabicSansLight,
+                                                          //           fontSize:
+                                                          //               14.83
+                                                          //                   .sp,
+                                                          //           fontWeight:
+                                                          //               FontWeight
+                                                          //                   .w600,
+                                                          //           color: AppColors
+                                                          //               .kBlackColor)),
+                                                          // },
                                                         ],
                                                       ))
                                             }

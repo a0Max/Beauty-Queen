@@ -39,6 +39,7 @@ import '../brands/branddetail_screen.dart';
 import '../cart/cart_screen.dart';
 import '../categories/alkasam_screen.dart';
 import '../categories/filter_screen2.dart';
+import '../home/bottom_nav_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
 import 'currentPriceWithBlack.dart';
@@ -211,99 +212,130 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                 .width,
                                             alignment: Alignment.topRight,
                                             child: Wrap(children: [
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    Get.to(AlKasamScreen());
-                                                  },
-                                                  child: Text(
-                                                    '${tr('sections')} / ',
-                                                    style: TextStyle(
-                                                      fontFamily:
-                                                          kTheArabicSansLight,
-                                                      color:
-                                                          AppColors.kGrayColor,
-                                                      fontSize: 16.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.visible,
-                                                  )),
-                                              ...List.generate(
-                                                controller
-                                                        .productData
-                                                        .last
-                                                        .product
-                                                        ?.category
-                                                        ?.length ??
-                                                    0,
-                                                (index) => ((controller
-                                                                    .productData
-                                                                    .last
-                                                                    .product
-                                                                    ?.category
-                                                                    ?.length ??
-                                                                0) -
-                                                            1) !=
-                                                        index
-                                                    ? GestureDetector(
-                                                        onTap: () {
-                                                          final AlkasamController
-                                                              controller0 =
-                                                              Get.put(
-                                                                  AlkasamController());
-                                                          controller0.updateCurrentCategoryId(
-                                                              newId: int.parse(
+                                              if (widget.isQueenOffer !=
+                                                  true) ...{
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      Get.to(AlKasamScreen());
+                                                    },
+                                                    child: Text(
+                                                      '${tr('sections')} / ',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        color: AppColors
+                                                            .kGrayColor,
+                                                        fontSize: 16.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.visible,
+                                                    )),
+                                                ...List.generate(
+                                                  controller
+                                                          .productData
+                                                          .last
+                                                          .product
+                                                          ?.category
+                                                          ?.length ??
+                                                      0,
+                                                  (index) => ((controller
+                                                                      .productData
+                                                                      .last
+                                                                      .product
+                                                                      ?.category
+                                                                      ?.length ??
+                                                                  0) -
+                                                              1) !=
+                                                          index
+                                                      ? GestureDetector(
+                                                          onTap: () {
+                                                            final AlkasamController
+                                                                controller0 =
+                                                                Get.put(
+                                                                    AlkasamController());
+                                                            controller0.updateCurrentCategoryId(
+                                                                newId: int.parse(
+                                                                    "${controller.productData.last.product?.category?[index].id ?? 0}"),
+                                                                getChild: null);
+                                                            Get.to(
+                                                                FliterScreen2(
+                                                              categoryId: int.parse(
                                                                   "${controller.productData.last.product?.category?[index].id ?? 0}"),
-                                                              getChild: null);
-                                                          Get.to(FliterScreen2(
-                                                            categoryId: int.parse(
-                                                                "${controller.productData.last.product?.category?[index].id ?? 0}"),
-                                                          ));
-                                                        },
-                                                        child: Text(
-                                                            '${controller.productData.last.product?.category?[index].title ?? ''} / ',
+                                                            ));
+                                                          },
+                                                          child: Text(
+                                                              '${controller.productData.last.product?.category?[index].title ?? ''} / ',
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    kTheArabicSansLight,
+                                                                color: AppColors
+                                                                    .kGrayColor,
+                                                                fontSize: 16.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              )))
+                                                      : GestureDetector(
+                                                          onTap: () {
+                                                            final AlkasamController
+                                                                controller0 =
+                                                                Get.put(
+                                                                    AlkasamController());
+                                                            controller0.updateCurrentCategoryId(
+                                                                newId: int.parse(
+                                                                    "${controller.productData.last.product?.category?[index].id ?? 0}"),
+                                                                getChild: null);
+                                                            Get.to(
+                                                                FliterScreen2(
+                                                              categoryId: int.parse(
+                                                                  "${controller.productData.last.product?.category?[index].id ?? 0}"),
+                                                            ));
+                                                          },
+                                                          child: Text(
+                                                            '${controller.productData.last.product?.category?[index].title ?? ''} ',
                                                             style: TextStyle(
                                                               fontFamily:
                                                                   kTheArabicSansLight,
                                                               color: AppColors
-                                                                  .kGrayColor,
+                                                                  .kBlackColor,
                                                               fontSize: 16.sp,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w400,
-                                                            )))
-                                                    : GestureDetector(
-                                                        onTap: () {
-                                                          final AlkasamController
-                                                              controller0 =
-                                                              Get.put(
-                                                                  AlkasamController());
-                                                          controller0.updateCurrentCategoryId(
-                                                              newId: int.parse(
-                                                                  "${controller.productData.last.product?.category?[index].id ?? 0}"),
-                                                              getChild: null);
-                                                          Get.to(FliterScreen2(
-                                                            categoryId: int.parse(
-                                                                "${controller.productData.last.product?.category?[index].id ?? 0}"),
-                                                          ));
-                                                        },
-                                                        child: Text(
-                                                          '${controller.productData.last.product?.category?[index].title ?? ''} ',
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                kTheArabicSansLight,
-                                                            color: AppColors
-                                                                .kBlackColor,
-                                                            fontSize: 16.sp,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                          ),
-                                                        )),
-                                              ),
-                                              if (widget.isQueenOffer ==
-                                                  true) ...{
+                                                                      .w700,
+                                                            ),
+                                                          )),
+                                                ),
+                                              } else ...{
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      Navigator
+                                                          .pushAndRemoveUntil(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        const MainView(),
+                                                              ),
+                                                              (route) => false);
+                                                    },
+                                                    child: Text(
+                                                      'الرئسيه / ',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        color: AppColors
+                                                            .kGrayColor,
+                                                        fontSize: 16.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.visible,
+                                                    )),
                                                 GestureDetector(
                                                     onTap: () {
                                                       Get.to(
