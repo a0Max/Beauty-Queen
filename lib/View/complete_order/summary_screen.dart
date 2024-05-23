@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -14,9 +15,11 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/complete_order_controller/basketController.dart';
+import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
+import '../product_profile/products_screen.dart';
 import 'productadded_screen.dart';
 
 class SummaryScreen extends StatelessWidget {
@@ -191,21 +194,42 @@ class SummaryScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        CachedNetworkImage(
-                                            height: 97.h,
-                                            width: 97.w,
-                                            imageUrl: Connection.urlOfProducts(
-                                              image: basketController
-                                                      .order
-                                                      .value
-                                                      .order
-                                                      ?.items?[index]
-                                                      .products
-                                                      ?.first
-                                                      .mainImage ??
-                                                  '',
-                                            ) // controller.order.value.order?.items?[index].products.first,
-                                            ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            if (basketController
+                                                    .order.value.order?.id !=
+                                                null) {
+                                              Get.to(ChangeNotifierProvider(
+                                                  create: (context) =>
+                                                      ProductProfileControllerProvider(),
+                                                  child: ItemProfilePage(
+                                                      itemId: int.parse(
+                                                          basketController
+                                                                  .order
+                                                                  .value
+                                                                  .order
+                                                                  ?.id
+                                                                  .toString() ??
+                                                              '0'))));
+                                            }
+                                          },
+                                          child: CachedNetworkImage(
+                                              height: 97.h,
+                                              width: 97.w,
+                                              imageUrl:
+                                                  Connection.urlOfProducts(
+                                                image: basketController
+                                                        .order
+                                                        .value
+                                                        .order
+                                                        ?.items?[index]
+                                                        .products
+                                                        ?.first
+                                                        .mainImage ??
+                                                    '',
+                                              ) // controller.order.value.order?.items?[index].products.first,
+                                              ),
+                                        ),
                                         5.pw,
                                         Column(
                                           crossAxisAlignment:

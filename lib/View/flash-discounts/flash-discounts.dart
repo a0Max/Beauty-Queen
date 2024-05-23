@@ -114,7 +114,7 @@ class _FliterScreenState extends State<FlashDiscountsScreen> {
                 SizedBox(
                   height: 0.h,
                 ),
-                Text("تخفيضات فلاشية",
+                Text("وفري ... واعتني ببشرتك",
                     style: kTheSansTextStyle.copyWith(
                         fontSize: 1.25 * 14,
                         fontWeight: FontWeight.w700,
