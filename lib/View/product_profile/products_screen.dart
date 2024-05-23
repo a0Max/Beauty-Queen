@@ -39,6 +39,7 @@ import '../brands/branddetail_screen.dart';
 import '../cart/cart_screen.dart';
 import '../categories/alkasam_screen.dart';
 import '../categories/filter_screen2.dart';
+import '../offers/beautypharmacyscreen.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
 import 'currentPriceWithBlack.dart';
 import 'currentPriceWithPink.dart';
@@ -300,7 +301,25 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                 FontWeight.w700,
                                                           ),
                                                         )),
-                                              )
+                                              ),
+                                              if (widget.isQueenOffer ==
+                                                  true) ...{
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      Get.to(
+                                                          const BeautyPharmacyScreen());
+                                                    },
+                                                    child: Text('المعرض',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              kTheArabicSansLight,
+                                                          color: AppColors
+                                                              .kGrayColor,
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        )))
+                                              }
                                             ])),
                                         SizedBox(
                                           height: 43.h,
