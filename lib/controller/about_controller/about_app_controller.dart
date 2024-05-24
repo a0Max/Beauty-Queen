@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../const/api_connrction/app_data_apis.dart';
 import '../../models/get_contact.dart';
+import '../../models/transactions_model.dart';
 
 class AboutAppController extends GetxController {
   RxBool stateOfMenu = false.obs;
@@ -19,7 +21,7 @@ class AboutAppController extends GetxController {
 
   RxBool loadingOfMySticker = false.obs;
 
-  RxList myStickerData = [].obs;
+  var myStickerData = TotalOfTransactionsModel().obs;
   getMySticker() async {
     loadingOfMySticker.value = true;
     myStickerData.value = await _api.getTransactionsataRequest();

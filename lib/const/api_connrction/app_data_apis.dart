@@ -110,7 +110,7 @@ class AppDataApis extends ApiProvider {
     }
   }
 
-  Future<List<TransactionsModel>> getTransactionsataRequest() async {
+  Future<TotalOfTransactionsModel> getTransactionsataRequest() async {
     final token = await getUserToken();
     final checkNetwork = await getCheckNetwork();
     final cookies = await getCookies();
@@ -129,10 +129,10 @@ class AppDataApis extends ApiProvider {
       ),
     );
     if (validResponse(response.statusCode!)) {
-      final List<TransactionsModel> l = [];
-      response.data['transactions']
-          .forEach((e) => l.add(TransactionsModel.fromJson(e)));
-      return l;
+      // final List<TransactionsModel> l = [];
+      // response.data['transactions']
+      //     .forEach((e) => l.add(TransactionsModel.fromJson(e)));
+      return TotalOfTransactionsModel.fromJson(response.data);
     } else {
       throw response.data;
     }

@@ -6,7 +6,20 @@ import 'sales_products_model.dart';
 part 'transactions_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
-class TransactionsModel{
+class TotalOfTransactionsModel {
+  List<TransactionsModel>? transactions;
+  dynamic queenaBalance;
+  TotalOfTransactionsModel({this.queenaBalance, this.transactions});
+
+  factory TotalOfTransactionsModel.fromJson(Map<String, dynamic> json) {
+    return _$TotalOfTransactionsModelFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$TotalOfTransactionsModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
+class TransactionsModel {
   int? id;
   int? userId;
   int? orderId;
@@ -26,14 +39,14 @@ class TransactionsModel{
   List<OptionsModel>? options;
   TransactionsModel(
       {this.id,
-        this.userId,
-        this.orderId,
-        this.type,
-        this.amount,
-        this.createdAt,
-        this.updatedAt,
-        this.isQueena,
-        this.queenaAmount});
+      this.userId,
+      this.orderId,
+      this.type,
+      this.amount,
+      this.createdAt,
+      this.updatedAt,
+      this.isQueena,
+      this.queenaAmount});
 
   factory TransactionsModel.fromJson(Map<String, dynamic> json) {
     return _$TransactionsModelFromJson(json);

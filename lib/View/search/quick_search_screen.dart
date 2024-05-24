@@ -16,6 +16,7 @@ import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../brands/branddetail_screen.dart';
 import '../product_profile/products_screen.dart';
+import 'search_screen.dart';
 
 class QuickSearchScreen extends StatefulWidget {
   const QuickSearchScreen({super.key});
@@ -96,29 +97,35 @@ class _QuickSearchScreen extends State<QuickSearchScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
-                        controller.keyWord.value != ''
-                            ? Row(
-                                children: [
-                                  Text(
-                                    'عرض كل نتائج البحث عن ',
-                                    style: TextStyle(
-                                      fontFamily: kTheArabicSansLight,
-                                      fontSize: 15.1.sp,
-                                      fontWeight: FontWeight.w600,
-                                      // color: AppColors.kPrimaryColor
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.keyWord.value,
-                                    style: TextStyle(
-                                        fontFamily: kTheArabicSansLight,
-                                        fontSize: 17.1.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.kPrimaryColor),
-                                  ),
-                                ],
-                              )
-                            : SizedBox(),
+                        // controller.keyWord.value != ''
+                        //     ? GestureDetector(
+                        //         onTap: () {
+                        //           Get.to(() => SearchScreen(
+                        //               subKeyWord: controller.keyWord.value));
+                        //         },
+                        //         child: Row(
+                        //           children: [
+                        //             Text(
+                        //               'عرض كل نتائج البحث عن ',
+                        //               style: TextStyle(
+                        //                 fontFamily: kTheArabicSansLight,
+                        //                 fontSize: 15.1.sp,
+                        //                 fontWeight: FontWeight.w600,
+                        //                 // color: AppColors.kPrimaryColor
+                        //               ),
+                        //             ),
+                        //             Text(
+                        //               controller.keyWord.value,
+                        //               style: TextStyle(
+                        //                   fontFamily: kTheArabicSansLight,
+                        //                   fontSize: 17.1.sp,
+                        //                   fontWeight: FontWeight.w600,
+                        //                   color: AppColors.kPrimaryColor),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       )
+                        //     : SizedBox(),
                         20.ph,
                         Listener(
                             onPointerDown: (event) {
@@ -202,6 +209,33 @@ class _QuickSearchScreen extends State<QuickSearchScreen> {
                                     itemCount: controller.generalQuickSearchData
                                             .value.products?.length ??
                                         0),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => SearchScreen(
+                                        subKeyWord: controller.keyWord.value));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'عرض كل نتائج البحث عن ',
+                                        style: TextStyle(
+                                          fontFamily: kTheArabicSansLight,
+                                          fontSize: 15.1.sp,
+                                          fontWeight: FontWeight.w600,
+                                          // color: AppColors.kPrimaryColor
+                                        ),
+                                      ),
+                                      Text(
+                                        controller.keyWord.value,
+                                        style: TextStyle(
+                                            fontFamily: kTheArabicSansLight,
+                                            fontSize: 17.1.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColors.kPrimaryColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 if (controller
                                         .generalQuickSearchData.value.brand !=
                                     null) ...{

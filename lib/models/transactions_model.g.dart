@@ -6,6 +6,22 @@ part of 'transactions_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+TotalOfTransactionsModel _$TotalOfTransactionsModelFromJson(
+        Map<String, dynamic> json) =>
+    TotalOfTransactionsModel(
+      queenaBalance: json['queena_balance'],
+      transactions: (json['transactions'] as List<dynamic>?)
+          ?.map((e) => TransactionsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$TotalOfTransactionsModelToJson(
+        TotalOfTransactionsModel instance) =>
+    <String, dynamic>{
+      'transactions': instance.transactions?.map((e) => e.toJson()).toList(),
+      'queena_balance': instance.queenaBalance,
+    };
+
 TransactionsModel _$TransactionsModelFromJson(Map<String, dynamic> json) =>
     TransactionsModel(
       id: json['id'] as int?,

@@ -31,6 +31,7 @@ class _MyStickerScreen extends State<MyStickerScreen> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(160.h),
+          // preferredSize: Size.fromHeight(100.h),
           child: CustomAppBar(
             showarrowIcon: true,
             searchBarWidth: 76.w,
@@ -60,7 +61,7 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(left: 20.w),
                           child: Text(
-                            'رصيد الملصقات: ${_controller.myStickerData.value.fold<int>(0, (sum, obj) => int.parse("$sum") + int.parse("${obj.queenaAmount}"))}',
+                            'رصيد الملصقات: ${_controller.myStickerData.value.queenaBalance}',
                             style: TextStyle(
                                 color: AppColors.kWhiteColor,
                                 fontSize: 17.sp,
@@ -73,7 +74,9 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                         ///////////////second row/////////////
 
                         ...List.generate(
-                          _controller.myStickerData.value.length,
+                          _controller
+                                  .myStickerData.value.transactions?.length ??
+                              0,
                           (index) => Container(
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             child: Column(
@@ -97,7 +100,7 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                                     SizedBox(
                                       width: 100.w,
                                       child: Text(
-                                        '${_controller.myStickerData.value[index].createdAt.split('T').first}',
+                                        '${_controller.myStickerData.value.transactions?[index].createdAt?.split('T').first}',
                                         style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w400,
@@ -105,15 +108,15 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
-                                    if (_controller
-                                            .myStickerData.value[index].type ==
+                                    if (_controller.myStickerData.value
+                                            .transactions?[index].type ==
                                         'add') ...{
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 (100.w + 30.w + 20),
                                         child: Text(
-                                          ' لقد حصلتي على ${_controller.myStickerData.value[index].queenaAmount} ملصق من الفاتورة #${_controller.myStickerData.value[index].orderId}',
+                                          ' لقد حصلتي على ${_controller.myStickerData.value.transactions?[index].queenaAmount} ملصق من الفاتورة #${_controller.myStickerData.value.transactions?[index].orderId}',
                                           style: TextStyle(
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.w400,
@@ -121,15 +124,15 @@ class _MyStickerScreen extends State<MyStickerScreen> {
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
-                                    } else if (_controller
-                                            .myStickerData.value[index].type ==
+                                    } else if (_controller.myStickerData.value
+                                            .transactions?[index].type ==
                                         'deduction') ...{
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 (100.w + 30.w + 20),
                                         child: Text(
-                                          ' تم سحب ${_controller.myStickerData.value[index].queenaAmount} ملصق من الفاتورة #${_controller.myStickerData.value[index].orderId}',
+                                          ' تم سحب ${_controller.myStickerData.value.transactions?[index].queenaAmount} ملصق من الفاتورة #${_controller.myStickerData.value.transactions?[index].orderId}',
                                           style: TextStyle(
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.w400,
