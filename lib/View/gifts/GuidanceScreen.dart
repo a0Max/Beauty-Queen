@@ -131,175 +131,185 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
             ),
           ),
           endDrawer: const MyEndDrawer(),
-          body: SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: HtmlWidget(
-                    controller.generalSearchData.value.info?.description ?? '',
-                    textStyle: TextStyle(
-                        fontFamily: kTheArabicSansBold,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-                controller.isLoading.value == true
-                    ? ShimmerSlider(
-                        height: 139.17.h,
-                      )
-                    : (controller.generalSearchData.value.info?.banner != null)
-                        ? SizedBox(
+          body: RefreshIndicator(
+              onRefresh: () async {
+                controller.getGiftsDataController(currentPage: 1);
+              },
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      child: HtmlWidget(
+                        controller.generalSearchData.value.info?.description ??
+                            '',
+                        textStyle: TextStyle(
+                            fontFamily: kTheArabicSansBold,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    controller.isLoading.value == true
+                        ? ShimmerSlider(
                             height: 139.17.h,
-                            width: MediaQuery.of(context).size.width,
-                            child: CachedNetworkImage(
-                                imageUrl: Connection.urlOfStorage(
-                                    image: controller.generalSearchData.value
-                                            .info?.banner ??
-                                        '')))
-                        : const SizedBox(),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Center(
-                  child: Text(tr('giftCard'),
-                      style: TextStyle(
-                        fontFamily: kTheArabicSansBold,
-                        color: AppColors.mainColor,
-                        fontSize: 17.5.sp,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  height: 270.69.h,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      GiftWidget(
-                        price: '100',
-                        onTap: () {
-                          final HomeController _controller =
-                              Get.put(HomeController());
-                          _controller.addToCart(productId: 1513);
-                        },
+                          )
+                        : (controller.generalSearchData.value.info?.banner !=
+                                null)
+                            ? SizedBox(
+                                height: 139.17.h,
+                                width: MediaQuery.of(context).size.width,
+                                child: CachedNetworkImage(
+                                    imageUrl: Connection.urlOfStorage(
+                                        image: controller.generalSearchData
+                                                .value.info?.banner ??
+                                            '')))
+                            : const SizedBox(),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Center(
+                      child: Text(tr('giftCard'),
+                          style: TextStyle(
+                            fontFamily: kTheArabicSansBold,
+                            color: AppColors.mainColor,
+                            fontSize: 17.5.sp,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      height: 270.69.h,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          GiftWidget(
+                            price: '100',
+                            onTap: () {
+                              final HomeController _controller =
+                                  Get.put(HomeController());
+                              _controller.addToCart(productId: 1513);
+                            },
+                          ),
+                          10.pw,
+                          GiftWidget(
+                            price: '250',
+                            onTap: () {
+                              final HomeController _controller =
+                                  Get.put(HomeController());
+                              _controller.addToCart(productId: 1514);
+                            },
+                          ),
+                          10.pw,
+                          GiftWidget(
+                            price: '500',
+                            onTap: () {
+                              final HomeController _controller =
+                                  Get.put(HomeController());
+                              _controller.addToCart(productId: 1515);
+                            },
+                          ),
+                        ],
                       ),
-                      10.pw,
-                      GiftWidget(
-                        price: '250',
-                        onTap: () {
-                          final HomeController _controller =
-                              Get.put(HomeController());
-                          _controller.addToCart(productId: 1514);
-                        },
-                      ),
-                      10.pw,
-                      GiftWidget(
-                        price: '500',
-                        onTap: () {
-                          final HomeController _controller =
-                              Get.put(HomeController());
-                          _controller.addToCart(productId: 1515);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 25.h,
-                ),
-                //////////custom drop down////////////
+                    ),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    //////////custom drop down////////////
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: Row(
-                    children: [
-                      SortDropDown(
-                        value: controller.valueSort.value == ''
-                            ? null
-                            : controller.valueSort.value,
-                        onChanged: (String? newValue) {
-                          SortTypes.listOfTTypesOfSort.forEach((key, value) {
-                            if (value == newValue) {
-                              controller.updateSortType(
-                                  newKeySort: key, newValueSort: value);
-                            }
-                          });
-                        },
-                      ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      child: Row(
+                        children: [
+                          SortDropDown(
+                            value: controller.valueSort.value == ''
+                                ? null
+                                : controller.valueSort.value,
+                            onChanged: (String? newValue) {
+                              SortTypes.listOfTTypesOfSort
+                                  .forEach((key, value) {
+                                if (value == newValue) {
+                                  controller.updateSortType(
+                                      newKeySort: key, newValueSort: value);
+                                }
+                              });
+                            },
+                          ),
 
-                      //////////////second///////////////
-                      FilterWidget(
-                        onTap: () {
-                          Get.to(const FilterByGiftsContainer());
-                        },
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 21.h,
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 16.w),
-                    child: Text(
-                        '${tr('count_items')}: ${controller.generalSearchData.value.gifts?.total ?? ''}',
-                        style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          color: AppColors.kGrayColor,
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  height: 22.h,
-                ),
-                controller.isLoading.value == true
-                    ? Wrap(
-                        runSpacing: 7,
-                        children:
-                            List.generate(2, (index) => const ShimmerItem()),
-                      )
-                    : Wrap(
-                        runSpacing: 7,
-                        children: List.generate(
-                            controller.dataProducts.value.length ?? 0,
-                            (index) => CustomCardWidget(
-                                  imageUrl: Connection.urlOfProducts(
-                                      image: controller.dataProducts
-                                              .value[index].mainImage ??
-                                          ''),
-                                  isDiscount: controller
-                                      .dataProducts.value[index].isOffer,
-                                  newArrival:
-                                      controller.dataProducts.value[index] ??
+                          //////////////second///////////////
+                          FilterWidget(
+                            onTap: () {
+                              Get.to(const FilterByGiftsContainer());
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 21.h,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 16.w),
+                        child: Text(
+                            '${tr('count_items')}: ${controller.generalSearchData.value.gifts?.total ?? ''}',
+                            style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.kGrayColor,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w400,
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 22.h,
+                    ),
+                    controller.isLoading.value == true
+                        ? Wrap(
+                            runSpacing: 7,
+                            children: List.generate(
+                                2, (index) => const ShimmerItem()),
+                          )
+                        : Wrap(
+                            runSpacing: 7,
+                            children: List.generate(
+                                controller.dataProducts.value.length ?? 0,
+                                (index) => CustomCardWidget(
+                                      imageUrl: Connection.urlOfProducts(
+                                          image: controller.dataProducts
+                                                  .value[index].mainImage ??
+                                              ''),
+                                      isDiscount: controller
+                                          .dataProducts.value[index].isOffer,
+                                      newArrival: controller
+                                              .dataProducts.value[index] ??
                                           SalesProductsModel(),
-                                  favorite: controller.dataProducts.value[index]
-                                          .wishlist?.isNotEmpty ??
-                                      false,
-                                )),
-                      ),
+                                      favorite: controller
+                                              .dataProducts
+                                              .value[index]
+                                              .wishlist
+                                              ?.isNotEmpty ??
+                                          false,
+                                    )),
+                          ),
 
-                if (controller.dataProducts.value.isNotEmpty) ...{
-                  SeeMoreWidget(
-                    currentDataProductsLength:
-                        "${controller.dataProducts.value.length ?? 0}",
-                    totalDataProductsLength:
-                        "${controller.generalSearchData.value.gifts?.total ?? 1}",
-                    onTap: () {
-                      controller.getGiftsDataController();
-                    },
-                  ),
-                }
-              ],
-            ),
-          ),
+                    if (controller.dataProducts.value.isNotEmpty) ...{
+                      SeeMoreWidget(
+                        currentDataProductsLength:
+                            "${controller.dataProducts.value.length ?? 0}",
+                        totalDataProductsLength:
+                            "${controller.generalSearchData.value.gifts?.total ?? 1}",
+                        onTap: () {
+                          controller.getGiftsDataController();
+                        },
+                      ),
+                    }
+                  ],
+                ),
+              )),
         ));
   }
 }

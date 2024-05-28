@@ -20,6 +20,8 @@ class HomeController extends GetxController {
   RxList sliders = [].obs;
 
   Future<void> getHomeDataController() async {
+    isLoading.value = true;
+
     try {
       homeData.value = await _api.homeDataRequest();
       sliders.value = (homeData.value.slides

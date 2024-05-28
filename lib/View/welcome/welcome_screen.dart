@@ -34,6 +34,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _startAutoNavigation() {
     _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
       setState(() {
+        print("_currentPage:$_currentPage");
+
         _progressList[_currentPage] += 0.1 / _durationPerPage;
         if (_progressList[_currentPage] >= 1.0) {
           _progressList[_currentPage] = 1.0;
@@ -48,6 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             _performAction();
           }
         }
+        print("_currentPage:$_currentPage");
       });
     });
   }
@@ -78,7 +81,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             },
             children: [
               Image.asset(
-                AppImages.kpageviewoneImage,
+                AppImages.kpageviewfourImage,
                 fit: BoxFit.cover,
               ),
               Image.asset(
@@ -90,7 +93,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 fit: BoxFit.cover,
               ),
               Image.asset(
-                AppImages.kpageviewfourImage,
+                AppImages.kpageviewoneImage,
                 fit: BoxFit.cover,
               ),
             ],
@@ -129,77 +132,120 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                   SizedBox(height: 15.h),
-                  SizedBox(
-                    width: 358.w,
-                    height: 54.h,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            AppColors.kPrimaryColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                  if (_currentPage == 3) ...{
+                    SizedBox(
+                      width: 358.w,
+                      height: 54.h,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              AppColors.kPrimaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
+                        onPressed: () {
+                          // Check if the timer has been canceled
+                          // if (controller.cancelTimerFlag.value) {
+                          // Timer canceled, navigate to the login screen
+                          // Get.off(const LogInPage());
+                          // } else {
+                          // Timer not canceled, cancel the timer and navigate
+                          // controller.cancelTimer();
+                          Get.off(const LogInPage());
+                          // }
+                        },
+                        child: Text(tr('kLogin'),
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontFamily: kTheArabicSansLight,
+                                color: AppColors.kWhiteColor,
+                                fontWeight: FontWeight.w700)),
                       ),
-                      onPressed: () {
-                        // Check if the timer has been canceled
-                        // if (controller.cancelTimerFlag.value) {
-                        // Timer canceled, navigate to the login screen
-                        // Get.off(const LogInPage());
-                        // } else {
-                        // Timer not canceled, cancel the timer and navigate
-                        // controller.cancelTimer();
-                        Get.off(const LogInPage());
-                        // }
-                      },
-                      child: Text(tr('kLogin'),
-                          style: TextStyle(
-                              fontSize: 20.sp,
-                              fontFamily: kTheArabicSansLight,
+                    ),
+                    SizedBox(height: 19.h),
+                    SizedBox(
+                      width: 358.w,
+                      height: 54.h,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.transparent),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 1.w, color: AppColors.kWhiteColor),
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          // Check if the timer has been canceled
+                          // if (controller.cancelTimerFlag.value) {
+                          //   // Timer canceled, navigate to the sign-up screen
+                          //   Get.off(const SignUpPage());
+                          // } else {
+                          //   // Timer not canceled, cancel the timer and navigate
+                          //   controller.cancelTimer();
+                          Get.off(const SignUpPage());
+                          // }
+                        },
+                        child: Text(
+                          tr('kCreateAccount'),
+                          style: kPrimaryTextStyle.copyWith(
                               color: AppColors.kWhiteColor,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                  ),
-                  SizedBox(height: 19.h),
-                  SizedBox(
-                    width: 358.w,
-                    height: 54.h,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.transparent),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            side: BorderSide(
-                                width: 1.w, color: AppColors.kWhiteColor),
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: kTheArabicSansLight),
                         ),
                       ),
-                      onPressed: () {
-                        // Check if the timer has been canceled
-                        // if (controller.cancelTimerFlag.value) {
-                        //   // Timer canceled, navigate to the sign-up screen
-                        //   Get.off(const SignUpPage());
-                        // } else {
-                        //   // Timer not canceled, cancel the timer and navigate
-                        //   controller.cancelTimer();
-                        Get.off(const SignUpPage());
-                        // }
-                      },
-                      child: Text(
-                        tr('kCreateAccount'),
-                        style: kPrimaryTextStyle.copyWith(
-                            color: AppColors.kWhiteColor,
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: kTheArabicSansLight),
+                    ),
+                  } else ...{
+                    SizedBox(
+                      width: 358.w,
+                      height: 54.h,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              AppColors.kPrimaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          print("_currentPage:$_currentPage");
+                          setState(() {
+                            //   updatePage();
+                            _progressList[_currentPage] = 1.0;
+
+                            _currentPage++;
+                            _pageController.animateToPage(
+                              _currentPage,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                            );
+                          });
+
+                          // print("_currentPage:$_currentPage");
+                          // _pageController.jumpToPage(_currentPage);
+                        },
+                        child: Text('التالي',
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontFamily: kTheArabicSansLight,
+                                color: AppColors.kWhiteColor,
+                                fontWeight: FontWeight.w700)),
                       ),
                     ),
-                  ),
+                    SizedBox(height: 19.h),
+                  }
                 ],
               ),
             ),

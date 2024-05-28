@@ -80,10 +80,10 @@ class _CustomCardWidgetState extends State<CustomCardWidget2> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      ChangeNotifierProvider(
-                          create: (context) => ProductProfileControllerProvider(),
-                          child:ItemProfilePage(itemId: widget.newArrival.id ?? 0))));
+                  builder: (context) => ChangeNotifierProvider(
+                      create: (context) => ProductProfileControllerProvider(),
+                      child:
+                          ItemProfilePage(itemId: widget.newArrival.id ?? 0))));
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,

@@ -111,128 +111,138 @@ class _DiscountScreenState extends State<DiscountScreen> {
                 searchBarTranslationX: searchBarTranslationX,
               )),
           endDrawer: const MyEndDrawer(),
-          body: SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                _controller.isLoading.value == true
-                    ? ShimmerSlider(
-                        height: 139.17.h,
-                      )
-                    : (_controller.generalSearchData.value.info?.banner != null)
-                        ? SizedBox(
+          body: RefreshIndicator(
+              onRefresh: () async {
+                _controller.getSalesDataController(currentPage: 1);
+              },
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    _controller.isLoading.value == true
+                        ? ShimmerSlider(
                             height: 139.17.h,
-                            width: MediaQuery.of(context).size.width,
-                            child: CachedNetworkImage(
-                                imageUrl: Connection.urlOfStorage(
-                                    image: _controller.generalSearchData.value
-                                            .info?.banner ??
-                                        '')))
-                        : const SizedBox(),
-                SizedBox(
-                  height: 14.h,
-                ),
-                Center(
-                  child: Text(tr('offers_sale_down'),
-                      style: TextStyle(
-                        fontFamily: kTheArabicSansBold,
-                        color: AppColors.mainColor,
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.w400,
-                      )),
-                ),
-                SizedBox(
-                  height: 14.h,
-                ),
-                ///////////////filter////////////
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: Row(
-                    children: [
-                      SortDropDown(
-                        value: _controller.valueSort.value == ''
-                            ? null
-                            : _controller.valueSort.value,
-                        onChanged: (String? newValue) {
-                          SortTypes.listOfTTypesOfSort.forEach((key, value) {
-                            if (value == newValue) {
-                              _controller.updateSortType(
-                                  newKeySort: key, newValueSort: value);
-                            }
-                          });
-                        },
+                          )
+                        : (_controller.generalSearchData.value.info?.banner !=
+                                null)
+                            ? SizedBox(
+                                height: 139.17.h,
+                                width: MediaQuery.of(context).size.width,
+                                child: CachedNetworkImage(
+                                    imageUrl: Connection.urlOfStorage(
+                                        image: _controller.generalSearchData
+                                                .value.info?.banner ??
+                                            '')))
+                            : const SizedBox(),
+                    SizedBox(
+                      height: 14.h,
+                    ),
+                    Center(
+                      child: Text(tr('offers_sale_down'),
+                          style: TextStyle(
+                            fontFamily: kTheArabicSansBold,
+                            color: AppColors.mainColor,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                    SizedBox(
+                      height: 14.h,
+                    ),
+                    ///////////////filter////////////
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      child: Row(
+                        children: [
+                          SortDropDown(
+                            value: _controller.valueSort.value == ''
+                                ? null
+                                : _controller.valueSort.value,
+                            onChanged: (String? newValue) {
+                              SortTypes.listOfTTypesOfSort
+                                  .forEach((key, value) {
+                                if (value == newValue) {
+                                  _controller.updateSortType(
+                                      newKeySort: key, newValueSort: value);
+                                }
+                              });
+                            },
+                          ),
+                          //////////////second///////////////
+                          FilterWidget(
+                            onTap: () {
+                              Get.to(const FilterByContainer());
+                            },
+                          )
+                        ],
                       ),
-                      //////////////second///////////////
-                      FilterWidget(
+                    ),
+
+                    SizedBox(
+                      height: 21.h,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 16.w),
+                        child: Text(
+                            '${tr('count_items')}: ${_controller.generalSearchData.value.salesCount ?? ''}',
+                            style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.kGrayColor,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w400,
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 22.h,
+                    ),
+                    _controller.isLoading.value == true
+                        ? Wrap(
+                            runSpacing: 7,
+                            children: List.generate(
+                                2, (index) => const ShimmerItem()),
+                          )
+                        : Wrap(
+                            runSpacing: 7,
+                            children: List.generate(
+                                _controller.dataProducts.value.length ?? 0,
+                                (index) => CustomCardWidget(
+                                    imageUrl: Connection.urlOfProducts(
+                                        image: _controller.dataProducts
+                                                .value[index].mainImage ??
+                                            ''),
+                                    newArrival:
+                                        _controller.dataProducts[index] ??
+                                            SalesProductsModel(),
+                                    favorite: _controller
+                                            .dataProducts
+                                            .value[index]
+                                            .wishlist
+                                            ?.isNotEmpty ??
+                                        false,
+                                    isDiscount: _controller
+                                        .dataProducts.value[index].isOffer)),
+                          ),
+                    // const SizedBox(
+                    //   height: 40,
+                    // ),
+
+                    if (_controller.dataProducts.value.isNotEmpty) ...{
+                      SeeMoreWidget(
+                        currentDataProductsLength:
+                            "${_controller.dataProducts.value.length ?? 0}",
+                        totalDataProductsLength:
+                            "${_controller.generalSearchData.value.salesCount ?? 1}",
                         onTap: () {
-                          Get.to(const FilterByContainer());
+                          _controller.getSalesDataController();
                         },
-                      )
-                    ],
-                  ),
-                ),
-
-                SizedBox(
-                  height: 21.h,
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 16.w),
-                    child: Text(
-                        '${tr('count_items')}: ${_controller.generalSearchData.value.salesCount ?? ''}',
-                        style: TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          color: AppColors.kGrayColor,
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  height: 22.h,
-                ),
-                _controller.isLoading.value == true
-                    ? Wrap(
-                        runSpacing: 7,
-                        children:
-                            List.generate(2, (index) => const ShimmerItem()),
-                      )
-                    : Wrap(
-                        runSpacing: 7,
-                        children: List.generate(
-                            _controller.dataProducts.value.length ?? 0,
-                            (index) => CustomCardWidget(
-                                imageUrl: Connection.urlOfProducts(
-                                    image: _controller.dataProducts.value[index]
-                                            .mainImage ??
-                                        ''),
-                                newArrival: _controller.dataProducts[index] ??
-                                    SalesProductsModel(),
-                                favorite: _controller.dataProducts.value[index]
-                                        .wishlist?.isNotEmpty ??
-                                    false,
-                                isDiscount: _controller
-                                    .dataProducts.value[index].isOffer)),
                       ),
-                // const SizedBox(
-                //   height: 40,
-                // ),
-
-                if (_controller.dataProducts.value.isNotEmpty) ...{
-                  SeeMoreWidget(
-                    currentDataProductsLength:
-                        "${_controller.dataProducts.value.length ?? 0}",
-                    totalDataProductsLength:
-                        "${_controller.generalSearchData.value.salesCount ?? 1}",
-                    onTap: () {
-                      _controller.getSalesDataController();
-                    },
-                  ),
-                }
-              ],
-            ),
-          ),
+                    }
+                  ],
+                ),
+              )),
         ));
   }
 }

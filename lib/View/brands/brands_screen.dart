@@ -129,139 +129,146 @@ class _BrandScreenState extends State<BrandScreen> {
         ),
       ),
       endDrawer: const MyEndDrawer(),
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            Image.asset(AppImages.kbannerImage),
-            SizedBox(
-              height: 30.h,
-            ),
-            for (int i = 0; i < _controller.characters.length; i += 6)
-              Directionality(
-                textDirection: TextDirection.ltr,
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    for (int j = i;
-                        j < i + 6 && j < _controller.characters.length;
-                        j++)
-                      // if (_controller.characters[j] != '') ...{
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            if (_controller.characters[j] != '') {
-                              _scrollToColumn(_controller.characters[j]);
-                            }
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            alignment: Alignment.center,
-                            child: Text(
-                              _controller.characters[j],
-                              style: TextStyle(
-                                  color: AppColors.kPrimaryColor,
-                                  fontSize: 16 +
-                                      (0.6 *
-                                          MediaQuery.of(context).size.width /
-                                          100),
-                                  fontWeight: FontWeight.w500),
+      body: RefreshIndicator(
+          onRefresh: () async {
+            _controller.getBrandsDataController();
+          },
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                Image.asset(AppImages.kbannerImage),
+                SizedBox(
+                  height: 30.h,
+                ),
+                for (int i = 0; i < _controller.characters.length; i += 6)
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        for (int j = i;
+                            j < i + 6 && j < _controller.characters.length;
+                            j++)
+                          // if (_controller.characters[j] != '') ...{
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                if (_controller.characters[j] != '') {
+                                  _scrollToColumn(_controller.characters[j]);
+                                }
+                              },
+                              child: Container(
+                                color: Colors.transparent,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  _controller.characters[j],
+                                  style: TextStyle(
+                                      color: AppColors.kPrimaryColor,
+                                      fontSize: 16 +
+                                          (0.6 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              100),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    // }
-                    // Expanded(child: SizedBox()),
-                    // Expanded(child: SizedBox())
-                  ],
-                ),
-              ),
-            Obx(() => ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    _columnKeys.add(GlobalKey());
-                    return Column(
-                      key: _columnKeys[index],
-                      children: [
-                        SizedBox(
-                          height: 30,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Divider(
-                                  endIndent: 15.w,
-                                  indent: 15.w,
-                                  // Adjust the height of the horizontal line
-                                  color: AppColors
-                                      .kPrimaryColor, // Change the color of the line
-                                  thickness:
-                                      2.w, // Adjust the width of the line
-                                ),
+                        // }
+                        // Expanded(child: SizedBox()),
+                        // Expanded(child: SizedBox())
+                      ],
+                    ),
+                  ),
+                Obx(() => ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        _columnKeys.add(GlobalKey());
+                        return Column(
+                          key: _columnKeys[index],
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Divider(
+                                      endIndent: 15.w,
+                                      indent: 15.w,
+                                      // Adjust the height of the horizontal line
+                                      color: AppColors
+                                          .kPrimaryColor, // Change the color of the line
+                                      thickness:
+                                          2.w, // Adjust the width of the line
+                                    ),
+                                  ),
+                                  Text(
+                                    _controller.brandsData.keys.toList()[index],
+                                    style: TextStyle(
+                                        fontSize: 23.82.sp,
+                                        fontFamily: kTheArabicSansLight,
+                                        color: AppColors.kPrimaryColor,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  Expanded(
+                                    child: Divider(
+                                      endIndent: 15.w,
+                                      indent: 15.w,
+                                      // Adjust the height of the horizontal line
+                                      color: AppColors
+                                          .kPrimaryColor, // Change the color of the line
+                                      thickness:
+                                          2.w, // Adjust the width of the line
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                _controller.brandsData.keys.toList()[index],
-                                style: TextStyle(
-                                    fontSize: 23.82.sp,
-                                    fontFamily: kTheArabicSansLight,
-                                    color: AppColors.kPrimaryColor,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              Expanded(
-                                child: Divider(
-                                  endIndent: 15.w,
-                                  indent: 15.w,
-                                  // Adjust the height of the horizontal line
-                                  color: AppColors
-                                      .kPrimaryColor, // Change the color of the line
-                                  thickness:
-                                      2.w, // Adjust the width of the line
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        20.ph,
-                        Wrap(
-                          spacing: 10,
-                          runSpacing: 30,
-                          alignment: WrapAlignment.center,
-                          children: List.generate(
-                            _controller
-                                .brandsData[
-                                    _controller.brandsData.keys.toList()[index]]
-                                .length,
-                            (index2) => CustomProductWidget(
-                              imagePath: Connection.urlOfBrands(
-                                  image: _controller
+                            ),
+                            20.ph,
+                            Wrap(
+                              spacing: 10,
+                              runSpacing: 30,
+                              alignment: WrapAlignment.center,
+                              children: List.generate(
+                                _controller
+                                    .brandsData[_controller.brandsData.keys
+                                        .toList()[index]]
+                                    .length,
+                                (index2) => CustomProductWidget(
+                                  imagePath: Connection.urlOfBrands(
+                                      image: _controller
+                                              .brandsData[_controller
+                                                  .brandsData.keys
+                                                  .toList()[index]][index2]
+                                              .logo ??
+                                          ''),
+                                  productName: _controller
                                           .brandsData[_controller
                                               .brandsData.keys
                                               .toList()[index]][index2]
-                                          .logo ??
-                                      ''),
-                              productName: _controller
+                                          .titleAr ??
+                                      '',
+                                  brandId: _controller
                                       .brandsData[_controller.brandsData.keys
                                           .toList()[index]][index2]
-                                      .titleAr ??
-                                  '',
-                              brandId: _controller
-                                  .brandsData[_controller.brandsData.keys
-                                      .toList()[index]][index2]
-                                  .id
-                                  .toString(),
+                                      .id
+                                      .toString(),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        23.ph,
-                      ],
-                    );
-                  },
-                  itemCount: _controller.brandsData.length,
-                ))
-          ],
-        ),
-      ),
+                            23.ph,
+                          ],
+                        );
+                      },
+                      itemCount: _controller.brandsData.length,
+                    ))
+              ],
+            ),
+          )),
     );
   }
 }

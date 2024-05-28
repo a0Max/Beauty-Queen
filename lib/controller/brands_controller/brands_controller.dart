@@ -54,6 +54,8 @@ class BrandsController extends GetxController {
   }
 
   Future<void> getBrandsDataController() async {
+    isLoading.value = true;
+
     try {
       if (!characters.value.contains('0-9')) {
         characters.value.add('0-9');

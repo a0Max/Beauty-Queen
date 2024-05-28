@@ -625,7 +625,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                     )
                                   ]))
                         } else if (productIsFlashDiscount == '1' &&
-                            productIsOffer != '1' &&
+                            // productIsOffer != '1' &&
                             productOptionsIsEmpty == true) ...{
                           SizedBox(
                               width:
@@ -668,7 +668,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                             )
                           }
                         } else if (productIsFlashDiscount == '1' &&
-                            productIsOffer != '1' &&
+                            // productIsOffer != '1' &&
                             productOptionsIsEmpty != true) ...{
                           SizedBox(
                               width:
@@ -681,8 +681,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                       price: '$productMainPrice',
                                     ),
                                     CurrentPriceWithPink2(
-                                      price:
-                                          '${selectedOptionsPrice ?? productFlashDiscountPrice}',
+                                      price: '${productFlashDiscountPrice}',
                                     )
                                   ]))
                         } else if (productIsFlashDiscount != '1' &&
@@ -703,8 +702,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                         price: '$productMainPrice',
                                       ),
                                       CurrentPriceWithPink2(
-                                        price:
-                                            '${selectedOptionsPrice ?? productOfferPrice}',
+                                        price: '${productOfferPrice}',
                                       )
                                     ]))
                           } else ...{
@@ -722,7 +720,10 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                 height: 0.08,
                               ),
                             )
+                            // SizedBox()
                           }
+                        } else ...{
+                          Text('----')
                         }
                       ],
                     ),

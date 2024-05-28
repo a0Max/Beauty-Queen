@@ -111,329 +111,360 @@ class _FliterScreenState extends State<FliterScreen> {
           ),
         ),
         endDrawer: const MyEndDrawer(),
-        body: Obx(() => SingleChildScrollView(
-              controller: _scrollController,
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                SizedBox(
-                  height: 10.h,
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 17.h),
-                    child: Obx(() => Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text(
-                                "${tr('categories')} / ",
-                                style: TextStyle(
-                                  fontFamily: kTheArabicSansLight,
-                                  color: AppColors.kGrayColor,
-                                  fontSize: 17.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              _controller.categoryData.value
-                                  .where((element) =>
-                                      element.id == widget.categoryId)
-                                  .toList()
-                                  .first
-                                  .title,
-                              style: TextStyle(
-                                fontFamily: kTheArabicSansLight,
-                                color: AppColors.kBlackColor,
-                                fontSize: 17.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          ],
-                        )),
-                  ),
-                ),
-                if (_controller.generalSearchData.value.info?.description !=
-                    null) ...{
-                  15.ph,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: HtmlWidget(
-                      _controller.generalSearchData.value.info?.description ??
-                          '',
-                      textStyle: TextStyle(fontFamily: kTheArabicSansLight),
-                    ),
-                  )
-                },
-                _controller.isLoading.value == true
-                    ? ShimmerSlider(
-                        height: 139.17.h,
-                      )
-                    : (_controller.generalSearchData.value.info?.banner != null)
-                        ? GestureDetector(
-                            onTap: () {
-                              if (_controller.generalSearchData.value.info
-                                      ?.bannerIsLink ==
-                                  '1') {
-                                if (_controller.generalSearchData.value.info
-                                        ?.bannerLinkType ==
-                                    LinkTypes.brand) {
-                                  Get.to(BrandDetailScreen(
-                                    brandId: int.parse(_controller
-                                            .generalSearchData
-                                            .value
-                                            .info
-                                            ?.bannerLinkId ??
-                                        '0'),
-                                  ));
-                                } else if (_controller.generalSearchData.value
-                                        .info?.bannerLinkType ==
-                                    LinkTypes.product) {
-                                  Get.to(ChangeNotifierProvider(
-                                      create: (context) =>
-                                          ProductProfileControllerProvider(),
-                                      child: ItemProfilePage(
-                                          itemId: int.parse(_controller
-                                                  .generalSearchData
-                                                  .value
-                                                  .info
-                                                  ?.bannerLinkId ??
-                                              '0'))));
-                                } else if (_controller.generalSearchData.value
-                                        .info?.bannerLinkType ==
-                                    LinkTypes.category) {
-                                  AlkasamController controller =
-                                      Get.put(AlkasamController());
-                                  controller.updateCurrentCategoryId(
-                                      newId: int.parse(_controller
-                                              .generalSearchData
-                                              .value
-                                              .info
-                                              ?.bannerLinkId ??
-                                          '0'),
-                                      getChild: null);
-                                  Get.to(FliterScreen2(
-                                    categoryId: int.parse(_controller
-                                            .generalSearchData
-                                            .value
-                                            .info
-                                            ?.bannerLinkId ??
-                                        '0'),
-                                  ));
-                                } else if (_controller.generalSearchData.value
-                                        .info?.bannerLinkType ==
-                                    LinkTypes.brands) {
-                                  Get.to(BrandDetailScreen(
-                                    brandId: int.parse(_controller
-                                            .generalSearchData
-                                            .value
-                                            .info
-                                            ?.bannerLinkId ??
-                                        '0'),
-                                  ));
-                                }
-                              }
-                            },
-                            child: SizedBox(
-                                height: 139.17.h,
-                                width: MediaQuery.of(context).size.width,
-                                child: CachedNetworkImage(
-                                    height: 139.17.h,
-                                    width: MediaQuery.of(context).size.width,
-                                    imageUrl: Connection.urlOfStorage(
-                                        image: _controller.generalSearchData
-                                                .value.info?.banner ??
-                                            ''))),
-                          )
-                        : const SizedBox(),
-                SizedBox(
-                  height: 24.h,
-                ),
-                _controller.isLoading.value == true
-                    ? SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: List.generate(
-                            4,
-                            (index) => const ShimmerCategoryFilter(),
-                          ),
+        body: RefreshIndicator(
+            onRefresh: () async {
+              _controller.updateCurrentCategoryId(
+                  newId: widget.categoryId, getChild: false);
+            },
+            child: Obx(() => SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10.h,
                         ),
-                      )
-                    : SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: List.generate(
-                            _controller.categoryData.value
-                                .where((element) =>
-                                    element.id == widget.categoryId)
-                                .toList()
-                                .first
-                                .children
-                                .length,
-                            (index) => Padding(
-                              padding: EdgeInsets.only(right: 8.82.w),
-                              child: Obx(
-                                () => MyCustomContainer(
-                                  text: _controller.categoryData.value
-                                      .where((element) =>
-                                          element.id == widget.categoryId)
-                                      .toList()
-                                      .first
-                                      .children[index]
-                                      .title,
-                                  isSelected: _controller.categoryData.value
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 17.h),
+                            child: Obx(() => Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        "${tr('categories')} / ",
+                                        style: TextStyle(
+                                          fontFamily: kTheArabicSansLight,
+                                          color: AppColors.kGrayColor,
+                                          fontSize: 17.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      _controller.categoryData.value
                                           .where((element) =>
                                               element.id == widget.categoryId)
                                           .toList()
                                           .first
-                                          .children[index]
-                                          .id ==
-                                      _controller.currentCategoryId.value,
-                                  onTap: () {
-                                    _controller.updateCurrentCategoryId(
-                                        newId: _controller.categoryData.value
-                                                .where((element) =>
-                                                    element.id ==
-                                                    widget.categoryId)
-                                                .toList()
-                                                .first
-                                                .children[index]
-                                                .id ??
-                                            0,
-                                        getChild: true);
-                                  },
+                                          .title,
+                                      style: TextStyle(
+                                        fontFamily: kTheArabicSansLight,
+                                        color: AppColors.kBlackColor,
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                  ],
+                                )),
+                          ),
+                        ),
+                        if (_controller
+                                .generalSearchData.value.info?.description !=
+                            null) ...{
+                          15.ph,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: HtmlWidget(
+                              _controller.generalSearchData.value.info
+                                      ?.description ??
+                                  '',
+                              textStyle:
+                                  TextStyle(fontFamily: kTheArabicSansLight),
+                            ),
+                          )
+                        },
+                        _controller.isLoading.value == true
+                            ? ShimmerSlider(
+                                height: 139.17.h,
+                              )
+                            : (_controller
+                                        .generalSearchData.value.info?.banner !=
+                                    null)
+                                ? GestureDetector(
+                                    onTap: () {
+                                      if (_controller.generalSearchData.value
+                                              .info?.bannerIsLink ==
+                                          '1') {
+                                        if (_controller.generalSearchData.value
+                                                .info?.bannerLinkType ==
+                                            LinkTypes.brand) {
+                                          Get.to(BrandDetailScreen(
+                                            brandId: int.parse(_controller
+                                                    .generalSearchData
+                                                    .value
+                                                    .info
+                                                    ?.bannerLinkId ??
+                                                '0'),
+                                          ));
+                                        } else if (_controller.generalSearchData
+                                                .value.info?.bannerLinkType ==
+                                            LinkTypes.product) {
+                                          Get.to(ChangeNotifierProvider(
+                                              create: (context) =>
+                                                  ProductProfileControllerProvider(),
+                                              child: ItemProfilePage(
+                                                  itemId: int.parse(_controller
+                                                          .generalSearchData
+                                                          .value
+                                                          .info
+                                                          ?.bannerLinkId ??
+                                                      '0'))));
+                                        } else if (_controller.generalSearchData
+                                                .value.info?.bannerLinkType ==
+                                            LinkTypes.category) {
+                                          AlkasamController controller =
+                                              Get.put(AlkasamController());
+                                          controller.updateCurrentCategoryId(
+                                              newId: int.parse(_controller
+                                                      .generalSearchData
+                                                      .value
+                                                      .info
+                                                      ?.bannerLinkId ??
+                                                  '0'),
+                                              getChild: null);
+                                          Get.to(FliterScreen2(
+                                            categoryId: int.parse(_controller
+                                                    .generalSearchData
+                                                    .value
+                                                    .info
+                                                    ?.bannerLinkId ??
+                                                '0'),
+                                          ));
+                                        } else if (_controller.generalSearchData
+                                                .value.info?.bannerLinkType ==
+                                            LinkTypes.brands) {
+                                          Get.to(BrandDetailScreen(
+                                            brandId: int.parse(_controller
+                                                    .generalSearchData
+                                                    .value
+                                                    .info
+                                                    ?.bannerLinkId ??
+                                                '0'),
+                                          ));
+                                        }
+                                      }
+                                    },
+                                    child: SizedBox(
+                                        height: 139.17.h,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: CachedNetworkImage(
+                                            height: 139.17.h,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            imageUrl: Connection.urlOfStorage(
+                                                image: _controller
+                                                        .generalSearchData
+                                                        .value
+                                                        .info
+                                                        ?.banner ??
+                                                    ''))),
+                                  )
+                                : const SizedBox(),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        _controller.isLoading.value == true
+                            ? SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: List.generate(
+                                    4,
+                                    (index) => const ShimmerCategoryFilter(),
+                                  ),
+                                ),
+                              )
+                            : SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: List.generate(
+                                    _controller.categoryData.value
+                                        .where((element) =>
+                                            element.id == widget.categoryId)
+                                        .toList()
+                                        .first
+                                        .children
+                                        .length,
+                                    (index) => Padding(
+                                      padding: EdgeInsets.only(right: 8.82.w),
+                                      child: Obx(
+                                        () => MyCustomContainer(
+                                          text: _controller.categoryData.value
+                                              .where((element) =>
+                                                  element.id ==
+                                                  widget.categoryId)
+                                              .toList()
+                                              .first
+                                              .children[index]
+                                              .title,
+                                          isSelected: _controller
+                                                  .categoryData.value
+                                                  .where((element) =>
+                                                      element.id ==
+                                                      widget.categoryId)
+                                                  .toList()
+                                                  .first
+                                                  .children[index]
+                                                  .id ==
+                                              _controller
+                                                  .currentCategoryId.value,
+                                          onTap: () {
+                                            _controller.updateCurrentCategoryId(
+                                                newId: _controller
+                                                        .categoryData.value
+                                                        .where((element) =>
+                                                            element.id ==
+                                                            widget.categoryId)
+                                                        .toList()
+                                                        .first
+                                                        .children[index]
+                                                        .id ??
+                                                    0,
+                                                getChild: true);
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        SizedBox(
+                          // height: 34.95.h,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: List.generate(
+                                _controller.childCategoryData.length,
+                                (index) => Padding(
+                                  padding: EdgeInsets.only(right: 8.82.w),
+                                  child: Obx(
+                                    () => MyCustomContainer(
+                                      text: _controller
+                                          .childCategoryData.value[index].title,
+                                      isSelected: _controller.childCategoryData
+                                              .value[index].id ==
+                                          _controller
+                                              .childCurrentCategoryId.value,
+                                      onTap: () {
+                                        _controller
+                                            .updateChildCurrentCategoryId(
+                                                newId: _controller
+                                                        .childCategoryData
+                                                        .value[index]
+                                                        .id ??
+                                                    0);
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                SizedBox(
-                  // height: 34.95.h,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(
-                        _controller.childCategoryData.length,
-                        (index) => Padding(
-                          padding: EdgeInsets.only(right: 8.82.w),
-                          child: Obx(
-                            () => MyCustomContainer(
-                              text: _controller
-                                  .childCategoryData.value[index].title,
-                              isSelected: _controller
-                                      .childCategoryData.value[index].id ==
-                                  _controller.childCurrentCategoryId.value,
-                              onTap: () {
-                                _controller.updateChildCurrentCategoryId(
-                                    newId: _controller.childCategoryData
-                                            .value[index].id ??
-                                        0);
-                              },
-                            ),
+                        SizedBox(
+                          height: 19.h,
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: Row(
+                            children: [
+                              SortDropDown(
+                                  value: _controller.valueSort.value == ''
+                                      ? null
+                                      : _controller.valueSort.value,
+                                  onChanged: (String? newValue) {
+                                    SortTypes.listOfTTypesOfSort
+                                        .forEach((key, value) {
+                                      if (value == newValue) {
+                                        _controller.updateSortType(
+                                            newKeySort: key,
+                                            newValueSort: value);
+                                      }
+                                    });
+                                  }),
+                              //////////////second///////////////
+                              FilterWidget(
+                                onTap: () {
+                                  Get.to(const FilterByCategoryContainer());
+                                },
+                              )
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 19.h,
-                ),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: Row(
-                    children: [
-                      SortDropDown(
-                          value: _controller.valueSort.value == ''
-                              ? null
-                              : _controller.valueSort.value,
-                          onChanged: (String? newValue) {
-                            SortTypes.listOfTTypesOfSort.forEach((key, value) {
-                              if (value == newValue) {
-                                _controller.updateSortType(
-                                    newKeySort: key, newValueSort: value);
-                              }
-                            });
-                          }),
-                      //////////////second///////////////
-                      FilterWidget(
-                        onTap: () {
-                          Get.to(const FilterByCategoryContainer());
-                        },
-                      )
-                    ],
-                  ),
-                ),
-
-                ////////////////////base///////////////
-                SizedBox(
-                  height: 15.h,
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 17.h),
-                    child: Text(
-                        '${tr('count_items')}: ${_controller.generalSearchData.value.products?.total ?? ''}',
-                        style: const TextStyle(
-                          fontFamily: kTheArabicSansLight,
-                          color: AppColors.kGrayColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                _controller.isLoading.value == true
-                    ? Wrap(
-                        runSpacing: 7,
-                        children:
-                            List.generate(2, (index) => const ShimmerItem()),
-                      )
-                    : Wrap(
-                        runSpacing: 7,
-                        children: List.generate(
-                            _controller.dataProducts.value.length ?? 0,
-                            (index) => CustomCardWidget(
-                                  imageUrl: Connection.urlOfProducts(
-                                      image: _controller.dataProducts
-                                              .value[index].mainImage ??
-                                          ''),
-                                  isDiscount: _controller
-                                      .dataProducts.value[index].isOffer,
-                                  newArrival:
-                                      _controller.dataProducts.value[index] ??
-                                          SalesProductsModel(),
-                                  favorite: _controller.dataProducts
-                                          .value[index].wishlist?.isNotEmpty ??
-                                      false,
+                        ////////////////////base///////////////
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 17.h),
+                            child: Text(
+                                '${tr('count_items')}: ${_controller.generalSearchData.value.products?.total ?? ''}',
+                                style: const TextStyle(
+                                  fontFamily: kTheArabicSansLight,
+                                  color: AppColors.kGrayColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
                                 )),
-                      ),
-                if (_controller.dataProducts.value.isNotEmpty) ...{
-                  SeeMoreWidget(
-                    currentDataProductsLength:
-                        "${_controller.dataProducts.value.length}",
-                    totalDataProductsLength:
-                        "${_controller.generalSearchData.value.products?.total ?? _controller.dataProducts.value.length}",
-                    onTap: () {
-                      _controller.getCategoriesDataController();
-                    },
-                  )
-                }
-                // if (_controller.dataProducts.value.isNotEmpty) ...{
-                //
-                // }
-              ]),
-            )));
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        _controller.isLoading.value == true
+                            ? Wrap(
+                                runSpacing: 7,
+                                children: List.generate(
+                                    2, (index) => const ShimmerItem()),
+                              )
+                            : Wrap(
+                                runSpacing: 7,
+                                children: List.generate(
+                                    _controller.dataProducts.value.length ?? 0,
+                                    (index) => CustomCardWidget(
+                                          imageUrl: Connection.urlOfProducts(
+                                              image: _controller.dataProducts
+                                                      .value[index].mainImage ??
+                                                  ''),
+                                          isDiscount: _controller.dataProducts
+                                              .value[index].isOffer,
+                                          newArrival: _controller
+                                                  .dataProducts.value[index] ??
+                                              SalesProductsModel(),
+                                          favorite: _controller
+                                                  .dataProducts
+                                                  .value[index]
+                                                  .wishlist
+                                                  ?.isNotEmpty ??
+                                              false,
+                                        )),
+                              ),
+                        if (_controller.dataProducts.value.isNotEmpty) ...{
+                          SeeMoreWidget(
+                            currentDataProductsLength:
+                                "${_controller.dataProducts.value.length}",
+                            totalDataProductsLength:
+                                "${_controller.generalSearchData.value.products?.total ?? _controller.dataProducts.value.length}",
+                            onTap: () {
+                              _controller.getCategoriesDataController();
+                            },
+                          )
+                        }
+                        // if (_controller.dataProducts.value.isNotEmpty) ...{
+                        //
+                        // }
+                      ]),
+                ))));
   }
 }
