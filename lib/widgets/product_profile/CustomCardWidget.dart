@@ -492,22 +492,28 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   if ((widget.newArrival.labels != null) &&
                       (widget.newArrival.labels?.isNotEmpty ?? false) &&
                       widget.hideTage != true) ...{
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      color: Color(int.parse(
-                          "ff${widget.newArrival.labels?.first.backgroundColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
-                          radix: 16)),
-                      child: Text(
-                        widget.newArrival.labels?.first.text ?? '',
-                        style: TextStyle(
-                            color: Color(int.parse(
-                                "ff${widget.newArrival.labels?.first.textColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
-                                radix: 16)),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            fontFamily: kTheArabicSansLight),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                          widget.newArrival.labels?.length ?? 0,
+                          (index) => Container(
+                                margin: EdgeInsets.only(top: 10),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                color: Color(int.parse(
+                                    "ff${widget.newArrival.labels?[index].backgroundColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
+                                    radix: 16)),
+                                child: Text(
+                                  widget.newArrival.labels?[index].text ?? '',
+                                  style: TextStyle(
+                                      color: Color(int.parse(
+                                          "ff${widget.newArrival.labels?[index].textColor?.toUpperCase().replaceAll('#', '') ?? 'ffffff'}",
+                                          radix: 16)),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      fontFamily: kTheArabicSansLight),
+                                ),
+                              )),
                     )
                   } else if (widget.newTag != null &&
                       widget.hideTage != true) ...{

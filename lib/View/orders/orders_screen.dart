@@ -173,7 +173,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                               .spaceBetween,
                                                       children: [
                                                         Text(
-                                                          'قيد الانتظار',
+                                                          'في انتظار التاكيد',
                                                           style: TextStyle(
                                                             fontFamily:
                                                                 kTheArabicSansLight,
@@ -250,7 +250,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                           .status ==
                                                       OrderState.confirmed) ...{
                                                     Text(
-                                                      'مؤكد',
+                                                      'تم تاكيد طلبك',
                                                       style: TextStyle(
                                                         fontFamily:
                                                             kTheArabicSansLight,
@@ -267,7 +267,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                           .status ==
                                                       OrderState.delayed) ...{
                                                     Text(
-                                                      'تأخير',
+                                                      'طلبك مؤجل',
                                                       style: TextStyle(
                                                         fontFamily:
                                                             kTheArabicSansLight,
@@ -303,7 +303,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                       OrderState
                                                           .atShippingAgent) ...{
                                                     Text(
-                                                      'مع وكيل الشحن',
+                                                      'طلبك لدي مندوب التوصيل',
                                                       style: TextStyle(
                                                         fontFamily:
                                                             kTheArabicSansLight,

@@ -216,18 +216,36 @@ class SummaryScreen extends StatelessWidget {
                                           child: CachedNetworkImage(
                                               height: 97.h,
                                               width: 97.w,
-                                              imageUrl:
-                                                  Connection.urlOfProducts(
-                                                image: basketController
-                                                        .order
-                                                        .value
-                                                        .order
-                                                        ?.items?[index]
-                                                        .products
-                                                        ?.first
-                                                        .mainImage ??
-                                                    '',
-                                              ) // controller.order.value.order?.items?[index].products.first,
+                                              imageUrl: (basketController
+                                                          .order
+                                                          .value
+                                                          .order
+                                                          ?.items?[index]
+                                                          .options
+                                                          ?.isNotEmpty ??
+                                                      false)
+                                                  ? Connection.urlOfOptions(
+                                                      image: basketController
+                                                              .order
+                                                              .value
+                                                              .order
+                                                              ?.items?[index]
+                                                              .options
+                                                              ?.first
+                                                              .mainImage
+                                                              ?.file ??
+                                                          '',
+                                                    )
+                                                  : Connection.urlOfProducts(
+                                                      image: basketController
+                                                              .order
+                                                              .value
+                                                              .order
+                                                              ?.items?[index]
+                                                              .products
+                                                              ?.first
+                                                              .mainImage ??
+                                                          '') // controller.order.value.order?.items?[index].products.first,
                                               ),
                                         ),
                                         5.pw,

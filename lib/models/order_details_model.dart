@@ -145,15 +145,15 @@ class OrderDetailsModel {
     } else if (status == OrderState.cancelled) {
       return 'ألغيت';
     } else if (status == OrderState.pending) {
-      return 'قيد الانتظار';
+      return 'في انتظار التاكيد';
     } else if (status == OrderState.confirmed) {
-      return 'مؤكد';
+      return 'تم تاكيد طلبك';
     } else if (status == OrderState.delayed) {
-      return 'تأخير';
+      return 'طلبك مؤجل';
     } else if (status == OrderState.readyToPickup) {
       return 'جاهز للاستلام';
     } else if (status == OrderState.atShippingAgent) {
-      return 'مع وكيل الشحن';
+      return 'طلبك لدي مندوب التوصيل';
     } else if (status == OrderState.inCart) {
       return 'في العربة';
     } else {
