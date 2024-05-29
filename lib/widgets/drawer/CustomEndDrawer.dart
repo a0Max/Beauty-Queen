@@ -390,7 +390,7 @@ class MyEndDrawer extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),
                   child: Text(
-                    'العروض',
+                    'المعرض',
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: AppColors.kBlackColor,

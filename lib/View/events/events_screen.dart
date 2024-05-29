@@ -88,7 +88,7 @@ class _EventsScreen extends State<EventsScreen> {
               ],
             ),
             Text(
-              'العروض',
+              'المعرض',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.mainColor,
