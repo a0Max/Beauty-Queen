@@ -368,7 +368,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                   const BeautyPharmacyScreen());
                                                             },
                                                             child: Text(
-                                                                'المعرض',
+                                                                'العروض',
                                                                 style:
                                                                     TextStyle(
                                                                   fontFamily:

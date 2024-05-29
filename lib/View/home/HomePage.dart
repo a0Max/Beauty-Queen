@@ -10,6 +10,7 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import '../../const/size.dart';
@@ -150,45 +151,67 @@ class _HomePageState extends State<HomePage> {
                                   items: List.generate(
                                       _controller.sliders.length ?? 0,
                                       (index) => GestureDetector(
-                                            onTap: () {
-                                              if (_controller.sliders[index]
-                                                      .linkType ==
-                                                  LinkTypes.brand) {
-                                                Get.to(BrandDetailScreen(
-                                                  brandId: int.parse(_controller
-                                                      .sliders[index].linkId),
-                                                ));
-                                              } else if (_controller
-                                                      .sliders[index]
-                                                      .linkType ==
-                                                  LinkTypes.product) {
-                                                Get.to(ChangeNotifierProvider(
-                                                    create: (context) =>
-                                                        ProductProfileControllerProvider(),
-                                                    child: ItemProfilePage(
-                                                        itemId: int.parse(
-                                                            _controller
-                                                                .sliders[index]
-                                                                .linkId))));
-                                              } else if (_controller
-                                                      .sliders[index]
-                                                      .linkType ==
-                                                  LinkTypes.category) {
-                                                AlkasamController controller =
-                                                    Get.put(
-                                                        AlkasamController());
-                                                controller
-                                                    .updateCurrentCategoryId(
-                                                        newId: int.parse(
-                                                            _controller
-                                                                .sliders[index]
-                                                                .linkId),
-                                                        getChild: null);
-                                                Get.to(FliterScreen2(
-                                                  categoryId: int.parse(
-                                                      _controller.sliders[index]
-                                                          .linkId),
-                                                ));
+                                            onTap: () async {
+                                              if (_controller
+                                                      .sliders[index].isLink ==
+                                                  "1") {
+                                                if (_controller.sliders[index]
+                                                        .linkType ==
+                                                    LinkTypes.brand) {
+                                                  Get.to(BrandDetailScreen(
+                                                    brandId: int.parse(
+                                                        _controller
+                                                            .sliders[index]
+                                                            .linkId),
+                                                  ));
+                                                } else if (_controller
+                                                        .sliders[index]
+                                                        .linkType ==
+                                                    LinkTypes.product) {
+                                                  Get.to(ChangeNotifierProvider(
+                                                      create: (context) =>
+                                                          ProductProfileControllerProvider(),
+                                                      child: ItemProfilePage(
+                                                          itemId: int.parse(
+                                                              _controller
+                                                                  .sliders[
+                                                                      index]
+                                                                  .linkId))));
+                                                } else if (_controller
+                                                        .sliders[index]
+                                                        .linkType ==
+                                                    LinkTypes.category) {
+                                                  AlkasamController controller =
+                                                      Get.put(
+                                                          AlkasamController());
+                                                  controller
+                                                      .updateCurrentCategoryId(
+                                                          newId: int.parse(
+                                                              _controller
+                                                                  .sliders[
+                                                                      index]
+                                                                  .linkId),
+                                                          getChild: null);
+                                                  Get.to(FliterScreen2(
+                                                    categoryId: int.parse(
+                                                        _controller
+                                                            .sliders[index]
+                                                            .linkId),
+                                                  ));
+                                                } else {
+                                                  print(
+                                                      "_controller.sliders[index].linkType:${_controller.sliders[index].linkType}");
+                                                  print(
+                                                      "_controller.sliders[index].linkType:${_controller.sliders[index].urlLink}");
+
+                                                  Uri _url = Uri.parse(
+                                                      'https://${_controller.sliders[index].urlLink}');
+                                                  await launchUrl(
+                                                    _url,
+                                                    mode: LaunchMode
+                                                        .externalApplication,
+                                                  );
+                                                }
                                               }
                                             },
                                             child: CachedNetworkImage(
@@ -1013,43 +1036,59 @@ class _HomePageState extends State<HomePage> {
                           ...List.generate(
                             _controller.homeData.value.banners?.length ?? 0,
                             (index) => GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 if (_controller.homeData.value.banners?[index]
-                                        .linkType ==
-                                    LinkTypes.brand) {
-                                  Get.to(BrandDetailScreen(
-                                    brandId: int.parse(_controller.homeData
-                                            .value.banners?[index].linkId ??
-                                        '0'),
-                                  ));
-                                } else if (_controller.homeData.value
-                                        .banners?[index].linkType ==
-                                    LinkTypes.product) {
-                                  Get.to(ChangeNotifierProvider(
-                                      create: (context) =>
-                                          ProductProfileControllerProvider(),
-                                      child: ItemProfilePage(
-                                          itemId: int.parse(_controller
-                                                  .homeData
-                                                  .value
-                                                  .banners?[index]
-                                                  .linkId ??
-                                              '0'))));
-                                } else if (_controller.homeData.value
-                                        .banners?[index].linkType ==
-                                    LinkTypes.category) {
-                                  AlkasamController controller =
-                                      Get.put(AlkasamController());
-                                  controller.updateCurrentCategoryId(
-                                      newId: int.parse(_controller.homeData
+                                        .isLink ==
+                                    "1") {
+                                  print(
+                                      "_controller.sliders[index].linkType:${_controller.sliders[index].linkType}");
+                                  print(
+                                      "_controller.sliders[index].linkType:${_controller.sliders[index].urlLink}");
+
+                                  if (_controller.homeData.value.banners?[index]
+                                          .linkType ==
+                                      LinkTypes.brand) {
+                                    Get.to(BrandDetailScreen(
+                                      brandId: int.parse(_controller.homeData
                                               .value.banners?[index].linkId ??
                                           '0'),
-                                      getChild: null);
-                                  Get.to(FliterScreen2(
-                                    categoryId: int.parse(_controller.homeData
-                                            .value.banners?[index].linkId ??
-                                        '0'),
-                                  ));
+                                    ));
+                                  } else if (_controller.homeData.value
+                                          .banners?[index].linkType ==
+                                      LinkTypes.product) {
+                                    Get.to(ChangeNotifierProvider(
+                                        create: (context) =>
+                                            ProductProfileControllerProvider(),
+                                        child: ItemProfilePage(
+                                            itemId: int.parse(_controller
+                                                    .homeData
+                                                    .value
+                                                    .banners?[index]
+                                                    .linkId ??
+                                                '0'))));
+                                  } else if (_controller.homeData.value
+                                          .banners?[index].linkType ==
+                                      LinkTypes.category) {
+                                    AlkasamController controller =
+                                        Get.put(AlkasamController());
+                                    controller.updateCurrentCategoryId(
+                                        newId: int.parse(_controller.homeData
+                                                .value.banners?[index].linkId ??
+                                            '0'),
+                                        getChild: null);
+                                    Get.to(FliterScreen2(
+                                      categoryId: int.parse(_controller.homeData
+                                              .value.banners?[index].linkId ??
+                                          '0'),
+                                    ));
+                                  } else {
+                                    Uri _url = Uri.parse(
+                                        'https://${_controller.homeData.value.banners?[index].urlLink}');
+                                    await launchUrl(
+                                      _url,
+                                      mode: LaunchMode.externalApplication,
+                                    );
+                                  }
                                 }
                               },
                               child: Container(
@@ -1499,19 +1538,88 @@ class _HomePageState extends State<HomePage> {
                                         margin: const EdgeInsets.symmetric(
                                             horizontal: 10.0),
                                         child: GestureDetector(
-                                          onTap: () {
-                                            Get.to(ChangeNotifierProvider(
-                                                create: (context) =>
-                                                    ProductProfileControllerProvider(),
-                                                child: ItemProfilePage(
-                                                    itemId: int.parse(
-                                                        _controller
-                                                                .homeData
-                                                                .value
-                                                                .organicItems?[
-                                                                    index]
-                                                                .linkId ??
-                                                            '0'))));
+                                          onTap: () async {
+                                            if (_controller
+                                                    .homeData
+                                                    .value
+                                                    .organicItems?[index]
+                                                    .isLink ==
+                                                "1") {
+                                              if (_controller
+                                                      .homeData
+                                                      .value
+                                                      .organicItems?[index]
+                                                      .linkType ==
+                                                  LinkTypes.brand) {
+                                                Get.to(BrandDetailScreen(
+                                                  brandId: int.parse(_controller
+                                                          .homeData
+                                                          .value
+                                                          .organicItems?[index]
+                                                          .linkId ??
+                                                      ''),
+                                                ));
+                                              } else if (_controller
+                                                      .homeData
+                                                      .value
+                                                      .organicItems?[index]
+                                                      .linkType ==
+                                                  LinkTypes.product) {
+                                                Get.to(ChangeNotifierProvider(
+                                                    create: (context) =>
+                                                        ProductProfileControllerProvider(),
+                                                    child: ItemProfilePage(
+                                                        itemId: int.parse(
+                                                            _controller
+                                                                    .homeData
+                                                                    .value
+                                                                    .organicItems?[
+                                                                        index]
+                                                                    .linkId ??
+                                                                ''))));
+                                              } else if (_controller
+                                                      .homeData
+                                                      .value
+                                                      .organicItems?[index]
+                                                      .linkType ==
+                                                  LinkTypes.category) {
+                                                AlkasamController controller =
+                                                    Get.put(
+                                                        AlkasamController());
+                                                controller.updateCurrentCategoryId(
+                                                    newId: int.parse(_controller
+                                                            .homeData
+                                                            .value
+                                                            .organicItems?[
+                                                                index]
+                                                            .linkId ??
+                                                        ''),
+                                                    getChild: null);
+                                                Get.to(FliterScreen2(
+                                                  categoryId: int.parse(
+                                                      _controller
+                                                              .homeData
+                                                              .value
+                                                              .organicItems?[
+                                                                  index]
+                                                              .linkId ??
+                                                          ''),
+                                                ));
+                                              } else {
+                                                print(
+                                                    "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].linkType}");
+                                                print(
+                                                    "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].urlLink}");
+
+                                                Uri _url = Uri.parse(
+                                                    'https://${_controller.homeData.value.organicItems?[index].urlLink}');
+                                                await launchUrl(
+                                                  _url,
+                                                  mode: LaunchMode
+                                                      .externalApplication,
+                                                );
+                                              }
+                                            }
                                           },
                                           child: Column(
                                             crossAxisAlignment:
@@ -1680,17 +1788,72 @@ class _HomePageState extends State<HomePage> {
                                 _controller.homeData.value.specials?.length ??
                                     0,
                                 (index) => GestureDetector(
-                                      onTap: () {
-                                        Get.to(ChangeNotifierProvider(
-                                            create: (context) =>
-                                                ProductProfileControllerProvider(),
-                                            child: ItemProfilePage(
-                                                itemId: int.parse(_controller
+                                      onTap: () async {
+                                        if (_controller.homeData.value
+                                                .specials?[index].isLink ==
+                                            "1") {
+                                          if (_controller.homeData.value
+                                                  .specials?[index].linkType ==
+                                              LinkTypes.brand) {
+                                            Get.to(BrandDetailScreen(
+                                              brandId: int.parse(_controller
+                                                      .homeData
+                                                      .value
+                                                      .specials?[index]
+                                                      .linkId ??
+                                                  ''),
+                                            ));
+                                          } else if (_controller.homeData.value
+                                                  .specials?[index].linkType ==
+                                              LinkTypes.product) {
+                                            Get.to(ChangeNotifierProvider(
+                                                create: (context) =>
+                                                    ProductProfileControllerProvider(),
+                                                child: ItemProfilePage(
+                                                    itemId: int.parse(
+                                                        _controller
+                                                                .homeData
+                                                                .value
+                                                                .specials?[
+                                                                    index]
+                                                                .linkId ??
+                                                            ''))));
+                                          } else if (_controller.homeData.value
+                                                  .specials?[index].linkType ==
+                                              LinkTypes.category) {
+                                            AlkasamController controller =
+                                                Get.put(AlkasamController());
+                                            controller.updateCurrentCategoryId(
+                                                newId: int.parse(_controller
                                                         .homeData
                                                         .value
                                                         .specials?[index]
                                                         .linkId ??
-                                                    '0'))));
+                                                    ''),
+                                                getChild: null);
+                                            Get.to(FliterScreen2(
+                                              categoryId: int.parse(_controller
+                                                      .homeData
+                                                      .value
+                                                      .specials?[index]
+                                                      .linkId ??
+                                                  ''),
+                                            ));
+                                          } else {
+                                            print(
+                                                "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
+                                            print(
+                                                "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
+
+                                            Uri _url = Uri.parse(
+                                                'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                            await launchUrl(
+                                              _url,
+                                              mode: LaunchMode
+                                                  .externalApplication,
+                                            );
+                                          }
+                                        }
                                       },
                                       child: CustomProductCard(
                                         imageUrl: Connection.urlOfSpecial(
