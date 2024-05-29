@@ -600,8 +600,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                             }
                                                           } else if (productIsFlashDiscount ==
                                                                   '1' &&
-                                                              productIsOffer !=
-                                                                  '1' &&
                                                               productOptionsIsEmpty ==
                                                                   true) ...{
                                                             if ("$productOfferPrice" !=
@@ -814,8 +812,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               }
                                                             },
                                                           } else if (productIsFlashDiscount ==
-                                                                  '1' &&
-                                                              productIsOffer !=
                                                                   '1' &&
                                                               productOptionsIsEmpty !=
                                                                   true) ...{
@@ -1541,8 +1537,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                           0.6 *
                                                                               18),
                                                         ),
-                                                        Text(
-                                                            "${DateTime(int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').last), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").last.toString().split(':').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").last.toString().split(':')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").last.toString().split(':').last))}"),
                                                         CountdownTimer(
                                                           endTime: DateTime.parse(controller
                                                                       .productData
@@ -1573,7 +1567,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                               0.6 * 14),
                                                                     ),
                                                                     Text(
-                                                                      "${currentRemainingTime?.sec ?? '00'}",
+                                                                      (currentRemainingTime?.sec).toString().toString().split('').length >
+                                                                              1
+                                                                          ? "${(currentRemainingTime?.sec)}"
+                                                                          : "0${(currentRemainingTime?.sec)}" ??
+                                                                              '00',
                                                                       style: timerTextStyle.copyWith(
                                                                           fontSize:
                                                                               3 * 14),
@@ -1602,7 +1600,11 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                               0.6 * 14),
                                                                     ),
                                                                     Text(
-                                                                      "${currentRemainingTime?.min ?? '00'}",
+                                                                      (currentRemainingTime?.min).toString().split('').length >
+                                                                              1
+                                                                          ? "${currentRemainingTime?.min}"
+                                                                          : "0${currentRemainingTime?.min}" ??
+                                                                              '00',
                                                                       style: timerTextStyle.copyWith(
                                                                           fontSize:
                                                                               3 * 14),
@@ -1631,7 +1633,10 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                                               0.6 * 14),
                                                                     ),
                                                                     Text(
-                                                                      "${int.parse("${(currentRemainingTime?.hours)}") + (DateTime(int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').last)).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1)).inHours) ?? '00'}",
+                                                                      "${int.parse("${(currentRemainingTime?.hours)}") + (DateTime(int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').last)).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1)).inHours) ?? '00'}".split('').length >
+                                                                              1
+                                                                          ? "${int.parse("${(currentRemainingTime?.hours)}") + (DateTime(int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').last)).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1)).inHours) ?? '00'}"
+                                                                          : "0${"${int.parse("${(currentRemainingTime?.hours)}") + (DateTime(int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').first), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-')[1]), int.parse((controller.productData.last.is_flash_discount.endAt ?? '').toString().split(" ").first.toString().split('-').last)).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1)).inHours) ?? '00'}"}",
                                                                       style: timerTextStyle.copyWith(
                                                                           fontSize:
                                                                               3 * 14),

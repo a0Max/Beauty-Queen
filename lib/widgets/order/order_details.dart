@@ -20,34 +20,6 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
     OrdersController controller = Get.put(OrdersController());
 
     return Scaffold(
-        // backgroundColor: Colors.transparent,
-        //   ,
-        // appBar: AppBar(
-        //   surfaceTintColor: AppColors.kWhiteColor,
-        //   automaticallyImplyLeading: false,
-        //   elevation: 1,
-        //   backgroundColor: AppColors.kWhiteColor,
-        //   // actions: [
-        //   //   IconButton(
-        //   //       onPressed: () {
-        //   //         Navigator.of(context).pop();
-        //   //       },
-        //   //       icon: Icon(
-        //   //         Icons.close,
-        //   //         size: 30.r,
-        //   //         color: AppColors.kPrimaryColor,
-        //   //       )),
-        //   // ],
-        //   // title: Text(
-        //   //   "سجل الطلبات",
-        //   //   style: TextStyle(
-        //   //       fontFamily: kTheArabicSansBold,
-        //   //       color: AppColors.mainColor,
-        //   //       fontSize: 23.74.sp,
-        //   //       fontWeight: FontWeight.w600),
-        //   // ),
-        //   centerTitle: true,
-        // ),
         body: SingleChildScrollView(
       child: Obx(() => controller.loadingDetailsOrders.value == true
           ? const ShimmerTicket()
@@ -182,7 +154,7 @@ class ShowModalSheetDetailOrder extends StatelessWidget {
                                         Text(
                                           controller.order.value.order
                                                   ?.cancelReason ??
-                                              '',
+                                              'تم الغاء الطلب قبل التاكيد من ${controller.order.value.order?.name}',
                                           style: TextStyle(
                                             fontFamily: kTheArabicSansLight,
                                             fontSize: 13.sp,

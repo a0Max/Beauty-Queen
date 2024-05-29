@@ -49,4 +49,9 @@ class OrdersController extends GetxController {
     }
     loadingDetailsOrders.value = false;
   }
+
+  cancelOrder({required int prderId}) async {
+    await _api.cancelOrder(orderId: prderId);
+    await getOrders();
+  }
 }

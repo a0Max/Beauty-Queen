@@ -74,6 +74,7 @@ class _CartScreen extends State<CartScreen> {
                                         AppImages.imageShop,
                                         height: 30.h,
                                         width: 30.w,
+                                        color: AppColors.mainColor,
                                       ),
                                       5.pw,
                                       Text(
@@ -97,7 +98,7 @@ class _CartScreen extends State<CartScreen> {
                                           await productController.clearCart();
                                         },
                                         child: SizedBox(
-                                          width: 150,
+                                          // width: 150,
                                           height: 50,
                                           child: Stack(
                                             children: [

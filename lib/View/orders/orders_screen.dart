@@ -1,4 +1,5 @@
 import 'package:beauty_queen/const/styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,7 @@ import '../../const/vars.dart';
 import '../../controller/orders_controller/orders_controller.dart';
 import '../../widgets/order/order_details.dart';
 import '../../widgets/order/pink_ticket.dart';
+import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/shimmer/shimmer_orders.dart';
 import 'details_of_order.dart';
 
@@ -162,18 +164,86 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                           .value[index]
                                                           .status ==
                                                       OrderState.pending) ...{
-                                                    Text(
-                                                      'قيد الانتظار',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            kTheArabicSansLight,
-                                                        fontSize: 15.sp,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color:
-                                                            AppColors.redColor,
-                                                      ),
-                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          'قيد الانتظار',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                kTheArabicSansLight,
+                                                            fontSize: 13.sp,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: AppColors
+                                                                .redColor,
+                                                          ),
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return CustomAlertDialog(
+                                                                    buttonTwo:
+                                                                        true,
+                                                                    dilougText:
+                                                                        'هل أنت متأكد من إلغاء الطلب ؟',
+                                                                    buttonOneText:
+                                                                        'لا ، الرجوع',
+                                                                    buttonTwoText:
+                                                                        'نعم',
+                                                                    onButtonOnePressed:
+                                                                        () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                    },
+                                                                    onButtonTwoPressed:
+                                                                        () async {
+                                                                      await controller.cancelOrder(
+                                                                          prderId:
+                                                                              int.parse("${controller.listOfOrders.value[index].id}"));
+                                                                    },
+                                                                  );
+                                                                });
+                                                          },
+                                                          child: Row(
+                                                            children: [
+                                                              Icon(
+                                                                Icons.close,
+                                                                color: AppColors
+                                                                    .redColor,
+                                                                size: 15,
+                                                              ),
+                                                              Text(
+                                                                'الغاء',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      kTheArabicSansLight,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: AppColors
+                                                                      .redColor,
+                                                                  fontSize:
+                                                                      13.sp,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )
                                                   } else if (controller
                                                           .listOfOrders
                                                           .value[index]

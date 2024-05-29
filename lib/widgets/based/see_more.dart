@@ -36,11 +36,11 @@ class SeeMoreWidget extends StatelessWidget {
             start: 0,
             end: double.parse("${totalDataProductsLength}"),
             valueBar: [
-              ValueBar(
-                  value: double.parse("${currentDataProductsLength}"),
-                  color: AppColors.mainColor,
-                  borderRadius: 15,
-                  valueBarThickness: 5)
+              // ValueBar(
+              //     value: double.parse("${currentDataProductsLength}"),
+              //     color: AppColors.mainColor,
+              //     borderRadius: 15,
+              //     valueBarThickness: 5)
             ],
             linearGaugeBoxDecoration: const LinearGaugeBoxDecoration(
                 backgroundColor: AppColors.kShadowColor,

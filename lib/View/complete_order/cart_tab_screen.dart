@@ -4,10 +4,12 @@ import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/app_colors.dart';
+import '../../const/app_images.dart';
 import '../../controller/complete_order_controller/basketController.dart';
 import 'productadded_screen.dart';
 import 'delivery_screen.dart';
@@ -54,7 +56,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           appBar: AppBar(
-            backgroundColor: AppColors.kTextGrayColor.withOpacity(.1),
+            backgroundColor: Colors.white,
             elevation: 0,
             automaticallyImplyLeading: false,
             actions: [
@@ -64,15 +66,35 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
                   },
                   icon: const Icon(Icons.arrow_forward_ios)),
             ],
-            centerTitle: true,
-            title: Text(
-              "سلّــتي",
-              style: TextStyle(
-                color: AppColors.kBlackColor,
-                fontSize:
-                    28.sp, // Replace with 28.sp if you're using scaled fonts
-                fontFamily: kTheArabicSansLight,
-              ),
+            // centerTitle: true,
+            // title: Text(
+            //   "سلّــتي",
+            //   style: TextStyle(
+            //     color: AppColors.kBlackColor,
+            //     fontSize:
+            //         28.sp, // Replace with 28.sp if you're using scaled fonts
+            //     fontFamily: kTheArabicSansLight,
+            //   ),
+            // ),
+            leading: Row(
+              children: [
+                20.pw,
+                SvgPicture.asset(
+                  AppImages.imageShop,
+                  height: 30.h,
+                  width: 30.w,
+                  color: AppColors.mainColor,
+                ),
+                5.pw,
+                Text(
+                  tr('cart'),
+                  style: TextStyle(
+                      fontFamily: kTheArabicSansLight,
+                      fontSize: 23.sp,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.kPrimaryColor),
+                ),
+              ],
             ),
           ),
           body: listOfTabBody[controller.selectedIndex.value],

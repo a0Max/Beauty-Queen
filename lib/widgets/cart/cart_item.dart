@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../View/brands/branddetail_screen.dart';
 import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
@@ -63,15 +64,29 @@ class CartItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       if (product.brand != null) ...{
-                        Text(
-                          product.brand ?? '',
-                          style: TextStyle(
-                              fontFamily: kTheArabicSansLight,
-                              fontSize: 18.39.sp,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.kBlackColor),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                        GestureDetector(
+                          onTap: () {
+                            //
+                            // Get.to(BrandDetailScreen(
+                            //   brandId: int.parse("${product.brand_id}"),
+                            // ));
+                            Navigator.of(context)
+                                .push<void>(MaterialPageRoute(builder: (_) {
+                              return BrandDetailScreen(
+                                brandId: int.parse("${product.brand_id}"),
+                              );
+                            }));
+                          },
+                          child: Text(
+                            product.brand ?? '',
+                            style: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                fontSize: 18.39.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.kBlackColor),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
                         )
                       } else if (product.code == GiftCode.gift100 ||
                           product.code == GiftCode.gift250 ||

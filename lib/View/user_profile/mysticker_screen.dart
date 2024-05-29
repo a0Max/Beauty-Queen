@@ -30,7 +30,7 @@ class _MyStickerScreen extends State<MyStickerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(160.h),
+          preferredSize: Size.fromHeight(100.h),
           // preferredSize: Size.fromHeight(100.h),
           child: CustomAppBar(
             showarrowIcon: true,

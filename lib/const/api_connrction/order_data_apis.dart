@@ -226,4 +226,27 @@ class OrderDataApis extends ApiProvider {
       throw response.data;
     }
   }
+
+  Future<bool> cancelOrder({required int orderId}) async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.post(
+      '${Connection.apiURL2}${ApiProvider.cancelOrderEndPoint}',
+      queryParameters: {'id': orderId},
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      return true;
+    } else {
+      throw response.data;
+    }
+  }
 }
