@@ -34,7 +34,7 @@ class DetailsStatic extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(bottom: 7, top: 7, right: 30.w),
+          padding: EdgeInsets.only(bottom: 7, top: 7, right: 20.w),
           decoration: const BoxDecoration(color: AppColors.klPinkColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -49,7 +49,7 @@ class DetailsStatic extends StatelessWidget {
               ),
               Container(
                 width:
-                    MediaQuery.of(context).size.width - (30.w + 30 + 14 + 40.w),
+                    MediaQuery.of(context).size.width - (30.w + 30 + 14 + 30.w),
                 child: Text(
                   title,
                   style: const TextStyle(
@@ -65,7 +65,11 @@ class DetailsStatic extends StatelessWidget {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(top: 7, bottom: 7, right: 85, left: 40.w),
+          padding: EdgeInsets.only(
+            top: 7,
+            bottom: 7,
+            right: (40.w + 14 + 20.w),
+          ),
           decoration: const BoxDecoration(color: AppColors.kcontainerGrayColor),
           alignment: Alignment.centerRight,
           child: Column(
