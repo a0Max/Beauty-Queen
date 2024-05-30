@@ -19,6 +19,7 @@ import '../../controller/product_controller/product_profile_controller_provider.
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/product_profile/custom_color_container.dart';
+import '../brands/branddetail_screen.dart';
 import '../product_profile/products_screen.dart';
 import 'productadded_screen.dart';
 
@@ -253,29 +254,43 @@ class SummaryScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  3,
-                                              child: Text(
-                                                basketController
-                                                        .order
-                                                        .value
-                                                        .order
-                                                        ?.items?[index]
-                                                        .products
-                                                        ?.first
-                                                        .brand
-                                                        ?.title ??
-                                                    '',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        kTheArabicSansLight,
-                                                    fontSize: 17.44.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                    color:
-                                                        AppColors.kBlackColor),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.of(context)
+                                                    .push<void>(
+                                                        MaterialPageRoute(
+                                                            builder: (_) {
+                                                  return BrandDetailScreen(
+                                                    brandId: int.parse(
+                                                        "${basketController.order.value.order?.items?[index].products?.first.brandId}"),
+                                                  );
+                                                }));
+                                              },
+                                              child: SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    3,
+                                                child: Text(
+                                                  basketController
+                                                          .order
+                                                          .value
+                                                          .order
+                                                          ?.items?[index]
+                                                          .products
+                                                          ?.first
+                                                          .brand
+                                                          ?.title ??
+                                                      '',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          kTheArabicSansLight,
+                                                      fontSize: 17.44.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppColors
+                                                          .kBlackColor),
+                                                ),
                                               ),
                                             ),
                                             SizedBox(

@@ -28,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    _startAutoNavigation();
+    // _startAutoNavigation();
   }
 
   void _startAutoNavigation() {
@@ -101,37 +101,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 70.h),
+              padding: EdgeInsets.only(bottom: 20.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    width: 35 * 4,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: _progressList.map((progress) {
-                        return Expanded(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                                child: LinearProgressIndicator(
-                                  borderRadius: BorderRadius.circular(10),
-                                  value: progress,
-                                  backgroundColor: Colors.grey[300],
-                                  valueColor:
-                                      const AlwaysStoppedAnimation<Color>(
-                                          Colors.white),
-                                ),
-                              ),
-                              const SizedBox(width: 5),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  SizedBox(height: 15.h),
+                  // SizedBox(height: 15.h),
                   if (_currentPage == 3) ...{
                     SizedBox(
                       width: 358.w,
@@ -139,7 +113,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              AppColors.kPrimaryColor),
+                              AppColors.kBlackColor),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -172,13 +146,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       height: 54.h,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.transparent),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.black54),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1.w, color: AppColors.kWhiteColor),
+                              side:
+                                  BorderSide(width: 1.w, color: Colors.black54),
                               borderRadius: BorderRadius.circular(8.r),
                             ),
                           ),
@@ -204,6 +178,47 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                       ),
                     ),
+                  } else if (_currentPage == 0) ...{
+                    SizedBox(
+                      width: 358.w,
+                      height: 54.h,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              AppColors.kBlackColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          print("_currentPage:$_currentPage");
+                          setState(() {
+                            //   updatePage();
+                            _progressList[_currentPage] = 1.0;
+
+                            _currentPage++;
+                            _pageController.animateToPage(
+                              _currentPage,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                            );
+                          });
+
+                          // print("_currentPage:$_currentPage");
+                          // _pageController.jumpToPage(_currentPage);
+                        },
+                        child: Text('ابدئي',
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontFamily: kTheArabicSansLight,
+                                color: AppColors.kWhiteColor,
+                                fontWeight: FontWeight.w700)),
+                      ),
+                    ),
+                    SizedBox(height: 19.h),
                   } else ...{
                     SizedBox(
                       width: 358.w,
@@ -211,7 +226,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              AppColors.kPrimaryColor),
+                              AppColors.kBlackColor),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
