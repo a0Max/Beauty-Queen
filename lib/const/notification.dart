@@ -3,11 +3,26 @@ import 'dart:developer';
 import 'dart:math' hide log;
 // import 'dart:math';
 
+import 'package:beauty_queen/const/vars.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 
+import '../View/brands/branddetail_screen.dart';
+import '../View/brands/brands_screen.dart';
+import '../View/categories/filter_screen2.dart';
+import '../View/discount/discounts_screen.dart';
+import '../View/gifts/GuidanceScreen.dart';
+import '../View/magazine/magazine_screen.dart';
+import '../View/notification/notification_screen.dart';
+import '../View/offers/beautypharmacyscreen.dart';
+import '../View/product_profile/products_screen.dart';
+import '../controller/AlKasam_controller/alkasam_controller.dart';
+import '../controller/home_controller/home_controller.dart';
+import '../controller/product_controller/product_profile_controller_provider.dart';
 import 'api_connrction/user_data_apis.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -90,10 +105,9 @@ class NotificationHelper {
         android: initializationSettingsAndroid,
         iOS: initializationSettingsIOS,
       );
-      await _localNotify.initialize(
-        initializationSettings,
-        onDidReceiveBackgroundNotificationResponse: onNotificationOpen,
-      );
+      await _localNotify.initialize(initializationSettings,
+          onDidReceiveBackgroundNotificationResponse: onNotificationOpen,
+          onDidReceiveNotificationResponse: onNotificationOpen);
       _init = true;
     }
   }
@@ -105,25 +119,188 @@ class NotificationHelper {
 
   static Future<void> onBgNotificationOpen(String? x) async {
     try {
-      // final message = json.decode(x!);
-      // Navigator.of(Get.context!).push(
-      //   CupertinoPageRoute(
-      //     builder: (context) => const NotificationScreen(),
-      //   ),
-      // );
+      final message = json.decode(x!);
+      print('message_notification--:${message}');
+      String? page = message['"page"'];
+      String? page2 = message['page'];
+      if (page != null) {
+        final HomeController _controllerHome = Get.put(HomeController());
+
+        _controllerHome.getHomeDataController();
+
+        if (page == '"${LinkTypes.product}"' || page2 == LinkTypes.product) {
+          String? key = message['value'];
+          print('page:${page}, key:$key');
+
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => ChangeNotifierProvider(
+                  create: (context) => ProductProfileControllerProvider(),
+                  child: ItemProfilePage(itemId: int.parse(key ?? '0'))),
+            ),
+          );
+        } else if (page == '"${LinkTypes.category}"' ||
+            page2 == LinkTypes.category) {
+          String? key = message['value'];
+          print('page:${page}, key:$key');
+
+          AlkasamController controller = Get.put(AlkasamController());
+          controller.updateCurrentCategoryId(
+              newId: int.parse(key ?? '0'), getChild: null);
+          // Get.to();
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => FliterScreen2(
+                categoryId: int.parse(key ?? '0'),
+              ),
+            ),
+          );
+        } else if (page == '"${LinkTypes.brand}"' || page2 == LinkTypes.brand) {
+          String? key = message['value'];
+          print('page:${page}, key:$key');
+
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => BrandDetailScreen(
+                brandId: int.parse(key ?? '0'),
+              ),
+            ),
+          );
+        } else if (page == '"${LinkTypes.brandsPage}"' ||
+            page2 == LinkTypes.brandsPage) {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const BrandScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.sales}"' || page2 == LinkTypes.sales) {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const DiscountScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.magazine}"' ||
+            page2 == LinkTypes.magazine) {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const MagazineScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.gifts}"' || page2 == LinkTypes.gifts) {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const GuidanceScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.offers}"' ||
+            page2 == LinkTypes.offers) {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const BeautyPharmacyScreen(),
+            ),
+          );
+        }
+      }
     } catch (e, s) {
       log('Manual Reporting Crash $e');
     }
   }
 
-  static Future<void> onNotificationOpen(NotificationResponse? x) async {
+  static Map convertPayload(String payload) {
+    final String payload0 = payload.substring(1, payload.length - 1);
+    List<String> split = [];
+    payload0.split(",").forEach((String s) => split.addAll(s.split(":")));
+    Map mapped = {};
+    for (int i = 0; i < split.length + 1; i++) {
+      if (i % 2 == 1) {
+        mapped.addAll({split[i - 1].trim().toString(): split[i].trim()});
+      }
+    }
+    return mapped;
+  }
+
+  static Future<void> onNotificationOpen(NotificationResponse? response) async {
     try {
-      // final message = json.decode(x!);
-      // Navigator.of(Get.context!).push(
-      //   CupertinoPageRoute(
-      //     builder: (context) => const NotificationScreen(),
-      //   ),
-      // );
+      print('message_notification00:${response}');
+      final Map _data = convertPayload(response!.payload!);
+      print('message_notification:${_data}');
+      print('message_notification_page:${_data.containsKey('"page"')}');
+      print('message_notification_page:${_data}');
+      String? page = _data['"page"'];
+      if (page != null) {
+        final HomeController _controllerHome = Get.put(HomeController());
+
+        _controllerHome.getHomeDataController();
+
+        if (page == '"${LinkTypes.product}"') {
+          String? key = _data['"value"'].toString().split('"')[1];
+          print('page:${page}, key:$key');
+
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => ChangeNotifierProvider(
+                  create: (context) => ProductProfileControllerProvider(),
+                  child: ItemProfilePage(itemId: int.parse(key ?? '0'))),
+            ),
+          );
+        } else if (page == '"${LinkTypes.category}"') {
+          String? key = _data['"value"'].toString().split('"')[1];
+          print('page:${page}, key:$key');
+
+          AlkasamController controller = Get.put(AlkasamController());
+          controller.updateCurrentCategoryId(
+              newId: int.parse(key ?? '0'), getChild: null);
+          // Get.to();
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => FliterScreen2(
+                categoryId: int.parse(key ?? '0'),
+              ),
+            ),
+          );
+        } else if (page == '"${LinkTypes.brand}"') {
+          String? key = _data['"value"'].toString().split('"')[1];
+          print('page:${page}, key:$key');
+
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => BrandDetailScreen(
+                brandId: int.parse(key ?? '0'),
+              ),
+            ),
+          );
+        } else if (page == '"${LinkTypes.brandsPage}"') {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const BrandScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.sales}"') {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const DiscountScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.magazine}"') {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const MagazineScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.gifts}"') {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const GuidanceScreen(),
+            ),
+          );
+        } else if (page == '"${LinkTypes.offers}"') {
+          Navigator.of(Get.context!).push(
+            CupertinoPageRoute(
+              builder: (context) => const BeautyPharmacyScreen(),
+            ),
+          );
+        }
+      }
     } catch (e, s) {
       log('Manual Reporting Crash $e');
     }
