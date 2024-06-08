@@ -41,7 +41,7 @@ class AppDataApis extends ApiProvider {
     final token = await getUserToken();
     final cookies = await getCookies();
 
-    await dio.get(
+    await dio.post(
       '${Connection.apiURL}${ApiProvider.readNotificationsDataEndPoint}',
       options: Options(
         headers: {

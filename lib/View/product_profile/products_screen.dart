@@ -119,7 +119,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
     final selectedOptionsPrice =
         ((controller.isLoading == false) || controller.selectedOptions.isEmpty)
             ? null
-            : controller.selectedOptions.first.price;
+            : controller.selectedOptions.first?.price ?? 0;
 
     final selectedOptions =
         ((controller.isLoading == false) || controller.selectedOptions.isEmpty)
