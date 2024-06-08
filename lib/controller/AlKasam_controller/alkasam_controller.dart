@@ -32,11 +32,34 @@ class AlkasamController extends GetxController {
   RxInt currentCategoryId = 0.obs;
   RxList parentsCategoryData = [].obs;
   Rx<CategoryModel> subCategoryData = CategoryModel().obs;
+  bool? allGetChild;
+  bool? allNotRestartChildren;
+  int? allSubId;
   updateCurrentCategoryId(
       {required int newId,
       required bool? getChild,
       int? subId,
       bool? notRestartChildren}) async {
+    if (getChild == null) {
+      allGetChild = null;
+    } else {
+      allGetChild = getChild;
+    }
+    if (subId == null) {
+      allSubId = null;
+    } else {
+      allSubId = subId;
+    }
+    if (notRestartChildren == null) {
+      allNotRestartChildren = null;
+    } else {
+      allNotRestartChildren = notRestartChildren;
+    }
+    update();
+    print('##########################');
+    print('getChild:$getChild');
+    print('subId:$subId');
+    pageCategory = 1;
     currentCategoryId.value = newId;
     getCategoriesDataController(
         currentPage: 1, getByParent: true, subId: subId);
@@ -55,7 +78,7 @@ class AlkasamController extends GetxController {
       }
     } else if (getChild == null) {
       GetCategoryModel value = await _api.getChildDataRequest2(
-          parentId: currentCategoryId.value, subId: subId);
+          parentId: currentCategoryId.value, subId: subId, page: 1);
       if (notRestartChildren != true) {
         subCategoryData.value = value.category ?? CategoryModel();
 
@@ -64,6 +87,20 @@ class AlkasamController extends GetxController {
         childCategoryData.value = value.category?.children ?? [];
       }
     }
+  }
+
+  getMore() async {
+    int? subId = allSubId;
+    pageCategory = pageCategory + 1;
+    childCurrentCategoryId.value = 0;
+    GeneralSearchModel tempData2 = await _api.getCategoryDataRequest(
+      page: pageCategory,
+      subId: subId,
+      keySort: keySort.value,
+      categoryId: currentCategoryId.value,
+    );
+    generalSearchData.value = tempData2;
+    dataProducts.addAll(generalSearchData.value.products?.data ?? []);
   }
 
   RxInt childCurrentCategoryId = 0.obs;

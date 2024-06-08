@@ -54,13 +54,17 @@ class AlkasamDataApis extends ApiProvider {
     }
   }
 
-  Future<GetCategoryModel> getChildDataRequest2(
-      {required int parentId, int? subId}) async {
+  Future<GetCategoryModel> getChildDataRequest2({
+    required int parentId,
+    int? subId,
+    required int page,
+  }) async {
     final token = await getUserToken();
     final response = await dio.get(
       subId == null
           ? '${Connection.apiURL2}${ApiProvider.getCategoryDataEndPoint2}/$parentId/null'
           : '${Connection.apiURL2}${ApiProvider.getCategoryDataEndPoint2}/$parentId/$subId',
+      queryParameters: {'page': page},
       options: Options(
         headers: {
           ...apiHeaders,
