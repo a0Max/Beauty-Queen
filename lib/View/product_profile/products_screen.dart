@@ -1531,7 +1531,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                   ? Column(
                                                       children: [
                                                         Text(
-                                                          'اشتري سعر التخفيض قبل انتهاء الوقت ${DateTime.parse(controller.productData.last.is_flash_discount.endAt ?? '')}',
+                                                          'اشتري سعر التخفيض قبل انتهاء الوقت ',
                                                           style:
                                                               kTheSansTextStyleGray
                                                                   .copyWith(
