@@ -37,6 +37,7 @@ import '../magazine/magazine_screen.dart';
 import '../new_arrived/new_arrived_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
 import '../product_profile/products_screen.dart';
+import 'auto_scroll_of_new_arrive.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -462,40 +463,45 @@ class _HomePageState extends State<HomePage> {
                                     height: 340.h < 305 ? 305 : 340.h,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 340.h < 305.h ? 309.h : 349.h,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: _controller.homeData.value
-                                            .newArrivals?.length ??
-                                        0,
-                                    itemBuilder: (context, index) {
-                                      return CustomCardWidget(
-                                        hideTage: true,
-                                        imageUrl: Connection.urlOfProducts(
-                                            image: _controller
-                                                    .homeData
-                                                    .value
-                                                    .newArrivals?[index]
-                                                    .mainImage ??
-                                                ''),
-                                        // isDiscount: _controller.homeData.value
-                                        //     .newArrivals?[index].isOffer,
-                                        newArrival: _controller.homeData.value
-                                                .newArrivals?[index] ??
-                                            SalesProductsModel(),
-                                        favorite: _controller
-                                                .homeData
-                                                .value
-                                                .newArrivals?[index]
-                                                .wishlist
-                                                ?.isNotEmpty ??
-                                            false,
-                                      );
-                                    },
-                                  ),
-                                )
+                                AutoScrollOfNewArrive(
+                                  data:
+                                      _controller.homeData.value.newArrivals ??
+                                          [],
+                                ),
+                                // SizedBox(
+                                //   height: 340.h < 305.h ? 309.h : 349.h,
+                                //   child: ListView.builder(
+                                //     shrinkWrap: true,
+                                //     scrollDirection: Axis.horizontal,
+                                //     itemCount: _controller.homeData.value
+                                //             .newArrivals?.length ??
+                                //         0,
+                                //     itemBuilder: (context, index) {
+                                //       return CustomCardWidget(
+                                //         hideTage: true,
+                                //         imageUrl: Connection.urlOfProducts(
+                                //             image: _controller
+                                //                     .homeData
+                                //                     .value
+                                //                     .newArrivals?[index]
+                                //                     .mainImage ??
+                                //                 ''),
+                                //         // isDiscount: _controller.homeData.value
+                                //         //     .newArrivals?[index].isOffer,
+                                //         newArrival: _controller.homeData.value
+                                //                 .newArrivals?[index] ??
+                                //             SalesProductsModel(),
+                                //         favorite: _controller
+                                //                 .homeData
+                                //                 .value
+                                //                 .newArrivals?[index]
+                                //                 .wishlist
+                                //                 ?.isNotEmpty ??
+                                //             false,
+                                //       );
+                                //     },
+                                //   ),
+                                // )
                               ],
                             ),
                           ),
