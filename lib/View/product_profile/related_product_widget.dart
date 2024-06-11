@@ -27,7 +27,7 @@ class _RelatedProductWidget extends State<RelatedProductWidget> {
 
   Timer? _timer;
   void _startAddingItems() {
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
+    _timer = Timer.periodic(Duration(seconds: 4), (timer) async {
       scrollOffsetController.animateScroll(
           offset: MediaQuery.of(context).size.width / 2,
           duration: Duration(milliseconds: 500));

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'brand_model.dart';
@@ -52,6 +54,7 @@ class HomeModel {
       this.newItems});
 
   factory HomeModel.fromJson(Map<String, dynamic> json) {
+    log('flash_discount_status:${json['flash_discount_status']}');
     return _$HomeModelFromJson(json);
   }
 
