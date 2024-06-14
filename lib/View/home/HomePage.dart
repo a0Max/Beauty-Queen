@@ -37,6 +37,7 @@ import '../magazine/magazine_screen.dart';
 import '../new_arrived/new_arrived_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
 import '../product_profile/products_screen.dart';
+import '../search/search_screen.dart';
 import 'auto_scroll_of_new_arrive.dart';
 
 class HomePage extends StatefulWidget {
@@ -200,18 +201,48 @@ class _HomePageState extends State<HomePage> {
                                                             .linkId),
                                                   ));
                                                 } else {
-                                                  print(
-                                                      "_controller.sliders[index].linkType:${_controller.sliders[index].linkType}");
-                                                  print(
-                                                      "_controller.sliders[index].linkType:${_controller.sliders[index].urlLink}");
-
-                                                  Uri _url = Uri.parse(
-                                                      'https://${_controller.sliders[index].urlLink}');
-                                                  await launchUrl(
-                                                    _url,
-                                                    mode: LaunchMode
-                                                        .externalApplication,
-                                                  );
+                                                  try {
+                                                    print(
+                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
+                                                    print(
+                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
+                                                    List linkData = _controller
+                                                            .homeData
+                                                            .value
+                                                            .specials?[index]
+                                                            .urlLink
+                                                            .toString()
+                                                            .split("/") ??
+                                                        [];
+                                                    if (linkData[1] ==
+                                                        LinkTypes.search) {
+                                                      String searchWord =
+                                                          linkData[2]
+                                                              .replaceAll(
+                                                                  '%20', ' ');
+                                                      print(
+                                                          'searchWord:$searchWord');
+                                                      Get.to(() => SearchScreen(
+                                                          subKeyWord:
+                                                              searchWord));
+                                                    } else {
+                                                      Uri _url = Uri.parse(
+                                                          'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                      await launchUrl(
+                                                        _url,
+                                                        mode: LaunchMode
+                                                            .externalApplication,
+                                                      );
+                                                    }
+                                                  } catch (e) {
+                                                    Uri _url = Uri.parse(
+                                                        'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                    await launchUrl(
+                                                      _url,
+                                                      mode: LaunchMode
+                                                          .externalApplication,
+                                                    );
+                                                  }
                                                 }
                                               }
                                             },
@@ -1088,12 +1119,38 @@ class _HomePageState extends State<HomePage> {
                                           '0'),
                                     ));
                                   } else {
-                                    Uri _url = Uri.parse(
-                                        'https://${_controller.homeData.value.banners?[index].urlLink}');
-                                    await launchUrl(
-                                      _url,
-                                      mode: LaunchMode.externalApplication,
-                                    );
+                                    try {
+                                      print(
+                                          "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
+                                      print(
+                                          "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
+                                      List linkData = _controller.homeData.value
+                                              .specials?[index].urlLink
+                                              .toString()
+                                              .split("/") ??
+                                          [];
+                                      if (linkData[1] == LinkTypes.search) {
+                                        String searchWord =
+                                            linkData[2].replaceAll('%20', ' ');
+                                        print('searchWord:$searchWord');
+                                        Get.to(() => SearchScreen(
+                                            subKeyWord: searchWord));
+                                      } else {
+                                        Uri _url = Uri.parse(
+                                            'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                        await launchUrl(
+                                          _url,
+                                          mode: LaunchMode.externalApplication,
+                                        );
+                                      }
+                                    } catch (e) {
+                                      Uri _url = Uri.parse(
+                                          'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                      await launchUrl(
+                                        _url,
+                                        mode: LaunchMode.externalApplication,
+                                      );
+                                    }
                                   }
                                 }
                               },
@@ -1612,18 +1669,47 @@ class _HomePageState extends State<HomePage> {
                                                           ''),
                                                 ));
                                               } else {
-                                                print(
-                                                    "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].linkType}");
-                                                print(
-                                                    "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].urlLink}");
-
-                                                Uri _url = Uri.parse(
-                                                    'https://${_controller.homeData.value.organicItems?[index].urlLink}');
-                                                await launchUrl(
-                                                  _url,
-                                                  mode: LaunchMode
-                                                      .externalApplication,
-                                                );
+                                                try {
+                                                  print(
+                                                      "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
+                                                  print(
+                                                      "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
+                                                  List linkData = _controller
+                                                          .homeData
+                                                          .value
+                                                          .specials?[index]
+                                                          .urlLink
+                                                          .toString()
+                                                          .split("/") ??
+                                                      [];
+                                                  if (linkData[1] ==
+                                                      LinkTypes.search) {
+                                                    String searchWord =
+                                                        linkData[2].replaceAll(
+                                                            '%20', ' ');
+                                                    print(
+                                                        'searchWord:$searchWord');
+                                                    Get.to(() => SearchScreen(
+                                                        subKeyWord:
+                                                            searchWord));
+                                                  } else {
+                                                    Uri _url = Uri.parse(
+                                                        'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                    await launchUrl(
+                                                      _url,
+                                                      mode: LaunchMode
+                                                          .externalApplication,
+                                                    );
+                                                  }
+                                                } catch (e) {
+                                                  Uri _url = Uri.parse(
+                                                      'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                  await launchUrl(
+                                                    _url,
+                                                    mode: LaunchMode
+                                                        .externalApplication,
+                                                  );
+                                                }
                                               }
                                             }
                                           },
@@ -1846,18 +1932,44 @@ class _HomePageState extends State<HomePage> {
                                                   ''),
                                             ));
                                           } else {
-                                            print(
-                                                "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
-                                            print(
-                                                "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
-
-                                            Uri _url = Uri.parse(
-                                                'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                            await launchUrl(
-                                              _url,
-                                              mode: LaunchMode
-                                                  .externalApplication,
-                                            );
+                                            try {
+                                              print(
+                                                  "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
+                                              print(
+                                                  "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
+                                              List linkData = _controller
+                                                      .homeData
+                                                      .value
+                                                      .specials?[index]
+                                                      .urlLink
+                                                      .toString()
+                                                      .split("/") ??
+                                                  [];
+                                              if (linkData[1] ==
+                                                  LinkTypes.search) {
+                                                String searchWord = linkData[2]
+                                                    .replaceAll('%20', ' ');
+                                                print('searchWord:$searchWord');
+                                                Get.to(() => SearchScreen(
+                                                    subKeyWord: searchWord));
+                                              } else {
+                                                Uri _url = Uri.parse(
+                                                    'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                await launchUrl(
+                                                  _url,
+                                                  mode: LaunchMode
+                                                      .externalApplication,
+                                                );
+                                              }
+                                            } catch (e) {
+                                              Uri _url = Uri.parse(
+                                                  'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                              await launchUrl(
+                                                _url,
+                                                mode: LaunchMode
+                                                    .externalApplication,
+                                              );
+                                            }
                                           }
                                         }
                                       },

@@ -172,6 +172,7 @@ abstract class LinkTypes {
   static const brands = 'brands';
   static const product = 'product';
   static const category = 'category';
+  static const search = 'search';
   static const brandsPage = 'brandsPage';
   static const offers = 'offers';
   static const sales = 'sales';

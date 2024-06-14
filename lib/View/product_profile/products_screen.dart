@@ -1983,6 +1983,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               .kPrimaryColor),
                                                     ),
                                                   ),
+                                                  15.ph,
                                                   RelatedProductWidget(
                                                     data: controller.productData
                                                             .last.p ??
@@ -2151,6 +2152,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               .kPrimaryColor),
                                                     ),
                                                   ),
+                                                  15.ph,
                                                   SameBrandWidget(
                                                       data: controller
                                                               .productData
