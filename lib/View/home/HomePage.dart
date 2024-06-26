@@ -4,6 +4,7 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -234,7 +235,10 @@ class _HomePageState extends State<HomePage> {
                                                             .externalApplication,
                                                       );
                                                     }
-                                                  } catch (e) {
+                                                  } catch (e, s) {
+                                                    FirebaseCrashlytics.instance
+                                                        .recordError(
+                                                            'Api Crash $e', s);
                                                     Uri _url = Uri.parse(
                                                         'https://${_controller.homeData.value.specials?[index].urlLink}');
                                                     await launchUrl(
@@ -1143,7 +1147,9 @@ class _HomePageState extends State<HomePage> {
                                           mode: LaunchMode.externalApplication,
                                         );
                                       }
-                                    } catch (e) {
+                                    } catch (e, s) {
+                                      FirebaseCrashlytics.instance
+                                          .recordError('Api Crash $e', s);
                                       Uri _url = Uri.parse(
                                           'https://${_controller.homeData.value.specials?[index].urlLink}');
                                       await launchUrl(
@@ -1701,7 +1707,10 @@ class _HomePageState extends State<HomePage> {
                                                           .externalApplication,
                                                     );
                                                   }
-                                                } catch (e) {
+                                                } catch (e, s) {
+                                                  FirebaseCrashlytics.instance
+                                                      .recordError(
+                                                          'Api Crash $e', s);
                                                   Uri _url = Uri.parse(
                                                       'https://${_controller.homeData.value.specials?[index].urlLink}');
                                                   await launchUrl(
@@ -1961,7 +1970,10 @@ class _HomePageState extends State<HomePage> {
                                                       .externalApplication,
                                                 );
                                               }
-                                            } catch (e) {
+                                            } catch (e, s) {
+                                              FirebaseCrashlytics.instance
+                                                  .recordError(
+                                                      'Api Crash $e', s);
                                               Uri _url = Uri.parse(
                                                   'https://${_controller.homeData.value.specials?[index].urlLink}');
                                               await launchUrl(

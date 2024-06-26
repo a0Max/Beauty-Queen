@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:beauty_queen/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -66,7 +67,8 @@ class AuthController extends GetxController {
       if (progressValue.value == 0.01) {
         try {
           await getUserData();
-        } catch (e) {
+        } catch (e, s) {
+          FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
           log('startProgress:Error:$e');
         }
       }
@@ -186,7 +188,8 @@ class AuthController extends GetxController {
     } on DioException catch (e) {
       brandsData.value = [];
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       brandsData.value = [];
       if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
@@ -235,7 +238,8 @@ class AuthController extends GetxController {
           googleId: googleAuth?.accessToken ?? '',
           email: googleUser?.email ?? '',
           name: googleUser?.displayName ?? '');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       print('errir:$e');
       print('errir:${e.runtimeType}');
     }
@@ -268,7 +272,8 @@ class AuthController extends GetxController {
       Get.back();
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       Get.back();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }

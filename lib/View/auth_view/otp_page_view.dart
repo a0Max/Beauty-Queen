@@ -3,6 +3,7 @@ import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/controller/auth_controller/otp_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,7 +71,8 @@ class _OtpPage extends State<OtpPage> {
       Get.back();
       ErrorPopUp(
           message: (e.response?.data as Map).values.first, title: tr('Error'));
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       if (!context.mounted) return;
 
       Get.back();

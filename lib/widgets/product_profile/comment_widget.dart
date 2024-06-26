@@ -1,6 +1,7 @@
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../const/app_colors.dart';
@@ -151,7 +152,8 @@ class CommentWidget extends StatelessWidget {
                 ErrorPopUp(
                     message: (e.response?.data as Map).values.first,
                     title: 'خطا');
-              } catch (e) {
+              } catch (e, s) {
+                FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
                 Navigator.of(context).pop();
                 if (e == 'Check Network connection') {
                   ErrorPopUp(

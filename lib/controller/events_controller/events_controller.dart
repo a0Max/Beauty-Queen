@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/events_data_apis.dart';
@@ -20,7 +21,8 @@ class EventsController extends GetxController {
       eventsList.value = await _api.getEventDataRequest();
     } on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
       } else {

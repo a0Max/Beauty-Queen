@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' hide Response;
@@ -52,7 +53,8 @@ class _EnterNewPassword extends State<EnterNewPassword> {
     } on DioException {
       Get.back();
       Navigator.of(context).pop();
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       Navigator.of(context).pop();
     }
   }

@@ -7,6 +7,7 @@ import 'package:beauty_queen/widgets/based/loading.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -169,12 +170,14 @@ class _TabScreenTwo extends State<TabScreenTwo> {
                     ErrorPopUp(
                         message: (e.response?.data as Map).values.first,
                         title: 'خطا');
-                  } catch (e) {
+                  } catch (e, s) {
+                    FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
                     ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
                   }
-                } catch (e) {
+                } catch (e, s) {
                   Navigator.of(context).pop();
 
+                  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
                   log('verifyToAddReview:error:$e');
                   if (e == 'Check Network connection') {
                     ErrorPopUp(message: tr('network_connection'), title: 'خطا');
@@ -264,9 +267,11 @@ class _TabScreenTwo extends State<TabScreenTwo> {
                                                 .values
                                                 .first,
                                             title: 'خطا');
-                                      } catch (e) {
+                                      } catch (e, s) {
                                         Navigator.of(context).pop();
 
+                                        FirebaseCrashlytics.instance
+                                            .recordError('Api Crash $e', s);
                                         log('verifyToAddReview:error:$e');
                                         if (e == 'Check Network connection') {
                                           ErrorPopUp(
@@ -313,7 +318,9 @@ class _TabScreenTwo extends State<TabScreenTwo> {
                                                 .values
                                                 .first,
                                             title: 'خطا');
-                                      } catch (e) {
+                                      } catch (e, s) {
+                                        FirebaseCrashlytics.instance
+                                            .recordError('Api Crash $e', s);
                                         Navigator.of(context).pop();
 
                                         log('verifyToAddReview:error:$e');

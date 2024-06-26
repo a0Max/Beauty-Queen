@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'categories_model.dart';
@@ -56,7 +57,8 @@ class ProductOptionsModel {
             ?.map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
             .toList(),
       );
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       return ProductOptionsModel(
         id: json['id'] as int?,
         title: json['title'] as String?,

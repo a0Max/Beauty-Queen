@@ -1,6 +1,7 @@
 import 'package:beauty_queen/const/vars.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../models/city_area_model.dart';
 import '../../models/user_model.dart';
@@ -122,7 +123,8 @@ class UserDataApis extends ApiProvider {
       }
     } on DioException {
       throw tr('check_phone_number');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       throw tr('check_phone_number');
     }
   }

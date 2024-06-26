@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:beauty_queen/const/app_colors.dart';
 import 'package:beauty_queen/const/extensions.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +19,8 @@ class DetailsStatic extends StatelessWidget {
     try {
       await launchUrl(Uri.parse("tel:$url"),
           mode: LaunchMode.externalApplication);
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       log('_makePhoneCall: error:$e');
     }
   }

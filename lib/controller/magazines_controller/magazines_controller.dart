@@ -1,6 +1,7 @@
 import 'package:beauty_queen/const/vars.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/magazines_data_apis.dart';
@@ -37,7 +38,8 @@ class MagazinesController extends GetxController {
     } on DioException catch (e) {
       magazinesData.value = MainMagazinesModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       magazinesData.value = MainMagazinesModel();
       print('error:$e');
       if (e == 'Check Network connection') {

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/alkasam_data_api.dart';
@@ -23,7 +24,8 @@ class AlkasamController extends GetxController {
     } on DioException catch (e) {
       categoryData.value = [];
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       categoryData.value = [];
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
@@ -152,7 +154,8 @@ class AlkasamController extends GetxController {
     } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }

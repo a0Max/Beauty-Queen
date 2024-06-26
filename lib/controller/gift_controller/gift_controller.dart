@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/brands_data_api.dart';
@@ -41,7 +42,8 @@ class GiftController extends GetxController {
     } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       generalSearchData.value = GeneralSearchModel();
       if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
@@ -110,7 +112,8 @@ class GiftController extends GetxController {
     } on DioException catch (e) {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       generalSearchData.value = GeneralSearchModel();
       if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');

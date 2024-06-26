@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,8 @@ class HomeController extends GetxController {
     } on DioException catch (e) {
       homeData.value = HomeModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       homeData.value = HomeModel();
       print('error:$e');
       if (e == 'Check Network connection') {
@@ -91,7 +93,8 @@ class HomeController extends GetxController {
       Get.back();
 
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       Get.back();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
@@ -115,7 +118,8 @@ class HomeController extends GetxController {
       wishlistList.value = await _api.getTheWishlist();
     } on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       if (e == 'Check Network connection') {
         ErrorPopUp(message: tr('network_connection'), title: 'خطا');
       } else {

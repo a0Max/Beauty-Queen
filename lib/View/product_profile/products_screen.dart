@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -86,7 +87,8 @@ class _ItemProfilePageState extends State<ItemProfilePage>
       try {
         isFavorite =
             controller.productData.last.product.wishlist?.isNotEmpty ?? false;
-      } catch (e) {
+      } catch (e, s) {
+        FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
         log("###########${controller.productData}");
         print("###########${controller.productData}");
       }

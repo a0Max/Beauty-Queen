@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../const/app_colors.dart';
@@ -17,7 +18,8 @@ class ContactUsScreen0 extends StatelessWidget {
     try {
       await launchUrl(Uri.parse("tel:$url"),
           mode: LaunchMode.externalApplication);
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       log('_makePhoneCall: error:$e');
     }
   }

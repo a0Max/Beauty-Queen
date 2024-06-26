@@ -5,6 +5,7 @@ import 'package:beauty_queen/const/extensions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -699,7 +700,9 @@ class SummaryScreen extends StatelessWidget {
                                     //   ErrorPopUp(
                                     //       message: tr('something_wrong'), title: 'خطا');
                                     // }
-                                  } catch (e) {
+                                  } catch (e, s) {
+                                    FirebaseCrashlytics.instance
+                                        .recordError('Api Crash $e', s);
                                     log('error3:$e');
                                     Navigator.of(context).pop();
                                     if (e == 'Check Network connection') {

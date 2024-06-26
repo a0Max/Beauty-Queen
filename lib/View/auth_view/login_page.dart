@@ -4,6 +4,7 @@ import 'package:beauty_queen/View/welcome/welcome_screen.dart';
 import 'package:beauty_queen/controller/auth_controller/auth_controler.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,7 +71,8 @@ class _LogInPage extends State<LogInPage> {
       Navigator.of(context).pop();
       ErrorPopUp(
           message: (e.response?.data as Map).values.first, title: tr('Error'));
-    } catch (e) {
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
