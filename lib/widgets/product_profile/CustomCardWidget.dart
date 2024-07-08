@@ -553,7 +553,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 ],
               ),
               Container(
-                height: 110,
+                height: 110.h,
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 9),
                 child: Column(

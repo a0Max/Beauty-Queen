@@ -49,21 +49,23 @@ class _AutoScrollOfNewArrive extends State<AutoScrollOfNewArrive> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 340.h < 305.h ? 309.h : 349.h,
+        height: 349.h,
         child: ScrollablePositionedList.builder(
           itemCount: (widget.data.length),
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => SizedBox(
-              width: (MediaQuery.of(context).size.width / 2),
-              child: CustomCardWidget(
-                hideTage: true,
-                imageUrl: Connection.urlOfProducts(
-                    image: widget.data[index].mainImage ?? ''),
-                // isDiscount: _controller.homeData.value
-                //     .newArrivals?[index].isOffer,
-                newArrival: widget.data[index] ?? SalesProductsModel(),
-                favorite: widget.data[index].wishlist?.isNotEmpty ?? false,
-              )),
+          itemBuilder: (context, index) => FittedBox(
+            child: SizedBox(
+                width: (MediaQuery.of(context).size.width / 2),
+                child: CustomCardWidget(
+                  hideTage: true,
+                  imageUrl: Connection.urlOfProducts(
+                      image: widget.data[index].mainImage ?? ''),
+                  // isDiscount: _controller.homeData.value
+                  //     .newArrivals?[index].isOffer,
+                  newArrival: widget.data[index] ?? SalesProductsModel(),
+                  favorite: widget.data[index].wishlist?.isNotEmpty ?? false,
+                )),
+          ),
           itemScrollController: itemScrollController,
           scrollOffsetController: scrollOffsetController,
           itemPositionsListener: itemPositionsListener,

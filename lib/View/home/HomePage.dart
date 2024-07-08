@@ -503,40 +503,6 @@ class _HomePageState extends State<HomePage> {
                                       _controller.homeData.value.newArrivals ??
                                           [],
                                 ),
-                                // SizedBox(
-                                //   height: 340.h < 305.h ? 309.h : 349.h,
-                                //   child: ListView.builder(
-                                //     shrinkWrap: true,
-                                //     scrollDirection: Axis.horizontal,
-                                //     itemCount: _controller.homeData.value
-                                //             .newArrivals?.length ??
-                                //         0,
-                                //     itemBuilder: (context, index) {
-                                //       return CustomCardWidget(
-                                //         hideTage: true,
-                                //         imageUrl: Connection.urlOfProducts(
-                                //             image: _controller
-                                //                     .homeData
-                                //                     .value
-                                //                     .newArrivals?[index]
-                                //                     .mainImage ??
-                                //                 ''),
-                                //         // isDiscount: _controller.homeData.value
-                                //         //     .newArrivals?[index].isOffer,
-                                //         newArrival: _controller.homeData.value
-                                //                 .newArrivals?[index] ??
-                                //             SalesProductsModel(),
-                                //         favorite: _controller
-                                //                 .homeData
-                                //                 .value
-                                //                 .newArrivals?[index]
-                                //                 .wishlist
-                                //                 ?.isNotEmpty ??
-                                //             false,
-                                //       );
-                                //     },
-                                //   ),
-                                // )
                               ],
                             ),
                           ),
@@ -1554,31 +1520,34 @@ class _HomePageState extends State<HomePage> {
                                             0,
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index) {
-                                          return CustomCardWidget(
-                                            hideTage: true,
-                                            // isDiscount: _controller.homeData.value
-                                            //     .discover?.products?[index].isOffer,
-                                            imageUrl: Connection.urlOfProducts(
-                                                image: _controller
-                                                        .homeData
-                                                        .value
-                                                        .discover
-                                                        ?.products?[index]
-                                                        .mainImage ??
-                                                    ''),
-                                            newArrival: _controller
-                                                    .homeData
-                                                    .value
-                                                    .discover
-                                                    ?.products?[index] ??
-                                                SalesProductsModel(),
-                                            favorite: _controller
-                                                    .homeData
-                                                    .value
-                                                    .newArrivals?[index]
-                                                    .wishlist
-                                                    ?.isNotEmpty ??
-                                                false,
+                                          return FittedBox(
+                                            child: CustomCardWidget(
+                                              hideTage: true,
+                                              // isDiscount: _controller.homeData.value
+                                              //     .discover?.products?[index].isOffer,
+                                              imageUrl:
+                                                  Connection.urlOfProducts(
+                                                      image: _controller
+                                                              .homeData
+                                                              .value
+                                                              .discover
+                                                              ?.products?[index]
+                                                              .mainImage ??
+                                                          ''),
+                                              newArrival: _controller
+                                                      .homeData
+                                                      .value
+                                                      .discover
+                                                      ?.products?[index] ??
+                                                  SalesProductsModel(),
+                                              favorite: _controller
+                                                      .homeData
+                                                      .value
+                                                      .newArrivals?[index]
+                                                      .wishlist
+                                                      ?.isNotEmpty ??
+                                                  false,
+                                            ),
                                           );
                                         },
                                       ),
@@ -1601,104 +1570,122 @@ class _HomePageState extends State<HomePage> {
                                             .organicItems?.length ??
                                         0,
                                     itemBuilder: (context, index) {
-                                      return Container(
-                                        width: 245.0.w,
-                                        height: 400.0.h,
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        child: GestureDetector(
-                                          onTap: () async {
-                                            if (_controller
-                                                    .homeData
-                                                    .value
-                                                    .organicItems?[index]
-                                                    .isLink ==
-                                                "1") {
+                                      return FittedBox(
+                                        child: Container(
+                                          width: 245.0.w,
+                                          height: 408.h,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: GestureDetector(
+                                            onTap: () async {
                                               if (_controller
                                                       .homeData
                                                       .value
                                                       .organicItems?[index]
-                                                      .linkType ==
-                                                  LinkTypes.brand) {
-                                                Get.to(BrandDetailScreen(
-                                                  brandId: int.parse(_controller
-                                                          .homeData
-                                                          .value
-                                                          .organicItems?[index]
-                                                          .linkId ??
-                                                      ''),
-                                                ));
-                                              } else if (_controller
-                                                      .homeData
-                                                      .value
-                                                      .organicItems?[index]
-                                                      .linkType ==
-                                                  LinkTypes.product) {
-                                                Get.to(ChangeNotifierProvider(
-                                                    create: (context) =>
-                                                        ProductProfileControllerProvider(),
-                                                    child: ItemProfilePage(
-                                                        itemId: int.parse(
-                                                            _controller
-                                                                    .homeData
-                                                                    .value
-                                                                    .organicItems?[
-                                                                        index]
-                                                                    .linkId ??
-                                                                ''))));
-                                              } else if (_controller
-                                                      .homeData
-                                                      .value
-                                                      .organicItems?[index]
-                                                      .linkType ==
-                                                  LinkTypes.category) {
-                                                AlkasamController controller =
-                                                    Get.put(
-                                                        AlkasamController());
-                                                controller.updateCurrentCategoryId(
-                                                    newId: int.parse(_controller
+                                                      .isLink ==
+                                                  "1") {
+                                                if (_controller
+                                                        .homeData
+                                                        .value
+                                                        .organicItems?[index]
+                                                        .linkType ==
+                                                    LinkTypes.brand) {
+                                                  Get.to(BrandDetailScreen(
+                                                    brandId: int.parse(
+                                                        _controller
+                                                                .homeData
+                                                                .value
+                                                                .organicItems?[
+                                                                    index]
+                                                                .linkId ??
+                                                            ''),
+                                                  ));
+                                                } else if (_controller
+                                                        .homeData
+                                                        .value
+                                                        .organicItems?[index]
+                                                        .linkType ==
+                                                    LinkTypes.product) {
+                                                  Get.to(ChangeNotifierProvider(
+                                                      create: (context) =>
+                                                          ProductProfileControllerProvider(),
+                                                      child: ItemProfilePage(
+                                                          itemId: int.parse(
+                                                              _controller
+                                                                      .homeData
+                                                                      .value
+                                                                      .organicItems?[
+                                                                          index]
+                                                                      .linkId ??
+                                                                  ''))));
+                                                } else if (_controller
+                                                        .homeData
+                                                        .value
+                                                        .organicItems?[index]
+                                                        .linkType ==
+                                                    LinkTypes.category) {
+                                                  AlkasamController controller =
+                                                      Get.put(
+                                                          AlkasamController());
+                                                  controller
+                                                      .updateCurrentCategoryId(
+                                                          newId: int.parse(
+                                                              _controller
+                                                                      .homeData
+                                                                      .value
+                                                                      .organicItems?[
+                                                                          index]
+                                                                      .linkId ??
+                                                                  ''),
+                                                          getChild: null);
+                                                  Get.to(FliterScreen2(
+                                                    categoryId: int.parse(
+                                                        _controller
+                                                                .homeData
+                                                                .value
+                                                                .organicItems?[
+                                                                    index]
+                                                                .linkId ??
+                                                            ''),
+                                                  ));
+                                                } else {
+                                                  try {
+                                                    print(
+                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
+                                                    print(
+                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
+                                                    List linkData = _controller
                                                             .homeData
                                                             .value
-                                                            .organicItems?[
-                                                                index]
-                                                            .linkId ??
-                                                        ''),
-                                                    getChild: null);
-                                                Get.to(FliterScreen2(
-                                                  categoryId: int.parse(
-                                                      _controller
-                                                              .homeData
-                                                              .value
-                                                              .organicItems?[
-                                                                  index]
-                                                              .linkId ??
-                                                          ''),
-                                                ));
-                                              } else {
-                                                try {
-                                                  print(
-                                                      "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
-                                                  print(
-                                                      "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
-                                                  List linkData = _controller
-                                                          .homeData
-                                                          .value
-                                                          .specials?[index]
-                                                          .urlLink
-                                                          .toString()
-                                                          .split("/") ??
-                                                      [];
-                                                  if (linkData[1] ==
-                                                      LinkTypes.search) {
-                                                    String searchWord =
-                                                        linkData[2].replaceAll(
-                                                            '%20', ' ');
-                                                    print(
-                                                        'searchWord:$searchWord');
-                                                    Get.to(() => SearchScreen(
-                                                        subKeyWord:
-                                                            searchWord));
-                                                  } else {
+                                                            .specials?[index]
+                                                            .urlLink
+                                                            .toString()
+                                                            .split("/") ??
+                                                        [];
+                                                    if (linkData[1] ==
+                                                        LinkTypes.search) {
+                                                      String searchWord =
+                                                          linkData[2]
+                                                              .replaceAll(
+                                                                  '%20', ' ');
+                                                      print(
+                                                          'searchWord:$searchWord');
+                                                      Get.to(() => SearchScreen(
+                                                          subKeyWord:
+                                                              searchWord));
+                                                    } else {
+                                                      Uri _url = Uri.parse(
+                                                          'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                      await launchUrl(
+                                                        _url,
+                                                        mode: LaunchMode
+                                                            .externalApplication,
+                                                      );
+                                                    }
+                                                  } catch (e, s) {
+                                                    FirebaseCrashlytics.instance
+                                                        .recordError(
+                                                            'Api Crash $e', s);
                                                     Uri _url = Uri.parse(
                                                         'https://${_controller.homeData.value.specials?[index].urlLink}');
                                                     await launchUrl(
@@ -1707,147 +1694,153 @@ class _HomePageState extends State<HomePage> {
                                                           .externalApplication,
                                                     );
                                                   }
-                                                } catch (e, s) {
-                                                  FirebaseCrashlytics.instance
-                                                      .recordError(
-                                                          'Api Crash $e', s);
-                                                  Uri _url = Uri.parse(
-                                                      'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                                  await launchUrl(
-                                                    _url,
-                                                    mode: LaunchMode
-                                                        .externalApplication,
-                                                  );
                                                 }
                                               }
-                                            }
-                                          },
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: [
-                                              Container(
-                                                width: 240.0.w,
-                                                height: 240.0.w,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image:
-                                                        CachedNetworkImageProvider(
-                                                      Connection.urlOfSpecial(
-                                                          image: _controller
-                                                                  .homeData
-                                                                  .value
-                                                                  .organicItems?[
-                                                                      index]
-                                                                  .image ??
-                                                              ''),
+                                            },
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Expanded(
+                                                  flex: 4,
+                                                  child: Container(
+                                                    // width: 240.0.w,
+                                                    // height: 240.0.w,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image:
+                                                            CachedNetworkImageProvider(
+                                                          Connection.urlOfSpecial(
+                                                              image: _controller
+                                                                      .homeData
+                                                                      .value
+                                                                      .organicItems?[
+                                                                          index]
+                                                                      .image ??
+                                                                  ''),
+                                                        ),
+                                                        fit: BoxFit.fill,
+                                                      ),
                                                     ),
-                                                    fit: BoxFit.fill,
                                                   ),
                                                 ),
-                                              ),
-                                              // Pink Container
-                                              Container(
-                                                width: 200.0.w,
-                                                height: 159.38.h,
-                                                color: AppColors.kPrimaryColor,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 18.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 15.h,
-                                                      ),
-                                                      Text(
-                                                        _controller
-                                                                .homeData
-                                                                .value
-                                                                .organicItems?[
-                                                                    index]
-                                                                .title ??
-                                                            '',
-                                                        textAlign:
-                                                            TextAlign.right,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 15.18.sp,
-                                                          fontFamily:
-                                                              kTheArabicSansBold,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          // height: 0.05,
-                                                        ),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 15.h,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 196.11.w,
-                                                        child: Text(
-                                                          _controller
-                                                                  .homeData
-                                                                  .value
-                                                                  .organicItems?[
-                                                                      index]
-                                                                  .description ??
-                                                              '',
-                                                          textAlign:
-                                                              TextAlign.right,
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 11.18.sp,
-                                                            fontFamily:
-                                                                kTheArabicSansBold,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            // height: 1.5,
-                                                            // letterSpacing: 0.13,
+                                                // Pink Container
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Container(
+                                                    // width: 200.0.w,
+                                                    // height: 186.h,
+                                                    color:
+                                                        AppColors.kPrimaryColor,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 18.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          SizedBox(
+                                                            height: 15.h,
                                                           ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 30.h,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 20.w),
-                                                        child: Text(
-                                                          tr('shop_now'),
-                                                          textAlign:
-                                                              TextAlign.right,
-                                                          style: TextStyle(
+                                                          Text(
+                                                            _controller
+                                                                    .homeData
+                                                                    .value
+                                                                    .organicItems?[
+                                                                        index]
+                                                                    .title ??
+                                                                '',
+                                                            textAlign:
+                                                                TextAlign.right,
+                                                            style: TextStyle(
                                                               color:
                                                                   Colors.white,
                                                               fontSize:
-                                                                  14.63.sp,
+                                                                  15.18.sp,
                                                               fontFamily:
-                                                                  kTheArabicSansLight,
+                                                                  kTheArabicSansBold,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w400,
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .underline,
-                                                              height: 0.08,
-                                                              letterSpacing:
-                                                                  -0.15,
-                                                              decorationColor:
-                                                                  Colors.white),
-                                                        ),
-                                                      )
-                                                    ],
+                                                                      .w500,
+                                                              // height: 0.05,
+                                                            ),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 15.h,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 196.11.w,
+                                                            child: Text(
+                                                              _controller
+                                                                      .homeData
+                                                                      .value
+                                                                      .organicItems?[
+                                                                          index]
+                                                                      .description ??
+                                                                  '',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .right,
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize:
+                                                                    11.18.sp,
+                                                                fontFamily:
+                                                                    kTheArabicSansBold,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                // height: 1.5,
+                                                                // letterSpacing: 0.13,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 30.h,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 20.w),
+                                                            child: Text(
+                                                              tr('shop_now'),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .right,
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      14.63.sp,
+                                                                  fontFamily:
+                                                                      kTheArabicSansLight,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .underline,
+                                                                  height: 0.08,
+                                                                  letterSpacing:
+                                                                      -0.15,
+                                                                  decorationColor:
+                                                                      Colors
+                                                                          .white),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
