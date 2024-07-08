@@ -341,7 +341,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                     child: DropdownButton<CityAreaModel>(
                       underline: const SizedBox(),
                       iconEnabledColor: Colors.transparent,
-                      isDense: true,
+                      // isDense: true,
                       // onTap:  controller.allowToEdit.value==true?null:log('open')
                       // ,
                       isExpanded: true,
@@ -350,16 +350,18 @@ class _MyDataScreen extends State<MyDataScreen> {
                           : controller.selectedCityData.value,
                       items: controller.citiesData.value.map((value) {
                         return DropdownMenuItem<CityAreaModel>(
-                          value: value,
-                          child: Text(value.name,
-                              style: TextStyle(
-                                color: AppColors.kBlackColor,
-                                fontSize: 14.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w400,
-                                height: 0,
-                              )),
-                        );
+                            value: value,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(value.name,
+                                  style: TextStyle(
+                                    color: AppColors.kBlackColor,
+                                    fontSize: 14.sp,
+                                    fontFamily: kTheArabicSansLight,
+                                    fontWeight: FontWeight.w400,
+                                    height: 0,
+                                  )),
+                            ));
                       }).toList(),
                       onChanged: controller.allowToEdit.value != true
                           ? null
@@ -417,23 +419,25 @@ class _MyDataScreen extends State<MyDataScreen> {
                       child: DropdownButton<CityAreaModel>(
                         underline: const SizedBox(),
                         iconEnabledColor: Colors.transparent,
-                        isDense: true,
+                        // isDense: true,
                         isExpanded: true,
                         value: controller.selectedAreaData.value.id == null
                             ? null
                             : controller.selectedAreaData.value,
                         items: controller.areaData.value.map((value) {
                           return DropdownMenuItem<CityAreaModel>(
-                            value: value,
-                            child: Text(value.name,
-                                style: TextStyle(
-                                  color: AppColors.kBlackColor,
-                                  fontSize: 14.sp,
-                                  fontFamily: kTheArabicSansLight,
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                )),
-                          );
+                              value: value,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(value.name,
+                                    style: TextStyle(
+                                      color: AppColors.kBlackColor,
+                                      fontSize: 14.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    )),
+                              ));
                         }).toList(),
                         onChanged: controller.allowToEdit.value != true
                             ? null
@@ -504,7 +508,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                           child: DropdownButton<BrandModel>(
                             underline: const SizedBox(),
                             iconEnabledColor: Colors.transparent,
-                            isDense: true,
+                            // isDense: true,
                             isExpanded: true,
                             value:
                                 controller.selectedBrandData1.value.id == null
@@ -512,16 +516,18 @@ class _MyDataScreen extends State<MyDataScreen> {
                                     : controller.selectedBrandData1.value,
                             items: controller.brandsData.value.map((value) {
                               return DropdownMenuItem<BrandModel>(
-                                value: value,
-                                child: Text(value.titleAr ?? '',
-                                    style: TextStyle(
-                                      color: AppColors.kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              );
+                                  value: value,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(value.titleAr ?? '',
+                                        style: TextStyle(
+                                          color: AppColors.kBlackColor,
+                                          fontSize: 14.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                        )),
+                                  ));
                             }).toList(),
                             onChanged: controller.allowToEdit.value != true
                                 ? null
@@ -577,7 +583,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                           child: DropdownButton<BrandModel>(
                             underline: const SizedBox(),
                             iconEnabledColor: Colors.transparent,
-                            isDense: true,
+                            // isDense: true,
                             isExpanded: true,
                             value:
                                 controller.selectedBrandData2.value.id == null
@@ -585,16 +591,18 @@ class _MyDataScreen extends State<MyDataScreen> {
                                     : controller.selectedBrandData2.value,
                             items: controller.brandsData.value.map((value) {
                               return DropdownMenuItem<BrandModel>(
-                                value: value,
-                                child: Text(value.titleAr ?? '',
-                                    style: TextStyle(
-                                      color: AppColors.kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              );
+                                  value: value,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(value.titleAr ?? '',
+                                        style: TextStyle(
+                                          color: AppColors.kBlackColor,
+                                          fontSize: 14.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                        )),
+                                  ));
                             }).toList(),
                             onChanged: controller.allowToEdit.value != true
                                 ? null
@@ -650,7 +658,7 @@ class _MyDataScreen extends State<MyDataScreen> {
                           child: DropdownButton<BrandModel>(
                             underline: const SizedBox(),
                             iconEnabledColor: Colors.transparent,
-                            isDense: true,
+                            // isDense: true,
                             isExpanded: true,
                             value:
                                 controller.selectedBrandData3.value.id == null
@@ -658,16 +666,18 @@ class _MyDataScreen extends State<MyDataScreen> {
                                     : controller.selectedBrandData3.value,
                             items: controller.brandsData.value.map((value) {
                               return DropdownMenuItem<BrandModel>(
-                                value: value,
-                                child: Text(value.titleAr ?? '',
-                                    style: TextStyle(
-                                      color: AppColors.kBlackColor,
-                                      fontSize: 14.sp,
-                                      fontFamily: kTheArabicSansLight,
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    )),
-                              );
+                                  value: value,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(value.titleAr ?? '',
+                                        style: TextStyle(
+                                          color: AppColors.kBlackColor,
+                                          fontSize: 14.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                        )),
+                                  ));
                             }).toList(),
                             onChanged: controller.allowToEdit.value != true
                                 ? null

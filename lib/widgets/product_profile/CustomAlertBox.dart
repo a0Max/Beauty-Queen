@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -55,45 +56,23 @@ class CustomAlertDialog extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Container(
-                    height: 42.65.h,
-                    // width: 145.91.w,
-
-                    padding: EdgeInsets.symmetric(horizontal: 7.w),
-                    color: AppColors.kBlackColor,
-                    child: Center(
-                      child: Text(
-                        buttonOneText.toString(),
-                        style: TextStyle(
-                            fontFamily: kTheArabicSansLight,
-                            color: AppColors.kWhiteColor,
-                            fontSize: 14.2.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ),
-                ),
-                if (buttonTwo)
+            FittedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
                   GestureDetector(
                     onTap: () {
                       Get.back();
-                      onButtonTwoPressed?.call();
                     },
                     child: Container(
                       height: 42.65.h,
-                      padding: EdgeInsets.symmetric(horizontal: 7.w),
                       // width: 145.91.w,
+
+                      padding: EdgeInsets.symmetric(horizontal: 7.w),
                       color: AppColors.kBlackColor,
                       child: Center(
                         child: Text(
-                          buttonTwoText.toString(),
+                          buttonOneText.toString(),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               color: AppColors.kWhiteColor,
@@ -103,7 +82,33 @@ class CustomAlertDialog extends StatelessWidget {
                       ),
                     ),
                   ),
-              ],
+                  if (buttonTwo) ...{
+                    10.pw,
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                        onButtonTwoPressed?.call();
+                      },
+                      child: Container(
+                        height: 42.65.h,
+                        padding: EdgeInsets.symmetric(horizontal: 7.w),
+                        // width: 145.91.w,
+                        color: AppColors.kBlackColor,
+                        child: Center(
+                          child: Text(
+                            buttonTwoText.toString(),
+                            style: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                color: AppColors.kWhiteColor,
+                                fontSize: 14.2.sp,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                    ),
+                  }
+                ],
+              ),
             ),
             // SizedBox(height: 13.h),
           ],

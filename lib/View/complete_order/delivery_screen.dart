@@ -268,7 +268,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               child: DropdownButton<CityAreaModel>(
                                 underline: const SizedBox(),
                                 iconEnabledColor: Colors.transparent,
-                                isDense: true,
+                                // isDense: true,
+                                padding: EdgeInsets.zero,
                                 onTap: () => log('open'),
                                 isExpanded: true,
                                 value: basketController
@@ -279,14 +280,17 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 items: controller.citiesData.value.map((value) {
                                   return DropdownMenuItem<CityAreaModel>(
                                     value: value,
-                                    child: Text(value.name,
-                                        style: TextStyle(
-                                          color: AppColors.kBlackColor,
-                                          fontSize: 14.sp,
-                                          fontFamily: kTheArabicSansLight,
-                                          fontWeight: FontWeight.w400,
-                                          height: 0,
-                                        )),
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(value.name,
+                                          style: TextStyle(
+                                            color: AppColors.kBlackColor,
+                                            fontSize: 14.sp,
+                                            fontFamily: kTheArabicSansLight,
+                                            fontWeight: FontWeight.w400,
+                                            height: 0,
+                                          )),
+                                    ),
                                   );
                                 }).toList(),
                                 onChanged: (CityAreaModel? newValue) {
@@ -364,7 +368,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 child: DropdownButton<CityAreaModel>(
                                   underline: const SizedBox(),
                                   iconEnabledColor: Colors.transparent,
-                                  isDense: true,
+                                  // isDense: true,
                                   isExpanded: true,
                                   value: basketController
                                               .selectedAreaData.value.id ==
@@ -374,15 +378,17 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                   items: basketController.areaData.value.areas
                                       ?.map((value) {
                                     return DropdownMenuItem<CityAreaModel>(
-                                      value: value,
-                                      child: Text(value.name ?? '',
-                                          style: TextStyle(
-                                            color: const Color(0xFF2C3E50),
-                                            fontSize: 17.69.sp,
-                                            fontFamily: kTheArabicSansLight,
-                                            fontWeight: FontWeight.w600,
-                                          )),
-                                    );
+                                        value: value,
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: Text(value.name ?? '',
+                                              style: TextStyle(
+                                                color: const Color(0xFF2C3E50),
+                                                fontSize: 17.69.sp,
+                                                fontFamily: kTheArabicSansLight,
+                                                fontWeight: FontWeight.w600,
+                                              )),
+                                        ));
                                   }).toList(),
                                   onChanged: (CityAreaModel? newValue) {
                                     basketController.updateSelectedArea(
@@ -517,7 +523,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               child: DropdownButton<WayToPay>(
                                 underline: const SizedBox(),
                                 iconEnabledColor: Colors.transparent,
-                                isDense: true,
+                                // isDense: true,
                                 // onTap: () => log('open'),
                                 isExpanded: true,
                                 value: resultOfWayToPay,
@@ -527,16 +533,18 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 //     : basketController.selectedCityData.value,
                                 items: listOfWayToPay.map((value) {
                                   return DropdownMenuItem<WayToPay>(
-                                    value: value,
-                                    child: Text(value.wayToPay,
-                                        style: TextStyle(
-                                          color: AppColors.kBlackColor,
-                                          fontSize: 14.sp,
-                                          fontFamily: kTheArabicSansLight,
-                                          fontWeight: FontWeight.w700,
-                                          height: 0,
-                                        )),
-                                  );
+                                      value: value,
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(value.wayToPay,
+                                            style: TextStyle(
+                                              color: AppColors.kBlackColor,
+                                              fontSize: 14.sp,
+                                              fontFamily: kTheArabicSansLight,
+                                              fontWeight: FontWeight.w700,
+                                              height: 0,
+                                            )),
+                                      ));
                                 }).toList(),
                                 onChanged: (WayToPay? newValue) {
                                   setState(() {
