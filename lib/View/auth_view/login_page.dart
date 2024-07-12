@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:beauty_queen/View/auth_view/signUp_page.dart';
 import 'package:beauty_queen/View/home/bottom_nav_screen.dart';
 import 'package:beauty_queen/View/welcome/welcome_screen.dart';
@@ -198,10 +200,12 @@ class _LogInPage extends State<LogInPage> {
                       ),
                     ),
                     SizedBox(height: 40.h),
-                    const LoginVia(),
-                    SizedBox(
-                      height: 20.h,
-                    ),
+                    if (Platform.isAndroid) ...{
+                      const LoginVia(),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                    },
                     Center(
                       child: GestureDetector(
                         onTap: () {

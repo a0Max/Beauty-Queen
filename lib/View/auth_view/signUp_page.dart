@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:io';
+
 import 'package:beauty_queen/View/auth_view/otp_page_view.dart';
 import 'package:beauty_queen/View/welcome/welcome_screen.dart';
 import 'package:beauty_queen/widgets/based/custom_button_2.dart';
@@ -227,10 +229,12 @@ class _SignUpPage extends State<SignUpPage> {
                             },
                           )),
                       SizedBox(height: 25.h),
-                      const LoginVia(),
-                      SizedBox(
-                        height: 25.h,
-                      ),
+                      if (Platform.isAndroid) ...{
+                        const LoginVia(),
+                        SizedBox(
+                          height: 25.h,
+                        ),
+                      }
                     ],
                   ),
                   CustomButtonTwo(
