@@ -219,6 +219,21 @@ class UserDataApis extends ApiProvider {
     );
   }
 
+  Future<void> deleteUserRequest() async {
+    final token = await getUserToken();
+    await dio.post(
+      '${Connection.apiURL}${ApiProvider.deleteEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          // 'Country-Id': await _getCountryCode(),
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+  }
+
   Future<bool> updateUserRequest({
     required String name,
     required String lastName,

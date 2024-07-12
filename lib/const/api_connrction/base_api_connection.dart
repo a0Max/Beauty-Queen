@@ -52,6 +52,7 @@ abstract class ApiProvider {
   static const String getQuickSearchEndPoint = "quickSearch";
   static const String userEndPoint = "user";
   static const String logoutEndPoint = "logout";
+  static const String deleteEndPoint = "user/delete";
   static const String updatePasswordEndPoint = "updatePassword";
   static const String updateUserPasswordEndPoint = "updateUserPassword";
   static const String productEndPoint = "product";

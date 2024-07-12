@@ -638,6 +638,45 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
                       ),
                     ),
                   ),
+                  10.ph,
+                  GestureDetector(
+                    onTap: () async {
+                      controller.deleteUserData();
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LogInPage(),
+                          ),
+                          (route) => false);
+                    },
+                    child: Container(
+                      height: 60.h,
+                      width: 398.w,
+                      decoration: BoxDecoration(
+                          color: AppColors.kPrimaryColor,
+                          borderRadius: BorderRadius.circular(50.r)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.delete,
+                            color: AppColors.kWhiteColor,
+                          ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Text(
+                            'حذف الحساب',
+                            style: TextStyle(
+                                fontFamily: kTheArabicSansLight,
+                                color: AppColors.kWhiteColor,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20.h,
                   ),

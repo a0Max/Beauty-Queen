@@ -103,6 +103,13 @@ class AuthController extends GetxController {
     userData.value = UserModel();
   }
 
+  deleteUserData() async {
+    _api.deleteUserRequest();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    userData.value = UserModel();
+  }
+
   RxString dateTime = ''.obs;
   updateDateTime({required String newDateTime}) {
     dateTime.value = newDateTime;
