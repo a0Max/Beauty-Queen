@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import '../../View/brands/branddetail_screen.dart';
 import '../../View/product_profile/products_screen.dart';
 import '../../const/app_colors.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/product_controller/product_profile_controller_provider.dart';
@@ -21,6 +22,7 @@ import '../../models/label_model.dart';
 import '../../models/options_model.dart';
 import '../../models/product_options_model.dart';
 import '../../models/sales_products_model.dart';
+import '../../models/user_model.dart';
 import '../currentPriceWithBlack.dart';
 import '../currentPriceWithPink.dart';
 import '../oldPriceWithBlack.dart';
@@ -393,6 +395,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                       } else ...{
                         InkWell(
                           onTap: () async {
+                            final AuthController _controllerLogin =
+                                Get.put(AuthController());
+                            UserModel user = _controllerLogin.userData.value;
+                            print('%%%%%%%%%:${user.id}');
+                            if (user.id == null) {
+                              _controllerLogin.alertOfLogin();
+                              return;
+                            }
                             if (selectedParentOption == null &&
                                 selectedOption == null) {
                               showDialog(
@@ -792,6 +802,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
               } else ...{
                 InkWell(
                   onTap: () async {
+                    final AuthController _controllerLogin =
+                        Get.put(AuthController());
+                    UserModel user = _controllerLogin.userData.value;
+                    print('%%%%%%%%%:${user.id}');
+                    if (user.id == null) {
+                      _controllerLogin.alertOfLogin();
+                      return;
+                    }
                     await _controller.addToCart(
                         productId: widget.newArrival.id ?? 0);
                     await controller.getCountOfCart();

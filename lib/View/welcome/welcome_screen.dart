@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:beauty_queen/View/auth_view/signUp_page.dart';
+import 'package:beauty_queen/View/home/HomePage.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,7 @@ import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../controller/welcome/welcomescreencontroller.dart';
 import '../auth_view/login_page.dart';
+import '../home/bottom_nav_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -170,6 +172,44 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         },
                         child: Text(
                           tr('kCreateAccount'),
+                          style: kPrimaryTextStyle.copyWith(
+                              color: AppColors.kWhiteColor,
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: kTheArabicSansLight),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 19.h),
+                    SizedBox(
+                      width: 358.w,
+                      height: 54.h,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.black54),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              side:
+                                  BorderSide(width: 1.w, color: Colors.black54),
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          // Check if the timer has been canceled
+                          // if (controller.cancelTimerFlag.value) {
+                          //   // Timer canceled, navigate to the sign-up screen
+                          //   Get.off(const SignUpPage());
+                          // } else {
+                          //   // Timer not canceled, cancel the timer and navigate
+                          //   controller.cancelTimer();
+                          Get.off(const MainView());
+                          // }
+                        },
+                        child: Text(
+                          'الاستمرار كــ زائر',
                           style: kPrimaryTextStyle.copyWith(
                               color: AppColors.kWhiteColor,
                               fontSize: 19.sp,

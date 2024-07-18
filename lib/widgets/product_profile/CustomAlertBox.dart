@@ -62,7 +62,11 @@ class CustomAlertDialog extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
-                      Get.back();
+                      if (onButtonOnePressed != null) {
+                        onButtonOnePressed!();
+                      } else {
+                        Get.back();
+                      }
                     },
                     child: Container(
                       height: 42.65.h,

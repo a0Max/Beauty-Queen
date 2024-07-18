@@ -23,6 +23,7 @@ import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/search/search_controller.dart';
+import '../../models/user_model.dart';
 import 'error_pop_up.dart';
 import 'loading.dart';
 
@@ -268,6 +269,14 @@ class CustomAppBar extends StatelessWidget {
                       if (isScrolled != true && showFavIcon) ...{
                         GestureDetector(
                           onTap: () {
+                            final AuthController _controllerLogin =
+                                Get.put(AuthController());
+                            UserModel user = _controllerLogin.userData.value;
+                            print('%%%%%%%%%:${user.id}');
+                            if (user.id == null) {
+                              _controllerLogin.alertOfLogin();
+                              return;
+                            }
                             Get.to(const FavScreen());
                           },
                           child: SvgPicture.asset(
@@ -283,6 +292,15 @@ class CustomAppBar extends StatelessWidget {
                             5.pw,
                             GestureDetector(
                               onTap: () {
+                                final AuthController _controllerLogin =
+                                    Get.put(AuthController());
+                                UserModel user =
+                                    _controllerLogin.userData.value;
+                                print('%%%%%%%%%:${user.id}');
+                                if (user.id == null) {
+                                  _controllerLogin.alertOfLogin();
+                                  return;
+                                }
                                 Get.to(const NormalProfileScreen());
                               },
                               child: Image.asset(
@@ -301,6 +319,15 @@ class CustomAppBar extends StatelessWidget {
                             9.pw,
                             GestureDetector(
                               onTap: () {
+                                final AuthController _controllerLogin =
+                                    Get.put(AuthController());
+                                UserModel user =
+                                    _controllerLogin.userData.value;
+                                print('%%%%%%%%%:${user.id}');
+                                if (user.id == null) {
+                                  _controllerLogin.alertOfLogin();
+                                  return;
+                                }
                                 Get.to(const CartScreen());
                               },
                               child: Badge(

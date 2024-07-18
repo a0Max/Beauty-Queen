@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../View/auth_view/login_page.dart';
 import '../../View/auth_view/otp_page_view.dart';
 import '../../View/home/bottom_nav_screen.dart';
 import '../../View/welcome/welcome_screen.dart';
@@ -19,6 +20,7 @@ import '../../models/brand_model.dart';
 import '../../models/city_area_model.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
+import '../../widgets/product_profile/CustomAlertBox.dart';
 
 class AuthController extends GetxController {
   var obscureText = true.obs;
@@ -284,5 +286,20 @@ class AuthController extends GetxController {
       Get.back();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
+  }
+
+  alertOfLogin() {
+    var context = Get.context;
+    showDialog(
+        context: context!,
+        builder: (BuildContext context) {
+          return CustomAlertDialog(
+              buttonTwo: false,
+              dilougText: tr('pleaseLogin'),
+              buttonOneText: 'تسجيل الدخول',
+              onButtonOnePressed: () {
+                Get.off(const LogInPage());
+              });
+        });
   }
 }

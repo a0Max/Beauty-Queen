@@ -21,12 +21,14 @@ import '../../const/app_colors.dart';
 import '../../const/size.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/product_controller/product_profile_controller.dart';
 import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
 import '../../models/sales_products_model.dart';
+import '../../models/user_model.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
@@ -2544,6 +2546,15 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                             } else ...{
                               GestureDetector(
                                 onTap: () async {
+                                  final AuthController _controllerLogin =
+                                      Get.put(AuthController());
+                                  UserModel user =
+                                      _controllerLogin.userData.value;
+                                  print('%%%%%%%%%:${user.id}');
+                                  if (user.id == null) {
+                                    _controllerLogin.alertOfLogin();
+                                    return;
+                                  }
                                   await controller.addToCart();
                                   await _controllerNav.getCountOfCart();
                                 },

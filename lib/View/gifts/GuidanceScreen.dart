@@ -23,6 +23,7 @@ import '../../controller/gift_controller/gift_controller.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/sales_products_model.dart';
+import '../../models/user_model.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
@@ -188,6 +189,14 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                           GiftWidget(
                             price: '100',
                             onTap: () {
+                              final AuthController _controllerLogin =
+                                  Get.put(AuthController());
+                              UserModel user = _controllerLogin.userData.value;
+                              print('%%%%%%%%%:${user.id}');
+                              if (user.id == null) {
+                                _controllerLogin.alertOfLogin();
+                                return;
+                              }
                               final HomeController _controller =
                                   Get.put(HomeController());
                               _controller.addToCart(productId: 1513);
@@ -197,6 +206,14 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                           GiftWidget(
                             price: '250',
                             onTap: () {
+                              final AuthController _controllerLogin =
+                                  Get.put(AuthController());
+                              UserModel user = _controllerLogin.userData.value;
+                              print('%%%%%%%%%:${user.id}');
+                              if (user.id == null) {
+                                _controllerLogin.alertOfLogin();
+                                return;
+                              }
                               final HomeController _controller =
                                   Get.put(HomeController());
                               _controller.addToCart(productId: 1514);
@@ -206,6 +223,14 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
                           GiftWidget(
                             price: '500',
                             onTap: () {
+                              final AuthController _controllerLogin =
+                                  Get.put(AuthController());
+                              UserModel user = _controllerLogin.userData.value;
+                              print('%%%%%%%%%:${user.id}');
+                              if (user.id == null) {
+                                _controllerLogin.alertOfLogin();
+                                return;
+                              }
                               final HomeController _controller =
                                   Get.put(HomeController());
                               _controller.addToCart(productId: 1515);
