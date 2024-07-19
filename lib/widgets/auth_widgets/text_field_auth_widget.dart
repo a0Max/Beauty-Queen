@@ -48,6 +48,12 @@ class TextFieldAuthWidget extends StatelessWidget {
           SizedBox(height: 10.h),
         },
         TextFormField(
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 12.74.sp,
+            fontFamily: kTheArabicSansLight,
+            fontWeight: FontWeight.w600,
+          ),
           obscureText: obscureText ?? false,
           controller: controler,
           readOnly: readOnly ?? false,
@@ -55,6 +61,12 @@ class TextFieldAuthWidget extends StatelessWidget {
           keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hindText,
+            errorStyle: TextStyle(
+              color: Colors.red,
+              fontSize: 9.74.sp,
+              fontFamily: kTheArabicSansLight,
+              fontWeight: FontWeight.w600,
+            ),
             hintStyle: hintStyle ??
                 TextStyle(
                   color: const Color(0xFFD5D5D5),

@@ -88,132 +88,137 @@ class _LogInPage extends State<LogInPage> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            centerTitle: true,
-            surfaceTintColor: AppColors.kWhiteColor,
-            automaticallyImplyLeading: false,
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Get.off(const WelcomeScreen());
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    color: AppColors.kBlackColor,
-                    size: 25.r,
-                  )),
-            ],
-            title: SvgPicture.asset(
-              AppImages.imageLogoLogin,
-              height: 55.93.h,
-              width: 166.08.w,
-            )),
-        body: Padding(
-          padding: EdgeInsets.all(16.r),
-          child: SingleChildScrollView(
-            child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 60.h),
-                    Text(
-                      tr('kWelcomeBack'),
-                      style: TextStyle(
-                        color: AppColors.kTextBlackColor,
-                        fontSize: 28.74.sp,
-                        fontFamily: kTheArabicSansLight,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 38.h),
-                    TextFieldAuthWidget(
-                      hindText: tr('kEnterYourPhoneNumber'),
-                      titleText: tr('kPhoneNumber'),
-                      controler: phoneController,
-                      keyboardType: TextInputType.phone,
-                      validatorTextField: (val) {
-                        return Validator().validatorPhoneNumber(val);
+      child: SafeArea(
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(55.93.h),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(),
+                  SvgPicture.asset(
+                    AppImages.imageLogoLogin,
+                    height: 55.93.h,
+                    width: 166.08.w,
+                    fit: BoxFit.cover,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        Get.off(const WelcomeScreen());
                       },
-                    ),
-                    SizedBox(height: 17.h),
-                    Obx(() => TextFieldAuthWidget(
-                          hindText: tr('kEnterYourPassword'),
-                          titleText: tr('kPassword'),
-                          controler: passwordController,
-                          keyboardType: TextInputType.text,
-                          obscureText: _controller.obscureText.value,
-                          suffixWidget: IconButton(
-                            icon: Icon(
-                              _controller.obscureText.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: AppColors.kTextGrayColor,
-                            ),
-                            onPressed: _controller.togglePasswordVisibility,
-                          ),
-                          validatorTextField: (val) {
-                            return Validator().validatorPassword(val);
-                          },
-                        )),
-                    SizedBox(height: 17.h),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: GestureDetector(
-                        onTap: () => Get.to(const EnterPhoneScreen()),
-                        child: Text(
-                          tr('kForgotPassword'),
-                          style: TextStyle(
-                            color: AppColors.kSecondaryColor,
-                            fontSize: 14.sp,
-                            fontFamily: kTheArabicSansLight,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        color: AppColors.kBlackColor,
+                        size: 25.r,
+                      )),
+                ],
+              ),
+            ),
+          ),
+          body: Padding(
+            padding: EdgeInsets.all(16.r),
+            child: SingleChildScrollView(
+              child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 60.h),
+                      Text(
+                        tr('kWelcomeBack'),
+                        style: TextStyle(
+                          color: AppColors.kTextBlackColor,
+                          fontSize: 28.74.sp,
+                          fontFamily: kTheArabicSansLight,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    SizedBox(height: 38.h),
-                    GestureDetector(
-                      onTap: () {
-                        _submit();
-                      },
-                      child: Container(
-                        height: 59.70.h,
-                        decoration: ShapeDecoration(
-                          color: AppColors.kPrimaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.84),
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(tr('kLogin'),
-                              style: TextStyle(
-                                  fontSize: 22.11.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.kWhiteColor,
-                                  fontFamily: kTheArabicSansLight)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40.h),
-                    if (Platform.isAndroid) ...{
-                      const LoginVia(),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                    },
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.off(const SignUpPage());
+                      SizedBox(height: 38.h),
+                      TextFieldAuthWidget(
+                        hindText: tr('kEnterYourPhoneNumber'),
+                        titleText: tr('kPhoneNumber'),
+                        controler: phoneController,
+                        keyboardType: TextInputType.phone,
+                        validatorTextField: (val) {
+                          return Validator().validatorPhoneNumber(val);
                         },
-                        child: SizedBox(
-                          height: 30.h,
-                          width: 200.w,
+                      ),
+                      SizedBox(height: 17.h),
+                      Obx(() => TextFieldAuthWidget(
+                            hindText: tr('kEnterYourPassword'),
+                            titleText: tr('kPassword'),
+                            controler: passwordController,
+                            keyboardType: TextInputType.text,
+                            obscureText: _controller.obscureText.value,
+                            suffixWidget: IconButton(
+                              icon: Icon(
+                                _controller.obscureText.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: AppColors.kTextGrayColor,
+                              ),
+                              onPressed: _controller.togglePasswordVisibility,
+                            ),
+                            validatorTextField: (val) {
+                              return Validator().validatorPassword(val);
+                            },
+                          )),
+                      SizedBox(height: 17.h),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: GestureDetector(
+                          onTap: () => Get.to(const EnterPhoneScreen()),
+                          child: Text(
+                            tr('kForgotPassword'),
+                            style: TextStyle(
+                              color: AppColors.kSecondaryColor,
+                              fontSize: 14.sp,
+                              fontFamily: kTheArabicSansLight,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 38.h),
+                      GestureDetector(
+                        onTap: () {
+                          _submit();
+                        },
+                        child: Container(
+                          height: 59.70.h,
+                          decoration: ShapeDecoration(
+                            color: AppColors.kPrimaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.84),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(tr('kLogin'),
+                                style: TextStyle(
+                                    fontSize: 22.11.sp,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.kWhiteColor,
+                                    fontFamily: kTheArabicSansLight)),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 40.h),
+                      if (Platform.isAndroid) ...{
+                        const LoginVia(),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                      },
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.off(const SignUpPage());
+                          },
                           child: Text(
                             tr('kDoNotHaveAnAccount'),
                             textAlign: TextAlign.center,
@@ -227,9 +232,9 @@ class _LogInPage extends State<LogInPage> {
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                )),
+                    ],
+                  )),
+            ),
           ),
         ),
       ),
