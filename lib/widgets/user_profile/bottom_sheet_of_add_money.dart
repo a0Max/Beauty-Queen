@@ -1,7 +1,8 @@
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -126,8 +127,8 @@ Future showModalSheet(BuildContext context) {
                             message: (e.response?.data as Map).values.first,
                             title: 'خطا');
                       } catch (e, s) {
-                        FirebaseCrashlytics.instance
-                            .recordError('Api Crash $e', s);
+                        // FirebaseCrashlytics.instance
+                        //     .recordError('Api Crash $e', s);
                         Navigator.of(context).pop();
 
                         if (e == 'Check Network connection') {

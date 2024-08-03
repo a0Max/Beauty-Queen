@@ -4,7 +4,8 @@ import 'dart:math' hide log;
 // import 'dart:math';
 
 import 'package:beauty_queen/const/vars.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+// //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
@@ -203,7 +204,7 @@ class NotificationHelper {
         }
       }
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      // FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       log('Manual Reporting Crash $e');
     }
   }
@@ -304,7 +305,7 @@ class NotificationHelper {
         }
       }
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      // FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       log('Manual Reporting Crash $e');
     }
   }

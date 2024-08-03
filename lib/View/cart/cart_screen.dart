@@ -8,7 +8,8 @@ import 'package:beauty_queen/widgets/cart/cart_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -327,8 +328,8 @@ class _CartScreen extends State<CartScreen> {
                                                   .first,
                                               title: tr('Error'));
                                         } catch (e, s) {
-                                          FirebaseCrashlytics.instance
-                                              .recordError('Api Crash $e', s);
+                                          // FirebaseCrashlytics.instance
+                                          //     .recordError('Api Crash $e', s);
                                           log('e:$e');
                                           Navigator.of(context).pop();
                                           if (e == 'Check Network connection') {

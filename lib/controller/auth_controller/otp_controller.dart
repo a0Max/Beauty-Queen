@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/user_data_apis.dart';
@@ -38,7 +39,7 @@ class OTPController extends GetxController {
     } on DioException catch (e) {
       ErrorPopUp(message: e.toString(), title: tr('Error'));
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      // FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       ErrorPopUp(message: e.toString(), title: tr('Error'));
     }
   }
@@ -66,7 +67,7 @@ class OTPController extends GetxController {
     } on DioException catch (e) {
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      // FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
   }

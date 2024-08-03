@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/alkasam_data_api.dart';
@@ -26,7 +27,7 @@ class FlashDiscountsController extends GetxController {
       categoryData.value = [];
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       categoryData.value = [];
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }
@@ -99,7 +100,7 @@ class FlashDiscountsController extends GetxController {
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: (e.response?.data as Map).values.first, title: 'خطا');
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       generalSearchData.value = GeneralSearchModel();
       ErrorPopUp(message: tr('something_wrong'), title: 'خطا');
     }

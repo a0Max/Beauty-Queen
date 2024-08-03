@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:get/get.dart';
 
 import '../../const/api_connrction/queen_data_apis.dart';
@@ -51,7 +52,7 @@ class QueenOfferController extends GetxController
       log('getQueenOfferDataController:error:$e');
       generalSearchData.value = GeneralSearchModel();
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       log('getQueenOfferDataController:error:$e');
       generalSearchData.value = GeneralSearchModel();
       if (e == 'Check Network connection') {

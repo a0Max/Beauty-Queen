@@ -1,4 +1,5 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'categories_model.dart';
@@ -58,7 +59,7 @@ class ProductOptionsModel {
             .toList(),
       );
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       return ProductOptionsModel(
         id: json['id'] as int?,
         title: json['title'] as String?,

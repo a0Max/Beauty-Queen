@@ -1,4 +1,5 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import '../const/vars.dart';
@@ -104,7 +105,7 @@ class OrderDetailsModel {
             : CityAreaModel.fromJson(json['area'] as Map<String, dynamic>),
       );
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       return OrderDetailsModel(
           id: json['id'] as int?,
           userId: json['user_id'] as int?,

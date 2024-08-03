@@ -3,7 +3,8 @@ import 'package:beauty_queen/models/brand_model.dart';
 import 'package:beauty_queen/widgets/based/custom_button.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -751,8 +752,8 @@ class _MyDataScreen extends State<MyDataScreen> {
                                           .first,
                                       title: 'خطا');
                                 } catch (e, s) {
-                                  FirebaseCrashlytics.instance
-                                      .recordError('Api Crash $e', s);
+                                  // FirebaseCrashlytics.instance
+                                  //     .recordError('Api Crash $e', s);
                                   Navigator.of(context).pop();
                                   print('error:$e');
                                   if (e == 'Check Network connection') {

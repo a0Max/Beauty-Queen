@@ -1,7 +1,8 @@
 import 'package:beauty_queen/widgets/based/custom_button_2.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,7 @@ class _PasswordScreen extends State<PasswordScreen> {
       ErrorPopUp(
           message: (e.response?.data as Map).values.first, title: tr('Error'));
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       if (!context.mounted) return;
 
       Navigator.of(context).pop();

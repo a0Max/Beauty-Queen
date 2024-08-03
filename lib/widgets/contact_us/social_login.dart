@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:flutter/material.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:flutter_svg/svg.dart';
@@ -79,8 +80,8 @@ class SocialLogin extends StatelessWidget {
                               Uri.parse(listOfSocialMedia[index].url),
                               mode: LaunchMode.externalApplication);
                         } catch (e, s) {
-                          FirebaseCrashlytics.instance
-                              .recordError('Api Crash $e', s);
+                          // FirebaseCrashlytics.instance
+                          //     .recordError('Api Crash $e', s);
                           log('_makePhoneCall: error:$e');
                         }
                       },
