@@ -37,8 +37,8 @@ class CustomAlertDialog extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       child: Container(
-        height: height,
-        width: width,
+        height: height?.h,
+        width: width?.w,
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
         decoration: const BoxDecoration(
           color: AppColors.kPrimaryColor,
@@ -56,27 +56,50 @@ class CustomAlertDialog extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            FittedBox(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    if (onButtonOnePressed != null) {
+                      onButtonOnePressed!();
+                    } else {
+                      Get.back();
+                    }
+                  },
+                  child: Container(
+                    height: 42.65.h,
+                    // width: 145.91.w,
+
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
+                    color: AppColors.kBlackColor,
+                    child: Center(
+                      child: Text(
+                        buttonOneText.toString(),
+                        style: TextStyle(
+                            fontFamily: kTheArabicSansLight,
+                            color: AppColors.kWhiteColor,
+                            fontSize: 14.2.sp,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ),
+                ),
+                if (buttonTwo) ...{
+                  10.pw,
                   GestureDetector(
                     onTap: () {
-                      if (onButtonOnePressed != null) {
-                        onButtonOnePressed!();
-                      } else {
-                        Get.back();
-                      }
+                      Get.back();
+                      onButtonTwoPressed?.call();
                     },
                     child: Container(
                       height: 42.65.h,
-                      // width: 145.91.w,
-
                       padding: EdgeInsets.symmetric(horizontal: 7.w),
+                      // width: 145.91.w,
                       color: AppColors.kBlackColor,
                       child: Center(
                         child: Text(
-                          buttonOneText.toString(),
+                          buttonTwoText.toString(),
                           style: TextStyle(
                               fontFamily: kTheArabicSansLight,
                               color: AppColors.kWhiteColor,
@@ -86,34 +109,10 @@ class CustomAlertDialog extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (buttonTwo) ...{
-                    10.pw,
-                    GestureDetector(
-                      onTap: () {
-                        Get.back();
-                        onButtonTwoPressed?.call();
-                      },
-                      child: Container(
-                        height: 42.65.h,
-                        padding: EdgeInsets.symmetric(horizontal: 7.w),
-                        // width: 145.91.w,
-                        color: AppColors.kBlackColor,
-                        child: Center(
-                          child: Text(
-                            buttonTwoText.toString(),
-                            style: TextStyle(
-                                fontFamily: kTheArabicSansLight,
-                                color: AppColors.kWhiteColor,
-                                fontSize: 14.2.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                    ),
-                  }
-                ],
-              ),
+                }
+              ],
             ),
+
             // SizedBox(height: 13.h),
           ],
         ),
