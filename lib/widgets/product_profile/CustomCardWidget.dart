@@ -97,6 +97,13 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
       // height: 152.27.h,
       child: InkWell(
         onTap: () {
+          final AuthController _controllerLogin = Get.put(AuthController());
+          UserModel user = _controllerLogin.userData.value;
+          print('%%%%%%%%%:${user.id}');
+          if (user.id == null) {
+            _controllerLogin.alertOfLogin();
+            return;
+          }
           // Get.lazyPut(()=>ProductProfileController());
           // Get.to(ItemProfilePage(itemId:widget.newArrival.id??0));
           print('%%%%%%%%%');
@@ -473,6 +480,15 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                                 // size: 30,
                               ),
                               onPressed: () {
+                                final AuthController _controllerLogin =
+                                    Get.put(AuthController());
+                                UserModel user =
+                                    _controllerLogin.userData.value;
+                                print('%%%%%%%%%:${user.id}');
+                                if (user.id == null) {
+                                  _controllerLogin.alertOfLogin();
+                                  return;
+                                }
                                 setState(() {
                                   isFavorite = true;
                                 });

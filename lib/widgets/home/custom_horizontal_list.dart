@@ -8,7 +8,9 @@ import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../models/categories_model.dart';
+import '../../models/user_model.dart';
 
 class CustomImageList extends StatelessWidget {
   final List<CategoryModel> dataOfItem;
@@ -27,6 +29,13 @@ class CustomImageList extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () async {
+            final AuthController _controllerLogin = Get.put(AuthController());
+            UserModel user = _controllerLogin.userData.value;
+            print('%%%%%%%%%:${user.id}');
+            if (user.id == null) {
+              _controllerLogin.alertOfLogin();
+              return;
+            }
             final AlkasamController controller = Get.put(AlkasamController());
 
             await controller.updateCurrentCategoryId(

@@ -23,6 +23,7 @@ import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../controller/home_controller/home_controller.dart';
 import '../../controller/product_controller/product_profile_controller_provider.dart';
 import '../../models/sales_products_model.dart';
+import '../../models/user_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
@@ -109,6 +110,14 @@ class _HomePageState extends State<HomePage> {
               showFavIcon: true,
               showPersonIcon: true,
               onPressed: () {
+                final AuthController _controllerLogin =
+                    Get.put(AuthController());
+                UserModel user = _controllerLogin.userData.value;
+                print('%%%%%%%%%:${user.id}');
+                if (user.id == null) {
+                  _controllerLogin.alertOfLogin();
+                  return;
+                }
                 _scaffoldKey.currentState?.openEndDrawer();
               },
               isScrolled: _isScrolled,
@@ -155,6 +164,16 @@ class _HomePageState extends State<HomePage> {
                                       _controller.sliders.length ?? 0,
                                       (index) => GestureDetector(
                                             onTap: () async {
+                                              final AuthController
+                                                  _controllerLogin =
+                                                  Get.put(AuthController());
+                                              UserModel user = _controllerLogin
+                                                  .userData.value;
+                                              print('%%%%%%%%%:${user.id}');
+                                              if (user.id == null) {
+                                                _controllerLogin.alertOfLogin();
+                                                return;
+                                              }
                                               if (_controller
                                                       .sliders[index].isLink ==
                                                   "1") {
@@ -350,6 +369,16 @@ class _HomePageState extends State<HomePage> {
                                         0,
                                     (index) => GestureDetector(
                                           onTap: () {
+                                            final AuthController
+                                                _controllerLogin =
+                                                Get.put(AuthController());
+                                            UserModel user =
+                                                _controllerLogin.userData.value;
+                                            print('%%%%%%%%%:${user.id}');
+                                            if (user.id == null) {
+                                              _controllerLogin.alertOfLogin();
+                                              return;
+                                            }
                                             if (_controller.homeData.value
                                                     .newItems?[index].linkId !=
                                                 null) {
@@ -465,6 +494,15 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    final AuthController _controllerLogin =
+                                        Get.put(AuthController());
+                                    UserModel user =
+                                        _controllerLogin.userData.value;
+                                    print('%%%%%%%%%:${user.id}');
+                                    if (user.id == null) {
+                                      _controllerLogin.alertOfLogin();
+                                      return;
+                                    }
                                     Get.to(const NewArrivedScreen());
                                   },
                                   child: Text(
@@ -519,6 +557,15 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
+                                      final AuthController _controllerLogin =
+                                          Get.put(AuthController());
+                                      UserModel user =
+                                          _controllerLogin.userData.value;
+                                      print('%%%%%%%%%:${user.id}');
+                                      if (user.id == null) {
+                                        _controllerLogin.alertOfLogin();
+                                        return;
+                                      }
                                       FlashDiscountsController controller =
                                           Get.put(FlashDiscountsController());
                                       controller.getCategoriesDataController(
@@ -808,6 +855,15 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    final AuthController _controllerLogin =
+                                        Get.put(AuthController());
+                                    UserModel user =
+                                        _controllerLogin.userData.value;
+                                    print('%%%%%%%%%:${user.id}');
+                                    if (user.id == null) {
+                                      _controllerLogin.alertOfLogin();
+                                      return;
+                                    }
                                     Get.to(const BeautyPharmacyScreen());
                                   },
                                   child: Text(
@@ -947,6 +1003,20 @@ class _HomePageState extends State<HomePage> {
                                                         BorderRadius.circular(
                                                             10.69.r),
                                                     onTap: () {
+                                                      final AuthController
+                                                          _controllerLogin =
+                                                          Get.put(
+                                                              AuthController());
+                                                      UserModel user =
+                                                          _controllerLogin
+                                                              .userData.value;
+                                                      print(
+                                                          '%%%%%%%%%:${user.id}');
+                                                      if (user.id == null) {
+                                                        _controllerLogin
+                                                            .alertOfLogin();
+                                                        return;
+                                                      }
                                                       Get.to(ChangeNotifierProvider(
                                                           create: (context) =>
                                                               ProductProfileControllerProvider(),
@@ -1044,6 +1114,15 @@ class _HomePageState extends State<HomePage> {
                             _controller.homeData.value.banners?.length ?? 0,
                             (index) => GestureDetector(
                               onTap: () async {
+                                final AuthController _controllerLogin =
+                                    Get.put(AuthController());
+                                UserModel user =
+                                    _controllerLogin.userData.value;
+                                print('%%%%%%%%%:${user.id}');
+                                if (user.id == null) {
+                                  _controllerLogin.alertOfLogin();
+                                  return;
+                                }
                                 if (_controller.homeData.value.banners?[index]
                                         .isLink ==
                                     "1") {
@@ -1176,6 +1255,16 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          final AuthController
+                                              _controllerLogin =
+                                              Get.put(AuthController());
+                                          UserModel user =
+                                              _controllerLogin.userData.value;
+                                          print('%%%%%%%%%:${user.id}');
+                                          if (user.id == null) {
+                                            _controllerLogin.alertOfLogin();
+                                            return;
+                                          }
                                           final NavController controller =
                                               Get.put(NavController());
                                           controller.updateIndex(2);
@@ -1399,6 +1488,15 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    final AuthController _controllerLogin =
+                                        Get.put(AuthController());
+                                    UserModel user =
+                                        _controllerLogin.userData.value;
+                                    print('%%%%%%%%%:${user.id}');
+                                    if (user.id == null) {
+                                      _controllerLogin.alertOfLogin();
+                                      return;
+                                    }
                                     final NavController controller =
                                         Get.put(NavController());
                                     controller.updateIndex(3);
@@ -1433,6 +1531,15 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
+                                    final AuthController _controllerLogin =
+                                        Get.put(AuthController());
+                                    UserModel user =
+                                        _controllerLogin.userData.value;
+                                    print('%%%%%%%%%:${user.id}');
+                                    if (user.id == null) {
+                                      _controllerLogin.alertOfLogin();
+                                      return;
+                                    }
                                     if (_controller.homeData.value.discover
                                             ?.info?.linkType ==
                                         LinkTypes.brand) {
@@ -1578,6 +1685,16 @@ class _HomePageState extends State<HomePage> {
                                               horizontal: 10.0),
                                           child: GestureDetector(
                                             onTap: () async {
+                                              final AuthController
+                                                  _controllerLogin =
+                                                  Get.put(AuthController());
+                                              UserModel user = _controllerLogin
+                                                  .userData.value;
+                                              print('%%%%%%%%%:${user.id}');
+                                              if (user.id == null) {
+                                                _controllerLogin.alertOfLogin();
+                                                return;
+                                              }
                                               if (_controller
                                                       .homeData
                                                       .value
@@ -1883,6 +2000,15 @@ class _HomePageState extends State<HomePage> {
                                     0,
                                 (index) => GestureDetector(
                                       onTap: () async {
+                                        final AuthController _controllerLogin =
+                                            Get.put(AuthController());
+                                        UserModel user =
+                                            _controllerLogin.userData.value;
+                                        print('%%%%%%%%%:${user.id}');
+                                        if (user.id == null) {
+                                          _controllerLogin.alertOfLogin();
+                                          return;
+                                        }
                                         if (_controller.homeData.value
                                                 .specials?[index].isLink ==
                                             "1") {
@@ -2035,6 +2161,16 @@ class _HomePageState extends State<HomePage> {
                                         10.ph,
                                         GestureDetector(
                                           onTap: () {
+                                            final AuthController
+                                                _controllerLogin =
+                                                Get.put(AuthController());
+                                            UserModel user =
+                                                _controllerLogin.userData.value;
+                                            print('%%%%%%%%%:${user.id}');
+                                            if (user.id == null) {
+                                              _controllerLogin.alertOfLogin();
+                                              return;
+                                            }
                                             Get.to(const MagazineScreen());
                                           },
                                           child: Container(

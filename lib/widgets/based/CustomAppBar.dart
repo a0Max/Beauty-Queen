@@ -209,6 +209,14 @@ class CustomAppBar extends StatelessWidget {
                             makeSearchBarNotClickable == false ? true : false,
                         autofocus: makeSearchBarNotClickable ?? false,
                         onTap: () {
+                          final AuthController _controllerLogin =
+                              Get.put(AuthController());
+                          UserModel user = _controllerLogin.userData.value;
+                          print('%%%%%%%%%:${user.id}');
+                          if (user.id == null) {
+                            _controllerLogin.alertOfLogin();
+                            return;
+                          }
                           if (makeSearchBarNotClickable == false) {
                             Get.to(() => const QuickSearchScreen());
                           }

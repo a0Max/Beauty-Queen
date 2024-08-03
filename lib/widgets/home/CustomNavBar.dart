@@ -10,7 +10,9 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
+import '../../models/user_model.dart';
 
 class ReusableBottomNavigationBar extends StatelessWidget {
   const ReusableBottomNavigationBar({Key? key}) : super(key: key);
@@ -67,7 +69,15 @@ class ReusableBottomNavigationBar extends StatelessWidget {
           currentIndex: controller.currentIndex.value,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
-            controller.updateIndex(index);
+            final AuthController _controllerLogin = Get.put(AuthController());
+            UserModel user = _controllerLogin.userData.value;
+            print('%%%%%%%%%:${user.id}');
+            if (user.id == null) {
+              _controllerLogin.alertOfLogin();
+              return;
+            } else {
+              controller.updateIndex(index);
+            }
           },
           items: navigationItems.map((item) {
             return BottomNavigationBarItem(

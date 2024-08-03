@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../View/brands/branddetail_screen.dart';
 import '../../const/vars.dart';
+import '../../controller/auth_controller/auth_controler.dart';
+import '../../models/user_model.dart';
 
 class ScrollableContainerList extends StatelessWidget {
   List<BrandModel> listOfBrands;
@@ -31,6 +33,14 @@ class ScrollableContainerList extends StatelessWidget {
             listOfBrands.length,
             (index) => GestureDetector(
                   onTap: () {
+                    final AuthController _controllerLogin =
+                        Get.put(AuthController());
+                    UserModel user = _controllerLogin.userData.value;
+                    print('%%%%%%%%%:${user.id}');
+                    if (user.id == null) {
+                      _controllerLogin.alertOfLogin();
+                      return;
+                    }
                     Get.to(BrandDetailScreen(
                       brandId: listOfBrands[index].id ?? 0,
                     ));
