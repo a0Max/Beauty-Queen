@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'const/analytics_client.dart';
 import 'const/app_colors.dart';
 import 'const/notification.dart';
 import 'const/styles.dart';
@@ -30,7 +29,7 @@ Future<void> main() async {
   NotificationHelper();
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
   FirebasePerformance.instance.setPerformanceCollectionEnabled(!kDebugMode);
-  Analytics.instance.setAnalyticsCollectionEnabled(!kDebugMode);
+  // Analytics.instance.setAnalyticsCollectionEnabled(!kDebugMode);
 
   runApp(EasyLocalization(
       supportedLocales: const [Locale('ar')],

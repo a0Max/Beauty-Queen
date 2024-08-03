@@ -20,6 +20,7 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+apply plugin: 'com.google.firebase.crashlytics'
 
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
@@ -28,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
 }
 android {
     namespace "com.beauty.beauty_queen"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -46,11 +47,11 @@ android {
 
     defaultConfig {
         applicationId "com.beauty.beauty_queen"
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 24
+        targetSdkVersion 33
+        multiDexEnabled  true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        multiDexEnabled = true
     }
     signingConfigs {
         release {
@@ -71,5 +72,8 @@ flutter {
     source '../..'
 }
 
-dependencies {}
-apply plugin: 'com.google.firebase.crashlytics'
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
+}
