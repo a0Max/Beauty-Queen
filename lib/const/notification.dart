@@ -4,8 +4,6 @@ import 'dart:math' hide log;
 // import 'dart:math';
 
 import 'package:beauty_queen/const/vars.dart';
-// //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
@@ -28,7 +26,8 @@ import '../controller/product_controller/product_profile_controller_provider.dar
 import 'api_connrction/user_data_apis.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  NotificationHelper.onBgNotificationOpen(json.encode(message.data));
+  print('firebaseMessagingBackgroundHandler:$message');
+  // NotificationHelper.onBgNotificationOpen(json.encode(message.data));
 }
 
 class NotificationHelper {
@@ -66,18 +65,25 @@ class NotificationHelper {
 
       // Get Token and just Print it.
       await _saveFCMToken();
+      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
       onTokenRefresh();
+      FirebaseMessaging.instance.getInitialMessage().then((message) {
+        if (message != null) {
+          _handleMessage(message);
+        }
+      });
+
+      FirebaseMessaging.onMessageOpenedApp.listen((message) {
+        _handleMessage(message);
+      });
       // Init Listen for Notifications.
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        if (kDebugMode) {
-          debugPrint(
-            "methodName: 'FirebaseMessaging@onMessage',\n"
+        // if (kDebugMode) {
+        print("methodName: 'FirebaseMessaging@onMessage',\n"
             "fileName: 'fcm_manager.dart',\n"
-            "response: ${message.data},\n",
-            wrapWidth: 512,
-          );
-        }
+            "response: ${message.data},\n");
+        // }
         //
         if (fcmOnMessage != null) fcmOnMessage!(message);
         //
@@ -107,9 +113,9 @@ class NotificationHelper {
         android: initializationSettingsAndroid,
         iOS: initializationSettingsIOS,
       );
-      await _localNotify.initialize(initializationSettings,
-          onDidReceiveBackgroundNotificationResponse: onNotificationOpen,
-          onDidReceiveNotificationResponse: onNotificationOpen);
+      // await _localNotify.initialize(initializationSettings,
+      //     onDidReceiveBackgroundNotificationResponse: onNotificationOpen,
+      //     onDidReceiveNotificationResponse: onNotificationOpen);
       _init = true;
     }
   }
@@ -119,19 +125,20 @@ class NotificationHelper {
     if (kDebugMode) debugPrint("_fcmToken: $token");
   }
 
-  static Future<void> onBgNotificationOpen(String? x) async {
+  void _handleMessage(RemoteMessage message) {
+    print("Notification Data: ${message.data}");
     try {
-      final message = json.decode(x!);
-      print('message_notification--:${message}');
-      String? page = message['"page"'];
-      String? page2 = message['page'];
+      String? page = message.data['page'];
+      print(
+          "Notification Data:$page - ${(page != null)} - ${(page == LinkTypes.product)}");
+
       if (page != null) {
         final HomeController _controllerHome = Get.put(HomeController());
 
         _controllerHome.getHomeDataController();
 
-        if (page == '"${LinkTypes.product}"' || page2 == LinkTypes.product) {
-          String? key = message['value'];
+        if (page == LinkTypes.product) {
+          String? key = message.data['value'];
           print('page:${page}, key:$key');
 
           Navigator.of(Get.context!).push(
@@ -141,9 +148,8 @@ class NotificationHelper {
                   child: ItemProfilePage(itemId: int.parse(key ?? '0'))),
             ),
           );
-        } else if (page == '"${LinkTypes.category}"' ||
-            page2 == LinkTypes.category) {
-          String? key = message['value'];
+        } else if (page == LinkTypes.category) {
+          String? key = message.data['value'];
           print('page:${page}, key:$key');
 
           AlkasamController controller = Get.put(AlkasamController());
@@ -157,8 +163,8 @@ class NotificationHelper {
               ),
             ),
           );
-        } else if (page == '"${LinkTypes.brand}"' || page2 == LinkTypes.brand) {
-          String? key = message['value'];
+        } else if (page == LinkTypes.brand) {
+          String? key = message.data['value'];
           print('page:${page}, key:$key');
 
           Navigator.of(Get.context!).push(
@@ -168,34 +174,31 @@ class NotificationHelper {
               ),
             ),
           );
-        } else if (page == '"${LinkTypes.brandsPage}"' ||
-            page2 == LinkTypes.brandsPage) {
+        } else if (page == LinkTypes.brandsPage) {
           Navigator.of(Get.context!).push(
             CupertinoPageRoute(
               builder: (context) => const BrandScreen(),
             ),
           );
-        } else if (page == '"${LinkTypes.sales}"' || page2 == LinkTypes.sales) {
+        } else if (page == LinkTypes.sales) {
           Navigator.of(Get.context!).push(
             CupertinoPageRoute(
               builder: (context) => const DiscountScreen(),
             ),
           );
-        } else if (page == '"${LinkTypes.magazine}"' ||
-            page2 == LinkTypes.magazine) {
+        } else if (page == LinkTypes.magazine) {
           Navigator.of(Get.context!).push(
             CupertinoPageRoute(
               builder: (context) => const MagazineScreen(),
             ),
           );
-        } else if (page == '"${LinkTypes.gifts}"' || page2 == LinkTypes.gifts) {
+        } else if (page == LinkTypes.gifts) {
           Navigator.of(Get.context!).push(
             CupertinoPageRoute(
               builder: (context) => const GuidanceScreen(),
             ),
           );
-        } else if (page == '"${LinkTypes.offers}"' ||
-            page2 == LinkTypes.offers) {
+        } else if (page == LinkTypes.offers) {
           Navigator.of(Get.context!).push(
             CupertinoPageRoute(
               builder: (context) => const BeautyPharmacyScreen(),
@@ -204,111 +207,197 @@ class NotificationHelper {
         }
       }
     } catch (e, s) {
-      // FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       log('Manual Reporting Crash $e');
     }
+    // Perform any other action you want when the notification is opened
   }
 
-  static Map convertPayload(String payload) {
-    final String payload0 = payload.substring(1, payload.length - 1);
-    List<String> split = [];
-    payload0.split(",").forEach((String s) => split.addAll(s.split(":")));
-    Map mapped = {};
-    for (int i = 0; i < split.length + 1; i++) {
-      if (i % 2 == 1) {
-        mapped.addAll({split[i - 1].trim().toString(): split[i].trim()});
-      }
-    }
-    return mapped;
-  }
+  // static Future<void> onBgNotificationOpen(String? x) async {
+  //   try {
+  //     final message = json.decode(x!);
+  //     print('message_notification--:${message}');
+  //     print('message_notification--:${x}');
+  //     String? page2 = message['page'];
+  //     print('message_notification--:${(page2 == LinkTypes.magazine)}, $page2');
+  //
+  //     if (page2 != null) {
+  //       final HomeController _controllerHome = Get.put(HomeController());
+  //
+  //       _controllerHome.getHomeDataController();
+  //
+  //       if (page2 == '"${LinkTypes.product}"' || page2 == LinkTypes.product) {
+  //         String? key = message['value'];
+  //         print('page:${page2}, key:$key');
+  //
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => ChangeNotifierProvider(
+  //                 create: (context) => ProductProfileControllerProvider(),
+  //                 child: ItemProfilePage(itemId: int.parse(key ?? '0'))),
+  //           ),
+  //         );
+  //       } else if (page2 == LinkTypes.category) {
+  //         String? key = message['value'];
+  //         print('page:${page2}, key:$key');
+  //
+  //         AlkasamController controller = Get.put(AlkasamController());
+  //         controller.updateCurrentCategoryId(
+  //             newId: int.parse(key ?? '0'), getChild: null);
+  //         // Get.to();
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => FliterScreen2(
+  //               categoryId: int.parse(key ?? '0'),
+  //             ),
+  //           ),
+  //         );
+  //       } else if (page2 == LinkTypes.brand) {
+  //         String? key = message['value'];
+  //         print('page:${page2}, key:$key');
+  //
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => BrandDetailScreen(
+  //               brandId: int.parse(key ?? '0'),
+  //             ),
+  //           ),
+  //         );
+  //       } else if (page2 == LinkTypes.brandsPage) {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const BrandScreen(),
+  //           ),
+  //         );
+  //       } else if (page2 == LinkTypes.sales) {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const DiscountScreen(),
+  //           ),
+  //         );
+  //       } else if (page2 == LinkTypes.magazine) {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const MagazineScreen(),
+  //           ),
+  //         );
+  //       } else if (page2 == LinkTypes.gifts) {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const GuidanceScreen(),
+  //           ),
+  //         );
+  //       } else if (page2 == LinkTypes.offers) {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const BeautyPharmacyScreen(),
+  //           ),
+  //         );
+  //       }
+  //     }
+  //   } catch (e, s) {
+  //     log('Manual Reporting Crash $e');
+  //   }
+  // }
+  //
+  // static Map convertPayload(String payload) {
+  //   final String payload0 = payload.substring(1, payload.length - 1);
+  //   List<String> split = [];
+  //   payload0.split(",").forEach((String s) => split.addAll(s.split(":")));
+  //   Map mapped = {};
+  //   for (int i = 0; i < split.length + 1; i++) {
+  //     if (i % 2 == 1) {
+  //       mapped.addAll({split[i - 1].trim().toString(): split[i].trim()});
+  //     }
+  //   }
+  //   return mapped;
+  // }
 
-  static Future<void> onNotificationOpen(NotificationResponse? response) async {
-    try {
-      print('message_notification00:${response}');
-      final Map _data = convertPayload(response!.payload!);
-      print('message_notification:${_data}');
-      print('message_notification_page:${_data.containsKey('"page"')}');
-      print('message_notification_page:${_data}');
-      String? page = _data['"page"'];
-      if (page != null) {
-        final HomeController _controllerHome = Get.put(HomeController());
-
-        _controllerHome.getHomeDataController();
-
-        if (page == '"${LinkTypes.product}"') {
-          String? key = _data['"value"'].toString().split('"')[1];
-          print('page:${page}, key:$key');
-
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => ChangeNotifierProvider(
-                  create: (context) => ProductProfileControllerProvider(),
-                  child: ItemProfilePage(itemId: int.parse(key ?? '0'))),
-            ),
-          );
-        } else if (page == '"${LinkTypes.category}"') {
-          String? key = _data['"value"'].toString().split('"')[1];
-          print('page:${page}, key:$key');
-
-          AlkasamController controller = Get.put(AlkasamController());
-          controller.updateCurrentCategoryId(
-              newId: int.parse(key ?? '0'), getChild: null);
-          // Get.to();
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => FliterScreen2(
-                categoryId: int.parse(key ?? '0'),
-              ),
-            ),
-          );
-        } else if (page == '"${LinkTypes.brand}"') {
-          String? key = _data['"value"'].toString().split('"')[1];
-          print('page:${page}, key:$key');
-
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => BrandDetailScreen(
-                brandId: int.parse(key ?? '0'),
-              ),
-            ),
-          );
-        } else if (page == '"${LinkTypes.brandsPage}"') {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const BrandScreen(),
-            ),
-          );
-        } else if (page == '"${LinkTypes.sales}"') {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const DiscountScreen(),
-            ),
-          );
-        } else if (page == '"${LinkTypes.magazine}"') {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const MagazineScreen(),
-            ),
-          );
-        } else if (page == '"${LinkTypes.gifts}"') {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const GuidanceScreen(),
-            ),
-          );
-        } else if (page == '"${LinkTypes.offers}"') {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const BeautyPharmacyScreen(),
-            ),
-          );
-        }
-      }
-    } catch (e, s) {
-      // FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
-      log('Manual Reporting Crash $e');
-    }
-  }
+  // static Future<void> onNotificationOpen(NotificationResponse? response) async {
+  //   try {
+  //     print('message_notification00:${response}');
+  //     final Map _data = convertPayload(response!.payload!);
+  //     print('message_notification:${_data}');
+  //     print('message_notification_page:${_data.containsKey('"page"')}');
+  //     print('message_notification_page:${_data}');
+  //     String? page = _data['"page"'];
+  //     if (page != null) {
+  //       final HomeController _controllerHome = Get.put(HomeController());
+  //
+  //       _controllerHome.getHomeDataController();
+  //
+  //       if (page == '"${LinkTypes.product}"') {
+  //         String? key = _data['"value"'].toString().split('"')[1];
+  //         print('page:${page}, key:$key');
+  //
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => ChangeNotifierProvider(
+  //                 create: (context) => ProductProfileControllerProvider(),
+  //                 child: ItemProfilePage(itemId: int.parse(key ?? '0'))),
+  //           ),
+  //         );
+  //       } else if (page == '"${LinkTypes.category}"') {
+  //         String? key = _data['"value"'].toString().split('"')[1];
+  //         print('page:${page}, key:$key');
+  //
+  //         AlkasamController controller = Get.put(AlkasamController());
+  //         controller.updateCurrentCategoryId(
+  //             newId: int.parse(key ?? '0'), getChild: null);
+  //         // Get.to();
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => FliterScreen2(
+  //               categoryId: int.parse(key ?? '0'),
+  //             ),
+  //           ),
+  //         );
+  //       } else if (page == '"${LinkTypes.brand}"') {
+  //         String? key = _data['"value"'].toString().split('"')[1];
+  //         print('page:${page}, key:$key');
+  //
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => BrandDetailScreen(
+  //               brandId: int.parse(key ?? '0'),
+  //             ),
+  //           ),
+  //         );
+  //       } else if (page == '"${LinkTypes.brandsPage}"') {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const BrandScreen(),
+  //           ),
+  //         );
+  //       } else if (page == '"${LinkTypes.sales}"') {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const DiscountScreen(),
+  //           ),
+  //         );
+  //       } else if (page == '"${LinkTypes.magazine}"') {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const MagazineScreen(),
+  //           ),
+  //         );
+  //       } else if (page == '"${LinkTypes.gifts}"') {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const GuidanceScreen(),
+  //           ),
+  //         );
+  //       } else if (page == '"${LinkTypes.offers}"') {
+  //         Navigator.of(Get.context!).push(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const BeautyPharmacyScreen(),
+  //           ),
+  //         );
+  //       }
+  //     }
+  //   } catch (e, s) {
+  //     log('Manual Reporting Crash $e');
+  //   }
+  // }
 
   // Helper Functions
   void showNotification(RemoteMessage payload) async {
