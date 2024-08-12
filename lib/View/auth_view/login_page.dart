@@ -56,18 +56,18 @@ class _LogInPage extends State<LogInPage> {
 
       Navigator.of(context).pop();
 
-      if (_controller.userData.value.isPhoneVerified == "0") {
-        Get.to(OtpPage(
-          phone: _controller.userData.value.phone ?? '',
-        ));
-      } else {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const MainView(),
-            ),
-            (route) => false);
-      }
+      // if (_controller.userData.value.isPhoneVerified == "0") {
+      //   Get.to(OtpPage(
+      //     phone: _controller.userData.value.phone ?? '',
+      //   ));
+      // } else {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MainView(),
+          ),
+          (route) => false);
+      // }
     } on DioException catch (e) {
       if (!context.mounted) return;
 

@@ -79,16 +79,7 @@ class AuthController extends GetxController {
     showProgress.value = false;
     await Future.delayed(const Duration(milliseconds: 500));
     if (userData.value.id != null) {
-      if (userData.value.isPhoneVerified == "0" &&
-          userData.value.phone != null) {
-        Get.off(() => const WelcomeScreen());
-
-        Get.to(OtpPage(
-          phone: userData.value.phone ?? '',
-        ));
-      } else {
-        Get.off(() => const MainView());
-      }
+      Get.off(() => const MainView());
     } else {
       Get.off(() => const WelcomeScreen());
     }

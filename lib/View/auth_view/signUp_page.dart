@@ -20,6 +20,7 @@ import '../../widgets/auth_widgets/text_field_auth_widget.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/auth_widgets/loginVia.dart';
+import '../home/bottom_nav_screen.dart';
 import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -56,12 +57,18 @@ class _SignUpPage extends State<SignUpPage> {
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
-      Navigator.push(
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => OtpPage(
+      //               phone: phoneController.text,
+      //             )));
+      Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => OtpPage(
-                    phone: phoneController.text,
-                  )));
+            builder: (context) => const MainView(),
+          ),
+          (route) => false);
       // Navigator.push(
       //     context,
       //     MaterialPageRoute(
@@ -78,7 +85,7 @@ class _SignUpPage extends State<SignUpPage> {
       ErrorPopUp(
           message: (e.response?.data as Map).values.first, title: tr('Error'));
     } catch (e, s) {
-    //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+      //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
       if (!context.mounted) return;
 
       Navigator.of(context).pop();
