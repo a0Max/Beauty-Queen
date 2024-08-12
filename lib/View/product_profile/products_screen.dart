@@ -908,7 +908,8 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       ),
                                                     ),
                                                     IconButton(
-                                                      icon: Icon(Icons.share),
+                                                      icon: Icon(
+                                                          CupertinoIcons.share),
                                                       onPressed: () {
                                                         Share.share(
                                                             '${Connection.baseURL}${UniVars.product}/${controller.productData.last.product.id}');
