@@ -3,6 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import '../models/grid_item_data.dart';
 import 'app_images.dart';
 
+abstract class UniVars {
+  UniVars._(); // to disable creating an object of this data.
+
+  static const product = 'product';
+
+  static List<String> get values => [product];
+}
+
 abstract class Connection {
   Connection._();
 

@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:widget_zoom/widget_zoom.dart';
 import '../../const/app_colors.dart';
 import '../../const/size.dart';
@@ -881,21 +882,39 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       )
                                                     : SizedBox(),
                                                 10.ph,
-                                                Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: Text(
-                                                    controller.productData.last
-                                                            .product?.title ??
-                                                        '',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            kTheArabicSansLight,
-                                                        fontSize: 15.sp,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color: AppColors
-                                                            .kBlackColor),
-                                                  ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Text(
+                                                        controller
+                                                                .productData
+                                                                .last
+                                                                .product
+                                                                ?.title ??
+                                                            '',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                kTheArabicSansLight,
+                                                            fontSize: 15.sp,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            color: AppColors
+                                                                .kBlackColor),
+                                                      ),
+                                                    ),
+                                                    IconButton(
+                                                      icon: Icon(Icons.share),
+                                                      onPressed: () {
+                                                        Share.share(
+                                                            '${Connection.baseURL}${UniVars.product}/${controller.productData.last.product.id}');
+                                                      },
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             )
