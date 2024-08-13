@@ -887,33 +887,42 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: Text(
-                                                        controller
-                                                                .productData
-                                                                .last
-                                                                .product
-                                                                ?.title ??
-                                                            '',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                kTheArabicSansLight,
-                                                            fontSize: 15.sp,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            color: AppColors
-                                                                .kBlackColor),
+                                                    Expanded(
+                                                      flex: 6,
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Text(
+                                                            controller
+                                                                    .productData
+                                                                    .last
+                                                                    .product
+                                                                    ?.title ??
+                                                                '',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    kTheArabicSansLight,
+                                                                fontSize: 15.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                color: AppColors
+                                                                    .kBlackColor),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .visible),
                                                       ),
                                                     ),
-                                                    IconButton(
-                                                      icon: Icon(
-                                                          CupertinoIcons.share),
-                                                      onPressed: () {
-                                                        Share.share(
-                                                            '${Connection.baseURL}${UniVars.product}/${controller.productData.last.product.id}');
-                                                      },
+                                                    Expanded(
+                                                      child: IconButton(
+                                                        icon: const Icon(
+                                                            CupertinoIcons
+                                                                .share),
+                                                        onPressed: () {
+                                                          Share.share(
+                                                              '${Connection.baseURL}${UniVars.product}/${controller.productData.last.product.id}');
+                                                        },
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
