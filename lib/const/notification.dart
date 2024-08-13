@@ -133,7 +133,7 @@ class NotificationHelper {
           String? key = message.data['value'];
           print('page:${page}, key:$key');
 
-          Get.off(() => ChangeNotifierProvider(
+          Get.to(() => ChangeNotifierProvider(
               create: (context) => ProductProfileControllerProvider(),
               child: ItemProfilePage(itemId: int.parse(key ?? '0'))));
         } else if (page == LinkTypes.category) {
@@ -144,24 +144,24 @@ class NotificationHelper {
           controller.updateCurrentCategoryId(
               newId: int.parse(key ?? '0'), getChild: null);
           // Get.to();
-          Get.off(() => FliterScreen2(categoryId: int.parse(key ?? '0')));
+          Get.to(() => FliterScreen2(categoryId: int.parse(key ?? '0')));
         } else if (page == LinkTypes.brand) {
           String? key = message.data['value'];
           print('page:${page}, key:$key');
 
-          Get.off(() => BrandDetailScreen(brandId: int.parse(key ?? '0')));
+          Get.to(() => BrandDetailScreen(brandId: int.parse(key ?? '0')));
         } else if (page == LinkTypes.brandsPage) {
           Get.off(
             () => const BrandScreen(),
           );
         } else if (page == LinkTypes.sales) {
-          Get.off(() => const DiscountScreen());
+          Get.to(() => const DiscountScreen());
         } else if (page == LinkTypes.magazine) {
-          Get.off(() => const MagazineScreen());
+          Get.to(() => const MagazineScreen());
         } else if (page == LinkTypes.gifts) {
-          Get.off(() => const GuidanceScreen());
+          Get.to(() => const GuidanceScreen());
         } else if (page == LinkTypes.offers) {
-          Get.off(() => const BeautyPharmacyScreen());
+          Get.to(() => const BeautyPharmacyScreen());
         }
       }
     } catch (e, s) {
