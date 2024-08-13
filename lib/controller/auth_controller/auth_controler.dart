@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:beauty_queen/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:flutter/material.dart';
@@ -78,6 +79,15 @@ class AuthController extends GetxController {
     }
     showProgress.value = false;
     await Future.delayed(const Duration(milliseconds: 500));
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        NotificationHelper().handleMessage(message);
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      NotificationHelper().handleMessage(message);
+    });
     if (userData.value.id != null) {
       Get.off(() => const MainView());
     } else {

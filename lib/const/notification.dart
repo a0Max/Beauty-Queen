@@ -68,15 +68,7 @@ class NotificationHelper {
       FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
       onTokenRefresh();
-      FirebaseMessaging.instance.getInitialMessage().then((message) {
-        if (message != null) {
-          _handleMessage(message);
-        }
-      });
 
-      FirebaseMessaging.onMessageOpenedApp.listen((message) {
-        _handleMessage(message);
-      });
       // Init Listen for Notifications.
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         // if (kDebugMode) {
@@ -125,7 +117,7 @@ class NotificationHelper {
     if (kDebugMode) debugPrint("_fcmToken: $token");
   }
 
-  void _handleMessage(RemoteMessage message) {
+  void handleMessage(RemoteMessage message) {
     print("Notification Data: ${message.data}");
     try {
       String? page = message.data['page'];
@@ -141,13 +133,9 @@ class NotificationHelper {
           String? key = message.data['value'];
           print('page:${page}, key:$key');
 
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => ChangeNotifierProvider(
-                  create: (context) => ProductProfileControllerProvider(),
-                  child: ItemProfilePage(itemId: int.parse(key ?? '0'))),
-            ),
-          );
+          Get.off(() => ChangeNotifierProvider(
+              create: (context) => ProductProfileControllerProvider(),
+              child: ItemProfilePage(itemId: int.parse(key ?? '0'))));
         } else if (page == LinkTypes.category) {
           String? key = message.data['value'];
           print('page:${page}, key:$key');
@@ -156,54 +144,24 @@ class NotificationHelper {
           controller.updateCurrentCategoryId(
               newId: int.parse(key ?? '0'), getChild: null);
           // Get.to();
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => FliterScreen2(
-                categoryId: int.parse(key ?? '0'),
-              ),
-            ),
-          );
+          Get.off(() => FliterScreen2(categoryId: int.parse(key ?? '0')));
         } else if (page == LinkTypes.brand) {
           String? key = message.data['value'];
           print('page:${page}, key:$key');
 
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => BrandDetailScreen(
-                brandId: int.parse(key ?? '0'),
-              ),
-            ),
-          );
+          Get.off(() => BrandDetailScreen(brandId: int.parse(key ?? '0')));
         } else if (page == LinkTypes.brandsPage) {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const BrandScreen(),
-            ),
+          Get.off(
+            () => const BrandScreen(),
           );
         } else if (page == LinkTypes.sales) {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const DiscountScreen(),
-            ),
-          );
+          Get.off(() => const DiscountScreen());
         } else if (page == LinkTypes.magazine) {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const MagazineScreen(),
-            ),
-          );
+          Get.off(() => const MagazineScreen());
         } else if (page == LinkTypes.gifts) {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const GuidanceScreen(),
-            ),
-          );
+          Get.off(() => const GuidanceScreen());
         } else if (page == LinkTypes.offers) {
-          Navigator.of(Get.context!).push(
-            CupertinoPageRoute(
-              builder: (context) => const BeautyPharmacyScreen(),
-            ),
-          );
+          Get.off(() => const BeautyPharmacyScreen());
         }
       }
     } catch (e, s) {
