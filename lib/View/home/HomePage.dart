@@ -1769,9 +1769,9 @@ class _HomePageState extends State<HomePage> {
                                                 } else {
                                                   try {
                                                     print(
-                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
+                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].linkType}");
                                                     print(
-                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
+                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].urlLink}");
                                                     List linkData = _controller
                                                             .homeData
                                                             .value
