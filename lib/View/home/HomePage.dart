@@ -1775,7 +1775,8 @@ class _HomePageState extends State<HomePage> {
                                                     List linkData = _controller
                                                             .homeData
                                                             .value
-                                                            .specials?[index]
+                                                            .organicItems?[
+                                                                index]
                                                             .urlLink
                                                             .toString()
                                                             .split("/") ??
@@ -1793,7 +1794,7 @@ class _HomePageState extends State<HomePage> {
                                                               searchWord));
                                                     } else {
                                                       Uri _url = Uri.parse(
-                                                          'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                          'https://${_controller.homeData.value.organicItems?[index].urlLink}');
                                                       await launchUrl(
                                                         _url,
                                                         mode: LaunchMode
@@ -1805,7 +1806,7 @@ class _HomePageState extends State<HomePage> {
                                                     //     .recordError(
                                                     //         'Api Crash $e', s);
                                                     Uri _url = Uri.parse(
-                                                        'https://${_controller.homeData.value.specials?[index].urlLink}');
+                                                        'https://${_controller.homeData.value.organicItems?[index].urlLink}');
                                                     await launchUrl(
                                                       _url,
                                                       mode: LaunchMode
