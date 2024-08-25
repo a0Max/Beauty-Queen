@@ -939,34 +939,36 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                     if ((controller.productData.last?.product
                                             ?.isQueena ==
                                         "1")) ...{
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            AppImages.pointsQueenaImage,
-                                            width: 30.w,
-                                          ),
-                                          10.pw,
-                                          Text(tr('collect')),
-                                          if ("${controller.productData.last.product.isOffer}" ==
-                                              '1') ...{
-                                            Text(
-                                              " +${double.parse("${double.parse('${controller.productData.last.product.offerPrice}') / 10}").toString().split('.').first} ",
-                                              style: const TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontFamily:
-                                                      kTheArabicSansLight),
+                                      FittedBox(
+                                        child: Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              AppImages.pointsQueenaImage,
+                                              width: 30.w,
                                             ),
-                                          } else ...{
-                                            Text(
-                                              " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
-                                              style: const TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontFamily:
-                                                      kTheArabicSansLight),
-                                            ),
-                                          },
-                                          Text(tr('con_collect')),
-                                        ],
+                                            10.pw,
+                                            Text(tr('collect')),
+                                            if ("${controller.productData.last.product.isOffer}" ==
+                                                '1') ...{
+                                              Text(
+                                                " +${double.parse("${double.parse('${controller.productData.last.product.offerPrice}') / 10}").toString().split('.').first} ",
+                                                style: const TextStyle(
+                                                    color: AppColors.mainColor,
+                                                    fontFamily:
+                                                        kTheArabicSansLight),
+                                              ),
+                                            } else ...{
+                                              Text(
+                                                " +${double.parse("${double.parse('${controller.productData.last.product.price}') / 10}").toString().split('.').first} ",
+                                                style: const TextStyle(
+                                                    color: AppColors.mainColor,
+                                                    fontFamily:
+                                                        kTheArabicSansLight),
+                                              ),
+                                            },
+                                            Text(tr('con_collect')),
+                                          ],
+                                        ),
                                       ),
                                       GestureDetector(
                                         onTap: () {

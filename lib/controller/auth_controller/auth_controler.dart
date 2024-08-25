@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 //import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +24,10 @@ import '../../models/city_area_model.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
+
+import 'package:uni_links/uni_links.dart' as uniLinks;
+import '../../const/unilink_client.dart';
+import 'package:quiver/strings.dart';
 
 class AuthController extends GetxController {
   var obscureText = true.obs;
@@ -61,6 +66,42 @@ class AuthController extends GetxController {
     getUserData();
   }
 
+  Future<bool?> _initUniLinks() async {
+    bool? linkState;
+    try {
+      await Future.delayed(const Duration(seconds: 1), () {});
+      String? initialLink = await uniLinks.getInitialLink();
+      if (isNotBlank(initialLink)) {
+        debugPrint('initialLink $initialLink');
+        linkState = await UniLinkClient.launchAd(initialLink!);
+      } else {
+        Uri? initialUri = await uniLinks.getInitialUri();
+        if (initialUri != null) {
+          debugPrint('initialLink $initialLink');
+          linkState = await UniLinkClient.launchAd(initialUri.toString());
+        }
+      }
+    } on PlatformException catch (e, s) {
+      print('Manuel Reporting Crash $e - $s');
+    }
+
+    uniLinks.linkStream.listen((String? link) async {
+      if (isNotBlank(link)) {
+        debugPrint(link);
+        linkState = await UniLinkClient.launchAd(link!);
+      } else {
+        uniLinks.uriLinkStream.listen((link) async {
+          linkState = await UniLinkClient.launchAd(link.toString());
+        }, onError: (e, s) {
+          print('Manuel Reporting Crash $e - $s');
+        });
+      }
+    }, onError: (e, s) {
+      print('Manuel Reporting Crash $e - $s');
+    });
+    return linkState;
+  }
+
   var progressValue = 0.0.obs;
   var showProgress = true.obs;
 
@@ -79,6 +120,10 @@ class AuthController extends GetxController {
     }
     showProgress.value = false;
     await Future.delayed(const Duration(milliseconds: 500));
+    bool? linkState = await _initUniLinks();
+    if (linkState == true) {
+      return;
+    }
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         NotificationHelper().handleMessage(message);
