@@ -937,7 +937,7 @@ class _HomePageState extends State<HomePage> {
                                                       .size
                                                       .width -
                                                   40,
-                                              // height: 181.04.h,
+                                              height: 280.h - 170.h,
                                               padding:
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 20),
@@ -953,121 +953,128 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ],
                                               ),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  10.ph,
-                                                  Text(
-                                                    _controller
-                                                            .homeData
-                                                            .value
-                                                            .offers?[index]
-                                                            .title ??
-                                                        '',
-                                                    style: TextStyle(
-                                                      color: AppColors
-                                                          .kPrimaryColor,
-                                                      fontSize: 18.sp,
-                                                      fontFamily:
-                                                          kTheArabicSansBold,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    _controller
-                                                            .homeData
-                                                            .value
-                                                            .offers?[index]
-                                                            .offerDescription ??
-                                                        '',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      color: AppColors
-                                                          .kBlackPinkColor,
-                                                      height: 2,
-                                                      fontSize: 13.sp,
-                                                      fontFamily:
-                                                          kTheArabicSansLight,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10.h,
-                                                  ),
-                                                  InkWell(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.69.r),
-                                                    onTap: () {
-                                                      final AuthController
-                                                          _controllerLogin =
-                                                          Get.put(
-                                                              AuthController());
-                                                      UserModel user =
-                                                          _controllerLogin
-                                                              .userData.value;
-                                                      print(
-                                                          '%%%%%%%%%:${user.id}');
-                                                      if (user.id == null) {
-                                                        _controllerLogin
-                                                            .alertOfLogin();
-                                                        return;
-                                                      }
-                                                      Get.to(ChangeNotifierProvider(
-                                                          create: (context) =>
-                                                              ProductProfileControllerProvider(),
-                                                          child: ItemProfilePage(
-                                                              isQueenOffer:
-                                                                  true,
-                                                              itemId: _controller
-                                                                      .homeData
-                                                                      .value
-                                                                      .offers?[
-                                                                          index]
-                                                                      .id ??
-                                                                  0)));
-                                                    },
-                                                    child: Container(
-                                                      width: 109.71.w,
-                                                      height: 37.93.h,
-                                                      decoration:
-                                                          ShapeDecoration(
+                                              child: FittedBox(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    10.ph,
+                                                    Text(
+                                                      _controller
+                                                              .homeData
+                                                              .value
+                                                              .offers?[index]
+                                                              .title ??
+                                                          '',
+                                                      style: TextStyle(
                                                         color: AppColors
                                                             .kPrimaryColor,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.69.r),
-                                                        ),
+                                                        fontSize: 18.sp,
+                                                        fontFamily:
+                                                            kTheArabicSansBold,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
-                                                      child: Center(
-                                                        child: Text(
-                                                          tr('shop_now'),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 12.83.sp,
-                                                            fontFamily:
-                                                                kTheArabicSansLight,
-                                                            fontWeight:
-                                                                FontWeight.w700,
+                                                    ),
+                                                    Text(
+                                                      _controller
+                                                              .homeData
+                                                              .value
+                                                              .offers?[index]
+                                                              .offerDescription ??
+                                                          '',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: AppColors
+                                                            .kBlackPinkColor,
+                                                        height: 2,
+                                                        fontSize: 13.sp,
+                                                        fontFamily:
+                                                            kTheArabicSansLight,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10.h,
+                                                    ),
+                                                    InkWell(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.69.r),
+                                                      onTap: () {
+                                                        final AuthController
+                                                            _controllerLogin =
+                                                            Get.put(
+                                                                AuthController());
+                                                        UserModel user =
+                                                            _controllerLogin
+                                                                .userData.value;
+                                                        print(
+                                                            '%%%%%%%%%:${user.id}');
+                                                        if (user.id == null) {
+                                                          _controllerLogin
+                                                              .alertOfLogin();
+                                                          return;
+                                                        }
+                                                        Get.to(ChangeNotifierProvider(
+                                                            create: (context) =>
+                                                                ProductProfileControllerProvider(),
+                                                            child: ItemProfilePage(
+                                                                isQueenOffer:
+                                                                    true,
+                                                                itemId: _controller
+                                                                        .homeData
+                                                                        .value
+                                                                        .offers?[
+                                                                            index]
+                                                                        .id ??
+                                                                    0)));
+                                                      },
+                                                      child: Container(
+                                                        width: 109.71.w,
+                                                        height: 37.93.h,
+                                                        decoration:
+                                                            ShapeDecoration(
+                                                          color: AppColors
+                                                              .kPrimaryColor,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.69
+                                                                            .r),
+                                                          ),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            tr('shop_now'),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize:
+                                                                  12.83.sp,
+                                                              fontFamily:
+                                                                  kTheArabicSansLight,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10.h,
-                                                  ),
-                                                ],
+                                                    SizedBox(
+                                                      height: 10.h,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           )

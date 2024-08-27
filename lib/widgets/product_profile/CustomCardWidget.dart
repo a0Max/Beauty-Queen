@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
 import 'package:beauty_queen/widgets/product_profile/CustomAlertBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -580,189 +581,202 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
               ),
               Container(
                 height: 110.h,
-                width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 9),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(BrandDetailScreen(
-                          brandId:
-                              int.parse("${widget.newArrival.brand?.id ?? 0}"),
-                        ));
-                      },
-                      child: Text(
-                        widget.newArrival.brand?.title ?? '',
-                        style: TextStyle(
-                          color: const Color(0xFFDE0F7E),
-                          fontSize: 15.sp,
-                          fontFamily: kTheArabicSansLight,
-                          fontWeight: FontWeight.w600,
-                          // height: 0.07,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      widget.newArrival.title ?? '',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 10.sp,
-                        fontFamily: kTheArabicSansLight,
-                        fontWeight: FontWeight.w700,
-                        // height: 1,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      widget.newArrival.note ?? '',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10.sp,
-                        fontFamily: kTheArabicSansLight,
-                        fontWeight: FontWeight.w700,
-                        // height: 1,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Row(
+                child: FittedBox(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (productIsFlashDiscount != '1' &&
-                            productIsOffer != '1' &&
-                            productOptionsIsEmpty == true) ...{
-                          CurrentPriceWithBlack2(
-                            price: '$productMainPrice',
-                          )
-                        } else if (productIsFlashDiscount != '1' &&
-                            productIsOffer == '1' &&
-                            productOptionsIsEmpty == true) ...{
-                          SizedBox(
-                              width:
-                                  (MediaQuery.of(context).size.width / 2) - 40,
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    OldPriceWithBlack2(
-                                      price: '$productMainPrice',
-                                    ),
-                                    CurrentPriceWithPink2(
-                                      price: '$productOfferPrice',
-                                    )
-                                  ]))
-                        } else if (productIsFlashDiscount == '1' &&
-                            // productIsOffer != '1' &&
-                            productOptionsIsEmpty == true) ...{
-                          SizedBox(
-                              width:
-                                  (MediaQuery.of(context).size.width / 2) - 40,
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    OldPriceWithBlack2(
-                                      price: '$productMainPrice',
-                                    ),
-                                    CurrentPriceWithPink2(
-                                      price: '$productFlashDiscountPrice',
-                                    )
-                                  ]))
-                        } else if (productIsFlashDiscount != '1' &&
-                            productIsOffer != '1' &&
-                            productOptionsIsEmpty != true) ...{
-                          if (widget.newArrival.productOptions?.first.options
-                                  ?.first.price ==
-                              widget.newArrival.productOptions?.first.options
-                                  ?.last.price) ...{
-                            CurrentPriceWithBlack2(
-                              price: '$productMainPrice',
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(BrandDetailScreen(
+                              brandId: int.parse(
+                                  "${widget.newArrival.brand?.id ?? 0}"),
+                            ));
+                          },
+                          child: Text(
+                            widget.newArrival.brand?.title ?? '',
+                            style: TextStyle(
+                              color: const Color(0xFFDE0F7E),
+                              fontSize: 15.sp,
+                              fontFamily: kTheArabicSansLight,
+                              fontWeight: FontWeight.w600,
+                              // height: 0.07,
                             ),
-                          } else ...{
-                            Text(
-                              "${widget.newArrival.productOptions?.first.options?.first.price ?? ''} ${tr('Del')}-${widget.newArrival.productOptions?.first.options?.last.price ?? ''} ${tr('Del')}",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15.16.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w400,
-                                // decoration:
-                                // TextDecoration
-                                //     .lineThrough,
-                                height: 0.08,
-                              ),
-                            )
-                          }
-                        } else if (productIsFlashDiscount == '1' &&
-                            // productIsOffer != '1' &&
-                            productOptionsIsEmpty != true) ...{
-                          SizedBox(
-                              width:
-                                  (MediaQuery.of(context).size.width / 2) - 40,
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    OldPriceWithBlack2(
-                                      price: '$productMainPrice',
+                          ),
+                        ),
+                        Text(
+                          widget.newArrival.title ?? '',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10.sp,
+                            fontFamily: kTheArabicSansLight,
+                            fontWeight: FontWeight.w700,
+                            // height: 1,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          widget.newArrival.note ?? '',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 10.sp,
+                            fontFamily: kTheArabicSansLight,
+                            fontWeight: FontWeight.w700,
+                            // height: 1,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        5.ph,
+                        FittedBox(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (productIsFlashDiscount != '1' &&
+                                  productIsOffer != '1' &&
+                                  productOptionsIsEmpty == true) ...{
+                                CurrentPriceWithBlack2(
+                                  price: '$productMainPrice',
+                                )
+                              } else if (productIsFlashDiscount != '1' &&
+                                  productIsOffer == '1' &&
+                                  productOptionsIsEmpty == true) ...{
+                                SizedBox(
+                                    width: (MediaQuery.of(context).size.width /
+                                            2) -
+                                        40,
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          OldPriceWithBlack2(
+                                            price: '$productMainPrice',
+                                          ),
+                                          CurrentPriceWithPink2(
+                                            price: '$productOfferPrice',
+                                          )
+                                        ]))
+                              } else if (productIsFlashDiscount == '1' &&
+                                  // productIsOffer != '1' &&
+                                  productOptionsIsEmpty == true) ...{
+                                SizedBox(
+                                    width: (MediaQuery.of(context).size.width /
+                                            2) -
+                                        40,
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          OldPriceWithBlack2(
+                                            price: '$productMainPrice',
+                                          ),
+                                          CurrentPriceWithPink2(
+                                            price: '$productFlashDiscountPrice',
+                                          )
+                                        ]))
+                              } else if (productIsFlashDiscount != '1' &&
+                                  productIsOffer != '1' &&
+                                  productOptionsIsEmpty != true) ...{
+                                if (widget.newArrival.productOptions?.first
+                                        .options?.first.price ==
+                                    widget.newArrival.productOptions?.first
+                                        .options?.last.price) ...{
+                                  CurrentPriceWithBlack2(
+                                    price: '$productMainPrice',
+                                  ),
+                                } else ...{
+                                  Text(
+                                    "${widget.newArrival.productOptions?.first.options?.first.price ?? ''} ${tr('Del')}-${widget.newArrival.productOptions?.first.options?.last.price ?? ''} ${tr('Del')}",
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15.16.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      // decoration:
+                                      // TextDecoration
+                                      //     .lineThrough,
+                                      height: 0.08,
                                     ),
-                                    CurrentPriceWithPink2(
-                                      price: '${productFlashDiscountPrice}',
-                                    )
-                                  ]))
-                        } else if (productIsFlashDiscount != '1' &&
-                            productIsOffer == '1' &&
-                            productOptionsIsEmpty != true) ...{
-                          if (widget.newArrival.productOptions?.first.options
-                                  ?.first.offerPrice ==
-                              widget.newArrival.productOptions?.first.options
-                                  ?.last.offerPrice) ...{
-                            SizedBox(
-                                width: (MediaQuery.of(context).size.width / 2) -
-                                    40,
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      OldPriceWithBlack2(
-                                        price: '$productMainPrice',
-                                      ),
-                                      CurrentPriceWithPink2(
-                                        price: '${productOfferPrice}',
-                                      )
-                                    ]))
-                          } else ...{
-                            Text(
-                              "${widget.newArrival.productOptions?.first.options?.first.offerPrice ?? ''} ${tr('Del')}-${widget.newArrival.productOptions?.first.options?.last.offerPrice ?? ''} ${tr('Del')}",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15.16.sp,
-                                fontFamily: kTheArabicSansLight,
-                                fontWeight: FontWeight.w400,
-                                // decoration:
-                                // TextDecoration
-                                //     .lineThrough,
-                                height: 0.08,
-                              ),
-                            )
-                            // SizedBox()
-                          }
-                        } else ...{
-                          Text('----')
-                        }
+                                  )
+                                }
+                              } else if (productIsFlashDiscount == '1' &&
+                                  // productIsOffer != '1' &&
+                                  productOptionsIsEmpty != true) ...{
+                                SizedBox(
+                                    width: (MediaQuery.of(context).size.width /
+                                            2) -
+                                        40,
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          OldPriceWithBlack2(
+                                            price: '$productMainPrice',
+                                          ),
+                                          CurrentPriceWithPink2(
+                                            price:
+                                                '${productFlashDiscountPrice}',
+                                          )
+                                        ]))
+                              } else if (productIsFlashDiscount != '1' &&
+                                  productIsOffer == '1' &&
+                                  productOptionsIsEmpty != true) ...{
+                                if (widget.newArrival.productOptions?.first
+                                        .options?.first.offerPrice ==
+                                    widget.newArrival.productOptions?.first
+                                        .options?.last.offerPrice) ...{
+                                  SizedBox(
+                                      width:
+                                          (MediaQuery.of(context).size.width /
+                                                  2) -
+                                              40,
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            OldPriceWithBlack2(
+                                              price: '$productMainPrice',
+                                            ),
+                                            CurrentPriceWithPink2(
+                                              price: '${productOfferPrice}',
+                                            )
+                                          ]))
+                                } else ...{
+                                  Text(
+                                    "${widget.newArrival.productOptions?.first.options?.first.offerPrice ?? ''} ${tr('Del')}-${widget.newArrival.productOptions?.first.options?.last.offerPrice ?? ''} ${tr('Del')}",
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15.16.sp,
+                                      fontFamily: kTheArabicSansLight,
+                                      fontWeight: FontWeight.w400,
+                                      // decoration:
+                                      // TextDecoration
+                                      //     .lineThrough,
+                                      height: 0.08,
+                                    ),
+                                  )
+                                  // SizedBox()
+                                }
+                              } else ...{
+                                Text('----')
+                              }
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                  ),
                 ),
               ),
               if (widget.newArrival.stock == null ||

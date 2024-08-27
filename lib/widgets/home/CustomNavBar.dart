@@ -91,7 +91,7 @@ class ReusableBottomNavigationBar extends StatelessWidget {
                               ? item.selectedImagePath // Use selected image
                               : item
                                   .unselectedImagePath, // Use unselected image
-                          height: 25,
+                          height: 25.h,
                         )
                       : Image.asset(
                           controller.currentIndex ==
@@ -99,7 +99,7 @@ class ReusableBottomNavigationBar extends StatelessWidget {
                               ? item.selectedImagePath // Use selected image
                               : item
                                   .unselectedImagePath, // Use unselected image
-                          height: 25,
+                          height: 25.h,
                         ),
                   5.ph,
                 ],

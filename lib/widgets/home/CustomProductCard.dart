@@ -25,7 +25,10 @@ class CustomProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 183.26.w,
-      height: 311.79.h,
+      height: 335.79.h,
+      decoration: const BoxDecoration(
+        color: AppColors.klPinkColor,
+      ),
       margin: EdgeInsets.only(bottom: 16.h),
       child: Stack(
         children: [
@@ -40,17 +43,6 @@ class CustomProductCard extends StatelessWidget {
                   image: CachedNetworkImageProvider(imageUrl),
                   fit: BoxFit.fill,
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0.53.w,
-            top: 183.26.h,
-            child: Container(
-              width: 182.74.w,
-              height: 128.53.h,
-              decoration: const BoxDecoration(
-                color: AppColors.klPinkColor,
               ),
             ),
           ),
@@ -74,7 +66,7 @@ class CustomProductCard extends StatelessWidget {
           ),
           Positioned(
             left: 61.68.w,
-            top: 283.83.h,
+            bottom: 20.83.h,
             child: Text(
               buttonText,
               textAlign: TextAlign.right,
