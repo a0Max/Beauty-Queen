@@ -27,19 +27,19 @@ class UniLinkClient {
     }
     print('uri:$uri');
     log('uri:$uri');
-    log('pathSegments:${uri.pathSegments[0]}');
-    log('uri:${uri.pathSegments[1]}');
+    log('pathSegments:${uri.pathSegments[uri.pathSegments.length - 2]}');
+    log('uri:${uri.pathSegments.last}');
 
     // if (uri.pathSegments.length < 2) return;
     // if (!UniVars.values
     //     .contains('${uri.pathSegments[0]}/${uri.pathSegments[1]}')) return;
 
-    final id = int.tryParse(uri.pathSegments[1]);
+    final id = int.tryParse(uri.pathSegments.last);
     final HomeController _controllerHome = Get.put(HomeController());
 
     _controllerHome.getHomeDataController();
     try {
-      switch (uri.pathSegments[0]) {
+      switch (uri.pathSegments[uri.pathSegments.length - 2]) {
         case UniVars.product:
           if (id == null) return null;
 

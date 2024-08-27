@@ -22,22 +22,23 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await EasyLocalization.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
 
   NotificationHelper();
   // FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
   // FirebasePerformance.instance.setPerformanceCollectionEnabled(!kDebugMode);
   // Analytics.instance.setAnalyticsCollectionEnabled(!kDebugMode);
 
-  runApp(EasyLocalization(
-      supportedLocales: const [Locale('ar')],
-      useOnlyLangCode: true,
-      path: 'assets/langs',
-      fallbackLocale: const Locale('ar'),
-      child: const MyApp()));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(EasyLocalization(
+        supportedLocales: const [Locale('ar')],
+        useOnlyLangCode: true,
+        path: 'assets/langs',
+        fallbackLocale: const Locale('ar'),
+        child: const MyApp()));
+  });
 }
 
 class MyApp extends StatelessWidget {
