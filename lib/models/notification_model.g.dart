@@ -13,6 +13,8 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
       isAdmin: json['is_admin'] as String?,
       text: json['text'] as String?,
       specialLine: json['special_line'] as String?,
+      mobileTitle: json['mobile_title'] as String?,
+      mobileBody: json['mobile_body'] as String?,
       isSentByAdmin: json['is_sent_by_admin'] as String?,
       isLink: json['is_link'] as String?,
       linkType: json['link_type'] as String?,
@@ -36,6 +38,8 @@ Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
       'link_id': instance.linkId,
       'url_link': instance.urlLink,
       'is_read': instance.isRead,
+      'mobile_title': instance.mobileTitle,
+      'mobile_body': instance.mobileBody,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
     };

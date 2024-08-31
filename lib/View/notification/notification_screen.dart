@@ -89,7 +89,9 @@ class _NotificationScreen extends State<NotificationScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  controller
+                                  controller.notificationList.value[index]
+                                          .mobileTitle ??
+                                      controller
                                           .notificationList.value[index].text ??
                                       '',
                                   style: const TextStyle(
@@ -102,10 +104,15 @@ class _NotificationScreen extends State<NotificationScreen> {
                                   maxLines: 1,
                                 ),
                                 if (controller.notificationList.value[index]
-                                        .specialLine !=
-                                    null)
+                                            .specialLine !=
+                                        null ||
+                                    controller.notificationList.value[index]
+                                            .mobileBody !=
+                                        null)
                                   Text(
                                     controller.notificationList.value[index]
+                                            .mobileBody ??
+                                        controller.notificationList.value[index]
                                             .specialLine ??
                                         '',
                                     style: const TextStyle(
