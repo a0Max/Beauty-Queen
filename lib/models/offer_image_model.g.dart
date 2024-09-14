@@ -8,14 +8,14 @@ part of 'offer_image_model.dart';
 
 OfferImageModel _$OfferImageModelFromJson(Map<String, dynamic> json) =>
     OfferImageModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       size: json['size'] as String?,
       file: json['file'] as String?,
       path: json['path'] as String?,
       fullFile: json['full_file'] as String?,
       mimeType: json['mime_type'] as String?,
       fileType: json['file_type'] as String?,
-      relationId: json['relation_id'] as int?,
+      relationId: (json['relation_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
     );

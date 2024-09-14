@@ -8,15 +8,15 @@ part of 'product_options_model.dart';
 
 ProductOptionsModel _$ProductOptionsModelFromJson(Map<String, dynamic> json) =>
     ProductOptionsModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
-      productId: json['product_id'] as int?,
+      productId: (json['product_id'] as num?)?.toInt(),
       product: json['product'] == null
           ? null
           : SalesProductsModel.fromJson(
               json['product'] as Map<String, dynamic>),
       isColor: json['is_color'] as String?,
-      userId: json['user_id'] as int?,
+      userId: (json['user_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       options: (json['options'] as List<dynamic>?)

@@ -8,7 +8,7 @@ part of 'specials_model.dart';
 
 SpecialsModel _$SpecialsModelFromJson(Map<String, dynamic> json) =>
     SpecialsModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       image: json['image'] as String?,
       description: json['description'] as String?,
       isLink: json['is_link'] as String?,

@@ -8,7 +8,7 @@ part of 'discover_brand.dart';
 
 DiscoverBrand _$DiscoverBrandFromJson(Map<String, dynamic> json) =>
     DiscoverBrand(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       description: json['description'] as String?,
       mobileImage: json['mobile_image'] == null
           ? null

@@ -1301,7 +1301,12 @@ class _HomePageState extends State<HomePage> {
                                         options: CarouselOptions(
                                           viewportFraction:
                                               1.0, // Set to 1.0 for full width current page
-                                          aspectRatio: 1.1,
+                                          aspectRatio: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
+                                                  450
+                                              ? 1.5
+                                              : 1.1,
                                           autoPlay: true,
                                           onPageChanged: (index, reason) {
                                             _controller.updateSalesProducts(
@@ -1688,7 +1693,7 @@ class _HomePageState extends State<HomePage> {
                                       return FittedBox(
                                         child: Container(
                                           width: 245.0.w,
-                                          height: 408.h,
+                                          height: 430.h,
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 10.0),
                                           child: GestureDetector(
@@ -1867,8 +1872,8 @@ class _HomePageState extends State<HomePage> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          SizedBox(
-                                                            height: 15.h,
+                                                          const SizedBox(
+                                                            height: 15,
                                                           ),
                                                           Text(
                                                             _controller
@@ -1896,8 +1901,8 @@ class _HomePageState extends State<HomePage> {
                                                                 TextOverflow
                                                                     .ellipsis,
                                                           ),
-                                                          SizedBox(
-                                                            height: 15.h,
+                                                          const SizedBox(
+                                                            height: 15,
                                                           ),
                                                           SizedBox(
                                                             width: 196.11.w,
@@ -1927,8 +1932,8 @@ class _HomePageState extends State<HomePage> {
                                                               ),
                                                             ),
                                                           ),
-                                                          SizedBox(
-                                                            height: 30.h,
+                                                          const SizedBox(
+                                                            height: 30,
                                                           ),
                                                           Padding(
                                                             padding:
@@ -1959,7 +1964,8 @@ class _HomePageState extends State<HomePage> {
                                                                       Colors
                                                                           .white),
                                                             ),
-                                                          )
+                                                          ),
+                                                          10.ph
                                                         ],
                                                       ),
                                                     ),
@@ -1974,9 +1980,6 @@ class _HomePageState extends State<HomePage> {
                                   ))
                             ],
                           ),
-                          // SizedBox(
-                          //   height: 10.h,
-                          // ),
 
                           ///specials
 

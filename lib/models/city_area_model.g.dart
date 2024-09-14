@@ -8,14 +8,14 @@ part of 'city_area_model.dart';
 
 CityAreaModel _$CityAreaModelFromJson(Map<String, dynamic> json) =>
     CityAreaModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       hasArea: json['has_area'] as String?,
       shippingCost: json['shipping_cost'],
       shippingTime: json['shipping_time'],
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      cityId: json['city_id'] as int?,
+      cityId: (json['city_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$CityAreaModelToJson(CityAreaModel instance) =>

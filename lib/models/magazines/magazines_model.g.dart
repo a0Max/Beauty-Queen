@@ -8,7 +8,7 @@ part of 'magazines_model.dart';
 
 MagazinesModel _$MagazinesModelFromJson(Map<String, dynamic> json) =>
     MagazinesModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       isMagazinePurchasable: json['is_magazine_purchasable'] as String?,
       magazineCover: json['magazine_cover'] == null

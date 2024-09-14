@@ -9,10 +9,10 @@ part of 'products_model.dart';
 ProductsModel _$ProductsModelFromJson(Map<String, dynamic> json) =>
     ProductsModel(
       rowId: json['rowId'] as String?,
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       code: json['code'] as String?,
-      brand_id: json['brand_id'] as int?,
+      brand_id: (json['brand_id'] as num?)?.toInt(),
       brand: json['brand'] as String?,
       main_image: json['main_image'] as String?,
       price: json['price'] as String?,
@@ -21,7 +21,7 @@ ProductsModel _$ProductsModelFromJson(Map<String, dynamic> json) =>
       offer_price: json['offer_price'] as String?,
       offer_start_at: json['offer_start_at'] as String?,
       offer_end_at: json['offer_end_at'] as String?,
-      poID: json['poID'] as int?,
+      poID: (json['poID'] as num?)?.toInt(),
       poTitle: json['poTitle'] as String?,
       opTitle: json['opTitle'] as String?,
       opCode: json['opCode'] as String?,

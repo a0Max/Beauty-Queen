@@ -12,7 +12,7 @@ CartModel _$CartModelFromJson(Map<String, dynamic> json) => CartModel(
           .toList(),
       totalPrice: json['totalPrice'] as String?,
       promoCode: json['promoCode'] as String?,
-      totalQty: json['totalQty'] as int?,
+      totalQty: (json['totalQty'] as num?)?.toInt(),
       initialPrice: json['initialPrice'] as String?,
     );
 

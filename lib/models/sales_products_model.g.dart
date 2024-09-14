@@ -8,13 +8,13 @@ part of 'sales_products_model.dart';
 
 SalesProductsModel _$SalesProductsModelFromJson(Map<String, dynamic> json) =>
     SalesProductsModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       subTitle: json['sub_title'] as String?,
       note: json['note'] as String?,
       description: json['description'] as String?,
       code: json['code'] as String?,
-      brandId: json['brand_id'] as int?,
+      brandId: (json['brand_id'] as num?)?.toInt(),
       stock: json['stock'] as String?,
       price: json['price'] as String?,
       priceRangeFrom: json['price_range_from'] as String?,

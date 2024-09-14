@@ -7,7 +7,7 @@ part of 'label_model.dart';
 // **************************************************************************
 
 LabelModel _$LabelModelFromJson(Map<String, dynamic> json) => LabelModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       text: json['text'] as String?,
       textColor: json['text_color'] as String?,
       backgroundColor: json['background_color'] as String?,

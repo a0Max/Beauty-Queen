@@ -8,7 +8,7 @@ part of 'departments_model.dart';
 
 DepartmentsModel _$DepartmentsModelFromJson(Map<String, dynamic> json) =>
     DepartmentsModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
       coverImage: json['cover_image'] == null

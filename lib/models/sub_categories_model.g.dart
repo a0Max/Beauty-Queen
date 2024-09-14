@@ -8,7 +8,7 @@ part of 'sub_categories_model.dart';
 
 SubCategoryModel _$SubCategoryModelFromJson(Map<String, dynamic> json) =>
     SubCategoryModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       image: json['image'] == null
           ? null

@@ -7,7 +7,7 @@ part of 'slides_model.dart';
 // **************************************************************************
 
 SlidesModel _$SlidesModelFromJson(Map<String, dynamic> json) => SlidesModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       desktop: json['desktop'] as String?,
       isPublic: json['is_public'] as String?,
       banner: json['banner'] as String?,

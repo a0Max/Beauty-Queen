@@ -8,17 +8,17 @@ part of 'order_details_model.dart';
 
 OrderDetailsModel _$OrderDetailsModelFromJson(Map<String, dynamic> json) =>
     OrderDetailsModel(
-      id: json['id'] as int?,
-      userId: json['user_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
       address: json['address'] as String?,
       email: json['email'] as String?,
       phone: json['phone'] as String?,
       name: json['name'] as String?,
-      orderItems: json['order_items'] as int?,
+      orderItems: (json['order_items'] as num?)?.toInt(),
       price: (json['price'] as num?)?.toDouble(),
       notes: json['notes'] as String?,
-      cityId: json['city_id'] as int?,
-      areaId: json['area_id'] as int?,
+      cityId: (json['city_id'] as num?)?.toInt(),
+      areaId: (json['area_id'] as num?)?.toInt(),
       isUsedPromoCode: json['is_used_promo_code'] as String?,
       promoCodeId: json['promo_code_id'],
       orderType: json['order_type'] as String?,

@@ -7,17 +7,17 @@ part of 'reviews_model.dart';
 // **************************************************************************
 
 ReviewsModel _$ReviewsModelFromJson(Map<String, dynamic> json) => ReviewsModel(
-      id: json['id'] as int?,
-      productId: json['product_id'] as int?,
-      userId: json['user_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      productId: (json['product_id'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
       comment: json['comment'] as String?,
-      rating: json['rating'] as int?,
+      rating: (json['rating'] as num?)?.toInt(),
       status: json['status'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      dislikes: json['dislikes'] as int?,
-      likes: json['likes'] as int?,
-      isUserReacted: json['is_user_reacted'] as int?,
+      dislikes: (json['dislikes'] as num?)?.toInt(),
+      likes: (json['likes'] as num?)?.toInt(),
+      isUserReacted: (json['is_user_reacted'] as num?)?.toInt(),
       user: _$JsonConverterFromJson<Map<String, dynamic>, UserModel>(
           json['user'], const UserModelJsonConv().fromJson),
       images: (json['images'] as List<dynamic>?)

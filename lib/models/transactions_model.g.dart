@@ -24,19 +24,19 @@ Map<String, dynamic> _$TotalOfTransactionsModelToJson(
 
 TransactionsModel _$TransactionsModelFromJson(Map<String, dynamic> json) =>
     TransactionsModel(
-      id: json['id'] as int?,
-      userId: json['user_id'] as int?,
-      orderId: json['order_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
+      orderId: (json['order_id'] as num?)?.toInt(),
       type: json['type'] as String?,
-      amount: json['amount'] as int?,
+      amount: (json['amount'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       isQueena: json['is_queena'] as String?,
-      queenaAmount: json['queena_amount'] as int?,
+      queenaAmount: (json['queena_amount'] as num?)?.toInt(),
     )
-      ..productId = json['product_id'] as int?
-      ..poID = json['po_i_d'] as int?
-      ..option = json['option'] as int?
+      ..productId = (json['product_id'] as num?)?.toInt()
+      ..poID = (json['po_i_d'] as num?)?.toInt()
+      ..option = (json['option'] as num?)?.toInt()
       ..price = json['price'] as String?
       ..quantity = json['quantity'] as String?
       ..status = json['status'] as String?

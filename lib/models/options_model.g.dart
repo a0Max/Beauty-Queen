@@ -7,7 +7,7 @@ part of 'options_model.dart';
 // **************************************************************************
 
 OptionsModel _$OptionsModelFromJson(Map<String, dynamic> json) => OptionsModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       code: json['code'] as String?,
       stock: json['stock'] as String?,
@@ -15,14 +15,14 @@ OptionsModel _$OptionsModelFromJson(Map<String, dynamic> json) => OptionsModel(
       isSet: json['is_set'] as String?,
       isColor: json['is_color'] as String?,
       color: json['color'] as String?,
-      specialKey: json['special_key'] as int?,
+      specialKey: (json['special_key'] as num?)?.toInt(),
       isSize: json['is_size'] as String?,
       size: json['size'] as String?,
       isOffer: json['is_offer'] as String?,
       offerPrice: json['offer_price'] as String?,
       offerStartAt: json['offer_start_at'] as String?,
       offerEndAt: json['offer_end_at'] as String?,
-      poID: json['po_i_d'] as int?,
+      poID: (json['po_i_d'] as num?)?.toInt(),
       isFlashDiscount: json['is_flash_discount'] as String?,
       flashDiscountPrice: json['flash_discount_price'] as String?,
       createdAt: json['created_at'] as String?,

@@ -7,7 +7,7 @@ part of 'faq_model.dart';
 // **************************************************************************
 
 FAQModel _$FAQModelFromJson(Map<String, dynamic> json) => FAQModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       question: json['question'] as String?,
       answer: json['answer'] as String?,
       createdAt: json['created_at'] as String?,
