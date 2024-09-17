@@ -60,7 +60,7 @@ class NotificationHelper {
     if (_init) {
       return;
     } else {
-      await _fcmNotify.subscribeToTopic('all');
+      await _fcmNotify.subscribeToTopic('all_users');
       await _fcmNotify.setAutoInitEnabled(true);
 
       // Get Token and just Print it.
