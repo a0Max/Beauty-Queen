@@ -84,7 +84,6 @@ abstract class Connection {
 
   static const String bundleId = '';
   static const String appstoreId = '';
-  static const String mapKey = 'AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE';
 
   static List<GridItemData> gridData = [
     GridItemData(

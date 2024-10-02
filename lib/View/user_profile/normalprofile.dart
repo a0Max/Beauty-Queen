@@ -4,6 +4,7 @@ import 'package:beauty_queen/View/user_profile/password_screen.dart';
 import 'package:beauty_queen/const/app_images.dart';
 import 'package:beauty_queen/const/extensions.dart';
 import 'package:beauty_queen/const/styles.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ import '../../const/app_colors.dart';
 import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/wallet_controller/wallet_controller.dart';
+import '../../widgets/based/error_pop_up.dart';
+import '../../widgets/based/loading.dart';
 import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/user_profile/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
@@ -596,9 +599,62 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
                       ],
                     ),
                   ),
+                  if (controller.userData.value.accountType !=
+                      AccountTypes.queena) ...{
+                    20.ph,
+                    GestureDetector(
+                      onTap: () async {
+                        try {
+                          LoadingScreen.show(context);
+
+                          await controller.upgradeAccount();
+
+                          Navigator.of(context).pop();
+                          ErrorPopUp(
+                              message: tr('update_success'),
+                              title: tr('upgrade_success'),
+                              isError: false);
+                          Get.to(const MyDataScreen(
+                            openToEdit: true,
+                          ));
+                        } on DioException catch (e) {
+                          ErrorPopUp(
+                              message: (e.response?.data as Map).values.first,
+                              title: 'خطا');
+                        } catch (e, s) {
+                          //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
+                          if (e == 'Check Network connection') {
+                            ErrorPopUp(
+                                message: tr('network_connection'),
+                                title: 'خطا');
+                          } else {
+                            ErrorPopUp(
+                                message: tr('something_wrong'), title: 'خطا');
+                          }
+                        }
+                      },
+                      child: Container(
+                        height: 60.h,
+                        alignment: Alignment.center,
+                        width: 398.w,
+                        decoration: BoxDecoration(
+                            color: AppColors.kPrimaryColor,
+                            borderRadius: BorderRadius.circular(50.r)),
+                        child: Text(
+                          'الترقية الى حساب كوينا',
+                          style: TextStyle(
+                              fontFamily: kTheArabicSansLight,
+                              color: AppColors.kWhiteColor,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  },
                   SizedBox(
                     height: 60.h,
                   ),
+                  10.ph,
                   GestureDetector(
                     onTap: () async {
                       //
