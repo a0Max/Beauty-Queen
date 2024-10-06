@@ -1,6 +1,7 @@
 {
   "must_add_phone_number": "يجب إضافة رقم هاتف صالح",
   "must_add_full_name": "يجب إضافة الاسم الكامل",
+  "must_add_birthday": "يجب إضافة هذا الحقل",
   "must_add_password": "يجب إضافة كلمة المرور",
   "password_8_digits": "يجب أن تكون كلمة المرور أكثر من 8 أرقام",
   "password_lower_letter": "كلمة المرور يجب أن تحتوي على حرف أقل",

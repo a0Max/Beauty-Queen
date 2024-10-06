@@ -604,34 +604,10 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
                     20.ph,
                     GestureDetector(
                       onTap: () async {
-                        try {
-                          LoadingScreen.show(context);
-
-                          await controller.upgradeAccount();
-
-                          Navigator.of(context).pop();
-                          ErrorPopUp(
-                              message: tr('update_success'),
-                              title: tr('upgrade_success'),
-                              isError: false);
-                          Get.to(const MyDataScreen(
-                            openToEdit: true,
-                          ));
-                        } on DioException catch (e) {
-                          ErrorPopUp(
-                              message: (e.response?.data as Map).values.first,
-                              title: 'خطا');
-                        } catch (e, s) {
-                          //  FirebaseCrashlytics.instance.recordError('Api Crash $e', s);
-                          if (e == 'Check Network connection') {
-                            ErrorPopUp(
-                                message: tr('network_connection'),
-                                title: 'خطا');
-                          } else {
-                            ErrorPopUp(
-                                message: tr('something_wrong'), title: 'خطا');
-                          }
-                        }
+                        Get.to(const MyDataScreen(
+                          openToEdit: true,
+                          tryToUpgradeAccount: true,
+                        ));
                       },
                       child: Container(
                         height: 60.h,

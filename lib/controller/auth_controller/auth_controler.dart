@@ -349,4 +349,53 @@ class AuthController extends GetxController {
               });
         });
   }
+
+  RxBool checkSelectedBrandData1 = false.obs;
+  RxBool checkSelectedBrandData2 = false.obs;
+  RxBool checkSelectedBrandData3 = false.obs;
+  RxBool checkSelectedCityData = false.obs;
+  RxBool checkSelectedAreaData = false.obs;
+  checkUpdateSelectedBrand1() async {
+    print('checkUpdateSelectedBrand1:${(selectedBrandData1.value.id == null)}');
+    if (selectedBrandData1.value.id == null) {
+      checkSelectedBrandData1.value = true;
+    } else {
+      checkSelectedBrandData1.value = false;
+    }
+  }
+
+  checkUpdateSelectedBrand2() async {
+    if (selectedBrandData2.value.id == null) {
+      checkSelectedBrandData2.value = true;
+    } else {
+      checkSelectedBrandData2.value = false;
+    }
+  }
+
+  checkUpdateSelectedBrand3() async {
+    if (selectedBrandData3.value.id == null) {
+      checkSelectedBrandData3.value = true;
+    } else {
+      checkSelectedBrandData3.value = false;
+    }
+  }
+
+  checkSelectedAreaDataAction() async {
+    if (selectedAreaData.value.id == null) {
+      checkSelectedAreaData.value = true;
+    } else {
+      checkSelectedAreaData.value = false;
+    }
+  }
+
+  checkSelectedCityDataAction() async {
+    if (selectedCityData.value.id == null) {
+      checkSelectedCityData.value = true;
+    } else {
+      checkSelectedCityData.value = false;
+      if (selectedCityData.value.hasArea != '1') {
+        checkSelectedAreaData.value = false;
+      }
+    }
+  }
 }

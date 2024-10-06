@@ -18,6 +18,10 @@ class Validator {
     return (val.length <= 4) ? tr('must_add_full_name') : null;
   }
 
+  String? validatorField(String val) {
+    return (val.length <= 4) ? tr('must_add_birthday') : null;
+  }
+
   String? validatorPassword(val) {
     return val!.isEmpty
         ? tr('must_add_password')
