@@ -189,9 +189,14 @@ class _MyDataScreen extends State<MyDataScreen> {
                           hindText: tr('kFirstNameHint'),
                           titleText: tr('kFirstNameHint'),
                           controler: nameController,
-                          readOnly: controller.allowToEdit.value == false
-                              ? true
-                              : null,
+                          onTap: () {
+                            print('##:${controller.allowToEdit.value}');
+                            print('##:${widget.tryToUpgradeAccount}');
+                          },
+                          readOnly: ((controller.allowToEdit.value == true) ||
+                                  (widget.tryToUpgradeAccount == true))
+                              ? null
+                              : true,
                           hintStyle: TextStyle(
                             color: const Color(0xFF2C3E50),
                             fontSize: 17.69.sp,
@@ -209,9 +214,10 @@ class _MyDataScreen extends State<MyDataScreen> {
                         child: TextFieldAuthWidget(
                           hindText: tr('nackName'),
                           titleText: tr('nackName'),
-                          readOnly: controller.allowToEdit.value == false
-                              ? true
-                              : null,
+                          readOnly: ((controller.allowToEdit.value == true) ||
+                                  (widget.tryToUpgradeAccount == true))
+                              ? null
+                              : true,
                           controler: nickNameController,
                           hintStyle: TextStyle(
                             color: const Color(0xFF2C3E50),
@@ -239,9 +245,10 @@ class _MyDataScreen extends State<MyDataScreen> {
                         TextFieldAuthWidget(
                           hindText: tr('whatsApp'),
                           titleText: tr('whatsApp'),
-                          readOnly: controller.allowToEdit.value == false
-                              ? true
-                              : null,
+                          readOnly: ((controller.allowToEdit.value == true) ||
+                                  (widget.tryToUpgradeAccount == true))
+                              ? null
+                              : true,
                           controler: whatsAppController,
                           hintStyle: TextStyle(
                             color: const Color(0xFF2C3E50),
@@ -268,9 +275,10 @@ class _MyDataScreen extends State<MyDataScreen> {
                         TextFieldAuthWidget(
                           hindText: tr('subPhone'),
                           titleText: tr('subPhone'),
-                          readOnly: controller.allowToEdit.value == false
-                              ? true
-                              : null,
+                          readOnly: ((controller.allowToEdit.value == true) ||
+                                  (widget.tryToUpgradeAccount == true))
+                              ? null
+                              : true,
                           controler: phoneController2,
                           hintStyle: TextStyle(
                             color: const Color(0xFF2C3E50),
@@ -291,8 +299,10 @@ class _MyDataScreen extends State<MyDataScreen> {
                     TextFieldAuthWidget(
                       hindText: tr('email'),
                       titleText: tr('email'),
-                      readOnly:
-                          controller.allowToEdit.value == false ? true : null,
+                      readOnly: ((controller.allowToEdit.value == true) ||
+                              (widget.tryToUpgradeAccount == true))
+                          ? null
+                          : true,
                       controler: emailController,
                       hintStyle: TextStyle(
                         color: const Color(0xFF2C3E50),
@@ -310,7 +320,8 @@ class _MyDataScreen extends State<MyDataScreen> {
                       titleText: tr('birthDay'),
                       readOnly: true,
                       onTap: () {
-                        if (controller.allowToEdit.value == true) {
+                        if ((controller.allowToEdit.value == true) ||
+                            (widget.tryToUpgradeAccount == true)) {
                           showDatePickerDialog();
                         }
                       },
@@ -336,7 +347,10 @@ class _MyDataScreen extends State<MyDataScreen> {
                     hindText: tr('kPhoneNumber'),
                     titleText: tr('kPhoneNumber'),
                     controler: phoneController,
-                    readOnly: true,
+                    readOnly: ((controller.allowToEdit.value == true) ||
+                            (widget.tryToUpgradeAccount == true))
+                        ? null
+                        : true,
                     hintStyle: TextStyle(
                       color: const Color(0xFF2C3E50),
                       fontSize: 17.69.sp,
@@ -646,17 +660,14 @@ class _MyDataScreen extends State<MyDataScreen> {
                               items: controller.brandsData.value.map((value) {
                                 return DropdownMenuItem<BrandModel>(
                                     value: value,
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Text(value.titleAr ?? '',
-                                          style: TextStyle(
-                                            color: AppColors.kBlackColor,
-                                            fontSize: 14.sp,
-                                            fontFamily: kTheArabicSansLight,
-                                            fontWeight: FontWeight.w400,
-                                            height: 0,
-                                          )),
-                                    ));
+                                    child: Text(value.titleAr ?? '',
+                                        style: TextStyle(
+                                          color: AppColors.kBlackColor,
+                                          fontSize: 14.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                        )));
                               }).toList(),
                               onChanged: controller.allowToEdit.value != true &&
                                       (widget.tryToUpgradeAccount != true)
@@ -726,17 +737,14 @@ class _MyDataScreen extends State<MyDataScreen> {
                               items: controller.brandsData.value.map((value) {
                                 return DropdownMenuItem<BrandModel>(
                                     value: value,
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Text(value.titleAr ?? '',
-                                          style: TextStyle(
-                                            color: AppColors.kBlackColor,
-                                            fontSize: 14.sp,
-                                            fontFamily: kTheArabicSansLight,
-                                            fontWeight: FontWeight.w400,
-                                            height: 0,
-                                          )),
-                                    ));
+                                    child: Text(value.titleAr ?? '',
+                                        style: TextStyle(
+                                          color: AppColors.kBlackColor,
+                                          fontSize: 14.sp,
+                                          fontFamily: kTheArabicSansLight,
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                        )));
                               }).toList(),
                               onChanged: controller.allowToEdit.value != true &&
                                       (widget.tryToUpgradeAccount != true)

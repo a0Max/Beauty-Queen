@@ -27,16 +27,18 @@ class _AutoScrollOfNewArrive extends State<AutoScrollOfNewArrive> {
 
   Timer? _timer;
   void _startAddingItems() {
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
-      scrollOffsetController.animateScroll(
-          offset: MediaQuery.of(context).size.width / 2,
-          duration: Duration(milliseconds: 500));
-      if (itemPositionsListener.itemPositions.value.last.index ==
-          widget.data.length - 2) {
-        await Future.delayed(Duration(seconds: 4));
-        itemScrollController.jumpTo(index: 0);
-      }
-    });
+    if (mounted) {
+      _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
+        scrollOffsetController.animateScroll(
+            offset: MediaQuery.of(context).size.width / 2,
+            duration: Duration(milliseconds: 500));
+        if (itemPositionsListener.itemPositions.value.last.index ==
+            widget.data.length - 2) {
+          await Future.delayed(Duration(seconds: 4));
+          itemScrollController.jumpTo(index: 0);
+        }
+      });
+    }
   }
 
   final ItemScrollController itemScrollController = ItemScrollController();
