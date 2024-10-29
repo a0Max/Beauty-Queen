@@ -198,7 +198,7 @@ abstract class LocationMapLatLng {
 }
 
 abstract class OrderState {
-  static const String mainPathToImages = 'assets/images/';
+  static const String mainPathToImages = 'assets/images';
 
   static const shipped = 'shipped';
   static const shippedImage = '$mainPathToImages/Shipped.png';
@@ -211,7 +211,7 @@ abstract class OrderState {
   static const pending = 'pending';
   static const pendingImage = '$mainPathToImages/Pending.png';
   static const pendingMessage =
-      'سيتم تأكيد طلبك..شكراً لاختيارك متجرناخلال ساعات العمل والاهتمام بكل ملاحظاتك.';
+      'شكراً لاختيارك متجرنا … سيتم تأكيد طلبك خلال ساعات العمل والاهتمام بكل ملاحظاتك.';
 
   static const confirmed = 'confirmed';
   static const confirmedImage = '$mainPathToImages/Confirmed.png';
