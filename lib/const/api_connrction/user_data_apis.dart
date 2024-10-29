@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../models/city_area_model.dart';
+import '../../models/pop_up_model.dart';
 import '../../models/user_model.dart';
 import 'base_api_connection.dart';
 
@@ -325,6 +326,30 @@ class UserDataApis extends ApiProvider {
     if (validResponse(response.statusCode!)) {
       final List<CityAreaModel> l = [];
       response.data['cities'].forEach((e) => l.add(CityAreaModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data;
+    }
+  }
+
+  Future<List<PopUpModel>> getPopupsDataRequest() async {
+    final token = await getUserToken();
+    final cookies = await getCookies();
+
+    final response = await dio.get(
+      '${Connection.apiURL}${ApiProvider.getPopupsEndPoint}',
+      options: Options(
+        headers: {
+          ...apiHeaders,
+          'Accept-Language': await ApiProvider.getAppLanguage(),
+          if (cookies != null) "Cookie": '$cookies',
+          if (token != null) "Authorization": 'Bearer $token',
+        },
+      ),
+    );
+    if (validResponse(response.statusCode!)) {
+      final List<PopUpModel> l = [];
+      response.data['popups'].forEach((e) => l.add(PopUpModel.fromJson(e)));
       return l;
     } else {
       throw response.data;

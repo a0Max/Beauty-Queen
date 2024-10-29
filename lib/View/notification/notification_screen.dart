@@ -8,8 +8,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../const/styles.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/notification_controller/notification_controller.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/shimmer/shimmer_notification.dart';
+import '../dialog_controller.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -31,7 +34,20 @@ class _NotificationScreen extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: AppColors.kWhiteColor,

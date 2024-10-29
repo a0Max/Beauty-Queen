@@ -45,6 +45,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   WalletController controller2 = Get.put(WalletController());
 
   WayToPay? resultOfWayToPay;
+  WayToPay wayToPayByCardWhenDeliver = WayToPay(
+      wayToPay: ' بطاقة مصرفية عند الاستلام ', keyOfWayToPay: 'cc_on_delivery');
   List<WayToPay> listOfWayToPay = [];
   @override
   void initState() {
@@ -296,6 +298,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 onChanged: (CityAreaModel? newValue) {
                                   basketController.updateSelectedCity(
                                       newCity: newValue ?? CityAreaModel());
+                                  if (newValue?.name == 'طرابلس') {
+                                    setState(() {
+                                      listOfWayToPay
+                                          .add(wayToPayByCardWhenDeliver);
+                                    });
+                                  }
                                 },
                                 hint: Text(
                                   tr('city'),
@@ -527,10 +535,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 // onTap: () => log('open'),
                                 isExpanded: true,
                                 value: resultOfWayToPay,
-                                //             ==
-                                //         null
-                                //     ? null
-                                //     : basketController.selectedCityData.value,
                                 items: listOfWayToPay.map((value) {
                                   return DropdownMenuItem<WayToPay>(
                                       value: value,

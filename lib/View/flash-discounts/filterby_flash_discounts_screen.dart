@@ -7,6 +7,9 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/AlKasam_controller/flash_discounts_controller.dart';
+import '../../controller/auth_controller/auth_controler.dart';
+import '../../widgets/dialog_widget.dart';
+import '../dialog_controller.dart';
 
 class FilterByFlashDiscountsContainer extends StatefulWidget {
   const FilterByFlashDiscountsContainer({super.key});
@@ -22,7 +25,20 @@ class _FilterByCategoryContainer
   Widget build(BuildContext context) {
     final FlashDiscountsController controller =
         Get.put(FlashDiscountsController());
-
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.kPrimaryColor,

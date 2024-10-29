@@ -26,6 +26,7 @@ import '../../controller/product_controller/product_profile_controller_provider.
 import '../../models/sales_products_model.dart';
 import '../../models/user_model.dart';
 import '../../widgets/based/CustomAppBar.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/home/CustomProductCard.dart';
@@ -35,6 +36,7 @@ import '../../widgets/loading/home_loading.dart';
 import '../brands/branddetail_screen.dart';
 import '../categories/filter_screen.dart';
 import '../categories/filter_screen2.dart';
+import '../dialog_controller.dart';
 import '../flash-discounts/flash-discounts.dart';
 import '../magazine/magazine_screen.dart';
 import '../new_arrived/new_arrived_screen.dart';
@@ -99,6 +101,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(

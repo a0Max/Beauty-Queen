@@ -23,6 +23,8 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    super.initState();
+    controller.getPopUpData();
     upgraderData.onLater = () {
       initData();
       return true;

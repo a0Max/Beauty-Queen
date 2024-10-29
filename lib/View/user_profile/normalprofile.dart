@@ -18,10 +18,12 @@ import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/wallet_controller/wallet_controller.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/user_profile/bottom_sheet_of_add_money.dart';
 import '../about_me/about_app.dart';
 import '../auth_view/login_page.dart';
+import '../dialog_controller.dart';
 import '../faq/faq_app.dart';
 import '../notification/notification_screen.dart';
 import 'mysticker_screen.dart';
@@ -48,6 +50,20 @@ class _NormalProfileScreen extends State<NormalProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: const ReusableBottomNavigationBar2(),

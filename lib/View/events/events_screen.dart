@@ -9,11 +9,14 @@ import '../../const/app_colors.dart';
 import '../../const/app_images.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/events_controller/events_controller.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../cart/cart_screen.dart';
+import '../dialog_controller.dart';
 import 'details_event_screen.dart';
 
 class EventsScreen extends StatefulWidget {
@@ -37,6 +40,20 @@ class _EventsScreen extends State<EventsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       bottomNavigationBar: const ReusableBottomNavigationBar2(),
       endDrawer: const MyEndDrawer(),

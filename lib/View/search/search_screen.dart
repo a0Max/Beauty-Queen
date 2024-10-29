@@ -20,10 +20,12 @@ import '../../models/sales_products_model.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_categories.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../brands/branddetail_screen.dart';
+import '../dialog_controller.dart';
 import 'filterby_search_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -86,6 +88,20 @@ class _SearchScreen extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(

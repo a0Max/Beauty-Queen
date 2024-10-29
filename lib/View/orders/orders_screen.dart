@@ -7,11 +7,14 @@ import 'package:get/get.dart';
 
 import '../../const/app_colors.dart';
 import '../../const/vars.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/orders_controller/orders_controller.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/order/order_details.dart';
 import '../../widgets/order/pink_ticket.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/shimmer/shimmer_orders.dart';
+import '../dialog_controller.dart';
 import 'details_of_order.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -35,6 +38,20 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       appBar: AppBar(
           elevation: 0,

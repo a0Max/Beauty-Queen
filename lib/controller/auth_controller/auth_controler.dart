@@ -45,6 +45,12 @@ class AuthController extends GetxController {
     getCities();
   }
 
+  RxList popData = [].obs;
+
+  getPopUpData() async {
+    popData.value = await _api.getPopupsDataRequest();
+  }
+
   var passwordObscureText = true.obs;
   var confirmPasswordObscureText = true.obs;
 

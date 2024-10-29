@@ -31,6 +31,7 @@ import '../../controller/queen_controller/queen_controller.dart';
 import '../../models/options_model.dart';
 import '../../models/sales_products_model.dart';
 import '../../models/user_model.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
 import '../../widgets/product_profile/CustomCardWidget.dart';
@@ -44,6 +45,7 @@ import '../brands/branddetail_screen.dart';
 import '../cart/cart_screen.dart';
 import '../categories/alkasam_screen.dart';
 import '../categories/filter_screen2.dart';
+import '../dialog_controller.dart';
 import '../home/bottom_nav_screen.dart';
 import '../offers/beautypharmacyscreen.dart';
 import '../whats_queena/Quinaprogram_screen.dart';
@@ -105,6 +107,20 @@ class _ItemProfilePageState extends State<ItemProfilePage>
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     final controller = context.watch<ProductProfileControllerProvider>();
     final productOptionsIsEmpty = (controller.isLoading == false)
         ? controller.productData.last.productOptions.isEmpty

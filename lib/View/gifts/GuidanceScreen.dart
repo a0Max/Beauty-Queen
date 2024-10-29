@@ -27,6 +27,7 @@ import '../../models/user_model.dart';
 import '../../widgets/based/filter_widget.dart';
 import '../../widgets/based/see_more.dart';
 import '../../widgets/based/sort_drop_down.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/gifts/gift_widget.dart';
 import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
@@ -34,6 +35,7 @@ import '../../widgets/product_profile/CustomCardWidget.dart';
 import '../../widgets/shimmer/shimmer_item.dart';
 import '../../widgets/shimmer/shimmer_slider.dart';
 import '../cart/cart_screen.dart';
+import '../dialog_controller.dart';
 import 'filterby_gifts_screen.dart';
 
 class GuidanceScreen extends StatefulWidget {
@@ -97,6 +99,20 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Obx(() => Scaffold(
           key: _scaffoldKey,
           bottomNavigationBar: widget.showBack == true

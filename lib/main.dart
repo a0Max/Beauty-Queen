@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'View/dialog_controller.dart';
 import 'const/app_colors.dart';
 import 'const/notification.dart';
 import 'const/styles.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             title: 'Beauty Queen',
+            initialBinding: BindingsBuilder(() {
+              Get.put(DialogController());
+            }),
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,

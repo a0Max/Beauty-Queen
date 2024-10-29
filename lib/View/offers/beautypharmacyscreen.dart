@@ -13,9 +13,11 @@ import '../../const/vars.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/gift_controller/gift_controller.dart';
 import '../../controller/product_controller/product_profile_controller_provider.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/home/CustomNavBar2.dart';
 import '../../widgets/shimmer/shimmer_beauty_pharmacy.dart';
+import '../dialog_controller.dart';
 import '../product_profile/products_screen.dart';
 
 class BeautyPharmacyScreen extends StatefulWidget {
@@ -70,6 +72,20 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
         key: scaffoldKey,
         bottomNavigationBar: const ReusableBottomNavigationBar2(),

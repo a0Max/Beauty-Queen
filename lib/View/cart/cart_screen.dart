@@ -20,12 +20,15 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 // import '../../const/images.dart';
 import '../../const/vars.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../models/products_model.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/based/error_pop_up.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/shimmer/shimmer_cart_item.dart';
 import '../complete_order/cart_tab_screen.dart';
+import '../dialog_controller.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -49,6 +52,20 @@ class _CartScreen extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return PopScope(
       canPop: true,
       onPopInvoked: (val) {

@@ -8,8 +8,11 @@ import 'package:get/get.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../controller/about_controller/about_app_controller.dart';
+import '../../controller/auth_controller/auth_controler.dart';
 import '../../widgets/about_app/item_of_app.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/home/CustomNavBar2.dart';
+import '../dialog_controller.dart';
 
 class AboutAppScreen extends StatefulWidget {
   const AboutAppScreen({super.key});
@@ -31,6 +34,20 @@ class _AboutAppScreen extends State<AboutAppScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
       bottomNavigationBar: const ReusableBottomNavigationBar2(),
       appBar: AppBar(

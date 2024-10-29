@@ -9,9 +9,11 @@ import '../../controller/AlKasam_controller/alkasam_controller.dart';
 import '../../controller/auth_controller/auth_controler.dart';
 import '../../controller/nav_bar_controller/NavBarController.dart';
 import '../../widgets/based/CustomAppBar.dart';
+import '../../widgets/dialog_widget.dart';
 import '../../widgets/drawer/CustomEndDrawer.dart';
 import '../../widgets/categories/CustomGirdview.dart';
 import '../../widgets/home/CustomNavBar2.dart';
+import '../dialog_controller.dart';
 
 class AlKasamScreen extends StatefulWidget {
   final bool? showBack;
@@ -71,6 +73,20 @@ class _AlKasamScreenState extends State<AlKasamScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final DialogController dialogController = Get.find<DialogController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.showDialog(
+        context,
+        Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.zero,
+          child: DialogWidget(
+            image:
+                Get.find<AuthController>().popData.value.first.mobile.fullFile,
+          ),
+        ),
+      );
+    });
     return Scaffold(
         key: _scaffoldKey,
         appBar: PreferredSize(
