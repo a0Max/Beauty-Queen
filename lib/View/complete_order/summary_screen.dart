@@ -13,6 +13,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:rainbow_color/rainbow_color.dart';
 import '../../const/app_colors.dart';
 import '../../const/styles.dart';
 import '../../const/vars.dart';
@@ -25,8 +26,39 @@ import '../brands/branddetail_screen.dart';
 import '../product_profile/products_screen.dart';
 import 'productadded_screen.dart';
 
-class SummaryScreen extends StatelessWidget {
+class SummaryScreen extends StatefulWidget {
   const SummaryScreen({super.key});
+
+  @override
+  State<SummaryScreen> createState() => _SummaryScreenState();
+}
+
+class _SummaryScreenState extends State<SummaryScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<Color> _colorAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: Duration(seconds: 3), vsync: this);
+    _colorAnim = RainbowColorTween(
+            [AppColors.kPrimaryColor, AppColors.kPrimaryColor.withOpacity(.5)])
+        .animate(controller)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          controller.reset();
+          controller.forward();
+        } else if (status == AnimationStatus.dismissed) {
+          controller.forward();
+        }
+      });
+    controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -673,70 +705,70 @@ class SummaryScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               GestureDetector(
-                                onTap: () async {
-                                  try {
-                                    LoadingScreen.show(context);
-                                    await basketController.completeOrder(
-                                        orderId:
-                                            '${basketController.order.value.order?.id}');
-                                    Navigator.of(context).pop();
-                                    basketController.clearData();
-                                    Get.to(ProductAddedScreen());
-                                    // Navigator.pushAndRemoveUntil(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //       builder: (context) => const ProductAddedScreen(),
-                                    //     ),
-                                    //     (route) => false);
-                                  } on DioException catch (e) {
-                                    log('error1:$e');
-                                    Navigator.of(context).pop();
-                                    // try {
-                                    ErrorPopUp(
-                                        message:
-                                            (e.response?.data).values.first,
-                                        title: 'خطا');
-                                    // } catch (e) {
-                                    //   log('error2:$e');
-                                    //   ErrorPopUp(
-                                    //       message: tr('something_wrong'), title: 'خطا');
-                                    // }
-                                  } catch (e, s) {
-                                    // FirebaseCrashlytics.instance
-                                    //     .recordError('Api Crash $e', s);
-                                    log('error3:$e');
-                                    Navigator.of(context).pop();
-                                    if (e == 'Check Network connection') {
+                                  onTap: () async {
+                                    try {
+                                      LoadingScreen.show(context);
+                                      await basketController.completeOrder(
+                                          orderId:
+                                              '${basketController.order.value.order?.id}');
+                                      Navigator.of(context).pop();
+                                      basketController.clearData();
+                                      Get.to(ProductAddedScreen());
+                                      // Navigator.pushAndRemoveUntil(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //       builder: (context) => const ProductAddedScreen(),
+                                      //     ),
+                                      //     (route) => false);
+                                    } on DioException catch (e) {
+                                      log('error1:$e');
+                                      Navigator.of(context).pop();
+                                      // try {
                                       ErrorPopUp(
-                                          message: tr('network_connection'),
+                                          message:
+                                              (e.response?.data).values.first,
                                           title: 'خطا');
-                                    } else {
-                                      ErrorPopUp(
-                                          message: tr('something_wrong'),
-                                          title: 'خطا');
+                                      // } catch (e) {
+                                      //   log('error2:$e');
+                                      //   ErrorPopUp(
+                                      //       message: tr('something_wrong'), title: 'خطا');
+                                      // }
+                                    } catch (e, s) {
+                                      // FirebaseCrashlytics.instance
+                                      //     .recordError('Api Crash $e', s);
+                                      log('error3:$e');
+                                      Navigator.of(context).pop();
+                                      if (e == 'Check Network connection') {
+                                        ErrorPopUp(
+                                            message: tr('network_connection'),
+                                            title: 'خطا');
+                                      } else {
+                                        ErrorPopUp(
+                                            message: tr('something_wrong'),
+                                            title: 'خطا');
+                                      }
                                     }
-                                  }
-                                },
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8),
-                                  width: MediaQuery.of(context).size.width - 40,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.kPrimaryColor,
-                                    // borderRadius: BorderRadius.circular(46.r),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      tr('confirem_order'),
-                                      style: TextStyle(
-                                          fontFamily: kTheArabicSansBold,
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: AppColors.kWhiteColor),
+                                  },
+                                  child: Container(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8),
+                                    width:
+                                        MediaQuery.of(context).size.width - 40,
+                                    decoration: BoxDecoration(
+                                      color: _colorAnim.value,
+                                      // borderRadius: BorderRadius.circular(46.r),
                                     ),
-                                  ),
-                                ),
-                              ),
+                                    child: Center(
+                                      child: Text(
+                                        tr('confirem_order'),
+                                        style: TextStyle(
+                                            fontFamily: kTheArabicSansBold,
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.kWhiteColor),
+                                      ),
+                                    ),
+                                  )),
                               10.ph,
                               GestureDetector(
                                 onTap: () async {

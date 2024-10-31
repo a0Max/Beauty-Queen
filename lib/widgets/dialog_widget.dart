@@ -10,18 +10,21 @@ class DialogWidget extends StatelessWidget {
   const DialogWidget({super.key, required this.image});
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        CachedNetworkImage(imageUrl: Connection.urlOfStorage(image: image)),
-        IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.close,
-              color: Colors.black,
-            ))
-      ],
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Stack(
+        children: [
+          CachedNetworkImage(imageUrl: Connection.urlOfStorage(image: image)),
+          IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.close,
+                color: Colors.black,
+              ))
+        ],
+      ),
     );
   }
 }
