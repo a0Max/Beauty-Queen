@@ -111,6 +111,10 @@ class _HomePageState extends State<HomePage> {
           child: DialogWidget(
             image:
                 Get.find<AuthController>().popData.value.first.mobile.fullFile,
+            isLink: Get.find<AuthController>().popData.value.first.isLink,
+            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
+            linkId: Get.find<AuthController>().popData.value.first.linkId,
+            linkType: Get.find<AuthController>().popData.value.first.linkType,
           ),
         ),
       );

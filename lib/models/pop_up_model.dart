@@ -10,10 +10,20 @@ part 'pop_up_model.g.dart';
 class PopUpModel {
   int? id;
   String? isLink;
+  String? linkType;
+  String? urlLink;
+  String? linkId;
   OfferImageModel? desktop;
   OfferImageModel? mobile;
 
-  PopUpModel({this.id, this.isLink, this.desktop, this.mobile});
+  PopUpModel(
+      {this.id,
+      this.isLink,
+      this.desktop,
+      this.urlLink,
+      this.mobile,
+      this.linkId,
+      this.linkType});
 
   factory PopUpModel.fromJson(Map<String, dynamic> json) {
     return _$PopUpModelFromJson(json);
