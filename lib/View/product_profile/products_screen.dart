@@ -1053,22 +1053,14 @@ class _ItemProfilePageState extends State<ItemProfilePage>
                                                               .start,
                                                       children: [
                                                         if (controller
-                                                                    .productData
-                                                                    .last
-                                                                    .productOptions?[
-                                                                        index]
-                                                                    .title ==
-                                                                TypeOfOptions
-                                                                    .color &&
-                                                            controller
-                                                                    .productData
-                                                                    .last
-                                                                    .productOptions?[
-                                                                        index]
-                                                                    .options
-                                                                    .first
-                                                                    .isColor ==
-                                                                "1") ...{
+                                                                .productData
+                                                                .last
+                                                                .productOptions?[
+                                                                    index]
+                                                                .options
+                                                                .first
+                                                                .isColor ==
+                                                            "1") ...{
                                                           Wrap(
                                                             spacing: 10,
                                                             runSpacing: 10,
