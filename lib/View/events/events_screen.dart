@@ -143,17 +143,22 @@ class _EventsScreen extends State<EventsScreen> {
                                     margin: const EdgeInsets.only(bottom: 20),
                                     child: Column(
                                       children: [
-                                        CachedNetworkImage(
-                                          imageUrl: Connection.urlOfEvent(
-                                              image: controller
-                                                  .eventsList[index]
-                                                  .coverImage
-                                                  .file),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 450.h,
-                                          fit: BoxFit.fill,
-                                        ),
+                                        if (controller
+                                                .eventsList[index].coverImage !=
+                                            null) ...{
+                                          CachedNetworkImage(
+                                            imageUrl: Connection.urlOfEvent(
+                                                image: controller
+                                                    .eventsList[index]
+                                                    .coverImage
+                                                    .file),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 450.h,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        },
                                         Container(
                                           height: 100.h,
                                           width:
