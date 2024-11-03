@@ -155,6 +155,7 @@ abstract class Connection {
 abstract class TypeOfOptions {
   static const size = 'الحجم';
   static const color = 'اللون';
+  static const color2 = 'الألوان';
 }
 
 abstract class SortTypes {
