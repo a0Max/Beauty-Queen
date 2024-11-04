@@ -64,6 +64,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
     super.initState();
     _scrollController.addListener(_scrollListener);
     controller.getGiftsDataController(currentPage: 1);
+    showDialog();
   }
 
   void _scrollListener() {
@@ -96,27 +97,15 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
   }
 
   final AuthController userController = Get.put(AuthController());
+  final DialogController dialogController = Get.put(DialogController());
+  showDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.addObjects(Get.find<AuthController>().popData);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final DialogController dialogController = Get.find<DialogController>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      dialogController.showDialog(
-        context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.zero,
-          child: DialogWidget(
-            image:
-                Get.find<AuthController>().popData.value.first.mobile.fullFile,
-            isLink: Get.find<AuthController>().popData.value.first.isLink,
-            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
-            linkId: Get.find<AuthController>().popData.value.first.linkId,
-            linkType: Get.find<AuthController>().popData.value.first.linkType,
-          ),
-        ),
-      );
-    });
     return Obx(() => Scaffold(
           key: _scaffoldKey,
           bottomNavigationBar: widget.showBack == true
@@ -155,6 +144,7 @@ class _GuidanceScreenState extends State<GuidanceScreen> {
           body: RefreshIndicator(
               onRefresh: () async {
                 controller.getGiftsDataController(currentPage: 1);
+                dialogController.onRefresh();
               },
               child: SingleChildScrollView(
                 controller: _scrollController,

@@ -30,8 +30,10 @@ import 'filterby_search_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   final String subKeyWord;
+  final bool? doNotShowDialog;
 
-  const SearchScreen({super.key, required this.subKeyWord});
+  const SearchScreen(
+      {super.key, required this.subKeyWord, this.doNotShowDialog});
 
   @override
   State<SearchScreen> createState() => _SearchScreen();
@@ -56,6 +58,9 @@ class _SearchScreen extends State<SearchScreen> {
     super.initState();
     _scrollController.addListener(_scrollListener);
     _controller.getSearchDetails(currentPage: 1, subKeyWord: widget.subKeyWord);
+    if (widget.doNotShowDialog != true) {
+      showDialog();
+    }
   }
 
   void _scrollListener() {
@@ -85,27 +90,15 @@ class _SearchScreen extends State<SearchScreen> {
   }
 
   final AuthController userController = Get.put(AuthController());
+  final DialogController dialogController = Get.put(DialogController());
+  showDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.addObjects(Get.find<AuthController>().popData);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final DialogController dialogController = Get.find<DialogController>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      dialogController.showDialog(
-        context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.zero,
-          child: DialogWidget(
-            image:
-                Get.find<AuthController>().popData.value.first.mobile.fullFile,
-            isLink: Get.find<AuthController>().popData.value.first.isLink,
-            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
-            linkId: Get.find<AuthController>().popData.value.first.linkId,
-            linkType: Get.find<AuthController>().popData.value.first.linkType,
-          ),
-        ),
-      );
-    });
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(

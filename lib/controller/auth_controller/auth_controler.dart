@@ -21,6 +21,7 @@ import '../../const/api_connrction/user_data_apis.dart';
 import '../../const/notification.dart';
 import '../../models/brand_model.dart';
 import '../../models/city_area_model.dart';
+import '../../models/pop_up_model.dart';
 import '../../widgets/based/error_pop_up.dart';
 import '../../widgets/based/loading.dart';
 import '../../widgets/product_profile/CustomAlertBox.dart';
@@ -45,7 +46,7 @@ class AuthController extends GetxController {
     getCities();
   }
 
-  RxList popData = [].obs;
+  RxList<PopUpModel> popData = <PopUpModel>[].obs;
 
   getPopUpData() async {
     popData.value = await _api.getPopupsDataRequest();

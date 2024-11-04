@@ -40,6 +40,7 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
     super.initState();
     _scrollController.addListener(_scrollListener);
     controller.getOffersDataController();
+    showDialog();
   }
 
   void _scrollListener() {
@@ -68,28 +69,16 @@ class _BeautyPharmacyScreenState extends State<BeautyPharmacyScreen> {
   }
 
   final AuthController userController = Get.put(AuthController());
+  final DialogController dialogController = Get.put(DialogController());
+  showDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.addObjects(Get.find<AuthController>().popData);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final DialogController dialogController = Get.find<DialogController>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      dialogController.showDialog(
-        context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.zero,
-          child: DialogWidget(
-            image:
-                Get.find<AuthController>().popData.value.first.mobile.fullFile,
-            isLink: Get.find<AuthController>().popData.value.first.isLink,
-            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
-            linkId: Get.find<AuthController>().popData.value.first.linkId,
-            linkType: Get.find<AuthController>().popData.value.first.linkType,
-          ),
-        ),
-      );
-    });
     return Scaffold(
         key: scaffoldKey,
         bottomNavigationBar: const ReusableBottomNavigationBar2(),

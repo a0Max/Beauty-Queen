@@ -41,11 +41,19 @@ class _BrandScreenState extends State<BrandScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final NavController _controllerNav = Get.put(NavController());
 
+  final DialogController dialogController = Get.put(DialogController());
+  showDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.addObjects(Get.find<AuthController>().popData);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
     _controller.getBrandsDataController();
+    showDialog();
   }
 
   void _scrollListener() {
@@ -103,23 +111,6 @@ class _BrandScreenState extends State<BrandScreen> {
   @override
   Widget build(BuildContext context) {
     final DialogController dialogController = Get.find<DialogController>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      dialogController.showDialog(
-        context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.zero,
-          child: DialogWidget(
-            image:
-                Get.find<AuthController>().popData.value.first.mobile.fullFile,
-            isLink: Get.find<AuthController>().popData.value.first.isLink,
-            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
-            linkId: Get.find<AuthController>().popData.value.first.linkId,
-            linkType: Get.find<AuthController>().popData.value.first.linkType,
-          ),
-        ),
-      );
-    });
     return Scaffold(
       key: _scaffoldKey,
       bottomNavigationBar:
@@ -152,6 +143,7 @@ class _BrandScreenState extends State<BrandScreen> {
       body: RefreshIndicator(
           onRefresh: () async {
             _controller.getBrandsDataController();
+            dialogController.onRefresh();
           },
           child: SingleChildScrollView(
             controller: _scrollController,

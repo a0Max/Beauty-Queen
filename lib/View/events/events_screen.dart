@@ -34,30 +34,20 @@ class _EventsScreen extends State<EventsScreen> {
   void initState() {
     super.initState();
     controller.getEvents();
+    showDialog();
+  }
+
+  final DialogController dialogController = Get.put(DialogController());
+  showDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.addObjects(Get.find<AuthController>().popData);
+    });
   }
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    final DialogController dialogController = Get.find<DialogController>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      dialogController.showDialog(
-        context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.zero,
-          child: DialogWidget(
-            image:
-                Get.find<AuthController>().popData.value.first.mobile.fullFile,
-            isLink: Get.find<AuthController>().popData.value.first.isLink,
-            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
-            linkId: Get.find<AuthController>().popData.value.first.linkId,
-            linkType: Get.find<AuthController>().popData.value.first.linkType,
-          ),
-        ),
-      );
-    });
     return Scaffold(
       bottomNavigationBar: const ReusableBottomNavigationBar2(),
       endDrawer: const MyEndDrawer(),

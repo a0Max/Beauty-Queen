@@ -59,7 +59,13 @@ import 'tab_screen_two.dart';
 class ItemProfilePage extends StatefulWidget {
   bool? isQueenOffer;
   final int itemId;
-  ItemProfilePage({super.key, required this.itemId, this.isQueenOffer});
+  final bool? doNotShowDialog;
+
+  ItemProfilePage(
+      {super.key,
+      required this.itemId,
+      this.isQueenOffer,
+      this.doNotShowDialog});
 
   @override
   State<ItemProfilePage> createState() => _ItemProfilePageState();
@@ -79,8 +85,16 @@ class _ItemProfilePageState extends State<ItemProfilePage>
     tabsController = TabController(vsync: this, length: 2);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.doNotShowDialog != true) {
+        showDialogAds();
+      }
       getDataOfProduct();
     });
+  }
+
+  final DialogController dialogController = Get.put(DialogController());
+  showDialogAds() {
+    dialogController.objects.addAll(Get.find<AuthController>().popData);
   }
 
   final ScrollController scrollController = ScrollController();
@@ -107,24 +121,6 @@ class _ItemProfilePageState extends State<ItemProfilePage>
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final DialogController dialogController = Get.find<DialogController>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      dialogController.showDialog(
-        context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.zero,
-          child: DialogWidget(
-            image:
-                Get.find<AuthController>().popData.value.first.mobile.fullFile,
-            isLink: Get.find<AuthController>().popData.value.first.isLink,
-            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
-            linkId: Get.find<AuthController>().popData.value.first.linkId,
-            linkType: Get.find<AuthController>().popData.value.first.linkType,
-          ),
-        ),
-      );
-    });
     final controller = context.watch<ProductProfileControllerProvider>();
     final productOptionsIsEmpty = (controller.isLoading == false)
         ? controller.productData.last.productOptions.isEmpty
@@ -168,6 +164,7 @@ class _ItemProfilePageState extends State<ItemProfilePage>
             onRefresh: () async {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 getDataOfProduct();
+                dialogController.onRefresh();
               });
             },
             child: Obx(() => Column(

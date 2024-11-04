@@ -40,6 +40,12 @@ class _DiscountScreenState extends State<DiscountScreen> {
   final ScrollController _scrollController = ScrollController();
 
   final SalesController _controller = Get.put(SalesController());
+  final DialogController dialogController = Get.put(DialogController());
+  showDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dialogController.addObjects(Get.find<AuthController>().popData);
+    });
+  }
 
   bool _isScrolled = false;
   double searchBarWidth = 1.0;
@@ -55,6 +61,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
     super.initState();
     _scrollController.addListener(_scrollListener);
     _controller.getSalesDataController(currentPage: 1);
+    showDialog();
   }
 
   void _scrollListener() {
@@ -88,23 +95,6 @@ class _DiscountScreenState extends State<DiscountScreen> {
   @override
   Widget build(BuildContext context) {
     final DialogController dialogController = Get.find<DialogController>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      dialogController.showDialog(
-        context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.zero,
-          child: DialogWidget(
-            image:
-                Get.find<AuthController>().popData.value.first.mobile.fullFile,
-            isLink: Get.find<AuthController>().popData.value.first.isLink,
-            urlLink: Get.find<AuthController>().popData.value.first.urlLink,
-            linkId: Get.find<AuthController>().popData.value.first.linkId,
-            linkType: Get.find<AuthController>().popData.value.first.linkType,
-          ),
-        ),
-      );
-    });
     return Obx(() => Scaffold(
           key: _scaffoldKey,
           bottomNavigationBar: widget.showBack == true
@@ -134,6 +124,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
           body: RefreshIndicator(
               onRefresh: () async {
                 _controller.getSalesDataController(currentPage: 1);
+                dialogController.onRefresh();
               },
               child: SingleChildScrollView(
                 controller: _scrollController,
