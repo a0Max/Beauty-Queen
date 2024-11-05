@@ -23,23 +23,30 @@ class DialogController extends GetxController {
   }
 
   void addObjects(List<PopUpModel> newObjects) {
-    objects.addAll(newObjects); // Adds and triggers the observer
+    objects.addAll(newObjects);
   }
 
-  void showDialogSequence() {
+  Future<void> showDialogSequence() async {
     print('showDialogSequence');
     print('(currentIndex.value < objects.length):${objects.length}');
     if (currentIndex.value < objects.length) {
-      Get.dialog(
+      final result = await Get.dialog<bool>(
         DialogWidget(
-          image: objects[currentIndex.value].mobile?.fullFile ?? '',
-          isLink: objects[currentIndex.value].isLink,
-          urlLink: objects[currentIndex.value].urlLink,
-          linkId: objects[currentIndex.value].linkId,
-          linkType: objects[currentIndex.value].linkType,
-        ),
-        barrierDismissible: false, // Prevent dialog from being dismissed
+            image: objects[currentIndex.value].mobile?.fullFile ?? '',
+            isLink: objects[currentIndex.value].isLink,
+            urlLink: objects[currentIndex.value].urlLink,
+            linkId: objects[currentIndex.value].linkId,
+            linkType: objects[currentIndex.value].linkType,
+            onPressBack: () {
+              Get.back(result: true);
+            }),
+        barrierDismissible: true,
       );
+      if (result == true || result == null) {
+        currentIndex.value++;
+        await Future.delayed(const Duration(milliseconds: 300));
+        showDialogSequence();
+      }
     }
   }
 

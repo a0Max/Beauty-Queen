@@ -19,12 +19,14 @@ class DialogWidget extends StatelessWidget {
   final String? linkType;
   final String? linkId;
   final String? urlLink;
+  final void Function() onPressBack;
 
   const DialogWidget(
       {super.key,
       required this.image,
       this.isLink,
       this.linkType,
+      required this.onPressBack,
       this.urlLink,
       this.linkId});
   @override
@@ -97,9 +99,7 @@ class DialogWidget extends StatelessWidget {
                 child: CachedNetworkImage(
                     imageUrl: Connection.urlOfStorage(image: image))),
             IconButton(
-                onPressed: () {
-                  Get.back();
-                },
+                onPressed: () => onPressBack(),
                 icon: Icon(
                   Icons.close,
                   color: Colors.black,
