@@ -516,92 +516,76 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               ],
                             ),
                             5.ph,
-                            Container(
-                              // margin: EdgeInsets.symmetric(horizontal: 15.w),
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              height: 49.76.h,
-                              alignment: Alignment.center,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(11.06.r),
-                                border: Border.all(
-                                    width: 1.11.w,
-                                    color: const Color(0xFFD9DEE2)),
-                              ),
-                              child: DropdownButton<WayToPay>(
-                                underline: const SizedBox(),
-                                iconEnabledColor: Colors.transparent,
-                                // isDense: true,
-                                // onTap: () => log('open'),
-                                isExpanded: true,
-                                value: resultOfWayToPay,
-                                items: listOfWayToPay.map((value) {
-                                  return DropdownMenuItem<WayToPay>(
-                                      value: value,
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: Text(value.wayToPay,
+                            ...List.generate(
+                                listOfWayToPay.length,
+                                (index) => Row(
+                                      children: [
+                                        Radio(
+                                          value: listOfWayToPay[index],
+                                          groupValue: resultOfWayToPay,
+                                          activeColor: AppColors.mainColor,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              resultOfWayToPay =
+                                                  listOfWayToPay[index];
+                                            });
+                                            if (listOfWayToPay[index]
+                                                    .keyOfWayToPay ==
+                                                'cash') {
+                                              basketController
+                                                  .selectPaymentMethod('cash');
+                                            } else if (listOfWayToPay[index]
+                                                    .keyOfWayToPay ==
+                                                'user_balance') {
+                                              if (num.parse(
+                                                          "${basketController.totalOrderDetails.value.totalPrice ?? '0'}") +
+                                                      num.parse(basketController
+                                                              .totalOrderDelivery
+                                                              .value
+                                                              .shippingCost ??
+                                                          '0') >
+                                                  num.parse(controller2
+                                                      .walletAmountState
+                                                      .value)) {
+                                                showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return CustomAlertDialog(
+                                                        buttonTwo: false,
+                                                        dilougText: tr(
+                                                            'no_enaph_money'),
+                                                        buttonOneText:
+                                                            tr('okay'),
+                                                      );
+                                                    });
+                                              } else {
+                                                basketController
+                                                    .selectPaymentMethod(
+                                                        'user_balance');
+                                              }
+                                            }
+                                          },
+                                          materialTapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                        ),
+                                        Text(listOfWayToPay[index].wayToPay,
                                             style: TextStyle(
                                               color: AppColors.kBlackColor,
                                               fontSize: 14.sp,
                                               fontFamily: kTheArabicSansLight,
                                               fontWeight: FontWeight.w700,
                                               height: 0,
-                                            )),
-                                      ));
-                                }).toList(),
-                                onChanged: (WayToPay? newValue) {
-                                  setState(() {
-                                    resultOfWayToPay = newValue;
-                                  });
-                                  if (newValue?.keyOfWayToPay == 'cash') {
-                                    basketController
-                                        .selectPaymentMethod('cash');
-                                  } else if (newValue?.keyOfWayToPay ==
-                                      'user_balance') {
-                                    if (num.parse(
-                                                "${basketController.totalOrderDetails.value.totalPrice ?? '0'}") +
-                                            num.parse(basketController
-                                                    .totalOrderDelivery
-                                                    .value
-                                                    .shippingCost ??
-                                                '0') >
-                                        num.parse(controller2
-                                            .walletAmountState.value)) {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return CustomAlertDialog(
-                                              buttonTwo: false,
-                                              dilougText: tr('no_enaph_money'),
-                                              buttonOneText: tr('okay'),
-                                            );
-                                          });
-                                    } else {
-                                      basketController
-                                          .selectPaymentMethod('user_balance');
-                                    }
-                                  }
+                                            ))
+                                      ],
+                                    )
 
-                                  // basketController.updateSelectedCity(
-                                  //     newCity: newValue ?? CityAreaModel());
-                                },
-                                hint: Text(
-                                  'طريقة الدقع',
-                                  style: TextStyle(
-                                    color: const Color(0xFF2C3E50),
-                                    fontSize: 17.69.sp,
-                                    fontFamily: kTheArabicSansLight,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  textAlign: TextAlign.start,
+                                //     ListTile(
+                                //   contentPadding: EdgeInsets.zero,
+                                //   title: ,
+                                //   // leading: ,
+                                // ),
                                 ),
-                                icon: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                         15.ph,
