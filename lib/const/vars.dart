@@ -1,6 +1,19 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../View/brands/branddetail_screen.dart';
+import '../View/categories/filter_screen2.dart';
+import '../View/product_profile/products_screen.dart';
+import '../View/search/search_screen.dart';
+import '../controller/AlKasam_controller/alkasam_controller.dart';
+import '../controller/auth_controller/auth_controler.dart';
+import '../controller/product_controller/product_profile_controller_provider.dart';
 import '../models/grid_item_data.dart';
+import '../models/user_model.dart';
 import 'app_images.dart';
 
 abstract class UniVars {
@@ -9,6 +22,80 @@ abstract class UniVars {
   static const product = 'product';
 
   static List<String> get values => [product];
+
+  static openTheLink(
+      {required String? isLink,
+      required String? linkType,
+      required String? urlLink,
+      bool? makeSearchOpenOutOfApp,
+      required String? linkId}) async {
+    final AuthController _controllerLogin = Get.put(AuthController());
+    UserModel user = _controllerLogin.userData.value;
+    print('%%%%%%%%%:${user.id}');
+    if (user.id == null) {
+      _controllerLogin.alertOfLogin();
+      return;
+    }
+    if (isLink == "1") {
+      print("_controller.sliders[index].linkType:$linkType");
+      print("_controller.sliders[index].linkType:$urlLink");
+
+      if (linkType == LinkTypes.brand) {
+        Get.to(BrandDetailScreen(
+          brandId: int.parse(linkId ?? '0'),
+        ));
+      } else if (linkType == LinkTypes.product) {
+        Get.to(ChangeNotifierProvider(
+            create: (context) => ProductProfileControllerProvider(),
+            child: ItemProfilePage(itemId: int.parse(linkId ?? '0'))));
+      } else if (linkType == LinkTypes.category) {
+        AlkasamController controller = Get.put(AlkasamController());
+        controller.updateCurrentCategoryId(
+            newId: int.parse(linkId ?? '0'), getChild: null);
+        Get.to(FliterScreen2(
+          categoryId: int.parse(linkId ?? '0'),
+        ));
+      } else if (linkType == LinkTypes.search) {
+        String searchWord = linkId ?? '0';
+        Get.to(() => SearchScreen(subKeyWord: searchWord));
+      } else {
+        if (makeSearchOpenOutOfApp == true) {
+          log('urlLink:${urlLink}');
+          log('isLink:${isLink}');
+          Uri _url = Uri.parse('https://${urlLink}');
+          await launchUrl(
+            _url,
+            mode: LaunchMode.externalApplication,
+          );
+        } else {
+          try {
+            print("_controller.sliders[index].linkType:${linkType}");
+            print("_controller.sliders[index].linkType:${urlLink}");
+            List linkData = urlLink.toString().split("/") ?? [];
+            if (linkData[1] == LinkTypes.search) {
+              String searchWord = linkData[2].replaceAll('%20', ' ');
+              print('searchWord:$searchWord');
+              Get.to(() => SearchScreen(subKeyWord: searchWord));
+            } else {
+              Uri _url = Uri.parse('https://${urlLink}');
+              await launchUrl(
+                _url,
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          } catch (e, s) {
+            // FirebaseCrashlytics.instance
+            //     .recordError('Api Crash $e', s);
+            Uri _url = Uri.parse('https://${urlLink}');
+            await launchUrl(
+              _url,
+              mode: LaunchMode.externalApplication,
+            );
+          }
+        }
+      }
+    }
+  }
 }
 
 abstract class Connection {

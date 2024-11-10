@@ -176,110 +176,15 @@ class _HomePageState extends State<HomePage> {
                                       _controller.sliders.length ?? 0,
                                       (index) => GestureDetector(
                                             onTap: () async {
-                                              final AuthController
-                                                  _controllerLogin =
-                                                  Get.put(AuthController());
-                                              UserModel user = _controllerLogin
-                                                  .userData.value;
-                                              print('%%%%%%%%%:${user.id}');
-                                              if (user.id == null) {
-                                                _controllerLogin.alertOfLogin();
-                                                return;
-                                              }
-                                              if (_controller
-                                                      .sliders[index].isLink ==
-                                                  "1") {
-                                                if (_controller.sliders[index]
-                                                        .linkType ==
-                                                    LinkTypes.brand) {
-                                                  Get.to(BrandDetailScreen(
-                                                    brandId: int.parse(
-                                                        _controller
-                                                            .sliders[index]
-                                                            .linkId),
-                                                  ));
-                                                } else if (_controller
-                                                        .sliders[index]
-                                                        .linkType ==
-                                                    LinkTypes.product) {
-                                                  Get.to(ChangeNotifierProvider(
-                                                      create: (context) =>
-                                                          ProductProfileControllerProvider(),
-                                                      child: ItemProfilePage(
-                                                          itemId: int.parse(
-                                                              _controller
-                                                                  .sliders[
-                                                                      index]
-                                                                  .linkId))));
-                                                } else if (_controller
-                                                        .sliders[index]
-                                                        .linkType ==
-                                                    LinkTypes.category) {
-                                                  AlkasamController controller =
-                                                      Get.put(
-                                                          AlkasamController());
-                                                  controller
-                                                      .updateCurrentCategoryId(
-                                                          newId: int.parse(
-                                                              _controller
-                                                                  .sliders[
-                                                                      index]
-                                                                  .linkId),
-                                                          getChild: null);
-                                                  Get.to(FliterScreen2(
-                                                    categoryId: int.parse(
-                                                        _controller
-                                                            .sliders[index]
-                                                            .linkId),
-                                                  ));
-                                                } else {
-                                                  try {
-                                                    print(
-                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
-                                                    print(
-                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
-                                                    List linkData = _controller
-                                                            .homeData
-                                                            .value
-                                                            .specials?[index]
-                                                            .urlLink
-                                                            .toString()
-                                                            .split("/") ??
-                                                        [];
-                                                    if (linkData[1] ==
-                                                        LinkTypes.search) {
-                                                      String searchWord =
-                                                          linkData[2]
-                                                              .replaceAll(
-                                                                  '%20', ' ');
-                                                      print(
-                                                          'searchWord:$searchWord');
-                                                      Get.to(() => SearchScreen(
-                                                          subKeyWord:
-                                                              searchWord));
-                                                    } else {
-                                                      Uri _url = Uri.parse(
-                                                          'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                                      await launchUrl(
-                                                        _url,
-                                                        mode: LaunchMode
-                                                            .externalApplication,
-                                                      );
-                                                    }
-                                                  } catch (e, s) {
-                                                    // FirebaseCrashlytics.instance
-                                                    //     .recordError(
-                                                    //         'Api Crash $e', s);
-                                                    Uri _url = Uri.parse(
-                                                        'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                                    await launchUrl(
-                                                      _url,
-                                                      mode: LaunchMode
-                                                          .externalApplication,
-                                                    );
-                                                  }
-                                                }
-                                              }
+                                              UniVars.openTheLink(
+                                                  isLink: _controller
+                                                      .sliders[index].isLink,
+                                                  linkType: _controller
+                                                      .sliders[index].linkType,
+                                                  urlLink: _controller
+                                                      .sliders[index].urlLink,
+                                                  linkId: _controller
+                                                      .sliders[index].linkId);
                                             },
                                             child: CachedNetworkImage(
                                               imageUrl: Connection.urlOfSlider(
@@ -1133,96 +1038,16 @@ class _HomePageState extends State<HomePage> {
                             _controller.homeData.value.banners?.length ?? 0,
                             (index) => GestureDetector(
                               onTap: () async {
-                                final AuthController _controllerLogin =
-                                    Get.put(AuthController());
-                                UserModel user =
-                                    _controllerLogin.userData.value;
-                                print('%%%%%%%%%:${user.id}');
-                                if (user.id == null) {
-                                  _controllerLogin.alertOfLogin();
-                                  return;
-                                }
-                                if (_controller.homeData.value.banners?[index]
-                                        .isLink ==
-                                    "1") {
-                                  print(
-                                      "_controller.sliders[index].linkType:${_controller.sliders[index].linkType}");
-                                  print(
-                                      "_controller.sliders[index].linkType:${_controller.sliders[index].urlLink}");
-
-                                  if (_controller.homeData.value.banners?[index]
-                                          .linkType ==
-                                      LinkTypes.brand) {
-                                    Get.to(BrandDetailScreen(
-                                      brandId: int.parse(_controller.homeData
-                                              .value.banners?[index].linkId ??
-                                          '0'),
-                                    ));
-                                  } else if (_controller.homeData.value
-                                          .banners?[index].linkType ==
-                                      LinkTypes.product) {
-                                    Get.to(ChangeNotifierProvider(
-                                        create: (context) =>
-                                            ProductProfileControllerProvider(),
-                                        child: ItemProfilePage(
-                                            itemId: int.parse(_controller
-                                                    .homeData
-                                                    .value
-                                                    .banners?[index]
-                                                    .linkId ??
-                                                '0'))));
-                                  } else if (_controller.homeData.value
-                                          .banners?[index].linkType ==
-                                      LinkTypes.category) {
-                                    AlkasamController controller =
-                                        Get.put(AlkasamController());
-                                    controller.updateCurrentCategoryId(
-                                        newId: int.parse(_controller.homeData
-                                                .value.banners?[index].linkId ??
-                                            '0'),
-                                        getChild: null);
-                                    Get.to(FliterScreen2(
-                                      categoryId: int.parse(_controller.homeData
-                                              .value.banners?[index].linkId ??
-                                          '0'),
-                                    ));
-                                  } else {
-                                    try {
-                                      print(
-                                          "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
-                                      print(
-                                          "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
-                                      List linkData = _controller.homeData.value
-                                              .specials?[index].urlLink
-                                              .toString()
-                                              .split("/") ??
-                                          [];
-                                      if (linkData[1] == LinkTypes.search) {
-                                        String searchWord =
-                                            linkData[2].replaceAll('%20', ' ');
-                                        print('searchWord:$searchWord');
-                                        Get.to(() => SearchScreen(
-                                            subKeyWord: searchWord));
-                                      } else {
-                                        Uri _url = Uri.parse(
-                                            'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                        await launchUrl(
-                                          _url,
-                                          mode: LaunchMode.externalApplication,
-                                        );
-                                      }
-                                    } catch (e, s) {
-                                      // FirebaseCrashlytics.instance
-                                      //     .recordError('Api Crash $e', s);
-                                      Uri _url = Uri.parse(
-                                          'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                      await launchUrl(
-                                        _url,
-                                        mode: LaunchMode.externalApplication,
-                                      );
-                                    }
-                                  }
-                                }
+                                UniVars.openTheLink(
+                                    isLink: _controller
+                                        .homeData.value.banners?[index].isLink,
+                                    linkType: _controller.homeData.value
+                                        .banners?[index].linkType,
+                                    urlLink: _controller
+                                        .homeData.value.banners?[index].urlLink,
+                                    linkId: _controller
+                                        .homeData.value.banners?[index].linkId,
+                                    makeSearchOpenOutOfApp: true);
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
@@ -1709,135 +1534,27 @@ class _HomePageState extends State<HomePage> {
                                               horizontal: 10.0),
                                           child: GestureDetector(
                                             onTap: () async {
-                                              final AuthController
-                                                  _controllerLogin =
-                                                  Get.put(AuthController());
-                                              UserModel user = _controllerLogin
-                                                  .userData.value;
-                                              print('%%%%%%%%%:${user.id}');
-                                              if (user.id == null) {
-                                                _controllerLogin.alertOfLogin();
-                                                return;
-                                              }
-                                              if (_controller
+                                              UniVars.openTheLink(
+                                                  isLink: _controller
                                                       .homeData
                                                       .value
                                                       .organicItems?[index]
-                                                      .isLink ==
-                                                  "1") {
-                                                if (_controller
-                                                        .homeData
-                                                        .value
-                                                        .organicItems?[index]
-                                                        .linkType ==
-                                                    LinkTypes.brand) {
-                                                  Get.to(BrandDetailScreen(
-                                                    brandId: int.parse(
-                                                        _controller
-                                                                .homeData
-                                                                .value
-                                                                .organicItems?[
-                                                                    index]
-                                                                .linkId ??
-                                                            ''),
-                                                  ));
-                                                } else if (_controller
-                                                        .homeData
-                                                        .value
-                                                        .organicItems?[index]
-                                                        .linkType ==
-                                                    LinkTypes.product) {
-                                                  Get.to(ChangeNotifierProvider(
-                                                      create: (context) =>
-                                                          ProductProfileControllerProvider(),
-                                                      child: ItemProfilePage(
-                                                          itemId: int.parse(
-                                                              _controller
-                                                                      .homeData
-                                                                      .value
-                                                                      .organicItems?[
-                                                                          index]
-                                                                      .linkId ??
-                                                                  ''))));
-                                                } else if (_controller
-                                                        .homeData
-                                                        .value
-                                                        .organicItems?[index]
-                                                        .linkType ==
-                                                    LinkTypes.category) {
-                                                  AlkasamController controller =
-                                                      Get.put(
-                                                          AlkasamController());
-                                                  controller
-                                                      .updateCurrentCategoryId(
-                                                          newId: int.parse(
-                                                              _controller
-                                                                      .homeData
-                                                                      .value
-                                                                      .organicItems?[
-                                                                          index]
-                                                                      .linkId ??
-                                                                  ''),
-                                                          getChild: null);
-                                                  Get.to(FliterScreen2(
-                                                    categoryId: int.parse(
-                                                        _controller
-                                                                .homeData
-                                                                .value
-                                                                .organicItems?[
-                                                                    index]
-                                                                .linkId ??
-                                                            ''),
-                                                  ));
-                                                } else {
-                                                  try {
-                                                    print(
-                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].linkType}");
-                                                    print(
-                                                        "_controller.sliders[index].linkType:${_controller.homeData.value.organicItems?[index].urlLink}");
-                                                    List linkData = _controller
-                                                            .homeData
-                                                            .value
-                                                            .organicItems?[
-                                                                index]
-                                                            .urlLink
-                                                            .toString()
-                                                            .split("/") ??
-                                                        [];
-                                                    if (linkData[1] ==
-                                                        LinkTypes.search) {
-                                                      String searchWord =
-                                                          linkData[2]
-                                                              .replaceAll(
-                                                                  '%20', ' ');
-                                                      print(
-                                                          'searchWord:$searchWord');
-                                                      Get.to(() => SearchScreen(
-                                                          subKeyWord:
-                                                              searchWord));
-                                                    } else {
-                                                      Uri _url = Uri.parse(
-                                                          'https://${_controller.homeData.value.organicItems?[index].urlLink}');
-                                                      await launchUrl(
-                                                        _url,
-                                                        mode: LaunchMode
-                                                            .externalApplication,
-                                                      );
-                                                    }
-                                                  } catch (e, s) {
-                                                    // FirebaseCrashlytics.instance
-                                                    //     .recordError(
-                                                    //         'Api Crash $e', s);
-                                                    Uri _url = Uri.parse(
-                                                        'https://${_controller.homeData.value.organicItems?[index].urlLink}');
-                                                    await launchUrl(
-                                                      _url,
-                                                      mode: LaunchMode
-                                                          .externalApplication,
-                                                    );
-                                                  }
-                                                }
-                                              }
+                                                      .isLink,
+                                                  linkType: _controller
+                                                      .homeData
+                                                      .value
+                                                      .organicItems?[index]
+                                                      .linkType,
+                                                  urlLink: _controller
+                                                      .homeData
+                                                      .value
+                                                      .organicItems?[index]
+                                                      .urlLink,
+                                                  linkId: _controller
+                                                      .homeData
+                                                      .value
+                                                      .organicItems?[index]
+                                                      .linkId);
                                             },
                                             child: Column(
                                               crossAxisAlignment:
@@ -2023,109 +1740,15 @@ class _HomePageState extends State<HomePage> {
                                     0,
                                 (index) => GestureDetector(
                                       onTap: () async {
-                                        final AuthController _controllerLogin =
-                                            Get.put(AuthController());
-                                        UserModel user =
-                                            _controllerLogin.userData.value;
-                                        print('%%%%%%%%%:${user.id}');
-                                        if (user.id == null) {
-                                          _controllerLogin.alertOfLogin();
-                                          return;
-                                        }
-                                        if (_controller.homeData.value
-                                                .specials?[index].isLink ==
-                                            "1") {
-                                          if (_controller.homeData.value
-                                                  .specials?[index].linkType ==
-                                              LinkTypes.brand) {
-                                            Get.to(BrandDetailScreen(
-                                              brandId: int.parse(_controller
-                                                      .homeData
-                                                      .value
-                                                      .specials?[index]
-                                                      .linkId ??
-                                                  ''),
-                                            ));
-                                          } else if (_controller.homeData.value
-                                                  .specials?[index].linkType ==
-                                              LinkTypes.product) {
-                                            Get.to(ChangeNotifierProvider(
-                                                create: (context) =>
-                                                    ProductProfileControllerProvider(),
-                                                child: ItemProfilePage(
-                                                    itemId: int.parse(
-                                                        _controller
-                                                                .homeData
-                                                                .value
-                                                                .specials?[
-                                                                    index]
-                                                                .linkId ??
-                                                            ''))));
-                                          } else if (_controller.homeData.value
-                                                  .specials?[index].linkType ==
-                                              LinkTypes.category) {
-                                            AlkasamController controller =
-                                                Get.put(AlkasamController());
-                                            controller.updateCurrentCategoryId(
-                                                newId: int.parse(_controller
-                                                        .homeData
-                                                        .value
-                                                        .specials?[index]
-                                                        .linkId ??
-                                                    ''),
-                                                getChild: null);
-                                            Get.to(FliterScreen2(
-                                              categoryId: int.parse(_controller
-                                                      .homeData
-                                                      .value
-                                                      .specials?[index]
-                                                      .linkId ??
-                                                  ''),
-                                            ));
-                                          } else {
-                                            try {
-                                              print(
-                                                  "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].linkType}");
-                                              print(
-                                                  "_controller.sliders[index].linkType:${_controller.homeData.value.specials?[index].urlLink}");
-                                              List linkData = _controller
-                                                      .homeData
-                                                      .value
-                                                      .specials?[index]
-                                                      .urlLink
-                                                      .toString()
-                                                      .split("/") ??
-                                                  [];
-                                              if (linkData[1] ==
-                                                  LinkTypes.search) {
-                                                String searchWord = linkData[2]
-                                                    .replaceAll('%20', ' ');
-                                                print('searchWord:$searchWord');
-                                                Get.to(() => SearchScreen(
-                                                    subKeyWord: searchWord));
-                                              } else {
-                                                Uri _url = Uri.parse(
-                                                    'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                                await launchUrl(
-                                                  _url,
-                                                  mode: LaunchMode
-                                                      .externalApplication,
-                                                );
-                                              }
-                                            } catch (e, s) {
-                                              // FirebaseCrashlytics.instance
-                                              //     .recordError(
-                                              //         'Api Crash $e', s);
-                                              Uri _url = Uri.parse(
-                                                  'https://${_controller.homeData.value.specials?[index].urlLink}');
-                                              await launchUrl(
-                                                _url,
-                                                mode: LaunchMode
-                                                    .externalApplication,
-                                              );
-                                            }
-                                          }
-                                        }
+                                        UniVars.openTheLink(
+                                            isLink: _controller.homeData.value
+                                                .specials?[index].isLink,
+                                            linkType: _controller.homeData.value
+                                                .specials?[index].linkType,
+                                            urlLink: _controller.homeData.value
+                                                .specials?[index].urlLink,
+                                            linkId: _controller.homeData.value
+                                                .specials?[index].linkId);
                                       },
                                       child: CustomProductCard(
                                         imageUrl: Connection.urlOfSpecial(
