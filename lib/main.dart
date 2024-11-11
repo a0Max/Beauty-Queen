@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'View/dialog_controller.dart';
 import 'const/app_colors.dart';
@@ -23,7 +24,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await EasyLocalization.ensureInitialized();
-
+  await Upgrader.clearSavedSettings();
   NotificationHelper();
   // FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
   // FirebasePerformance.instance.setPerformanceCollectionEnabled(!kDebugMode);

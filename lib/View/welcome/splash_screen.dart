@@ -18,38 +18,39 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreen extends State<SplashScreen> {
   final AuthController controller = Get.put(AuthController());
-  Upgrader upgraderData = Upgrader.sharedInstance;
+  // Upgrader upgraderData = ;
 
   @override
   void initState() {
     super.initState();
-    super.initState();
-    controller.getPopUpData();
-    upgraderData.onLater = () {
-      initData();
-      return true;
-    };
-    upgraderData.onIgnore = () {
-      initData();
-      return true;
-    };
-    print(
-        "${upgraderData.isUpdateAvailable().runtimeType}:upgraderData.isUpdateAvailable():${upgraderData.isUpdateAvailable()}");
-    if (upgraderData.isUpdateAvailable() == false) {
-      initData();
-    }
+
+    initData();
   }
+
+  // isUpdate() async {
+  //   await upgraderData.initialize();
+  //   if (upgraderData.isUpdateAvailable() == false) {
+  //     initData();
+  //   }
+  // }
 
   initData() {
     controller.startProgress();
     controller.getCities();
+    controller.getPopUpData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: UpgradeAlert(
-          upgrader: upgraderData,
+          upgrader: Upgrader(
+            showIgnore: false,
+            showLater: true,
+            debugLogging: true,
+            debugDisplayAlways: true,
+            durationUntilAlertAgain: const Duration(minutes: 60),
+          ),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
