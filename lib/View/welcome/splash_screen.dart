@@ -47,8 +47,8 @@ class _SplashScreen extends State<SplashScreen> {
           upgrader: Upgrader(
             showIgnore: false,
             showLater: true,
-            debugLogging: true,
-            debugDisplayAlways: true,
+            // debugLogging: true,
+            // debugDisplayAlways: true,
             durationUntilAlertAgain: const Duration(minutes: 60),
           ),
           child: Center(
