@@ -1046,8 +1046,7 @@ class _HomePageState extends State<HomePage> {
                                     urlLink: _controller
                                         .homeData.value.banners?[index].urlLink,
                                     linkId: _controller
-                                        .homeData.value.banners?[index].linkId,
-                                    makeSearchOpenOutOfApp: true);
+                                        .homeData.value.banners?[index].linkId);
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
