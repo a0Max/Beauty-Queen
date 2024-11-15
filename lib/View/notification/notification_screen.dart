@@ -34,7 +34,7 @@ class _NotificationScreen extends State<NotificationScreen> {
   }
 
   final DialogController dialogController = Get.put(DialogController());
-   showDialog() {
+  showDialog() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       dialogController.addObjects(Get.find<AuthController>().popData);
     });
@@ -110,8 +110,8 @@ class _NotificationScreen extends State<NotificationScreen> {
                                     fontFamily: 'TheSans',
                                     fontWeight: FontWeight.w400,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
+                                  overflow: TextOverflow.visible,
+                                  // maxLines: 1,
                                 ),
                                 if (controller.notificationList.value[index]
                                             .specialLine !=
@@ -131,8 +131,8 @@ class _NotificationScreen extends State<NotificationScreen> {
                                       fontFamily: 'TheSans',
                                       fontWeight: FontWeight.w400,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
+                                    overflow: TextOverflow.visible,
+                                    // maxLines: 1,
                                   ),
                                 10.ph,
                                 Text(
