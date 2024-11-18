@@ -22,6 +22,7 @@ class ProductController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxDouble totalPrice = 0.0.obs;
+  RxString totalPriceString = ''.obs;
   RxInt totalCount = 0.obs;
 
   getCartData() async {
@@ -125,6 +126,7 @@ class ProductController extends GetxController {
           (double.parse("${element.qty ?? 1}") *
               double.parse("${element.price ?? 1}"));
     });
+    totalPriceString.value = totalPrice.value.toStringAsFixed(2);
   }
 
   checkCode({required String code}) async {

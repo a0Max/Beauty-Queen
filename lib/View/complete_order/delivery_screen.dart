@@ -505,7 +505,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                             Row(
                               children: [
                                 Text(
-                                  'طريقة الدقع',
+                                  'طريقة الدفع',
                                   style: TextStyle(
                                     color: AppColors.kBlackColor,
                                     fontSize: 17.sp,

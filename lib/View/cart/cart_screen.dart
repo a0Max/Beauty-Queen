@@ -233,7 +233,7 @@ class _CartScreen extends State<CartScreen> {
                                                         .kPrimaryColor),
                                               ),
                                               Text(
-                                                '${tr('all')}: ${productController.totalPrice.value} ${tr('Del')} ',
+                                                '${tr('all')}: ${productController.totalPriceString.value} ${tr('Del')} ',
                                                 style: TextStyle(
                                                     fontFamily:
                                                         kTheArabicSansLight,

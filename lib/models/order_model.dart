@@ -6,11 +6,11 @@ part 'order_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class OrderModel {
-  int? subtotal;
-  int? discount;
-  int? totalQty;
+  dynamic subtotal;
+  dynamic discount;
+  dynamic totalQty;
   dynamic shippingCost;
-  int? totalPrice;
+  dynamic totalPrice;
   OrderDetailsModel? order;
   String? flashDiscountStatus;
   String? flashDiscountEndAt;
@@ -28,13 +28,13 @@ class OrderModel {
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
         shippingCost: json['shippingCost'],
-        discount: json['discount'] as int?,
+        discount: json['discount'],
         order: json['order'] == null
             ? null
             : OrderDetailsModel.fromJson(json['order'] as Map<String, dynamic>),
-        subtotal: json['subtotal'] as int?,
-        totalPrice: json['totalPrice'] as int?,
-        totalQty: json['totalQty'] as int?,
+        subtotal: json['subtotal'],
+        totalPrice: json['totalPrice'],
+        totalQty: json['totalQty'],
         flashDiscountStatus: json['flashDiscountStatus'] as String?,
         flashDiscountEndAt: json['flashDiscountEndAt'] as String?);
   }
