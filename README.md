@@ -66,5 +66,3 @@ To run this project locally, follow the instructions below:
    ```bash
    flutter run
 
-
-
