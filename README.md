@@ -18,13 +18,13 @@ BeautyQueen is a mobile eCommerce app built with Flutter. It allows users to bro
 ## Screenshots
 
 [//]: # (![Home Screen]&#40;assets/readme/1.jpg&#41;)
-<img alt="Home Screen" src="assets/readme/1.jpg" width="300" height="600" />
-<img alt="Sections Screen" src="assets/readme/2.jpg" width="300" height="600" />
-<img alt="Sections Screen" src="assets/readme/3.jpg" width="300" height="600" />
-<img alt="Search Screen" src="assets/readme/4.jpg" width="300" height="600" />
-<img alt="Product Screen" src="assets/readme/5.jpg" width="300" height="600" />
-<img alt="Offers Screen" src="assets/readme/6.jpg" width="300" height="600" />
-<img alt="Magazine Screen" src="assets/readme/7.jpg" width="300" height="600" />
+<img alt="Home Screen" src="assets/readme/1.jpg" width="200" height="400" />
+<img alt="Sections Screen" src="assets/readme/2.jpg" width="200" height="400" />
+<img alt="Sections Screen" src="assets/readme/3.jpg" width="200" height="400" />
+<img alt="Search Screen" src="assets/readme/4.jpg" width="200" height="400" />
+<img alt="Product Screen" src="assets/readme/5.jpg" width="200" height="400" />
+<img alt="Offers Screen" src="assets/readme/6.jpg" width="200" height="400" />
+<img alt="Magazine Screen" src="assets/readme/7.jpg" width="200" height="400" />
 
 
 ## App Icons
