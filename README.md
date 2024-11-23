@@ -27,12 +27,12 @@ BeautyQueen is a mobile eCommerce app built with Flutter. It allows users to bro
 <img alt="Magazine Screen" src="assets/readme/7.jpg" width="200" height="400" />
 
 
-## App Icons
+## App on stores
 <a href="https://apps.apple.com/eg/app/beauty-queen-shop-your-beauty/id6477649645">
-  <img alt="App Store Icon" src="assets/readme/app-store.png" width="100" height="100" style="display: inline-block; margin-right: 10px;" />
+  <img alt="App Store Icon" src="assets/readme/app-store.png" width="60" height="60" style="display: inline-block; margin-right: 10px;" />
 </a>
 <a href="https://play.google.com/store/apps/details?id=com.beauty.beauty_queen">
-  <img alt="Google Play Icon" src="assets/readme/google-play.png" width="100" height="100" style="display: inline-block;" />
+  <img alt="Google Play Icon" src="assets/readme/google-play.png" width="60" height="60" style="display: inline-block;" />
 </a>
 
 ## Getting Started
